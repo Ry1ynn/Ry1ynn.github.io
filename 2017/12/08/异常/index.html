@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="异常异常介绍 demo：open(&amp;#39;123.txt&amp;#39;,&amp;#39;r&amp;#39;)，打开一个不存在的文件123.txt，当找不到123.txt 文件时，就会抛出给我们一个IOError类型的错误，No such file or directory：123.txt （没有123.txt这样的文件或目录） 当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异常">
+<meta property="og:url" content="http://21guns.top/2017/12/08/异常/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="异常异常介绍 demo：open(&amp;#39;123.txt&amp;#39;,&amp;#39;r&amp;#39;)，打开一个不存在的文件123.txt，当找不到123.txt 文件时，就会抛出给我们一个IOError类型的错误，No such file or directory：123.txt （没有123.txt这样的文件或目录） 当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-7/39819783.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-7/57509701.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-7/53707184.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-7/40656895.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-7/54503453.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-7/64010460.jpg">
+<meta property="og:updated_time" content="2019-02-18T08:01:08.597Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="异常">
+<meta name="twitter:description" content="异常异常介绍 demo：open(&amp;#39;123.txt&amp;#39;,&amp;#39;r&amp;#39;)，打开一个不存在的文件123.txt，当找不到123.txt 文件时，就会抛出给我们一个IOError类型的错误，No such file or directory：123.txt （没有123.txt这样的文件或目录） 当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-7/39819783.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/08/异常/">
+
+
+
+
+
+  <title>异常 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/08/异常/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">异常</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T15:50:24+08:00">
+                2017-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="异常"><a href="#异常" class="headerlink" title="异常"></a>异常</h1><h2 id="异常介绍"><a href="#异常介绍" class="headerlink" title="异常介绍"></a>异常介绍</h2><ul>
+<li>demo：<code>open(&#39;123.txt&#39;,&#39;r&#39;)</code>，打开一个不存在的文件123.txt，当找不到123.txt 文件时，就会抛出给我们一个IOError类型的错误，No such file or directory：123.txt （没有123.txt这样的文件或目录）</li>
+<li>当Python检测到一个错误时，解释器就无法继续执行了，反而出现了一些错误的提示，这就是所谓的”异常”</li>
+</ul>
+<a id="more"></a>
+<h2 id="捕获异常"><a href="#捕获异常" class="headerlink" title="捕获异常"></a>捕获异常</h2><ul>
+<li><p>捕获异常try-except</p>
+<ul>
+<li><p>demo：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    print(<span class="string">'-----test--1---'</span>)</span><br><span class="line">    open(<span class="string">'123.txt'</span>,<span class="string">'r'</span>)</span><br><span class="line">    print(<span class="string">'-----test--2---'</span>)</span><br><span class="line"><span class="keyword">except</span> IOError:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结果：没有报错</p>
+</li>
+<li><p>说明：</p>
+<ul>
+<li>此程序看不到任何错误，因为用except 捕获到了IOError异常，并添加了处理的方法</li>
+<li>pass 表示实现了相应的实现，但什么也不做；如果把pass改为print语句，那么就会输出其他信息</li>
+</ul>
+</li>
+<li><p>总结：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-7/39819783.jpg" alt></p>
+<ul>
+<li>把可能出现问题的代码，放在try中</li>
+<li>把处理异常的代码，放在except中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>except捕获多个异常</p>
+<ul>
+<li><p>demo：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">print</span> num</span><br><span class="line"><span class="keyword">except</span> IOError:</span><br><span class="line">    print(<span class="string">'产生错误了'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>结果：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-7/57509701.jpg" alt></p>
+</li>
+<li><p>分析：</p>
+<ul>
+<li>except捕获的错误类型是IOError，而此时程序产生的异常为 NameError ，所以except没有生效</li>
+</ul>
+</li>
+<li><p>修改后便没有报错：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">print</span> num</span><br><span class="line"><span class="keyword">except</span> NameError:</span><br><span class="line">    print(<span class="string">'产生错误了'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>实际开发中，捕获多个异常</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    print(<span class="string">'-----test--1---'</span>)</span><br><span class="line">    open(<span class="string">'123.txt'</span>,<span class="string">'r'</span>) <span class="comment"># 如果123.txt文件不存在，那么会产生 IOError 异常</span></span><br><span class="line">    print(<span class="string">'-----test--2---'</span>)</span><br><span class="line">    print(num)<span class="comment"># 如果num变量没有定义，那么会产生 NameError 异常</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">except</span> (IOError,NameError): </span><br><span class="line">    <span class="comment">#如果想通过一次except捕获到多个异常可以用一个元组的方式</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># errorMsg里会保存捕获到的错误信息</span></span><br><span class="line">    print(errorMsg)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意：</p>
+<ul>
+<li>当捕获多个异常时，可以把要捕获的异常的名字，放到except 后，并使用元组的方式仅进行存储</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>获取异常的信息描述</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-7/53707184.jpg" alt></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-7/40656895.jpg" alt></p>
+</li>
+<li><p>else：</p>
+<ul>
+<li><p>咱们应该对<code>else</code>并不陌生，在if中，它的作用是当条件不满足时执行的实行；同样在try…except…中也是如此，即如果没有捕获到异常，那么就执行else中的事情</p>
+</li>
+<li><p>demo：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    num = <span class="number">100</span></span><br><span class="line">    <span class="keyword">print</span> num</span><br><span class="line"><span class="keyword">except</span> NameError <span class="keyword">as</span> errorMsg:</span><br><span class="line">    print(<span class="string">'产生错误了:%s'</span>%errorMsg)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    print(<span class="string">'没有捕获到异常，真高兴'</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>结果：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-7/54503453.jpg" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>try-finally</p>
+<ul>
+<li><p>在程序中，如果一个段代码必须要执行，即无论异常是否产生都要执行，那么此时就需要使用finally。 比如文件关闭，释放锁，把数据库连接返还给连接池等</p>
+</li>
+<li><p>demo：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f = open(<span class="string">'test.txt'</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            content = f.readline()</span><br><span class="line">            <span class="keyword">if</span> len(content) == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            time.sleep(<span class="number">2</span>)</span><br><span class="line">            print(content)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment">#如果在读取文件的过程中，产生了异常，那么就会捕获到</span></span><br><span class="line">        <span class="comment">#比如 按下了 ctrl+c</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        f.close()</span><br><span class="line">        print(<span class="string">'关闭文件'</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">"没有这个文件"</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>说明：</p>
+<p>test.txt文件中每一行数据打印，但是我有意在每打印一行之前用time.sleep方法暂停2秒钟。这样做的原因是让程序运行得慢一些。在程序运行的时候，按Ctrl+c中断（取消）程序。</p>
+<p>我们可以观察到KeyboardInterrupt异常被触发，程序退出。但是在程序退出之前，finally从句仍然被执行，把文件关闭。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="异常传递"><a href="#异常传递" class="headerlink" title="异常传递"></a>异常传递</h2><ul>
+<li><p>try嵌套中</p>
+<ul>
+<li><p>demo：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    f = open(<span class="string">'test.txt'</span>)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            content = f.readline()</span><br><span class="line">            <span class="keyword">if</span> len(content) == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            time.sleep(<span class="number">2</span>)</span><br><span class="line">            print(content)</span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        f.close()</span><br><span class="line">        print(<span class="string">'关闭文件'</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    print(<span class="string">"没有这个文件"</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结果：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">26</span>]: <span class="keyword">import</span> time</span><br><span class="line">    ...: <span class="keyword">try</span>:</span><br><span class="line">    ...:     f = open(<span class="string">'test.txt'</span>)</span><br><span class="line">    ...:     <span class="keyword">try</span>:</span><br><span class="line">    ...:         <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    ...:             content = f.readline()</span><br><span class="line">    ...:             <span class="keyword">if</span> len(content) == <span class="number">0</span>:</span><br><span class="line">    ...:                 <span class="keyword">break</span></span><br><span class="line">    ...:             time.sleep(<span class="number">2</span>)</span><br><span class="line">    ...:             print(content)</span><br><span class="line">    ...:     <span class="keyword">finally</span>:</span><br><span class="line">    ...:         f.close()</span><br><span class="line">    ...:         print(<span class="string">'关闭文件'</span>)</span><br><span class="line">    ...: <span class="keyword">except</span>:</span><br><span class="line">    ...:     print(<span class="string">"没有这个文件"</span>)</span><br><span class="line">    ...: <span class="keyword">finally</span>:</span><br><span class="line">    ...:     print(<span class="string">"最后的finally"</span>)</span><br><span class="line">    ...:     </span><br><span class="line">xxxxxxx---&gt;这是test.txt文件中读取到信息</span><br><span class="line">^C关闭文件</span><br><span class="line">没有这个文件</span><br><span class="line">最后的<span class="keyword">finally</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>函数嵌套调用中</p>
+<ul>
+<li><p>demo：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span><span class="params">()</span>:</span></span><br><span class="line">     print(<span class="string">"----test1-1----"</span>)</span><br><span class="line">     print(num)</span><br><span class="line">     print(<span class="string">"----test1-2----"</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>def test2():
+    print(&quot;----test2-1----&quot;)
+    test1()
+    print(&quot;----test2-2----&quot;)
+</code></pre></li>
+</ul>
+</li>
+</ul>
+<pre><code>    def test3():
+        try:
+            print(&quot;----test3-1----&quot;)
+            test1()
+            print(&quot;----test3-2----&quot;)
+        except Exception as result:
+            print(&quot;捕获到了异常，信息是:%s&quot;%result)
+
+        print(&quot;----test3-2----&quot;)
+
+
+
+    test3()
+    print(&quot;------华丽的分割线-----&quot;)
+    test2()
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 结果：</span><br><span class="line"></span><br><span class="line">    ![](http://ot12pfxkm.bkt.clouddn.com/17-12-7/43785913.jpg)</span><br><span class="line"></span><br><span class="line">  - 总结：</span><br><span class="line"></span><br><span class="line">    - 如果try嵌套，那么如果里面的try没有捕获到这个异常，那么外面的try会接收到这个异常，然后进行处理，如果外边的try依然没有捕获到，那么再进行传递。。。</span><br><span class="line">    - 如果一个异常是在一个函数中产生的，例如函数A----&gt;函数B----&gt;函数C,而异常是在函数C中产生的，那么如果函数C中没有对这个异常进行处理，那么这个异常会传递到函数B中，如果函数B有异常处理那么就会按照函数B的处理方式进行执行；如果函数B也没有异常处理，那么这个异常会继续传递，以此类推。。。如果所有的函数都没有处理，那么此时就会进行异常的默认处理，即通常见到的那样</span><br><span class="line">    - 注意观察上图中，当调用test3函数时，在test1函数内部产生了异常，此异常被传递到test3函数中完成了异常处理，而当异常处理完后，并没有返回到函数test1中进行执行，而是在函数test3中继续执行</span><br><span class="line"></span><br><span class="line">## 抛出自定义异常</span><br><span class="line"></span><br><span class="line">- 你可以用raise语句来引发一个异常。异常/错误对象必须有一个名字，且它们应是Error或Exception类的子类</span><br><span class="line"></span><br><span class="line">- demo：</span><br><span class="line"></span><br><span class="line">  ```python</span><br><span class="line">  class ShortInputException(Exception):</span><br><span class="line">      &apos;&apos;&apos;自定义的异常类&apos;&apos;&apos;</span><br><span class="line">      def __init__(self, length, atleast):</span><br><span class="line">          #super().__init__()</span><br><span class="line">          self.length = length</span><br><span class="line">          self.atleast = atleast</span><br><span class="line">  </span><br><span class="line">  def main():</span><br><span class="line">      try:</span><br><span class="line">          s = input(&apos;请输入 --&gt; &apos;)</span><br><span class="line">          if len(s) &lt; 3:</span><br><span class="line">              # raise引发一个你定义的异常</span><br><span class="line">              raise ShortInputException(len(s), 3)</span><br><span class="line">      except ShortInputException as result:#x这个变量被绑定到了错误的实例</span><br><span class="line">          print(&apos;ShortInputException: 输入的长度是 %d,长度至少应是 %d&apos;% (result.length, result.atleast))</span><br><span class="line">      else:</span><br><span class="line">          print(&apos;没有异常发生.&apos;)</span><br><span class="line">  </span><br><span class="line">  main()</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li><p>结果：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-7/64010460.jpg" alt></p>
+</li>
+<li><p>以上程序中，关于代码<code>#super().__init__()</code>的说明：</p>
+<ul>
+<li>这一行代码，可以调用也可以不调用，建议调用，因为<code>__init__</code>方法往往是用来对创建完的对象进行初始化工作，如果在子类中重写了父类的<code>__init__</code>方法，即意味着父类中的很多初始化工作没有做，这样就不保证程序的稳定了，所以在以后的开发中，如果重写了父类的<code>__init__</code>方法，最好是先调用父类的这个方法，然后再添加自己的功能</li>
+</ul>
+</li>
+</ul>
+<h2 id="异常处理中抛出异常"><a href="#异常处理中抛出异常" class="headerlink" title="异常处理中抛出异常"></a>异常处理中抛出异常</h2><ul>
+<li><p>demo：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, switch)</span>:</span></span><br><span class="line">        self.switch = switch <span class="comment">#开关</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">calc</span><span class="params">(self, a, b)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">return</span> a/b</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> result:</span><br><span class="line">            <span class="keyword">if</span> self.switch:</span><br><span class="line">                print(<span class="string">"捕获开启，已经捕获到了异常，信息如下:"</span>)</span><br><span class="line">                print(result)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="comment">#重新抛出这个异常，此时就不会被这个异常处理给捕获到，从而触发默认的异常处理</span></span><br><span class="line">                <span class="keyword">raise</span></span><br></pre></td></tr></table></figure>
+<p>a = Test(True)<br>a.calc(11,0)</p>
+<p>print(“———————-华丽的分割线—————-“)</p>
+<p>a.switch = False<br>a.calc(11,0)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 结果：</span><br><span class="line"></span><br><span class="line">  ![](http://ot12pfxkm.bkt.clouddn.com/17-12-7/23736308.jpg)</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/08/面向对象/" rel="next" title="面向对象">
+                <i class="fa fa-chevron-left"></i> 面向对象
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/08/模块/" rel="prev" title="模块">
+                模块 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异常"><span class="nav-text">异常</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常介绍"><span class="nav-text">异常介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#捕获异常"><span class="nav-text">捕获异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常传递"><span class="nav-text">异常传递</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#异常处理中抛出异常"><span class="nav-text">异常处理中抛出异常</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

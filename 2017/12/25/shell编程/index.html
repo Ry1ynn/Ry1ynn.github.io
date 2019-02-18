@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="shell脚本的建立&amp;amp;运行简介 两种方式：  shell中输入命令交互执行 保存到sh文件，将其作为程序调用   一次执行多条命令，需分号分隔">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell编程">
+<meta property="og:url" content="http://21guns.top/2017/12/25/shell编程/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="shell脚本的建立&amp;amp;运行简介 两种方式：  shell中输入命令交互执行 保存到sh文件，将其作为程序调用   一次执行多条命令，需分号分隔">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-4/89186367.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-4/23229533.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-5/26378751.jpg">
+<meta property="og:updated_time" content="2019-02-18T08:33:49.450Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell编程">
+<meta name="twitter:description" content="shell脚本的建立&amp;amp;运行简介 两种方式：  shell中输入命令交互执行 保存到sh文件，将其作为程序调用   一次执行多条命令，需分号分隔">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-4/89186367.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/25/shell编程/">
+
+
+
+
+
+  <title>shell编程 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/25/shell编程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">shell编程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:29:49+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="shell脚本的建立-amp-运行"><a href="#shell脚本的建立-amp-运行" class="headerlink" title="shell脚本的建立&amp;运行"></a>shell脚本的建立&amp;运行</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li><p>两种方式：</p>
+<ul>
+<li>shell中输入命令交互执行</li>
+<li>保存到sh文件，将其作为程序调用</li>
+</ul>
+</li>
+<li><p>一次执行多条命令，需分号分隔<a id="more"></a>s</p>
+</li>
+<li><p>命令一行写不完可以换行，用反斜杠（\）来扩充，如</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# echo "this is \</span><br><span class="line"><span class="meta">&gt;</span> long command"</span><br><span class="line">this is long command</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：“&gt;”符号是自动产生，而不是自动输入</li>
+</ul>
+</li>
+</ul>
+<h2 id="脚本建立"><a href="#脚本建立" class="headerlink" title="脚本建立"></a>脚本建立</h2><ul>
+<li><p>shell脚本程序的每行既可以是shell语句，又可以是shell命令</p>
+</li>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line"><span class="meta">#</span>一个简单例子</span><br><span class="line">who</span><br><span class="line">pwd</span><br><span class="line">date</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注释以#开始，持续到行尾</li>
+<li>第一行<code>#! /bin/bash</code> 是注释语句的特殊符号，#!告诉系统其后面的参数是用来执行此文件的程序。</li>
+<li><code>/bin/bash</code>是默认的shell执行程序。</li>
+</ul>
+</li>
+</ul>
+<h2 id="脚本运行"><a href="#脚本运行" class="headerlink" title="脚本运行"></a>脚本运行</h2><ul>
+<li><p>方法1，运行/bin/bash命令并且把脚本文件名作为它的参数。 </p>
+<p><code>[root@localhost root]# /bin/bash scp1</code></p>
+<ul>
+<li>若搜索路径（PATH变量）中已包含/bin目录，可直接bash</li>
+</ul>
+</li>
+<li><p>脚本文件赋予执行权限后，绝对路径或相对路径执行</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# chmod u+x scp1</span><br><span class="line">[root@localhost root]# ./scp1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="shell变量"><a href="#shell变量" class="headerlink" title="shell变量"></a>shell变量</h1><h2 id="简介-1"><a href="#简介-1" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>同其他程序设计语言，bash脚本也需要变量存放数据，但不需事先声明</li>
+<li>默认下，变量以字符串来存储，即使赋值为数值型</li>
+<li>在需要时，shell及其他工具程序可以将字符串形式的数值转化为数值，并进行相关数值运算</li>
+</ul>
+<h2 id="环境变量-amp-用户自定义变量"><a href="#环境变量-amp-用户自定义变量" class="headerlink" title="环境变量&amp;用户自定义变量"></a>环境变量&amp;用户自定义变量</h2><h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><ul>
+<li>shell变量两大类型：环境变量和用户自定义变量</li>
+<li>自定义变量：只在当前shell环境下有效；环境变量：在整个系统的shell环境中皆有效</li>
+</ul>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><ul>
+<li><p>环境变量用于定制shell运行环境，保证shell命令正确执行</p>
+</li>
+<li><p>环境变量会传递到shell的子进程，当前shell进程和其子进程皆有效</p>
+</li>
+<li><p>大多数环境变量在/etc/profile文件中初始化，而此文件是在用户登录时执行的</p>
+</li>
+<li><p>常见环境变量：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">PATH　　　　　　决定了shell将到哪些目录中寻找命令或程序</span><br><span class="line">HOME　　　　　　当前用户主目录</span><br><span class="line">HISTSIZE　　　　历史记录数</span><br><span class="line">LOGNAME 　　　　当前用户的登录名 </span><br><span class="line">HOSTNAME　　　　指主机的名称</span><br><span class="line">SHELL 　　　　　前用户Shell类型 </span><br><span class="line">LANGUGE 　　　　语言相关的环境变量，多语言可以修改此环境变量</span><br><span class="line">MAIL　　　　　　当前用户的邮件存放目录 </span><br><span class="line">PS1　　　　　　 基本提示符，对于root用户是#，对于普通用户是$</span><br><span class="line">PS2　　　　　　 附属提示符，默认是“&gt;”</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="相关操作"><a href="#相关操作" class="headerlink" title="相关操作"></a>相关操作</h3><ul>
+<li><p>查看环境变量</p>
+<ul>
+<li><code>#set命令和#en命令</code></li>
+<li>env只看环境变量</li>
+<li>set可查看所有变量，包括用户自定义变量</li>
+</ul>
+</li>
+<li><p>shell脚本中使用自定义变量</p>
+<ul>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>stuname=“lian”</span><br><span class="line"><span class="meta">#</span>export stuname</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>即，将自定义变量设置为环境变量</p>
+</li>
+</ul>
+</li>
+<li><p>删除变量用unset命令，如<code>#unset demo</code></p>
+</li>
+<li><p>设置只读变量用readonly命令，如<code>readonly stuname</code></p>
+<ul>
+<li>设置为只读后便不可删除或修改，只可重启shell使其被清除掉</li>
+</ul>
+</li>
+<li><p>给变量赋值的时候 “=”左右不能有空格</p>
+</li>
+<li><p>当把包含空格（不连续）的字符赋值给变量时，要用引号“”引起来。</p>
+</li>
+</ul>
+<h2 id="变量声明-amp-赋值"><a href="#变量声明-amp-赋值" class="headerlink" title="变量声明&amp;赋值"></a>变量声明&amp;赋值</h2><h3 id="变量声明"><a href="#变量声明" class="headerlink" title="变量声明"></a>变量声明</h3><ul>
+<li><p>shell编程不一定要声明变量，但有些特殊类型的必须声明</p>
+</li>
+<li><p>命令语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">declare [options] [name[=value]]</span><br><span class="line">typeset [options] [name[=value]</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>功能：声明变量、初始化变量、设置变量属性</p>
+</li>
+<li><p>注意：当不加name和value时，会显示指定类型的（options指定）所有shell变量及其变量值</p>
+</li>
+<li><p>常用选项</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-a     声明“name”是一个数组</span><br><span class="line">-f     声明“name”是一个函数</span><br><span class="line">-i     声明“name”是一个整数</span><br><span class="line">-r     声明“name”是只读的变量</span><br><span class="line">-x     表示每一个“name”变量都可以被子进程访问到，即全局变量</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>举例说明</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# declare –i age=20</span><br><span class="line">[root@localhost root]# declare –rx OS=LINUX</span><br><span class="line">[root@localhost root]# declare –i</span><br><span class="line"><span class="meta">#</span>显示所有整型变量；</span><br><span class="line">[root@localhost root]# declare –x</span><br><span class="line"><span class="meta">#</span>显示所有全局变量；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="变量赋值"><a href="#变量赋值" class="headerlink" title="变量赋值"></a>变量赋值</h3><ul>
+<li>格式：变量名=值</li>
+<li>注意：等号(=)前后没有空格</li>
+<li>举例：<code>x=6</code>，<code>a=&quot;hello world&quot;</code></li>
+</ul>
+<h2 id="变量引用（即访问）"><a href="#变量引用（即访问）" class="headerlink" title="变量引用（即访问）"></a>变量引用（即访问）</h2><h3 id="变量引用"><a href="#变量引用" class="headerlink" title="变量引用"></a>变量引用</h3><ul>
+<li><p>变量名前加$来访问其内容，如</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# aa=123</span><br><span class="line"><span class="meta">#</span>变量赋值</span><br><span class="line">[root@localhost root]# echo aa</span><br><span class="line"><span class="meta">#</span>输出字符串aa</span><br><span class="line">[root@localhost root]# echo $aa</span><br><span class="line"><span class="meta">#</span>输出变量aa的值123</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以用已有变量给新变量赋值</p>
+<ul>
+<li>变量2=\$变量1</li>
+<li>如<code>aa=$bb</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="单引号、双引号和反斜杠"><a href="#单引号、双引号和反斜杠" class="headerlink" title="单引号、双引号和反斜杠"></a>单引号、双引号和反斜杠</h3><ul>
+<li><p>单引号可引用任意字符或字符串，其中内容均失去特殊含义</p>
+</li>
+<li><p>双引号类似单引号可引用任意，除<code>$ 反引号 反斜杠</code></p>
+<ul>
+<li>$可用于变量的引用，用来替换变量</li>
+<li>反引号可用于执行shell命令</li>
+<li>反斜线则转义</li>
+</ul>
+</li>
+<li><p>反斜杠用于转义特殊字符，使其失去特殊含义，变为一般的字符</p>
+</li>
+<li><p>举例</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# BOOK=”linux book”</span><br><span class="line">[root@localhost root]# MSG=’$BOOK’</span><br><span class="line">[root@localhost root]# echo $MSG</span><br><span class="line"><span class="meta">$</span>BOOK</span><br><span class="line"></span><br><span class="line">[root@localhost root]# msg=’ my name is ’</span><br><span class="line">[root@localhost root]# echo $msg</span><br><span class="line">my name is</span><br><span class="line"></span><br><span class="line">[root@localhost root]# echo “$msg Linux”</span><br><span class="line">my name is Linux</span><br><span class="line">[root@localhost root]# echo \$msg</span><br><span class="line"><span class="meta">$</span>msg</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="命令替换"><a href="#命令替换" class="headerlink" title="命令替换"></a>命令替换</h2><ul>
+<li><p>两种形式：<code>$(command) 和 ‘command’（此处为反引号）</code></p>
+</li>
+<li><p>shell把其替换为这个命令的输出结果。此过程被称为命令替换。</p>
+</li>
+<li><p>注意：命令替换适用于任何命令</p>
+</li>
+<li><p>举例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]#pwd</span><br><span class="line">/root/d1</span><br><span class="line">[root@localhost root]# cmd1=pwd</span><br><span class="line">[root@localhost root]# echo “The value of command is:$cmd1.”</span><br><span class="line">The value of command is: pwd</span><br><span class="line">[root@localhost root]# cmd1=$(pwd)</span><br><span class="line">[root@localhost root]# echo “The value of command is:$cmd1.”</span><br><span class="line">The value of comomand is: /root/d1</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>举例2：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">在下面的例子中，在echo命令执行前，date命令的输出就替换了$(date)。</span><br><span class="line">[root@localhost root]# echo “The date and time is $(date).”</span><br><span class="line">The date and time is 9月20日 10:23:16 UTC 2011.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="输入命令"><a href="#输入命令" class="headerlink" title="输入命令"></a>输入命令</h2><h3 id="read简介"><a href="#read简介" class="headerlink" title="read简介"></a>read简介</h3><ul>
+<li><p>使用read命令将用户输入赋值给shell变量（作用类似于python中input函数）</p>
+</li>
+<li><p>语法：<code>read [options] variable-list</code></p>
+</li>
+<li><p>常用选项：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-a 	 name 	 把词读入到name数组中去。</span><br><span class="line">-e  		把一整行读入到第一个变量中，其余的变量均为null。</span><br><span class="line">-n			在输出echo后的字符串后，光标仍然停留在同一行。</span><br><span class="line">-p   prompt   如果是从终端读入数据则显示prompt字符串。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读入的一行输入由许多词组成，他们是用空格（或者制表符，或shell环境变量IFS的值）分隔开的。 </p>
+</li>
+<li><p>如果这些词的数量比列出的变量的数量多，则把余下的所有词赋值给最后一个变量。如果列出的变量的数量多于输入的词的数量，这多余的变量的值被设置为null。 </p>
+</li>
+<li><p>通常情况下，在用户按下回车键时，read命令结束。</p>
+</li>
+</ul>
+<h3 id="read实例"><a href="#read实例" class="headerlink" title="read实例"></a>read实例</h3><h4 id="使用echo-n："><a href="#使用echo-n：" class="headerlink" title="使用echo -n："></a>使用<code>echo -n</code>：</h4><ul>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">echo -n "input:"   #参数-n的作用是不换行，echo默认是换行</span><br><span class="line">read  name         #从键盘输入</span><br><span class="line">echo $name     	   #显示信息</span><br><span class="line">exit 0    		   #退出shell程序。</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="read-p"><a href="#read-p" class="headerlink" title="read -p"></a>read -p</h4><ul>
+<li><p>由于read命令提供了-p参数，允许在read命令行中直接指定一个提示。故上面的脚本可以简写成下面的脚本：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">read -p "Enter your name:" name</span><br><span class="line">echo "hello $name, welcome to my program"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在read命令行中也可以不指定变量.如果不指定变量，那么read命令会将接收到的数据放置在环境变量REPLY中。</p>
+<ul>
+<li>如<code>read -p &quot;Enter a number&quot;</code></li>
+<li>环境变量REPLY中包含输入的所有数据，可以像使用其他变量一样在shell脚本中使用环境变量REPLY.</li>
+</ul>
+</li>
+</ul>
+<h4 id="计时输入"><a href="#计时输入" class="headerlink" title="计时输入"></a>计时输入</h4><ul>
+<li><p>使用read命令存在着潜在危险。脚本很可能会停下来一直等待用户的输入。</p>
+</li>
+<li><p>如果无论是否输入数据脚本都必须继续执行，那么可以使用-t选项指定一个计时器。</p>
+</li>
+<li><p>-t选项指定read命令等待输入的秒数。当计时满时，read命令返回一个非零退出状态;</p>
+</li>
+<li><p>如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">if read -t 5 -p "please enter your name:" name</span><br><span class="line">then </span><br><span class="line">    echo "hello $name ,welcome to my script"</span><br><span class="line">else</span><br><span class="line">    echo "sorry,too slow"</span><br><span class="line">fi</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="限制输入字符"><a href="#限制输入字符" class="headerlink" title="限制输入字符"></a>限制输入字符</h4><ul>
+<li><p>除了输入时间计时，还可以设置read命令计数输入的字符。</p>
+</li>
+<li><p>当输入的字符数目达到预定数目时，自动退出，并将输入的数据赋值给变量。</p>
+</li>
+<li><p>如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">read –n 1 -p "Do you want to continue [Y/N]?" answer</span><br><span class="line">case $answer in</span><br><span class="line">Y | y)</span><br><span class="line">      echo "fine ,continue";;</span><br><span class="line">N | n)</span><br><span class="line">      echo "ok,good bye";;</span><br><span class="line">*)</span><br><span class="line">     echo "error choice";;</span><br><span class="line">esac</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>该例子使用了-n选项，后接数值1，指示read命令只要接受到一个字符就退出。</li>
+<li>只要按下一个字符进行回答，read命令立即接受输入并将其传给变量。无需按回车键。</li>
+</ul>
+</li>
+</ul>
+<h4 id="默读（输入不显示）"><a href="#默读（输入不显示）" class="headerlink" title="默读（输入不显示）"></a>默读（输入不显示）</h4><ul>
+<li><p>输入的数据不显示，如Linux系统输入密码时不显示</p>
+</li>
+<li><p>-s选项能够使read命令中输入的数据不显示在监视器上</p>
+</li>
+<li><p>实际上，数据是显示的，只是 read命令将文本颜色设置成与背景相同的颜色）</p>
+</li>
+<li><p>如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">read  -s  -p "Enter your password:" pass</span><br><span class="line">echo "your password is $pass"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="read读取Linux系统文件"><a href="#read读取Linux系统文件" class="headerlink" title="read读取Linux系统文件"></a>read读取Linux系统文件</h4><ul>
+<li><p>每次调用read命令都会读取文件中的”一行”文本。当文件没有可读的行时，read命令将以非零状态退出。</p>
+</li>
+<li><p>读取文件的关键是如何将文本中的数据传送给read命令。</p>
+</li>
+<li><p>最常用的方法是对文件使用cat命令并通过管道将结果直接传送给包含read命令的 while命令</p>
+</li>
+<li><p>如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash</span><br><span class="line">count=1    #赋值语句，不加空格</span><br><span class="line">cat test | while read line        #cat 命令的输出作为read命令的输入,read读到的值放在line中</span><br><span class="line">do</span><br><span class="line">   echo "Line $count:$line"</span><br><span class="line">   count=$[ $count + 1 ]          #注意中括号中的空格。</span><br><span class="line">done</span><br><span class="line">echo "finish"</span><br><span class="line">exit 0</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="输出命令"><a href="#输出命令" class="headerlink" title="输出命令"></a>输出命令</h2><ul>
+<li><p>echo命令的功能是在显示器上显示一段文字，一般起到一个提示的作用。</p>
+</li>
+<li><p>该命令的一般格式为：<code>echo [-ne][字符串]或 echo [--help][--version]</code></p>
+<ul>
+<li>echo会将输入的字符串送往标准输出。</li>
+<li>输出的字符串间以空白字符隔开</li>
+<li>默认自动换行。（-n参数可避免换行）</li>
+</ul>
+</li>
+<li><p>参数：-n 不要在最后自动换行</p>
+</li>
+<li><p>-e 若字符串中出现以下字符，则特别加以处理，而不会将它当成一般文字输出：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">\a 		发出警告声；</span><br><span class="line">\b 		删除前一个字符；</span><br><span class="line">\c 		最后不加上换行符号；</span><br><span class="line">\f 		换行但光标仍旧停留在原来的位置；</span><br><span class="line">\n 		换行且光标移至行首；</span><br><span class="line">\r 		光标移至行首，但不换行；</span><br><span class="line">\t 		插入tab；</span><br><span class="line">\v 		与\f相同；</span><br><span class="line">\\ 		插入\字符；</span><br><span class="line">\nnn 	插入nnn（八进制）所代表的ASCII字符</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="shell脚本位置参数"><a href="#shell脚本位置参数" class="headerlink" title="shell脚本位置参数"></a>shell脚本位置参数</h1><h2 id="位置参数"><a href="#位置参数" class="headerlink" title="位置参数"></a>位置参数</h2><ul>
+<li><p>在Linux系统中运行命令或脚本程序时，可以在命令行中进行参数的传递。</p>
+</li>
+<li><p>如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span>*  $@  $#  $n  $?  $$  $!</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>$* 和$@</code>有区别：</p>
+<ul>
+<li><code>$@ $*</code> 只在被双引号包起来的时候才会有差异双引号括起来的情况：</li>
+<li><code>$*</code>将所有的参数认为是一个字段</li>
+<li><code>$@</code>以IFS（默认为空格）来划分字段</li>
+</ul>
+</li>
+<li><p>一图胜千言：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-4/89186367.jpg" alt></p>
+</li>
+<li><p>实例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line">echo “程序名: $0”</span><br><span class="line">echo “命令传递参数个数:$#”</span><br><span class="line">echo “参数值分别是:$1 $2 $3 $4 $5 $6 $7 $8 $9”</span><br><span class="line">echo “所有参数: $@”</span><br><span class="line">exit 0</span><br><span class="line">[root@localhost root]# demo_arg a b c d e f g h i </span><br><span class="line"></span><br><span class="line"><span class="meta">#</span></span><br><span class="line"><span class="meta">#</span>程序名:demo_arg</span><br><span class="line"><span class="meta">#</span>命令传递参数个数: 9</span><br><span class="line"><span class="meta">#</span>参数值分别是: a b c d e f g h i</span><br><span class="line"><span class="meta">#</span>所有参数: a b c d e f g h i</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="shift命令"><a href="#shift命令" class="headerlink" title="shift命令"></a>shift命令</h2><ul>
+<li><p>当有脚本程序的参数多于9个时，用shift命令来使用多于9个的参数。</p>
+</li>
+<li><p>命令句法：shift [N]</p>
+</li>
+<li><p>功能：把命令行参数向左移动N个位置</p>
+</li>
+<li><p>实例：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-4/23229533.jpg" alt></p>
+</li>
+</ul>
+<h2 id="set命令"><a href="#set命令" class="headerlink" title="set命令"></a>set命令</h2><ul>
+<li><p>命令语法：<code>set [options] argnument-list</code></p>
+</li>
+<li><p>功能：设置标志、选项和位置参数；使用在argument-list中的值来设置位置参数。</p>
+</li>
+<li><p>常用选项：</p>
+<pre><code>--      不把以’-’开头的词作为参数选项
+</code></pre></li>
+<li><p>实例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# cat demo_set</span><br><span class="line"><span class="meta">#</span>! /bin/bash</span><br><span class="line">filename=“$1”</span><br><span class="line">set $(ls –il $filename)</span><br><span class="line">inode=“$1”</span><br><span class="line">size=“$6”</span><br><span class="line">echo “Name 	Inode  Size”</span><br><span class="line">echo “$filename 	$inode 	$size”</span><br><span class="line">exit 0</span><br><span class="line"></span><br><span class="line">[root@localhost root]# demo_set file0</span><br><span class="line">Name 	Inode  Size</span><br><span class="line">file0  	980  	282</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="控制结构语句"><a href="#控制结构语句" class="headerlink" title="控制结构语句"></a>控制结构语句</h1><h2 id="简介-2"><a href="#简介-2" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>bash具有一般高级程序设计语言具有的控制结构语句。</li>
+<li>程序控制语句是用来决定shell脚本执行时各个语句执行的顺序的。</li>
+<li>有三种基本命令可以控制程序流程：<ul>
+<li>二路跳转（if语句）</li>
+<li>多路跳转（case和if语句）</li>
+<li>循环结构（for、while和until语句）</li>
+</ul>
+</li>
+</ul>
+<h2 id="if-then-elif-else-fi语句"><a href="#if-then-elif-else-fi语句" class="headerlink" title="if-then-elif-else-fi语句"></a>if-then-elif-else-fi语句</h2><h3 id="简介-3"><a href="#简介-3" class="headerlink" title="简介"></a>简介</h3><ul>
+<li><p>格式如下：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-5/26378751.jpg" alt></p>
+</li>
+</ul>
+<ul>
+<li>Linux里的if的结束标志是将if反过来写成fi；而elif其实是else if的缩写，其中elif理论上可以有无限多个。<ul>
+<li>表达式expression可以用test expression命令或[ expression ]来检测。这个命令检测一个表达式并返回true还是false。</li>
+<li>命令语法：<code>test [expression]</code>和<code>[ expression ]</code></li>
+<li>test命令可以使用的条件类型可以归为三类：字符串比较、算术比较和与文件有关的条件测试 。</li>
+</ul>
+</li>
+</ul>
+<h3 id="字符串比较"><a href="#字符串比较" class="headerlink" title="字符串比较"></a>字符串比较</h3><ul>
+<li><p>作用：测试字符串是否相等、长度是否为零，字符串是否为NULL。</p>
+</li>
+<li><p>常用的字符串操作符：</p>
+<p>| 字符串操作符 | 含义及返回值                        |<br>| ———— | ———————————– |<br>| =            | 比较两字符串是否相同，              |<br>| !=           | 比较两字符串是否不相同，            |<br>| -n           | 比较字符串长度是否等于0，           |<br>| -z           | 比较字符串长度是否等于0，若是则返真 |</p>
+</li>
+</ul>
+<h3 id="算术比较"><a href="#算术比较" class="headerlink" title="算术比较"></a>算术比较</h3><ul>
+<li><p>在bash shell编程中的关系运算有别于其他编程语言。</p>
+</li>
+<li><p>| 运算符号 | 含义     |<br>| :——- | :——- |<br>| -eq      | 相等     |<br>| -ge      | 大于等于 |<br>| -le      | 小于等于 |<br>| -ne      | 不等于   |<br>| -gt      | 大于     |<br>| -lt      | 小于     |</p>
+</li>
+</ul>
+<h3 id="逻辑操作"><a href="#逻辑操作" class="headerlink" title="逻辑操作"></a>逻辑操作</h3><ul>
+<li><p>逻辑运算符号：</p>
+<p>| 运算符号 | 含义 |<br>| ——– | —- |<br>| -d       |      |<br>| -f       |      |<br>| -L       |      |<br>| -r       |      |<br>| -s       |      |<br>| -w       |      |<br>| -x       |      |</p>
+</li>
+</ul>
+<h3 id="文件条件测试"><a href="#文件条件测试" class="headerlink" title="文件条件测试"></a>文件条件测试</h3><ul>
+<li><p>文件测试表达式通常是为了测试文件的信息，一般由脚本来决定文件是否应该备份、复制或删除</p>
+</li>
+<li><p>常用：</p>
+<p>| 运算符号 | 含义                           |<br>| ——– | —————————— |<br>| -d       | 若文件对象存在且为目录，返回真 |<br>| -f       | ……且为普通文件……               |<br>| -L       | ……且为链接为文件……             |<br>| -r       | ……且可读……                     |<br>| -s       | ……且长度非0……                  |<br>| -w       | ……且可写……                     |<br>| -x       | ……且可执行……                   |</p>
+</li>
+</ul>
+<h2 id="for语句"><a href="#for语句" class="headerlink" title="for语句"></a>for语句</h2><ul>
+<li><p>例： 在列表中的值：a,b,c,e,i,2,4,6,8用循环的方式把字符与数字分成两行输出。</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">for i in a,b,c,e,i   2,4,6,8</span><br><span class="line"> do </span><br><span class="line">  echo $i</span><br><span class="line"> done</span><br><span class="line"> </span><br><span class="line"><span class="meta">#</span>结果</span><br><span class="line">[root@localhost bin]# ./test9</span><br><span class="line">a,b,c,e,i</span><br><span class="line">2,4,6,8</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：在循环列表中的空格可表示换行</li>
+</ul>
+</li>
+<li><p>例:求从1到100的和。</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">total=0</span><br><span class="line">for ((j=1;j&lt;=100;j++));</span><br><span class="line">  do</span><br><span class="line">     total=`expr $total + $j`</span><br><span class="line">  done</span><br><span class="line">echo "The result is $total"</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：for语句中的双括号不能省，最后的分号可有可无，表达式total=<code>expr $total + $j</code>的加号两边的空格不能省，否则会成为字符串的连接</li>
+</ul>
+</li>
+</ul>
+<h2 id="while语句"><a href="#while语句" class="headerlink" title="while语句"></a>while语句</h2><ul>
+<li><p>语法：</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">while 表达式</span><br><span class="line">  do</span><br><span class="line">    操作</span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>只要while表达式为真，do和done之间的操作就一直会进行</p>
+</li>
+</ul>
+<h2 id="util语句"><a href="#util语句" class="headerlink" title="util语句"></a>util语句</h2><ul>
+<li><p>语法：</p>
+  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">until 表达式</span><br><span class="line">	do</span><br><span class="line">		操作</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重复do和done之间的操作直到表达式成立为止。</p>
+</li>
+</ul>
+<h2 id="case语句"><a href="#case语句" class="headerlink" title="case语句"></a>case语句</h2><ul>
+<li><p>语法：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">case 字符串 in</span><br><span class="line">值1|值2)  操作</span><br><span class="line">    ;;</span><br><span class="line">值3|值4)  操作</span><br><span class="line">    ;;</span><br><span class="line">…</span><br><span class="line">值5|值6)   操作</span><br><span class="line">   ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>case的作用就是当字符串与某个值相同是就执行那个值后面的操作。如果同一个操作对于多个值，则使用“|”将各个值分开。</p>
+</li>
+<li><p>在case的每一个操作的最后面都有两个”;;”，分号是必须的。</p>
+</li>
+<li><p>例：Linux是一个多用户操作系统，编写一程序根据不同的用户登录输出不同的反馈结果。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost bin]#vi test15</span><br><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">case $USER in</span><br><span class="line"> beichen)</span><br><span class="line">   echo "You are beichen!";;</span><br><span class="line"> liangnian)</span><br><span class="line">   echo "You are liangnian"; //注意这里只有一个分号 </span><br><span class="line">   echo "Welcome!";;  //这里才是两个分号</span><br><span class="line"> root)</span><br><span class="line">   echo "You are root! "; echo "Welcome!";;</span><br><span class="line">    //将两命令写在一行，用一个分号作为分隔符 </span><br><span class="line"> *)</span><br><span class="line">   echo "Who are you?$USER?";;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="break和continue语句"><a href="#break和continue语句" class="headerlink" title="break和continue语句"></a>break和continue语句</h2><ul>
+<li>break命令使得程序跳出for、while、until循环，执行done后面的语句，这样就永久终止了循环。</li>
+<li>continue命令使得程序跳到done，这使得循环条件被再次求值，从而开始新的一次循环，循环变量取循环列表中的下一个值。</li>
+<li>无论哪种情况，循环体中在这两条命令后的语句都没有执行。</li>
+<li>break命令和continue命令常作为条件语句的一部分来使用</li>
+</ul>
+<h2 id="exit语句"><a href="#exit语句" class="headerlink" title="exit语句"></a>exit语句</h2><ul>
+<li><p>exit命令使脚本程序结束运行，退出码为n</p>
+</li>
+<li><p>语句语法：exit n</p>
+</li>
+<li><p>在任何一个交互式shell的命令提示符中使用这个命令，它都会让你退出系统。</p>
+</li>
+<li><p>如果在退出时不指定一个退出状态，那么该脚本中最后一条被执行命令的状态将被用作返回值。</p>
+</li>
+<li><p>在shell脚本编程中，退出码0表示成功，退出码1~125是脚本程序使用的错误代码。其余数字具有保留含义 </p>
+</li>
+<li><p>| 退出码    | 说明         |<br>| ——— | ———— |<br>| 126       | 文件不可执行 |<br>| 127       | 命令未找到   |<br>| 128及以上 | 出现一个信号 |</p>
+</li>
+</ul>
+<h2 id="printf语句"><a href="#printf语句" class="headerlink" title="printf语句"></a>printf语句</h2><ul>
+<li>X/Open规范建议应该用它来代替echo命令以产生格式化的输出。</li>
+<li><p>语句语法：</p>
+<p>printf  “format string” parameter1 parameter2 …</p>
+</li>
+<li><p>格式字符串与C/C++中使用的非常相似，但有一些自己的限制。主要是不支持浮点数。</p>
+</li>
+<li>格式字符串由各种可打印字符、转义序列和字符转换限定符组成。</li>
+<li>格式字符串中除了%和\之外的所有字符都将按原样输出。</li>
+</ul>
+<h1 id="数值处理"><a href="#数值处理" class="headerlink" title="数值处理"></a>数值处理</h1><h2 id="简介-4"><a href="#简介-4" class="headerlink" title="简介"></a>简介</h2><ul>
+<li><p>在Linux系统中bash变量的值是以字符串方式存储。如果需要进行算术和逻辑操作，必须先转换为整数，得到运算结果后再转换回字符串，以便正确地保存于shell变量中。</p>
+</li>
+<li><p>bash提供了三种方法对数值数据进行算术运算：</p>
+<p>(1) let命令    </p>
+<p>(2) shell扩展$(( expression ))</p>
+<p>(3) expr命令</p>
+</li>
+<li><p>以0为首的数字当作八进制数，以0x或0X为首的数字当作是十六进制数，除此之外则当作十进制数。</p>
+</li>
+<li><p>表达式求值以长整数进行，并且不作溢出检查。当在表达式中使用shell变量时，变量在求值前首先将被扩展和强制转换为长类型。</p>
+</li>
+<li><p>同组的运算符有相同的优先级。将表达式置于括号中可改变求值的次序</p>
+</li>
+</ul>
+<h2 id="let命令"><a href="#let命令" class="headerlink" title="let命令"></a>let命令</h2><ul>
+<li><p>let可以用来计算算术表达式的值。如果表达式中有空格或者特殊字符，则应将表达式括在双引号中。</p>
+</li>
+<li><p>命令语法：let express-list</p>
+</li>
+<li><p>如果最后的表达式取值为0，let命令返回1；否则返回0。</p>
+</li>
+<li><p>例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# let “x=6” “y = 9”“z = 16”</span><br><span class="line">[root@localhost root]# let t=x+y</span><br><span class="line">[root@localhost root]# echo “t= $t”</span><br><span class="line">t= 15</span><br><span class="line">[root@localhost root]# let A=2**x B=y*z </span><br><span class="line">[root@localhost root]# echo “A=$A    B=$B”</span><br><span class="line">A=64     B=144</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="exp-扩展"><a href="#exp-扩展" class="headerlink" title="$((exp))扩展"></a>$((exp))扩展</h2><ul>
+<li><p>命令语法：$((expression))</p>
+</li>
+<li><p>shell计算expression并用其计算结果代替$((expression))。这个语法类似于命令替换所用的语法“$(…)”，并将执行相同的功能。可将$((expression))作为参数传递给命令或者放置在命令行上任何数字位置上。 </p>
+</li>
+<li><p>不需要在expression中的变量名称前加上$符号。</p>
+</li>
+<li><p>例2.15 age_check程序 </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/bash </span><br><span class="line">echo -n "How old are you? " </span><br><span class="line">read age </span><br><span class="line">echo "Wow, in $((100-age)) years, you'll be 100! " </span><br><span class="line">[root@localhost root]# age_check </span><br><span class="line">How old are you? 20</span><br><span class="line">Wow, in 80 years, you'll be 100!</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="expr命令"><a href="#expr命令" class="headerlink" title="expr命令"></a>expr命令</h2><ul>
+<li><p>expr命令将它的参数当作一个表达式来求值</p>
+</li>
+<li><p>命令语法：expr args</p>
+</li>
+<li><p>功能：计算表达式的参数‘args’的值，并返回它的值到标准输出。</p>
+</li>
+<li><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">常见用法：x=expr $x + 1</span><br><span class="line">反引号（）字符使x取值为命令expr $x + 1的执行结果。也可以用语法$()替换反引号</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>expr命令的应用</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# a1=5</span><br><span class="line">[root@localhost root]# a1=$( expr $a1 + 1 )</span><br><span class="line">[root@localhost root]# echo $var1</span><br><span class="line">6</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h2><ul>
+<li><p>如何获取子字符串？如 str=“2013134.key”   获取去掉”.key”的字符串</p>
+<ol>
+<li>获取子字符串的位置</li>
+<li>根据返回值，对字符串str进行截取</li>
+</ol>
+</li>
+<li><p>获取子字符串的位置，如 str=“2013134.key”获取“key”的位置</p>
+<ul>
+<li>方法1：<code>$expr match $str “.*key”</code>（返回11）</li>
+<li>方法2： <code>$expr index $str “key”</code>(返回9）</li>
+<li>如果只是判断“key”是否在str中出现，可以这样写：</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if [[  $str == key ]]</span><br><span class="line">	then</span><br><span class="line">   		echo “yes,key is in str”</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据返回值，对字符串str进行截取。如 str=“2013134.key”已经获取“.”的位置是第8个，现在要截取str的前7个字符，作为子字符串</p>
+<ul>
+<li><p>方法1：<code>echo  ${str:0:7}</code>//从第0个字符开始截取，截取7个字符</p>
+</li>
+<li><p>方法2：<code>$expr substr &quot;$variable&quot; startposition length</code></p>
+<p>   <code>$expr substr $str 1 7</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><h2 id="数组声明"><a href="#数组声明" class="headerlink" title="数组声明"></a>数组声明</h2><ul>
+<li><p>可以使用declare、local、readonly等各种语句声明数组变量，也可以直接赋值的方法声明一个数组。</p>
+</li>
+<li><p>常用格式：<code>name=(value1 ... valueN)</code></p>
+<ul>
+<li>value1形如“[[subscript]=]string”。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>下标是可选的，若给出，则给数组中相应的位置赋值；否则将给数组中上次赋值位置的下一个位置赋值 </li>
+</ul>
+<ul>
+<li><p>例：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# ns=(max san [6]=zhang [25]=wang)</span><br><span class="line">[root@localhost root]# echo $&#123;ns[0]&#125;</span><br><span class="line">max</span><br><span class="line">[root@localhost root]# echo $&#123;ns[6]&#125;</span><br><span class="line">zhang</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="数组元素的引用（即访问）"><a href="#数组元素的引用（即访问）" class="headerlink" title="数组元素的引用（即访问）"></a>数组元素的引用（即访问）</h2><ul>
+<li><p>可以用<code>${name[subscript]}</code>引用数组中的元素。这种方式叫数组索引</p>
+</li>
+<li><p>下标<code>[@]与[*]</code>的作用都是得到整个数组元素，但它们加上双引号使用时是不同的。</p>
+</li>
+<li><p><code>“${name[@]}”</code>含义将原数组的内容复制到一个新数组中，生成的新数组和原来一样；</p>
+</li>
+<li><p><code>“${name[*]}”</code>把原数组中的所有元素当成一个元素复制到新数组中，生成新的数组只有一个元素。</p>
+</li>
+<li><p>例如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost root]# a=(“$&#123;ns[@]&#125;”)</span><br><span class="line">[root@localhost root]# echo $&#123;a[0]&#125;</span><br><span class="line">max</span><br><span class="line">[root@localhost root]# b=(“$&#123;ns[*]&#125;”)</span><br><span class="line">[root@localhost root]# echo $&#123;b[0]&#125;</span><br><span class="line">max san zhang wang</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：给数组赋值时，等号右边要使用圆括号。 </li>
+</ul>
+</li>
+</ul>
+<h1 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h1><ul>
+<li><p>shell程序也支持函数。函数能完成一个特定的功能，可以重复调用这个函数。</p>
+</li>
+<li><p>格式：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">函数名（   ）</span><br><span class="line">&#123;</span><br><span class="line">   函数体</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>函数调用方式为：<code>函数名  参数列表</code></p>
+</li>
+<li><p>可以使用local关键字在shell函数中声明局部变量，局部变量将局限在函数的作用范围内。 </p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/Linux系统管理/" rel="next" title="Linux系统管理">
+                <i class="fa fa-chevron-left"></i> Linux系统管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/权限管理/" rel="prev" title="权限管理">
+                权限管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#shell脚本的建立-amp-运行"><span class="nav-text">shell脚本的建立&amp;运行</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本建立"><span class="nav-text">脚本建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本运行"><span class="nav-text">脚本运行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell变量"><span class="nav-text">shell变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介-1"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量-amp-用户自定义变量"><span class="nav-text">环境变量&amp;用户自定义变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分类"><span class="nav-text">分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境变量"><span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关操作"><span class="nav-text">相关操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量声明-amp-赋值"><span class="nav-text">变量声明&amp;赋值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量声明"><span class="nav-text">变量声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量赋值"><span class="nav-text">变量赋值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#变量引用（即访问）"><span class="nav-text">变量引用（即访问）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量引用"><span class="nav-text">变量引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单引号、双引号和反斜杠"><span class="nav-text">单引号、双引号和反斜杠</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令替换"><span class="nav-text">命令替换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入命令"><span class="nav-text">输入命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#read简介"><span class="nav-text">read简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#read实例"><span class="nav-text">read实例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用echo-n："><span class="nav-text">使用echo -n：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#read-p"><span class="nav-text">read -p</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#计时输入"><span class="nav-text">计时输入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#限制输入字符"><span class="nav-text">限制输入字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#默读（输入不显示）"><span class="nav-text">默读（输入不显示）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#read读取Linux系统文件"><span class="nav-text">read读取Linux系统文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出命令"><span class="nav-text">输出命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#shell脚本位置参数"><span class="nav-text">shell脚本位置参数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#位置参数"><span class="nav-text">位置参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shift命令"><span class="nav-text">shift命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#set命令"><span class="nav-text">set命令</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#控制结构语句"><span class="nav-text">控制结构语句</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介-2"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#if-then-elif-else-fi语句"><span class="nav-text">if-then-elif-else-fi语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介-3"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串比较"><span class="nav-text">字符串比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#算术比较"><span class="nav-text">算术比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#逻辑操作"><span class="nav-text">逻辑操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件条件测试"><span class="nav-text">文件条件测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#for语句"><span class="nav-text">for语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#while语句"><span class="nav-text">while语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#util语句"><span class="nav-text">util语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#case语句"><span class="nav-text">case语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#break和continue语句"><span class="nav-text">break和continue语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exit语句"><span class="nav-text">exit语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#printf语句"><span class="nav-text">printf语句</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数值处理"><span class="nav-text">数值处理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介-4"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let命令"><span class="nav-text">let命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exp-扩展"><span class="nav-text">$((exp))扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expr命令"><span class="nav-text">expr命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串操作"><span class="nav-text">字符串操作</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-text">数组</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组声明"><span class="nav-text">数组声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组元素的引用（即访问）"><span class="nav-text">数组元素的引用（即访问）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数"><span class="nav-text">函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

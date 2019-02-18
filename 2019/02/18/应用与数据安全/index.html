@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,信息安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="05-应用与数据安全 目录 浏览器安全 网上金融交易安全 电子邮件安全 数据安全 账号口令安全">
+<meta name="keywords" content="NISP,信息安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="应用与数据安全">
+<meta property="og:url" content="http://21guns.top/2019/02/18/应用与数据安全/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="05-应用与数据安全 目录 浏览器安全 网上金融交易安全 电子邮件安全 数据安全 账号口令安全">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T07:39:39.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="应用与数据安全">
+<meta name="twitter:description" content="05-应用与数据安全 目录 浏览器安全 网上金融交易安全 电子邮件安全 数据安全 账号口令安全">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/02/18/应用与数据安全/">
+
+
+
+
+
+  <title>应用与数据安全 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/02/18/应用与数据安全/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">应用与数据安全</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-18T13:41:28+08:00">
+                2019-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP一级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP一级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="05-应用与数据安全"><a href="#05-应用与数据安全" class="headerlink" title="05-应用与数据安全"></a>05-应用与数据安全</h1><ul>
+<li>目录<ul>
+<li>浏览器安全</li>
+<li>网上金融交易安全</li>
+<li>电子邮件安全</li>
+<li>数据安全</li>
+<li>账号口令安全</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="5-1-浏览器安全"><a href="#5-1-浏览器安全" class="headerlink" title="5.1-浏览器安全"></a>5.1-浏览器安全</h2><h3 id="服务器端和客户端"><a href="#服务器端和客户端" class="headerlink" title="服务器端和客户端"></a>服务器端和客户端</h3><ul>
+<li>服务器端<ul>
+<li>是指网络中能对其他计算机和终端提供某些服务的计算机系统，如新浪网站服务器</li>
+</ul>
+</li>
+<li>客户端<ul>
+<li>客户端与服务器端相对应</li>
+<li>是指为客户提供本地服务的程序，一般安装在普通的客户机上，需要与服务器端互相配合运行，如安装在移动智能终端上的地图导航程序</li>
+</ul>
+</li>
+</ul>
+<h3 id="C-S架构"><a href="#C-S架构" class="headerlink" title="C/S架构"></a>C/S架构</h3><ul>
+<li>客户端/服务器架构，是一种软件系统的体系结构</li>
+<li>此结构中程序和服务器端程序通常分布于两台计算机上，客户端程序的任务是将用户的要求提交给服务器端程序，再将服务器端程序返回的结果以特定的形式显示给用户</li>
+<li>服务器端程序的任务是接收客户端程序提出的服务请求，并进行相应的处理，再将结果返回给客户端程序</li>
+</ul>
+<h3 id="B-S架构"><a href="#B-S架构" class="headerlink" title="B/S架构"></a>B/S架构</h3><ul>
+<li>浏览器/服务器结构，终端用户不需要安装专门的软件，只需要安装浏览器即可</li>
+<li>此结构将系统功能的核心部分集中到服务器上</li>
+<li>以新浪为例，用户所使用的浏览器即为客户端程序，在浏览器中输入新浪的网址，用户就向新浪的网站服务器发出访问请求，新浪的服务器接受客户端访问请求并进行处理，将结果返回给浏览器，由浏览器显示，提供给用户查看。</li>
+<li>B/S模式发展迅速，针对浏览器的安全威胁也越来越多，因此浏览器安全至关重要</li>
+</ul>
+<h3 id="浏览器安全措施"><a href="#浏览器安全措施" class="headerlink" title="浏览器安全措施"></a>浏览器安全措施</h3><ul>
+<li>浏览器是可以显示网页文件，并提供用户与服务器交互功能的一种软件</li>
+<li>浏览器安全措施<ul>
+<li>删除和管理cookies</li>
+<li>删除浏览器历史纪录</li>
+<li>禁用activeX控件</li>
+</ul>
+</li>
+<li>删除和管理cookies<ul>
+<li>cookie是指网站放置在个人计算机上的小文件，用于存储用户信息和用户偏好的资料</li>
+<li>cookie可以记录用户访问某个网站的长高和口令，从而避免每次访问网站时都需要使用输入账号和口令登录</li>
+<li>cookie也存在安全隐患，因cookie中保存的信息含有一些个人隐私，若攻击者获取这些cookie信息，就会危及个人隐私安全，所以在公用计算机上使用浏览器后需要删除cookie信息</li>
+</ul>
+</li>
+<li>删除浏览器历史记录<ul>
+<li>浏览历史记录是在用户浏览网页时，由浏览器记住并存储在计算机中的信息</li>
+<li>这些信息包括输入表单的信息、口令和访问的网站等，方便用户再次使用浏览器访问网站</li>
+<li>如果用户使用公用计算机上，可有选择的删除</li>
+</ul>
+</li>
+<li>禁用ActiveX控件<ul>
+<li>activeX控件是一些嵌入在网页中的小程序，网站可以使用这类小程序提供视频和游戏等内容</li>
+<li>浏览网站服务器时，用户还可以使用这些小程序与工具栏等内容进行交互</li>
+<li>activeX控件会导致一些安全隐患，攻击者可以使用activeX控件向用户提供不需要的服务</li>
+<li>某些情况下，这些程序还可以用来收集用户计算机的个人信息，破坏计算机的信息，或者在未获取用户同意的情况下安装恶意软件</li>
+</ul>
+</li>
+<li>思考<ul>
+<li>c/s和b/s模式的区别？（<ul>
+<li>cs模式，客户端的电脑也可以参与整个系统的事务处理，可以处理一些不需要服务器处理的服务</li>
+<li>bs模式，浏览器只能通过浏览程序ie等，访问服务器，显示服务器提供的信息，整个系统的事务处理都要由服务器来完成</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-2-网上金融交易安全"><a href="#5-2-网上金融交易安全" class="headerlink" title="5.2-网上金融交易安全"></a>5.2-网上金融交易安全</h2><ul>
+<li>网上金融交易<ul>
+<li>用户通过因特网完成各种网络金融服务（开户、查询、付账等）和网络电子商务支付，用户足不出户完成各种金融业务</li>
+<li>网络电子商务支付可以使用银行卡或第三方支付平台完成网络购物，如车票等</li>
+<li>为保障安全，网上金融交易一般不采用简单的账号口令的验证方式来识别用户身份，多采用双因素身份认证识别用户身份，只有通过认证的才可以完成操作</li>
+</ul>
+</li>
+<li>网上金融交易常用安全措施<ul>
+<li>U盾，usb-key</li>
+<li>手机短信验证</li>
+<li>口令卡</li>
+<li>采用安全超文本传输协议</li>
+</ul>
+</li>
+</ul>
+<h3 id="U盾"><a href="#U盾" class="headerlink" title="U盾"></a>U盾</h3><ul>
+<li>u盾时用于网上电子银行签名和数字认证的工具，其内置微型智能卡处理器，采用非对称加密体制对网上数据进行加密、解密和数字签名</li>
+<li>用户选择使用U盾后，所有涉及资金对外转移的网银操作，都必须使用U盾才能完成</li>
+<li>使用U盾时，除了需要将U盾插入计算机，还需要输入设置的口令才能完成身份认证</li>
+</ul>
+<h3 id="手机短信验证"><a href="#手机短信验证" class="headerlink" title="手机短信验证"></a>手机短信验证</h3><ul>
+<li>用户向网络金融交易平台发出交易请求后</li>
+<li>网络金融平台通过短信向用户绑定的手机号码发出一次性口令</li>
+<li>只有在输入正确的用户口令和短信验证口令后，整个交易才能被确认并完成</li>
+</ul>
+<h3 id="口令卡"><a href="#口令卡" class="headerlink" title="口令卡"></a>口令卡</h3><ul>
+<li>口令卡相当于一种动态的电子银行口令</li>
+<li>口令卡上以矩阵的形式印有若干字符串，用户在使用电子银行进行对外转账等支付交易时，电子银行系统就会随机给出一组口令卡坐标，用户根据坐标从卡片中找到口令组合并输入</li>
+<li>只有口令组合输入正确时，用户才能完成相关交易</li>
+<li>这种口令组合是动态变化的，用户每次使用时输入的口令都不一样，交易结束后即失效，从而防止攻击者窃取用户口令</li>
+<li></li>
+</ul>
+<h3 id="HTTPS"><a href="#HTTPS" class="headerlink" title="HTTPS"></a>HTTPS</h3><ul>
+<li>https是以安全为目标的http通道协议，是HTTP的安全版</li>
+<li>https协议提供了身份验证与加密通信的方法，广泛用于因特网上安全敏感的通信，例如银行网站登录采用https方式</li>
+<li>该安全协议很大程度上保障用户数据的安全</li>
+</ul>
+<h3 id="5-3-电子邮件安全"><a href="#5-3-电子邮件安全" class="headerlink" title="5.3-电子邮件安全"></a>5.3-电子邮件安全</h3><ul>
+<li>电子邮件系统<ul>
+<li>电子邮件是一种用电子手段提供信息交换的服务方式，是因特网上应用广泛的服务之一</li>
+</ul>
+</li>
+<li>电子邮件安全威胁<ul>
+<li>邮件地址欺骗</li>
+<li>垃圾邮件</li>
+<li>邮件病毒</li>
+<li>邮件炸弹</li>
+</ul>
+</li>
+</ul>
+<h3 id="邮件地址欺骗"><a href="#邮件地址欺骗" class="headerlink" title="邮件地址欺骗"></a>邮件地址欺骗</h3><ul>
+<li>是黑客攻击和垃圾邮件制造者常用的方法</li>
+<li>由于在SMTP协议中，邮件发送者可以指定SMTP发送者的发送账户、发送账户的显示名称、SMTP服务器域名等信息，如果接收端未对这些信息进行认证，就可能放过一些可以伪造的邮件</li>
+<li>攻击者可以通过自行搭建SMTP服务器来发送伪造地址的邮件</li>
+<li>目前，正规的邮件服务器都有黑名单和反向认证等机制，如检查邮件来源IP、检查邮件发送域、反向DNS查询、登录验证等</li>
+<li>伪造邮件一般很难通过严格设置的邮件服务器，但用户还是要对邮件内容涉及敏感信息的邮件来源保持高度警惕</li>
+<li></li>
+</ul>
+<h3 id="垃圾邮件"><a href="#垃圾邮件" class="headerlink" title="垃圾邮件"></a>垃圾邮件</h3><ul>
+<li>是指未经用户许可就强行发送到用户邮箱的电子邮件</li>
+<li>垃圾邮件一般具有批量发送的特征，其内容包括广告等</li>
+<li>垃圾邮件可以分为良性和恶性的</li>
+<li>良性垃圾邮件是对收件人影响不大的信息邮件，例如宣传广告</li>
+<li>恶意垃圾邮件是指具有破坏性的电子邮件，例如携带恶意代码的广告</li>
+</ul>
+<h3 id="邮件病毒"><a href="#邮件病毒" class="headerlink" title="邮件病毒"></a>邮件病毒</h3><ul>
+<li>邮件病毒和普通病毒在功能上是一样的</li>
+<li>他们主要通过电子邮件进行传播，因此被称为邮件病毒</li>
+<li>一般通过邮件附件发送病毒，接收者打开邮件，运行附件会使计算机中毒</li>
+</ul>
+<h3 id="邮件炸弹"><a href="#邮件炸弹" class="headerlink" title="邮件炸弹"></a>邮件炸弹</h3><ul>
+<li>是指邮件发送者利用特殊的电子邮件软件，在很短的时间内连续地将邮件发送给同一收信人，</li>
+<li>由于用户邮箱存储空间有限，没有多余空间接受新邮件，新邮件将会丢失或退回，从而造成收件人邮箱功能瘫痪</li>
+<li>同时，邮件炸弹会大量消耗网络资源，会导致网络阻塞，严重时会影响到大量用户邮件的使用</li>
+</ul>
+<ul>
+<li>电子邮件安全防护技术<ul>
+<li>垃圾邮件过滤技术</li>
+<li>邮件加密和签名</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>垃圾邮件过滤技术<ul>
+<li>是应对垃圾邮件问题的有效手段之一，由黑白名单过滤和智能内容过滤两种技术</li>
+<li>黑白名单过滤<ul>
+<li>采用最简单直接的方式对垃圾邮件进行过滤</li>
+<li>由用户手动添加需要过滤的域名、发信人或发信IP地址等</li>
+<li>对于常见的广告型垃圾邮件效果明显</li>
+<li>此种方式属于被动防御，需要大量手工操作，每次都需要对黑白名单进行手动添加</li>
+</ul>
+</li>
+<li>内容过滤：<ul>
+<li>主要针对邮件标题、邮件附件文件名和邮件附件大小等选项设定关键值</li>
+<li>当上述选项被认定是垃圾邮件，邮件系统会将其直接删除</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>邮件加密和签名<ul>
+<li>未经加密的邮件，经过加密和签名，可提高安全性</li>
+<li>用于电子邮件加密和签名的软件：GnuPG（常见的开源软件</li>
+<li>GnuPG是一个基于RSA公钥密码体制的邮件加密软件，可以加密邮件以防止非授权者阅读，同时还可以对邮件加上数字签名，使收信人剋确认邮件发送者，并确认邮件没有被篡改</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h2 id="5-4-数据安全"><a href="#5-4-数据安全" class="headerlink" title="5.4-数据安全"></a>5.4-数据安全</h2><h3 id="数据备份"><a href="#数据备份" class="headerlink" title="数据备份"></a>数据备份</h3><ul>
+<li>系统运行和维护的过程中，常会有一些因素导致数据丢失，为确保数据安全性，需要对数据进行备份</li>
+<li>数据备份是容灾的基础，是为防止系统出现操作失误或系统故障导致数据丢失，而将全部或部分数据集合，从应用主机的硬盘或阵列复制到其它异地存储介质或移动硬盘的过程</li>
+<li>备份的方式有多种，传统方式是采用内置或外置的磁带机进行冷备份<ul>
+<li>备份后的磁带机数据保存在安全的位置，这种备份方式恢复数据的时间很长</li>
+</ul>
+</li>
+<li>随着海量数据的增加，开始采用网络备份<ul>
+<li>网络备份一般通过专业的数据存储管理软件结合相应的硬件和存储设备来实现</li>
+</ul>
+</li>
+<li>随着云计算和云技术发展，出现云备份<ul>
+<li>个人或企业可以将重要数据备份到云服务器上，需要使用时，从云服务器上下载到本地使用</li>
+</ul>
+</li>
+</ul>
+<h3 id="数据恢复"><a href="#数据恢复" class="headerlink" title="数据恢复"></a>数据恢复</h3><ul>
+<li>数据丢失后，就需要数据恢复</li>
+<li>了解其基本原理并掌握常用数据恢复工具，可以恢复丢失的数据，挽回损失</li>
+<li>若不慎删除硬盘分区信息或误格式化硬盘，造成系统信息区破坏，无法读取数据资料，首先应关机，不要轻易对硬盘数据资料进行写操作，否则会增加数据恢复的难度，重启开机后，再使用数据恢复工具完成恢复工作</li>
+<li>EasyRecovery是一款常用数据恢复工具，它可以帮助用户恢复丢失的数据以及重建文件系统<ul>
+<li>其不会向用户的原始驱动器写入任何数据</li>
+<li>其工作原理是在内存种重建文件分区表，然后将数据安全地传输到其他驱动器中</li>
+</ul>
+</li>
+<li>使用数据恢复软件找回数据文件的前提是硬盘中还保留有误删除文件的信息和数据块</li>
+<li>当用户误删除文件或误格式化U盘后，不要在该分区中写入任何文件，否则这些需要恢复的数据就有可能被写入的数据覆盖，恢复数据的难度就会加大</li>
+<li>因此，为了恢复误删除的数据，就不能对要修复的分区或硬盘进行新的读写操作</li>
+</ul>
+<h3 id="数据加密"><a href="#数据加密" class="headerlink" title="数据加密"></a>数据加密</h3><ul>
+<li>是保护数据安全的主要手段之一，可避免用户在传输或存储重要信息过程中，被第三方窃取信息</li>
+<li>数据加密工具可以分为：<ul>
+<li>硬件加密<ul>
+<li>直接通过硬件单元，如利用USB接口或者计算机并行口等对数据进行加密</li>
+<li>加密后可以有效地保护用户信息、隐私或知识产权</li>
+</ul>
+</li>
+<li>软件加密<ul>
+<li>主要有文件加密工具、光盘加密工具和磁盘加密工具</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>对单个文件或文件夹进行加密的工具有很多，如zip和rar压缩包可以用来加密大文件，压缩时可以设置密码，输入正确密码后才可以解压</li>
+<li>WPS，word，PPT等也可以通过设置口令的方式来加密文件</li>
+<li>光盘加密工具可以防止光盘数据被复制，可采用的方法很多，用户可以给光盘添加密码，<ul>
+<li>如SecureBurn软件可以在正式刻录之前对光盘进行密码保护，然后通过软件内置的刻录功能即可直接获得有密码保护的光盘，用户也可以让文件只在光盘中运行</li>
+<li>又如，CD-Protector制作的加密光盘，他人无法通过直接复制文件获得光盘中的重要文件，即使把文件复制到硬盘再运行也会出现出错提示信息而不能使用</li>
+<li>光盘加密工具可以对镜像文件进行可视化修改，隐藏光盘镜像文件</li>
+<li>此外，还可以放大一般的文件，将普通目录改为文件目录，由此保护光盘中的机密文件和有关隐私的信息</li>
+<li>磁盘加密工具则是对磁盘数据进行加密</li>
+</ul>
+</li>
+<li>目前磁盘加密工具主要有：<ul>
+<li>PGPDisk</li>
+<li>TrueCrypt</li>
+</ul>
+</li>
+<li>为了数据安全，加密数据时应尽量保证：<ul>
+<li>加密过程足够强壮并覆盖整个磁盘，包括剩余空间、交换文件</li>
+<li>加密密钥足够长，能够抵御暴力破解攻击</li>
+<li>加密密钥自身的机密性能够得到保障，例如用于加密磁盘的密钥从来不存储在被加密保护的磁盘中</li>
+</ul>
+</li>
+<li>除了采用数据加密保证数据的保密性，用户还可以通过对数据文件添加数字签名来保证数据文件的完整性和真实性，防止数据被篡改或伪造，也可避免可能存在的欺骗和抵赖，一些应用软件可以对数据文件进行签名，如word，邮件客户端Foxmail等</li>
+</ul>
+<h3 id="数据删除"><a href="#数据删除" class="headerlink" title="数据删除"></a>数据删除</h3><ul>
+<li>不法分子通过对存储介质进行数据恢复来窃取曾经存储的重要数据，导致泄密，彻底删除计算机数据，防止数据泄露，也是很重要的</li>
+<li>Windows中，delete-放入回收站，shift+delete或清空回收站才会真正删除；</li>
+<li>由于Windows操作系统只考虑了由操作系统本身对系统资源存取，因此无论是在文件分配表（file allocation table，FAT）还是新技术文件系统（new technology file system，NTFS）下，操作系统删除文件的标准都是对操作系统不可见；事实上，只是对文件的目录做了删除标记，保证率文件在删除前所占用的空间确实得到释放，而文件实际存放在数据区的内容毫无改，从以上原理知，只要数据区没有被破坏，数据就没有被完全删除，就存在被恢复的可能</li>
+<li>数据安全删除就是要完全删除了要删除的文件，包括文件相关属性信息，即完全破坏数据，使数据恢复无法进行，从而实现保护数据的目的</li>
+<li>安全删除的方法，可分为：<ul>
+<li>硬销毁</li>
+<li>软销毁</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>数据删除-硬销毁<ul>
+<li>即破坏性销毁，是指采用物理破坏或者化学腐蚀的方法把记录涉密数据的物理载体完全破坏掉</li>
+<li>然而从根本上删除数据的销毁方式，是对保护数据不被恢复的安全的、彻底的方法</li>
+<li>可分为：<ul>
+<li>物理销毁<ul>
+<li>又可分为消磁、熔炉中焚化和熔炼、借助外力粉粹及研磨磁盘表面等方法</li>
+<li>费时，费力，适用于保密要求较高的场合</li>
+</ul>
+</li>
+<li>化学销毁<ul>
+<li>采用化学药品腐蚀、溶解磁盘记录表面的数据销毁方法</li>
+<li>只能由专业人员在特定场所中进行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据删除-软销毁<ul>
+<li>即逻辑销毁，是指通过软件编程实现对数据及相关信息的反复覆盖擦除，达到不可恢复的安全删除目的</li>
+<li>一般情况下，认为低级格式化以后，数据恢复的可能性依然存在</li>
+<li>要保证安全，必须通过多次写入新数据来覆盖旧数据才能真正达到数据安全删除的目的</li>
+<li>数据软销毁通常采用数据覆写法</li>
+<li>数据覆写是将非保密数据写入以前存有敏感数据的硬盘簇的过程，其技术原理是依据硬盘上的书都是以二进制的1和0形式存储的，而使用预先定义的无意义、无规律的信息反复多次覆盖硬盘上原先存储的数据，就无法知道原先的数据，也就达到了销毁数据的目的</li>
+<li>由于经过数据覆写法处理后的硬盘可以循环使用，适用于密级要求不是很高的场合，特别是需要对某一具体文件进行销毁而其他文件不能破坏时，此方法更实用</li>
+<li>现在常用的数据销毁软件，例如BCWipe，Eraser等，主要是针对文件、剩余空间和物理磁盘的销毁。所采用的方式都是通过软件对磁盘进行相应的覆写</li>
+<li>数据覆写技术犹如碎纸机，是安全、经济的数据软销毁方式之一。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>思考：<ul>
+<li>使用Easy Recovery工具恢复数据最为重要的因素是？<ul>
+<li>当用户误删除文件或者误格式化U盘后，不要在该分区中写入任何文件，否则这些需要恢复的数据就有可能被写入的数据覆盖，恢复数据的难度就会加大。因此，为了恢复误删除的数据，就不能对要修复的分区或硬盘进行新的读写操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="5-5-账户口令安全"><a href="#5-5-账户口令安全" class="headerlink" title="5.5-账户口令安全"></a>5.5-账户口令安全</h2><ul>
+<li>用户使用应用时，需通过账号和口令来验证身份从而访问某些资源，因此，账号口令的安全性非常重要</li>
+<li>攻击者窃取口令的方式主要有三种：<ul>
+<li>暴力破解<ul>
+<li>又称为口令穷举，就是通过计算机对所有可能的口令组合进行穷举尝试</li>
+<li>如果攻击者已知用户账号，用户的口令又比较简单，例如比较简单的数字组合，攻击者使用暴力破解工具很快可以破译口令</li>
+<li>因此在一些安全性较高的系统，如网银系统，会限制口令的输入次数，降低暴力破解口令的成功率</li>
+</ul>
+</li>
+<li>键盘记录木马<ul>
+<li>若用户的计算机被植入键盘记录木马，当用户通过键盘输入口令时，键盘记录木马程序会记住用户输入的口令，然后木马程序通过自带邮件发送功能把记录的口令发送到制定者的邮箱</li>
+</ul>
+</li>
+<li>屏幕快照木马<ul>
+<li>若用户的计算机被植入屏幕快照木马，木马程序会通过屏幕快照将用户的登录界面连续保存为两张黑白图片，然后通过自带的发信模块将图片发送到制定邮箱</li>
+<li>攻击者通过对照图片中鼠标的点击位置，就能破译出用户账号和口令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用户在设置账号的口令时，应遵循以下原则<ul>
+<li>严禁使用空口令</li>
+<li>严禁使用与账号相同或相似的口令</li>
+<li>不要设置简单字母和数字组成的口令</li>
+<li>不要设置短于6各字符或仅包含字母或数字的口令</li>
+<li>不要使用与个人有关的信息作为口令内容，如生日等</li>
+</ul>
+</li>
+<li>为了保证口令的安全性，建议用户每隔一段时间更新一次账号口令</li>
+<li>如果用户是在公共场所使用计算机上网，登录账户时不要选择保存口令和自动登录，离开时要清除使用过的记录</li>
+</ul>
+<h2 id="5-6-实验"><a href="#5-6-实验" class="headerlink" title="5.6-实验"></a>5.6-实验</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/18/操作系统安全防护技术/" rel="next" title="操作系统安全防护技术">
+                <i class="fa fa-chevron-left"></i> 操作系统安全防护技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/18/移动智能终端安全防护/" rel="prev" title="移动智能终端安全防护">
+                移动智能终端安全防护 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#05-应用与数据安全"><span class="nav-text">05-应用与数据安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-浏览器安全"><span class="nav-text">5.1-浏览器安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器端和客户端"><span class="nav-text">服务器端和客户端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-S架构"><span class="nav-text">C/S架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B-S架构"><span class="nav-text">B/S架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#浏览器安全措施"><span class="nav-text">浏览器安全措施</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-网上金融交易安全"><span class="nav-text">5.2-网上金融交易安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#U盾"><span class="nav-text">U盾</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#手机短信验证"><span class="nav-text">手机短信验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#口令卡"><span class="nav-text">口令卡</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTPS"><span class="nav-text">HTTPS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-电子邮件安全"><span class="nav-text">5.3-电子邮件安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邮件地址欺骗"><span class="nav-text">邮件地址欺骗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#垃圾邮件"><span class="nav-text">垃圾邮件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邮件病毒"><span class="nav-text">邮件病毒</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邮件炸弹"><span class="nav-text">邮件炸弹</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-数据安全"><span class="nav-text">5.4-数据安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据备份"><span class="nav-text">数据备份</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据恢复"><span class="nav-text">数据恢复</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据加密"><span class="nav-text">数据加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据删除"><span class="nav-text">数据删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-账户口令安全"><span class="nav-text">5.5-账户口令安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-实验"><span class="nav-text">5.6-实验</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

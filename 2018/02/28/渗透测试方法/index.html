@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="渗透测试,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="kali Linux渗透测试方法安全问题的根源 从更加宏观的角度看待安全 概览安全体系的知识结构 明确渗透测试在其中的定位   最近一次技术交流引起的思考 分层思想的利弊 片面的认识安全">
+<meta name="keywords" content="渗透测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="渗透测试方法">
+<meta property="og:url" content="http://21guns.top/2018/02/28/渗透测试方法/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="kali Linux渗透测试方法安全问题的根源 从更加宏观的角度看待安全 概览安全体系的知识结构 明确渗透测试在其中的定位   最近一次技术交流引起的思考 分层思想的利弊 片面的认识安全">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T11:48:26.756Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="渗透测试方法">
+<meta name="twitter:description" content="kali Linux渗透测试方法安全问题的根源 从更加宏观的角度看待安全 概览安全体系的知识结构 明确渗透测试在其中的定位   最近一次技术交流引起的思考 分层思想的利弊 片面的认识安全">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/28/渗透测试方法/">
+
+
+
+
+
+  <title>渗透测试方法 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/渗透测试方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">渗透测试方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T19:31:33+08:00">
+                2018-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/渗透测试/" itemprop="url" rel="index">
+                    <span itemprop="name">渗透测试</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="kali-Linux渗透测试方法"><a href="#kali-Linux渗透测试方法" class="headerlink" title="kali Linux渗透测试方法"></a>kali Linux渗透测试方法</h1><h2 id="安全问题的根源"><a href="#安全问题的根源" class="headerlink" title="安全问题的根源"></a>安全问题的根源</h2><ul>
+<li>从更加宏观的角度看待安全<ul>
+<li>概览安全体系的知识结构</li>
+<li>明确渗透测试在其中的定位</li>
+</ul>
+</li>
+<li>最近一次技术交流引起的思考</li>
+<li>分层思想的利弊<ul>
+<li>片面的认识安全<a id="more"></a></li>
+<li>只追求功能的实现</li>
+<li>人这一层面是问题的根源</li>
+<li>静态死板的分层并不能满足所有安全的需求</li>
+</ul>
+</li>
+</ul>
+<h2 id="软件安全生命周期"><a href="#软件安全生命周期" class="headerlink" title="软件安全生命周期"></a>软件安全生命周期</h2><ul>
+<li>需求<ul>
+<li>安全需求</li>
+</ul>
+</li>
+<li>设计<ul>
+<li>系统架构</li>
+</ul>
+</li>
+<li>编码<ul>
+<li>编码规范</li>
+</ul>
+</li>
+<li>测试<ul>
+<li>代码审计</li>
+</ul>
+</li>
+<li>上线<ul>
+<li>部署规范</li>
+</ul>
+</li>
+<li>运维<ul>
+<li>环境审计</li>
+</ul>
+</li>
+</ul>
+<h2 id="渗透测试的意义"><a href="#渗透测试的意义" class="headerlink" title="渗透测试的意义"></a>渗透测试的意义</h2><ul>
+<li>安全建设<ul>
+<li>周期长</li>
+<li>投入大</li>
+<li>效果不尽人意</li>
+</ul>
+</li>
+<li>渗透测试<ul>
+<li>相对软件安全生命周期，逆向思维</li>
+<li>从问题出发检查系统安全</li>
+<li>用黑客角度审视系统</li>
+<li>在资源有限的条件下效率更高<ul>
+<li>中小型企业</li>
+<li>IT资金投入不足，安全更不足</li>
+</ul>
+</li>
+<li>渗透测试的目标是让系统更安全<ul>
+<li>而非恶意黑客</li>
+<li>部分白帽子嘲笑某系统安全方面辣鸡现象</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kali-Linux简介"><a href="#Kali-Linux简介" class="headerlink" title="Kali Linux简介"></a>Kali Linux简介</h2><ul>
+<li>前身是BackTrack</li>
+<li>包含600+工具，仍需自己添加</li>
+<li>安全从业人员专用操作系统</li>
+<li>安全工具军火库</li>
+<li>支持多平台，包括ARM</li>
+<li>渗透测试和安全审计的平台</li>
+<li>工具党问题<ul>
+<li>只掌握工具不掌握原理</li>
+<li>编程语言，扫描工具其实都是工具</li>
+<li>不可能从0101代码层面考虑，编程语言本身也是工具</li>
+<li>掌握工具使用仍是重要的</li>
+</ul>
+</li>
+</ul>
+<h2 id="渗透测试标准PETS"><a href="#渗透测试标准PETS" class="headerlink" title="渗透测试标准PETS"></a>渗透测试标准PETS</h2><ul>
+<li>前期沟通<ul>
+<li>不涉及技术层面</li>
+<li>渗透测试的时间，地点</li>
+<li>使用的工具，ddos抗压测试工具</li>
+<li>目标范围，通常给出域名，是否包括其子域名</li>
+</ul>
+</li>
+<li>信息收集<ul>
+<li>技术层面</li>
+<li>被动信息搜集（OSINT）<ul>
+<li>域名，人员，邮箱，地址，手机号码等<ul>
+<li>为了定制专属的字典，密码破解</li>
+<li>本地工具<ul>
+<li>nslookup、dig、whois</li>
+<li>Fierce<ul>
+<li>较综合工具<ul>
+<li>Dns查询</li>
+<li>区域传输</li>
+<li>基于字典的解析记录暴力破解</li>
+<li>Subtopic</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dnsrecon<ul>
+<li>功能类似上者</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>在线网站<ul>
+<li>站长之家等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>搜索引擎<ul>
+<li>shodan<ul>
+<li>针对联网设备</li>
+<li>例如，查看目标是否使用某防火墙</li>
+<li>搜索联网摄像头</li>
+</ul>
+</li>
+<li>谷歌黑客</li>
+</ul>
+</li>
+<li>Metadata<ul>
+<li>拍摄设备拍摄的照片会泄露信息，如GPS</li>
+</ul>
+</li>
+<li>专属密码字典<ul>
+<li>工具Cupp，自行安装，基于py</li>
+<li>基于之前搜集的信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>主动信息搜集<ul>
+<li>扫描IP地址段<ul>
+<li>工具nmap</li>
+<li>思路<ul>
+<li>域名</li>
+<li>其子域名</li>
+<li>其IP地址</li>
+<li>其c段IP地址</li>
+<li>IP地址对应主机的端口开放情况</li>
+<li>端口对应服务的版本</li>
+<li>根据版本搜索漏洞库寻找已知漏洞</li>
+<li>根据漏洞寻相应payload</li>
+</ul>
+</li>
+<li>上步骤可写shell脚本，所有命令集中在同一脚本，自动化</li>
+</ul>
+</li>
+<li>其他服务扫描<ul>
+<li>除nmap扫描的中一般服务外的其他服务</li>
+<li>SNMP、SMB、SMPT、WEB<ul>
+<li>Snmp<ul>
+<li>Onesistyone命令</li>
+<li>Snmpwalk工具</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>识别防护机制<ul>
+<li>LBD工具<ul>
+<li>测试负载均衡</li>
+</ul>
+</li>
+<li>Wafw00f工具<ul>
+<li>测试waf是否存在</li>
+</ul>
+</li>
+<li>Fragroute工具<ul>
+<li>是否有其他IDS，IPS</li>
+</ul>
+</li>
+<li>Nmap</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>威胁建模<ul>
+<li>传统威胁建模方法<ul>
+<li>资产/攻击者</li>
+</ul>
+</li>
+<li>PETS标准威胁建模方法<ul>
+<li>按照PETS，一般是非黑盒方面，不涉及技术，走访，问卷调查企业，获取相关信息</li>
+<li>商业资产<ul>
+<li>主要资产</li>
+<li>次要资产</li>
+</ul>
+</li>
+<li>商业流程<ul>
+<li>技术支持</li>
+<li>资产管理</li>
+<li>人力资源</li>
+<li>第三方</li>
+</ul>
+</li>
+<li>威胁主体<ul>
+<li>内部</li>
+<li>外部</li>
+</ul>
+</li>
+<li>威胁能力<ul>
+<li>威胁主体的能力</li>
+<li>威胁的可能性</li>
+</ul>
+</li>
+<li>企业专有的威胁模型，而非通常的技术模型</li>
+</ul>
+</li>
+<li>动机建模<ul>
+<li>企业内部人员威胁，其动机</li>
+</ul>
+</li>
+<li>影响建模</li>
+<li>从技术黑盒的角度进行建模<ul>
+<li>工具，技术，能力发现被攻击面</li>
+<li>确定实施渗透的最佳路径</li>
+<li>确定控制，流程，架构</li>
+</ul>
+</li>
+<li>建立的模型结果作为渗透测试报告的一部分进行提交</li>
+</ul>
+</li>
+<li>漏洞分析<ul>
+<li>漏洞扫描<ul>
+<li>系统层面<ul>
+<li>Nessus</li>
+<li>Openvas</li>
+<li>Nexpose</li>
+<li>Nmap script</li>
+</ul>
+</li>
+<li>Web层面<ul>
+<li>Nikto</li>
+<li>Burpsuite</li>
+<li>Owasp ZAP</li>
+<li>Sqlmap</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>已知漏洞利用<ul>
+<li>在线搜索<ul>
+<li>在线搜索exp平台，如exploitdb</li>
+<li>搜索引擎</li>
+</ul>
+</li>
+<li>本地工具<ul>
+<li>Searchsploit</li>
+<li>Sandi</li>
+<li>Armitage</li>
+<li>Msf漏洞利用平台</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>渗透攻击<ul>
+<li>明显技术层面</li>
+<li>进行到此步发现有所不足，可能会重新建模，重新漏洞分析，反复进行，周而复始。</li>
+<li>未知漏洞挖掘<ul>
+<li>Fuzzing</li>
+<li>Edb</li>
+<li>Ollydbg</li>
+</ul>
+</li>
+<li>常见遇到防护措施，如waf，如杀毒软件。 需要进行面杀编码绕过<ul>
+<li>Webshell编码和过滤绕过</li>
+<li>Metasploit工具，msfvenom一般生成的payload会被杀软识别，虚编码绕过</li>
+<li>Vile-evation，功能类似上，会对payload进行编码混淆。 Kali未自带。</li>
+</ul>
+</li>
+<li>Wifi渗透<ul>
+<li>到目标办公地点进行</li>
+<li>Wifite工具</li>
+</ul>
+</li>
+<li>密码破解<ul>
+<li>Hydra</li>
+<li>John</li>
+<li>PTH</li>
+<li>Subtopic</li>
+</ul>
+</li>
+<li>社工<ul>
+<li>侧面攻击</li>
+<li>Setoolkit工具</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>后渗透测试<ul>
+<li>取得一台主机控制权后</li>
+<li>扩大战果内网渗透<ul>
+<li>内网扫描</li>
+<li>抓包分析</li>
+<li>地址欺骗</li>
+</ul>
+</li>
+<li>本地提权</li>
+<li>获取数据</li>
+<li>擦除痕迹</li>
+<li>留后门</li>
+</ul>
+</li>
+<li>渗透测试报告<ul>
+<li>管理层报告<ul>
+<li>风险级别</li>
+<li>风险分类</li>
+<li>整改规划</li>
+</ul>
+</li>
+<li>技术报告<ul>
+<li>漏洞细节</li>
+<li>漏洞复现</li>
+<li>修补方案</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kali-Linux渗透测试实践方法"><a href="#Kali-Linux渗透测试实践方法" class="headerlink" title="Kali Linux渗透测试实践方法"></a>Kali Linux渗透测试实践方法</h2><ul>
+<li>简单总结<ul>
+<li>安全工作的目标是实现安全</li>
+<li>渗透测试的目的不是证明系统有多烂和测试者有多牛</li>
+<li>PETS是安全实操的方法论，掌握标准但但不要迷信标准</li>
+<li>保持学习状态，重视理论研究，多做上手实践</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h2 id="对人的安全意识教育贯穿始终"><a href="#对人的安全意识教育贯穿始终" class="headerlink" title="对人的安全意识教育贯穿始终"></a>对人的安全意识教育贯穿始终</h2></blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/渗透测试/" rel="tag"># 渗透测试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/28/Web渗透-CSRF漏洞/" rel="next" title="Web渗透-CSRF漏洞">
+                <i class="fa fa-chevron-left"></i> Web渗透-CSRF漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/28/Web渗透-主机发现/" rel="prev" title="主动信息收集_主机发现">
+                主动信息收集_主机发现 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#kali-Linux渗透测试方法"><span class="nav-text">kali Linux渗透测试方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全问题的根源"><span class="nav-text">安全问题的根源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#软件安全生命周期"><span class="nav-text">软件安全生命周期</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渗透测试的意义"><span class="nav-text">渗透测试的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kali-Linux简介"><span class="nav-text">Kali Linux简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#渗透测试标准PETS"><span class="nav-text">渗透测试标准PETS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kali-Linux渗透测试实践方法"><span class="nav-text">Kali Linux渗透测试实践方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对人的安全意识教育贯穿始终"><span class="nav-text">对人的安全意识教育贯穿始终</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

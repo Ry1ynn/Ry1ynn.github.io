@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="并发服务器&amp;amp;HTTP协议01-单进程服务器 完成一个简单的TCP服务器">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并发服务器&amp;HTTP协议">
+<meta property="og:url" content="http://21guns.top/2018/01/02/并发服务器-HTTP协议/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="并发服务器&amp;amp;HTTP协议01-单进程服务器 完成一个简单的TCP服务器">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:07:23.240Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="并发服务器&amp;HTTP协议">
+<meta name="twitter:description" content="并发服务器&amp;amp;HTTP协议01-单进程服务器 完成一个简单的TCP服务器">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/02/并发服务器-HTTP协议/">
+
+
+
+
+
+  <title>并发服务器&HTTP协议 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/并发服务器-HTTP协议/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">并发服务器&HTTP协议</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:54+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="并发服务器-amp-HTTP协议"><a href="#并发服务器-amp-HTTP协议" class="headerlink" title="并发服务器&amp;HTTP协议"></a>并发服务器&amp;HTTP协议</h1><h2 id="01-单进程服务器"><a href="#01-单进程服务器" class="headerlink" title="01-单进程服务器"></a>01-单进程服务器</h2><ul>
+<li><p>完成一个简单的TCP服务器<a id="more"></a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">serSocket = socket(AF_INET, SOCK_STREAM)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 重复使用绑定的信息</span></span><br><span class="line">serSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR  , <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">localAddr = (<span class="string">''</span>, <span class="number">7788</span>)</span><br><span class="line"></span><br><span class="line">serSocket.bind(localAddr)</span><br><span class="line"></span><br><span class="line">serSocket.listen(<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line"></span><br><span class="line">    print(<span class="string">'-----主进程，，等待新客户端的到来------'</span>)</span><br><span class="line"></span><br><span class="line">    newSocket,destAddr = serSocket.accept()</span><br><span class="line"></span><br><span class="line">    print(<span class="string">'-----主进程，，接下来负责数据处理[%s]-----'</span>%str(destAddr))</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            recvData = newSocket.recv(<span class="number">1024</span>)</span><br><span class="line">            <span class="keyword">if</span> len(recvData)&gt;<span class="number">0</span>:</span><br><span class="line">                print(<span class="string">'recv[%s]:%s'</span>%(str(destAddr), recvData))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                print(<span class="string">'[%s]客户端已经关闭'</span>%str(destAddr))</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">finally</span>:</span><br><span class="line">        newSocket.close()</span><br><span class="line"></span><br><span class="line">serSocket.close()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结:</p>
+<ul>
+<li>同一时刻只能为一个客户进行服务，不能同时为多个客户服务</li>
+<li>类似于找一个“明星”签字一样，客户需要耐心等待才可以获取到服务</li>
+<li><code>当服务器为一个客户端服务时，而另外的客户端发起了connect，只要服务器listen的队列有空闲的位置，就会为这个新客户端进行连接，并且客户端可以发送数据，但当服务器为这个新客户端服务时，可能一次性把所有数据接收完毕</code></li>
+<li>当recv接收数据时，返回值为空，即没有返回数据，那么意味着客户端已经调用了close关闭了；因此服务器通过判断recv接收数据是否为空 来判断客户端是否已经下线</li>
+</ul>
+</li>
+</ul>
+<h2 id="02-多进程服务器"><a href="#02-多进程服务器" class="headerlink" title="02-多进程服务器"></a>02-多进程服务器</h2><ul>
+<li><p>code：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"></span><br><span class="line"><span class="comment"># 处理客户端的请求并为其服务</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dealWithClient</span><span class="params">(newSocket,destAddr)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        recvData = newSocket.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">if</span> len(recvData)&gt;<span class="number">0</span>:</span><br><span class="line">            print(<span class="string">'recv[%s]:%s'</span>%(str(destAddr), recvData))</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'[%s]客户端已经关闭'</span>%str(destAddr))</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    newSocket.close()</span><br></pre></td></tr></table></figure>
+<p>def main():</p>
+<pre><code>serSocket = socket(AF_INET, SOCK_STREAM)
+serSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR  , 1)
+localAddr = (&apos;&apos;, 7788)
+serSocket.bind(localAddr)
+serSocket.listen(5)
+
+try:
+    while True:
+        print(&apos;-----主进程，，等待新客户端的到来------&apos;)
+        newSocket,destAddr = serSocket.accept()
+
+        print(&apos;-----主进程，，接下来创建一个新的进程负责数据处理[%s]-----&apos;%str(destAddr))
+        client = Process(target=dealWithClient, args=(newSocket,destAddr))
+        client.start()
+
+        #因为已经向子进程中copy了一份（引用），并且父进程中这个套接字也没有用处了
+        #所以关闭
+        newSocket.close()
+finally:
+    #当为所有的客户端服务完之后再进行关闭，表示不再接收新的客户端的链接
+    serSocket.close()
+</code></pre><p>if <strong>name</strong> == ‘<strong>main</strong>‘:</p>
+<pre><code>main()
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 总结</span><br><span class="line"></span><br><span class="line">  - 通过为每个客户端创建一个进程的方式，能够同时为多个客户端进行服务</span><br><span class="line">  - 当客户端不是特别多的时候，这种方式还行，如果有几百上千个，就不可取了，因为每次创建进程等过程需要好较大的资源</span><br><span class="line"></span><br><span class="line">## 03-多线程服务器</span><br><span class="line"></span><br><span class="line">- code：</span><br><span class="line"></span><br><span class="line">  ```python</span><br><span class="line">  #coding=utf-8</span><br><span class="line">  from socket import *</span><br><span class="line">  from threading import Thread</span><br><span class="line">  from time import sleep</span><br><span class="line"></span><br><span class="line">  # 处理客户端的请求并执行事情</span><br><span class="line">  def dealWithClient(newSocket,destAddr):</span><br><span class="line">      while True:</span><br><span class="line">          recvData = newSocket.recv(1024)</span><br><span class="line">          if len(recvData)&gt;0:</span><br><span class="line">              print(&apos;recv[%s]:%s&apos;%(str(destAddr), recvData))</span><br><span class="line">          else:</span><br><span class="line">              print(&apos;[%s]客户端已经关闭&apos;%str(destAddr))</span><br><span class="line">              break</span><br><span class="line"></span><br><span class="line">      newSocket.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  def main():</span><br><span class="line"></span><br><span class="line">      serSocket = socket(AF_INET, SOCK_STREAM)</span><br><span class="line">      serSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR  , 1)</span><br><span class="line">      localAddr = (&apos;&apos;, 7788)</span><br><span class="line">      serSocket.bind(localAddr)</span><br><span class="line">      serSocket.listen(5)</span><br><span class="line"></span><br><span class="line">      try:</span><br><span class="line">          while True:</span><br><span class="line">              print(&apos;-----主进程，，等待新客户端的到来------&apos;)</span><br><span class="line">              newSocket,destAddr = serSocket.accept()</span><br><span class="line"></span><br><span class="line">              print(&apos;-----主进程，，接下来创建一个新的进程负责数据处理[%s]-----&apos;%str(destAddr))</span><br><span class="line">              client = Thread(target=dealWithClient, args=(newSocket,destAddr))</span><br><span class="line">              client.start()</span><br><span class="line"></span><br><span class="line">              #因为线程中共享这个套接字，如果关闭了会导致这个套接字不可用，</span><br><span class="line">              #但是此时在线程中这个套接字可能还在收数据，因此不能关闭</span><br><span class="line">              #newSocket.close() </span><br><span class="line">      finally:</span><br><span class="line">          serSocket.close()</span><br><span class="line"></span><br><span class="line">  if __name__ == &apos;__main__&apos;:</span><br><span class="line">      main()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="04-单线程服务器-非阻塞模式"><a href="#04-单线程服务器-非阻塞模式" class="headerlink" title="04-单线程服务器-非阻塞模式"></a>04-单线程服务器-非阻塞模式</h2><ul>
+<li><p>服务端</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用来存储所有的新链接的socket</span></span><br><span class="line">g_socketList = []</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    serSocket = socket(AF_INET, SOCK_STREAM)</span><br><span class="line">    serSocket.setsockopt(SOL_SOCKET, SO_REUSEADDR  , <span class="number">1</span>)</span><br><span class="line">    localAddr = (<span class="string">''</span>, <span class="number">7788</span>)</span><br><span class="line">    serSocket.bind(localAddr)</span><br><span class="line">    <span class="comment">#可以适当修改listen中的值来看看不同的现象</span></span><br><span class="line">    serSocket.listen(<span class="number">1000</span>)</span><br><span class="line">    <span class="comment">#将套接字设置为非堵塞</span></span><br><span class="line">    <span class="comment">#设置为非堵塞后，如果accept时，恰巧没有客户端connect，那么accept会</span></span><br><span class="line">    <span class="comment">#产生一个异常，所以需要try来进行处理</span></span><br><span class="line">    serSocket.setblocking(<span class="keyword">False</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line"></span><br><span class="line">        <span class="comment">#用来测试</span></span><br><span class="line">        <span class="comment">#time.sleep(0.5)</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            newClientInfo = serSocket.accept()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> result:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">"一个新的客户端到来:%s"</span>%str(newClientInfo))</span><br><span class="line">            newClientInfo[<span class="number">0</span>].setblocking(<span class="keyword">False</span>)</span><br><span class="line">            g_socketList.append(newClientInfo)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 用来存储需要删除的客户端信息</span></span><br><span class="line">        needDelClientInfoList = []</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> clientSocket,clientAddr <span class="keyword">in</span> g_socketList:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                recvData = clientSocket.recv(<span class="number">1024</span>)</span><br><span class="line">                <span class="keyword">if</span> len(recvData)&gt;<span class="number">0</span>:</span><br><span class="line">                    print(<span class="string">'recv[%s]:%s'</span>%(str(clientAddr), recvData))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    print(<span class="string">'[%s]客户端已经关闭'</span>%str(clientAddr))</span><br><span class="line">                    clientSocket.close()</span><br><span class="line">                    g_needDelClientInfoList.append((clientSocket,clientAddr))</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> result:</span><br><span class="line">                <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> needDelClientInfo <span class="keyword">in</span> needDelClientInfoList:</span><br><span class="line">            g_socketList.remove(needDelClientInfo)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>客户端</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">serverIp = raw_input(<span class="string">"请输入服务器的ip:"</span>)</span><br><span class="line">connNum = raw_input(<span class="string">"请输入要链接服务器的次数(例如1000):"</span>)</span><br><span class="line">g_socketList = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(int(connNum)):</span><br><span class="line">    s = socket(AF_INET, SOCK_STREAM)</span><br><span class="line">    s.connect((serverIp, <span class="number">7788</span>))</span><br><span class="line">    g_socketList.append(s)</span><br><span class="line">    print(i)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">    <span class="keyword">for</span> s <span class="keyword">in</span> g_socketList:</span><br><span class="line">        s.send(str(random.randint(<span class="number">0</span>,<span class="number">100</span>)))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 用来测试用</span></span><br><span class="line">    <span class="comment">#time.sleep(1)</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="05-单进程服务器-select版"><a href="#05-单进程服务器-select版" class="headerlink" title="05-单进程服务器-select版"></a>05-单进程服务器-select版</h2><ul>
+<li><p>select 原理</p>
+<ul>
+<li>在多路复用的模型中，比较常用的有select模型和epoll模型。这两个都是系统接口，由操作系统提供。当然，Python的select模块进行了更高级的封装。</li>
+<li>网络通信被Unix系统抽象为文件的读写，通常是一个设备，由设备驱动程序提供，驱动可以知道自身的数据是否可用。支持阻塞操作的设备驱动通常会实现一组自身的等待队列，如读/写等待队列用于支持上层(用户层)所需的block或non-block操作。设备的文件的资源如果可用（可读或者可写）则会通知进程，反之则会让进程睡眠，等到数据到来可用的时候，再唤醒进程。</li>
+<li>这些设备的文件描述符被放在一个数组中，然后select调用的时候遍历这个数组，如果对于的文件描述符可读则会返回改文件描述符。当遍历结束之后，如果仍然没有一个可用设备文件描述符，select让用户进程则会睡眠，直到等待资源可用的时候在唤醒，遍历之前那个监视的数组。每次遍历都是依次进行判断的。</li>
+</ul>
+</li>
+<li><p>select 回显服务器</p>
+<p>使用python的select模块很容易写出下面一个echo(回显)服务器：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> select</span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> sys</span><br></pre></td></tr></table></figure>
+<p>server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>server.bind((‘’, 7788))<br>server.listen(5)</p>
+<p>inputs = [server, sys.stdin]</p>
+<p>running = True</p>
+<p>while True:</p>
+<pre><code># 调用 select 函数，阻塞等待
+readable, writeable, exceptional = select.select(inputs, [], [])
+
+# 数据抵达，循环
+for sock in readable:
+
+    # 监听到有新的连接
+    if sock == server:
+        conn, addr = server.accept()
+        # select 监听的socket
+        inputs.append(conn)
+
+    # 监听到键盘有输入
+    elif sock == sys.stdin:
+        cmd = sys.stdin.readline()
+        running = False
+        break
+
+    # 有数据到达
+    else:
+        # 读取客户端连接发送的数据
+        data = sock.recv(1024)
+        if data:
+            sock.send(data)
+        else:
+            # 移除select监听的socket
+            inputs.remove(sock)
+            sock.close()
+
+# 如果检测到用户输入敲击键盘，那么就退出
+if not running:
+    break
+</code></pre><p>server.close()</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 在windows中，使用‘网络调试助手’，进行连接服务器即可测试</span><br><span class="line"></span><br><span class="line">  ![](http://ot12pfxkm.bkt.clouddn.com/18-1-2/16850770.jpg)</span><br><span class="line"></span><br><span class="line">- 另外一个服务器（包含writeList）</span><br><span class="line"></span><br><span class="line">  ```python</span><br><span class="line">  #coding=utf-8</span><br><span class="line">  import socket  </span><br><span class="line">  import Queue</span><br><span class="line">  from select import select  </span><br><span class="line"></span><br><span class="line">  SERVER_IP = (&apos;&apos;, 9999)  </span><br><span class="line"></span><br><span class="line">  # 保存客户端发送过来的消息,将消息放入队列中  </span><br><span class="line">  message_queue = &#123;&#125;  </span><br><span class="line">  input_list = []  </span><br><span class="line">  output_list = []  </span><br><span class="line"></span><br><span class="line">  if __name__ == &quot;__main__&quot;:  </span><br><span class="line">      server = socket.socket()  </span><br><span class="line">      server.bind(SERVER_IP)  </span><br><span class="line">      server.listen(10)  </span><br><span class="line">      # 设置为非阻塞  </span><br><span class="line">      server.setblocking(False)  </span><br><span class="line"></span><br><span class="line">      # 初始化将服务端加入监听列表  </span><br><span class="line">      input_list.append(server)  </span><br><span class="line"></span><br><span class="line">      while True:  </span><br><span class="line">          # 开始 select 监听,对input_list中的服务端server进行监听  </span><br><span class="line">          stdinput, stdoutput, stderr = select(input_list, output_list, input_list)  </span><br><span class="line"></span><br><span class="line">          # 循环判断是否有客户端连接进来,当有客户端连接进来时select将触发  </span><br><span class="line">          for obj in stdinput:  </span><br><span class="line">              # 判断当前触发的是不是服务端对象, 当触发的对象是服务端对象时,说明有新客户端连接进来了  </span><br><span class="line">              if obj == server:  </span><br><span class="line">                  # 接收客户端的连接, 获取客户端对象和客户端地址信息  </span><br><span class="line">                  conn, addr = server.accept()  </span><br><span class="line">                  print(&quot;Client %s connected! &quot;%str(addr))  </span><br><span class="line">                  # 将客户端对象也加入到监听的列表中, 当客户端发送消息时 select 将触发  </span><br><span class="line">                  input_list.append(conn)  </span><br><span class="line">                  # 为连接的客户端单独创建一个消息队列，用来保存客户端发送的消息  </span><br><span class="line">                  message_queue[conn] = Queue.Queue()  </span><br><span class="line"></span><br><span class="line">              else:  </span><br><span class="line">                  # 由于客户端连接进来时服务端接收客户端连接请求，将客户端加入到了监听列表中(input_list)，客户端发送消息将触发  </span><br><span class="line">                  # 所以判断是否是客户端对象触发  </span><br><span class="line">                  try:  </span><br><span class="line">                      recv_data = obj.recv(1024)  </span><br><span class="line">                      # 客户端未断开  </span><br><span class="line">                      if recv_data:  </span><br><span class="line">                          print(&quot;received %s from client %s&quot;%(recv_data, str(addr)))  </span><br><span class="line">                          # 将收到的消息放入到各客户端的消息队列中  </span><br><span class="line">                          message_queue[obj].put(recv_data)  </span><br><span class="line"></span><br><span class="line">                          # 将回复操作放到output列表中，让select监听  </span><br><span class="line">                          if obj not in output_list:  </span><br><span class="line">                              output_list.append(obj)  </span><br><span class="line"></span><br><span class="line">                  except ConnectionResetError:  </span><br><span class="line">                      # 客户端断开连接了，将客户端的监听从input列表中移除  </span><br><span class="line">                      input_list.remove(obj)  </span><br><span class="line">                      # 移除客户端对象的消息队列  </span><br><span class="line">                      del message_queue[obj]  </span><br><span class="line">                      print(&quot;\n[input] Client %s disconnected&quot;%str(addr))  </span><br><span class="line"></span><br><span class="line">          # 如果现在没有客户端请求,也没有客户端发送消息时，开始对发送消息列表进行处理，是否需要发送消息  </span><br><span class="line">          for sendobj in output_list:  </span><br><span class="line">              try:  </span><br><span class="line">                  # 如果消息队列中有消息,从消息队列中获取要发送的消息  </span><br><span class="line">                  if not message_queue[sendobj].empty():  </span><br><span class="line">                      # 从该客户端对象的消息队列中获取要发送的消息  </span><br><span class="line">                      send_data = message_queue[sendobj].get()  </span><br><span class="line">                      sendobj.send(send_data)  </span><br><span class="line">                  else:  </span><br><span class="line">                      # 将监听移除等待下一次客户端发送消息  </span><br><span class="line">                      output_list.remove(sendobj)  </span><br><span class="line"></span><br><span class="line">              except ConnectionResetError:  </span><br><span class="line">                  # 客户端连接断开了  </span><br><span class="line">                  del message_queue[sendobj]  </span><br><span class="line">                  output_list.remove(sendobj)  </span><br><span class="line">                  print(&quot;\n[output] Client  %s disconnected&quot;%str(addr))</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>优点</p>
+<ul>
+<li>select目前几乎在所有的平台上支持，其良好跨平台支持也是它的一个优点。</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>select的一个缺点在于单个进程能够监视的文件描述符的数量存在最大限制，在Linux上一般为1024，可以通过修改宏定义甚至重新编译内核的方式提升这一限制，但是这样也会造成效率的降低。</li>
+<li>一般来说这个数目和系统内存关系很大，具体数目可以cat /proc/sys/fs/file-max察看。32位机默认是1024个。64位机默认是2048.</li>
+<li>对socket进行扫描时是依次扫描的，即采用轮询的方法，效率较低。</li>
+<li>当套接字比较多的时候，每次select()都要通过遍历FD_SETSIZE个Socket来完成调度，不管哪个Socket是活跃的，都遍历一遍。这会浪费很多CPU时间。</li>
+</ul>
+</li>
+</ul>
+<h2 id="06-单进程服务器-epoll版"><a href="#06-单进程服务器-epoll版" class="headerlink" title="06-单进程服务器-epoll版"></a>06-单进程服务器-epoll版</h2><ul>
+<li><p>epoll的优点</p>
+<ul>
+<li>没有最大并发连接的限制，能打开的FD(指的是文件描述符，通俗的理解就是套接字对应的数字编号)的上限远大于1024</li>
+<li>效率提升，不是轮询的方式，不会随着FD数目的增加效率下降。只有活跃可用的FD才会调用callback函数；即epoll最大的优点就在于它只管你“活跃”的连接，而跟连接总数无关，因此在实际的网络环境中，epoll的效率就会远远高于select和poll。</li>
+</ul>
+</li>
+<li><p>epoll使用参考代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> select</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建套接字</span></span><br><span class="line">s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置可以重复使用绑定的信息</span></span><br><span class="line">s.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绑定本机信息</span></span><br><span class="line">s.bind((<span class="string">""</span>,<span class="number">7788</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 变为被动</span></span><br><span class="line">s.listen(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个epoll对象</span></span><br><span class="line">epoll=select.epoll()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 测试，用来打印套接字对应的文件描述符</span></span><br><span class="line"><span class="comment"># print s.fileno()</span></span><br><span class="line"><span class="comment"># print select.EPOLLIN|select.EPOLLET</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 注册事件到epoll中</span></span><br><span class="line"><span class="comment"># epoll.register(fd[, eventmask])</span></span><br><span class="line"><span class="comment"># 注意，如果fd已经注册过，则会发生异常</span></span><br><span class="line"><span class="comment"># 将创建的套接字添加到epoll的事件监听中</span></span><br><span class="line">epoll.register(s.fileno(),select.EPOLLIN|select.EPOLLET)</span><br></pre></td></tr></table></figure>
+<p>connections = {}<br>addresses = {}</p>
+<h1 id="循环等待客户端的到来或者对方发送数据"><a href="#循环等待客户端的到来或者对方发送数据" class="headerlink" title="循环等待客户端的到来或者对方发送数据"></a>循环等待客户端的到来或者对方发送数据</h1><p>while True:</p>
+<pre><code># epoll 进行 fd 扫描的地方 -- 未指定超时时间则为阻塞等待
+epoll_list=epoll.poll()
+
+# 对事件进行判断
+for fd,events in epoll_list:
+
+    # print fd
+    # print events
+
+    # 如果是socket创建的套接字被激活
+    if fd == s.fileno():
+        conn,addr=s.accept()
+
+        print(&apos;有新的客户端到来%s&apos;%str(addr))
+
+        # 将 conn 和 addr 信息分别保存起来
+        connections[conn.fileno()] = conn
+        addresses[conn.fileno()] = addr
+
+        # 向 epoll 中注册 连接 socket 的 可读 事件
+        epoll.register(conn.fileno(), select.EPOLLIN | select.EPOLLET)
+</code></pre></li>
+</ul>
+<pre><code>elif events == select.EPOLLIN:
+    # 从激活 fd 上接收
+    recvData = connections[fd].recv(1024)
+
+    if len(recvData)&gt;0:
+        print(&apos;recv:%s&apos;%recvData)
+    else:
+        # 从 epoll 中移除该 连接 fd
+        epoll.unregister(fd)
+
+        # server 侧主动关闭该 连接 fd
+        connections[fd].close()
+
+        print(&quot;%s---offline---&quot;%str(addresses[fd]))
+</code></pre>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 说明</span><br><span class="line"></span><br><span class="line">  - EPOLLIN （可读）</span><br><span class="line">  - EPOLLOUT （可写）</span><br><span class="line">  - EPOLLET （ET模式）</span><br><span class="line"></span><br><span class="line">- epoll对文件描述符的操作有两种模式：LT（level trigger）和ET（edge trigger）。LT模式是默认模式，LT模式与ET模式的区别如下：</span><br></pre></td></tr></table></figure>
+<p>  LT模式：当epoll检测到描述符事件发生并将此事件通知应用程序，应用程序可以不立即处理该事件。下次调用epoll时，会再次响应应用程序并通知此事件。</p>
+<p>  ET模式：当epoll检测到描述符事件发生并将此事件通知应用程序，应用程序必须立即处理该事件。如果不处理，下次调用epoll时，不会再次响应应用程序并通知此事件。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 07-多进程实现-协程</span><br><span class="line"></span><br><span class="line">- 协程，又称微线程，纤程。英文名Coroutine。</span><br><span class="line"></span><br><span class="line">- 协程是啥</span><br><span class="line"></span><br><span class="line">  - 首先我们得知道协程是啥？协程其实可以认为是比线程更小的执行单元。 为啥说他是一个执行单元，因为他自带CPU上下文。这样只要在合适的时机， 我们可以把一个协程 切换到另一个协程。 只要这个过程中保存或恢复 CPU上下文那么程序还是可以运行的。</span><br><span class="line">  - 通俗的理解：在一个线程中的某个函数，可以在任何地方保存当前函数的一些临时变量等信息，然后切换到另外一个函数中执行，注意不是通过调用函数的方式做到的，并且切换的次数以及什么时候再切换到原来的函数都由开发者自己确定</span><br><span class="line"></span><br><span class="line">- 协程和线程差异</span><br><span class="line"></span><br><span class="line">  - 那么这个过程看起来比线程差不多。其实不然, 线程切换从系统层面远不止保存和恢复 CPU上下文这么简单。</span><br><span class="line">  -  操作系统为了程序运行的高效性每个线程都有自己缓存Cache等等数据，操作系统还会帮你做这些数据的恢复操作。 </span><br><span class="line">  - 所以线程的切换非常耗性能。但是协程的切换只是单纯的操作CPU的上下文，所以一秒钟切换个上百万次系统都抗的住。</span><br><span class="line"></span><br><span class="line">- 协程的问题</span><br><span class="line"></span><br><span class="line">  - 但是协程有一个问题，就是系统并不感知，所以操作系统不会帮你做切换。 那么谁来帮你做切换？让需要执行的协程更多的获得CPU时间才是问题的关键。</span><br><span class="line"></span><br><span class="line">- 例子</span><br><span class="line"></span><br><span class="line">  - 目前的协程框架一般都是设计成 1:N 模式。所谓 1:N 就是一个线程作为一个容器里面放置多个协程。 那么谁来适时的切换这些协程？答案是有协程自己主动让出CPU，也就是每个协程池里面有一个调度器， 这个调度器是被动调度的。意思就是他不会主动调度。而且当一个协程发现自己执行不下去了(比如异步等待网络的数据回来，但是当前还没有数据到)， 这个时候就可以由这个协程通知调度器，这个时候执行到调度器的代码，调度器根据事先设计好的调度算法找到当前最需要CPU的协程。 切换这个协程的CPU上下文把CPU的运行权交个这个协程，直到这个协程出现执行不下去需要等等的情况，或者它调用主动让出CPU的API之类，触发下一次调度。</span><br><span class="line"></span><br><span class="line">- 那么这个实现有没有问题？</span><br><span class="line"></span><br><span class="line">  - 其实是有问题的，假设这个线程中有一个协程是CPU密集型的他没有IO操作， 也就是自己不会主动触发调度器调度的过程，那么就会出现其他协程得不到执行的情况， 所以这种情况下需要程序员自己避免。这是一个问题，假设业务开发的人员并不懂这个原理的话就可能会出现问题。</span><br><span class="line"></span><br><span class="line">- 协程的好处</span><br><span class="line"></span><br><span class="line">  - 在IO密集型的程序中由于IO操作远远慢于CPU的操作，所以往往需要CPU去等IO操作。 同步IO下系统需要切换线程，让操作系统可以在IO过程中执行其他的东西。 这样虽然代码是符合人类的思维习惯但是由于大量的线程切换带来了大量的性能的浪费，尤其是IO密集型的程序。</span><br><span class="line">  - 所以人们发明了异步IO。就是当数据到达的时候触发我的回调。来减少线程切换带来性能损失。 但是这样的坏处也是很大的，主要的坏处就是操作被 “分片” 了，代码写的不是 “一气呵成” 这种。 而是每次来段数据就要判断 数据够不够处理哇，够处理就处理吧，不够处理就在等等吧。这样代码的可读性很低，其实也不符合人类的习惯。</span><br><span class="line">  - 但是协程可以很好解决这个问题。比如 把一个IO操作 写成一个协程。当触发IO操作的时候就自动让出CPU给其他协程。要知道协程的切换很轻的。 协程通过这种对异步IO的封装 既保留了性能也保证了代码的容易编写和可读性。在高IO密集型的程序下很好。但是高CPU密集型的程序下没啥好处。</span><br><span class="line"></span><br><span class="line">- 协程一个简单实现</span><br><span class="line"></span><br><span class="line">  ```python</span><br><span class="line">  import time</span><br><span class="line"></span><br><span class="line">  def A():</span><br><span class="line">      while True:</span><br><span class="line">          print(&quot;----A---&quot;)</span><br><span class="line">          yield</span><br><span class="line">          time.sleep(0.5)</span><br><span class="line"></span><br><span class="line">  def B(c):</span><br><span class="line">      while True:</span><br><span class="line">          print(&quot;----B---&quot;)</span><br><span class="line">          c.next()</span><br><span class="line">          time.sleep(0.5)</span><br><span class="line"></span><br><span class="line">  if __name__==&apos;__main__&apos;:</span><br><span class="line">      a = A()</span><br><span class="line">      B(a)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p>运行结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">--B--</span><br><span class="line">--A--</span><br><span class="line">--B--</span><br><span class="line">--A--</span><br><span class="line">--B--</span><br><span class="line">--A--</span><br><span class="line">--B--</span><br><span class="line">--A--</span><br><span class="line">--B--</span><br><span class="line">--A--</span><br><span class="line">--B--</span><br><span class="line">--A--</span><br><span class="line">...省略...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="08-协程-greenlet版"><a href="#08-协程-greenlet版" class="headerlink" title="08-协程-greenlet版"></a>08-协程-greenlet版</h2><ul>
+<li><p>为了更好使用协程来完成多任务，python中的greenlet模块对其封装，从而使得切换任务变的更加简单</p>
+</li>
+<li><p>使用如下命令安装greenlet模块:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pip install greenlet</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>code </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> greenlet <span class="keyword">import</span> greenlet</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"---A--"</span></span><br><span class="line">        gr2.switch()</span><br><span class="line">        time.sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test2</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">"---B--"</span></span><br><span class="line">        gr1.switch()</span><br><span class="line">        time.sleep(<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">gr1 = greenlet(test1)</span><br><span class="line">gr2 = greenlet(test2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#切换到gr1中运行</span></span><br><span class="line">gr1.switch()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---A--</span><br><span class="line">---B--</span><br><span class="line">---A--</span><br><span class="line">---B--</span><br><span class="line">---A--</span><br><span class="line">---B--</span><br><span class="line">---A--</span><br><span class="line">---B--</span><br><span class="line">...省略...</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="09-协程-gevent版"><a href="#09-协程-gevent版" class="headerlink" title="09-协程-gevent版"></a>09-协程-gevent版</h2><h3 id="9-1-gevent"><a href="#9-1-gevent" class="headerlink" title="9.1-gevent"></a>9.1-gevent</h3><ul>
+<li>greenlet已经实现了协程，但是这个还的人工切换，是不是觉得太麻烦了，不要捉急，python还有一个比greenlet更强大的并且能够自动切换任务的模块<code>gevent</code></li>
+<li>其原理是当一个greenlet遇到IO(指的是input output 输入输出，比如网络、文件操作等)操作时，比如访问网络，就自动切换到其他的greenlet，等到IO操作完成，再在适当的时候切换回来继续执行。</li>
+<li>由于IO操作非常耗时，经常使程序处于等待状态，有了gevent为我们自动切换协程，就保证总有greenlet在运行，而不是等待IO</li>
+</ul>
+<h3 id="9-2-gevent的使用"><a href="#9-2-gevent的使用" class="headerlink" title="9.2-gevent的使用"></a>9.2-gevent的使用</h3><ul>
+<li><p>code</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#请使用python 2 来执行此程序</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">print</span> gevent.getcurrent(), i</span><br><span class="line"></span><br><span class="line">g1 = gevent.spawn(f, <span class="number">5</span>)</span><br><span class="line">g2 = gevent.spawn(f, <span class="number">5</span>)</span><br><span class="line">g3 = gevent.spawn(f, <span class="number">5</span>)</span><br><span class="line">g1.join()</span><br><span class="line">g2.join()</span><br><span class="line">g3.join()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行结果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;Greenlet at 0x10e49f550: f(5)&gt; 0</span><br><span class="line">&lt;Greenlet at 0x10e49f550: f(5)&gt; 1</span><br><span class="line">&lt;Greenlet at 0x10e49f550: f(5)&gt; 2</span><br><span class="line">&lt;Greenlet at 0x10e49f550: f(5)&gt; 3</span><br><span class="line">&lt;Greenlet at 0x10e49f550: f(5)&gt; 4</span><br><span class="line">&lt;Greenlet at 0x10e49f910: f(5)&gt; 0</span><br><span class="line">&lt;Greenlet at 0x10e49f910: f(5)&gt; 1</span><br><span class="line">&lt;Greenlet at 0x10e49f910: f(5)&gt; 2</span><br><span class="line">&lt;Greenlet at 0x10e49f910: f(5)&gt; 3</span><br><span class="line">&lt;Greenlet at 0x10e49f910: f(5)&gt; 4</span><br><span class="line">&lt;Greenlet at 0x10e49f4b0: f(5)&gt; 0</span><br><span class="line">&lt;Greenlet at 0x10e49f4b0: f(5)&gt; 1</span><br><span class="line">&lt;Greenlet at 0x10e49f4b0: f(5)&gt; 2</span><br><span class="line">&lt;Greenlet at 0x10e49f4b0: f(5)&gt; 3</span><br><span class="line">&lt;Greenlet at 0x10e49f4b0: f(5)&gt; 4</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以看到，3个greenlet是依次运行而不是交替运行</p>
+</li>
+</ul>
+<h3 id="9-3-gevent切换执行"><a href="#9-3-gevent切换执行" class="headerlink" title="9.3-gevent切换执行"></a>9.3-gevent切换执行</h3><ul>
+<li><p>code：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">        <span class="keyword">print</span> gevent.getcurrent(), i</span><br><span class="line">        <span class="comment">#用来模拟一个耗时操作，注意不是time模块中的sleep</span></span><br><span class="line">        gevent.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">g1 = gevent.spawn(f, <span class="number">5</span>)</span><br><span class="line">g2 = gevent.spawn(f, <span class="number">5</span>)</span><br><span class="line">g3 = gevent.spawn(f, <span class="number">5</span>)</span><br><span class="line">g1.join()</span><br><span class="line">g2.join()</span><br><span class="line">g3.join()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1c30</span>: f(<span class="number">5</span>)&gt; <span class="number">0</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1870</span>: f(<span class="number">5</span>)&gt; <span class="number">0</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1eb0</span>: f(<span class="number">5</span>)&gt; <span class="number">0</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1c30</span>: f(<span class="number">5</span>)&gt; <span class="number">1</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1870</span>: f(<span class="number">5</span>)&gt; <span class="number">1</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1eb0</span>: f(<span class="number">5</span>)&gt; <span class="number">1</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1c30</span>: f(<span class="number">5</span>)&gt; <span class="number">2</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1870</span>: f(<span class="number">5</span>)&gt; <span class="number">2</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1eb0</span>: f(<span class="number">5</span>)&gt; <span class="number">2</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1c30</span>: f(<span class="number">5</span>)&gt; <span class="number">3</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1870</span>: f(<span class="number">5</span>)&gt; <span class="number">3</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1eb0</span>: f(<span class="number">5</span>)&gt; <span class="number">3</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1c30</span>: f(<span class="number">5</span>)&gt; <span class="number">4</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1870</span>: f(<span class="number">5</span>)&gt; <span class="number">4</span></span><br><span class="line">&lt;Greenlet at <span class="number">0x7fa70ffa1eb0</span>: f(<span class="number">5</span>)&gt; <span class="number">4</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3个greenlet交替运行</p>
+</li>
+</ul>
+<h3 id="9-4-gevent并发下载器"><a href="#9-4-gevent并发下载器" class="headerlink" title="9.4-gevent并发下载器"></a>9.4-gevent并发下载器</h3><ul>
+<li><p>当然，实际代码里，我们不会用gevent.sleep()去切换协程，而是在执行到IO操作时，gevent自动切换，代码如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> monkey; </span><br><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"><span class="keyword">import</span> urllib2</span><br><span class="line"></span><br><span class="line"><span class="comment">#有IO才做时需要这一句</span></span><br><span class="line">monkey.patch_all()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">myDownLoad</span><span class="params">(url)</span>:</span></span><br><span class="line">    print(<span class="string">'GET: %s'</span> % url)</span><br><span class="line">    resp = urllib2.urlopen(url)</span><br><span class="line">    data = resp.read()</span><br><span class="line">    print(<span class="string">'%d bytes received from %s.'</span> % (len(data), url))</span><br><span class="line"></span><br><span class="line">gevent.joinall([</span><br><span class="line">        gevent.spawn(myDownLoad, <span class="string">'http://www.baidu.com/'</span>),</span><br><span class="line">        gevent.spawn(myDownLoad, <span class="string">'http://www.itcast.cn/'</span>),</span><br><span class="line">        gevent.spawn(myDownLoad, <span class="string">'http://www.itheima.com/'</span>),</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行结果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">GET: http://www.baidu.com/</span><br><span class="line">GET: http://www.itcast.cn/</span><br><span class="line">GET: http://www.itheima.com/</span><br><span class="line"><span class="number">102247</span> bytes received <span class="keyword">from</span> http://www.baidu.com/.</span><br><span class="line"><span class="number">166903</span> bytes received <span class="keyword">from</span> http://www.itheima.com/.</span><br><span class="line"><span class="number">162294</span> bytes received <span class="keyword">from</span> http://www.itcast.cn/.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从上能够看到是先发送的获取baidu的相关信息，然后依次是itcast、itheima，但是收到数据的先后顺序不一定与发送顺序相同，这也就体现出了异步，即不确定什么时候会收到数据，顺序不一定</p>
+</li>
+</ul>
+<h2 id="10-单进程服务器-gevent版"><a href="#10-单进程服务器-gevent版" class="headerlink" title="10-单进程服务器-gevent版"></a>10-单进程服务器-gevent版</h2><ul>
+<li><p>gevent版-TCP服务器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> gevent</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> gevent <span class="keyword">import</span> socket,monkey</span><br><span class="line">monkey.patch_all()</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">handle_request</span><span class="params">(conn)</span>:</span></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        data = conn.recv(<span class="number">1024</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> data:</span><br><span class="line">            conn.close()</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        print(<span class="string">"recv:"</span>, data)</span><br><span class="line">        conn.send(data)</span><br></pre></td></tr></table></figure>
+<p>def server(port):</p>
+<pre><code>s = socket.socket()
+s.bind((&apos;&apos;, port))
+s.listen(5)
+while True:
+    cli, addr = s.accept()
+    gevent.spawn(handle_request, cli)
+</code></pre><p>if <strong>name</strong> == ‘<strong>main</strong>‘:</p>
+<pre><code>server(7788)
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/杂乱知识点-2/" rel="next" title="杂乱知识点_2">
+                <i class="fa fa-chevron-left"></i> 杂乱知识点_2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/动态语言-生成器-迭代器/" rel="prev" title="动态语言_生成器_迭代器">
+                动态语言_生成器_迭代器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#并发服务器-amp-HTTP协议"><span class="nav-text">并发服务器&amp;HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-单进程服务器"><span class="nav-text">01-单进程服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-多进程服务器"><span class="nav-text">02-多进程服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-单线程服务器-非阻塞模式"><span class="nav-text">04-单线程服务器-非阻塞模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-单进程服务器-select版"><span class="nav-text">05-单进程服务器-select版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-单进程服务器-epoll版"><span class="nav-text">06-单进程服务器-epoll版</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#循环等待客户端的到来或者对方发送数据"><span class="nav-text">循环等待客户端的到来或者对方发送数据</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#08-协程-greenlet版"><span class="nav-text">08-协程-greenlet版</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#09-协程-gevent版"><span class="nav-text">09-协程-gevent版</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-1-gevent"><span class="nav-text">9.1-gevent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-2-gevent的使用"><span class="nav-text">9.2-gevent的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-3-gevent切换执行"><span class="nav-text">9.3-gevent切换执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-4-gevent并发下载器"><span class="nav-text">9.4-gevent并发下载器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-单进程服务器-gevent版"><span class="nav-text">10-单进程服务器-gevent版</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

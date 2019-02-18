@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Kali,tool,Web渗透,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="扫描工具之OWASP_ZAP简介 Zed attack proxy ，开源，免费，跨平台 基于Java语言 web application集成渗透测试和漏洞挖掘工具  基础使用 保存session问题">
+<meta name="keywords" content="Kali,tool,Web渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali实战-OWASP_ZAP">
+<meta property="og:url" content="http://21guns.top/2018/01/27/Kali实战-OWASP-ZAP/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="扫描工具之OWASP_ZAP简介 Zed attack proxy ，开源，免费，跨平台 基于Java语言 web application集成渗透测试和漏洞挖掘工具  基础使用 保存session问题">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T11:48:45.526Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kali实战-OWASP_ZAP">
+<meta name="twitter:description" content="扫描工具之OWASP_ZAP简介 Zed attack proxy ，开源，免费，跨平台 基于Java语言 web application集成渗透测试和漏洞挖掘工具  基础使用 保存session问题">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/27/Kali实战-OWASP-ZAP/">
+
+
+
+
+
+  <title>Kali实战-OWASP_ZAP | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/27/Kali实战-OWASP-ZAP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kali实战-OWASP_ZAP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T19:30:50+08:00">
+                2018-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kali相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Kali相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="扫描工具之OWASP-ZAP"><a href="#扫描工具之OWASP-ZAP" class="headerlink" title="扫描工具之OWASP_ZAP"></a>扫描工具之OWASP_ZAP</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Zed attack proxy ，开源，免费，跨平台</li>
+<li>基于Java语言</li>
+<li>web application集成渗透测试和漏洞挖掘工具</li>
+</ul>
+<h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><ul>
+<li>保存session问题<a id="more"></a><ul>
+<li>每次启动都会询问是否保存本次会话到本地</li>
+<li>每次启动都是一个zap实例，或者zap会话，以保存扫描记录等</li>
+<li>保存后下次可直接导入会话，不需再次扫描</li>
+<li>可选项<ul>
+<li>基于系统时间戳保存，默认方式</li>
+<li>自行选择保存路径及名字，用户自定义保存</li>
+<li>不保存</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>插件及更新问题<ul>
+<li>启动时询问检查更新并安装</li>
+<li>可安装不同插件以供使用<ul>
+<li>plugin或add_on，不同软件其插件名称不同</li>
+<li>release正式发布版本，beta测试版本，alpha，测试版本，低于beta</li>
+<li>建议安装release和beta，alpha自行决定</li>
+</ul>
+</li>
+<li>建议每次使用前进行zap及其插件的更新</li>
+</ul>
+</li>
+<li>截断代理功能<ul>
+<li>启动后默认开启端口监听</li>
+<li>默认监听8080端口</li>
+<li>浏览器设置对应代理端口</li>
+<li>浏览器端访问网站，zap端记录所有访问请求，以备后续测试</li>
+<li>即手动爬网过程</li>
+<li>自动配置代理<ul>
+<li>针对Firefox24.0及以上版本</li>
+<li>plug-n-hack按钮，以脚本形式自动配置浏览器代理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>扫描功能<ul>
+<li>主动扫描<ul>
+<li>身份认证问题，如登录后才可以访问的页面</li>
+<li>两种方式<ul>
+<li>quick start界面，指定URL，点击攻击<ul>
+<li>会先进行主动爬网</li>
+</ul>
+</li>
+<li>站点界面，右键，攻击-active scan<ul>
+<li>不会爬网</li>
+<li>代理截断后，针对已获取的流量</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>被动扫描<ul>
+<li>截断代理时，针对截获的流量进行被动分析</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Fuzzer<ul>
+<li>暴力破解和目录穷举皆为fuzz范畴</li>
+<li>启动方式不唯一（其他功能如扫描也是如此</li>
+<li>fuzz所用字段可自定义字符串或文件，也可使用zap内置payload，如常见密码，常见目录名，sql注入相关语句等</li>
+<li>类似burp的intruder模块</li>
+</ul>
+</li>
+<li>API<ul>
+<li>很多其他工具都有提供API功能</li>
+<li>其提供的程序调用接口，以此来进行进一步开发</li>
+<li>使用代理的情况下，访问http：//zap，查看相关文档</li>
+</ul>
+</li>
+</ul>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><ul>
+<li>扫描模式<ul>
+<li>四种模式，safe、protected、standard、attack，攻击程度递增</li>
+</ul>
+</li>
+<li>扫描策略<ul>
+<li>存在默认策略，可以此为基础修改</li>
+<li>可自定义添加策略<ul>
+<li>报警预值，扫描强度等设置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>anti scrftoken<ul>
+<li>针对某些站点使用token防止csrf</li>
+<li>详情自行google</li>
+</ul>
+</li>
+<li>https的证书问题</li>
+<li>scope、context、filter<ul>
+<li>为目标划定范围，达到过滤目的</li>
+<li>content为一个请求URL，站点或其目录，理解为一个目标</li>
+<li>一个scope包括多个context，即多个目标</li>
+</ul>
+</li>
+<li>身份认证相关<ul>
+<li>四种：基于表单、manual、http、基于脚本</li>
+<li>建议manual方式，即浏览器输入账号密码手动认证</li>
+<li>针对web应用，使用表单认证</li>
+<li>支持基于脚本的认证，需要自编写<ul>
+<li>zap中脚本可用于多个功能模块</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>http session<ul>
+<li>zap存在内置session的名字，默认的集合，都是些很常见的名称</li>
+<li>某session字段名称存在于其集合时，zap会识别，判断其为session字段</li>
+<li>对于很多站点独特的session字段，因为其不在集合中，故不会判断其为session，此时需要手动添加</li>
+</ul>
+</li>
+<li>note/tag<ul>
+<li>针对扫描结果或者说是扫描时的请求</li>
+<li>添加备注简单记录</li>
+<li>添加tag简单分组</li>
+</ul>
+</li>
+<li>字符串编码、解码、哈希</li>
+<li>截断功能<ul>
+<li>zap界面中类似音乐播放、快进、暂停按钮</li>
+<li>类似于burp</li>
+<li>代理与截断不同，都是浏览器发送请求，请求都到达zap，但是对于发包，前者自动，后者手动</li>
+</ul>
+</li>
+<li>显示隐藏域<ul>
+<li>zap界面中小灯泡按钮</li>
+<li>很对html页面存在隐藏域，如form中input的hidden属性</li>
+<li>截断时，若开启此设置，zap在接收到响应时会去除其隐藏属性，使其显示在浏览器</li>
+</ul>
+</li>
+</ul>
+<h2 id="标准扫描工作流程"><a href="#标准扫描工作流程" class="headerlink" title="标准扫描工作流程"></a>标准扫描工作流程</h2><ul>
+<li>设置代理<ul>
+<li>zap监听端口，浏览器设置对应端口的代理</li>
+</ul>
+</li>
+<li>手动爬网<ul>
+<li>代理时，浏览器尽可能点击多个页面，此时可能会针对已截获的请求进行被动扫描</li>
+</ul>
+</li>
+<li>自动爬网<ul>
+<li>可针对某一目录，弥补手动爬网缺陷，如某些不可见链接</li>
+</ul>
+</li>
+<li>主动扫描<ul>
+<li>有了爬取结果后，进行主动扫描，对各请求提交参数测试</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kali/" rel="tag"># Kali</a>
+          
+            <a href="/tags/tool/" rel="tag"># tool</a>
+          
+            <a href="/tags/Web渗透/" rel="tag"># Web渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/27/Kali实战-Nikto/" rel="next" title="Kali实战-Nikto">
+                <i class="fa fa-chevron-left"></i> Kali实战-Nikto
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/27/Kali实战-Skipfish/" rel="prev" title="Kali实战-Skipfish">
+                Kali实战-Skipfish <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#扫描工具之OWASP-ZAP"><span class="nav-text">扫描工具之OWASP_ZAP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础使用"><span class="nav-text">基础使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他问题"><span class="nav-text">其他问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#标准扫描工作流程"><span class="nav-text">标准扫描工作流程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

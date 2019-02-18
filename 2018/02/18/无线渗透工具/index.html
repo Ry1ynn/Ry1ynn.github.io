@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="无线安全,Kali,Tool,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="无线渗透实操01-aircrack-ng简介 无线渗透和审计神器 包含各种功能的工具套件（而非单个工具） 网络监测 嗅探抓包 包注入 密码破解">
+<meta name="keywords" content="无线安全,Kali,Tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无线渗透工具">
+<meta property="og:url" content="http://21guns.top/2018/02/18/无线渗透工具/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="无线渗透实操01-aircrack-ng简介 无线渗透和审计神器 包含各种功能的工具套件（而非单个工具） 网络监测 嗅探抓包 包注入 密码破解">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/32103618.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/59161236.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/75041727.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/21291254.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/2545645.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/98016684.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/85851087.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/15304207.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/72745635.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/12690651.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/27714946.jpg?ynotemdtimestamp=1550490800086">
+<meta property="og:updated_time" content="2019-02-18T12:01:48.633Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="无线渗透工具">
+<meta name="twitter:description" content="无线渗透实操01-aircrack-ng简介 无线渗透和审计神器 包含各种功能的工具套件（而非单个工具） 网络监测 嗅探抓包 包注入 密码破解">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/32103618.jpg?ynotemdtimestamp=1550490800086">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/18/无线渗透工具/">
+
+
+
+
+
+  <title>无线渗透工具 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/无线渗透工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">无线渗透工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="无线渗透实操"><a href="#无线渗透实操" class="headerlink" title="无线渗透实操"></a>无线渗透实操</h1><h2 id="01-aircrack-ng简介"><a href="#01-aircrack-ng简介" class="headerlink" title="01-aircrack-ng简介"></a>01-aircrack-ng简介</h2><ul>
+<li>无线渗透和审计神器</li>
+<li>包含各种功能的工具套件（而非单个工具）<ul>
+<li>网络监测</li>
+<li>嗅探抓包</li>
+<li>包注入</li>
+<li>密码破解<a id="more"></a></li>
+</ul>
+</li>
+<li><p>aircrack-ng仅仅是套件中一个工具，以其来此套件</p>
+</li>
+<li><p>建议关闭<code>network-maneger</code>服务，存在冲突问题，可能会导致后续操作出错</p>
+<p><code>service network-maneger stop</code></p>
+</li>
+<li><p><code>ifconfig</code>不显示wlan0</p>
+<ul>
+<li><code>ifconfig -a</code>是显示所有的，包括未启动的</li>
+<li><code>iwconfig</code>会显示（即使没有启动</li>
+<li><code>ifconfig wlan0 up</code>启动网卡</li>
+</ul>
+</li>
+</ul>
+<h2 id="02-airmon-ng（侦听）"><a href="#02-airmon-ng（侦听）" class="headerlink" title="02-airmon-ng（侦听）"></a>02-airmon-ng（侦听）</h2><h3 id="2-1-检查网卡驱动"><a href="#2-1-检查网卡驱动" class="headerlink" title="2.1-检查网卡驱动"></a>2.1-检查网卡驱动</h3><ul>
+<li><p><code>airmon-ng</code>检查网卡驱动信息，如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">PHY     Interface       Driver          Chipset</span><br><span class="line">phy1    wlan0           ath9k_htc       Atheros Communications, Inc. AR9271 802.11n</span><br></pre></td></tr></table></figure>
+<ul>
+<li>显示出当前的驱动信息、目前网卡使用的芯片</li>
+<li>驱动问题往往是很棘手的；驱动更新、打补丁</li>
+</ul>
+</li>
+<li><p><code>airmon-ng check</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# airmon-ng check</span><br><span class="line"></span><br><span class="line">Found 2 processes that could cause trouble.</span><br><span class="line">If airodump-ng, aireplay-ng or airtun-ng stops working after</span><br><span class="line">a short period of time, you may want to run &apos;airmon-ng check kill&apos;</span><br><span class="line"></span><br><span class="line">  PID Name</span><br><span class="line"> 1421 wpa_supplicant</span><br><span class="line">31531 dhclient</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>不是检测网卡的驱动等硬件信息，而是检测aircrack-ng套件在使用过程中与当前系统是否产生冲突的问题</p>
+</li>
+<li><p>可以手动<code>kill + pid</code> 一个一个删除，但是效率低</p>
+</li>
+<li><p><code>airmon-ng check kill</code>会把所有可能产生问题的进程全部kill</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# airmon-ng check kill</span><br><span class="line"></span><br><span class="line">Killing these processes:</span><br><span class="line"></span><br><span class="line">  PID Name</span><br><span class="line"> 1421 wpa_supplicant</span><br><span class="line">31531 dhclient</span><br><span class="line"></span><br><span class="line">root@kali:~# airmon-ng check</span><br><span class="line"># 无显示</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-开启和停止无线侦听"><a href="#2-2-开启和停止无线侦听" class="headerlink" title="2.2-开启和停止无线侦听"></a>2.2-开启和停止无线侦听</h3><ul>
+<li><p><code>airmon-ng start wlan0</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# airmon-ng start wlan0</span><br><span class="line"></span><br><span class="line">PHY     Interface       Driver          Chipset</span><br><span class="line">phy1    wlan0           ath9k_htc       Atheros Communications, Inc. AR9271 802.11n</span><br><span class="line"></span><br><span class="line">                (mac80211 monitor mode vif enabled for [phy1]wlan0 on [phy1]wlan0mon)</span><br><span class="line">                (mac80211 station mode vif disabled for [phy1]wlan0)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>iw dev wlan2 interface add wlan2mon type monitor</code>方法也可以，在这利用<code>aircrack-ng中的airmon-ng</code>来实现而已</p>
+</li>
+<li><p>在wlan0网卡上启动无线侦听，即monitor模式，后续大部分操作都是基于此模式下的，而非默认的managed模式</p>
+</li>
+<li><p>mac80211便是当前的无线协议栈（早期的ieee 80211</p>
+</li>
+<li><p>wlan0变为wlan0mon后enable，并置为monitor模式</p>
+</li>
+<li><p>同时，disable掉wlan0</p>
+</li>
+<li><p>再ifconfig后，则出现wlan0mon（wlan0没有了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# ifconfig</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">wlan0mon: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500</span><br><span class="line">        unspec 6C-FD-B9-B2-9B-9C-30-3A-00-00-00-00-00-00-00-00  txqueuelen 1000  (UNSPEC)</span><br><span class="line">        RX packets 75800  bytes 17702601 (16.8 MiB)</span><br><span class="line">        RX errors 0  dropped 75800  overruns 0  frame 0</span><br><span class="line">        TX packets 0  bytes 0 (0.0 B)</span><br><span class="line">        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>iwconfig后，发现wlan0mon已经是monitor模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# iwconfig</span><br><span class="line">wlan0mon  IEEE 802.11  Mode:Monitor  Frequency:2.457 GHz  Tx-Power=20 dBm</span><br><span class="line">          Retry short limit:7   RTS thr:off   Fragment thr:off</span><br><span class="line">          Power Management:off</span><br><span class="line"></span><br><span class="line">eth0      no wireless extensions.</span><br><span class="line"></span><br><span class="line">lo        no wireless extensions.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>原来wlan0是管理模式，即Mode:Managed，默认模式，此模式下可以正常连接无线网络上网）</p>
+</li>
+</ul>
+</li>
+<li><p><code>iwlist wlan0mon channel</code>查看信道信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# iwlist wlan0mon channel</span><br><span class="line">wlan0mon  13 channels in total; available frequencies :</span><br><span class="line">          Channel 01 : 2.412 GHz</span><br><span class="line">          Channel 02 : 2.417 GHz</span><br><span class="line">          Channel 03 : 2.422 GHz</span><br><span class="line">          Channel 04 : 2.427 GHz</span><br><span class="line">          Channel 05 : 2.432 GHz</span><br><span class="line">          Channel 06 : 2.437 GHz</span><br><span class="line">          Channel 07 : 2.442 GHz</span><br><span class="line">          Channel 08 : 2.447 GHz</span><br><span class="line">          Channel 09 : 2.452 GHz</span><br><span class="line">          Channel 10 : 2.457 GHz</span><br><span class="line">          Channel 11 : 2.462 GHz</span><br><span class="line">          Channel 12 : 2.467 GHz</span><br><span class="line">          Channel 13 : 2.472 GHz</span><br><span class="line">          Current Frequency:2.457 GHz (Channel 10)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>支持13个信道</li>
+<li>当前工作信道10上</li>
+</ul>
+</li>
+<li><p><code>airmon-ng start wlan0 3</code></p>
+<ul>
+<li>手动指定其信道</li>
+<li>信道号1-13</li>
+</ul>
+</li>
+<li><p><code>airmon-ng stop wlan0mon</code>关闭监听模式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# airmon-ng stop wlan0mon</span><br><span class="line">PHY     Interface       Driver          Chipset</span><br><span class="line">phy1    wlan0mon        ath9k_htc       Atheros Communications, Inc. AR9271 802.11n</span><br><span class="line"></span><br><span class="line">                (mac80211 station mode vif enabled on [phy1]wlan0)</span><br><span class="line">                (mac80211 monitor mode vif disabled for [phy1]wlan0mon)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>监听工作结束后，还原至管理模式（原来wlan0是管理模式，即Mode:Managed，默认模式，此模式下可以正常连接无线网络上网）</p>
+</li>
+<li><p>wlan0mon被wlan0取而代之</p>
+</li>
+<li><p>模式由monitor变为managed</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# iwconfig</span><br><span class="line">eth0      no wireless extensions.</span><br><span class="line"></span><br><span class="line">lo        no wireless extensions.</span><br><span class="line"></span><br><span class="line">wlan0     IEEE 802.11  ESSID:off/any</span><br><span class="line">          Mode:Managed  Access Point: Not-Associated   Tx-Power=20 dBm</span><br><span class="line">          Retry short limit:7   RTS thr:off   Fragment thr:off</span><br><span class="line">          Encryption key:off</span><br><span class="line">          Power Management:off</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此时ifconfig不可见wlan0（-a可见），因为其未被激活，<code>ifconfig wlan0 up</code>来启动</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="03-airodump-ng（抓包）"><a href="#03-airodump-ng（抓包）" class="headerlink" title="03-airodump-ng（抓包）"></a>03-airodump-ng（抓包）</h2><h3 id="3-1-无线抓包"><a href="#3-1-无线抓包" class="headerlink" title="3.1-无线抓包"></a>3.1-无线抓包</h3><ul>
+<li><p>简介</p>
+<ul>
+<li>也可以用wireshark和tcpdump等工具来抓包，但是含大量的其它的数据包（网络层的、传输层的），此外抓到的无线包字段等信息混乱，观察不方便</li>
+<li><code>airodump-ng</code>是专门针对无线数据包抓取的，且显示友好（自动对各字段进行排序等操作，便于观察</li>
+</ul>
+</li>
+<li><p><code>airodump-ng wlan2mon</code>（抓包之前先启用monitor模式）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">CH 11 ][ Elapsed: 2 mins ][ 2018-02-02 00:50 ][ paused output</span><br><span class="line">  </span><br><span class="line">BSSID              PWR  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID</span><br><span class="line">  </span><br><span class="line">30:B4:9E:95:AB:9E  -42       33        3    0  11  54e. WPA2 CCMP   PSK  11111</span><br><span class="line">18:4F:32:B3:A7:93  -54       28        1    0  10  54e. WPA2 CCMP   PSK  na</span><br><span class="line">4A:C2:DD:C8:57:07  -57       35        3    0  11  54e. WPA2 CCMP   PSK  360▒..费WiFi-N1</span><br><span class="line">02:1A:11:F7:B9:2C  -59       41        0    0   3  54e  WPA2 CCMP   PSK  ▒..大海</span><br><span class="line">20:6B:E7:42:38:AE  -59       35        0    0   2  54e. WPA2 CCMP   PSK  mayizhengzhuang1</span><br><span class="line">22:08:B1:C6:C1:2F  -59       30        0    0  11  54e. WPA2 CCMP   PSK  360▒..费wifi▒..</span><br><span class="line"></span><br><span class="line">   BSSID              STATION            PWR   Rate    Lost    Frames  Probe</span><br><span class="line">  </span><br><span class="line">  (not associated)   AC:D1:B8:C7:DC:3F  -40    0 - 1      0        1</span><br><span class="line">  (not associated)   54:35:30:09:76:81  -48    0 - 1      0        3</span><br><span class="line">  (not associated)   3C:F5:91:66:6C:C9  -50    0 - 1      0        7</span><br><span class="line">  (not associated)   B8:86:87:DA:68:B1  -56    0 - 1      0        4</span><br></pre></td></tr></table></figure>
+<ul>
+<li>尽管启动网卡的监听模式后，查看其信道后，其是工作在特定信道上的（可以手工指定）<ul>
+<li>但是在抓包时，其会处于一种hooping模式，轮循各个信道（1-13），从而得到各个信道中存在的AP</li>
+<li>运行后，是动态变化的，空格可暂停其变化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code>airodump-ng wlan0mon -c 3</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CH  3 ][ Elapsed: 0 s ][ 2018-02-02 01:12 ][ paused output</span><br><span class="line">  </span><br><span class="line">BSSID              PWR RXQ  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID</span><br><span class="line">  </span><br><span class="line">6A:3E:34:02:01:35  -77   0        3        0    0   2  54e. WPA  CCMP   PSK  m2 note</span><br><span class="line">1A:E3:47:F2:6A:E3  -73   0       13        0    0   3  54e. WPA2 CCMP   PSK  360▒..费WiFi-LG</span><br><span class="line">20:6B:E7:42:38:AE  -62   0       20        0    0   2  54e. WPA2 CCMP   PSK  mayizhengzhuang1</span><br><span class="line">76:DF:BF:43:92:8D  -67   0        2        0    0   1  54e. WPA2 CCMP   PSK  YAN</span><br><span class="line">88:25:93:A5:4C:1F  -73   0       21       34   15   3  54e. WPA2 CCMP   PSK  xdhj</span><br><span class="line">02:1A:11:F7:B9:2C  -62 100       23        0    0   3  54e  WPA2 CCMP   PSK  ▒..大海</span><br><span class="line">14:2D:27:E8:98:7D  -69   0        0        0    0  11  54e  WPA2 CCMP   PSK  ALENOVO-PC</span><br><span class="line">  </span><br><span class="line">BSSID              STATION            PWR   Rate    Lost    Frames  Probe</span><br><span class="line">  </span><br><span class="line">(not associated)   D0:57:7B:1D:84:72  -66    0 - 1      2        5</span><br><span class="line">(not associated)   A0:88:69:33:13:DC  -64    0 - 1      0        3</span><br><span class="line">88:25:93:A5:4C:1F  28:E3:47:F2:6A:E3  -74    0e- 0e     0        7</span><br><span class="line">88:25:93:A5:4C:1F  FC:1A:11:87:78:D8   -1    0e- 0      0        1</span><br></pre></td></tr></table></figure>
+<ul>
+<li>抓包时指定信道（否则轮循1-13，各个信道都检测</li>
+<li>此时结果中会出现PXQ一列（不指定的话便没有）</li>
+<li>但是结果中，AP部分也会出现其它信道的AP，因为各个信道是存在交叉重叠的</li>
+</ul>
+</li>
+<li><p><code>airodump-ng wlan0mon --bssid AE:D1:B8:C7:D4:3F -c 11 -w test</code></p>
+<ul>
+<li><p>-c指定信道</p>
+</li>
+<li><p>–bssid，指定抓取某AP的数据包</p>
+</li>
+<li><p>-w，将结果保存至本地，cap文件可wireshark打开，详细查看其通信</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# ls test*</span><br><span class="line">test-01.cap  test-01.csv  test-01.kismet.csv  test-01.kismet.netxml</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定特定信道和bssid后，从结果中可以看到连接到它的STA的信息，如MAC地址</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CH 11 ][ Elapsed: 1 min ][ 2018-02-02 01:28 ][ paused output</span><br><span class="line">    </span><br><span class="line">BSSID              PWR RXQ  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSI</span><br><span class="line">AE:D1:B8:C7:D4:3F  -26   0      660       88    0  11  54e  WPA2 CCMP   PSK  DELL</span><br><span class="line">    </span><br><span class="line">BSSID              STATION            PWR   Rate    Lost    Frames  Probe</span><br><span class="line">AE:D1:B8:C7:D4:3F  A4:5E:60:BA:D2:23  -46    0e-11e     0      131</span><br></pre></td></tr></table></figure>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/32103618.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>其它参数</p>
+<ul>
+<li><code>--ivs：Save only captured IVs</code>，适合为破解WEP收集IVs（初始向量），再用这些IVs来破解密码</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-输出结果分析"><a href="#3-2-输出结果分析" class="headerlink" title="3.2-输出结果分析"></a>3.2-输出结果分析</h3><p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/59161236.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+<h4 id="（1）最上面一行："><a href="#（1）最上面一行：" class="headerlink" title="（1）最上面一行："></a>（1）最上面一行：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CH 12 ][ Elapsed: 8 mins ][ 2018-02-02 00:56 ][ paused output</span><br></pre></td></tr></table></figure>
+<ul>
+<li>依次是当前信道（轮循的）</li>
+<li>已经工作的时间</li>
+<li>系统当前时间</li>
+<li>除上述三个字段外，后面还会有其它字段（默认是没有显示的<ul>
+<li><code>[ paused output</code>提示暂停输出（可按空格停止其动态变化）</li>
+<li><code>[ rusumed ouput</code>表正正在输出</li>
+<li>其它情况，如果存在WAP/WPA2的AP，有一个客户端连接上AP，其四步握手过程被抓到时，就会显示有一个四步握手被抓到，并将相应的AP的MAC地址显示在此位置（这个数据会被抓取下来）</li>
+<li>如果存在一个WEP的AP，有新客户端连接时，会抓到challenge信息（明文的cha和经过密钥流加密的密文cha，二者异或，可以得到密钥流，此时，这个密钥流文件会自动保存到本地，以.xor结尾的一个文件，其文件内容时密文，H可以利用其与AP认证，从而进一步与其建立关联关系，进一步实施攻击，后续WEP攻击会讲到）</li>
+</ul>
+</li>
+</ul>
+<h4 id="（2）上面部分：AP信息"><a href="#（2）上面部分：AP信息" class="headerlink" title="（2）上面部分：AP信息"></a>（2）上面部分：AP信息</h4><p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/75041727.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+<ul>
+<li><p>BSSID：AP的MAC地址，如win10开的热点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Microsoft Wi-Fi Direct Virtual Adapter #3</span><br><span class="line">        Link encap: IEEE 802.11 HWaddr: AE-D1-B8-C7-D4-3F</span><br><span class="line">        inet addr:192.168.137.1 Mask: 255.255.255.0</span><br><span class="line">...</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>PWR：即power</p>
+<ul>
+<li>网卡接收到的信号强度，距离越近信号越强</li>
+<li>越接近0表示信号强度越强（即绝对值越大越强<ul>
+<li>小于50：优</li>
+<li>小于75：良</li>
+<li>大于75：信号较弱</li>
+<li>超过130即认为是不可接收，就会显示-1，</li>
+</ul>
+</li>
+<li>-1的情况 ：<ul>
+<li>驱动不支持信号强度</li>
+<li>本机距离AP太远，即信号太弱（对本机而言；AP部分的PWR）</li>
+<li>本机连接AP，AP上还连接了另一个STA，本机与这个STA相距远（STA部分的PWR）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>RXQ：最近10秒成功接收的数据帧的百分比（数据帧、管理帧）</p>
+<ul>
+<li>数据帧和管理帧中都会有数据内容（不严格来讲，数据帧就是包括数据帧和管理帧的），而控制帧是没有的</li>
+<li>是根据接收到的数据帧中的sequence number来判断的，</li>
+<li>接受成功的/总接受的，是一个比值（数据是可能接收失败的）</li>
+<li>只有在固定信道时才会出现</li>
+</ul>
+</li>
+<li><p>Beacons：接收到此AP发送的beacon帧数量</p>
+</li>
+<li><p><code>#data</code>：抓到的数据帧数量</p>
+<ul>
+<li>可以应用到WEP场景：若是WEP，则此字段可以反映IV数量（WEP要收集 IV来破解密码）</li>
+<li>是一个累积的值（而非10秒内等某个时间端的），并且包含广播数据帧（不止单播帧</li>
+</ul>
+</li>
+<li><p><code>#/s</code></p>
+<ul>
+<li>最近10秒内，每秒平均抓到的帧的数量</li>
+<li>不止数据帧，还有其它另外两种，都包含在内</li>
+</ul>
+</li>
+<li><p>CH：信道号（从beacon帧中获得）</p>
+<ul>
+<li>信道重叠时可能发现其它信道</li>
+<li>即使指定信道，因为信道叠加的原因，也可以发现结果中有其它信道</li>
+</ul>
+</li>
+<li><p>MB：AP支持的最大速率</p>
+</li>
+<li><p>ENC：采用的无线安全技术，如：WEP、WPA、WPA2、OPEN</p>
+</li>
+<li><p>cipher：采用的加密套件，如：CCMP（目前来讲最安全）、TKIP、WEP40、WEP104</p>
+</li>
+<li><p>auth：身份认证方法，如：</p>
+<ul>
+<li>MGT（WPA企业时，在后端有身份认证服务器，需要账号密码登录 ）、</li>
+<li>PSK（家用路由器，WPA的预设共享密钥）、</li>
+<li>SKA（如果WEP而非WPA ，则就是SKA，其便是WEP的预设共享密钥）、</li>
+<li>OPEN（不要密码的那种）</li>
+</ul>
+</li>
+<li><p>ESSID：无线网络名称</p>
+<ul>
+<li>若是隐藏AP，此值可能为空</li>
+<li>可以显示隐藏AP的长度，如上图的<code>&lt;length:32&gt;</code></li>
+<li>airodump从probe和association request帧中发现隐藏AP<ul>
+<li>AP会隐藏自己，但是要连接他的STA不会帮他隐藏</li>
+<li>若airodump-ng抓到相关包，也会在此字段显示出其ESSID</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="（3）下面部分：STA信息"><a href="#（3）下面部分：STA信息" class="headerlink" title="（3）下面部分：STA信息"></a>（3）下面部分：STA信息</h4><p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/21291254.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+<ul>
+<li>两种情况<ul>
+<li>STA离本机比较近，故本机网卡也能探测到其的存在</li>
+<li>STA离本机远（PWR为-1），但是本机网卡与其连接的AP距离近，从而也能探测到这种STA的存在</li>
+</ul>
+</li>
+<li>BSSID<ul>
+<li>若STA关联到AP，则显示AP的MAC地址</li>
+<li>若未关联，则（not associated）</li>
+</ul>
+</li>
+<li>STATION：终端设备的MAC地址</li>
+<li>PWR：信号强度，与AP部分的类似，若是-1，则表示本机与其相距太远，攻击就会受影响</li>
+<li>Rate：传输速率</li>
+<li>Lost：通过sequence number 判断最近10秒sta发送丢失的数据包数量<ul>
+<li>包括管理帧、数据帧（二者都含有数据部分，而控制帧没有）</li>
+<li>导致Lost太多的原因<ul>
+<li>干扰、距离</li>
+<li>无线网卡使发包不能收、收包不能发的（若处于侦听状态，在收包，其发包就会受影响</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Frames：STA发送的数据包数量</li>
+<li>Probe：STA探测的ESSID</li>
+</ul>
+<h3 id="3-3-常见问题及解决"><a href="#3-3-常见问题及解决" class="headerlink" title="3.3-常见问题及解决"></a>3.3-常见问题及解决</h3><ul>
+<li>不显示任何AP和STA信息<ul>
+<li>物理机场景下使用笔记本内置无线网卡时，确保BIOS中已启用无线网卡</li>
+<li>确认无线网卡在managed模式下可以正常工作</li>
+<li>尝试禁用network-managed服务</li>
+<li>尝试卸载rmmod和重新加载modprobe驱动</li>
+</ul>
+</li>
+<li>工作一段时间后airodump-ng<ul>
+<li>airmon-ng check kill</li>
+<li>确认wpa_supplicant进程已停止</li>
+</ul>
+</li>
+</ul>
+<h2 id="04-aireplay-ng（注入）"><a href="#04-aireplay-ng（注入）" class="headerlink" title="04-aireplay-ng（注入）"></a>04-aireplay-ng（注入）</h2><h3 id="4-1-简介"><a href="#4-1-简介" class="headerlink" title="4.1-简介"></a>4.1-简介</h3><ul>
+<li>注入包的目的：产生或者加速无线通信流量</li>
+<li><p>向无线网络中注入数据包，可以：</p>
+<ul>
+<li>伪造身份验证</li>
+<li>强制重新身份验证（伪造正常STA，断掉其与AP的连接，STA会尝试重新连接，再抓包，从而得到相关信息）</li>
+<li>抓包，处理后重放（作为中间人）</li>
+</ul>
+</li>
+<li><p>用于后续WEP和WPA密码破解</p>
+</li>
+<li><p>格式：<code>aireplay-ng &lt;option&gt; &lt;interface name&gt;</code>（接口需处于monitor模式）</p>
+</li>
+<li><p>aireplay-ng：支持10种包注入的方式（0-9）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/2545645.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+</li>
+<li><p>获取包的两种途径，即数据包的来源</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/98016684.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+<ul>
+<li>指定接口抓到的数据包（-i</li>
+<li>指定抓包文件pcap（-r</li>
+</ul>
+</li>
+<li><p>Filter 命令选项（除0、1两种攻击方式</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/85851087.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+<ul>
+<li>抓包后，一般要经过筛选等处理后，再重新发送出去</li>
+</ul>
+</li>
+<li><p>Replay命令选项（重放）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/15304207.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+</li>
+</ul>
+<h3 id="4-2-常见问题及解决"><a href="#4-2-常见问题及解决" class="headerlink" title="4.2-常见问题及解决"></a>4.2-常见问题及解决</h3><ul>
+<li>aireplay-ng命令挂起没有任何输出<ul>
+<li>无线网卡与ap工作在不同信道</li>
+</ul>
+</li>
+<li>报错“write failed: Cannot allocate memory wi_write(): illegal seek”<ul>
+<li>无线网卡使用Broadcom芯片（bcm43xx），替换为b43驱动可解决</li>
+</ul>
+</li>
+<li>可注入但速度很慢，并提示内核消息“rtc: lost some interrupts at 1024Hz”<ul>
+<li>没有修正方法，此时可以启动多个aireplay-ng命令提高速度</li>
+</ul>
+</li>
+<li>使用-h参数指定注入MAC地址与网卡MAC地址不一致报错<ul>
+<li>建议保持一致<ul>
+<li>macchanger命令更改MAC地址</li>
+<li>更改之前先将网卡down掉</li>
+</ul>
+</li>
+<li>00:11:11:11:11:11 / -h 00:22:22:22:22:22</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-aireplay-ng包注入测试"><a href="#4-3-aireplay-ng包注入测试" class="headerlink" title="4.3-aireplay-ng包注入测试"></a>4.3-aireplay-ng包注入测试</h3><ul>
+<li><p>简介</p>
+<ul>
+<li>检测网卡是否可以注入包（-9参数）</li>
+<li>检测AP的响应时间（回包率反映链路质量）</li>
+<li>如果有两个无线网卡，可以检测具体可以注入哪种攻击<ul>
+<li>只有一个，则只可以-9来最基本的检测</li>
+<li>有两个，则可以互相测试，进一步检测可以支持的攻击</li>
+</ul>
+</li>
+<li>基本测试检测AP对probe广播的响应<ul>
+<li>向AP发30个数据包</li>
+<li>网卡成功发送并可接收包的能力</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>基本测试：<code>aireplay-ng -9 wlan2mon</code></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/72745635.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+<ul>
+<li><code>09:20:16 Injection is working!</code>：表示当前网卡及驱动是支持注入的</li>
+<li><code>Trying broadcast probe requests...</code>：发广播包，探测周围存在的AP</li>
+<li><code>Found 7 APs</code>：发现了7个AP</li>
+<li><code>Trying directed probe requests...</code>：接下来对每个AP进行probe探测</li>
+<li><code>19/30: 63%</code>：每次发30个包，根据其百分比看出其能力（发包及接收包的能力</li>
+</ul>
+</li>
+<li><p>向隐藏AP/指定ssid注入：<code>aireplay-ng -9 -e huazhu-hanting -a 88:25:93:CA:98:A2 wlan0mon</code></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/12690651.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+<ul>
+<li>-e：指定ESSID，即无线名字</li>
+<li>-a：指定无线AP的MAC地址</li>
+<li>此时就不是一个广播了，是由针对性的单播</li>
+<li>若信道不一致，则更换一个与wlan0mon同信道的AP来探测（aireplay-ng无法手动指定信道，只能换AP来测试）</li>
+</ul>
+</li>
+<li><p>card to card注入测试</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/27714946.jpg?ynotemdtimestamp=1550490800086" alt="img"></p>
+<ul>
+<li>若有两块无线网卡，都置于monitor模式，可以做网卡-网卡的注入</li>
+<li>检测结果更加准确、精细，可以检测0-8这几种方式是否都支持</li>
+<li>网卡a去发包，发到b，网卡b接受包（b模拟AP接受数据包），若b能接受并返回包，则说明二者支持这种类型的包</li>
+<li>-i参数：指定作为AP的网卡（另外一个网卡发包用</li>
+<li>如图：5/7 Failed<ul>
+<li>可能是真的不支持这两种类型（但是在其它类型都支持的情况下，这种可能性很小</li>
+<li>实践中：只要保证注入Mac和真实Mac相同，那么是可以正常使用的（-h指定</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/无线安全/" rel="tag"># 无线安全</a>
+          
+            <a href="/tags/Kali/" rel="tag"># Kali</a>
+          
+            <a href="/tags/Tool/" rel="tag"># Tool</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/无线通信过程/" rel="next" title="无线通信过程">
+                <i class="fa fa-chevron-left"></i> 无线通信过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/18/Linux无线协议栈及常用命令/" rel="prev" title="Linux无线协议栈及常用命令">
+                Linux无线协议栈及常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无线渗透实操"><span class="nav-text">无线渗透实操</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-aircrack-ng简介"><span class="nav-text">01-aircrack-ng简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-airmon-ng（侦听）"><span class="nav-text">02-airmon-ng（侦听）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-检查网卡驱动"><span class="nav-text">2.1-检查网卡驱动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-开启和停止无线侦听"><span class="nav-text">2.2-开启和停止无线侦听</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-airodump-ng（抓包）"><span class="nav-text">03-airodump-ng（抓包）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-无线抓包"><span class="nav-text">3.1-无线抓包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-输出结果分析"><span class="nav-text">3.2-输出结果分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#（1）最上面一行："><span class="nav-text">（1）最上面一行：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（2）上面部分：AP信息"><span class="nav-text">（2）上面部分：AP信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#（3）下面部分：STA信息"><span class="nav-text">（3）下面部分：STA信息</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-常见问题及解决"><span class="nav-text">3.3-常见问题及解决</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-aireplay-ng（注入）"><span class="nav-text">04-aireplay-ng（注入）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-简介"><span class="nav-text">4.1-简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-常见问题及解决"><span class="nav-text">4.2-常见问题及解决</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-aireplay-ng包注入测试"><span class="nav-text">4.3-aireplay-ng包注入测试</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

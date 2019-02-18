@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="无线安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="无线网硬件设备及基本概念无线网卡准备 物理机运行kali 虚拟机运行kali 外置USB无线网卡 虚拟机软件支持将物理机上的网卡映射到虚拟机 桥接模式下：尽管是无线网卡，虚拟机仍将其看作是有线网卡eth0，而非wlan0等   TL-WN722N（建议，一般没问题">
+<meta name="keywords" content="无线安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无线网硬件设备及基本概念">
+<meta property="og:url" content="http://21guns.top/2018/02/18/无线网硬件设备及基本概念/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="无线网硬件设备及基本概念无线网卡准备 物理机运行kali 虚拟机运行kali 外置USB无线网卡 虚拟机软件支持将物理机上的网卡映射到虚拟机 桥接模式下：尽管是无线网卡，虚拟机仍将其看作是有线网卡eth0，而非wlan0等   TL-WN722N（建议，一般没问题">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:01:58.983Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="无线网硬件设备及基本概念">
+<meta name="twitter:description" content="无线网硬件设备及基本概念无线网卡准备 物理机运行kali 虚拟机运行kali 外置USB无线网卡 虚拟机软件支持将物理机上的网卡映射到虚拟机 桥接模式下：尽管是无线网卡，虚拟机仍将其看作是有线网卡eth0，而非wlan0等   TL-WN722N（建议，一般没问题">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/18/无线网硬件设备及基本概念/">
+
+
+
+
+
+  <title>无线网硬件设备及基本概念 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/无线网硬件设备及基本概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">无线网硬件设备及基本概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="无线网硬件设备及基本概念"><a href="#无线网硬件设备及基本概念" class="headerlink" title="无线网硬件设备及基本概念"></a>无线网硬件设备及基本概念</h1><h2 id="无线网卡准备"><a href="#无线网卡准备" class="headerlink" title="无线网卡准备"></a>无线网卡准备</h2><ul>
+<li>物理机运行kali</li>
+<li>虚拟机运行kali<ul>
+<li>外置USB无线网卡<ul>
+<li>虚拟机软件支持将物理机上的网卡映射到虚拟机</li>
+<li>桥接模式下：尽管是无线网卡，虚拟机仍将其看作是有线网卡eth0，而非wlan0等</li>
+</ul>
+</li>
+<li>TL-WN722N（建议，一般没问题<a id="more"></a></li>
+<li>dmesg命令<ul>
+<li>可以查看系统硬件方面的变化，如插入新网卡新鼠标</li>
+<li>dmesg -T可以按照时间查看</li>
+<li>可根据时间找到新插入的网卡信息</li>
+<li>idvendor为厂商编号，ipproduct为产品编号（二者很有用，设置相关，等再次插入网卡时，可自动识别为虚拟机的设备，忽略物理机</li>
+<li>manufacturer：xxx，显示芯片，而非厂商，重要的是芯片（决定后面实践是否顺利），而非厂商，如atheros，rtl8171</li>
+<li>ath9k_htc看用的是什么驱动</li>
+</ul>
+</li>
+<li>iwconfig<ul>
+<li>非ifconfig，是专门用来查看无线的</li>
+<li>IEEE802.1 bng（支持这三种模式，ng都是相互兼容b的</li>
+<li>ESSID为扩展服务及id，因未连接无线网络，所以此时为off/any</li>
+<li>mode：managed（模式是managed，若想抓802.11包头，则设置为monitor模式</li>
+<li>access-point：xxx（连接的是哪个ap，即访问点，未连接时，not-associated</li>
+<li>tx-power：20 sbM（发送信号的强度</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统选择<ul>
+<li>不建议Windows，对硬件、驱动等太过于苛刻</li>
+<li>建议Linux，kali就好了</li>
+</ul>
+</li>
+</ul>
+<h2 id="无线网卡选择"><a href="#无线网卡选择" class="headerlink" title="无线网卡选择"></a>无线网卡选择</h2><ul>
+<li>选择无线网卡是痛苦且受挫的过程</li>
+<li>无线网卡的芯片型号是成败的关键（而非厂商</li>
+<li>不同设备的选择<ul>
+<li>台式机相关网卡（选择较多<ul>
+<li>usb无线网卡（不支持扩展天线</li>
+<li>PCMCIA（16位，已停产，802.11b</li>
+<li>cardbus（32位，PCMCIA 8.0标准</li>
+<li>express cards</li>
+<li>mini PCI</li>
+<li>mini PCI express</li>
+<li>PCI接口卡</li>
+</ul>
+</li>
+<li>笔记本或虚拟机（没得选，只能是usb</li>
+</ul>
+</li>
+<li>关注点<ul>
+<li>发送功率<ul>
+<li>决定远程连接距离的远近</li>
+<li>一般情况，设备的发送功率出厂时已被厂家限制（为防止无线垃圾</li>
+<li>为扩大功率，可以自行安装天线</li>
+<li>若条件允许，尽量选择功率大的</li>
+<li>发送时，关注的是功率问题</li>
+</ul>
+</li>
+<li>接收灵敏度<ul>
+<li>接收时，关注的是灵敏度</li>
+<li>不能过高，适当降低灵敏度，使接受效果更佳</li>
+<li>过高时，接受到的垃圾信号多</li>
+<li>尽量低，不同于发送时功率尽量高</li>
+</ul>
+</li>
+<li>有一经验但非铁律<ul>
+<li>选择atheros或者realtek芯片</li>
+<li>不存在最好的网卡一说法，没有神器，效果好即可</li>
+<li>选择兼容aircrack-ng suite的<ul>
+<li>后期实践部分使用较多的工具</li>
+<li>可到其官网，查看其建议的芯片</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>无线渗透网卡的选择没有所谓标准<ul>
+<li>但aircrack-ng作者给出建议</li>
+<li>12年提出的（时间供参考</li>
+<li>alfa networks AWUS036H 无线网卡<ul>
+<li>Realtek 8171无线芯片</li>
+<li>1000 mW的发送功率</li>
+<li>天线：RP-SMA</li>
+<li>是可扩展的，可更换天线</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="无线技术概念"><a href="#无线技术概念" class="headerlink" title="无线技术概念"></a>无线技术概念</h2><ul>
+<li>单位相关<ul>
+<li>分贝dB<ul>
+<li>大小写严格要求</li>
+<li>测量无线强度信号</li>
+</ul>
+</li>
+<li>B<ul>
+<li>向Alexander Graham Bell 致敬</li>
+<li>今天大部分声学设备的发明者和理论奠基人</li>
+</ul>
+</li>
+<li>dB<ul>
+<li>表示两个信号之间的差异比率</li>
+<li>用于描述设备的信号强度</li>
+<li>是一个相对值，而非一个绝对的值</li>
+</ul>
+</li>
+<li>dBm<ul>
+<li>功率值与1mW进行比较的dB值结果（可理解为是一个绝对的值</li>
+</ul>
+</li>
+<li>功率值与分贝值可通过公式转换</li>
+<li>大概规律为：<ul>
+<li>每增加3dBm，功率增加约1wM</li>
+<li>美增加10dBm，功率增加10倍</li>
+</ul>
+</li>
+<li>无线相关的单位全是dB（dB、dBm、dBi、dBd；网卡或天线</li>
+<li>既然有mW来表示功率，为何还要引入dB<ul>
+<li>接收信号时无线信号转变为高频电子脉冲，反之发射信号时高频电子脉冲转换为无线电波，这些过程功率往往要产生上万倍的变化，使用W、mW来记数非常不便，而dBm单位通过对功率的对数计算，使用一个较小的数值既可以比较直观的表达功率的变化，因此无线和声学系统都采用了dB这个单位</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>天线相关<ul>
+<li>简介<ul>
+<li>分为定向天线和全向天线</li>
+<li>安全考虑，多采用定向天线，防止信号外漏，使恶意用户连接</li>
+<li>天线就是要增大信号强度，其能力的大小称为增益</li>
+<li>如30dBm的网卡，加9dBi的天线，则变成39dBm（思路是这样的，具体公式求解</li>
+</ul>
+</li>
+<li>dBi：全向天线信号功率增益<ul>
+<li>全向天线向所有方向均匀辐射</li>
+<li>增益是指信号功率强度增加了多少dB</li>
+<li>增益在网卡，也可以增益在无线路由器</li>
+<li>具体增益了多少，公式求解</li>
+</ul>
+</li>
+<li>dBd：定向天线的增益值<ul>
+<li>全向天线再所有方向上收发信号，定向天线在制定方向的范围内收发信号（理论如此，但实际区分并未这样严格</li>
+<li>天线增益越大，信号传输距离越远</li>
+<li>因为信号比较集中，所以传输距离远</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>全向天线<ul>
+<li>波形图类似甜甜圈</li>
+<li>天线选择的误区：认为增益越高越好<ul>
+<li>好处：可以扩大范围，增强信号</li>
+<li>高耗能</li>
+<li>对周围环境造成信号干扰</li>
+<li>增益过高的全向天线会变成定向天线（波形会产生变化</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定向天线<ul>
+<li>双四边形</li>
+<li>定向发送信号</li>
+<li>功率相同时，比全向天线传输距离更远（方向正确的情况下</li>
+<li>常见<ul>
+<li>八木天线：引向反射天线</li>
+<li>平面天线：多出现在办公区，多在天花板</li>
+<li>扇形天线：常用于移动电话网络；三到四个扇形天线联合使用可实现全向信号覆盖</li>
+<li>网状天线：射束带宽更加集中，功率更强</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/无线安全/" rel="tag"># 无线安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/27/Kali实战-Beef/" rel="next" title="Kali实战-Beef">
+                <i class="fa fa-chevron-left"></i> Kali实战-Beef
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/18/无线网络运行模式/" rel="prev" title="无线网络运行模式">
+                无线网络运行模式 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无线网硬件设备及基本概念"><span class="nav-text">无线网硬件设备及基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#无线网卡准备"><span class="nav-text">无线网卡准备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无线网卡选择"><span class="nav-text">无线网卡选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无线技术概念"><span class="nav-text">无线技术概念</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

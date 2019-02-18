@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Kali,tool,Web渗透,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="扫描工具之Vega简介 Java编写，开源，web扫描器 图形化工具，不同于nikto纯命令行 工作模式 扫描模式 主动扫描 根据字典文件，可做fuzz测试 得目标的隐蔽目录">
+<meta name="keywords" content="Kali,tool,Web渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali实战-Vega">
+<meta property="og:url" content="http://21guns.top/2018/01/27/Kali实战-Vega/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="扫描工具之Vega简介 Java编写，开源，web扫描器 图形化工具，不同于nikto纯命令行 工作模式 扫描模式 主动扫描 根据字典文件，可做fuzz测试 得目标的隐蔽目录">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T11:48:50.506Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kali实战-Vega">
+<meta name="twitter:description" content="扫描工具之Vega简介 Java编写，开源，web扫描器 图形化工具，不同于nikto纯命令行 工作模式 扫描模式 主动扫描 根据字典文件，可做fuzz测试 得目标的隐蔽目录">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/27/Kali实战-Vega/">
+
+
+
+
+
+  <title>Kali实战-Vega | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/27/Kali实战-Vega/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kali实战-Vega</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T19:30:50+08:00">
+                2018-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kali相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Kali相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="扫描工具之Vega"><a href="#扫描工具之Vega" class="headerlink" title="扫描工具之Vega"></a>扫描工具之Vega</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Java编写，开源，web扫描器</li>
+<li>图形化工具，不同于nikto纯命令行</li>
+<li>工作模式<ul>
+<li>扫描模式<ul>
+<li>主动扫描</li>
+<li>根据字典文件，可做fuzz测试</li>
+<li>得目标的隐蔽目录<a id="more"></a></li>
+</ul>
+</li>
+<li>代理模式<ul>
+<li>代理截断，如burp</li>
+<li>手动测试，较隐蔽，攻击不易被发现</li>
+<li>得一般可见目录</li>
+</ul>
+</li>
+<li>二者互有利弊，互补</li>
+</ul>
+</li>
+<li>专注web application层面，而非web server和app server</li>
+<li>可爬站，处理表单，做注入测试</li>
+<li>支持SSL，https相关</li>
+</ul>
+<h2 id="常见设置"><a href="#常见设置" class="headerlink" title="常见设置"></a>常见设置</h2><ul>
+<li>使用外部代理服务器<ul>
+<li>socks代理<ul>
+<li>如tor</li>
+</ul>
+</li>
+<li>http代理<ul>
+<li>如本机的goagent代理</li>
+<li>上述是本机到Google的代理</li>
+<li>尽管IP为127.0.0.1，实际连接远程Google代理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用内部代理<ul>
+<li>可选择覆盖原有ua头，也可使用原先代理的浏览器</li>
+<li>设置useragent，伪装浏览器，ua头去掉Vega标示</li>
+<li>可监听本机IP和本地端口，端口同浏览器设置的一致</li>
+<li>也可以代理其他主机，填写其IP即可，得保证其能访问本机</li>
+</ul>
+</li>
+<li>阻止浏览器和代理的缓存<ul>
+<li>有缓存时客户端就不会新请求服务端</li>
+<li>缓存在挖掘漏洞时会导致产生误判</li>
+<li>阻止后，请求量加大</li>
+</ul>
+</li>
+<li>扫描功能<ul>
+<li>设置ua头，每次扫描请求时带上，伪造浏览器，防止被ban</li>
+<li>扫描路径深度</li>
+<li>扫描线程数等其他信息</li>
+</ul>
+</li>
+<li>代理模式下也可使用扫描模块<ul>
+<li>流量经过时同时进行测试</li>
+<li>子主题</li>
+</ul>
+</li>
+<li>添加目标范围，做一个分组，也可以设置exclude做排除，如排除logout页面</li>
+</ul>
+<h2 id="简单使用"><a href="#简单使用" class="headerlink" title="简单使用"></a>简单使用</h2><ul>
+<li>代理功能<ul>
+<li>监听浏览器指定端口，实现内部的代理</li>
+<li>浏览器点击目标应用所有可见链接</li>
+<li>Vega在接收到流量的同时浏览器的请求会照常发送，不同于burp会卡住</li>
+<li>Vega显示所有点击过的链接，并根据页面内容的超链接得到进一步的页面url</li>
+<li>手动点击新的url，来发现新的url，继续…</li>
+<li>会发现大量网站页面，类似爬虫，但爬虫近会发现静态。</li>
+<li>请求时浏览器发送的，Vega做提取url工作</li>
+<li>代理同时启动扫描模块，通过数据分析，被动发现漏洞</li>
+</ul>
+</li>
+<li>扫描功能<ul>
+<li>由Vega向目标发送请求</li>
+<li>定义目标scope，设置排除的页面如logout页面</li>
+<li>选择要启动的扫描模块，一般选择全部开启，（同代理模式下的一样</li>
+<li>可以设置认证登录信息<ul>
+<li>粘贴cookie信息至此，实现认证</li>
+<li>添加认证信息<ul>
+<li>填写待认证的用户名</li>
+<li>选择验证类型<ul>
+<li>basic http</li>
+<li>digest http</li>
+<li>NTLM<ul>
+<li>微软系统</li>
+</ul>
+</li>
+<li>macro<ul>
+<li>macro宏，可用于表单验证，比较常见</li>
+</ul>
+</li>
+<li>前三针对web server类型的，macro针对application</li>
+</ul>
+</li>
+<li>添加宏信息<ul>
+<li>设置宏名字</li>
+<li>add item，即登录时那个表单请求</li>
+<li>编辑上述item，设置所需要的字段，如username和password</li>
+<li>效果等同于手动登录页面</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>填写排除的扫描参数<ul>
+<li>已知某参数不会有安全隐患时</li>
+<li>可以减小扫描负担</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>重放功能<ul>
+<li>对已经访问过的URL进行修改重放</li>
+<li>修改http请求内容后重发</li>
+</ul>
+</li>
+<li>截断功能<ul>
+<li>截取到的流量不是直接发送到服务端</li>
+<li>阻断在Vega，先在Vega下观察，修改</li>
+<li>不同于之前的代理模块，浏览器访问的同时Vega也可以获取信息</li>
+<li>同burp，Vega这方面有所欠缺，还是以burp为主</li>
+</ul>
+</li>
+</ul>
+<h2 id="支持SSL"><a href="#支持SSL" class="headerlink" title="支持SSL"></a>支持SSL</h2><ul>
+<li>原理<ul>
+<li>Vega也支持自签名证书，可看为一台服务器</li>
+<li>使用代理模块时，本地浏览器-Vega，Vega-目标服务器，这两段都是https通信过程，前者利用Vega证书，后者是服务器证书</li>
+<li>远程使用Vega<ul>
+<li>除了本机使用Vega进行代理，也就是浏览器与Vega位于同一台主机，还可以远程使用Vega，此时远程服务器的身份验证就很重要。</li>
+<li>若利用相关攻击手段，使VegaIP指向了危险Vega主机</li>
+<li>则本机浏览器-危险Vega主机-目标服务器；</li>
+<li>Vega充当了中间人，可实施中间人攻击</li>
+</ul>
+</li>
+<li>避免基于Vega的中间人攻击<ul>
+<li>本机浏览器安装正常的Vega证书</li>
+<li>若出现危险提示，即证书不安全，则可能使用了危险Vega</li>
+<li>正常情况下是不会有证书不安全等提示的</li>
+<li>从而避免中间人攻击</li>
+<li>前提是远程Vega，本地使用自然没有中间人威胁，出现安全提示时选择信任即可<ul>
+<li>安装证书后的信任与强制选择信任是不同的</li>
+<li>后者浏览器仍会显示警告，url左侧的⚠️</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>简单使用<ul>
+<li>http：//vega/ca.crt 下载Vega证书并安装</li>
+<li>前提是开启Vega代理，否则无法访问并下载</li>
+<li>安装证书后的信任与强制选择信任是不同的</li>
+<li>后者浏览器仍会显示警告，url左侧的⚠️</li>
+</ul>
+</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>安全学习的两个方法<ul>
+<li>根据扫描器的请求，观察其请求链接，来学习</li>
+<li>向黑帽子学习，蜜罐，学习其攻击手法</li>
+</ul>
+</li>
+<li>注意目标的范围问题<ul>
+<li>如上，代理模块时，会找到页面内容中存在的新的url链接</li>
+<li>只是从内容中的超链接提取的，并不是真正访问的</li>
+<li>范围控制不好，目标太多，工作量加大</li>
+<li>由原先目标引出其他无关目标，没有得到授权，测试其他目标可能不合法</li>
+</ul>
+</li>
+<li>代理相关<ul>
+<li>Vega支持代理模式，内部代理<ul>
+<li>Vega代理浏览器</li>
+<li>都是同一机器，IP相同</li>
+<li>目标可封杀IP，致使浏览器也无法访问</li>
+</ul>
+</li>
+<li>Vega支持外部代理<ul>
+<li>外部服务器代理本机</li>
+<li>目标看到的IP是外网的代理服务器<ul>
+<li>匿名代理最好，隐藏本机</li>
+<li>透明代理无隐藏功能，目标依然可见本机IP</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>https相关<ul>
+<li>相关知识<ul>
+<li>公私钥<ul>
+<li>公钥可公开，私钥自己所有</li>
+<li>非对称加密；对称加密由同一密钥加解密</li>
+<li>公钥加密，私钥解密；前者于锁，后者于钥匙</li>
+<li>私钥的机密性是安全的根本</li>
+</ul>
+</li>
+<li>访问速度<ul>
+<li>相较http，前期多了证书和对称密钥的传递，必然会慢一点</li>
+<li>两端传输信息时会有加解密</li>
+</ul>
+</li>
+<li>三个大步骤<ul>
+<li>1，证书的认证，进行身份验证，检查对方网站是否合法或者被篡改</li>
+<li>2，身份验证通过后，进行对称密钥的传输</li>
+<li>3，双方拥有同一对称秘钥后，开始进行加密通信</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>简单工作过程<ul>
+<li>c第一次对s发起访问请求，s向c发送含有公钥的证书CA<ul>
+<li>会涉及证书签名及认证</li>
+<li>c端会有根证书，判断发送过来的CA是否是合法的</li>
+</ul>
+</li>
+<li>c上会随机生成一个对称秘钥，其用于后续所有通信</li>
+<li>c的对称秘钥不会直接传输到s，经上述的公钥加密后再传输</li>
+<li>s收到密文时，用对应的私钥解密得到对称秘钥</li>
+<li>c和s都拥有同一个对称秘钥，用于后续通信</li>
+<li>关键点就是如何把c端的对称秘钥发送到服务端</li>
+<li>其他<ul>
+<li>每次的会话这个对称秘钥都是随机生成的</li>
+<li>每一次通信结束后其就会失效，时间很短且加密强度高</li>
+<li>加密强度高，破解时间长，即使解出也失效了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>证书相关<ul>
+<li>牵涉对称加密，非对称加密，hash算法等</li>
+<li>服务器本身可以自签名证书，即自己颁发证书，但是没有第三方的认证，多见于小型站点</li>
+<li>大型网站如百度，其证书都是由证书颁发机构颁发的，具有公信力<ul>
+<li>证书是颁发到域名的而非IP地址</li>
+<li>https访问一个IP时仍会报错，尽管此IP使用的域名的证书是合法的</li>
+</ul>
+</li>
+<li>客户端浏览器是信任那些证书颁发机构的<ul>
+<li>前提是浏览器安装有证书颁发机构的根证书</li>
+<li>根证书里也含有颁发机构的公钥</li>
+<li>即客户端浏览器持有证书颁发机构的公钥</li>
+</ul>
+</li>
+<li>身份认证流程<ul>
+<li>所颁发的证书都是由颁发机构所签名的</li>
+<li>对证书内容进行hash计算</li>
+<li>用根证书的私钥对哈希值进行加密</li>
+<li>密文连同所颁发的证书等一起发给申请者</li>
+<li>当c端请求s端，网站将证书及签名信息（即加密的哈希值）一同发给c</li>
+<li>c端有颁发机构根证书的公钥，对密文解密得哈希值1</li>
+<li>c对证书内容进行哈希计算，得到哈希值2</li>
+<li>比较两个值，若相同则表明此证书是由颁发机构颁发的正规证书</li>
+<li>是c对s网站的身份认证，表明目标网站是真实的</li>
+</ul>
+</li>
+<li>身份认证的必要性<ul>
+<li>小型站点采用自签名证书<ul>
+<li>只是其证书未得到颁发机构信任</li>
+<li>不会得到客户端信任，因此访问一些https网站时会询问是否信任</li>
+<li>倘若信任，继续访问并不会影响后续的通信，而且后续通信也会加密处理，实现正常的https服务</li>
+<li>证书仅仅提供身份验证功能，看目标网站是否被篡改</li>
+<li>无论证书是证书颁发机构的还是自签名的，若客户端都选择信任其，则后续通信正常；证书的作用仅仅提供身份验证</li>
+</ul>
+</li>
+<li>被攻击后，真假网站<ul>
+<li>通过链路欺骗或者dns域名劫持等攻击手法</li>
+<li>客户端误把IP指向了假网站</li>
+<li>若真网站采用了https且其证书经过颁发机构颁发且认证</li>
+<li>但是假网站证书是自签名的，得不到认证</li>
+<li>客户访问的时候就会提示，避免客户因访问假网站而受到危害</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kali/" rel="tag"># Kali</a>
+          
+            <a href="/tags/tool/" rel="tag"># tool</a>
+          
+            <a href="/tags/Web渗透/" rel="tag"># Web渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/提权相关/" rel="next" title="提权相关">
+                <i class="fa fa-chevron-left"></i> 提权相关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/27/Kali实战-BurpSuite/" rel="prev" title="Kali实战-BurpSuite">
+                Kali实战-BurpSuite <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#扫描工具之Vega"><span class="nav-text">扫描工具之Vega</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见设置"><span class="nav-text">常见设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单使用"><span class="nav-text">简单使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支持SSL"><span class="nav-text">支持SSL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

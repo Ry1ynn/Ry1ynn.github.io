@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="无线安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="无线通信过程连接到无线网络（大体过程）  Probe STA向所有信道发出probe帧，发现AP（AP工作的信道不是固定不变的 AP应道response   Authentication">
+<meta name="keywords" content="无线安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="无线通信过程">
+<meta property="og:url" content="http://21guns.top/2018/02/18/无线通信过程/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="无线通信过程连接到无线网络（大体过程）  Probe STA向所有信道发出probe帧，发现AP（AP工作的信道不是固定不变的 AP应道response   Authentication">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/65707860.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/53206916.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/58934405.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/31220233.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/11529223.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/11261183.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/79594752.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/77293652.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/66013725.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/37676185.jpg?ynotemdtimestamp=1550490771881">
+<meta property="og:updated_time" content="2019-02-18T12:01:52.272Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="无线通信过程">
+<meta name="twitter:description" content="无线通信过程连接到无线网络（大体过程）  Probe STA向所有信道发出probe帧，发现AP（AP工作的信道不是固定不变的 AP应道response   Authentication">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/65707860.jpg?ynotemdtimestamp=1550490771881">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/18/无线通信过程/">
+
+
+
+
+
+  <title>无线通信过程 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/无线通信过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">无线通信过程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="无线通信过程"><a href="#无线通信过程" class="headerlink" title="无线通信过程"></a>无线通信过程</h1><h2 id="连接到无线网络（大体过程）"><a href="#连接到无线网络（大体过程）" class="headerlink" title="连接到无线网络（大体过程）"></a>连接到无线网络（大体过程）</h2><p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/65707860.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+<ul>
+<li>Probe<ul>
+<li>STA向所有信道发出probe帧，发现AP（AP工作的信道不是固定不变的</li>
+<li>AP应道response</li>
+</ul>
+</li>
+<li>Authentication<a id="more"></a><ul>
+<li>STA向AP发送验证请求</li>
+<li>发生认证过程（步骤可变</li>
+<li>AP响应STA的认证结果</li>
+</ul>
+</li>
+<li>Association<ul>
+<li>STA发出关联请求</li>
+<li>AP响应关联请求</li>
+<li>关联成功，开始通信</li>
+</ul>
+</li>
+</ul>
+<h1 id="探测"><a href="#探测" class="headerlink" title="探测"></a>探测</h1><h2 id="WEP探测过程"><a href="#WEP探测过程" class="headerlink" title="WEP探测过程"></a>WEP探测过程</h2><blockquote>
+<p>在probe和authentication时，若客户端和AP都采用WEP加密方式，则……</p>
+</blockquote>
+<ol>
+<li><p>发送beacon，标识使用WEP加密</p>
+<ul>
+<li>AP通告STA要使用WEP加密方式来通信</li>
+</ul>
+</li>
+<li><p>STA发送普通probe帧</p>
+<ul>
+<li>通常来说，许多厂商的产品都不会识别beacon中的WEP要求</li>
+<li>而会发送一个普通的帧（不使用WEP</li>
+</ul>
+</li>
+<li><p>AP响应一个probe response 帧声明其采用WEP加密</p>
+<ul>
+<li>AP再次接收到probe时，会响应一个response，再次声明要采用WEP加密</li>
+</ul>
+</li>
+</ol>
+<h2 id="WPA探测过程"><a href="#WPA探测过程" class="headerlink" title="WPA探测过程"></a>WPA探测过程</h2><ul>
+<li>AP怎么标识其支持WPA方式加密？<ul>
+<li>前面privacy处标识为1，标识支持加密（WEP便时如此</li>
+<li>但WPA不同于WEP，除了上面的标识外，在数据包后面还会有WPA的相关Tag，用于标识这是WPA，而不是WEP（WEP只有前面的标识，没有后面的）</li>
+</ul>
+</li>
+<li><p>其探测过程同WEP大同小异，只不过是WPA</p>
+</li>
+<li><p>若有两个不同AP，都支持WPA，则两个AP的beacon包内容不同，但都声明采用了WPA加密（不同厂商对802.11标准的实现方式不同</p>
+</li>
+<li>相关数据包的包头中包含WPA1字段信息</li>
+</ul>
+<h1 id="认证"><a href="#认证" class="headerlink" title="认证"></a>认证</h1><h2 id="WEP-OPEN认证过程"><a href="#WEP-OPEN认证过程" class="headerlink" title="WEP OPEN认证过程"></a>WEP OPEN认证过程</h2><blockquote>
+<p>虽然采用WEP，但是认证是OPEN方式（即认证过程中不需要输入密码</p>
+</blockquote>
+<ul>
+<li>WEP open认证与直接open认证通信过程相同</li>
+<li>正确认证后通信数据被WEP加密（后续的通信是采用WEP的）</li>
+<li>如果认证时客户端输入错误密码<ul>
+<li>认证依然可以通过（authentication时是可以通过的，但是后续数据传输时会出错</li>
+<li>AP将丢弃该STA的数据包<ul>
+<li>起始向量被错误地密钥解密后完整性被破坏（因为密码是错误的）</li>
+<li>但数据传输将失败</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>认证响应正确，身份验证正确</li>
+</ul>
+<h2 id="WEP-PSK认证过程"><a href="#WEP-PSK认证过程" class="headerlink" title="WEP PSK认证过程"></a>WEP PSK认证过程</h2><p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/53206916.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+<ul>
+<li>STA发认证请求</li>
+<li>AP返回随机challenge消息</li>
+<li>STA使用PSK加密cha并发回给ap<ul>
+<li>PSK为pre share key，预设共享密钥（AP端和客户端都会有）</li>
+<li>传输的是加密的随机数，PSK不会出现在传输过程中</li>
+</ul>
+</li>
+<li>ap使用psk解密密文，获得cha并与原始cha对比，相同则验证成功，不同则失败</li>
+<li>注：大部分人无线驱动首先尝试open验证，如失败则尝试psk</li>
+</ul>
+<h2 id="WEP共享密钥认证过程"><a href="#WEP共享密钥认证过程" class="headerlink" title="WEP共享密钥认证过程"></a>WEP共享密钥认证过程</h2><ul>
+<li>无论使用什么加密结构，关联过程完全相同<ul>
+<li>sta向ap发送关联请求</li>
+<li>ap向sta发送关联成功或失败结果</li>
+</ul>
+</li>
+<li>隐藏AP<ul>
+<li>STA关联包中必须包含目标AP的essid</li>
+<li>嗅探到此关联包，说明有隐藏AP存在</li>
+</ul>
+</li>
+</ul>
+<h1 id="加密"><a href="#加密" class="headerlink" title="加密"></a>加密</h1><h2 id="加密-1"><a href="#加密-1" class="headerlink" title="加密"></a>加密</h2><ul>
+<li>无线安全根源<ul>
+<li>无线通信是基于广播的（广播便是指在范围内所有STA的都会收到）</li>
+<li>802.11基于无线电波发射信息</li>
+<li>嗅探侦听是主要问题</li>
+<li>加密机制是必须手段</li>
+</ul>
+</li>
+<li>wired equivalent privacy（WEP）<ul>
+<li>802.11 标准的一部分</li>
+<li>发布后不久被发现存在安全漏洞</li>
+</ul>
+</li>
+<li>WI-FI protected access（WPA）取代WEP<ul>
+<li>WPA2（802.11i标准</li>
+</ul>
+</li>
+</ul>
+<h2 id="open无加密网络"><a href="#open无加密网络" class="headerlink" title="open无加密网络"></a>open无加密网络</h2><ul>
+<li>无任何加密机制</li>
+<li>所有数据都可以被嗅探</li>
+<li>STA和AP只协商拼配参数即可连入网络</li>
+</ul>
+<h2 id="WEP加密系统"><a href="#WEP加密系统" class="headerlink" title="WEP加密系统"></a>WEP加密系统</h2><ul>
+<li>使用rivest cipher 4（RF4）算法加密流量内容，实现机密性<ul>
+<li>RF4是对称加密算法</li>
+</ul>
+</li>
+<li>CRC32 算法检查数据完整性</li>
+<li>标准采用使用24位initialization vector（IV）</li>
+<li>受美国加密技术出口限制法律的要求<ul>
+<li>高于64位 key禁止出口</li>
+<li>所以除24位 IV 之外，真实的key只有40位的版本被允许出口</li>
+<li>出口限制法律撤销后实现了128位 key 的WEP版本（也含有同上的24bit IV）</li>
+</ul>
+</li>
+</ul>
+<h3 id="RC4算法"><a href="#RC4算法" class="headerlink" title="RC4算法"></a>RC4算法</h3><ul>
+<li><p>RSA实验室研发的对称加密流算法</p>
+<ul>
+<li>实现简单</li>
+<li>速度快</li>
+</ul>
+</li>
+<li><p>加密：对明文流和密钥流进行XOR计算</p>
+</li>
+<li><p>解密：对密文流和密钥流进行XOR计算</p>
+</li>
+<li><p>RC4算法key由两个过程生成</p>
+<ul>
+<li>合并IV和SKA，利用KSA算法生成起始状态表</li>
+<li>PRGA算法最终生成密钥流</li>
+</ul>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/58934405.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+</li>
+<li><p>加密流程</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/31220233.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+</li>
+<li><p>解密流程</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/11529223.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+</li>
+</ul>
+<h2 id="WPA安全系统"><a href="#WPA安全系统" class="headerlink" title="WPA安全系统"></a>WPA安全系统</h2><ul>
+<li><p>Wi-Fi Protected Access</p>
+</li>
+<li><p>802.11 i组为提高无线安全，开发两个新的链路层加密协议</p>
+<ul>
+<li>Temporal Key Integrity Protocol，TKIP（WPA1，较之WEP可动态改变密钥</li>
+<li>Counter Mode with CBC-MAC，CCMP（WPA2</li>
+</ul>
+</li>
+<li>WPA加密两种安全类型<ul>
+<li>WPA个人：使用预设共享密钥视线身份验证</li>
+<li>WPA企业：使用802.1x 和radius 服务器实现AAA</li>
+</ul>
+</li>
+</ul>
+<h3 id="WPA1"><a href="#WPA1" class="headerlink" title="WPA1"></a>WPA1</h3><ul>
+<li>802.11 i 第三版草案</li>
+<li>与WEP比较<ul>
+<li>都采用逐包进行密钥加密</li>
+<li>128位的key和48位的初向量（IV</li>
+<li>RC4流加密数据</li>
+<li>帧计数器避免重放攻击</li>
+<li>TKIP使用Michael算法进行完整性校验（MIC）<ul>
+<li>WEP CRC32</li>
+</ul>
+</li>
+<li>兼容更早期版本硬件</li>
+</ul>
+</li>
+</ul>
+<h3 id="WPA2"><a href="#WPA2" class="headerlink" title="WPA2"></a>WPA2</h3><ul>
+<li>依据802.11i 完全重新设计实现</li>
+<li>也被称为robust security network（RSN</li>
+<li>CCMP替代TKIP</li>
+<li>AES加密算法取代了RC4</li>
+<li>不兼容早期版本硬件</li>
+</ul>
+<h3 id="WPA企业连接过程"><a href="#WPA企业连接过程" class="headerlink" title="WPA企业连接过程"></a>WPA企业连接过程</h3><p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/11261183.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+<ul>
+<li>协商安全协议</li>
+<li>身份认证</li>
+<li>密钥分发和验证</li>
+<li>数据加密完整性</li>
+</ul>
+<h3 id="WPA-PSK"><a href="#WPA-PSK" class="headerlink" title="WPA-PSK"></a>WPA-PSK</h3><p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/79594752.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+<ul>
+<li>协商安全协议</li>
+<li>密钥分发和验证</li>
+<li>数据加密完整性</li>
+</ul>
+<h4 id="协商安全协议"><a href="#协商安全协议" class="headerlink" title="协商安全协议"></a>协商安全协议</h4><ul>
+<li>协商认证方式<ul>
+<li>PSK/802.1x</li>
+</ul>
+</li>
+<li>单播和组播/广播流量加密套件<ul>
+<li>TKIP/CCMP</li>
+</ul>
+</li>
+<li>STA通过probe获取无线网络信息<ul>
+<li>速率</li>
+<li>加密</li>
+<li>通道</li>
+<li>名称</li>
+</ul>
+</li>
+</ul>
+<h4 id="身份认证（WPA企业"><a href="#身份认证（WPA企业" class="headerlink" title="身份认证（WPA企业"></a>身份认证（WPA企业</h4><ul>
+<li>身份认证基于EAP实现<ul>
+<li>EAP-TLS，需要客户端和服务器证书</li>
+<li>EAP-TTLS</li>
+<li>PEAP混合身份验证，只需要服务器证书</li>
+</ul>
+</li>
+<li>客户端选择身份认证方式</li>
+<li>AP发送身份验证信息给radius server</li>
+<li>radius server返回radius accept 表示认证成功<ul>
+<li>其中包括master key，即MK</li>
+</ul>
+</li>
+<li>AP通过EAP消息通知STA认证成功</li>
+</ul>
+<h4 id="密钥交换"><a href="#密钥交换" class="headerlink" title="密钥交换"></a>密钥交换</h4><p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/77293652.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+<ul>
+<li>无线网络设计用于一组无线设备通信</li>
+<li>关联到同一AP的设备共享无线通道</li>
+<li>单播、广播、组播<ul>
+<li>安全特性要求不同</li>
+<li>单播通信需要单独密钥加密通信双方流量<ul>
+<li>pairwise key：对偶密钥（PTK</li>
+</ul>
+</li>
+<li>组播通信需要信任域内所有成员共享的同一密钥<ul>
+<li>group key：组密钥（GTK</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="PMK"><a href="#PMK" class="headerlink" title="PMK"></a>PMK</h4><ul>
+<li>安全上下文的顶级密钥<ul>
+<li>MK进行TLS-PRF加密得出PMK</li>
+</ul>
+</li>
+<li>基于服务密钥<ul>
+<li>由上层身份验证方法服务器生成</li>
+<li>从服务器通过radius传给AP</li>
+<li>从AP通过EAP消息传给所有STA</li>
+</ul>
+</li>
+<li>基于PSK共享密钥<ul>
+<li>Essid+PSK+迭代次数4096—hash计算生成</li>
+<li>STA和AP分别计算得出PMK，并不在网络中传递交换</li>
+</ul>
+</li>
+<li>256位即32字节</li>
+</ul>
+<h4 id="密钥交换-1"><a href="#密钥交换-1" class="headerlink" title="密钥交换"></a>密钥交换</h4><ul>
+<li><p>PTK的生成过程</p>
+<ul>
+<li>HMAC-SHA1散列算法</li>
+<li>PRF-X散列算法</li>
+</ul>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/66013725.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+</li>
+<li><p>四步握手过程生成PTK</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/37676185.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
+<ul>
+<li>AP发送Anonence给STA</li>
+<li>STA生成sconce计算出PTK</li>
+<li>sconce加PTK的MIC发送AP</li>
+<li>AP拿到Sconce计算出PTK</li>
+<li>AP计算MIC与接收的MIC比对</li>
+<li>MIC一致说明确定STA知道PMK</li>
+<li>AP发GTK给STA</li>
+<li>STA回复ACK并使用密钥加密</li>
+</ul>
+</li>
+</ul>
+<h4 id="数据加密和完整性"><a href="#数据加密和完整性" class="headerlink" title="数据加密和完整性"></a>数据加密和完整性</h4><ul>
+<li>三种算法，如下<ul>
+<li>TKIP4</li>
+<li>CCMP5</li>
+<li>WRAP6</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/无线安全/" rel="tag"># 无线安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/无线网络运行模式/" rel="next" title="无线网络运行模式">
+                <i class="fa fa-chevron-left"></i> 无线网络运行模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/18/无线渗透工具/" rel="prev" title="无线渗透工具">
+                无线渗透工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无线通信过程"><span class="nav-text">无线通信过程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#连接到无线网络（大体过程）"><span class="nav-text">连接到无线网络（大体过程）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#探测"><span class="nav-text">探测</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEP探测过程"><span class="nav-text">WEP探测过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WPA探测过程"><span class="nav-text">WPA探测过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#认证"><span class="nav-text">认证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WEP-OPEN认证过程"><span class="nav-text">WEP OPEN认证过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WEP-PSK认证过程"><span class="nav-text">WEP PSK认证过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WEP共享密钥认证过程"><span class="nav-text">WEP共享密钥认证过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#加密"><span class="nav-text">加密</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#加密-1"><span class="nav-text">加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#open无加密网络"><span class="nav-text">open无加密网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WEP加密系统"><span class="nav-text">WEP加密系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#RC4算法"><span class="nav-text">RC4算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WPA安全系统"><span class="nav-text">WPA安全系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WPA1"><span class="nav-text">WPA1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WPA2"><span class="nav-text">WPA2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WPA企业连接过程"><span class="nav-text">WPA企业连接过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WPA-PSK"><span class="nav-text">WPA-PSK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#协商安全协议"><span class="nav-text">协商安全协议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#身份认证（WPA企业"><span class="nav-text">身份认证（WPA企业</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#密钥交换"><span class="nav-text">密钥交换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#PMK"><span class="nav-text">PMK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#密钥交换-1"><span class="nav-text">密钥交换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据加密和完整性"><span class="nav-text">数据加密和完整性</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

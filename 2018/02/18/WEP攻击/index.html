@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Kali,Tool,无线渗透,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="01-WEP共享密钥破解1.1-简介 WEP的安全问题 一发布就被发现存在安全隐患，已经被WPA/WPA2取代 因安全原因，大部分AP已不设置WEP，且针对WEP的攻击复杂（没有必要学？no） 但人员安全意识薄弱，仍存在使用WEP的现象，如火车站、家用路由器等，此外，有的企业因某些因素，不得不使用WEP   WEP加密流程">
+<meta name="keywords" content="Kali,Tool,无线渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WEP攻击">
+<meta property="og:url" content="http://21guns.top/2018/02/18/WEP攻击/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="01-WEP共享密钥破解1.1-简介 WEP的安全问题 一发布就被发现存在安全隐患，已经被WPA/WPA2取代 因安全原因，大部分AP已不设置WEP，且针对WEP的攻击复杂（没有必要学？no） 但人员安全意识薄弱，仍存在使用WEP的现象，如火车站、家用路由器等，此外，有的企业因某些因素，不得不使用WEP   WEP加密流程">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/53206916.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/98141407.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/59213738.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/34502255.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/28922540.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/23781071.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/74245642.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/73724415.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:updated_time" content="2019-02-18T12:01:26.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WEP攻击">
+<meta name="twitter:description" content="01-WEP共享密钥破解1.1-简介 WEP的安全问题 一发布就被发现存在安全隐患，已经被WPA/WPA2取代 因安全原因，大部分AP已不设置WEP，且针对WEP的攻击复杂（没有必要学？no） 但人员安全意识薄弱，仍存在使用WEP的现象，如火车站、家用路由器等，此外，有的企业因某些因素，不得不使用WEP   WEP加密流程">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-2/53206916.jpg?ynotemdtimestamp=1550490828873">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/18/WEP攻击/">
+
+
+
+
+
+  <title>WEP攻击 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/WEP攻击/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WEP攻击</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="01-WEP共享密钥破解"><a href="#01-WEP共享密钥破解" class="headerlink" title="01-WEP共享密钥破解"></a>01-WEP共享密钥破解</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1-简介"></a>1.1-简介</h2><ul>
+<li>WEP的安全问题<ul>
+<li>一发布就被发现存在安全隐患，已经被WPA/WPA2取代</li>
+<li>因安全原因，大部分AP已不设置WEP，且针对WEP的攻击复杂（没有必要学？no）</li>
+<li>但人员安全意识薄弱，仍存在使用WEP的现象，如火车站、家用路由器等，此外，有的企业因某些因素，不得不使用WEP</li>
+</ul>
+</li>
+<li>WEP加密流程<a id="more"></a><ul>
+<li>密钥和起始向量组合，通过加密算法，得到一个key的string，即密钥流</li>
+<li>key流再与数据流data流进行逐位二进制加密</li>
+</ul>
+</li>
+<li>WEP密码破解原理<ul>
+<li>起始向量IV是随机产生的，但并非完全随机</li>
+<li>每224个包可能出现一次IV重用（很大的概率重复出现）</li>
+<li>得到IV及密文，分析得共享密码<ul>
+<li>收集大量IV之后找出相同IV</li>
+<li>通过抓包得到密文</li>
+<li>二者进行比对，对大量数据进行计算分析，可以得出共享密码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>IV数量<ul>
+<li>收集的IV数量越多，破解的速度越快，精确度越高</li>
+<li>即使没有收集到足够的IV，也可以通过暴力破解的形式，但暴力破解效率低（主动针对WPA</li>
+<li>尽力收集足够多的IV，原则上，IV足够多的情况下，任何复杂程度的WEP密码都可以破解（即使采用512位密钥其他的还有64位、128位、256位、512位）</li>
+</ul>
+</li>
+<li>准备测试的AP<ul>
+<li>设置为WEP，认证类型为共享密钥（而非MAC绑定攻击中设置的开放系统）</li>
+<li>WEP密钥格式：<ul>
+<li>ASCII码：最长设置13个字符，来作为连接AP的无线密码<ul>
+<li>13字符，13字节，13x8=104位</li>
+<li>24位随机IV，104+24=128</li>
+<li>密钥类型：一般路由器支持64和128（256和512受美国加密某法律的限制，出口到中国的只有64和128</li>
+<li>若选择64位密钥，则最多设置5个字符，5x8+24=64位</li>
+<li>为了更安全，一般选择位数多的，即128位</li>
+</ul>
+</li>
+<li>十六进制：<ul>
+<li>最多26个字符</li>
+<li>因为16进制，所以2个字符一个字节，26个字符13字节，13x8=104位，同上……</li>
+<li>因为牵扯进制转换，故一般选择ASCII码的密钥格式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>设置之后，保存重启，使之生效</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-WEP认证相关"><a href="#1-2-WEP认证相关" class="headerlink" title="1.2-WEP认证相关"></a>1.2-WEP认证相关</h2><ul>
+<li><p>认证过程</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-2/53206916.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<ul>
+<li>STA发认证请求</li>
+<li>AP返回随机challenge消息</li>
+<li>STA使用PSK加密cha并发回给ap<ul>
+<li>PSK为pre share key，预设共享密钥（AP端和客户端都会有）</li>
+<li>传输的是加密的随机数，PSK不会出现在传输过程中</li>
+</ul>
+</li>
+<li>ap使用psk解密密文，获得cha并与原始cha对比，相同则验证成功，不同则失败</li>
+</ul>
+</li>
+<li><p>利用：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/98141407.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<ul>
+<li>在airodump抓包过程中，若恰好有新的客户端在认证，则可以抓到challenge的明文和经过密钥流加密后的密文</li>
+<li>明文和密文异或便可以得到原始的密钥流，keystream（由无线密码+IV组合，并加密后的密文，即这个密钥流也是一个密文</li>
+<li>airodump可以抓到这个认证过程，并自动保存到本地，.xor后缀的文件</li>
+<li>H可以利用这个密钥流来与AP进行认证（如WEP认证过程图），从而关联，进而进一步的攻击（因为这个密钥流是不变的，H也可以用于认证</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-一般流程"><a href="#1-3-一般流程" class="headerlink" title="1.3-一般流程"></a>1.3-一般流程</h2><ul>
+<li>前期准备阶段</li>
+<li>启用monitor模式</li>
+<li>启动抓包并保存抓包</li>
+<li>Deauthenticatiion抓取XOR文件</li>
+<li>利用XOR文件与AP建立连接</li>
+<li>执行ARP重放及Deauthenticatiion触发ARP数据包</li>
+<li>收集足够DATA后破解密码</li>
+</ul>
+<h3 id="（1）前期准备阶段"><a href="#（1）前期准备阶段" class="headerlink" title="（1）前期准备阶段"></a>（1）前期准备阶段</h3><ul>
+<li>（网卡启动等必须步骤</li>
+</ul>
+<h3 id="（2）启动monitor模式"><a href="#（2）启动monitor模式" class="headerlink" title="（2）启动monitor模式"></a>（2）启动monitor模式</h3><ul>
+<li>airmon-ng，</li>
+</ul>
+<h3 id="（3）启动抓包并保存抓包"><a href="#（3）启动抓包并保存抓包" class="headerlink" title="（3）启动抓包并保存抓包"></a>（3）启动抓包并保存抓包</h3><ul>
+<li>airodump-ng，</li>
+</ul>
+<h3 id="（4）Deauthentication抓取XOR文件"><a href="#（4）Deauthentication抓取XOR文件" class="headerlink" title="（4）Deauthentication抓取XOR文件"></a>（4）Deauthentication抓取XOR文件</h3><ul>
+<li><p>执行此步骤的目的：</p>
+<ul>
+<li>抓包时恰好有新STA进行身份认证，运气是没那么好的</li>
+<li>即使正好有其它的认证过程，但是抓包也不是面面俱到的，也可能遗漏这个认证包</li>
+<li>为了保证效率，手动将其断掉，再让其主动重连</li>
+</ul>
+</li>
+<li><p>H分别向AP和正常STA发送某请求，使二者暂时断开</p>
+</li>
+<li>因为无线的网络质量是不稳定的，所以客户端有这样的重连机制：一旦其与AP暂时断开（丢失几个包，其就会主动重新与AP进行认证、关联等操作，H就可以抓到</li>
+<li>与新STA加入AP的过程是一样的，同样可以获得xor文件</li>
+<li>aireplay-ng注入包：<code>aireplay-ng -0 1 -a MAC1 -c MAC2 wlan0mon</code></li>
+</ul>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/59213738.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<ul>
+<li>一个包足矣让其二者断开，若失败则尝试多发</li>
+<li>-0：断开SAT与AP的连接</li>
+</ul>
+<h3 id="（5）利用XOR文件与AP建立关联"><a href="#（5）利用XOR文件与AP建立关联" class="headerlink" title="（5）利用XOR文件与AP建立关联"></a>（5）利用XOR文件与AP建立关联</h3><ul>
+<li><p>aireplay-ng，注入包，以认证与关联AP</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -1 60 -e kifi -y wep-xx-xx-xx-xx-xx-xx.xor -a MAC1 -h MAC MAC2 wlan0mon</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><code>-1：fake authentication with AP</code>，利用抓获的xor文件进行关联操作（Attack mode中的选项）</p>
+</li>
+<li><p><code>60</code>：表示每60秒进行一次伪造认证，保证其处于持续认证状态</p>
+</li>
+<li><p><code>-e kifi</code>：指定无线的ESSID（<code>Fakeauth attack options</code>中的选项)</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-y</span><br></pre></td></tr></table></figure>
+<p>：指定上述已经抓获，保存到本地的xor文件</p>
+<ul>
+<li>此文件是关键</li>
+<li>（<code>Fakeauth attack options</code>中的选项)</li>
+</ul>
+</li>
+<li><p><code>-a</code>：AP的MAC地址（<code>Replay options:</code>）</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-h</span><br></pre></td></tr></table></figure>
+<p>：本机网卡的MAC地址</p>
+<ul>
+<li>(<code>Replay options:</code>)</li>
+<li>认证及后续的关联，必然需要二者的MAC地址</li>
+<li>原来wlan0，转为monitor模式，变为wlan0mon</li>
+<li>wlan0的MAC地址是6个字节的16进制数，wlan0mon是16个字节的16进制数（前6个不变，后10个随机</li>
+<li>在这-h，跟的是原来的6个字节，即16的前6</li>
+</ul>
+</li>
+<li><p>wlan0mon，便是本机的无线网卡</p>
+</li>
+</ul>
+</li>
+<li><p>执行后（是分为两个步骤的：认证和关联）</p>
+</li>
+</ul>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/34502255.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<h3 id="（6）执行ARP重放及Deauthenticatiion触发ARP数据包"><a href="#（6）执行ARP重放及Deauthenticatiion触发ARP数据包" class="headerlink" title="（6）执行ARP重放及Deauthenticatiion触发ARP数据包"></a>（6）执行ARP重放及Deauthenticatiion触发ARP数据包</h3><ul>
+<li><p>促使AP发送大量IV的</p>
+<ul>
+<li>需是大量的，少量的不足以分析出密钥来</li>
+<li>64位密钥，要至少20万以上IV</li>
+<li>128位，150万左右IV</li>
+<li>当然，若只有5万IV，也是有可能分析出的（需要的IV恰巧在里面），但是可能性很小，还是多抓IV，保证一定能分析出</li>
+<li>没有严格的数量限制，但是越多越好，分析的越准确、越块</li>
+</ul>
+</li>
+<li><p>判断IV数量（已经抓了多少）：airodump抓包时，可通过#data字段判断，因为IV就是数据帧的形式</p>
+</li>
+<li><p>如何产生大量IV值？</p>
+<ul>
+<li>用ARP重放（IP-MAC，与以太网中的ARP是同种东西）</li>
+<li>思想：向AP发送大量ARP，从大量ARP响应中得到IV</li>
+<li>但是H仅仅是与AP通过认证并建立了关联，其是不能向直接向AP发送ARP的</li>
+<li>发送ARP的工作，就要由正常STA来做，STA发送ARP，H端截获再发送至AP，AP的ARP响应发送至H（ARP发送阶段，H作为中间人截获过来，由它来发送</li>
+</ul>
+</li>
+<li><p>大体分为两步</p>
+<ul>
+<li><p>（一）H端启动ARP重放攻击</p>
+<ul>
+<li><p><code>aireplay-ng -3 -b MAC1 -h MAC2 wlan0mon</code></p>
+</li>
+<li><p>但是此时并没有可用的ARP请求（由正常STA提供）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/28922540.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>（二）打掉STA与AP的连接，其重新连接时，会产生ARP请求</p>
+<ul>
+<li>同获取XOR一样，同样是利用Deauthentication</li>
+<li><code>aireplay-ng -0 1 -a MAC1 -c MAC2 wlan0mon</code></li>
+</ul>
+</li>
+<li><p>此时arp重放攻击中，就得到了ARP请求，开始进行攻击</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/23781071.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+</li>
+<li><p>airodump-ng抓包处可以看到#data字段值在不断增加（即正在收集IV</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/74245642.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>留出时间，让其来进行IV的收集</p>
+</li>
+<li>也可以一边收集一边尝试破解<ul>
+<li>不必那么死板非要等IV到一个很大值，少量时也可以破解的，只不过可能性很小而已</li>
+<li>节约时间，提高效率</li>
+</ul>
+</li>
+</ul>
+<h3 id="（7）aircrack-ng破解密码"><a href="#（7）aircrack-ng破解密码" class="headerlink" title="（7）aircrack-ng破解密码"></a>（7）aircrack-ng破解密码</h3><ul>
+<li><p>破解密码是比较简单的，aircrack-ng</p>
+</li>
+<li><p><code>aircrack-ng xxx.cap</code>（后面跟cap即可，是airodump-ng抓包时保存到本地的</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/73724415.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<ul>
+<li>KEY FOUND：依次是十六进制和ASCII码的密码（1234567890123</li>
+</ul>
+</li>
+<li><p>aircrack-ng套件有三种破解思想</p>
+<ul>
+<li>通过ARP重放收集大量IV便是其中一种（STA向AP发送ARP，ARP响应中便是IV的重要来源）</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-4-补充"><a href="#1-4-补充" class="headerlink" title="1.4-补充"></a>1.4-补充</h2><h3 id="（1）fake-authentication"><a href="#（1）fake-authentication" class="headerlink" title="（1）fake authentication"></a>（1）fake authentication</h3><ul>
+<li><p>WEP破解全部需要首先伪造认证，以便与AP进行正常通信</p>
+</li>
+<li><p>是不产生ARP数据包</p>
+</li>
+<li><p><code>aireplay-ng -1 0 -e kifi -a &lt;AP MAC &gt; -h &lt;your MAC &gt; &lt;interface &gt;</code></p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -1 60 -o 1 -q 10 -e&lt;ESSID&gt; -a &lt;AP MAC &gt; -h &lt;your MAC &gt; &lt;interface &gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>每6000秒发送若authentication</li>
+<li>-o 1 每次身份认证只发一组认证数据包（默认是发送3组）</li>
+<li>-q 10 每10秒发keep-live帧</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）fake-authentication排错"><a href="#（2）fake-authentication排错" class="headerlink" title="（2）fake authentication排错"></a>（2）fake authentication排错</h3><ul>
+<li>某些AP验证客户端MAC地址OUI<ul>
+<li>即MAC的前三个字节，国际标准化组织分给各厂商的</li>
+<li>后三个字节是厂商自行分配给网卡的</li>
+</ul>
+</li>
+<li>也可能AP做了MAC地址过滤<ul>
+<li>MAC地址绑定攻击，伪造MAC</li>
+</ul>
+</li>
+<li>Denied （Code 1） is WPA in use<ul>
+<li>WPA/WPA2 不支持fake authentication</li>
+<li>只有WEP破解时会用到</li>
+</ul>
+</li>
+<li>-h指定本机网卡MAC地址时，粗心写错<ul>
+<li>使用真实Mac地址</li>
+</ul>
+</li>
+<li>本机与AP距离太远<ul>
+<li>物理靠近AP</li>
+<li>或使用天线扩大信号</li>
+</ul>
+</li>
+<li>侦听信道和AP工作信道必须是一致的，不一致也会失败</li>
+</ul>
+<h3 id="（3）deauthentication攻击"><a href="#（3）deauthentication攻击" class="headerlink" title="（3）deauthentication攻击"></a>（3）deauthentication攻击</h3><ul>
+<li><p>强制客户端与AP断开关联</p>
+<ul>
+<li>重连生成ARP请求，AP回应包含IV</li>
+<li>WPA重连过程会抓取四步握手过程</li>
+<li>无客户端情况下此攻击无效</li>
+</ul>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -0 0 -a &lt;ap的mac&gt; -c &lt;客户端的mac&gt; &lt;interface name&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>不指定-c参数时，没有指定具体的客户端<ul>
+<li>以广播攻击所有客户端</li>
+<li>但是有的客户端会拒绝广播形式的aireplay发出的数据包</li>
+<li>故不是所有的客户端都会受到攻击</li>
+</ul>
+</li>
+<li>0：不是不发包，而是无限次，即不停的发包</li>
+<li>每攻击发送128个包，64个给AP，64个给客户端</li>
+<li>物理足够接近被攻击者，即距离要小</li>
+</ul>
+</li>
+</ul>
+<h3 id="（4）deauthentication排错"><a href="#（4）deauthentication排错" class="headerlink" title="（4）deauthentication排错"></a>（4）deauthentication排错</h3><ul>
+<li>物理足够接受被攻击者（离得近一些</li>
+<li>与被攻击者使用相同无线标准b、n、g（模式不匹配可能会失败）</li>
+<li>客户端可能拒绝广播帧，建议指定客户端</li>
+</ul>
+<h3 id="（5）ARP重放"><a href="#（5）ARP重放" class="headerlink" title="（5）ARP重放"></a>（5）ARP重放</h3><ul>
+<li><p>侦听正常的ARP包并重放给AP</p>
+</li>
+<li><p>AP回包中包含大量弱IV</p>
+<ul>
+<li>弱IV，即重复出现的IV值</li>
+<li>有些厂商会自己采取措施，防止重复IV的出现</li>
+</ul>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aireplay-ng -3 -b &lt;ap的mac&gt; -h &lt;source的Mac&gt; &lt;interface name&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-h 合法客户端/供给者MAC</li>
+</ul>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airodump-ng data字段</span><br></pre></td></tr></table></figure>
+<ul>
+<li>64位密钥 ：25万</li>
+<li>128位密钥：150万</li>
+<li>不必死板追求某一值，IV数量少的时候，也会有一定几率破解成功</li>
+</ul>
+</li>
+</ul>
+<h3 id="（6）WEP破解"><a href="#（6）WEP破解" class="headerlink" title="（6）WEP破解"></a>（6）WEP破解</h3><ul>
+<li>airecrack-ng wep.cap</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kali/" rel="tag"># Kali</a>
+          
+            <a href="/tags/Tool/" rel="tag"># Tool</a>
+          
+            <a href="/tags/无线渗透/" rel="tag"># 无线渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/802-11标准/" rel="next" title="802.11标准">
+                <i class="fa fa-chevron-left"></i> 802.11标准
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/28/Web渗透-基础知识/" rel="prev" title="Web渗透-基础知识">
+                Web渗透-基础知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-WEP共享密钥破解"><span class="nav-text">01-WEP共享密钥破解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-简介"><span class="nav-text">1.1-简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-WEP认证相关"><span class="nav-text">1.2-WEP认证相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-一般流程"><span class="nav-text">1.3-一般流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）前期准备阶段"><span class="nav-text">（1）前期准备阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）启动monitor模式"><span class="nav-text">（2）启动monitor模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（3）启动抓包并保存抓包"><span class="nav-text">（3）启动抓包并保存抓包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（4）Deauthentication抓取XOR文件"><span class="nav-text">（4）Deauthentication抓取XOR文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（5）利用XOR文件与AP建立关联"><span class="nav-text">（5）利用XOR文件与AP建立关联</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（6）执行ARP重放及Deauthenticatiion触发ARP数据包"><span class="nav-text">（6）执行ARP重放及Deauthenticatiion触发ARP数据包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（7）aircrack-ng破解密码"><span class="nav-text">（7）aircrack-ng破解密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-补充"><span class="nav-text">1.4-补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）fake-authentication"><span class="nav-text">（1）fake authentication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）fake-authentication排错"><span class="nav-text">（2）fake authentication排错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（3）deauthentication攻击"><span class="nav-text">（3）deauthentication攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（4）deauthentication排错"><span class="nav-text">（4）deauthentication排错</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（5）ARP重放"><span class="nav-text">（5）ARP重放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（6）WEP破解"><span class="nav-text">（6）WEP破解</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

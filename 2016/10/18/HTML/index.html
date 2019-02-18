@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web前端,html," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HTML 介绍html文档的基本结构，html常用标签的使用，理解html语言制作网页基本原理。  01-html概述和基本结构 概述  HTML是 HyperText Mark-up Language 的首字母简写，意思是超文本标记语言 超文本指的是超链接，标记指的是标签，是一种用来制作网页的语言 这种语言由一个个的标签组成，用这种语言制作的文件保存的是一个文本文件，文件的扩展名为html或者h">
+<meta name="keywords" content="Web前端,html">
+<meta property="og:type" content="article">
+<meta property="og:title" content="HTML">
+<meta property="og:url" content="http://21guns.top/2016/10/18/HTML/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="HTML 介绍html文档的基本结构，html常用标签的使用，理解html语言制作网页基本原理。  01-html概述和基本结构 概述  HTML是 HyperText Mark-up Language 的首字母简写，意思是超文本标记语言 超文本指的是超链接，标记指的是标签，是一种用来制作网页的语言 这种语言由一个个的标签组成，用这种语言制作的文件保存的是一个文本文件，文件的扩展名为html或者h">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T09:22:13.154Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="HTML">
+<meta name="twitter:description" content="HTML 介绍html文档的基本结构，html常用标签的使用，理解html语言制作网页基本原理。  01-html概述和基本结构 概述  HTML是 HyperText Mark-up Language 的首字母简写，意思是超文本标记语言 超文本指的是超链接，标记指的是标签，是一种用来制作网页的语言 这种语言由一个个的标签组成，用这种语言制作的文件保存的是一个文本文件，文件的扩展名为html或者h">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2016/10/18/HTML/"/>
+
+
+
+
+
+  <title>HTML | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2016/10/18/HTML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTML</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-18T17:19:08+08:00">
+                2016-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web前端/" itemprop="url" rel="index">
+                    <span itemprop="name">Web前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><blockquote>
+<p>介绍html文档的基本结构，html常用标签的使用，理解html语言制作网页基本原理。</p>
+</blockquote>
+<h2 id="01-html概述和基本结构"><a href="#01-html概述和基本结构" class="headerlink" title="01-html概述和基本结构"></a>01-html概述和基本结构</h2><ul>
+<li><p>概述</p>
+<ul>
+<li>HTML是 HyperText Mark-up Language 的首字母简写，意思是超文本标记语言</li>
+<li>超文本指的是超链接，标记指的是标签，是一种用来制作网页的语言</li>
+<li>这种语言由一个个的标签组成，用这种语言制作的文件保存的是一个文本文件，文件的扩展名为html或者htm</li>
+<li>一个html文件就是一个网页，html文件用编辑器打开显示的是文本，可以用文本的方式编辑它<a id="more"></a></li>
+<li>如果用浏览器打开，浏览器会按照标签描述内容将文件渲染成网页，显示的网页可以从一个网页链接跳转到另外一个网页</li>
+</ul>
+</li>
+<li><p>基本结构</p>
+<ul>
+<li><p>一个html的基本结构如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">    &lt;head&gt;            </span><br><span class="line">        &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">        &lt;title&gt;网页标题&lt;/title&gt;</span><br><span class="line">    &lt;/head&gt;</span><br><span class="line">    &lt;body&gt;</span><br><span class="line">          网页显示内容</span><br><span class="line">    &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第一行是文档声明，第二行“”标签和最后一行“”定义html文档的整体</p>
+</li>
+<li><p>“”标签中的‘lang=“en”’定义网页的语言为英文，定义成中文是’lang=”zh-CN”‘,不定义也没什么影响，它一般作为分析统计用。 “<head><meta name="generator" content="Hexo 3.8.0">”标签和“</head><body>”标签是它的第一层子元素</body></p>
+</li>
+<li><p>“<head><meta name="generator" content="Hexo 3.8.0">”标签里面负责对网页进行一些设置以及定义标题，设置包括定义网页的编码格式，外链css样式文件和javascript文件等，设置的内容不会显示在网页上，标题的内容会显示在标题栏</head></p>
+</li>
+<li><p>“<body>”内编写网页上显示的内容。</body></p>
+</li>
+</ul>
+</li>
+<li><p>文档类型</p>
+<ul>
+<li><p>目前常用的两种文档类型是xhtml 1.0和html5</p>
+<ul>
+<li><p>xhtml 1.0 是html5之前的一个常用的版本，目前许多网站仍然使用此版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</span><br><span class="line">&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html;charset=UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt; xhtml 1.0 文档类型 &lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>pc端可以使用xhtml 1.0，也可以使用html5，html5是向下兼容的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt; html5文档类型 &lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>两种文档的区别</p>
+<ul>
+<li>文档声明和编码声明</li>
+<li>html5新增了标签元素以及元素属性</li>
+</ul>
+</li>
+<li><p>文档规范</p>
+<blockquote>
+<p>xhtml制定了文档的编写规范，html5可部分遵守，也可全部遵守，看开发要求</p>
+</blockquote>
+<ul>
+<li>所有的标签必须小写</li>
+<li>所有的属性必须用双引号括起来</li>
+<li>所有标签必须闭合</li>
+<li>img必须要加alt属性(对图片的描述)</li>
+</ul>
+</li>
+<li><p>html注释：</p>
+<ul>
+<li><p>html文档代码中可以插入注释，注释是对代码的说明和解释，注释的内容不会显示在页面上</p>
+</li>
+<li><p>html代码中插入注释的方法是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 这是一段注释  --&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>标签特点</p>
+<ul>
+<li><p>html的标签大部分是成对出现的,少量是单个出现的，特定标签之间可以相互嵌套，嵌套就是指一个标签里面可以包含一个或多个其他的标签，包含的标签和父标签可以是同类型的，也可以是不同类型的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- 成对出现的标签  --&gt;</span><br><span class="line">&lt;body&gt;......&lt;/body&gt;</span><br><span class="line">&lt;p&gt;......&lt;/p&gt;</span><br><span class="line">&lt;div&gt;......&lt;/div&gt;</span><br><span class="line">&lt;b&gt;......&lt;/b&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 单个出现的标签  --&gt;</span><br><span class="line">&lt;br /&gt;</span><br><span class="line">&lt;img src=&quot;...&quot; /&gt;</span><br><span class="line">&lt;input type=&quot;...&quot; /&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- 标签之间的嵌套  --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">    &lt;span&gt;...&lt;/span&gt;</span><br><span class="line">    &lt;a href=&quot;...&quot;&gt;...&lt;/a&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">      &lt;h3&gt;...&lt;/h3&gt;</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">              &lt;span&gt;...&lt;/span&gt;</span><br><span class="line">              &lt;p&gt;...&lt;/p&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="02-html标题"><a href="#02-html标题" class="headerlink" title="02-html标题"></a>02-html标题</h2><ul>
+<li><p>通过<code>&lt;h1&gt;、&lt;h2&gt;、&lt;h3&gt;、&lt;h4&gt;、&lt;h5&gt;、&lt;h6&gt;</code>,标签可以在网页上定义6种级别的标题。6种级别的标题表示文档的6级目录层级关系，比如说： <code>&lt;h1&gt;</code>用作主标题（最重要的），其后是 <code>&lt;h2&gt;</code>（次重要的），再其次是 <code>&lt;h3&gt;</code>，以此类推。搜索引擎会使用标题将网页的结构和内容编制索引，所以网页上使用标题是很重要的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;这是一级标题&lt;/h1&gt;</span><br><span class="line">&lt;h2&gt;这是二级标题&lt;/h2&gt;</span><br><span class="line">&lt;h3&gt;这是三级标题&lt;/h3&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="03-html段落、换行与字符实体"><a href="#03-html段落、换行与字符实体" class="headerlink" title="03-html段落、换行与字符实体"></a>03-html段落、换行与字符实体</h2><ul>
+<li><p>html段落</p>
+<ul>
+<li><p>标签定义一个文本段落，一个段落含有默认的上下间距，段落之间会用这种默认间距隔开</p>
+</li>
+<li><p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;段落&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;p&gt;HTML是 HyperText Mark-up Language 的首字母简写，意思是超文本标记语言，超</span><br><span class="line">    文本指的是超链接，标记指的是标签，是一种用来制作网页的语言，这种语言由一个个的</span><br><span class="line">    标签组成，用这种语言制作的文件保存的是一个文本文件，文件的扩展名为html或者htm。</span><br><span class="line">    &lt;/p&gt;</span><br><span class="line"></span><br><span class="line">    &lt;p&gt;一个html文件就是一个网页，html文件用编辑器打开显示的是文本，可以用文本的方</span><br><span class="line">    式编辑它，如果用浏览器打开，浏览器会按照标签描述内容将文件渲染成网页，显示的网</span><br><span class="line">    页可以从一个网页链接跳转到另外一个网页。&lt;/p&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>html换行</p>
+<ul>
+<li><p>代码中成段的文字，直接在代码中回车换行，在渲染成网页时候不认这种换行，如果真想换行，可以在代码的段落中插入<br>来强制换行</p>
+</li>
+<li><p>代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">一个html文件就是一个网页，html文件用编辑器打开显示的是文本，可以用&lt;br /&gt;</span><br><span class="line">文本的方式编辑它，如果用浏览器打开，浏览器会按照标签描述内容将文件&lt;br /&gt;</span><br><span class="line">渲染成网页，显示的网页可以从一个网页链接跳转到另外一个网页。</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>字符实体</p>
+<ul>
+<li><p>代码中成段的文字，如果文字间想空多个空格，在代码中空多个空格，在渲染成网页时只会显示一个空格，如果想显示多个空格，可以使用空格的字符实体,</p>
+</li>
+<li><p>代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--  在段落前想缩进两个文字的空格，使用空格的字符实体：&amp;nbsp;   --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&amp;nbsp;&amp;nbsp;一个html文件就是一个网页，html文件用编辑器打开显示的是文本，可以用&lt;br /&gt;</span><br><span class="line">文本的方式编辑它，如果用浏览器打开，浏览器会按照标签描述内容将文件&lt;br /&gt;</span><br><span class="line">渲染成网页，显示的网页可以从一个网页链接跳转到另外一个网页。&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在网页上显示 “&lt;” 和 “&gt;” 会误认为是标签，想在网页上显示“&lt;”和“&gt;”可以使用它们的字符实体</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- “&lt;” 和 “&gt;” 的字符实体为 &amp;lt; 和 &amp;gt;  --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">    3 &amp;lt; 5 &lt;br&gt;</span><br><span class="line">    10 &amp;gt; 5</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="04-html块、含样式的标签"><a href="#04-html块、含样式的标签" class="headerlink" title="04-html块、含样式的标签"></a>04-html块、含样式的标签</h2><ul>
+<li>html块<ul>
+<li>div标签 块元素，表示一块内容，没有具体的语义。</li>
+<li>span标签 行内元素，表示一行中的一小段内容，没有具体的语义。</li>
+</ul>
+</li>
+<li>含样式和语义的标签<ul>
+<li>em标签 行内元素，表示语气中的强调词</li>
+<li>i标签 行内元素，原本没有语义，w3c强加了语义，表示专业词汇</li>
+<li>b标签 行内元素，原本没有语义，w3c强加了语义，表示文档中的关键字或者产品名</li>
+<li>strong标签 行内元素，表示非常重要的内容</li>
+</ul>
+</li>
+<li>语义化的标签<ul>
+<li>语义化的标签，就是在布局的时候多使用语义化的标签，搜索引擎在爬网的时候能认识这些标签，理解文档的结构，方便网站的收录。</li>
+<li>比如：h1标签是表示标题，p标签是表示段落，ul、li标签是表示列表，a标签表示链接，dl、dt、dd表示定义列表等</li>
+<li>语义化的标签不多。</li>
+</ul>
+</li>
+</ul>
+<h2 id="05-html图像、绝对路径和相对路径"><a href="#05-html图像、绝对路径和相对路径" class="headerlink" title="05-html图像、绝对路径和相对路径"></a>05-html图像、绝对路径和相对路径</h2><ul>
+<li>html图像<ul>
+<li>标签可以在网页上插入一张图片，它是独立使用的标签，通过“src”属性定义图片的地址，通过“alt”属性定义图片加载失败时显示的文字，以及对搜索引擎和盲人读屏软件的支持。</li>
+<li><code>&lt;img src=&quot;images/pic.jpg&quot; alt=&quot;产品图片&quot; /&gt;</code></li>
+</ul>
+</li>
+<li>绝对路径和相对路径<ul>
+<li>像网页上插入图片这种外部文件，需要定义文件的引用地址，引用外部文件还包括引用外部样式表，javascript等等，引用地址分为绝对地址和相对地址</li>
+<li>绝对地址：相对于磁盘的位置去定位文件的地址</li>
+<li>相对地址：相对于引用文件本身去定位被引用的文件地址</li>
+<li>绝对地址在整体文件迁移时会因为磁盘和顶层目录的改变而找不到文件，相对路径就没有这个问题。</li>
+<li>相对路径的定义技巧：<ul>
+<li>“ ./ ” 表示当前文件所在目录下，比如：“./pic.jpg” 表示当前目录下的pic.jpg的图片，这个使用时可以省略。</li>
+<li>“ ../ ” 表示当前文件所在目录下的上一级目录，比如：“../images/pic.jpg” 表示当前目录下的上一级目录下的images文件夹中的pic.jpg的图片。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="06-html链接"><a href="#06-html链接" class="headerlink" title="06-html链接"></a>06-html链接</h2><ul>
+<li><p>标签可以在网页上定义一个链接地址，通过src属性定义跳转的地址，通过title属性定义鼠标悬停时弹出的提示文字框</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;#&quot;&gt;&lt;/a&gt; &lt;!--  # 表示链接到页面顶部   --&gt;</span><br><span class="line">&lt;a href=&quot;http://www.itcast.cn/&quot; title=&quot;跳转的传智播客网站&quot;&gt;传智播客&lt;/a&gt;</span><br><span class="line">&lt;a href=&quot;2.html&quot;&gt;测试页面2&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>定义页面内滚动跳转</p>
+<ul>
+<li><p>页面内定义了“id”或者“name”的元素，可以通过a标签链接到它的页面滚动位置</p>
+</li>
+<li><p>前提是页面要足够高，有滚动条，且元素不能在页面顶部，否则页面不会滚动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;#mao1&quot;&gt;标题一&lt;/a&gt;</span><br><span class="line">......</span><br><span class="line">......</span><br><span class="line">&lt;h3 id=&quot;mao1&quot;&gt;跳转到的标题&lt;/h3&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="07-html列表"><a href="#07-html列表" class="headerlink" title="07-html列表"></a>07-html列表</h2><ul>
+<li><p>有序列表</p>
+<ul>
+<li><p>在网页上定义一个有编号的内容列表可以用</p>
+<ol>
+<li><p>、</p>
+</li>
+<li><p>配合使用来实现</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ol&gt;</span><br><span class="line">    &lt;li&gt;列表文字一&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;列表文字二&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;列表文字三&lt;/li&gt;</span><br><span class="line">&lt;/ol&gt;</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>在网页上生成的列表，每条项目上会按1、2、3编号，有序列表在实际开发中较少使用。</li>
+</ul>
+<ul>
+<li><p>无序列表</p>
+<ul>
+<li><p>在网页上定义一个无编号的内容列表可以用</p>
+<ul>
+<li><p>、</p>
+</li>
+<li><p>配合使用来实现</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    &lt;li&gt;列表文字一&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;列表文字二&lt;/li&gt;</span><br><span class="line">    &lt;li&gt;列表文字三&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+</code></pre><ul>
+<li>在网页上生成的列表，每条项目上会有一个小图标，这个小图标在不同浏览器上显示效果不同，所以一般会用样式去掉默认的小图标，如果需要图标，可以用样式自定义图标，从而达到在不同浏览器上显示的效果相同,实际开发中一般用这种列表</li>
+</ul>
+<ul>
+<li><p>定义列表</p>
+<ul>
+<li><p>定义列表通常用于术语的定义。</p>
+<ul>
+<li><p>标签定义术语的题目。</p>
+<p>标签是术语的解释。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>一个</li>
+</ul>
+<ul>
+<li><p>eg:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;h3&gt;前端三大块&lt;/h3&gt;</span><br><span class="line">&lt;dl&gt;</span><br><span class="line">    &lt;dt&gt;html&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;负责页面的结构&lt;/dd&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dt&gt;css&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;负责页面的表现&lt;/dd&gt;</span><br><span class="line"></span><br><span class="line">    &lt;dt&gt;javascript&lt;/dt&gt;</span><br><span class="line">    &lt;dd&gt;负责页面的行为&lt;/dd&gt;</span><br><span class="line"></span><br><span class="line">&lt;/dl&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="08-html表格及传统布局"><a href="#08-html表格及传统布局" class="headerlink" title="08-html表格及传统布局"></a>08-html表格及传统布局</h2><ul>
+<li>table常用标签<ul>
+<li>table标签：声明一个表格</li>
+<li>tr标签：定义表格中的一行</li>
+<li>td和th标签：定义一行中的一个单元格，td代表普通单元格，th表示表头单元格</li>
+</ul>
+</li>
+<li>table常用属性<ul>
+<li>border 定义表格的边框</li>
+<li>cellpadding 定义单元格内内容与边框的距离</li>
+<li>cellspacing 定义单元格与单元格之间的距离</li>
+<li>align 设置单元格中内容的水平对齐方式,设置值有：left | center | right</li>
+<li>valign 设置单元格中内容的垂直对齐方式 top | middle | bottom</li>
+<li>colspan 设置单元格水平合并</li>
+<li>rowspan 设置单元格垂直合并</li>
+</ul>
+</li>
+<li>传统布局<ul>
+<li>传统的布局方式就是使用table来做整体页面的布局，布局的技巧归纳为如下几点</li>
+<li>定义表格宽高，将border、cellpadding、cellspacing全部设置为0</li>
+<li>单元格里面嵌套表格</li>
+<li>单元格中的元素和嵌套的表格用align和valign设置对齐方式</li>
+<li>通过属性或者css样式设置单元格中元素的样式</li>
+</ul>
+</li>
+<li>传统布局目前应用<ul>
+<li>快速制作用于演示的html页面</li>
+<li>商业推广EDM制作(广告邮件)</li>
+</ul>
+</li>
+<li>表格常用样式属性<ul>
+<li>border-collapse:collapse 设置边框合并，制作一像素宽的边线的表格</li>
+</ul>
+</li>
+</ul>
+<h2 id="09-html表单"><a href="#09-html表单" class="headerlink" title="09-html表单"></a>09-html表单</h2><ul>
+<li><p>表单用于搜集不同类型的用户输入，表单由不同类型的标签组成，实现一个特定功能的表单区域（比如：注册）</p>
+</li>
+<li><p>首先应该用<form>标签来定义表单区域整体，在此标签中再使用不同的表单控件来实现不同类型的信息输入</form></p>
+</li>
+<li><p>具体实现及注释可参照以下伪代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- form定义一个表单区域,action属性定义表单数据提交的地址，</span><br><span class="line">method属性定义提交的方式。   --&gt;</span><br><span class="line">&lt;form action=&quot;http://www...&quot; method=&quot;get&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- label标签定义表单控件的文字标注，input类型为text定义了</span><br><span class="line">一个单行文本输入框  --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;label&gt;姓名：&lt;/label&gt;&lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- input类型为password定义了一个密码输入框  --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;label&gt;密码：&lt;/label&gt;&lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- input类型为radio定义了单选框  --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;label&gt;性别：&lt;/label&gt;</span><br><span class="line">&lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;0&quot; /&gt; 男</span><br><span class="line">&lt;input type=&quot;radio&quot; name=&quot;gender&quot; value=&quot;1&quot; /&gt; 女</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- input类型为checkbox定义了单选框  --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;label&gt;爱好：&lt;/label&gt;</span><br><span class="line">&lt;input type=&quot;checkbox&quot; name=&quot;like&quot; value=&quot;sing&quot; /&gt; 唱歌</span><br><span class="line">&lt;input type=&quot;checkbox&quot; name=&quot;like&quot; value=&quot;run&quot; /&gt; 跑步</span><br><span class="line">&lt;input type=&quot;checkbox&quot; name=&quot;like&quot; value=&quot;swiming&quot; /&gt; 游泳</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- input类型为file定义上传照片或文件等资源  --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;label&gt;照片：&lt;/label&gt;</span><br><span class="line">&lt;input type=&quot;file&quot; name=&quot;person_pic&quot;&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- textarea定义多行文本输入  --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;label&gt;个人描述：&lt;/label&gt;</span><br><span class="line">&lt;textarea name=&quot;about&quot;&gt;&lt;/textarea&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- select定义下拉列表选择  --&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;label&gt;籍贯：&lt;/label&gt;</span><br><span class="line">&lt;select name=&quot;site&quot;&gt;</span><br><span class="line">    &lt;option value=&quot;0&quot;&gt;北京&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;1&quot;&gt;上海&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;2&quot;&gt;广州&lt;/option&gt;</span><br><span class="line">    &lt;option value=&quot;3&quot;&gt;深圳&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- input类型为submit定义提交按钮  </span><br><span class="line">     还可以用图片控件代替submit按钮提交，一般会导致提交两次，不建议使用。如：</span><br><span class="line">     &lt;input type=&quot;image&quot; src=&quot;xxx.gif&quot;&gt;</span><br><span class="line">--&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; name=&quot;&quot; value=&quot;提交&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;!-- input类型为reset定义重置按钮  --&gt;</span><br><span class="line">&lt;input type=&quot;reset&quot; name=&quot;&quot; value=&quot;重置&quot;&gt;</span><br><span class="line">&lt;/p&gt;</span><br><span class="line"></span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="10-html内嵌框架"><a href="#10-html内嵌框架" class="headerlink" title="10-html内嵌框架"></a>10-html内嵌框架</h2><ul>
+<li><p><iframe>标签会创建包含另外一个html文件的内联框架（即行内框架），src属性来定义另一个html文件的引用地址，frameborder属性定义边框，scrolling属性定义是否有滚动条</iframe></p>
+</li>
+<li><iframe src="http://www..." frameborder="0" scrolling="no"></iframe>
+</li>
+<li><p>a标签的target属性可以将链接到的页面直接显示在当前页面的iframe中</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;a href=&quot;01.html&quot; target=&quot;myframe&quot;&gt;页面一&lt;/a&gt;</span><br><span class="line">&lt;a href=&quot;02.html&quot; target=&quot;myframe&quot;&gt;页面二&lt;/a&gt;</span><br><span class="line">&lt;a href=&quot;03.html&quot; target=&quot;myframe&quot;&gt;页面三&lt;/a&gt;</span><br><span class="line">&lt;iframe src=&quot;01.html&quot; frameborder=&quot;0&quot; scrolling=&quot;no&quot; name=&quot;myframe&quot;&gt;&lt;/iframe&gt;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web前端/" rel="tag"># Web前端</a>
+          
+            <a href="/tags/html/" rel="tag"># html</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/18/JavaScript/" rel="next" title="JavaScript">
+                <i class="fa fa-chevron-left"></i> JavaScript
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/18/CSS/" rel="prev" title="CSS">
+                CSS <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Ry1ynn" />
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTML"><span class="nav-text">HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-html概述和基本结构"><span class="nav-text">01-html概述和基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-html标题"><span class="nav-text">02-html标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-html段落、换行与字符实体"><span class="nav-text">03-html段落、换行与字符实体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-html块、含样式的标签"><span class="nav-text">04-html块、含样式的标签</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-html图像、绝对路径和相对路径"><span class="nav-text">05-html图像、绝对路径和相对路径</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-html链接"><span class="nav-text">06-html链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#07-html列表"><span class="nav-text">07-html列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#08-html表格及传统布局"><span class="nav-text">08-html表格及传统布局</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#09-html表单"><span class="nav-text">09-html表单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-html内嵌框架"><span class="nav-text">10-html内嵌框架</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5"  zIndex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

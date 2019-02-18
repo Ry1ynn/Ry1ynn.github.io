@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="无线安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="EVIL TWIN AP / ROGUE AP01-简介 流氓AP、恶意AP问题 蹭网（破解无线密码进入他人网络）与被蹭网（故意设置恶意AP，诱使受害者连接） 北上广20%的公共场所无限网络是伪造的（客户端流量流经AP，可进行嗅探等） 用于制作恶意AP的工具主要有两个：airbase-ng和hostapd  02-恶意AP攻击原理">
+<meta name="keywords" content="无线安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="恶意AP相关">
+<meta property="og:url" content="http://21guns.top/2019/02/18/恶意AP相关/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="EVIL TWIN AP / ROGUE AP01-简介 流氓AP、恶意AP问题 蹭网（破解无线密码进入他人网络）与被蹭网（故意设置恶意AP，诱使受害者连接） 北上广20%的公共场所无限网络是伪造的（客户端流量流经AP，可进行嗅探等） 用于制作恶意AP的工具主要有两个：airbase-ng和hostapd  02-恶意AP攻击原理">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-11/44044821.jpg?ynotemdtimestamp=1550490896649">
+<meta property="og:updated_time" content="2019-02-18T12:01:35.500Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="恶意AP相关">
+<meta name="twitter:description" content="EVIL TWIN AP / ROGUE AP01-简介 流氓AP、恶意AP问题 蹭网（破解无线密码进入他人网络）与被蹭网（故意设置恶意AP，诱使受害者连接） 北上广20%的公共场所无限网络是伪造的（客户端流量流经AP，可进行嗅探等） 用于制作恶意AP的工具主要有两个：airbase-ng和hostapd  02-恶意AP攻击原理">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-11/44044821.jpg?ynotemdtimestamp=1550490896649">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/02/18/恶意AP相关/">
+
+
+
+
+
+  <title>恶意AP相关 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/02/18/恶意AP相关/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">恶意AP相关</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-18T19:55:04+08:00">
+                2019-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="EVIL-TWIN-AP-ROGUE-AP"><a href="#EVIL-TWIN-AP-ROGUE-AP" class="headerlink" title="EVIL TWIN AP / ROGUE AP"></a>EVIL TWIN AP / ROGUE AP</h1><h2 id="01-简介"><a href="#01-简介" class="headerlink" title="01-简介"></a>01-简介</h2><ul>
+<li>流氓AP、恶意AP问题</li>
+<li>蹭网（破解无线密码进入他人网络）与被蹭网（故意设置恶意AP，诱使受害者连接）</li>
+<li>北上广20%的公共场所无限网络是伪造的（客户端流量流经AP，可进行嗅探等）</li>
+<li>用于制作恶意AP的工具主要有两个：airbase-ng和hostapd</li>
+</ul>
+<h2 id="02-恶意AP攻击原理"><a href="#02-恶意AP攻击原理" class="headerlink" title="02-恶意AP攻击原理"></a>02-恶意AP攻击原理<a id="more"></a></h2><ul>
+<li><p>airudump-ng发现周围存在的AP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CH  8 ][ Elapsed: 3 mins ][ 2018-02-10 21:22 ][ paused output</span><br><span class="line"></span><br><span class="line">BSSID              PWR  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID</span><br><span class="line">C4:A8:1D:E1:65:F8  -46       51        9    0   1  54e  WPA2 CCMP   PSK  D-Link_DIR-612</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>airbase-ng --essid &quot;D-Link-free&quot; -c 1 wlan0mon</code>，伪造AP</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# airbase-ng --essid &quot;D-Link-free&quot; -c 1 wlan0mon</span><br><span class="line">21:25:11  Created tap interface at0</span><br><span class="line">21:25:11  Trying to set MTU on at0 to 1500</span><br><span class="line">21:25:11  Trying to set MTU on wlan0mon to 1800</span><br><span class="line">21:25:13  Access Point with BSSID 6C:FD:B9:B2:9B:9C started.</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>ifconfig -a</code>，发现出现一个新网卡at0</li>
+<li>可以做成名称相似的，也可以一致的（更有欺骗性，但方便演示时区分，还是不要一致的好）</li>
+<li>伪造的AP的MAC地址即网卡MAC地址（前6个16进制字节）</li>
+<li>-a参数也可以指定其MAC地址为真实AP的（不指定，默认的话时网卡的MAC地址</li>
+<li>airodump-ng也会发现伪造出的AP</li>
+<li>airbase伪造AP时没有添加其它加密相关的参数，故默认时OPEN（随意连接不需要密码，也符合free）</li>
+<li>若伪造的AP的ESSID、MAC地址、信道、加密方式均与真实的一样，再将其信号放至最大，完全可以以假乱真</li>
+</ul>
+</li>
+<li><p>手机连接伪造的AP</p>
+<ul>
+<li><p>（手机端显示当前WiFi无互联网连接，但伪造的AP端发现客户端已连接</p>
+<p><code>21:31:19 Client 70:F0:87:7F:2B:91 associated (unencrypted) to ESSID: &quot;D-Link-free&quot;</code></p>
+</li>
+<li><p>或者是手机端显示无法加入此网络，安卓模拟机试一下（安卓模拟器无法加入外部无线网络）</p>
+</li>
+<li><p>因为此步骤失败，故以下操作都只停留在理论层面，并未实践，可能是kali并未进行dhcp服务器配置的原因，并未深究，用到时再查</p>
+</li>
+</ul>
+</li>
+<li><p>kali上安装网卡桥接的工具包</p>
+<ul>
+<li><code>apt-get install bridge-utils</code></li>
+<li>实现无线网卡wlan0与有线网卡eth0的连接</li>
+<li>伪造的AP是由无线网卡创建的，其连同接入的客户端都属于网络1；而有线网卡eth0与其它主机都是属于网络2的；桥接之后，可以实现两个网络的连接</li>
+<li>kali虚拟机设置的网络模式为桥接，即连接到家用路由器，其与物理机和正常AP是在一个网络的</li>
+<li>若连入伪造AP的客户端即手机，可以打开路由器的web管理页面192.168.0.1，则两个网络桥接成功</li>
+</ul>
+</li>
+<li><p>有线网卡与无线网卡的连接</p>
+<ul>
+<li><p><code>brctl addbr 网桥名称</code>（建立新的网桥）</p>
+</li>
+<li><p><code>brctl addif 网桥名称 eth0</code>（eth0为接口名称，为网桥增加接口）</p>
+</li>
+<li><p><code>brctl addif 网桥名称 at0</code>（at0为接口名称，为网桥增加成员接口）</p>
+</li>
+<li><p><code>ifconfig eth0 0.0.0.0 up</code>（启动成员接口）</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig at0 0.0.0.0 up</span><br></pre></td></tr></table></figure>
+<p>（启动成员接口）</p>
+<ul>
+<li>eth0和at0都是网桥的成员接口，不能有IP地址，故设置为0</li>
+</ul>
+</li>
+<li><p><code>ifconfig 网桥名称 192.168.0.4 up</code>（这是原来eth0的IP，为网桥分配IP地址并启动）</p>
+</li>
+<li><p><code>route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.0.4</code>（添加缺省路由，网络和掩码均为0，网管为网桥的IP地址）</p>
+</li>
+</ul>
+</li>
+<li><p>开启IP转发功能，即路由功能</p>
+<ul>
+<li><code>/prof/sys/net/ipv4/ip_forward</code>修改其内容，将0改为1</li>
+</ul>
+</li>
+<li><p>若客户端连接至恶意AP，可进行DNS欺骗</p>
+<ul>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dnspoof -i bridge -f host</span><br></pre></td></tr></table></figure>
+<ul>
+<li>-i，指定网桥</li>
+<li>-f，指定用于欺骗的host文件</li>
+<li><code>/usr/share/dsniff/dnsspoof.hosts</code>，为host文件示例</li>
+</ul>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apachet2ctl start</span><br></pre></td></tr></table></figure>
+<ul>
+<li>启动apache服务器</li>
+<li>DNS欺骗后，将正常网址IP解析到本机</li>
+<li>可进行钓鱼攻击</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>因为手机连接恶意AP失败，故都只停留在理论层面，并未实践，攻击原理便是如此</p>
+</li>
+</ul>
+<h2 id="03-3vilTwinAttacker工具"><a href="#03-3vilTwinAttacker工具" class="headerlink" title="03-3vilTwinAttacker工具"></a>03-3vilTwinAttacker工具</h2><ul>
+<li><p>简介</p>
+<ul>
+<li>图形化工具，集成其它工具，方便用户使用</li>
+<li>自身并没有什么创新，而是集成了已有的各种工具（hostapd、dhcp等）</li>
+<li>还有其它工具如WiFi-Pumpkin（github上）</li>
+</ul>
+</li>
+<li><p>下载安装</p>
+<ul>
+<li><p>官网下载或git clone</p>
+<ul>
+<li>官网：<code>http://seclist.us/3viltwinattacker-v0-6-7-released-framework-for-rogue-wi-fi-access-point-attack.html</code></li>
+<li><code>git clone https://github.com/wi-fi-analyzer/3vilTwinAttacker.git</code></li>
+<li>实测官网下载解压后的成功，github上的或多或少存在问题，启动工具会失败</li>
+</ul>
+</li>
+<li><p><code>cd 3vilTwinAttacker</code></p>
+</li>
+<li><p><code>./install.sh --install</code>（uninstall卸载）</p>
+</li>
+<li><p>需要安装dhcp</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">install DHCP in Debian-based</span><br><span class="line">Ubuntu</span><br><span class="line">$ sudo apt-get install isc-dhcp-server</span><br><span class="line">Kali linux</span><br><span class="line">$ echo &quot;deb http://ftp.de.debian.org/debian wheezy main &quot; &gt;&gt; /etc/apt/sources.list</span><br><span class="line">$ apt-get update &amp;&amp; apt-get install isc-dhcp-server</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>使用</p>
+<ul>
+<li><p>直接<code>3vilTwinAttacker</code>启动（启动前先保证isc-dhcp-server是启动状态）</p>
+</li>
+<li><p>输入网关、网络名、使用的无线网卡，后启动AP</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-11/44044821.jpg?ynotemdtimestamp=1550490896649" alt="img"></p>
+</li>
+<li><p>创建恶意AP成功</p>
+</li>
+</ul>
+</li>
+<li><p>其它</p>
+<ul>
+<li>工具其它许多功能有待学习（如iptables配置、对STA抓包等）</li>
+<li>但因后面手机端总是连接此AP失败，无法进行后续对客户端攻击演示，暂搁置</li>
+<li>可能是iPhone手机有针对恶意AP的保护机制？日后换安卓机测试</li>
+<li>从网上找其它搭建钓鱼WiFi的文章，来实践一下</li>
+<li>其它类型工具还有WiFi-Pumpkin（github上）</li>
+</ul>
+</li>
+</ul>
+<h2 id="04-实例搭建恶意AP"><a href="#04-实例搭建恶意AP" class="headerlink" title="04-实例搭建恶意AP"></a>04-实例搭建恶意AP</h2><ul>
+<li>相关链接：<ul>
+<li><code>http://www.hackdig.com/07/hack-47472.htm</code></li>
+<li><code>https://zhuanlan.zhihu.com/p/27386429</code></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/无线安全/" rel="tag"># 无线安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/18/WPS攻击/" rel="next" title="WPS攻击">
+                <i class="fa fa-chevron-left"></i> WPS攻击
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/18/其它无线攻击-工具/" rel="prev" title="其它无线攻击&工具">
+                其它无线攻击&工具 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#EVIL-TWIN-AP-ROGUE-AP"><span class="nav-text">EVIL TWIN AP / ROGUE AP</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-简介"><span class="nav-text">01-简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-恶意AP攻击原理"><span class="nav-text">02-恶意AP攻击原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-3vilTwinAttacker工具"><span class="nav-text">03-3vilTwinAttacker工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-实例搭建恶意AP"><span class="nav-text">04-实例搭建恶意AP</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

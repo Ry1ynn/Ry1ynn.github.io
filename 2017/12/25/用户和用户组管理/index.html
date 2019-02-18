@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="用户和用户组管理用户配置文件 简介 Linux中主要通过用户配置文件来查看和修改用户信息 服务器安全性能要求越高，越需要建立合理的用户权限等级制度和服务器操作规范   用户信息文件：/etc/passwd 每一行记录为一个用户">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用户和用户组管理">
+<meta property="og:url" content="http://21guns.top/2017/12/25/用户和用户组管理/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="用户和用户组管理用户配置文件 简介 Linux中主要通过用户配置文件来查看和修改用户信息 服务器安全性能要求越高，越需要建立合理的用户权限等级制度和服务器操作规范   用户信息文件：/etc/passwd 每一行记录为一个用户">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T08:33:16.419Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用户和用户组管理">
+<meta name="twitter:description" content="用户和用户组管理用户配置文件 简介 Linux中主要通过用户配置文件来查看和修改用户信息 服务器安全性能要求越高，越需要建立合理的用户权限等级制度和服务器操作规范   用户信息文件：/etc/passwd 每一行记录为一个用户">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/25/用户和用户组管理/">
+
+
+
+
+
+  <title>用户和用户组管理 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/25/用户和用户组管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用户和用户组管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:29:49+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="用户和用户组管理"><a href="#用户和用户组管理" class="headerlink" title="用户和用户组管理"></a>用户和用户组管理</h1><h2 id="用户配置文件"><a href="#用户配置文件" class="headerlink" title="用户配置文件"></a>用户配置文件</h2><ul>
+<li>简介<ul>
+<li>Linux中主要通过用户配置文件来查看和修改用户信息</li>
+<li>服务器安全性能要求越高，越需要建立合理的用户权限等级制度和服务器操作规范</li>
+</ul>
+</li>
+<li>用户信息文件：/etc/passwd<ul>
+<li>每一行记录为一个用户<a id="more"></a></li>
+<li>冒号分隔各字段</li>
+<li>七个字段<ul>
+<li>用户名<ul>
+<li>不可用系统不可接受的特殊字符</li>
+<li>尽量有含义，便于辨认</li>
+</ul>
+</li>
+<li>密码标志<ul>
+<li>早期Linux密码存放于此</li>
+<li>x-表示此用户存在密码；空-无密码<ul>
+<li>无密码登录仅可本机，不允许远程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用户ID，UID<ul>
+<li>0-超级用户</li>
+<li>1-499:系统用户（伪用户<ul>
+<li>系统调用相关用户</li>
+<li>不可登录</li>
+<li>不可删除</li>
+</ul>
+</li>
+<li>500-65535:普通用户</li>
+<li>将UID改为0即可把普通用户升级为超级用户</li>
+</ul>
+</li>
+<li>GID（用户初始组ID<ul>
+<li>初始组<ul>
+<li>用户一建立就默认加入的组</li>
+<li>初始组只有一个且必须有</li>
+<li>一般，此组名与用户名相同</li>
+</ul>
+</li>
+<li>附加组<ul>
+<li>用户可加入其他组，并拥有其权限</li>
+<li>附加组可有对个</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用户说明</li>
+<li>用户主目录（家目录<ul>
+<li>普通用户：/home/用户名/</li>
+<li>超级用户root：/root/</li>
+</ul>
+</li>
+<li>登录之后的shell<ul>
+<li>shell为Linux的命令解释器</li>
+<li>超级用户及普通用户需要登录：/bin/bash</li>
+<li>系统用户不可登录：/sbin/nologin</li>
+<li>暂时冻结用户，可更改其shell为nologin</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>影子文件：/etc/shadow<ul>
+<li>权限很小为：000，只有root可操作</li>
+<li>9个字段<ul>
+<li>1，用户名</li>
+<li>2，加密密码<ul>
+<li>加密算法升级为SHA512散列加密算法，比之前MD5先进，安全系数更高</li>
+<li>若密码位为“！！”或“*”，表示没有密码，不可以登录；可以用此方法临时禁用某用户</li>
+<li>root密码123，test密码也为123；加密后也不同，不会通过此方法来破解</li>
+<li>暴力破解会有几率成功，故此文件重点保护，绝不轻易泄漏</li>
+</ul>
+</li>
+<li>3，密码最后一次修改日期<ul>
+<li>距离标准时间的天数</li>
+<li>标准时间为：1970.01.01</li>
+<li>每过一天时间戳加一</li>
+</ul>
+</li>
+<li>4，两次密码的修改时间间隔<ul>
+<li>和第3字段相比</li>
+<li>若为10，表10天后才可改密码</li>
+</ul>
+</li>
+<li>5，密码有效期<ul>
+<li>和第3字段相比</li>
+<li>若为10，表10天后过期（即规定每10天修改一次密码</li>
+<li>对应密码实效性原则（还有复杂性和易记性</li>
+</ul>
+</li>
+<li>6，密码过期前的警告天数<ul>
+<li>过期前</li>
+<li>和第5字段相比</li>
+<li>若为10，若失效日期为15，则5号时提醒修改密码</li>
+</ul>
+</li>
+<li>7，密码过期后的宽限时间<ul>
+<li>过期后</li>
+<li>和第5字段相比</li>
+<li>0或空着表示过期后立即失效</li>
+<li>-1表示密码永不会失效</li>
+<li>若为10，表密码过期后，再多给10天宽限，10天后失效</li>
+</ul>
+</li>
+<li>8，账号失效时间<ul>
+<li>时间戳表示</li>
+<li>优先级高于以上的有效期相关字段</li>
+</ul>
+</li>
+<li>9，保留字段</li>
+</ul>
+</li>
+<li>时间戳与日期的换算（利用公式</li>
+</ul>
+</li>
+<li>组相关文件<ul>
+<li>组信息文件：/etc/group<ul>
+<li>四个字段<ul>
+<li>1，组名</li>
+<li>2，组密码标志</li>
+<li>3，GID</li>
+<li>4，组中附加用户<ul>
+<li>看不见初始用户</li>
+<li>初始用户或初始组需要passed和group两个文件对照来看</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>组密码文件：/etc/gshadow<ul>
+<li>四个字段<ul>
+<li>1，组名</li>
+<li>2，组密码<ul>
+<li>并不常见且不推荐使用</li>
+</ul>
+</li>
+<li>3，组管理用户组</li>
+<li>4，组中附加用户</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户管理相关文件"><a href="#用户管理相关文件" class="headerlink" title="用户管理相关文件"></a>用户管理相关文件</h2><ul>
+<li>1，用户的家目录<ul>
+<li>简介<ul>
+<li>创建用户时自动生成</li>
+<li>普通用户改为超级用户时，仅获取了相关权限，其目录未变</li>
+</ul>
+</li>
+<li>普通用户<ul>
+<li>/home/用户名/</li>
+<li>所有者和所属组都是此用户</li>
+<li>700权限</li>
+</ul>
+</li>
+<li>超级用户<ul>
+<li>/root/</li>
+<li>所有者和所属组都是root用户</li>
+<li>550权限</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>2，用户的邮箱<ul>
+<li>创建用户时默认生成</li>
+<li>/var/spool/mail/用户名/</li>
+<li>var：Linux下可变数据的保存目录</li>
+</ul>
+</li>
+<li>3，用户模板目录<ul>
+<li>/etc/skel/</li>
+<li>创建新用户时会从此目录拷贝文件作为其家目录下的默认文件</li>
+<li>可以在此自定义其他文件，创建新用户时会生成相应文件</li>
+<li>作为一个模板</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户管理命令"><a href="#用户管理命令" class="headerlink" title="用户管理命令"></a>用户管理命令</h2><ul>
+<li>命令归根结底操作的是配置文件</li>
+<li>用户添加命令：useradd<ul>
+<li>格式：useradd+选项+用户名</li>
+<li>常见选项<ul>
+<li>u：手工指定uid</li>
+<li>d：指定家目录</li>
+<li>c：指定用户说明</li>
+<li>g：指定用户初始组</li>
+<li>G：指定用户附加组</li>
+<li>s：指定用户登录shell；默认为/bin/bash/</li>
+</ul>
+</li>
+<li>执行结果<ul>
+<li>passwd、shadow、group、gshadow文件会新增记录</li>
+<li>生成相应家目录</li>
+<li>生成相应邮箱目录</li>
+</ul>
+</li>
+<li>用户默认值文件<ul>
+<li>新建用户时的默认值设置，如默认的shell为/bin/bash</li>
+<li>/etc/default/useradd<ul>
+<li>用户家目录</li>
+<li>默认shell</li>
+<li>是否创建邮箱</li>
+<li>…</li>
+</ul>
+</li>
+<li>/etc/logindefs<ul>
+<li>密码有效期</li>
+<li>密码修改间隔</li>
+<li>密码最小位数等</li>
+<li>密码的加密方式（前期是md5</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改用户密码：passwd<ul>
+<li>格式：passwd+选项+用户名</li>
+<li>常用选项<ul>
+<li>不加：给用户设置密码</li>
+<li>S：查询用户的密码状态（仅root可用</li>
+<li>l：暂时锁定用户（仅root可用</li>
+<li>u：解锁用户（仅root可用</li>
+<li>—stdin：可通过管道符输出的数据作为用户的密码<ul>
+<li>多用于shell编程批量操作时</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>改密码相关<ul>
+<li>超级用户<ul>
+<li>可更改包括自己在内的所有用户</li>
+<li>需要指定用户名</li>
+<li>可不遵守密码复杂性的原则</li>
+</ul>
+</li>
+<li>普通用户<ul>
+<li>只可更改自己</li>
+<li>直接passwd即可</li>
+<li>需遵守密码复杂性原则</li>
+</ul>
+</li>
+<li>输密码时字符不可见</li>
+<li>删除键也会视为字符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修改用户信息：usermod<ul>
+<li>格式：usermod+选项+用户名</li>
+<li>类似useradd+选项命令</li>
+<li>add针对新用户，mod针对已存在用户</li>
+<li>大部分选项同useradd，如u、c、G</li>
+<li>L：锁定用户；U：解锁用户（同passwd作用类似</li>
+</ul>
+</li>
+<li>修改用户密码状态：chage<ul>
+<li>格式：chage+选项+用户名</li>
+<li>效果同手工修改shadow文件</li>
+<li>l：列出用户的详细密码状态</li>
+<li>d：更改密码最后一次修改时间这一字段<ul>
+<li>-d 0:把密码修改日期更改为零</li>
+<li>用户一登录就要修改密码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>删除用户：userdel<ul>
+<li>userdel -r 用户名<ul>
+<li>r表示删除用户同时删除其家目录</li>
+<li>推荐使用此选项，否则还要手工删除目录</li>
+</ul>
+</li>
+<li>效果同手工删除（删除相关文件的记录及相关目录</li>
+</ul>
+</li>
+<li>查看用户ID：id<ul>
+<li>id+用户名</li>
+<li>显示用户ID、组ID信息</li>
+</ul>
+</li>
+<li>用户切换命令：su<ul>
+<li>格式：su+选项+用户名</li>
+<li>root切换普通不需要密码，反之需要</li>
+<li>选项<ul>
+<li>不加：环境变量不会切换（env命令查看<ul>
+<li>su root</li>
+</ul>
+</li>
+<li>-：选项仅使用-表示连带用户的环境变量一起切换<ul>
+<li>su - root</li>
+</ul>
+</li>
+<li>-c：仅执行一次命令，而不切换用户身份<ul>
+<li>su - root -c “命令”</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户组管理命令"><a href="#用户组管理命令" class="headerlink" title="用户组管理命令"></a>用户组管理命令</h2><ul>
+<li>添加用户组<ul>
+<li>groupadd +选项+组名</li>
+<li>不加：默认gid，依次增加</li>
+<li>g：指定gid</li>
+</ul>
+</li>
+<li>修改用户组<ul>
+<li>g：修改组ID</li>
+<li>n：修改组名</li>
+</ul>
+</li>
+<li>删除用户组<ul>
+<li>groupdel</li>
+<li>删除前提：此组里没有初始用户（是否有附加用户不影响</li>
+</ul>
+</li>
+<li>把用户添加入组或从组中删除<ul>
+<li>a+用户名+组名：添加（附加用户</li>
+<li>d+用户名+组名：删除</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/08/实践之飞机大战/" rel="next" title="实践之飞机大战">
+                <i class="fa fa-chevron-left"></i> 实践之飞机大战
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/Shell及编程基础/" rel="prev" title="Shell及编程基础">
+                Shell及编程基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用户和用户组管理"><span class="nav-text">用户和用户组管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用户配置文件"><span class="nav-text">用户配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户管理相关文件"><span class="nav-text">用户管理相关文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户管理命令"><span class="nav-text">用户管理命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户组管理命令"><span class="nav-text">用户组管理命令</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

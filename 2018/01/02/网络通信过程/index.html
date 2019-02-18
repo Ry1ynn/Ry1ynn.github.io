@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="网络通信过程详解01-packet tracer网络通信过程 略  02-两台电脑联网 略  03-通过集线器组网 集线器又名hub">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络通信过程">
+<meta property="og:url" content="http://21guns.top/2018/01/02/网络通信过程/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="网络通信过程详解01-packet tracer网络通信过程 略  02-两台电脑联网 略  03-通过集线器组网 集线器又名hub">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/6352554.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/77077746.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/70144291.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/41341708.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/93289019.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/35335799.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/28359102.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/26830300.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/73440845.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/46636293.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/53536143.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/3556867.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/69103817.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/89600880.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/46384793.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/30582106.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/93750444.jpg">
+<meta property="og:updated_time" content="2019-02-18T12:07:25.992Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络通信过程">
+<meta name="twitter:description" content="网络通信过程详解01-packet tracer网络通信过程 略  02-两台电脑联网 略  03-通过集线器组网 集线器又名hub">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-2/6352554.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/02/网络通信过程/">
+
+
+
+
+
+  <title>网络通信过程 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/网络通信过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络通信过程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:54+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="网络通信过程详解"><a href="#网络通信过程详解" class="headerlink" title="网络通信过程详解"></a>网络通信过程详解</h1><h2 id="01-packet-tracer网络通信过程"><a href="#01-packet-tracer网络通信过程" class="headerlink" title="01-packet tracer网络通信过程"></a>01-packet tracer网络通信过程</h2><ul>
+<li>略</li>
+</ul>
+<h2 id="02-两台电脑联网"><a href="#02-两台电脑联网" class="headerlink" title="02-两台电脑联网"></a>02-两台电脑联网</h2><ul>
+<li>略</li>
+</ul>
+<h2 id="03-通过集线器组网"><a href="#03-通过集线器组网" class="headerlink" title="03-通过集线器组网"></a>03-通过集线器组网</h2><ul>
+<li>集线器又名hub<a id="more"></a></li>
+<li>hub（集线器）能够完成多个电脑的链接、</li>
+<li>每个数据包的发送都是以广播的形式进行的，容易堵塞网络</li>
+</ul>
+<h2 id="04-通过交换机组网"><a href="#04-通过交换机组网" class="headerlink" title="04-通过交换机组网"></a>04-通过交换机组网</h2><ul>
+<li>网络交换机（又称“网络交换器”），是一个扩大网络的器材，能为子网络中提供更多的连接端口，以便连接更多的计算机 具有性能价格比高、高度灵活、相对简单、易于实现等特点 以太网技术已成为当今最重要的一种局域网组网技术，网络交换机也就成为了最普及的交换机<ul>
+<li>家用级</li>
+<li>企业级</li>
+</ul>
+</li>
+<li>交换机的作用：<ul>
+<li>转发过滤：当一个数据帧的目的地址在MAC地址表中有映射时，它被转发到连接目的节点的端口而不是所有端口（如该数据帧为广播帧则转发至所有端口）</li>
+<li>学习功能：以太网交换机了解每一端口相连设备的MAC地址，并将地址同相应的端口映射起来存放在交换机缓存中的MAC地址表中</li>
+</ul>
+</li>
+<li>总结<ul>
+<li>交换机能够完成多个电脑的链接</li>
+<li>每个数据包的发送都是以广播的形式进行的，容易堵塞网络</li>
+<li>如果PC不知目标IP所对应的的MAC，那么可以看出，pc会先发送arp广播，得到对方的MAC然后，在进行数据的传送</li>
+<li>当switch第一次收到arp广播数据，会把arp广播数据包转发给所有端口（除来源端口）；如果以后还有pc询问此IP的MAC，那么只是向目标的端口进行转发数据</li>
+</ul>
+</li>
+</ul>
+<h2 id="05-通过路由器组网"><a href="#05-通过路由器组网" class="headerlink" title="05-通过路由器组网"></a>05-通过路由器组网</h2><ul>
+<li><p>路由器（Router）又称网关设备（Gateway）是用于连接多个逻辑上分开的网络</p>
+</li>
+<li><p>所谓逻辑网络是代表一个单独的网络或者一个子网。当数据从一个子网传输到另一个子网时，可通过路由器的路由功能来完成</p>
+</li>
+<li><p>具有判断网络地址和选择IP路径的功能</p>
+<ul>
+<li>家用级</li>
+<li>企业级</li>
+</ul>
+</li>
+<li><p>总结</p>
+<ul>
+<li>不在同一网段的pc，需要设置默认网关才能把数据传送过去 通常情况下，都会把路由器默认网关</li>
+<li>当路由器收到一个其它网段的数据包时，会根据“路由表”来决定，把此数据包发送到哪个端口；路由表的设定有静态和动态方法</li>
+<li>每经过一次路由器，那么TTL值就会减一</li>
+</ul>
+</li>
+</ul>
+<h2 id="06-交换机、路由器、服务器组网"><a href="#06-交换机、路由器、服务器组网" class="headerlink" title="06-交换机、路由器、服务器组网"></a>06-交换机、路由器、服务器组网</h2><ul>
+<li><p>通信过程（pc+switch+router+server）</p>
+</li>
+<li><p>较为复杂的通信过程如：访问 <a href="http://www.itheima.com" target="_blank" rel="noopener">www.itheima.com</a></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/6352554.jpg" alt></p>
+</li>
+<li><p>注意：一定要配置</p>
+<ul>
+<li>PC：IP、NETMASK、DFGATEWAY、DNS</li>
+<li>ROUTER：IP、NETMASK、路由表</li>
+</ul>
+</li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/77077746.jpg" alt></p>
+</li>
+<li><p>总结</p>
+<ul>
+<li>DNS服务器用来解析出IP（类似电话簿）</li>
+<li>DFGATEWAY（默认网关）用来对顶，当发送的数据包的目的ip不是当前网络时，此数据包包转发的目的ip</li>
+<li>在路由器中路由表指定数据包的”下一跳”的地址</li>
+</ul>
+</li>
+</ul>
+<h2 id="07-TCP三次握手"><a href="#07-TCP三次握手" class="headerlink" title="07-TCP三次握手"></a>07-TCP三次握手</h2><ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/70144291.jpg" alt></p>
+</li>
+</ul>
+<h2 id="08-TCP四次握手"><a href="#08-TCP四次握手" class="headerlink" title="08-TCP四次握手"></a>08-TCP四次握手</h2><ul>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/41341708.jpg" alt></p>
+</li>
+</ul>
+<h2 id="09-TCP十种状态"><a href="#09-TCP十种状态" class="headerlink" title="09-TCP十种状态"></a>09-TCP十种状态</h2><ul>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/93289019.jpg" alt></p>
+</li>
+<li><p>注意:</p>
+<ul>
+<li><p>当一端收到一个FIN，内核让read返回0来通知应用层另一端已经终止了向本端的数据传送</p>
+</li>
+<li><p>发送FIN通常是应用层对socket进行关闭的结果</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/35335799.jpg" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="10-TCP的2MSL问题"><a href="#10-TCP的2MSL问题" class="headerlink" title="10-TCP的2MSL问题"></a>10-TCP的2MSL问题</h2><ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/28359102.jpg" alt></p>
+</li>
+<li><p>说明：</p>
+<p>2MSL即两倍的MSL，TCP的TIME_WAIT状态也称为2MSL等待状态，</p>
+<p>当TCP的一端发起主动关闭，在发出最后一个ACK包后，</p>
+<p>即第3次握 手完成后发送了第四次握手的ACK包后就进入了TIME_WAIT状态，</p>
+<p>必须在此状态上停留两倍的MSL时间，</p>
+<p>等待2MSL时间主要目的是怕最后一个 ACK包对方没收到，</p>
+<p>那么对方在超时后将重发第三次握手的FIN包，</p>
+<p>主动关闭端接到重发的FIN包后可以再发一个ACK应答包。</p>
+<p>在TIME_WAIT状态 时两端的端口不能使用，要等到2MSL时间结束才可继续使用。</p>
+<p>当连接处于2MSL等待阶段时任何迟到的报文段都将被丢弃。</p>
+<p>不过在实际应用中可以通过设置 SO_REUSEADDR选项达到不必等待2MSL时间结束再使用此端口。</p>
+</li>
+</ul>
+<h2 id="11-TCP长连接和短连接"><a href="#11-TCP长连接和短连接" class="headerlink" title="11-TCP长连接和短连接"></a>11-TCP长连接和短连接</h2><h3 id="11-1-简介"><a href="#11-1-简介" class="headerlink" title="11.1-简介"></a>11.1-简介</h3><ul>
+<li><p>TCP在真正的读写操作之前，server与client之间必须建立一个连接，</p>
+</li>
+<li><p>当读写操作完成后，双方不再需要这个连接时它们可以释放这个连接，</p>
+</li>
+<li><p>连接的建立通过三次握手，释放则需要四次握手，</p>
+</li>
+<li><p>所以说每个连接的建立都是需要资源消耗和时间消耗的。</p>
+</li>
+<li><p>TCP通信的整个过程，如下图:</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/26830300.jpg" alt></p>
+</li>
+</ul>
+<h3 id="11-2-TCP短连接"><a href="#11-2-TCP短连接" class="headerlink" title="11.2-TCP短连接"></a>11.2-TCP短连接</h3><ul>
+<li>模拟一种TCP短连接的情况:<ol>
+<li>client 向 server 发起连接请求</li>
+<li>server 接到请求，双方建立连接</li>
+<li>client 向 server 发送消息</li>
+<li>server 回应 client</li>
+<li>一次读写完成，此时双方任何一个都可以发起 close 操作</li>
+</ol>
+</li>
+<li>在第 步骤5中，一般都是 client 先发起 close 操作。当然也不排除有特殊的情况</li>
+<li>从上面的描述看，短连接一般只会在 client/server 间传递一次读写操作！</li>
+</ul>
+<h3 id="11-3-TCP长连接"><a href="#11-3-TCP长连接" class="headerlink" title="11.3-TCP长连接"></a>11.3-TCP长连接</h3><ul>
+<li>再模拟一种长连接的情况:<ol>
+<li>client 向 server 发起连接</li>
+<li>server 接到请求，双方建立连接</li>
+<li>client 向 server 发送消息</li>
+<li>server 回应 client</li>
+<li>一次读写完成，连接不关闭</li>
+<li>后续读写操作…</li>
+<li>长时间操作之后client发起关闭请求</li>
+</ol>
+</li>
+</ul>
+<h3 id="11-4-TCP长-短连接操作过程"><a href="#11-4-TCP长-短连接操作过程" class="headerlink" title="11.4-TCP长/短连接操作过程"></a>11.4-TCP长/短连接操作过程</h3><ul>
+<li><p>短连接的操作步骤是：</p>
+<p>建立连接——数据传输——关闭连接…建立连接——数据传输——关闭连接</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/73440845.jpg" alt></p>
+</li>
+<li><p>长连接的操作步骤</p>
+<p>建立连接——数据传输…（保持连接）…数据传输——关闭连接</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/46636293.jpg" alt></p>
+</li>
+</ul>
+<h3 id="11-5-TCP长-短连接的优点和缺点"><a href="#11-5-TCP长-短连接的优点和缺点" class="headerlink" title="11.5-TCP长/短连接的优点和缺点"></a>11.5-TCP长/短连接的优点和缺点</h3><ul>
+<li><p>长连接可以省去较多的TCP建立和关闭的操作，减少浪费，节约时间。</p>
+<p>对于频繁请求资源的客户来说，较适用长连接。</p>
+</li>
+<li><p>client与server之间的连接如果一直不关闭的话，会存在一个问题，</p>
+<p>随着客户端连接越来越多，server早晚有扛不住的时候，这时候server端需要采取一些策略，</p>
+<p>如关闭一些长时间没有读写事件发生的连接，这样可以避免一些恶意连接导致server端服务受损；</p>
+<p>如果条件再允许就可以以客户端机器为颗粒度，限制每个客户端的最大长连接数，</p>
+<p>这样可以完全避免某个蛋疼的客户端连累后端服务。</p>
+</li>
+<li><p>短连接对于服务器来说管理较为简单，存在的连接都是有用的连接，不需要额外的控制手段。</p>
+</li>
+<li><p>但如果客户请求频繁，将在TCP的建立和关闭操作上浪费时间和带宽。</p>
+</li>
+</ul>
+<h3 id="11-6-TCP长-短连接的应用场景"><a href="#11-6-TCP长-短连接的应用场景" class="headerlink" title="11.6-TCP长/短连接的应用场景"></a>11.6-TCP长/短连接的应用场景</h3><ul>
+<li><p>长连接多用于操作频繁，点对点的通讯，而且连接数不能太多情况。</p>
+<p>每个TCP连接都需要三次握手，这需要时间，如果每个操作都是先连接，</p>
+<p>再操作的话那么处理速度会降低很多，所以每个操作完后都不断开，</p>
+<p>再次处理时直接发送数据包就OK了，不用建立TCP连接。</p>
+<p>例如：数据库的连接用长连接，如果用短连接频繁的通信会造成socket错误，</p>
+<p>而且频繁的socket 创建也是对资源的浪费。</p>
+</li>
+<li><p>而像WEB网站的http服务一般都用短链接，因为长连接对于服务端来说会耗费一定的资源，</p>
+<p>而像WEB网站这么频繁的成千上万甚至上亿客户端的连接用短连接会更省一些资源，</p>
+<p>如果用长连接，而且同时有成千上万的用户，如果每个用户都占用一个连接的话，</p>
+<p>那可想而知吧。所以并发量大，但每个用户无需频繁操作情况下需用短连好。</p>
+</li>
+</ul>
+<h2 id="12-listen的队列长度"><a href="#12-listen的队列长度" class="headerlink" title="12-listen的队列长度"></a>12-listen的队列长度</h2><ul>
+<li><p>服务器端运行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">from</span> time <span class="keyword">import</span> sleep</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建socket</span></span><br><span class="line">tcpSerSocket = socket(AF_INET, SOCK_STREAM)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绑定本地信息</span></span><br><span class="line">address = (<span class="string">''</span>, <span class="number">7788</span>)</span><br><span class="line">tcpSerSocket.bind(address)</span><br><span class="line"></span><br><span class="line">connNum = int(raw_input(<span class="string">"请输入要最大的链接数:"</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用socket创建的套接字默认的属性是主动的，使用listen将其变为被动的，这样就可以接收别人的链接了</span></span><br><span class="line">tcpSerSocket.listen(connNum)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 如果有新的客户端来链接服务器，那么就产生一个新的套接字专门为这个客户端服务器</span></span><br><span class="line">    newSocket, clientAddr = tcpSerSocket.accept()</span><br><span class="line">    <span class="keyword">print</span> clientAddr</span><br><span class="line">    sleep(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>客户端运行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">from</span> socket <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">connNum = raw_input(<span class="string">"请输入要链接服务器的次数:"</span>)</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(int(connNum)):</span><br><span class="line">    s = socket(AF_INET, SOCK_STREAM)</span><br><span class="line">    s.connect((<span class="string">"192.168.1.102"</span>, <span class="number">7788</span>))</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>总结</p>
+<ul>
+<li>listen中的black表示已经建立链接和半链接的总数</li>
+<li>如果当前已建立链接数和半链接数以达到设定值，那么新客户端就不会connect成功，而是等待服务器</li>
+</ul>
+</li>
+</ul>
+<h2 id="13-手动配置IP"><a href="#13-手动配置IP" class="headerlink" title="13-手动配置IP"></a>13-手动配置IP</h2><ul>
+<li><p>设置IP和掩码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ifconfig eth0 192.168.5.40 netmask 255.255.255.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置网关</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">route add default gw 192.168.5.1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="14-常见网络攻击案例"><a href="#14-常见网络攻击案例" class="headerlink" title="14-常见网络攻击案例"></a>14-常见网络攻击案例</h2><h3 id="01-tcp半链接攻击"><a href="#01-tcp半链接攻击" class="headerlink" title="01-tcp半链接攻击"></a>01-tcp半链接攻击</h3><ul>
+<li><p>tcp半链接攻击</p>
+<ul>
+<li>tcp半链接攻击也称为：SYN Flood (SYN洪水)</li>
+<li>是种典型的DoS (Denial of Service，拒绝服务) 攻击</li>
+<li>效果就是服务器TCP连接资源耗尽，停止响应正常的TCP连接请求</li>
+</ul>
+</li>
+<li><p>正常链接时的情况</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/53536143.jpg" alt></p>
+</li>
+<li><p>半链接攻击时的情况</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/3556867.jpg" alt></p>
+</li>
+</ul>
+<h3 id="02-dns攻击"><a href="#02-dns攻击" class="headerlink" title="02-dns攻击"></a>02-dns攻击</h3><ul>
+<li><p>dns服务器被劫持</p>
+<ul>
+<li><p>我们知道一个域名服务器对其区域内的用户解析请求负责，但是并没有一个机制去监督它有没有真地负责。</p>
+</li>
+<li><p>也就是说域名服务器的权力并没有被关在笼子里，所以它既可以认真地“为人民服务”，也可以“指鹿为马”。</p>
+</li>
+<li><p>于是有些流氓的域名服务器故意更改一些域名的解析结果，将用户引向一个错误的目标地址。这就叫作 DNS 劫持，主要用来阻止用户访问某些特定的网站，或者是将用户引导到广告页面</p>
+</li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/69103817.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>dns欺骗</p>
+<ul>
+<li><p>DNS 欺骗简单来说就是用一个假的 DNS 应答来欺骗用户计算机，让其相信这个假的地址，并且抛弃真正的 DNS 应答。</p>
+</li>
+<li><p>在一台主机发出 DNS 请求后，它就开始等待应答，如果此时有一个看起来正确（拥有和DNS请求一样的序列号）的应答包，它就会信以为真，并且丢弃稍晚一点到达的应答。</p>
+</li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/89600880.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>03-查看域名解析的ip地址方法</p>
+<ul>
+<li><p>code：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nslookup 域名</span><br><span class="line"></span><br><span class="line">例如：</span><br><span class="line">nslookup baidu.com</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/46384793.jpg" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-ARP攻击"><a href="#03-ARP攻击" class="headerlink" title="03-ARP攻击"></a>03-ARP攻击</h3><ul>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/30582106.jpg" alt></p>
+</li>
+</ul>
+<h2 id="15-家庭上网解析"><a href="#15-家庭上网解析" class="headerlink" title="15- 家庭上网解析"></a>15- 家庭上网解析</h2><ul>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-2/93750444.jpg" alt></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/闭包-装饰器/" rel="next" title="闭包_装饰器">
+                <i class="fa fa-chevron-left"></i> 闭包_装饰器
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/网络概述/" rel="prev" title="网络概述">
+                网络概述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#网络通信过程详解"><span class="nav-text">网络通信过程详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-packet-tracer网络通信过程"><span class="nav-text">01-packet tracer网络通信过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-两台电脑联网"><span class="nav-text">02-两台电脑联网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-通过集线器组网"><span class="nav-text">03-通过集线器组网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-通过交换机组网"><span class="nav-text">04-通过交换机组网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-通过路由器组网"><span class="nav-text">05-通过路由器组网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-交换机、路由器、服务器组网"><span class="nav-text">06-交换机、路由器、服务器组网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#07-TCP三次握手"><span class="nav-text">07-TCP三次握手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#08-TCP四次握手"><span class="nav-text">08-TCP四次握手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#09-TCP十种状态"><span class="nav-text">09-TCP十种状态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-TCP的2MSL问题"><span class="nav-text">10-TCP的2MSL问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-TCP长连接和短连接"><span class="nav-text">11-TCP长连接和短连接</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#11-1-简介"><span class="nav-text">11.1-简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-2-TCP短连接"><span class="nav-text">11.2-TCP短连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-3-TCP长连接"><span class="nav-text">11.3-TCP长连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-4-TCP长-短连接操作过程"><span class="nav-text">11.4-TCP长/短连接操作过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-5-TCP长-短连接的优点和缺点"><span class="nav-text">11.5-TCP长/短连接的优点和缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#11-6-TCP长-短连接的应用场景"><span class="nav-text">11.6-TCP长/短连接的应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#12-listen的队列长度"><span class="nav-text">12-listen的队列长度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#13-手动配置IP"><span class="nav-text">13-手动配置IP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#14-常见网络攻击案例"><span class="nav-text">14-常见网络攻击案例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-tcp半链接攻击"><span class="nav-text">01-tcp半链接攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-dns攻击"><span class="nav-text">02-dns攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-ARP攻击"><span class="nav-text">03-ARP攻击</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#15-家庭上网解析"><span class="nav-text">15- 家庭上网解析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

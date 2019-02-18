@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Web服务器案例01-HTTP协议介绍1.1-使用谷歌/火狐浏览器分析 在Web应用中，服务器把网页传给浏览器，实际上就是把网页的HTML代码发送给浏览器，让浏览器显示出来。 而浏览器和服务器之间的传输协议是HTTP，所以： HTML是一种用来定义网页的文本，会HTML，就可以编写网页； HTTP是在网络上传输HTML的协议，用于浏览器和服务器的通信。   Chrome和Firefox浏览器提供了">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web服务器案例">
+<meta property="og:url" content="http://21guns.top/2018/01/02/Web服务器案例/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="Web服务器案例01-HTTP协议介绍1.1-使用谷歌/火狐浏览器分析 在Web应用中，服务器把网页传给浏览器，实际上就是把网页的HTML代码发送给浏览器，让浏览器显示出来。 而浏览器和服务器之间的传输协议是HTTP，所以： HTML是一种用来定义网页的文本，会HTML，就可以编写网页； HTTP是在网络上传输HTML的协议，用于浏览器和服务器的通信。   Chrome和Firefox浏览器提供了">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-3/90656082.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-3/71952654.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-3/7738633.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-3/94475735.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-3/14822936.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-3/67530567.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-3/93511036.jpg">
+<meta property="og:updated_time" content="2019-02-18T12:07:20.300Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web服务器案例">
+<meta name="twitter:description" content="Web服务器案例01-HTTP协议介绍1.1-使用谷歌/火狐浏览器分析 在Web应用中，服务器把网页传给浏览器，实际上就是把网页的HTML代码发送给浏览器，让浏览器显示出来。 而浏览器和服务器之间的传输协议是HTTP，所以： HTML是一种用来定义网页的文本，会HTML，就可以编写网页； HTTP是在网络上传输HTML的协议，用于浏览器和服务器的通信。   Chrome和Firefox浏览器提供了">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-3/90656082.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/02/Web服务器案例/">
+
+
+
+
+
+  <title>Web服务器案例 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/Web服务器案例/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web服务器案例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:54+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Web服务器案例"><a href="#Web服务器案例" class="headerlink" title="Web服务器案例"></a>Web服务器案例</h1><h2 id="01-HTTP协议介绍"><a href="#01-HTTP协议介绍" class="headerlink" title="01-HTTP协议介绍"></a>01-HTTP协议介绍</h2><h3 id="1-1-使用谷歌-火狐浏览器分析"><a href="#1-1-使用谷歌-火狐浏览器分析" class="headerlink" title="1.1-使用谷歌/火狐浏览器分析"></a>1.1-使用谷歌/火狐浏览器分析</h3><ul>
+<li>在Web应用中，服务器把网页传给浏览器，实际上就是把网页的HTML代码发送给浏览器，让浏览器显示出来。</li>
+<li>而浏览器和服务器之间的传输协议是HTTP，所以：<ul>
+<li>HTML是一种用来定义网页的文本，会HTML，就可以编写网页；</li>
+<li>HTTP是在网络上传输HTML的协议，用于浏览器和服务器的通信。</li>
+</ul>
+</li>
+<li>Chrome和Firefox浏览器提供了一套完整地调试工具，非常适合Web开发。（F12</li>
+</ul>
+<h3 id="1-2-http协议的分析"><a href="#1-2-http协议的分析" class="headerlink" title="1.2-http协议的分析"></a>1.2-http协议的分析<a id="more"></a></h3><ul>
+<li>当我们在地址栏输入<a href="http://www.sina.com时，浏览器将显示新浪的首页。在这个过程中，浏览器都干了哪些事情呢？通过Network的记录，我们就可以知道。在Network中，找到www.sina.com那条记录，点击，右侧将显示Request" target="_blank" rel="noopener">www.sina.com时，浏览器将显示新浪的首页。在这个过程中，浏览器都干了哪些事情呢？通过Network的记录，我们就可以知道。在Network中，找到www.sina.com那条记录，点击，右侧将显示Request</a> Headers，点击右侧的view source，我们就可以看到浏览器发给新浪服务器的请求</li>
+</ul>
+<h3 id="1-2-1请求"><a href="#1-2-1请求" class="headerlink" title="1.2.1请求"></a>1.2.1请求</h3><ul>
+<li>GET / HTTP/1.1<ul>
+<li>GET表示一个读取请求，将从服务器获得网页数据</li>
+<li>/表示URL的路径，URL总是以/开头，/就表示首页</li>
+<li>最后的HTTP/1.1指示采用的HTTP协议版本是1.1</li>
+<li>目前HTTP协议的版本就是1.1，但是大部分服务器也支持1.0版本，主要区别在于1.1版本允许多个HTTP请求复用一个TCP连接，以加快传输速度。</li>
+</ul>
+</li>
+<li>Host: <a href="http://www.sina.com" target="_blank" rel="noopener">www.sina.com</a><ul>
+<li>表示请求的域名是<a href="http://www.sina.com" target="_blank" rel="noopener">www.sina.com</a></li>
+<li>如果一台服务器有多个网站，服务器就需要通过Host来区分浏览器请求的是哪个网站。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-2-响应"><a href="#1-2-2-响应" class="headerlink" title="1.2.2-响应"></a>1.2.2-响应</h4><ul>
+<li>HTTP响应分为Header和Body两部分（Body是可选项）</li>
+<li>HTTP/1.1 200 OK<ul>
+<li>200表示一个成功的响应，后面的OK是说明</li>
+<li>如果返回的不是200，那么往往有其他的功能</li>
+</ul>
+</li>
+<li>Content-Type: text/html<ul>
+<li>Content-Type指示响应的内容，这里是text/html表示HTML网页。</li>
+<li>请注意，浏览器就是依靠Content-Type来判断响应的内容是网页还是图片，是视频还是音乐</li>
+<li>浏览器并不靠URL来判断响应的内容，所以，即使URL是<a href="http://www.baidu.com/meimei.jpg，它也不一定就是图片。" target="_blank" rel="noopener">http://www.baidu.com/meimei.jpg，它也不一定就是图片。</a></li>
+</ul>
+</li>
+<li>HTTP响应的Body就是HTML源码，我们在菜单栏选择“视图”，“开发者”，“查看网页源码”就可以在浏览器中直接查看HTML源码</li>
+</ul>
+<h4 id="1-2-3-浏览器解析过程"><a href="#1-2-3-浏览器解析过程" class="headerlink" title="1.2.3-浏览器解析过程"></a>1.2.3-浏览器解析过程</h4><ul>
+<li>当浏览器读取到新浪首页的HTML源码后，它会解析HTML，显示页面，然后，根据HTML里面的各种链接，再发送HTTP请求给新浪服务器，拿到相应的图片、视频、Flash、JavaScript脚本、CSS等各种资源，最终显示出一个完整的页面。所以我们在Network下面能看到很多额外的HTTP请求。</li>
+</ul>
+<h3 id="1-3-总结"><a href="#1-3-总结" class="headerlink" title="1.3-总结"></a>1.3-总结</h3><h4 id="1-3-1-HTTP请求"><a href="#1-3-1-HTTP请求" class="headerlink" title="1.3.1 HTTP请求"></a>1.3.1 HTTP请求</h4><ul>
+<li>总结一下HTTP请求的流程：<ul>
+<li>步骤1：浏览器首先向服务器发送HTTP请求，请求包括<ul>
+<li>方法：GET还是POST，GET仅请求资源，POST会附带用户数据；</li>
+<li>路径：/full/url/path；</li>
+<li>域名：由Host头指定：Host: <a href="http://www.sina.com" target="_blank" rel="noopener">www.sina.com</a></li>
+<li>以及其他相关的Header；</li>
+<li>如果是POST，那么请求还包括一个Body，包含用户数据</li>
+</ul>
+</li>
+<li>步骤2：服务器向浏览器返回HTTP响应，响应包括<ul>
+<li>响应代码：200表示成功，3xx表示重定向，4xx表示客户端发送的请求有错误，5xx表示服务器端处理时发生了错误</li>
+<li>响应类型：由Content-Type指定；</li>
+<li>以及其他相关的Header；</li>
+<li>通常服务器的HTTP响应会携带内容，也就是有一个Body，包含响应的内容，网页的HTML源码就在Body中</li>
+</ul>
+</li>
+<li>步骤3：如果浏览器还需要继续向服务器请求其他资源，比如图片，就再次发出HTTP请求，重复步骤1、2。<ul>
+<li>Web采用的HTTP协议采用了非常简单的请求-响应模式，从而大大简化了开发。当我们编写一个页面时，我们只需要在HTTP请求中把HTML发送出去，不需要考虑如何附带图片、视频等，浏览器如果需要请求图片和视频，它会发送另一个HTTP请求，因此，一个HTTP请求只处理一个资源(此时就可以理解为TCP协议中的短连接，每个链接只获取一个资源，如需要多个就需要建立多个链接)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>HTTP协议同时具备极强的扩展性，虽然浏览器请求的是<a href="http://www.sina.com的首页，但是新浪在HTML中可以链入其他服务器的资源，比如" target="_blank" rel="noopener">http://www.sina.com的首页，但是新浪在HTML中可以链入其他服务器的资源，比如</a><timg src="http://i1.sinaimg.cn/home/2013/1008/U8455P30DT20131008135420.png">，从而将请求压力分散到各个服务器上，并且，一个站点可以链接到其他站点，无数个站点互相链接起来，就形成了World Wide Web，简称WWW。</timg></li>
+</ul>
+<h4 id="1-3-2-HTTP格式"><a href="#1-3-2-HTTP格式" class="headerlink" title="1.3.2-HTTP格式"></a>1.3.2-HTTP格式</h4><ul>
+<li><p>每个HTTP请求和响应都遵循相同的格式，一个HTTP包含Header和Body两部分，其中Body是可选的。</p>
+</li>
+<li><p>HTTP协议是一种文本协议，所以，它的格式也非常简单。</p>
+</li>
+<li><p>HTTP GET请求的格式：</p>
+<pre><code>GET /path HTTP/1.1
+Header1: Value1
+Header2: Value2
+Header3: Value3
+</code></pre><ul>
+<li>每个Header一行一个，换行符是\r\n。</li>
+</ul>
+</li>
+<li><p>HTTP POST请求的格式：</p>
+<pre><code>POST /path HTTP/1.1
+Header1: Value1
+Header2: Value2
+Header3: Value3
+
+body data goes here...
+</code></pre><ul>
+<li>当遇到连续两个\r\n时，Header部分结束，后面的数据全部是Body。</li>
+</ul>
+</li>
+<li><p>HTTP响应的格式：</p>
+<pre><code>200 OK
+Header1: Value1
+Header2: Value2
+Header3: Value3
+
+body data goes here...
+</code></pre><ul>
+<li>HTTP响应如果包含body，也是通过\r\n\r\n来分隔的。</li>
+</ul>
+</li>
+<li><p>请再次注意，Body的数据类型由Content-Type头来确定，如果是网页，Body就是文本，如果是图片，Body就是图片的二进制数据。</p>
+</li>
+<li><p>当存在Content-Encoding时，Body数据是被压缩的，最常见的压缩方式是gzip，所以，看到Content-Encoding: gzip时，需要将Body数据先解压缩，才能得到真正的数据。压缩的目的在于减少Body的大小，加快网络传输。</p>
+</li>
+</ul>
+<h2 id="02-Web静态服务器-1-显示固定的页面"><a href="#02-Web静态服务器-1-显示固定的页面" class="headerlink" title="02-Web静态服务器-1-显示固定的页面"></a>02-Web静态服务器-1-显示固定的页面</h2><ul>
+<li><p>code：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br></pre></td></tr></table></figure>
+<p>def handleClient(clientSocket):</p>
+<pre><code>&apos;用一个新的进程，为一个客户端进行服务&apos;
+recvData = clientSocket.recv(2014)
+requestHeaderLines = recvData.splitlines()
+for line in requestHeaderLines:
+    print(line)
+
+responseHeaderLines = &quot;HTTP/1.1 200 OK\r\n&quot;
+responseHeaderLines += &quot;\r\n&quot;
+responseBody = &quot;hello world&quot;
+
+response = responseHeaderLines + responseBody
+clientSocket.send(response)
+clientSocket.close()
+</code></pre></li>
+</ul>
+<p>  def main():<br>      ‘作为程序的主控制入口’</p>
+<pre><code>serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+serverSocket.bind((&quot;&quot;, 7788))
+serverSocket.listen(10)
+while True:
+    clientSocket,clientAddr = serverSocket.accept()
+    clientP = Process(target = handleClient, args = (clientSocket,))
+    clientP.start()
+    clientSocket.close()
+</code></pre><p>  if <strong>name</strong> == ‘<strong>main</strong>‘:<br>      main()</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- 服务器端</span><br><span class="line"></span><br><span class="line">  ![](http://ot12pfxkm.bkt.clouddn.com/18-1-3/61184021.jpg)</span><br><span class="line"></span><br><span class="line">- 客户端</span><br><span class="line"></span><br><span class="line">  ![](http://ot12pfxkm.bkt.clouddn.com/18-1-3/65948288.jpg)</span><br><span class="line"></span><br><span class="line">## 03-Web静态服务器-2-显示需要的页面</span><br><span class="line"></span><br><span class="line">- code</span><br><span class="line"></span><br><span class="line">  ```python</span><br><span class="line">  #coding=utf-8</span><br><span class="line">  import socket</span><br><span class="line">  from multiprocessing import Process</span><br><span class="line">  import re</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  def handleClient(clientSocket):</span><br><span class="line">      &apos;用一个新的进程，为一个客户端进行服务&apos;</span><br><span class="line">      recvData = clientSocket.recv(2014)</span><br><span class="line">      requestHeaderLines = recvData.splitlines()</span><br><span class="line">      for line in requestHeaderLines:</span><br><span class="line">          print(line)</span><br><span class="line"></span><br><span class="line">      httpRequestMethodLine = requestHeaderLines[0]</span><br><span class="line">      getFileName = re.match(&quot;[^/]+(/[^ ]*)&quot;, httpRequestMethodLine).group(1)</span><br><span class="line">      print(&quot;file name is ===&gt;%s&quot;%getFileName) #for test</span><br><span class="line"></span><br><span class="line">      if getFileName == &apos;/&apos;:</span><br><span class="line">          getFileName = documentRoot + &quot;/index.html&quot;</span><br><span class="line">      else:</span><br><span class="line">          getFileName = documentRoot + getFileName</span><br><span class="line"></span><br><span class="line">      print(&quot;file name is ===2&gt;%s&quot;%getFileName) #for test</span><br><span class="line"></span><br><span class="line">      try:</span><br><span class="line">          f = open(getFileName)</span><br><span class="line">      except IOError:</span><br><span class="line">          responseHeaderLines = &quot;HTTP/1.1 404 not found\r\n&quot;</span><br><span class="line">          responseHeaderLines += &quot;\r\n&quot;</span><br><span class="line">          responseBody = &quot;====sorry ,file not found====&quot;</span><br><span class="line">      else:</span><br><span class="line">          responseHeaderLines = &quot;HTTP/1.1 200 OK\r\n&quot;</span><br><span class="line">          responseHeaderLines += &quot;\r\n&quot;</span><br><span class="line">          responseBody = f.read()</span><br><span class="line">          f.close()</span><br><span class="line">      finally:</span><br><span class="line">          response = responseHeaderLines + responseBody</span><br><span class="line">          clientSocket.send(response)</span><br><span class="line">          clientSocket.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  def main():</span><br><span class="line">      &apos;作为程序的主控制入口&apos;</span><br><span class="line"></span><br><span class="line">      serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)</span><br><span class="line">      serverSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)</span><br><span class="line">      serverSocket.bind((&quot;&quot;, 7788))</span><br><span class="line">      serverSocket.listen(10)</span><br><span class="line">      while True:</span><br><span class="line">          clientSocket,clientAddr = serverSocket.accept()</span><br><span class="line">          clientP = Process(target = handleClient, args = (clientSocket,))</span><br><span class="line">          clientP.start()</span><br><span class="line">          clientSocket.close()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  #这里配置服务器</span><br><span class="line">  documentRoot = &apos;./html&apos;</span><br><span class="line"></span><br><span class="line">  if __name__ == &apos;__main__&apos;:</span><br><span class="line">      main()</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>服务器端</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-3/90656082.jpg" alt></p>
+</li>
+<li><p>客户端</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-3/71952654.jpg" alt></p>
+</li>
+</ul>
+<h2 id="04-Web静态服务器-3-使用类"><a href="#04-Web静态服务器-3-使用类" class="headerlink" title="04-Web静态服务器-3-使用类"></a>04-Web静态服务器-3-使用类</h2><ul>
+<li><p>code</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WSGIServer</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    addressFamily = socket.AF_INET</span><br><span class="line">    socketType = socket.SOCK_STREAM</span><br><span class="line">    requestQueueSize = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, server_address)</span>:</span></span><br><span class="line">        <span class="comment">#创建一个tcp套接字</span></span><br><span class="line">        self.listenSocket = socket.socket(self.addressFamily,self.socketType)</span><br><span class="line">        <span class="comment">#允许重复使用上次的套接字绑定的port</span></span><br><span class="line">        self.listenSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line">        <span class="comment">#绑定</span></span><br><span class="line">        self.listenSocket.bind(server_address)</span><br><span class="line">        <span class="comment">#变为被动，并制定队列的长度</span></span><br><span class="line">        self.listenSocket.listen(self.requestQueueSize)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">serveForever</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'循环运行web服务器，等待客户端的链接并为客户端服务'</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            <span class="comment">#等待新客户端到来</span></span><br><span class="line">            self.clientSocket, client_address = self.listenSocket.accept()</span><br><span class="line"></span><br><span class="line">            <span class="comment">#方法2，多进程服务器，并发服务器于多个客户端</span></span><br><span class="line">            newClientProcess = Process(target = self.handleRequest)</span><br><span class="line">            newClientProcess.start()</span><br><span class="line"></span><br><span class="line">            <span class="comment">#因为创建的新进程中，会对这个套接字+1，所以需要在主进程中减去依次，即调用一次close</span></span><br><span class="line">            self.clientSocket.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handleRequest</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'用一个新的进程，为一个客户端进行服务'</span></span><br><span class="line">        recvData = self.clientSocket.recv(<span class="number">2014</span>)</span><br><span class="line">        requestHeaderLines = recvData.splitlines()</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> requestHeaderLines:</span><br><span class="line">            print(line)</span><br><span class="line"></span><br><span class="line">        httpRequestMethodLine = requestHeaderLines[<span class="number">0</span>]</span><br><span class="line">        getFileName = re.match(<span class="string">"[^/]+(/[^ ]*)"</span>, httpRequestMethodLine).group(<span class="number">1</span>)</span><br><span class="line">        print(<span class="string">"file name is ===&gt;%s"</span>%getFileName) <span class="comment">#for test</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> getFileName == <span class="string">'/'</span>:</span><br><span class="line">            getFileName = documentRoot + <span class="string">"/index.html"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            getFileName = documentRoot + getFileName</span><br><span class="line"></span><br><span class="line">        print(<span class="string">"file name is ===2&gt;%s"</span>%getFileName) <span class="comment">#for test</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            f = open(getFileName)</span><br><span class="line">        <span class="keyword">except</span> IOError:</span><br><span class="line">            responseHeaderLines = <span class="string">"HTTP/1.1 404 not found\r\n"</span></span><br><span class="line">            responseHeaderLines += <span class="string">"\r\n"</span></span><br><span class="line">            responseBody = <span class="string">"====sorry ,file not found===="</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            responseHeaderLines = <span class="string">"HTTP/1.1 200 OK\r\n"</span></span><br><span class="line">            responseHeaderLines += <span class="string">"\r\n"</span></span><br><span class="line">            responseBody = f.read()</span><br><span class="line">            f.close()</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            response = responseHeaderLines + responseBody</span><br><span class="line">            self.clientSocket.send(response)</span><br><span class="line">            self.clientSocket.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#设定服务器的端口</span></span><br><span class="line">serverAddr = (HOST, PORT) = <span class="string">''</span>, <span class="number">8888</span></span><br><span class="line"><span class="comment">#设置服务器服务静态资源时的路径</span></span><br><span class="line">documentRoot = <span class="string">'./html'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">makeServer</span><span class="params">(serverAddr)</span>:</span></span><br><span class="line">    server = WSGIServer(serverAddr)</span><br><span class="line">    <span class="keyword">return</span> server</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line">    httpd = makeServer(serverAddr)</span><br><span class="line">    print(<span class="string">'web Server: Serving HTTP on port %d ...\n'</span>%PORT)</span><br><span class="line">    httpd.serveForever()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="05-服务器动态资源请求"><a href="#05-服务器动态资源请求" class="headerlink" title="05-服务器动态资源请求"></a>05-服务器动态资源请求</h2><ul>
+<li><p>浏览器请求动态页面过程</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-3/7738633.jpg" alt></p>
+</li>
+</ul>
+<h3 id="5-1-WSGI"><a href="#5-1-WSGI" class="headerlink" title="5.1-WSGI"></a>5.1-WSGI</h3><ul>
+<li><p>怎么在你刚建立的Web服务器上运行一个Django应用和Flask应用，如何不做任何改变而适应不同的web架构呢？</p>
+</li>
+<li><p>在以前，选择 Python web 架构会受制于可用的web服务器，反之亦然。如果架构和服务器可以协同工作，那就好了：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-3/94475735.jpg" alt></p>
+</li>
+<li><p>但有可能面对（或者曾有过）下面的问题，当要把一个服务器和一个架构结合起来时，却发现他们不是被设计成协同工作的：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-3/14822936.jpg" alt></p>
+</li>
+<li><p>那么，怎么可以不修改服务器和架构代码而确保可以在多个架构下运行web服务器呢？答案就是 Python Web Server Gateway Interface (或简称 WSGI，读作“wizgy”)。</p>
+</li>
+<li><p>WSGI允许开发者将选择web框架和web服务器分开。可以混合匹配web服务器和web框架，选择一个适合的配对。比如,可以在Gunicorn 或者 Nginx/uWSGI 或者 Waitress上运行 Django, Flask, 或 Pyramid。真正的混合匹配，得益于WSGI同时支持服务器和架构：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-3/67530567.jpg" alt></p>
+</li>
+<li><p>web服务器必须具备WSGI接口，所有的现代Python Web框架都已具备WSGI接口，它让你不对代码作修改就能使服务器和特点的web框架协同工作</p>
+</li>
+<li><p>WSGI由web服务器支持，而web框架允许你选择适合自己的配对，但它同样对于服务器和框架开发者提供便利使他们可以专注于自己偏爱的领域和专长而不至于相互牵制。其他语言也有类似接口：java有Servlet API，Ruby 有 Rac</p>
+</li>
+</ul>
+<h3 id="5-2-定义WSGI接口"><a href="#5-2-定义WSGI接口" class="headerlink" title="5.2-定义WSGI接口"></a>5.2-定义WSGI接口</h3><ul>
+<li><p>WSGI接口定义非常简单，它只要求Web开发者实现一个函数，就可以响应HTTP请求。我们来看一个最简单的Web版本的“Hello World!”：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(environ, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>, <span class="string">'text/html'</span>)])</span><br><span class="line">    <span class="keyword">return</span> <span class="string">'Hello World!'</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>上面的<code>application()</code>函数就是符合WSGI标准的一个HTTP处理函数，它接收两个参数：</p>
+<ul>
+<li>environ：一个包含所有HTTP请求信息的dict对象；</li>
+<li>start_response：一个发送HTTP响应的函数。</li>
+</ul>
+</li>
+<li><p>整个<code>application()</code>函数本身没有涉及到任何解析HTTP的部分，也就是说，把底层web服务器解析部分和应用程序逻辑部分进行了分离，这样开发者就可以专心做一个领域了</p>
+</li>
+<li><p>不过，等等，这个<code>application()</code>函数怎么调用？如果我们自己调用，两个参数environ和start_response我们没法提供，返回的str也没法发给浏览器。</p>
+</li>
+<li><p>所以<code>application()</code>函数必须由WSGI服务器来调用。有很多符合WSGI规范的服务器。而我们此时的web服务器项目的目的就是做一个极可能解析静态网页还可以解析动态网页的服务器</p>
+</li>
+</ul>
+<h2 id="06-Web动态服务器-1-基本实现"><a href="#06-Web动态服务器-1-基本实现" class="headerlink" title="06-Web动态服务器-1-基本实现"></a>06-Web动态服务器-1-基本实现</h2><ul>
+<li><p>code</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WSGIServer</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    addressFamily = socket.AF_INET</span><br><span class="line">    socketType = socket.SOCK_STREAM</span><br><span class="line">    requestQueueSize = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, serverAddress)</span>:</span></span><br><span class="line">        <span class="comment">#创建一个tcp套接字</span></span><br><span class="line">        self.listenSocket = socket.socket(self.addressFamily,self.socketType)</span><br><span class="line">        <span class="comment">#允许重复使用上次的套接字绑定的port</span></span><br><span class="line">        self.listenSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line">        <span class="comment">#绑定</span></span><br><span class="line">        self.listenSocket.bind(serverAddress)</span><br><span class="line">        <span class="comment">#变为被动，并制定队列的长度</span></span><br><span class="line">        self.listenSocket.listen(self.requestQueueSize)</span><br><span class="line"></span><br><span class="line">        self.servrName = <span class="string">"localhost"</span></span><br><span class="line">        self.serverPort = serverAddress[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">serveForever</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'循环运行web服务器，等待客户端的链接并为客户端服务'</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            <span class="comment">#等待新客户端到来</span></span><br><span class="line">            self.clientSocket, client_address = self.listenSocket.accept()</span><br><span class="line"></span><br><span class="line">            <span class="comment">#方法2，多进程服务器，并发服务器于多个客户端</span></span><br><span class="line">            newClientProcess = Process(target = self.handleRequest)</span><br><span class="line">            newClientProcess.start()</span><br><span class="line"></span><br><span class="line">            <span class="comment">#因为创建的新进程中，会对这个套接字+1，所以需要在主进程中减去依次，即调用一次close</span></span><br><span class="line">            self.clientSocket.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setApp</span><span class="params">(self, application)</span>:</span></span><br><span class="line">        <span class="string">'设置此WSGI服务器调用的应用程序入口函数'</span></span><br><span class="line">        self.application = application</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handleRequest</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'用一个新的进程，为一个客户端进行服务'</span></span><br><span class="line">        self.recvData = self.clientSocket.recv(<span class="number">2014</span>)</span><br><span class="line">        requestHeaderLines = self.recvData.splitlines()</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> requestHeaderLines:</span><br><span class="line">            print(line)</span><br><span class="line"></span><br><span class="line">        httpRequestMethodLine = requestHeaderLines[<span class="number">0</span>]</span><br><span class="line">        getFileName = re.match(<span class="string">"[^/]+(/[^ ]*)"</span>, httpRequestMethodLine).group(<span class="number">1</span>)</span><br><span class="line">        print(<span class="string">"file name is ===&gt;%s"</span>%getFileName) <span class="comment">#for test</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> getFileName[<span class="number">-3</span>:] != <span class="string">".py"</span>:</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> getFileName == <span class="string">'/'</span>:</span><br><span class="line">                getFileName = documentRoot + <span class="string">"/index.html"</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                getFileName = documentRoot + getFileName</span><br><span class="line"></span><br><span class="line">            print(<span class="string">"file name is ===2&gt;%s"</span>%getFileName) <span class="comment">#for test</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                f = open(getFileName)</span><br><span class="line">            <span class="keyword">except</span> IOError:</span><br><span class="line">                responseHeaderLines = <span class="string">"HTTP/1.1 404 not found\r\n"</span></span><br><span class="line">                responseHeaderLines += <span class="string">"\r\n"</span></span><br><span class="line">                responseBody = <span class="string">"====sorry ,file not found===="</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                responseHeaderLines = <span class="string">"HTTP/1.1 200 OK\r\n"</span></span><br><span class="line">                responseHeaderLines += <span class="string">"\r\n"</span></span><br><span class="line">                responseBody = f.read()</span><br><span class="line">                f.close()</span><br><span class="line">            <span class="keyword">finally</span>:</span><br><span class="line">                response = responseHeaderLines + responseBody</span><br><span class="line">                self.clientSocket.send(response)</span><br><span class="line">                self.clientSocket.close()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line"></span><br><span class="line">            <span class="comment">#根据接收到的请求头构造环境变量字典</span></span><br><span class="line">            env = &#123;&#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">#调用应用的相应方法，完成动态数据的获取</span></span><br><span class="line">            bodyContent = self.application(env, self.startResponse)</span><br><span class="line"></span><br><span class="line">            <span class="comment">#组织数据发送给客户端</span></span><br><span class="line">            self.finishResponse(bodyContent)</span><br></pre></td></tr></table></figure>
+<pre><code>def startResponse(self, status, response_headers):
+    serverHeaders = [
+        (&apos;Date&apos;, &apos;Tue, 31 Mar 2016 10:11:12 GMT&apos;),
+        (&apos;Server&apos;, &apos;WSGIServer 0.2&apos;),
+    ]
+    self.headers_set = [status, response_headers + serverHeaders]
+
+def finishResponse(self, bodyContent):
+    try:
+        status, response_headers = self.headers_set
+        #response的第一行
+        response = &apos;HTTP/1.1 {status}\r\n&apos;.format(status=status)
+        #response的其他头信息
+        for header in response_headers:
+            response += &apos;{0}: {1}\r\n&apos;.format(*header)
+        #添加一个换行，用来和body进行分开
+        response += &apos;\r\n&apos;
+        #添加发送的数据
+        for data in bodyContent:
+            response += data
+
+        self.clientSocket.send(response)
+    finally:
+        self.clientSocket.close()
+</code></pre><p>#设定服务器的端口<br>serverAddr = (HOST, PORT) = ‘’, 8888<br>#设置服务器静态资源的路径<br>documentRoot = ‘./html’<br>#设置服务器动态资源的路径<br>pythonRoot = ‘./wsgiPy’</p>
+<p>def makeServer(serverAddr, application):</p>
+<pre><code>server = WSGIServer(serverAddr)
+server.setApp(application)
+return server
+</code></pre><p>def main():</p>
+<pre><code>if len(sys.argv) &lt; 2:
+    sys.exit(&apos;请按照要求，指定模块名称:应用名称,例如 module:callable&apos;)
+
+#获取module:callable
+appPath = sys.argv[1]
+#根据冒号切割为module和callable
+module, application = appPath.split(&apos;:&apos;)
+#添加路径套sys.path
+sys.path.insert(0, pythonRoot)
+#动态导入module变量中指定的模块
+module = __import__(module)
+#获取module变量中指定的模块的，application变量指定的属性
+application = getattr(module, application)
+httpd = makeServer(serverAddr, application)
+print(&apos;WSGIServer: Serving HTTP on port %d ...\n&apos;%PORT)
+httpd.serveForever()
+</code></pre><p>if <strong>name</strong> == ‘<strong>main</strong>‘:</p>
+<pre><code>main()
+</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">## 07-应用程序示例</span><br><span class="line"></span><br><span class="line">- code:</span><br><span class="line"></span><br><span class="line">  ```python</span><br><span class="line">  import time</span><br><span class="line"></span><br><span class="line">  def app(environ, start_response):</span><br><span class="line">      status = &apos;200 OK&apos;</span><br><span class="line">      response_headers = [(&apos;Content-Type&apos;, &apos;text/plain&apos;)]</span><br><span class="line">      start_response(status, response_headers)</span><br><span class="line">      return [str(environ)+&apos;==Hello world from a simple WSGI application!---&gt;%s\n&apos;%time.ctime()]</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="08-Web动态服务器-2-传递数据到应用"><a href="#08-Web动态服务器-2-传递数据到应用" class="headerlink" title="08-Web动态服务器-2-传递数据到应用"></a>08-Web动态服务器-2-传递数据到应用</h2><ul>
+<li><p>code:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#coding=utf-8</span></span><br><span class="line"><span class="keyword">import</span> socket</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> multiprocessing <span class="keyword">import</span> Process</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">WSGIServer</span><span class="params">(object)</span>:</span></span><br><span class="line"></span><br><span class="line">    addressFamily = socket.AF_INET</span><br><span class="line">    socketType = socket.SOCK_STREAM</span><br><span class="line">    requestQueueSize = <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, serverAddress)</span>:</span></span><br><span class="line">        <span class="comment">#创建一个tcp套接字</span></span><br><span class="line">        self.listenSocket = socket.socket(self.addressFamily,self.socketType)</span><br><span class="line">        <span class="comment">#允许重复使用上次的套接字绑定的port</span></span><br><span class="line">        self.listenSocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, <span class="number">1</span>)</span><br><span class="line">        <span class="comment">#绑定</span></span><br><span class="line">        self.listenSocket.bind(serverAddress)</span><br><span class="line">        <span class="comment">#变为被动，并制定队列的长度</span></span><br><span class="line">        self.listenSocket.listen(self.requestQueueSize)</span><br><span class="line"></span><br><span class="line">        self.servrName = <span class="string">"localhost"</span></span><br><span class="line">        self.serverPort = serverAddress[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">serveForever</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'循环运行web服务器，等待客户端的链接并为客户端服务'</span></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            <span class="comment">#等待新客户端到来</span></span><br><span class="line">            self.clientSocket, client_address = self.listenSocket.accept()</span><br><span class="line"></span><br><span class="line">            <span class="comment">#方法2，多进程服务器，并发服务器于多个客户端</span></span><br><span class="line">            newClientProcess = Process(target = self.handleRequest)</span><br><span class="line">            newClientProcess.start()</span><br><span class="line"></span><br><span class="line">            <span class="comment">#因为创建的新进程中，会对这个套接字+1，所以需要在主进程中减去依次，即调用一次close</span></span><br><span class="line">            self.clientSocket.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setApp</span><span class="params">(self, application)</span>:</span></span><br><span class="line">        <span class="string">'设置此WSGI服务器调用的应用程序入口函数'</span></span><br><span class="line">        self.application = application</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">handleRequest</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'用一个新的进程，为一个客户端进行服务'</span></span><br><span class="line">        self.recvData = self.clientSocket.recv(<span class="number">2014</span>)</span><br><span class="line">        requestHeaderLines = self.recvData.splitlines()</span><br><span class="line">        <span class="keyword">for</span> line <span class="keyword">in</span> requestHeaderLines:</span><br><span class="line">            print(line)</span><br><span class="line"></span><br><span class="line">        httpRequestMethodLine = requestHeaderLines[<span class="number">0</span>]</span><br><span class="line">        getFileName = re.match(<span class="string">"[^/]+(/[^ ]*)"</span>, httpRequestMethodLine).group(<span class="number">1</span>)</span><br><span class="line">        print(<span class="string">"file name is ===&gt;%s"</span>%getFileName) <span class="comment">#for test</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> getFileName[<span class="number">-3</span>:] != <span class="string">".py"</span>:</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> getFileName == <span class="string">'/'</span>:</span><br><span class="line">                getFileName = documentRoot + <span class="string">"/index.html"</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                getFileName = documentRoot + getFileName</span><br><span class="line"></span><br><span class="line">            print(<span class="string">"file name is ===2&gt;%s"</span>%getFileName) <span class="comment">#for test</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                f = open(getFileName)</span><br><span class="line">            <span class="keyword">except</span> IOError:</span><br><span class="line">                responseHeaderLines = <span class="string">"HTTP/1.1 404 not found\r\n"</span></span><br><span class="line">                responseHeaderLines += <span class="string">"\r\n"</span></span><br><span class="line">                responseBody = <span class="string">"====sorry ,file not found===="</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                responseHeaderLines = <span class="string">"HTTP/1.1 200 OK\r\n"</span></span><br><span class="line">                responseHeaderLines += <span class="string">"\r\n"</span></span><br><span class="line">                responseBody = f.read()</span><br><span class="line">                f.close()</span><br><span class="line">            <span class="keyword">finally</span>:</span><br><span class="line">                response = responseHeaderLines + responseBody</span><br><span class="line">                self.clientSocket.send(response)</span><br><span class="line">                self.clientSocket.close()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment">#处理接收到的请求头</span></span><br><span class="line">            self.parseRequest()</span><br><span class="line"></span><br><span class="line">            <span class="comment">#根据接收到的请求头构造环境变量字典</span></span><br><span class="line">            env = self.getEnviron()</span><br><span class="line"></span><br><span class="line">            <span class="comment">#调用应用的相应方法，完成动态数据的获取</span></span><br><span class="line">            bodyContent = self.application(env, self.startResponse)</span><br><span class="line"></span><br><span class="line">            <span class="comment">#组织数据发送给客户端</span></span><br><span class="line">            self.finishResponse(bodyContent)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">parseRequest</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="string">'提取出客户端发送的request'</span></span><br><span class="line">        requestLine = self.recvData.splitlines()[<span class="number">0</span>]</span><br><span class="line">        requestLine = requestLine.rstrip(<span class="string">'\r\n'</span>)</span><br><span class="line">        self.requestMethod, self.path, self.requestVersion = requestLine.split(<span class="string">" "</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getEnviron</span><span class="params">(self)</span>:</span></span><br><span class="line">        env = &#123;&#125;</span><br><span class="line">        env[<span class="string">'wsgi.version'</span>]      = (<span class="number">1</span>, <span class="number">0</span>)</span><br><span class="line">        env[<span class="string">'wsgi.input'</span>]        = self.recvData</span><br><span class="line">        env[<span class="string">'REQUEST_METHOD'</span>]    = self.requestMethod    <span class="comment"># GET</span></span><br><span class="line">        env[<span class="string">'PATH_INFO'</span>]         = self.path             <span class="comment"># /index.html</span></span><br><span class="line">        <span class="keyword">return</span> env</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">startResponse</span><span class="params">(self, status, response_headers, exc_info=None)</span>:</span></span><br><span class="line">        serverHeaders = [</span><br><span class="line">            (<span class="string">'Date'</span>, <span class="string">'Tue, 31 Mar 2016 10:11:12 GMT'</span>),</span><br><span class="line">            (<span class="string">'Server'</span>, <span class="string">'WSGIServer 0.2'</span>),</span><br><span class="line">        ]</span><br><span class="line">        self.headers_set = [status, response_headers + serverHeaders]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">finishResponse</span><span class="params">(self, bodyContent)</span>:</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            status, response_headers = self.headers_set</span><br><span class="line">            <span class="comment">#response的第一行</span></span><br><span class="line">            response = <span class="string">'HTTP/1.1 &#123;status&#125;\r\n'</span>.format(status=status)</span><br><span class="line">            <span class="comment">#response的其他头信息</span></span><br><span class="line">            <span class="keyword">for</span> header <span class="keyword">in</span> response_headers:</span><br><span class="line">                response += <span class="string">'&#123;0&#125;: &#123;1&#125;\r\n'</span>.format(*header)</span><br><span class="line">            <span class="comment">#添加一个换行，用来和body进行分开</span></span><br><span class="line">            response += <span class="string">'\r\n'</span></span><br><span class="line">            <span class="comment">#添加发送的数据</span></span><br><span class="line">            <span class="keyword">for</span> data <span class="keyword">in</span> bodyContent:</span><br><span class="line">                response += data</span><br><span class="line"></span><br><span class="line">            self.clientSocket.send(response)</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            self.clientSocket.close()</span><br><span class="line"></span><br><span class="line"><span class="comment">#设定服务器的端口</span></span><br><span class="line">serverAddr = (HOST, PORT) = <span class="string">''</span>, <span class="number">8888</span></span><br><span class="line"><span class="comment">#设置服务器静态资源的路径</span></span><br><span class="line">documentRoot = <span class="string">'./html'</span></span><br><span class="line"><span class="comment">#设置服务器动态资源的路径</span></span><br><span class="line">pythonRoot = <span class="string">'./wsgiPy'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">makeServer</span><span class="params">(serverAddr, application)</span>:</span></span><br><span class="line">    server = WSGIServer(serverAddr)</span><br><span class="line">    server.setApp(application)</span><br><span class="line">    <span class="keyword">return</span> server</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span><span class="params">()</span>:</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> len(sys.argv) &lt; <span class="number">2</span>:</span><br><span class="line">        sys.exit(<span class="string">'请按照要求，指定模块名称:应用名称,例如 module:callable'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#获取module:callable</span></span><br><span class="line">    appPath = sys.argv[<span class="number">1</span>]</span><br><span class="line">    <span class="comment">#根据冒号切割为module和callable</span></span><br><span class="line">    module, application = appPath.split(<span class="string">':'</span>)</span><br><span class="line">    <span class="comment">#添加路径套sys.path</span></span><br><span class="line">    sys.path.insert(<span class="number">0</span>, pythonRoot)</span><br><span class="line">    <span class="comment">#动态导入module变量中指定的模块</span></span><br><span class="line">    module = __import__(module)</span><br><span class="line">    <span class="comment">#获取module变量中制定的模块的application变量指定的属性</span></span><br><span class="line">    application = getattr(module, application)</span><br><span class="line">    httpd = makeServer(serverAddr, application)</span><br><span class="line">    print(<span class="string">'WSGIServer: Serving HTTP on port &#123;port&#125; ...\n'</span>.format(port=PORT))</span><br><span class="line">    httpd.serveForever()</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    main()guo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结果：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-3/93511036.jpg" alt></p>
+</li>
+</ul>
+<p>## </p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/02/进程/" rel="next" title="进程">
+                <i class="fa fa-chevron-left"></i> 进程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/02/闭包-装饰器/" rel="prev" title="闭包_装饰器">
+                闭包_装饰器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Web服务器案例"><span class="nav-text">Web服务器案例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-HTTP协议介绍"><span class="nav-text">01-HTTP协议介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-使用谷歌-火狐浏览器分析"><span class="nav-text">1.1-使用谷歌/火狐浏览器分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-http协议的分析"><span class="nav-text">1.2-http协议的分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1请求"><span class="nav-text">1.2.1请求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-响应"><span class="nav-text">1.2.2-响应</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-3-浏览器解析过程"><span class="nav-text">1.2.3-浏览器解析过程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-总结"><span class="nav-text">1.3-总结</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-HTTP请求"><span class="nav-text">1.3.1 HTTP请求</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-HTTP格式"><span class="nav-text">1.3.2-HTTP格式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-Web静态服务器-1-显示固定的页面"><span class="nav-text">02-Web静态服务器-1-显示固定的页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-Web静态服务器-3-使用类"><span class="nav-text">04-Web静态服务器-3-使用类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-服务器动态资源请求"><span class="nav-text">05-服务器动态资源请求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-WSGI"><span class="nav-text">5.1-WSGI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-定义WSGI接口"><span class="nav-text">5.2-定义WSGI接口</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#06-Web动态服务器-1-基本实现"><span class="nav-text">06-Web动态服务器-1-基本实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#08-Web动态服务器-2-传递数据到应用"><span class="nav-text">08-Web动态服务器-2-传递数据到应用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

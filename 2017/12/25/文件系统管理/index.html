@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文件系统管理回顾分区和文件系统 详情：Linux系统安装——系统分区相关  文件系统常用命令 df、du、fsck、dumpe2fs等命令 文件系统查看命令：df 格式：df+选项+挂载点">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件系统管理">
+<meta property="og:url" content="http://21guns.top/2017/12/25/文件系统管理/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="文件系统管理回顾分区和文件系统 详情：Linux系统安装——系统分区相关  文件系统常用命令 df、du、fsck、dumpe2fs等命令 文件系统查看命令：df 格式：df+选项+挂载点">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T08:33:20.769Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件系统管理">
+<meta name="twitter:description" content="文件系统管理回顾分区和文件系统 详情：Linux系统安装——系统分区相关  文件系统常用命令 df、du、fsck、dumpe2fs等命令 文件系统查看命令：df 格式：df+选项+挂载点">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/25/文件系统管理/">
+
+
+
+
+
+  <title>文件系统管理 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/25/文件系统管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文件系统管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:29:49+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="文件系统管理"><a href="#文件系统管理" class="headerlink" title="文件系统管理"></a>文件系统管理</h1><h2 id="回顾分区和文件系统"><a href="#回顾分区和文件系统" class="headerlink" title="回顾分区和文件系统"></a>回顾分区和文件系统</h2><ul>
+<li>详情：Linux系统安装——系统分区相关</li>
+</ul>
+<h2 id="文件系统常用命令"><a href="#文件系统常用命令" class="headerlink" title="文件系统常用命令"></a>文件系统常用命令</h2><ul>
+<li>df、du、fsck、dumpe2fs等命令<ul>
+<li>文件系统查看命令：df<ul>
+<li>格式：df+选项+挂载点<a id="more"></a></li>
+<li>常用选项<ul>
+<li>a：显示所有文件信息，包括特殊文件系统，如/proc/、/sysfs</li>
+<li>h：使用习惯单位显示容量，如KB、MB、GB，最常用</li>
+<li>T：显示文件系统类型</li>
+<li>m：以MB为单位显示容量</li>
+<li>k：以KB为单位显示容量，默认</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>统计目录或文件大小：du<ul>
+<li>du+选项+目录或文件名</li>
+<li>一般不使用其看文件大小，直接ls -l即可</li>
+<li>ls -l查看目录大小仅是查看其子目录下文件名的占用大小，不针对文件具体数据大小</li>
+<li>常用选项<ul>
+<li>a：显示每个子文件的磁盘占有量；默认只统计子目录的</li>
+<li>h：使用习惯单位显示容量，如KB、MB、GB，最常用</li>
+<li>s：统计总占有量，而不列出子目录和子文件的占有量</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>du和df的区别<ul>
+<li>df：面向文件系统，不光考虑文件占用空间，还要统计被命令或程序占用的空间（如文件已删除，但程序并没有释放空间</li>
+<li>du：面向文件，只计算目录或文件占用的空间</li>
+</ul>
+</li>
+<li>文件系统修复命令：fsck<ul>
+<li>fsck+选项+分区设备文件名</li>
+<li>无需手动运行，系统开机时自动运行</li>
+<li>了解即可，不常用，有时修复后反而出错</li>
+<li>a：不显示用户提示，自动修复文件系统</li>
+<li>y：自动修复。同a作用相同，有的文件系统只支持y</li>
+</ul>
+</li>
+<li>显示磁盘状态命令：dumpe2fs<ul>
+<li>+分区设备文件名</li>
+<li>命令本身不难，输出的结果复杂</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>挂载命令：mount<ul>
+<li>简介<ul>
+<li>进行设备挂载，Linux所有存储设备使用前都需要挂载，如硬盘、软盘、光盘、U盘、移动硬盘</li>
+<li>硬盘是系统自动挂载，但光盘等需要手动挂载</li>
+<li>挂载：将设备文件名与挂载点建立连接，通过挂载点访问设备</li>
+<li>挂载即win中分配盘符；挂载点对应盘符；win中是自动进行的，Linux需要手工</li>
+</ul>
+</li>
+<li>查询与自动挂载<ul>
+<li>l或不加选项：查询系统中已挂载的设备，l会显示卷标名称</li>
+<li>a：依据配置文件/etc/fstab的内容，自行挂载</li>
+</ul>
+</li>
+<li>挂载命令格式<ul>
+<li>mount （-t 文件系统）（-L 卷标名）（-o 特殊选项）+设备文件名+挂载点</li>
+<li>t：指定挂载的文件系统类型，可ext3，ext4，iso9660</li>
+<li>L：挂载指定卷标分区，而不是设备文件名挂载（一个别名，用处不大</li>
+<li>o：指定挂载的额外选项（如remount、noexec</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>挂载光盘与U盘<ul>
+<li>挂载光盘相关<ul>
+<li>建立挂载点，即创建盘符<ul>
+<li>mkdir /mnt/cdrom/</li>
+<li>/media/挂载光盘；/mnt/挂U盘；</li>
+<li>早期只有mnt目录；哪个目录作为挂载点随便，只要是一个空目录</li>
+</ul>
+</li>
+<li>光盘插入光驱<ul>
+<li>正式挂载前需要插入光驱</li>
+<li>物理机即放入光盘</li>
+<li>虚拟机进行相关操作</li>
+</ul>
+</li>
+<li>挂载光盘<ul>
+<li>mount -t iso9660 /dev/cdrom /mnt/cdrom/</li>
+<li>mount /dev/sr0 /mnt/cdrom/</li>
+<li>光盘默认的文件系统为iso9660</li>
+<li>cdrom和sr0代表相同光盘，使用哪个名称均可以，只不过一方是软链接，即快捷方式</li>
+<li>若有第二块，则为cdrom1和sr1</li>
+</ul>
+</li>
+<li>卸载光盘<ul>
+<li>若都为物理机，Windows直接弹出光盘即可，Linux需要先卸载，再按弹出光盘</li>
+<li>win的分配盘符和取消盘符都是自动进行，但Linux需要手动，因此要手动取消盘符，即卸载光盘。二者原理相同，自动与手动的区别</li>
+<li>格式：umount + 设备文件名或挂载点<ul>
+<li>两者均可</li>
+<li>因为挂载后，两者建立连接，都表示同一光盘，任一均可</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其它<ul>
+<li>光盘是只读，不可写</li>
+<li>挂载后会提示“光盘有写保护，以readonly方式挂载”，可作为挂载成功的标志</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>挂载U盘<ul>
+<li>插入U盘<ul>
+<li>插入时不可以在远程工具连接时，在Linux本身</li>
+<li>若是虚拟机，一定进入Linux的虚拟机，否则插入后被物理机识别</li>
+</ul>
+</li>
+<li>找到U盘设备文件名<ul>
+<li>U盘的设备文件名不是固定的</li>
+<li>U盘的命名同硬盘，名字不确定，取决于系统已经存在的硬盘数目，如已经有一块，则为sdb，已经有两块，则为sdc</li>
+<li>fdisk -l命令，</li>
+<li>如/dev/sdb1，注意要有分区号</li>
+</ul>
+</li>
+<li>创建挂载点</li>
+<li>挂载U盘<ul>
+<li>mount -t vfat /dev/sdb1 /mnt/usb/</li>
+<li>Linux中，FAT16识别为fat，FAT32识别为vfat</li>
+<li>Linux默认不支持NTFS文件系统，如ntfs的移动硬盘默认不可以挂载成功</li>
+</ul>
+</li>
+<li>卸载U盘</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>支持NTFS文件系统<ul>
+<li>简介<ul>
+<li>Linux默认不支持NTFS文件系统，如ntfs的移动硬盘默认不可以挂载成功</li>
+<li>Linux绝大情况下都不需要手动安装驱动，内核默认存在许多常见硬件的驱动，自行安装</li>
+<li>windows安装后需要给所有硬件安装驱动后才可以使用，手工安装或更新</li>
+<li>Linux手工安装的情况<ul>
+<li>内核发布过早，较新的硬件驱动需自行安装</li>
+<li>像ntfs文件系统的移动硬盘，需要自己安装驱动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>两种方法<ul>
+<li>重新编译内核，将ntfs驱动加进来（底层操作，不建议</li>
+<li>利用第三方软件<ul>
+<li>NTFS-3G插件<ul>
+<li>下载安装</li>
+<li>使用：mount -t ntfs-3g+分区设备文件名+挂载点</li>
+<li>注意特定的文件系统类型</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="fdisk分区"><a href="#fdisk分区" class="headerlink" title="fdisk分区"></a>fdisk分区</h2><ul>
+<li>fdisk命令分区过程<ul>
+<li>1，添加硬盘（关机断电情况下</li>
+<li>2，查看新硬盘（fdisk -l</li>
+<li>3，fdisk命令分区<ul>
+<li>fdisk /dev/sdb</li>
+<li>注意：还未分区，不写分区号</li>
+</ul>
+</li>
+<li>4，进入交互模式<ul>
+<li>常用fdisk交互指令<ul>
+<li>d：删除分区</li>
+<li>n：新建分区</li>
+<li>t：改变分区的系统id</li>
+<li>l：显示已知的文件系统类型（82位Linux swap 分区，83为Linux标准分区</li>
+<li>p：显示分区列表</li>
+<li>q：不保存退出</li>
+<li>w：保存退出</li>
+</ul>
+</li>
+<li>输错字符，要删除时，需按着ctrl键</li>
+</ul>
+</li>
+<li>5，开始分区（主分区为例<ul>
+<li>键入n，新建分区</li>
+<li>选择分区类型，扩展分区或主分区（先主分区；逻辑分区要等扩展分区创建后才可以</li>
+<li>选择分区号，1-4（一般从1开始，按顺序连续分区，不留间隔</li>
+<li>选择开始柱面（可理解为一个硬盘由许多柱面组成</li>
+<li>选择结束柱面<ul>
+<li>作为第一块分区终点</li>
+<li>也要连续分配，不留间隔</li>
+<li>可以选择以柱面分配，也可以用K、M、G等熟悉的空间单位，如+2G</li>
+<li>注意用KMG单位时要带+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>6，保存退出才可生效：w</li>
+<li>7，重新读取分区表信息<ul>
+<li>partprobe命令</li>
+<li>有时分区表正在占用，系统提示重新启动后分区才可生效</li>
+<li>避免重启，用此命令</li>
+<li>可作为分区的标准执行步骤，每次分区后都执行</li>
+</ul>
+</li>
+<li>8，格式化分区<ul>
+<li>mkfs -t ext4 /dev/sdb1</li>
+<li>将指定分区格式化为指定文件系统类型</li>
+</ul>
+</li>
+<li>9，建立挂载点并挂载<ul>
+<li>mkdir /disk1/</li>
+<li>mount /dev/sdb1 /disk1/</li>
+<li>fdisk命令只能查看硬盘是否被分区</li>
+<li>查看是否被挂载要用mount或df</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分区自动挂载<ul>
+<li>默认下：分区在每次系统重启都需要手工挂载</li>
+<li>要实现自动挂载，归根结底要写入文件，/etc/fstab</li>
+<li>fstab文件的六个字段<ul>
+<li>1，分区设备文件名或UUID（硬盘通用唯一标示码<ul>
+<li>尽量采用uuid</li>
+<li>dumpe2fs + /dev/sdb1查看某分区设备的uuid</li>
+</ul>
+</li>
+<li>2，挂载点</li>
+<li>3，文件系统名称</li>
+<li>4，挂载权限参数<ul>
+<li>一般为default权限</li>
+<li>其权限与mount命令时的挂载权限是通用的</li>
+</ul>
+</li>
+<li>5，指定分区是否被dump备份<ul>
+<li>dump为Linux的备份命令</li>
+<li>备份目录：此分区对应目录下的lost+found目录（只针对是分区的目录，其子分区不会有</li>
+<li>0表不备份</li>
+<li>1表每天备份</li>
+<li>2表不定期备份</li>
+</ul>
+</li>
+<li>6，指定分区是否被fsck检测<ul>
+<li>fsck检测命令不需手工，系统会自动进行</li>
+<li>0表不检测</li>
+<li>其它数字代表检测的优先级</li>
+<li>数字越小优先级越高，1比2高</li>
+<li>手工添加的分区不应该为1，系统根分区的为1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实现自动挂载，按照fstab文件格式添加相应记录即可<ul>
+<li>vi /etc/fstab</li>
+<li>添加：/dev/sdb1 /disk1 ext4 default 1 2</li>
+</ul>
+</li>
+<li>自动挂载<ul>
+<li>mount -a</li>
+<li>依据fstab命令，实现自动挂载</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="etc-fstab文件修复"><a href="#etc-fstab文件修复" class="headerlink" title="/etc/fstab文件修复"></a>/etc/fstab文件修复</h2><ul>
+<li>fstab为系统重要文件，毁坏后系统可能启动异常</li>
+<li>启动时报错，仍可输入密码后进入<ul>
+<li>前提是根分区那条目录没有出错</li>
+<li>否则连报错都不出现，直接崩溃，何谈进入系统</li>
+</ul>
+</li>
+<li>尝试修改fstab文件，发现只读</li>
+<li>重新挂载根分区，使其可写，mount -o remount，rw /</li>
+<li>修改fstab错误，保存</li>
+<li>重启测试文件修复成功</li>
+</ul>
+<h2 id="分配swap分区"><a href="#分配swap分区" class="headerlink" title="分配swap分区"></a>分配swap分区</h2><ul>
+<li>简介<ul>
+<li>系统必须分配swap作为系统分区</li>
+<li>若使用过程中发现swap分区不够大，可扩充</li>
+</ul>
+</li>
+<li>free命令<ul>
+<li>查看内存与swap分区使用状况</li>
+<li>加m参数，以M单位来显示</li>
+<li>cache（缓存）：是指把读取出来的数据保存在内存当中，当再次读取时，不用读取硬盘而直接从内存当中读取，加速数据读取过程</li>
+<li>buffer（缓冲）：是指在写入数据时，先把分散的写入操作保存到内存当中，当达到一定程度再集中写入硬盘，减少了磁盘碎片和硬盘的反复寻道，加速了数据的写入过程</li>
+</ul>
+</li>
+<li>步骤<ul>
+<li>1，按照分区步骤，新建一个逻辑分区<ul>
+<li>默认分区id为83，代表Linux标准分区，swap分区号为82</li>
+</ul>
+</li>
+<li>2，使用t参数更改分区号为82，即swap</li>
+<li>3，w保存退出</li>
+<li>4，partprobe，重新读取分区表<ul>
+<li>避免重启</li>
+<li>非万能，有时运行之后还是报错，仍需重启</li>
+</ul>
+</li>
+<li>5，格式化<ul>
+<li>同普通分区格式化所用命令不同</li>
+<li>mkswap /dev/sdb6</li>
+</ul>
+</li>
+<li>6，加入swap分区<ul>
+<li>swapon /dev/sdb6</li>
+<li>取消分区：swapoff /dev/sdb6</li>
+</ul>
+</li>
+<li>7，swap分区自动挂载<ul>
+<li>若是命令操作，重启时仍需手工挂载</li>
+<li>修改fstab文件实现自动挂载</li>
+<li>添加记录：/dev/sdb6 swap swap default 0 0<ul>
+<li>第二个字段为swap，注意没有根/</li>
+<li>后面两字段为0 0</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/文本编辑器Vim/" rel="next" title="文本编辑器Vim">
+                <i class="fa fa-chevron-left"></i> 文本编辑器Vim
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/备份与恢复/" rel="prev" title="备份与恢复">
+                备份与恢复 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件系统管理"><span class="nav-text">文件系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#回顾分区和文件系统"><span class="nav-text">回顾分区和文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统常用命令"><span class="nav-text">文件系统常用命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fdisk分区"><span class="nav-text">fdisk分区</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#etc-fstab文件修复"><span class="nav-text">/etc/fstab文件修复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分配swap分区"><span class="nav-text">分配swap分区</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="权限管理ACL权限 简介与开启 ACL是为解决身份不足的问题，一般只有ugo三种身份 普通权限即ugo的rwx 查看分区ACL是否权限是否开启 dumpe2fs -h /dev/sda3">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="权限管理">
+<meta property="og:url" content="http://21guns.top/2017/12/25/权限管理/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="权限管理ACL权限 简介与开启 ACL是为解决身份不足的问题，一般只有ugo三种身份 普通权限即ugo的rwx 查看分区ACL是否权限是否开启 dumpe2fs -h /dev/sda3">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T08:33:18.679Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="权限管理">
+<meta name="twitter:description" content="权限管理ACL权限 简介与开启 ACL是为解决身份不足的问题，一般只有ugo三种身份 普通权限即ugo的rwx 查看分区ACL是否权限是否开启 dumpe2fs -h /dev/sda3">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/25/权限管理/">
+
+
+
+
+
+  <title>权限管理 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/25/权限管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">权限管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:29:49+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="权限管理"><a href="#权限管理" class="headerlink" title="权限管理"></a>权限管理</h1><h2 id="ACL权限"><a href="#ACL权限" class="headerlink" title="ACL权限"></a>ACL权限</h2><ul>
+<li>简介与开启<ul>
+<li>ACL是为解决身份不足的问题，一般只有ugo三种身份</li>
+<li>普通权限即ugo的rwx</li>
+<li>查看分区ACL是否权限是否开启<ul>
+<li>dumpe2fs -h /dev/sda3<a id="more"></a></li>
+<li>dumpe2fs命令是查询指定分区详细文件系统信息的命令</li>
+<li>-h：仅显示超级块中信息，而不显示磁盘块的详细信息</li>
+<li>一般默认下都是开启的，查看一下以防万一</li>
+</ul>
+</li>
+<li>临时开启分区ACL权限<ul>
+<li>默认是开启的，若真未开启，则…</li>
+<li>mount -o remount，acl /</li>
+<li>重新挂载根分区，并挂载加入acl权限</li>
+<li>命令挂载仅是临时生效，重新启动系统后则失效</li>
+</ul>
+</li>
+<li>永久开启分区ACL权限<ul>
+<li>vim /etc/fstab<ul>
+<li>编辑文件，加入acl</li>
+<li>defaults后加,acl</li>
+</ul>
+</li>
+<li>mount -o remount /<ul>
+<li>重新挂载文件系统或重启系统，使修改生效</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查看与设定<ul>
+<li>查看ACL命令<ul>
+<li>getfacle +文件名</li>
+<li>查看某文件acl权限</li>
+</ul>
+</li>
+<li>设定ACL权限的命令<ul>
+<li>setfacle+选项+文件名</li>
+<li>选项<ul>
+<li>-m：设定acl权限</li>
+<li>-x：删除指定的acl权限</li>
+<li>-b：删除所有的acl权限</li>
+<li>-d：设定默认acl权限</li>
+<li>-k：删除默认acl权限</li>
+<li>-R：递归设定acl权限</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>给某用户设定acl权限<ul>
+<li>此用户即不可设置为目录的所有者，也不可设置为目录的所属组，故应用到acl</li>
+<li>setfacl -m u:st:rx /project/</li>
+<li>给用户st赋予r-x权限，使用“u：用户名：权限”格式</li>
+</ul>
+</li>
+<li>给某用户组设定ACL权限<ul>
+<li>setfacl -m g:tgroup:rwx /project</li>
+<li>为组tgroup分配acl权限，使用“g：组名：权限”格式</li>
+</ul>
+</li>
+<li>设置之后，ll命令查看，在普通权限后有一个加号（ugo的rwx即为普通权限</li>
+</ul>
+</li>
+<li>最大有效权限与删除ACL权限<ul>
+<li>最大有效权限mask<ul>
+<li>mask是用来指定最大有效权限的</li>
+<li>若给用户赋予了acl权限，是需要和mask权限相与，才能得到用户的真正权限</li>
+</ul>
+</li>
+<li>设置最大有效权限<ul>
+<li>setfacl -m m:rx /project</li>
+<li>设定mask权限为r-x，格式如上</li>
+</ul>
+</li>
+<li>删除ACL权限<ul>
+<li>删除指定用户的acl权限<ul>
+<li>setfacl -x u：用户名 文件名</li>
+</ul>
+</li>
+<li>删除指定用户组的acl权限<ul>
+<li>setfacl -x g：组名 文件名</li>
+</ul>
+</li>
+<li>删除文件的所有acl权限<ul>
+<li>setfacl -b 文件名</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>默认ACL权限与递归ACL权限<ul>
+<li>递归acl权限<ul>
+<li>递归是父目录在设定acl时，所有的子文件和子目录也会拥有的acl权限</li>
+<li>setfacl -m u：用户名：权限 -R 文件名</li>
+</ul>
+</li>
+<li>默认acl权限<ul>
+<li>默认acl权限的作用是如果给父目录设定了默认acl权限，那么父目录中所有新建的子文件都会继承父目录的acl权限</li>
+<li>setfacl -m d：u：用户名：权限 文件名</li>
+</ul>
+</li>
+<li>这两种权限都只针对于目录</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件特殊权限"><a href="#文件特殊权限" class="headerlink" title="文件特殊权限"></a>文件特殊权限</h2><ul>
+<li>SetUID和SetGID（以SUID为例<ul>
+<li>功能<ul>
+<li>只有可以执行的二进制程序才能设定SUID权限</li>
+<li>命令执行者要对该程序拥有x，即执行权限</li>
+<li>命令执行者在执行该程序时获得该程序文件属主的身份（在执行程序的过程中灵魂附体为文件的属主</li>
+<li>SetUID权限只在该程序执行过程中有效，也就是说身份改变只在程序执行过程中有效</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>passwd命令拥有SetUID权限，所以普通用户可以修改自己的密码</li>
+<li>cat命令没有SetUID权限，所以普通用户不能查看/etc/shadow文件内容</li>
+</ul>
+</li>
+<li>设定suid的方法<ul>
+<li>chmod 4755 文件名（4代表suid，2表示sgid，1表示Sbit，7的话表示都有</li>
+<li>chmod u+s 文件名</li>
+</ul>
+</li>
+<li>取消SUID的方法<ul>
+<li>chmod 755 文件名</li>
+<li>chmod u-s 文件名</li>
+</ul>
+</li>
+<li>危险的SetUID<ul>
+<li>关键目录应严格控制写权限，如/，/usr</li>
+<li>用户的密码设置要严格遵守密码三原则</li>
+<li>对系统中默认应该具有SetUID权限的文件作一列表，定时检查有没有这之外的文件被设置了SetUID权限</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Sticky BIT<ul>
+<li>SBIT粘着位作用<ul>
+<li>粘着位目前只对目录有效（SUID针对可执行程序，SGID针对目录和文件</li>
+<li>普通目录对该目录拥有w和x权限，即普通用户可以在此目录拥有写入权限</li>
+<li>如果没有粘着位，因为普通用户拥有w权限，所以可以删除此目录下所有文件，包括其它用户建立的文件。一旦赋予了粘着位，除了root可以删除所有文件，普通用户就算拥有w权限，也只能删除自己建立的文件，但是不能删除其它用户建立的文件</li>
+</ul>
+</li>
+<li>设置与取消SBIT<ul>
+<li>设置<ul>
+<li>chmod 1755 目录名</li>
+<li>chmod o+t 目录名</li>
+</ul>
+</li>
+<li>取消<ul>
+<li>chmod  777 目录名</li>
+<li>chmod o-t 目录名</li>
+</ul>
+</li>
+<li>与SUID和SGID得设置方法基本一致</li>
+<li>赋予7755，前面的7意义不大，但是也允许</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件系统属性chattr权限"><a href="#文件系统属性chattr权限" class="headerlink" title="文件系统属性chattr权限"></a>文件系统属性chattr权限</h2><ul>
+<li>chattr命令<ul>
+<li>设置文件系统属性</li>
+<li>chattr +/-/= 选项 文件/目录名</li>
+<li>+/-/=表增加/删除/增加某权限</li>
+<li>选项<ul>
+<li>i<ul>
+<li>如果对文件设置i属性，那么不允许对文件进行删除、改名，也不能添加和修改数据；相当于锁起来了</li>
+<li>如果对目录设置i属性，那么只能修改目录下文件的数据，但不允许建立和删除文件</li>
+</ul>
+</li>
+<li>a<ul>
+<li>如果对文件设置a属性，那么只能在文件中增加数据，不能删除也不能修改数据，</li>
+<li>如果对目录设置a属性，那么只允许在目录中建立和修改文件，但是不允许删除</li>
+</ul>
+</li>
+<li>i属性更严格，a较宽松</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>lsattr命令<ul>
+<li>查看文件系统属性</li>
+<li>lsattr + 选项 + 文件名</li>
+<li>-a：显示所有文件和目录</li>
+<li>-d：若目标是目录，仅列出目录本身的属性，而不是子文件的</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统命令sudo权限"><a href="#系统命令sudo权限" class="headerlink" title="系统命令sudo权限"></a>系统命令sudo权限</h2><ul>
+<li>sudo权限<ul>
+<li>root把本来只能超级用户执行的命令赋予普通用户执行</li>
+<li>sudo的操作对象是系统命令，而chattr等的对象是文件及目录</li>
+</ul>
+</li>
+<li>sudo使用<ul>
+<li>visodu命令<ul>
+<li>直接运行此命令（root运行</li>
+<li>实际修改的是/etc/sudoers文件（也可以vim直接修改此文件</li>
+<li>其内容编辑<ul>
+<li>root ALL=(ALL) ALL<ul>
+<li>用户名 被管理主机的地址=（可使用的身份） 授权命令（绝对路径表示</li>
+<li>一般地址写ALL或者本机IP，不是指来源IP，也可以网段（自己查</li>
+<li>一般可使用的身份：写ALL或不写均可，一般表示此用户使用 root身份</li>
+</ul>
+</li>
+<li><h1 id="wheel-ALL-ALL-ALL"><a href="#wheel-ALL-ALL-ALL" class="headerlink" title="%wheel ALL=(ALL)  ALL"></a>%wheel ALL=(ALL)  ALL</h1><ul>
+<li>%组名 被管理主机的地址=（可使用的身份） 授权命令（绝对路径表示</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>授权sc用户可以重启服务器<ul>
+<li>visudo</li>
+<li>添加内容：sc ALL=/sbin/shutdown -r now</li>
+</ul>
+</li>
+<li>普通用户执行sudo赋予的命令<ul>
+<li>su -sc</li>
+<li>sudo -l（查看可用的sudo命令</li>
+<li>sudo /sbin/shutdown -r now（普通用户执行sudo赋予的命令</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/shell编程/" rel="next" title="shell编程">
+                <i class="fa fa-chevron-left"></i> shell编程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/服务管理/" rel="prev" title="服务管理">
+                服务管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#权限管理"><span class="nav-text">权限管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ACL权限"><span class="nav-text">ACL权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件特殊权限"><span class="nav-text">文件特殊权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统属性chattr权限"><span class="nav-text">文件系统属性chattr权限</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统命令sudo权限"><span class="nav-text">系统命令sudo权限</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#wheel-ALL-ALL-ALL"><span class="nav-text">%wheel ALL=(ALL)  ALL</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

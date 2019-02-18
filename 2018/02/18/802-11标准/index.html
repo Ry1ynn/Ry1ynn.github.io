@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="无线安全,802.11,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="802.11标准课程简介 与其它章节独立，涵盖面广，可独立成课 无线技术变化快，难度大 即新鲜刺激又压力山大（不会研究很深 一半理论一半实践，理论是最有价值的东西，网上文章多实践 无线技术难度最大，如协议结构知识点">
+<meta name="keywords" content="无线安全,802.11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="802.11标准">
+<meta property="og:url" content="http://21guns.top/2018/02/18/802-11标准/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="802.11标准课程简介 与其它章节独立，涵盖面广，可独立成课 无线技术变化快，难度大 即新鲜刺激又压力山大（不会研究很深 一半理论一半实践，理论是最有价值的东西，网上文章多实践 无线技术难度最大，如协议结构知识点">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:02:08.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="802.11标准">
+<meta name="twitter:description" content="802.11标准课程简介 与其它章节独立，涵盖面广，可独立成课 无线技术变化快，难度大 即新鲜刺激又压力山大（不会研究很深 一半理论一半实践，理论是最有价值的东西，网上文章多实践 无线技术难度最大，如协议结构知识点">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/18/802-11标准/">
+
+
+
+
+
+  <title>802.11标准 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/802-11标准/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">802.11标准</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="802-11标准"><a href="#802-11标准" class="headerlink" title="802.11标准"></a>802.11标准</h1><h2 id="课程简介"><a href="#课程简介" class="headerlink" title="课程简介"></a>课程简介</h2><ul>
+<li>与其它章节独立，涵盖面广，可独立成课</li>
+<li>无线技术变化快，难度大</li>
+<li>即新鲜刺激又压力山大（不会研究很深</li>
+<li>一半理论一半实践，理论是最有价值的东西，网上文章多实践</li>
+<li>无线技术难度最大，如协议结构知识点<a id="more"></a></li>
+</ul>
+<h2 id="无线技术特点"><a href="#无线技术特点" class="headerlink" title="无线技术特点"></a>无线技术特点</h2><ul>
+<li>行业发展迅速</li>
+<li>互联网重要入口</li>
+<li>边界模糊</li>
+<li>安全实施缺失且困难</li>
+<li>对技术不了解而造成配置不当</li>
+<li>企业网络私自接入AP破坏网络边界</li>
+</ul>
+<h2 id="IEEE"><a href="#IEEE" class="headerlink" title="IEEE"></a>IEEE</h2><ul>
+<li>一个协会，由各方面科学家组成，目的是制定标准，指导行业技术的发展</li>
+<li>分为不同的技术委员会，其中802委员会负责lan、man的制定（局域网、城域网）</li>
+<li>802委员会成果如<ul>
+<li>以太网：802.3</li>
+<li>无线局域网：802.11</li>
+<li>令牌环网：802.5</li>
+<li>城域网：802.6</li>
+</ul>
+</li>
+</ul>
+<h2 id="802-11工作在"><a href="#802-11工作在" class="headerlink" title="802.11工作在"></a>802.11工作在</h2><ul>
+<li>物理层</li>
+<li>数据链路层<ul>
+<li>逻辑链路控制子层LLC</li>
+<li>媒体访问控制子层MAC</li>
+</ul>
+</li>
+<li>只七层模型的下面两层，其它以上的层如网络层传输层不涉及</li>
+</ul>
+<h2 id="802-11协议族-版本"><a href="#802-11协议族-版本" class="headerlink" title="802.11协议族/版本"></a>802.11协议族/版本</h2><ul>
+<li>802委员会第11组负责开发无线局域网标准</li>
+<li>IEEE 802.11 a/b/c/d/e等小写字母的：非标准版本，是对上次的修正和完善</li>
+<li>IEEE 802.11 F：为大写字母，表示是正式版本（包括F在内，有三个标准的</li>
+<li>除了a-z这26个，还有其它，如802.11 mb/aa/ac</li>
+</ul>
+<h2 id="日常使用的：802-11-、802-11-a-b-g-i-n"><a href="#日常使用的：802-11-、802-11-a-b-g-i-n" class="headerlink" title="日常使用的：802.11 、802.11 a/b/g/i/n"></a>日常使用的：802.11 、802.11 a/b/g/i/n</h2><ul>
+<li>802.11: 最原始的WLAN标准，也称legacy<ul>
+<li>起初设想信号传播方式：红外线和无线电播</li>
+</ul>
+</li>
+<li>a：5GHz，54Mbit/s（注：网络相关：用位，bit，而物理硬盘传输：byte用字节）</li>
+<li>b：2.4GHz，5.5和11Mbit/s<ul>
+<li>严格意义上Wi-Fi，仅针对b，其它的不能成为Wi-Fi</li>
+</ul>
+</li>
+<li>g：2.4G，54M，兼容b</li>
+<li>n：最常见，提供高的传输速率</li>
+<li>i也较少，与安全性相关</li>
+</ul>
+<h2 id="802-11"><a href="#802-11" class="headerlink" title="802.11"></a>802.11</h2><ul>
+<li>发布于1997年</li>
+<li>速率1Mbps或2Mbps</li>
+<li>红外线传输介质<ul>
+<li>并未实际实现，仅在理论层面</li>
+<li>因为红外线会受障碍物限制</li>
+<li>故最后主流传输介质还是射频，即radio</li>
+</ul>
+</li>
+<li>无线射频信号编码<ul>
+<li>射频是主流传输介质</li>
+<li>有两种技术<ul>
+<li>DSSS：直序扩频</li>
+<li>FHSS：跳频扩频</li>
+</ul>
+</li>
+<li>频宽资源是有限的，要传输大量资源，就需要扩频技术（只为提高速率，与窃听机密无关）</li>
+<li>无线频宽都是受严格控制的<ul>
+<li>军事的频宽高，而个人或企业的频宽低</li>
+<li>日程收音机是低频宽的，无法听到高频宽的军事等（并非技术问题，而是厂商严格控制</li>
+<li>国家也会严密监控，私自到高频宽可听到机密，犯法行为</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用的媒体访问方式：CSMA/CA<ul>
+<li>载波侦听，多路访问，冲突避免</li>
+<li>以太网的CSMA/CD，是冲突检测</li>
+<li>其思想与CSMA/CD类似，除了后面的冲突检测<ul>
+<li>避免两个数据包发生冲突</li>
+<li>发送数据包前会先发包声明</li>
+<li>根据算法侦听一定时长</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>为了更好的避免冲突，又引入RTS和CTS<ul>
+<li>request to send</li>
+<li>clear to send</li>
+</ul>
+</li>
+<li>扩频相关公式：c=b+log2（1+s/n）<ul>
+<li>s：传输的数据量</li>
+<li>b：频宽</li>
+<li>s：信号强度</li>
+<li>n：噪声</li>
+<li>s/n：信噪比</li>
+<li>要增大传输量，则b+，s+，n-</li>
+</ul>
+</li>
+</ul>
+<h2 id="802-11-b"><a href="#802-11-b" class="headerlink" title="802.11 b"></a>802.11 b</h2><ul>
+<li>是802.11的改良完善版本</li>
+<li>增加了CCK，即补偿代码键<ul>
+<li>传输速率提高：5.5 and 11Mbps</li>
+<li>明确使用2.4GHz的带宽band，在2.4-2.485之间<ul>
+<li>分成11或13或14个信道</li>
+<li>配置路由器时会后信道的设置，可以手动指定，也可以自适应</li>
+</ul>
+</li>
+<li>最多14个信道<ul>
+<li>每个信道22MHz的带宽</li>
+<li>信道会有重叠（因为前后相减，除以14，小于22</li>
+<li>每个信道都会有一个带宽值，是一个中位数，距离左11，距离右11</li>
+</ul>
+</li>
+<li>只有三个完全不重叠的信道<ul>
+<li>若两信道重叠，且距离比较近，则会干扰，影响通信</li>
+<li>85分给14个，且要每个22，则必然不重叠的会很少</li>
+<li>85/22取整后为3</li>
+</ul>
+</li>
+<li>不同国家对信道的利用策略<ul>
+<li>美国：1-11个信道（2.412-2.462</li>
+<li>欧洲：1-13个信道（2.412-2.472</li>
+<li>日本：1-14个信道（2.412-2.484</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="802-11-a"><a href="#802-11-a" class="headerlink" title="802.11 a"></a>802.11 a</h2><ul>
+<li>与802.11b几乎同时发布（因设备价格问题没有得到广泛使用</li>
+<li>使用5GHz带宽<ul>
+<li>2.4GHz带宽 干扰源多（微波炉、蓝牙、家用的无绳电话</li>
+<li>5GHz频率有更多带宽空间，可容纳更多不重叠的信道</li>
+<li>出现新的信号调制方法：OFDM，正交频分复用技术</li>
+<li>更高速率54Mbps，每个信道20Mhz带宽</li>
+<li>变频<ul>
+<li>5.15-5.35GHz：用于室内</li>
+<li>5.7-5.8 GHz：用于室外</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="802-11-g"><a href="#802-11-g" class="headerlink" title="802.11 g"></a>802.11 g</h2><ul>
+<li>在b的基础上的扩展</li>
+<li>目的是在2.4GHz上达到与a相同的速率（目标已达成</li>
+<li>2.4GHz频率</li>
+<li>信号调制方法为：OFDM</li>
+<li>与802.11 a速率相同</li>
+<li>可全局降速，向后兼容802.11吧，并切换为CCK信号调制方法</li>
+<li>每个信道20/22MHz带宽（可变的信号带宽</li>
+</ul>
+<h2 id="802-11-n"><a href="#802-11-n" class="headerlink" title="802.11 n"></a>802.11 n</h2><ul>
+<li>2.4或5GHz频率（兼容这两种<ul>
+<li>速度300Mbps，最高600Mbps</li>
+<li>新的通信技术，MIMO：多进多出通信技术</li>
+<li>多天线，多无线电播，独立收发信号，来实现MIMO</li>
+<li>可使用40MHz信道带宽，使传输速率翻倍</li>
+</ul>
+</li>
+<li>在全n的设备网络中，可以使用新报文格式，使速率达到最大（若出现一个b，则也会降速，向其兼容</li>
+<li>每个信道20huo40MHz</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/无线安全/" rel="tag"># 无线安全</a>
+          
+            <a href="/tags/802-11/" rel="tag"># 802.11</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/802-11头部/" rel="next" title="802.11头部">
+                <i class="fa fa-chevron-left"></i> 802.11头部
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/18/WEP攻击/" rel="prev" title="WEP攻击">
+                WEP攻击 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#802-11标准"><span class="nav-text">802.11标准</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#课程简介"><span class="nav-text">课程简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#无线技术特点"><span class="nav-text">无线技术特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IEEE"><span class="nav-text">IEEE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#802-11工作在"><span class="nav-text">802.11工作在</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#802-11协议族-版本"><span class="nav-text">802.11协议族/版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#日常使用的：802-11-、802-11-a-b-g-i-n"><span class="nav-text">日常使用的：802.11 、802.11 a/b/g/i/n</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#802-11"><span class="nav-text">802.11</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#802-11-b"><span class="nav-text">802.11 b</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#802-11-a"><span class="nav-text">802.11 a</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#802-11-g"><span class="nav-text">802.11 g</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#802-11-n"><span class="nav-text">802.11 n</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

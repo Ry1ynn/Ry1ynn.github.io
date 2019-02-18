@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,渗透测试,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Kali实战-web渗透web技术发展和攻击面 web技术发展 静态web 当前的攻击主要针对web应用程序，如iis，apache   动态web 包含数据库，应用程序，web服务器及应用服务器 cs架构到bs架构，后者只专注于服务端的开发，前者还需要客户端 攻击主要针对数据库及应用程序（程序员自己开发的如电子商城   web攻击类型有数百种">
+<meta name="keywords" content="Web安全,渗透测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web渗透-基础知识">
+<meta property="og:url" content="http://21guns.top/2018/02/28/Web渗透-基础知识/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="Kali实战-web渗透web技术发展和攻击面 web技术发展 静态web 当前的攻击主要针对web应用程序，如iis，apache   动态web 包含数据库，应用程序，web服务器及应用服务器 cs架构到bs架构，后者只专注于服务端的开发，前者还需要客户端 攻击主要针对数据库及应用程序（程序员自己开发的如电子商城   web攻击类型有数百种">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T11:48:53.308Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web渗透-基础知识">
+<meta name="twitter:description" content="Kali实战-web渗透web技术发展和攻击面 web技术发展 静态web 当前的攻击主要针对web应用程序，如iis，apache   动态web 包含数据库，应用程序，web服务器及应用服务器 cs架构到bs架构，后者只专注于服务端的开发，前者还需要客户端 攻击主要针对数据库及应用程序（程序员自己开发的如电子商城   web攻击类型有数百种">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/28/Web渗透-基础知识/">
+
+
+
+
+
+  <title>Web渗透-基础知识 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-基础知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web渗透-基础知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T19:31:33+08:00">
+                2018-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Kali实战-web渗透"><a href="#Kali实战-web渗透" class="headerlink" title="Kali实战-web渗透"></a>Kali实战-web渗透</h1><h2 id="web技术发展和攻击面"><a href="#web技术发展和攻击面" class="headerlink" title="web技术发展和攻击面"></a>web技术发展和攻击面</h2><ul>
+<li>web技术发展<ul>
+<li>静态web<ul>
+<li>当前的攻击主要针对web应用程序，如iis，apache</li>
+</ul>
+</li>
+<li>动态web<ul>
+<li>包含数据库，应用程序，web服务器及应用服务器</li>
+<li>cs架构到bs架构，后者只专注于服务端的开发，前者还需要客户端</li>
+<li>攻击主要针对数据库及应用程序（程序员自己开发的如电子商城</li>
+</ul>
+</li>
+<li>web攻击类型有数百种<a id="more"></a></li>
+</ul>
+</li>
+<li>web攻击面<ul>
+<li>network</li>
+<li>OS</li>
+<li>web server</li>
+<li>app server</li>
+<li>web application</li>
+<li>database</li>
+<li>browser</li>
+</ul>
+</li>
+<li>其他<ul>
+<li>应用服务器与web服务器不同<ul>
+<li>web服务器-数据库</li>
+<li>web服务器-应用服务器-数据库</li>
+<li>后者会为前者提供API接口，同时也可以访问数据库</li>
+</ul>
+</li>
+<li>前期攻击针对web服务器，后期针对代码如应用程序</li>
+</ul>
+</li>
+</ul>
+<h2 id="http协议基础"><a href="#http协议基础" class="headerlink" title="http协议基础"></a>http协议基础</h2><ul>
+<li>明文<ul>
+<li>无内建的机密性安全机制</li>
+<li>嗅探或代理截断可查看全部明文信息</li>
+<li>不可过分信赖https，仅提高传输层安全</li>
+</ul>
+</li>
+<li>无状态<ul>
+<li>客户端与服务端的每一次通信都是独立的过程</li>
+<li>为多步通信，web 应用需跟踪客户端会话，引出cookie技术</li>
+<li>若无cookie，每次请求都需要重新验证登录，影响用户体验</li>
+<li>session用于身份验证后跟踪用户行为<ul>
+<li>提好用户体验</li>
+<li>扩大了攻击面</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>cycle<ul>
+<li>请求+响应构成http通信的最小单元cycle</li>
+<li>请求和响应都是由header和body组成</li>
+</ul>
+</li>
+<li>重要的header<ul>
+<li>响应头<ul>
+<li>set-cookie :服务器发送给客户端的session ID</li>
+<li>content-length：响应body部分的长度；可用来判断暴力破解时是否成功</li>
+<li>location：重定向相关；如登录成功后重定向到其他页面</li>
+</ul>
+</li>
+<li>请求头<ul>
+<li>cookie：键值对形式</li>
+<li>referer：来自哪一个页面；基于此的安全限制容易被绕过</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常见状态码<ul>
+<li>响应的状态码表示响应的结果类型，五个大类，50多个具体响应码</li>
+<li>100<ul>
+<li>表示服务器还有后续处理，不常见</li>
+</ul>
+</li>
+<li>200<ul>
+<li>请求被成功接受且处理</li>
+</ul>
+</li>
+<li>300<ul>
+<li>重定向</li>
+<li>301永久重定向</li>
+<li>302临时重定向</li>
+</ul>
+</li>
+<li>400<ul>
+<li>客户端请求错误</li>
+<li>401需要身份验证</li>
+<li>403拒绝访问</li>
+<li>404目标资源不存在</li>
+</ul>
+</li>
+<li>500<ul>
+<li>服务器内部错误</li>
+<li>503服务不可用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他<ul>
+<li>https并非绝对安全<ul>
+<li>简介<ul>
+<li>https传输的流量是加密的，公钥加密，私钥解密</li>
+<li>只提高传输层安全，防止简单嗅探和抓包</li>
+<li>https时传输密文，某一节点可被截获，解密上游密文，再加密发送到下游，实现中间人攻击</li>
+</ul>
+</li>
+<li>简单工作过程<ul>
+<li>c第一次对s发起访问请求，s向c发送含有公钥的证书CA<ul>
+<li>会涉及证书签名及认证</li>
+<li>c端会有根证书，判断发送过来的CA是否是合法的</li>
+</ul>
+</li>
+<li>c上会随机生成一个对称秘钥，其用于后续所有通信</li>
+<li>c的对称秘钥不会直接传输到s，经上述的公钥加密后再传输</li>
+<li>s收到密文时，用对应的私钥解密得到对称秘钥</li>
+<li>c和s都拥有同一个对称秘钥，用于后续通信</li>
+<li>其他<ul>
+<li>每次的会话这个对称秘钥都是随机生成的</li>
+<li>每一次通信结束后其就会失效，时间很短且加密强度高</li>
+<li>加密强度高，破解时间长，即使解出也失效了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>攻击思路<ul>
+<li>破解公钥的暴力破解效率低</li>
+<li>https时传输密文，某一节点可被截获，解密上游密文，再加密发送到下游，实现中间人攻击<ul>
+<li>中间人根据s端的相关字段伪造一张证书，除公私钥，其他无差别</li>
+<li>中间人伪造成s，与c进行通信，用的是伪造的证书及中间人的公私钥<ul>
+<li>这一段也是密文传输，与正常的https通信无异，只不过中间人充当s角色</li>
+<li>存在攻击方法值得这一段为明文传输，欺骗c端</li>
+</ul>
+</li>
+<li>中间人伪造成c，与s进行通信，用的是s端正常的证书及公司钥</li>
+<li>中间人分别与c和s的通信都是一段完整的https通信过程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>cookie与session与会话<ul>
+<li>cookie与sessionID可等同，前者可能包含后者，后者是前者中一个字段</li>
+<li>sessionID位于客户端，session位于服务端</li>
+<li>cookie与session可用于验证,会话表示一次通信过程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>https相关<ul>
+<li>相关知识<ul>
+<li>公私钥<ul>
+<li>公钥可公开，私钥自己所有</li>
+<li>非对称加密；对称加密由同一密钥加解密</li>
+<li>公钥加密，私钥解密；前者于锁，后者于钥匙</li>
+<li>私钥的机密性是安全的根本</li>
+</ul>
+</li>
+<li>访问速度<ul>
+<li>相较http，前期多了证书和对称密钥的传递，必然会慢一点</li>
+<li>两端传输信息时会有加解密</li>
+</ul>
+</li>
+<li>三个大步骤<ul>
+<li>1，证书的认证，进行身份验证，检查对方网站是否合法或者被篡改</li>
+<li>2，身份验证通过后，进行对称密钥的传输</li>
+<li>3，双方拥有同一对称秘钥后，开始进行加密通信</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>简单工作过程<ul>
+<li>c第一次对s发起访问请求，s向c发送含有公钥的证书CA<ul>
+<li>会涉及证书签名及认证</li>
+<li>c端会有根证书，判断发送过来的CA是否是合法的</li>
+</ul>
+</li>
+<li>c上会随机生成一个对称秘钥，其用于后续所有通信</li>
+<li>c的对称秘钥不会直接传输到s，经上述的公钥加密后再传输</li>
+<li>s收到密文时，用对应的私钥解密得到对称秘钥</li>
+<li>c和s都拥有同一个对称秘钥，用于后续通信</li>
+<li>关键点就是如何把c端的对称秘钥发送到服务端</li>
+<li>其他<ul>
+<li>每次的会话这个对称秘钥都是随机生成的</li>
+<li>每一次通信结束后其就会失效，时间很短且加密强度高</li>
+<li>加密强度高，破解时间长，即使解出也失效了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>证书相关<ul>
+<li>牵涉对称加密，非对称加密，hash算法等</li>
+<li>服务器本身可以自签名证书，即自己颁发证书，但是没有第三方的认证，多见于小型站点</li>
+<li>大型网站如百度，其证书都是由证书颁发机构颁发的，具有公信力<ul>
+<li>证书是颁发到域名的而非IP地址</li>
+<li>https访问一个IP时仍会报错，尽管此IP使用的域名的证书是合法的</li>
+</ul>
+</li>
+<li>客户端浏览器是信任那些证书颁发机构的<ul>
+<li>前提是浏览器安装有证书颁发机构的根证书</li>
+<li>根证书里也含有颁发机构的公钥</li>
+<li>即客户端浏览器持有证书颁发机构的公钥</li>
+</ul>
+</li>
+<li>身份认证流程<ul>
+<li>所颁发的证书都是由颁发机构所签名的</li>
+<li>对证书内容进行hash计算</li>
+<li>用根证书的私钥对哈希值进行加密</li>
+<li>密文连同所颁发的证书等一起发给申请者</li>
+<li>当c端请求s端，网站将证书及签名信息（即加密的哈希值）一同发给c</li>
+<li>c端有颁发机构根证书的公钥，对密文解密得哈希值1</li>
+<li>c对证书内容进行哈希计算，得到哈希值2</li>
+<li>比较两个值，若相同则表明此证书是由颁发机构颁发的正规证书</li>
+<li>是c对s网站的身份认证，表明目标网站是真实的</li>
+</ul>
+</li>
+<li>身份认证的必要性<ul>
+<li>小型站点采用自签名证书<ul>
+<li>只是其证书未得到颁发机构信任</li>
+<li>不会得到客户端信任，因此访问一些https网站时会询问是否信任</li>
+<li>倘若信任，继续访问并不会影响后续的通信，而且后续通信也会加密处理，实现正常的https服务</li>
+<li>证书仅仅提供身份验证功能，看目标网站是否被篡改</li>
+<li>无论证书是证书颁发机构的还是自签名的，若客户端都选择信任其，则后续通信正常；证书的作用仅仅提供身份验证</li>
+</ul>
+</li>
+<li>被攻击后，真假网站<ul>
+<li>通过链路欺骗或者dns域名劫持等攻击手法</li>
+<li>客户端误把IP指向了假网站</li>
+<li>若真网站采用了https且其证书经过颁发机构颁发且认证</li>
+<li>但是假网站证书是自签名的，得不到认证</li>
+<li>客户访问的时候就会提示，避免客户因访问假网站而受到危害</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="实验环境"><a href="#实验环境" class="headerlink" title="实验环境"></a>实验环境</h2><ul>
+<li>靶机metasploitable</li>
+<li>目标应用程序DVWA</li>
+</ul>
+<h2 id="侦查工具httrack"><a href="#侦查工具httrack" class="headerlink" title="侦查工具httrack"></a>侦查工具httrack</h2><ul>
+<li>功能<ul>
+<li>将目标站点copy到本地，减少与目标的实际交互</li>
+<li>爬虫功能，可指定爬取特定的后缀的文件</li>
+<li>支持代理功能<ul>
+<li>国外的hidemyass</li>
+<li>国内的西刺代理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>简要步骤<ul>
+<li>输入项目名称</li>
+<li>输入保存到本地的目录</li>
+<li>选择copy的方法等</li>
+</ul>
+</li>
+</ul>
+<h2 id="扫描工具"><a href="#扫描工具" class="headerlink" title="扫描工具"></a>扫描工具</h2><ul>
+<li>与通用扫描工具如Nessus和openvas不同</li>
+<li>两种模式<ul>
+<li>代理截断模式</li>
+<li>主动扫描模式</li>
+<li>大部分都支持这两种</li>
+</ul>
+</li>
+<li>扫描工作是必须的，无可厚非<ul>
+<li>手动扫描<ul>
+<li>既手动点击链接</li>
+<li>浏览器即可</li>
+</ul>
+</li>
+<li>自动扫描<ul>
+<li>借助工具</li>
+<li>辅助手动扫描</li>
+<li>发现一些隐藏链接</li>
+<li>会触及目标系统报警</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不可过分依赖也不要嗤之以鼻</li>
+<li>大部分扫描器的扫描重点是web应用程序也就是代码处</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/渗透测试/" rel="tag"># 渗透测试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/WEP攻击/" rel="next" title="WEP攻击">
+                <i class="fa fa-chevron-left"></i> WEP攻击
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/28/Web渗透-XSS漏洞/" rel="prev" title="Web渗透-XSS漏洞">
+                Web渗透-XSS漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kali实战-web渗透"><span class="nav-text">Kali实战-web渗透</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#web技术发展和攻击面"><span class="nav-text">web技术发展和攻击面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#http协议基础"><span class="nav-text">http协议基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实验环境"><span class="nav-text">实验环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#侦查工具httrack"><span class="nav-text">侦查工具httrack</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#扫描工具"><span class="nav-text">扫描工具</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

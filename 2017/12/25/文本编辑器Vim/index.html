@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="文本编辑器Vim简介 没有菜单，只有命令 三种工作模式 命令模式 打开文件后的默认模式 输入会被当作命令而非字符 wq退出">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="文本编辑器Vim">
+<meta property="og:url" content="http://21guns.top/2017/12/25/文本编辑器Vim/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="文本编辑器Vim简介 没有菜单，只有命令 三种工作模式 命令模式 打开文件后的默认模式 输入会被当作命令而非字符 wq退出">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T08:33:11.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="文本编辑器Vim">
+<meta name="twitter:description" content="文本编辑器Vim简介 没有菜单，只有命令 三种工作模式 命令模式 打开文件后的默认模式 输入会被当作命令而非字符 wq退出">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/25/文本编辑器Vim/">
+
+
+
+
+
+  <title>文本编辑器Vim | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/25/文本编辑器Vim/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">文本编辑器Vim</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:29:49+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="文本编辑器Vim"><a href="#文本编辑器Vim" class="headerlink" title="文本编辑器Vim"></a>文本编辑器Vim</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>没有菜单，只有命令</li>
+<li>三种工作模式<ul>
+<li>命令模式<ul>
+<li>打开文件后的默认模式</li>
+<li>输入会被当作命令而非字符</li>
+<li>wq退出<a id="more"></a></li>
+</ul>
+</li>
+<li>插入模式<ul>
+<li>命令模式下a、i、o进入</li>
+<li>ESC退出至命令模式</li>
+</ul>
+</li>
+<li>编辑模式<ul>
+<li>命令模式下冒号进入</li>
+<li>输入命令，如设置行号set nu</li>
+<li>命令以回车结束运行</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h2><ul>
+<li>插入命令（命令模式进入插入模式<ul>
+<li>a：在光标所在字符后插入</li>
+<li>A：光标所在行尾</li>
+<li>i：光标所在字符前</li>
+<li>I：光标所在行首</li>
+<li>o：光标下插入新行</li>
+<li>O：光标上插入新行</li>
+</ul>
+</li>
+<li>定位命令（命令和编辑模式下<ul>
+<li>：set nu—设置行号</li>
+<li>：set nonu—取消行号</li>
+<li>gg—到第一行</li>
+<li>G—到最后一行</li>
+<li>nG—到第n行</li>
+<li>：n—到第n行</li>
+<li>$—移至行尾</li>
+<li>0—移至行首</li>
+</ul>
+</li>
+<li>删除命令<ul>
+<li>x：删除光标所在处字符</li>
+<li>nx：删除光标所在处后n个字符</li>
+<li>dd：删除光标所在行，ndd删除n行</li>
+<li>dG：删除光标所在行到文件末尾内容</li>
+<li>D：删除光标所在处到行尾内容</li>
+<li>：m，nd—删除m行到n行</li>
+</ul>
+</li>
+<li>复制、剪切、粘贴<ul>
+<li>yy：复制当前行</li>
+<li>nyy：复制当前行以下n行</li>
+<li>dd：剪切当前行</li>
+<li>ndd：剪切当前行以下n行</li>
+<li>p、P：粘贴在所在行的行下或行上</li>
+</ul>
+</li>
+<li>替换或取消命令<ul>
+<li>r：取代光标所在处字符</li>
+<li>R：从光标所在处开始替换字符，ESC结束</li>
+<li>u：取消上一步操作，即撤销</li>
+</ul>
+</li>
+<li>搜索或搜索替换<ul>
+<li>/+string：搜索指定string<ul>
+<li>：set ic—搜索命令前执行，忽略大小写（noic取消</li>
+<li>n：下一个</li>
+</ul>
+</li>
+<li>：%s/old/new/g——全文替换指定字符串（%s表示全文替换</li>
+<li>：m,ns/old/new/g——在一定范围内替换指定字符串<ul>
+<li>起始行，终止行 s/要替换的字符串/新的字符串/g或者c</li>
+<li>g不询问，c询问以确认是否替换</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>保存和退出命令<ul>
+<li>：w——保存修改</li>
+<li>：w newfilename——另存为新文件（可使用文件路径，如/etc/backup.txt</li>
+<li>：wq——保存修改并退出</li>
+<li>ZZ：快捷键，保存修改并退出</li>
+<li>：q！——不保存修改退出</li>
+<li>：wq！——保存修改并退出<ul>
+<li>文件所有者及root可使用</li>
+<li>强行保存，如root打开一个只读文件，使修改生效时</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="使用技巧"><a href="#使用技巧" class="headerlink" title="使用技巧"></a>使用技巧</h2><ul>
+<li>文件中导入其它<ul>
+<li>r +文件名：将指定文件的内容导入到此文件中</li>
+<li>！+ 命令：不退出vim，执行系统命令</li>
+<li>r + ！+ 命令：不退出vim，执行命令并将其结果导入此文件中</li>
+</ul>
+</li>
+<li>定义快捷键<ul>
+<li>：map+快捷键+触发的命令</li>
+<li>举例<ul>
+<li>添加行注释<ul>
+<li>：map  ^P  I#<esc></esc></li>
+<li>Ctrl+v+p会生成ctrl+p的命令，即^P</li>
+<li>I：跳到行首并进入插入模式</li>
+<li>#：添加注释符</li>
+<li><esc>：退出插入模式至命令模式</esc></li>
+<li>ctrl+p即可注释当前行</li>
+</ul>
+</li>
+<li>取消当前行注释<ul>
+<li>：map ^B 0x</li>
+<li>Ctrl+v+p会生成ctrl+p的命令，即^P</li>
+<li>0:  跳到行首（不进入插入模式，同I不同</li>
+<li>x：删除光标处第一个字符（#一般是每行的第一个字符</li>
+<li>ctrl+b会取消行注释</li>
+</ul>
+</li>
+<li>插入邮箱等常用信息<ul>
+<li>：map ^H   i+邮箱等+<esc></esc></li>
+<li>I：当前光标处进入插入模式</li>
+<li>添加自定义常用信息</li>
+<li>esc：退出至命令模式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>连续行注释<ul>
+<li>应用到vim替换命令的格式（：m,ns/old/new/g</li>
+<li>添加多行注释<ul>
+<li>：m,ns/^/#/g</li>
+<li>m-n行</li>
+<li>^：表示行首这个特殊字符</li>
+<li>#：替换为注释符#（也可以为其它，如//，但需要转义\/\/</li>
+</ul>
+</li>
+<li>取消多行注释<ul>
+<li>：m,ns/^#//g</li>
+<li>^#：将行首的#替换为空，即去掉</li>
+<li>一定加^，否则不是行首的#也会被删</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>替换<ul>
+<li>：ab mymail <a href="mailto:123123123@163.com" target="_blank" rel="noopener">123123123@163.com</a></li>
+<li>ab：替换命令，本意是输入a时，回车或空格后变为b</li>
+<li>如输入mymail，空格或回车后变为我的自定义邮箱</li>
+<li>编辑模式下定义替换的信息</li>
+<li>插入模式下使用</li>
+</ul>
+</li>
+<li>配置文件问题<ul>
+<li>上述操作仅本次vim使用时有效</li>
+<li>若要永久生效，需保存到vim的配置文件<ul>
+<li>root用户：/root/.vimrc</li>
+<li>其它：/home/用户名/.vimrc</li>
+</ul>
+</li>
+<li>针对编辑模式下的命令，即冒号开头的</li>
+<li>保存到配置文件时，不需要带冒号</li>
+<li>一条命令占一行</li>
+<li>如永久显示行号，文件内容为“set nu”（不带冒号，且占一行</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/日志管理/" rel="next" title="日志管理">
+                <i class="fa fa-chevron-left"></i> 日志管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/文件系统管理/" rel="prev" title="文件系统管理">
+                文件系统管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文本编辑器Vim"><span class="nav-text">文本编辑器Vim</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用操作"><span class="nav-text">常用操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用技巧"><span class="nav-text">使用技巧</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

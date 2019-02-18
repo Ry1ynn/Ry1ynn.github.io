@@ -1,0 +1,1963 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Shell及编程基础概述 什么是Shell 1，是一个命令解释器，连接用户与系统内核 由内而外：硬件-系统内核-Shell-应用程序-用户 2，是一个功能强大的、解释执行的编程语言，可直接调用Linux系统命令   分类">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell及编程基础">
+<meta property="og:url" content="http://21guns.top/2017/12/25/Shell及编程基础/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="Shell及编程基础概述 什么是Shell 1，是一个命令解释器，连接用户与系统内核 由内而外：硬件-系统内核-Shell-应用程序-用户 2，是一个功能强大的、解释执行的编程语言，可直接调用Linux系统命令   分类">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T08:33:22.855Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shell及编程基础">
+<meta name="twitter:description" content="Shell及编程基础概述 什么是Shell 1，是一个命令解释器，连接用户与系统内核 由内而外：硬件-系统内核-Shell-应用程序-用户 2，是一个功能强大的、解释执行的编程语言，可直接调用Linux系统命令   分类">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/25/Shell及编程基础/">
+
+
+
+
+
+  <title>Shell及编程基础 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/25/Shell及编程基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Shell及编程基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:29:49+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Shell及编程基础"><a href="#Shell及编程基础" class="headerlink" title="Shell及编程基础"></a>Shell及编程基础</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>什么是Shell<ul>
+<li>1，是一个命令解释器，连接用户与系统内核</li>
+<li>由内而外：硬件-系统内核-Shell-应用程序-用户</li>
+<li>2，是一个功能强大的、解释执行的编程语言，可直接调用Linux系统命令</li>
+</ul>
+</li>
+<li>分类<a id="more"></a><ul>
+<li>Bourne Shell：从1979起Unix就开始使用，其主文件名为sh</li>
+<li>C Shell：主要在BSD版的Unix使用，其语法类似C语言而得名</li>
+<li>Bash：与sh兼容，如今Linux的基本shell便是Bash</li>
+<li>Shell两种主要语法类型：Bourne、C<ul>
+<li>两种语法彼此不兼容</li>
+<li>Bourne家族：sh、ksh、Bash、psh、zsh（Bash为主流</li>
+<li>C家族：csh、tcsh</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Linux支持的Shell<ul>
+<li>vim  /etc/shells</li>
+<li>有：sh、bash、nologin、csh、tcsh</li>
+</ul>
+</li>
+</ul>
+<h2 id="shell脚本的执行方式"><a href="#shell脚本的执行方式" class="headerlink" title="shell脚本的执行方式"></a>shell脚本的执行方式</h2><ul>
+<li>echo输出命令<ul>
+<li>echo + 选项 + 输出内容</li>
+<li>-e：支持反斜线控制的字符转换</li>
+<li>如echo “ab/bc”：输出ac，/b退格，即向左删除</li>
+</ul>
+</li>
+<li>编写测试脚本<ul>
+<li>vim hello.sh</li>
+<li>第一行：#! /bin/Bash（表示此脚本为shell脚本，而非注释，不可省略</li>
+<li>第二：echo “hello world ”</li>
+</ul>
+</li>
+<li>脚本执行<ul>
+<li>赋予执行权限，直接运行（常用<ul>
+<li>chmod 755 hello.sh</li>
+<li>./hello.sh（或绝对路径</li>
+</ul>
+</li>
+<li>通过Bash调用<ul>
+<li>bash hello.sh</li>
+<li>甚至不用赋予执行权限</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Bash的基本功能"><a href="#Bash的基本功能" class="headerlink" title="Bash的基本功能"></a>Bash的基本功能</h2><ul>
+<li>历史命令<ul>
+<li>history + [选项]+[历史命令保存文件]<ul>
+<li>直接history：显示历史命令<ul>
+<li>默认保存1000条</li>
+<li>可在环境变量配置文件/etc/profile中修改（HISTSIZE字段</li>
+<li>其配置文件生效需要用户重新登录</li>
+</ul>
+</li>
+<li>-c：清空历史命令<ul>
+<li>缓存中和文件中都会清空（ubuntu中测试时，并不会清空文件里的，只会清空缓存）</li>
+<li>不建议使用，但攻击者常用来擦除痕迹</li>
+</ul>
+</li>
+<li>-w：把缓存中历史命令写入历史命令保存文件<ul>
+<li>手动执行命令来写入，默认用户退出后，会自动写入</li>
+<li>默认为～/.bash_history，也可手工指定</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>历史命令的保存<ul>
+<li>默认保存1000条</li>
+<li>可在环境变量配置文件/etc/profile中修改（HISTSIZE字段</li>
+<li>其配置文件生效需要用户重新登录</li>
+<li>默认保存在～/.bash_history</li>
+</ul>
+</li>
+<li>历史命令的调用<ul>
+<li>上下箭头显示上一条、下一条命令</li>
+<li>!n：再次执行第n条命令</li>
+<li>!!：再次执行上一条命令</li>
+<li>!字符串：再次执行最后一条、以该字符串开头的命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>命令别名及补全<ul>
+<li>常用命令<ul>
+<li>alias 别名=‘原命令’：为命令设置别名（如alias vi=‘ vim’</li>
+<li>alias：查询已有的命令别名</li>
+<li>unalias + 别名：删除别名</li>
+</ul>
+</li>
+<li>命令执行时顺序<ul>
+<li>第一顺位：绝对路径或相对路径执行的命令</li>
+<li>第二顺位：执行别名</li>
+<li>第三顺位：执行Bash内部命令</li>
+<li>第四顺位：执行按照$PATH环境变量定义的外部命令</li>
+</ul>
+</li>
+<li>其它<ul>
+<li>别名不可与已有系统命令相同，防混淆</li>
+<li>让别名永久生效：vi /root/.bashrc后再添加目录（不同用户，家目录不同</li>
+</ul>
+</li>
+<li>命令或文件的补全<ul>
+<li>Tab键自动补全</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Bash常用快捷键<ul>
+<li>ctrl + 字母</li>
+<li>a/e：光标移动到命令行开头/结尾</li>
+<li>l：清屏，同clear命令</li>
+<li>c：强制终止当前命令</li>
+<li>u/k：删除或剪切光标之前/之后的内容（避免退格键一个一个删；粘贴则是剪切，不粘则是删除</li>
+<li>y：粘贴u或k剪切的内容</li>
+<li>r：在历史命令中搜索</li>
+<li>d：退出当前终端，即退出登录，同logout</li>
+<li>z：暂停，并放入后台</li>
+<li>s/q：暂停/恢复屏幕输出</li>
+</ul>
+</li>
+<li>输入或输出重定向<ul>
+<li>标准输入输出<ul>
+<li>键盘<ul>
+<li>设备文件名：/dev/stdin</li>
+<li>文件描述符：0</li>
+<li>类型：标准输入</li>
+</ul>
+</li>
+<li>显示器<ul>
+<li>设备文件名：/dev/stdout<ul>
+<li>文件描述符：1</li>
+<li>类型：标准输出</li>
+</ul>
+</li>
+<li>设备文件名：/dev/stderr<ul>
+<li>文件描述符：2</li>
+<li>类型：标准错误输出</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>输出重定向<ul>
+<li>其它<ul>
+<li>命令执行结果原本输出到屏幕，改变其方向，输出到文件或设备中</li>
+<li>有输出的命令才可以用于重定向</li>
+<li>错误输出要在大于号前加2，且不可有空格</li>
+<li>正确输出和错误输出来分别保存用处不大，需同时保存</li>
+</ul>
+</li>
+<li>正确输出和错误输出不同时保存<ul>
+<li>标准输出重定向<ul>
+<li>以xx的方式，把命令的正确输出输出到指定文件或设备中</li>
+<li>命令 &gt; 文件：以覆盖的方式</li>
+<li>命令 &gt;&gt; 文件：以追加的方式</li>
+</ul>
+</li>
+<li>标准错误输出重定向<ul>
+<li>以xx的方式，把命令的错误输出输出到指定文件或设备中</li>
+<li>错误命令 2&gt; 文件：以覆盖的方式</li>
+<li>错误命令 2&gt;&gt; 文件：以追加的方式</li>
+</ul>
+</li>
+<li>正确输出和错误输出来分别保存用处不大，需同时保存，即不管正确与否，都保存</li>
+</ul>
+</li>
+<li>正确输出和错误输出同时保存（建议<ul>
+<li>正确输出和错误输出写入同一个文件<ul>
+<li>不管正确与否都写入同一个文件</li>
+<li>方式1<ul>
+<li>命令 &gt; 文件 2&gt;&amp;1（覆盖</li>
+<li>命令 &gt;&gt; 文件 2&gt;&amp;1（追加</li>
+<li>后面固定是：2&gt;&amp;1</li>
+</ul>
+</li>
+<li>方式2<ul>
+<li>命令 &amp;&gt; 文件（覆盖</li>
+<li>命令 &amp;&gt;&gt; 文件（追加</li>
+<li>推荐使用，易记</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>正确输出追加至文件1，错误输出追加至文件2<ul>
+<li>命令 &gt;&gt; 文件1 2 &gt;&gt; 文件2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>输入重定向<ul>
+<li>命令执行的参数原来是键盘输入，更改为从文件输入</li>
+<li>用的不如输出重定向多，以wc为例测试</li>
+<li>wc+[选项] +[文件名]<ul>
+<li>直接wc：输入字符，ctrl+d结束，会显示输入的行数、单词数、字节数</li>
+<li>-c：统计字节数</li>
+<li>-w：统计单词数</li>
+<li>-l：统计行数</li>
+</ul>
+</li>
+<li>命令 &lt; 文件<ul>
+<li>把文件作为命令输入，可统计文件内容相关信息</li>
+<li>如wc &lt; test.txt</li>
+</ul>
+</li>
+<li>命令 &lt;&lt; 字符串<ul>
+<li>wc &lt;&lt; hello，一直输入，直到遇到hello作为结束，取之间内容作为参数（用的更少，了解</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多命令顺序执行<ul>
+<li>分号;<ul>
+<li>命令1；命令2</li>
+<li>多个命令顺序执行</li>
+<li>命令之间无逻辑关系</li>
+<li>如：date: dd命令 ;date（查看执行dd命令所花费时间</li>
+</ul>
+</li>
+<li>&amp;&amp;<ul>
+<li>概述<ul>
+<li>命令1 &amp;&amp; 命令2</li>
+<li>逻辑与</li>
+</ul>
+</li>
+<li>执行逻辑<ul>
+<li>1正确执行，2才会执行</li>
+<li>1执行不正确，2不会执行</li>
+</ul>
+</li>
+<li>应用<ul>
+<li>用于有严格顺序要求的多个命令间，前面执行成功才可以执行后者，前面出一点错就全部停止</li>
+<li>如安装软件时：./configure &amp;&amp; make &amp;&amp; make install</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>||<ul>
+<li>概述<ul>
+<li>命令1 || 命令2</li>
+<li>逻辑或</li>
+</ul>
+</li>
+<li>执行逻辑<ul>
+<li>1执行不正确，2才会执行</li>
+<li>1正确执行，2不会执行</li>
+</ul>
+</li>
+<li>应用<ul>
+<li>同逻辑与结合，判断某命令是否执行成功</li>
+<li>如：命令 &amp;&amp; echo yes || echo no（很巧妙，多用于脚本内判断是否执行成功，if语句作用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他<ul>
+<li>dd命令<ul>
+<li>dd if=输入文件 of=输出文件 bs=字节数 count=个数</li>
+<li>if：指定源文件或源设备</li>
+<li>of：指定目标…</li>
+<li>bs：指定一次输入/输出多少字节，即把多少字节看作一个数据块</li>
+<li>count：指定输入/输出多少个数据块</li>
+<li>特殊的复制命令：磁盘、数据、分区、硬盘等的复制，不同于cp文件复制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>管道符（“|”）<ul>
+<li>简介<ul>
+<li>命令1 | 命令2</li>
+<li>1的正确输出作为2的操作对象</li>
+<li>前提是1必须成功执行，否则2不可执行</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>ls -a /etc/ | more</li>
+<li>more原来跟文件，分屏显示其内容，现在操作对象变为前者命令的输出</li>
+<li>netstat -an | grep “ESTABLISTED”</li>
+<li>查看当前系统的远程连接</li>
+</ul>
+</li>
+<li>其它<ul>
+<li>grep命令<ul>
+<li>grep + 选项+“搜索内容” + 文件名</li>
+<li>显示其所在的行</li>
+<li>-i：忽略大小写</li>
+<li>-n：输出行号</li>
+<li>-v：反向查找，如-v root，会排除root的那一行</li>
+<li>—color=搜索出的关键字用颜色显示</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通配符及其它特殊符号<ul>
+<li>Linux常见通配符<ul>
+<li>?：匹配一个任意字符</li>
+<li>*：匹配0个或多个，即任何内容</li>
+<li>[]：匹配中括号中任意一个字符<ul>
+<li>[abc]表一定匹配一个，a或b或c</li>
+</ul>
+</li>
+<li>[-]：匹配其中任意一个字符，-表范围<ul>
+<li>[a-z]：表匹配一个小写字母</li>
+</ul>
+</li>
+<li>[^]：逻辑非，匹配不是中括号中的字符<ul>
+<li>[^0-9]：匹配一个不是数字的字符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通配符应用<ul>
+<li>rm -rf *：删除所有文件</li>
+<li>ls ?abc：列出所有abc前一个字符的文件</li>
+<li>ls [0-9]*：列出数字开头的文件</li>
+<li>ls [^0-9]*：列出非数字开头的文件</li>
+</ul>
+</li>
+<li>其它特殊符号<ul>
+<li>单引号<ul>
+<li>单引号中的特殊符号都失去各自特殊意义</li>
+<li>引起含空格的字符串，使其为一个整体（Linux中空格作为命令、选项、参数的分隔</li>
+</ul>
+</li>
+<li>双引号<ul>
+<li>双引号中的特殊符号会失去各自特殊意义</li>
+<li>仍有特殊意义的<ul>
+<li>$：调用变量的值</li>
+<li>单个反引号：引用命令</li>
+<li>\：转义字符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>反引号<ul>
+<li>其括起来的内容是系统命令</li>
+<li>Bash中会优先执行，然后再赋值等，如n=‘date’，先执行date命令，将其结果赋值给n变量（输入法问题，故用单引号代替</li>
+<li>同$()，但其易看错，不建议使用</li>
+</ul>
+</li>
+<li>$()<ul>
+<li>同反引号，引用系统命令</li>
+<li>优先执行，如echo $(ls)，会输出ls执行结果</li>
+<li>推荐使用</li>
+</ul>
+</li>
+<li>#<ul>
+<li>shell脚本中作注释符</li>
+<li>配置文件中的注释符</li>
+</ul>
+</li>
+<li>$<ul>
+<li>用于调用变量的值，如$name</li>
+</ul>
+</li>
+<li>\<ul>
+<li>转义，其后的特殊字符失去特殊意义，变为普通字符</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Bash的变量"><a href="#Bash的变量" class="headerlink" title="Bash的变量"></a>Bash的变量</h2><ul>
+<li>概述<ul>
+<li>变量设置规则<ul>
+<li>由字母、数字、下划线组成，不可数字开头</li>
+<li>Bash中变量默认类型都是字符串型，若要进行数值运算，则必须指定变量类型为数值型</li>
+<li>变量用等号连接值，等号左右两侧不能有空格</li>
+<li>变量的值若有空格，用单/双引号括起来</li>
+<li>变量的值，允许有转义符\</li>
+<li>若要增加变量值，可进行变量值叠加。不过变量需要用双引号包含”$变量名”或者${变量名}包含</li>
+<li>若把命令的输出结果作为值赋值给变量，需要用反引号或$()包含名令</li>
+<li>环境变量名建议大写，便于与命令区分</li>
+</ul>
+</li>
+<li>变量分类<ul>
+<li>用户自定义变量<ul>
+<li>最普通、最常见的</li>
+<li>变量名及变量名均自定义</li>
+</ul>
+</li>
+<li>环境变量<ul>
+<li>此变量保存的是与系统操作环境相关的数据</li>
+<li>系统环境变量不可更改</li>
+<li>用户可自行新建新的环境变量</li>
+</ul>
+</li>
+<li>位置参数变量<ul>
+<li>用来向脚本中传递参数和数据</li>
+<li>变量名不能自定义</li>
+<li>变量作用是固定的</li>
+<li>从根本上说，就是预定义变量，只不过出现太频繁</li>
+</ul>
+</li>
+<li>预定义变量<ul>
+<li>Bash中已定义好的</li>
+<li>变量名不能自定义</li>
+<li>变量作用是固定的</li>
+</ul>
+</li>
+<li>自上往下：限制越来越严格，后两者限制程度相同</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用户自定义变量（即本地变量<ul>
+<li>变量定义<ul>
+<li>如name=“test test”（有空格，加引号</li>
+<li>echo $name（调用时加$</li>
+</ul>
+</li>
+<li>变量叠加<ul>
+<li>a=123</li>
+<li>a=“$a”456（此时为123456</li>
+<li>a=${a}789（此时为123456789</li>
+</ul>
+</li>
+<li>变量调用<ul>
+<li>echo $name（调用时加$</li>
+</ul>
+</li>
+<li>变量查看<ul>
+<li>set命令</li>
+<li>显示系统所有变量（不止自定义的</li>
+</ul>
+</li>
+<li>变量删除<ul>
+<li>unset命令</li>
+<li>unset name（不需加$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>环境变量<ul>
+<li>何为环境变量<ul>
+<li>用户自定义变量只在当前shell有效</li>
+<li>环境变量会在当前shell和此变量所有的子shell中有效</li>
+<li>若把环境变量写入相关配置文件，则其会在所有的shell中生效</li>
+<li>类似于局部变量和全局变量作用</li>
+</ul>
+</li>
+<li>创建子shell<ul>
+<li>当前shell为bash，再键入bash，会进入子shell</li>
+<li>pstree可以查看</li>
+<li>exit退出当前子shell，回到父shell</li>
+</ul>
+</li>
+<li>设置新的自定义环境变量<ul>
+<li>export 变量名=变量值<ul>
+<li>声名为环境变量</li>
+<li>或者，变量名=变量值，再export 变量名</li>
+<li>加$调用变量，如echo $name</li>
+</ul>
+</li>
+<li>env<ul>
+<li>查询变量</li>
+</ul>
+</li>
+<li>unset 变量名<ul>
+<li>删除变量</li>
+<li>如unset name（不需$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常见系统环境变量<ul>
+<li>PATH<ul>
+<li>作用：定义系统查找命令的路径</li>
+<li>echo $PATH：输出许多路径，冒号分割</li>
+<li>所有的执行都需要到绝对路径，ls等系统命令也不例外</li>
+<li>因PATH的存在，ls可不加绝对路径，直接运行</li>
+<li>可变量叠加，将自习脚本路径写入path，但仅本次生效，重启失效</li>
+</ul>
+</li>
+<li>PS1<ul>
+<li>作用：定义系统提示符的变量</li>
+<li>并非严格意义上的系统环境变量，env不可见，set可见 </li>
+<li>默认值（echo $PS1后）：[\u@\h \W]\$</li>
+<li>默认提示符是[root@localhost ~]#（即每个shell窗口前的提示信息，</li>
+<li>可自定义，但意义不大，默认即可</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>位置参数变量<ul>
+<li>$n<ul>
+<li>n为数字，$1–$9表第一到第九个参数</li>
+<li>$0表示命令本身</li>
+<li>10以上的需要用大括号包含，如${10}</li>
+<li>运行脚本文件时：./test.sh 11 22 33，则分别对应$0-3，此参数可以在脚本内容中调用</li>
+</ul>
+</li>
+<li>$*<ul>
+<li>代表命令行中所有参数</li>
+<li>$*把所有参数看作一个整体</li>
+</ul>
+</li>
+<li>$@<ul>
+<li>也代表命令行中所有参数</li>
+<li>只不过把每个参数区别对待，可理解为一个数组有多个元素</li>
+</ul>
+</li>
+<li>$#<ul>
+<li>代表命令行中所有参数的个数（不包括命令本身</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>预定义变量<ul>
+<li>变量名和变量值均不可改，只可传入不同的值</li>
+<li>常用预定义变量<ul>
+<li>$?<ul>
+<li>最后一次执行的、命令的返回状态</li>
+<li>若此变量值为0，表上一命令成功执行</li>
+<li>若非0，表执行不正确（具体哪个值由命令决定，如命令不存在时爆127，文件未找到爆2</li>
+</ul>
+</li>
+<li>$$<ul>
+<li>当前进程的进程号PID</li>
+</ul>
+</li>
+<li>$!<ul>
+<li>后台运行的最后一个进程的进程号</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>接受键盘输入<ul>
+<li>read +选项+变量名<ul>
+<li>shell脚本中使用，类似py中raw_input()</li>
+<li>-p + 提示信息：在等待read输入时，输出提示信息</li>
+<li>-t+秒数：不加read会一直等待，加了会指定等待的时间</li>
+<li>-n + 字符数：接受到指定的字符数后就会执行，就不用手动按回车</li>
+<li>-s：隐藏输入的数据，适用于机密信息（如Linux输入密码时</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数值运算与运算符<ul>
+<li>declare声名变量类型<ul>
+<li>declare [+/-] 选项 变量名</li>
+<li>-：给变量设定类型属性（与日常思维相反</li>
+<li>+：取消变量的类型属性</li>
+<li>-i：将变量声明为整数型（integer</li>
+<li>-x：将变量声明为环境变量（export也可以</li>
+<li>-p：显示指定变量的被声名的类型（如环境变量显示x</li>
+</ul>
+</li>
+<li>数值运算<ul>
+<li>方法1（使用declare<ul>
+<li>aa=11</li>
+<li>bb=22（给aa和bb赋值</li>
+<li>declare -i cc=$aa+$bb<ul>
+<li>此时cc为33，一般的话是字符串”11+22”</li>
+<li>当然也可以为其他运算符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>方法2（使用expr或let数值运算工具<ul>
+<li>aa=11</li>
+<li>bb=22（给aa和bb赋值</li>
+<li>dd=$(expr $aa + $bb)<ul>
+<li>dd为33</li>
+<li>注意加号两侧必须有空格</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>（推荐）方法三：$((运算式))或$[运算式]<ul>
+<li>aa=11</li>
+<li>bb=22（给aa和bb赋值</li>
+<li>ff=$(($aa+$bb))</li>
+<li>或gg=$[$aa+$bb]</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常见运算符<ul>
+<li>各运算符存在优先级</li>
+<li>优先级数目越大，其优先级别越高</li>
+<li>可用小括号调整优先级</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>变量测试与内容替换<ul>
+<li>随用随查，知道这回事即可</li>
+<li>举例如x=${y-新值}<ul>
+<li>若变量y没有设置，则x=新值</li>
+<li>若y为空值，则x为空</li>
+<li>若变量y设置值，则x=$y</li>
+<li>上述逻辑条件反之亦可成立</li>
+<li>不推荐记忆使用，了解即可（有相应表格可查看</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="环境变量配置文件"><a href="#环境变量配置文件" class="headerlink" title="环境变量配置文件"></a>环境变量配置文件</h2><ul>
+<li>简介<ul>
+<li>定义系统默认环境变量，如PATH，PS1，HISTSIZE，保存在此的就会永久生效</li>
+<li>source命令<ul>
+<li>source+配置文件或 .+配置文件</li>
+<li>默认下需要重启系统才可让环境变量配置文件生效，source即可避免重启</li>
+</ul>
+</li>
+<li>主要环境变量配置文件<ul>
+<li>/etc/profile</li>
+<li>/etc/profile.d/*.sh</li>
+<li>/etc/bashrc</li>
+<li>～/.bash_profile</li>
+<li>～/.bashrc</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>文件作用<ul>
+<li>etc下的针对所有用户，家目录下的只针对当前用户</li>
+<li>主要环境变量配置文件<ul>
+<li>/etc/profile<ul>
+<li>USER变量</li>
+<li>LOGNAME变量</li>
+<li>MAIL变量</li>
+<li>PATH变量</li>
+<li>HOSTNAME变量</li>
+<li>HISTSIZE变量</li>
+<li>umask:</li>
+<li>调用/etc/profile.d/*.sh</li>
+</ul>
+</li>
+<li>/etc/profile.d/*.sh</li>
+<li>/etc/bashrc</li>
+<li>～/.bash_profile</li>
+<li>～/.bashrc</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他配置文件和登录信息<ul>
+<li>～/.bash_logout（注销时生效的环境变量配置文件<ul>
+<li>默认为空</li>
+</ul>
+</li>
+<li>～/bash_history<ul>
+<li>保存历史命令</li>
+</ul>
+</li>
+<li>shell登录信息<ul>
+<li>本地终端前欢迎信息<ul>
+<li>/etc/issue</li>
+</ul>
+</li>
+<li>远程登录前欢迎信息<ul>
+<li>/etc/issue.net</li>
+<li>转义符在其中不可使用</li>
+<li>是否显示此欢迎信息，由ssh的配置文件/etc/ssh/sshd_config决定，加入“Banner /etc/issue.net”才可</li>
+</ul>
+</li>
+<li>登录后欢迎信息<ul>
+<li>/etc/motd</li>
+<li>本地登录还是远程登录时都会显示</li>
+<li>是登录后的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><ul>
+<li>正则与通配符<ul>
+<li>其他语言中，通配符只是正则内容的一部分</li>
+<li>正则表达式<ul>
+<li>在文件中匹配符合要求的字符串</li>
+<li>包含匹配<ul>
+<li>类似于贪婪模式，尽可能多的匹配</li>
+<li>如grep “abc” test.txt，把所有123所在行显示出来</li>
+</ul>
+</li>
+<li>grep、awk、sed等搜索文件内容的命令支持正则</li>
+</ul>
+</li>
+<li>通配符<ul>
+<li>系统目录中匹配符合条件的文件名</li>
+<li>完全匹配<ul>
+<li>如目录下存在aa和aabb两文件，ls aa只会显示aa文件；ls aa*才会全部显示</li>
+</ul>
+</li>
+<li>ls、find、cp等与文件名相关的命令，不支持正则，故只可使用通配符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基础正则表达式（除基础还有扩展<ul>
+<li>元字符<ul>
+<li>*<ul>
+<li>前一个字符匹配0次或任意多次</li>
+<li>0次的也会</li>
+<li>前一个字符</li>
+<li>通配符*表任意字符</li>
+</ul>
+</li>
+<li>.<ul>
+<li>匹配除了换行符外任意一个字符</li>
+<li>类似通配符中？</li>
+</ul>
+</li>
+<li>^<ul>
+<li>匹配行首</li>
+<li>^hello，匹配hello开头的</li>
+</ul>
+</li>
+<li>$<ul>
+<li>匹配行尾</li>
+<li>hello$，匹配hello结尾的</li>
+</ul>
+</li>
+<li>[]<ul>
+<li>匹配其中指定的任意一个字符，仅一个</li>
+<li>同通配符中｛｝</li>
+<li>[0-9]，匹配一个数字</li>
+</ul>
+</li>
+<li>[^]<ul>
+<li>匹配除其中指定的 任意一个字符，同上恰相反</li>
+<li>[0-9]，匹配一个非数字</li>
+</ul>
+</li>
+<li>\<ul>
+<li>转义符，取消特殊字符的特殊含义</li>
+</ul>
+</li>
+<li>{n}<ul>
+<li>匹配其前面的字符恰好出现n次</li>
+<li>如[0-9]{4}，匹配四个数字</li>
+<li>\转义大括号｛</li>
+</ul>
+</li>
+<li>{n,}<ul>
+<li>匹配其前面的字符出现大于n次</li>
+<li>如[0-9]{4,}，匹配四位以上数字</li>
+</ul>
+</li>
+<li>{n,m}<ul>
+<li>匹配其前面的字符出现大于n次，小于m次</li>
+<li>如[0-9]{4,8}，匹配4-8位数字</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>grep “.*” test.txt，匹配所有内容</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="字符截取命令"><a href="#字符截取命令" class="headerlink" title="字符截取命令"></a>字符截取命令</h2><ul>
+<li>cut列提取命令<ul>
+<li>cut +选项+文件名<ul>
+<li>可以手工指定文件名，也可通过管道符</li>
+<li>-f+列号：提取指定列，逗号分隔指定多列</li>
+<li>-d+分隔符：按照指定的分隔符分隔列</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>cut -f 2,4 test.txt ，提取出24列</li>
+<li>cut -d “:” -f 1 /etc/passwd，提取passwd文件第一列，即用户名列，其文件每行以冒号分隔</li>
+</ul>
+</li>
+<li>独立使用意义不大，多与grep搭配<ul>
+<li>grep是提取行，cut提取列</li>
+<li>cat /etc/passwd | grep /bin/bash | grep -v root | cut -d “:” -f 1</li>
+<li>提取出所有可登录用户，shell为/bin/bash的为系统可登录用户</li>
+<li>排除root，grep的v选项</li>
+</ul>
+</li>
+<li>cut命令的局限<ul>
+<li>文件是一个x行x列的表格，制表符分隔，不可空格，否则cut不可使用</li>
+<li>不可识别以空格分隔的，易报错</li>
+<li>可识别：制表符或冒号等符号</li>
+<li>awk解决此局限，但awk较复杂，简单的能cut就cut，如冒号分隔的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>printf标准格式输出命令<ul>
+<li>printf +“输出类型及格式” +输出内容<ul>
+<li>输出类型<ul>
+<li>%ns<ul>
+<li>输出字符串</li>
+<li>n为数字表示输出几个字符</li>
+</ul>
+</li>
+<li>%ni<ul>
+<li>输出整数</li>
+<li>n为数字表示输出几个数字</li>
+</ul>
+</li>
+<li>%m.nf<ul>
+<li>输出浮点数</li>
+<li>m为总位数，n为数位</li>
+<li>%8.2f表总共输出8位，2位小数，6位整数</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>输出格式<ul>
+<li>\a：发出警告音</li>
+<li>\b：输出退格，及backspace</li>
+<li>\f：清屏</li>
+<li>\n：换行</li>
+<li>\r：回车，即enter</li>
+<li>\t：水平输出退格，即tab</li>
+<li>\v：垂直输出退格，即tab</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其它<ul>
+<li>严格来讲并不是字符提取命令，包含于awk</li>
+<li>其后不可直接加文件名，其前也不可以有管道符<ul>
+<li>利用$()，即先执行其中的命令，其输出结果作为printf的输出内容</li>
+<li>如printf  ‘%s’  $(cat test.txt)</li>
+</ul>
+</li>
+<li>不如echo命令方便，也不如cat，cat命令本身做了格式优化</li>
+<li>为awk命令使用方便，因awk不可调用echo和cat</li>
+<li>awk中支持print和printf<ul>
+<li>print在每次输出后自动加换行符，print并不是Linux中的命令</li>
+<li>printf需手工加入换行符</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>printf ‘%s %s %s\n’ 1 2 3 4 5 6 </li>
+<li>分两组，123和456，且换行了</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>awk命令<ul>
+<li>简介<ul>
+<li>同cut截取列，但会弥补其缺陷；grep是截取行</li>
+<li>awk复杂且功能强大，故有awk编程一说</li>
+</ul>
+</li>
+<li>awk ‘条件1 ｛动作1｝条件2 ｛动作2｝…’  文件名<ul>
+<li>单引号扩起来</li>
+<li>后可加文件名，前可加管道符</li>
+<li>满足条件则执行动作，不加条件时表示总会执行动作</li>
+<li>以行为单位先遍历，再根据条件是否符合决定动作的执行与否（自己总结，待验证</li>
+<li>条件（pattern<ul>
+<li>一般使用关系表达式作为条件</li>
+<li>x &gt; 10，判断x是否大于10</li>
+<li>x &gt;= 10，</li>
+<li>x &lt;= 10，</li>
+</ul>
+</li>
+<li>动作（action<ul>
+<li>格式化输出</li>
+<li>流程控制语句</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>awk ‘｛printf $2 “\t” $6 “\n”｝’ test.txt<ul>
+<li>printf需要手动换行</li>
+<li>$2表第二列</li>
+</ul>
+</li>
+<li>df -h | awk ‘｛print $1 “\t” $3｝‘<ul>
+<li>磁盘使用情况</li>
+<li>不加条件时则默认执行动作</li>
+</ul>
+</li>
+<li>awk ‘$2&gt;=20｛printf $2 “\n”｝’ test.txt<ul>
+<li>$2表第二列</li>
+<li>第二列数据大于20时才执行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BEGIN和END<ul>
+<li>处理数据之前或之后执行某动作，属于条件</li>
+<li>BEGIN常与FS一起使用，指定分隔符时</li>
+</ul>
+</li>
+<li>FS内置变量<ul>
+<li>默认识别的分隔符是制表符或空格，FS可指定</li>
+<li>awk ‘BEGIN｛FS=“:”｝｛printf $2 “\t” $6 “\n”｝’  /etc/passwd</li>
+<li>以冒号为分隔，打印出其第26行</li>
+<li>要加BEGIN，否则第一条数据不会认为以冒号分隔的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>sed命令<ul>
+<li>简介<ul>
+<li>并非截取命令，grep行截取，awk和cut列截取</li>
+<li>而是一个流编辑器，将数据进行选取、替换、删除、新增</li>
+<li>vim也是编辑器，操作文件内容，不可操作命令输出结果，sed两者都可以（借助管道符</li>
+</ul>
+</li>
+<li>sed +选项+‘动作’+文件名<ul>
+<li>动作用单引号扩起来</li>
+<li>选项<ul>
+<li>-n<ul>
+<li>sed默认将所有数据都输出到屏幕</li>
+<li>加此选项，会把经过sed处理后的输出到屏幕</li>
+</ul>
+</li>
+<li>-e<ul>
+<li>允许对输入数据应用多条sed命令编辑</li>
+<li>如，sed -e ‘3a yyy’  ‘2a hello’ test.txt</li>
+</ul>
+</li>
+<li>-i<ul>
+<li>默认sed处理后不会影响源文件，只是输出时有所改变</li>
+<li>加此i，sed处理后的结果写入源文件，直接修改了源文件，而不是输出至屏幕</li>
+<li>存在一定危险性，不建议，sed还是多用于命令结果处理</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>动作<ul>
+<li>一般之前要紧跟行或行范围，如2a，3i</li>
+<li>a \<ul>
+<li>追加，在当前行后添加一行或多行</li>
+<li>添加多行时，除最后一行，每行末都加\表示未完结</li>
+</ul>
+</li>
+<li>c \<ul>
+<li>行替换，用c后面的字符串替换原数据行</li>
+<li>替换多行时，除最后一行，每行末都加\表示未完结</li>
+</ul>
+</li>
+<li>i \<ul>
+<li>插入，在当前行前插入一行或多行</li>
+<li>插入多行时，除最后一行，每行末都加\表示未完结</li>
+</ul>
+</li>
+<li>d<ul>
+<li>删除指定行</li>
+</ul>
+</li>
+<li>p<ul>
+<li>输出制定行</li>
+</ul>
+</li>
+<li>s<ul>
+<li>字符串替换</li>
+<li>行范围s/旧/新/g（同vim</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>举例<ul>
+<li>sed -n ‘2p’ test.txt<ul>
+<li>输出第二行</li>
+<li>若不加n，在所有数据基础上又打印第二行，第二行重复输出</li>
+<li>一般打印时，都跟n</li>
+</ul>
+</li>
+<li>df -h | sed -n ‘2p’<ul>
+<li>管道符后以处理上条命令结果</li>
+</ul>
+</li>
+<li>sed ‘2,4d’ test.txt<ul>
+<li>删除2-4行，但不修改文件本身</li>
+</ul>
+</li>
+<li>sed ‘2a hello’ test.txt<ul>
+<li>第二行后追加hello</li>
+</ul>
+</li>
+<li>sed ‘2i hello \ world‘ test.txt<ul>
+<li>第二行前插入两行数据</li>
+<li>-i时，直接把修改写入文件</li>
+</ul>
+</li>
+<li>sed ‘2c hello  world‘ test.txt<ul>
+<li>行替换，将第二行替换为指定的字符串</li>
+</ul>
+</li>
+<li>字符串替换<ul>
+<li>sed ‘s/旧/新/g’ 文件名</li>
+<li>sed ‘3s/yes/no/g’ test.txt</li>
+<li>在第三行，将yes替换为no</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="字符处理命令"><a href="#字符处理命令" class="headerlink" title="字符处理命令"></a>字符处理命令</h2><ul>
+<li>排序命令sort<ul>
+<li>sort+选项+文件名<ul>
+<li>-f：忽略大小写</li>
+<li>-n：以数值型进行排序，默认是字符串型</li>
+<li>-r：反向排序</li>
+<li>-t：指定分隔符，默认是制表符</li>
+<li>-k  n[,m]：按照指定的字段范围排序，n开始m结束；默认到行尾</li>
+</ul>
+</li>
+<li>按每行的第一个字母来排序</li>
+<li>举例<ul>
+<li>sort /etc/passwd</li>
+<li>sort -t “:”  -k 3,3 /etc/passwd（3开头3结尾，即用3字段排序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>统计命令wc<ul>
+<li>wc+选项+文件名<ul>
+<li>-l：只统计行数</li>
+<li>-w：只统计单词数</li>
+<li>-m：只统计字符数</li>
+<li>不加则输出所有，行数，单词数，字符数</li>
+</ul>
+</li>
+<li>也可以用管道符来接收</li>
+</ul>
+</li>
+</ul>
+<h2 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h2><ul>
+<li>按文件类型进行判断<ul>
+<li>-e：只判断文件是否存在</li>
+<li>-s：判断文件是否存在，并且是否为空</li>
+<li>-x + 文件：判读该文件是否存在，并且是xx文件（是的话返回真<ul>
+<li>-d：目录文件</li>
+<li>-f：普通文件</li>
+<li>-b：块设备文件</li>
+<li>-c：字符设备文件</li>
+<li>-L：符号链接文件</li>
+<li>-p：管道文件</li>
+<li>-S：套接字文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>按照文件权限判断<ul>
+<li>-xx +文件：判断该文件是否存在，并且是否存在xx权限，（存在xx权限则返回真</li>
+<li>-r/w/x：读写执行权限（ugo其中有一个存在此权限就返回真</li>
+<li>-u：SUID权限</li>
+<li>-g：SGID权限</li>
+<li>-k：Sbit权限</li>
+</ul>
+</li>
+<li>两个文件之间进行比较<ul>
+<li>文件1 -nt 文件2:文件1的修改时间是否比2新</li>
+<li>文件1 -ot 文件2: 文件1的修改时间是否比2旧</li>
+<li>文件1 -ef 文件2<ul>
+<li>判断文件1和2的Inode号是否一致，即是否是同一个文件；</li>
+<li>用于判断硬链接</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>两个整数之间比较<ul>
+<li>整数1 -xx 整数2:  1和2是否xx，若xx则为真</li>
+<li>-eq：是否相等</li>
+<li>-ne：是否不相等</li>
+<li>-gt：是否大于</li>
+<li>-lt：是否小于</li>
+<li>-ge：是否大于等于</li>
+<li>-le：是否小于等于</li>
+</ul>
+</li>
+<li>字符串的判断<ul>
+<li>-z 字符串<ul>
+<li>字符串是否为空，为空返回真</li>
+</ul>
+</li>
+<li>-n 字符串<ul>
+<li>是否为非空</li>
+</ul>
+</li>
+<li>字符串a == 字符串b<ul>
+<li>是否相等</li>
+</ul>
+</li>
+<li>字符串a != 字符串b<ul>
+<li>是否不相等</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>多重条件判断<ul>
+<li>判断1 -a 判断2<ul>
+<li>逻辑与</li>
+<li>12都真才真</li>
+</ul>
+</li>
+<li>判断1 -o 判断2<ul>
+<li>逻辑或</li>
+<li>12有一个为真便真</li>
+</ul>
+</li>
+<li>！判断<ul>
+<li>逻辑非</li>
+<li>对原判断取反</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>两种判断格式<ul>
+<li>利用test <ul>
+<li>test -e /root/install.log</li>
+<li>运行后无输出，借用echo $?，来判断上一条是否执行正确，若是0则正确，非0则错误</li>
+</ul>
+</li>
+<li>利用中括号<ul>
+<li>中括号右/左必须有括号</li>
+<li>[ -e /root/install.log ]</li>
+<li>[ 23 -gt 22 ]</li>
+</ul>
+</li>
+<li>两种方式屏幕都无输出<ul>
+<li>运行后无输出，借用echo $?，来判断上一条是否执行正确，若是0则正确，非0则错误</li>
+<li>[ -e /root/install.log ] &amp;&amp; echo  yes || echo no</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/用户和用户组管理/" rel="next" title="用户和用户组管理">
+                <i class="fa fa-chevron-left"></i> 用户和用户组管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/Linux常用命令/" rel="prev" title="Linux常用命令">
+                Linux常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Shell及编程基础"><span class="nav-text">Shell及编程基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shell脚本的执行方式"><span class="nav-text">shell脚本的执行方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bash的基本功能"><span class="nav-text">Bash的基本功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bash的变量"><span class="nav-text">Bash的变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境变量配置文件"><span class="nav-text">环境变量配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#正则表达式"><span class="nav-text">正则表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符截取命令"><span class="nav-text">字符截取命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字符处理命令"><span class="nav-text">字符处理命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#条件判断"><span class="nav-text">条件判断</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

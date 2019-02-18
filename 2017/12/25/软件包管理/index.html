@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="软件包管理软件包分类 源码包 大部分是C语言（Linux便是C开发 脚本安装包：其实也是源码包，在其基础上添加安装界面等，不多见 优点 开源，若有足够能力，可自己修改源码 可自由选择所需功能">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="软件包管理">
+<meta property="og:url" content="http://21guns.top/2017/12/25/软件包管理/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="软件包管理软件包分类 源码包 大部分是C语言（Linux便是C开发 脚本安装包：其实也是源码包，在其基础上添加安装界面等，不多见 优点 开源，若有足够能力，可自己修改源码 可自由选择所需功能">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T08:33:14.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="软件包管理">
+<meta name="twitter:description" content="软件包管理软件包分类 源码包 大部分是C语言（Linux便是C开发 脚本安装包：其实也是源码包，在其基础上添加安装界面等，不多见 优点 开源，若有足够能力，可自己修改源码 可自由选择所需功能">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/25/软件包管理/">
+
+
+
+
+
+  <title>软件包管理 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/25/软件包管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">软件包管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:29:49+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="软件包管理"><a href="#软件包管理" class="headerlink" title="软件包管理"></a>软件包管理</h1><h2 id="软件包分类"><a href="#软件包分类" class="headerlink" title="软件包分类"></a>软件包分类</h2><ul>
+<li>源码包<ul>
+<li>大部分是C语言（Linux便是C开发</li>
+<li>脚本安装包：其实也是源码包，在其基础上添加安装界面等，不多见</li>
+<li>优点<ul>
+<li>开源，若有足够能力，可自己修改源码</li>
+<li>可自由选择所需功能<a id="more"></a></li>
+<li>软件是编译安装，故更加适合自己系统，更加稳定且效率高</li>
+<li>卸载方便（直接删除其安装的目录即可</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>安装步骤多、繁杂</li>
+<li>编译过程时间长，影响安装速度（比二进制包慢</li>
+<li>因为是编译安装，安装时出错难以解决</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>二进制包<ul>
+<li>经过编译后的0101的机器语言包</li>
+<li>优点<ul>
+<li>包管理系统简单，通过命令可实现包的安装、升级、查询，卸载</li>
+<li>安装速度比源码包快的多</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>因其是编译后，故不可见源码</li>
+<li>功能选择不如源码包灵活</li>
+<li>存在依赖性（最大的麻烦</li>
+</ul>
+</li>
+<li>如，CentOS的rpm包、系统默认包</li>
+</ul>
+</li>
+</ul>
+<h2 id="RPM包管理"><a href="#RPM包管理" class="headerlink" title="RPM包管理"></a>RPM包管理</h2><ul>
+<li>rpm命令管理<ul>
+<li>RPM包命名规则<ul>
+<li>如：httpd-2.2.15-15.el6.centos.1.i686.rpm（这是包全名，区别于包名</li>
+<li>httpd:软件包名<ul>
+<li>包名与包全名要有所区分</li>
+<li>有些命令会跟包名，有些跟包全名</li>
+</ul>
+</li>
+<li>2.2.15: 软件版本</li>
+<li>15: 软件发布的次数</li>
+<li>el6.centos：适合的Linux平台（不写的话会认为适合所有的</li>
+<li>i686：适合的硬件平台（86-32位、64-64位、noarch表任何硬件平台都可以</li>
+<li>rpm：rpm包扩展名<ul>
+<li>Linux中无扩展名的概念，后缀可随便写</li>
+<li>但rpm包规定以.rpm为后缀，方便用户辨认</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>RPM包依赖性<ul>
+<li>树形依赖：a-b-c<ul>
+<li>安装：先c再b后a，卸载相反</li>
+</ul>
+</li>
+<li>环形依赖：a-b-c-a<ul>
+<li>abc同时安装就会解决</li>
+</ul>
+</li>
+<li>模块依赖<ul>
+<li>模块依赖查询网站：<a href="http://www.rpmfind.net" target="_blank" rel="noopener">www.rpmfind.net</a></li>
+<li>安装a包，需依赖x模块，可查询x模块在哪个包中，若是b包，则先安装b</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>安装、升级与卸载<ul>
+<li>包全名与全名<ul>
+<li>包全名：操作的包是没有安装的软件包时，使用包全名，且要注意路径</li>
+<li>包名：操作已经安装的软件包，使用包名。是搜索/var/lib/rpm的数据库</li>
+</ul>
+</li>
+<li>RPM安装<ul>
+<li>rpm -ivh 包全名</li>
+<li>i：安装</li>
+<li>v：显示详细信息</li>
+<li>h：hash，用#显示进度</li>
+<li>—nodeps 不检测依赖性（不建议</li>
+</ul>
+</li>
+<li>RPM包升级<ul>
+<li>rpm -Uvh 包全名</li>
+<li>U：upgrade，升级</li>
+</ul>
+</li>
+<li>卸载<ul>
+<li>rpm -e 包名</li>
+<li>已安装，需跟包名</li>
+<li>e：erase，卸载</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查询<ul>
+<li>查询是否安装<ul>
+<li>rpm -q 包名（q：query，查询</li>
+<li>rpm -qa（a：all，查询所有已安装的</li>
+<li>rpm -qa | grep httpd（查询所有httpd相关</li>
+</ul>
+</li>
+<li>查询软件包详细信息<ul>
+<li>rpm -qi 包名</li>
+<li>i：information，查询软件信息</li>
+<li>p：package，查询未安装包信息（因未安装，故跟全名；包在构建时就存在此信息，故可以查询</li>
+</ul>
+</li>
+<li>查询包中文件安装位置<ul>
+<li>rpm -ql 包名</li>
+<li>l：list，列表</li>
+<li>p：package，查询未安装包信息（因未安装，故跟全名；在包构建时就存在其相关信息，其打算装在哪</li>
+<li>由包找文件</li>
+</ul>
+</li>
+<li>查询系统文件属于哪个rpm包<ul>
+<li>rpm -qf 系统文件名</li>
+<li>f：file，查询系统文件属于哪个安装包</li>
+<li>由文件找包（此文件必须是通过包生成的</li>
+</ul>
+</li>
+<li>查询软件包依赖性<ul>
+<li>rpm -qR 包名</li>
+<li>R：查询软件包依赖性，requires</li>
+<li>p：查询未安装的软件包（此信息在包构建时就存在；需跟包全名；</li>
+<li>多用于查询未安装包，安装前先检测</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>校验和文件提取<ul>
+<li>RPM包校验<ul>
+<li>rpm -V 包名</li>
+<li>V：verify，检验指定RPM包中的文件</li>
+<li>判断安装后，其相关文件是否更改</li>
+<li>若运行后无信息输出，则未更改</li>
+<li>输出验证信息，则经过更改<ul>
+<li>验证信息=8个字段+文件类型+文件名</li>
+<li>8个字段<ul>
+<li>S：文件大小是否被改变</li>
+<li>M：文件类型或文件权限是否被改变</li>
+<li>5:文件md5校验和是否改变（即文件内容是否改变</li>
+<li>D：设备的中、从代码是否改变</li>
+<li>L：文件路径是否改变</li>
+<li>U：文件属主（即所有者）是否改变</li>
+<li>G：文件属组是否改变</li>
+<li>T：文件修改时间是否改变</li>
+</ul>
+</li>
+<li>文件类型<ul>
+<li>c：配置文件</li>
+<li>d：document，普通文档</li>
+<li>g：ghost file，鬼文件，少见，即该文件不应该被此rpm包包含</li>
+<li>l：license，授权文件</li>
+<li>r：readme，描述文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>rpm包中文件提取<ul>
+<li>rpm2cpio 包全名 | cpio -idv .文件绝对路径</li>
+<li>rpm2cpio：将rpm包转为cpio格式</li>
+<li>cpio：一个标准工具，用于创建软件档案文件和从档案文件提取文件<ul>
+<li>cpio+选项  &lt;  [文件或设备]</li>
+<li>i：copy-in模式，还原</li>
+<li>d：还原时自动新建目录</li>
+<li>v：显示还原过程</li>
+</ul>
+</li>
+<li>例如<ul>
+<li>1，rpm -qf /bin/ls（查询ls命令属于哪个软件包</li>
+<li>2，mv /bin/ls /tmp（假装误删除ls命令</li>
+<li>3，rpm2cpio 相应包全名 |  cpio -idv ./bin/ls（包由1步骤查询得；提取rpm包中的ls命令到当前目录的/bin/ls下</li>
+<li>4，cp /root/bin/ls /bin/（把ls命令复制到/bin/命令，修复其丢失</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>子主题</li>
+</ul>
+</li>
+<li>yum在线管理<ul>
+<li>简介<ul>
+<li>很好的解决了软件安装时的依赖问题</li>
+<li>redhat系列是作为售后服务，需付费；故使用centos，免费</li>
+<li>可使用在线yum源，也可以本地光盘搭建</li>
+<li>yum实际操作的也是rpm包；可理解为rpm是手动，yum为自动</li>
+</ul>
+</li>
+<li>IP地址配置和网络yum源<ul>
+<li>只要接入互联网，不需要配置便可以使用</li>
+<li>默认已经配置好官方yum源，可自行更改为国内源</li>
+<li>保存位置：/etc/yum.repos.d/CentOS-base.repo</li>
+<li>repo后缀名的都是合法的yum源文件<ul>
+<li>centos-base.repo：在线的</li>
+<li>centos-media.repo：本地光盘的</li>
+</ul>
+</li>
+<li>网络yum源文件内容分析（centos-base.repo<ul>
+<li>[base]：容器名称，一定放在[]中（有多个名称不同的容器</li>
+<li>name：容器说明，可自定义</li>
+<li>mirrorlist：镜像站点，可注释掉</li>
+<li>baseurl：yum源服务器的地址，默认国外官方，可改为国内</li>
+<li>enabled：此容器是否生效</li>
+<li>gpgcheck：若是1指rpm的数字证书生效，0则不生效</li>
+<li>gpgkey：数字证书的公钥文件保存位置，不必修改</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>yum命令<ul>
+<li>常用yum命令<ul>
+<li>查询<ul>
+<li>yum list：查询所有可用软件包列表</li>
+<li>yum search+关键字：搜索服务器上所有与关键字相关的包</li>
+</ul>
+</li>
+<li>安装<ul>
+<li>yum -y install 包名</li>
+<li>install：安装</li>
+<li>y：自行回答yes</li>
+</ul>
+</li>
+<li>升级<ul>
+<li>yum -y update 包名</li>
+<li>不加包名：升级所有软件包，包括内核（内核升级有宕机风险，不建议使用</li>
+</ul>
+</li>
+<li>卸载<ul>
+<li>yum -y remove 包名</li>
+<li>因具有依赖性，会卸载所有其依赖的包，如a依赖b，卸载a，就会卸载b，但c也依赖b，故会出错</li>
+<li>不建议使用卸载功能，有风险</li>
+</ul>
+</li>
+<li>注意<ul>
+<li>升级全部、卸载，要慎用，风险极大</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>yum软件组管理命令<ul>
+<li>软件包的集合</li>
+<li>yum grouplist：列出所有可用软件组列表</li>
+<li>yum groupinstall 软件组名：安装指定软件组，组名可以由grouplist查询出来</li>
+<li>yum groupremove 软件组名：卸载指定软件组</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>本地光盘yum源搭建<ul>
+<li>1，挂载光盘<ul>
+<li>mount /dev/cdrom /mnt/cdrom/</li>
+</ul>
+</li>
+<li>2，让其它yum源文件失效<ul>
+<li>cd /etc/yum.repos.d/</li>
+<li>只让centos-media.repo生效<ul>
+<li>此repo与本地yum源相关，即光盘yum源</li>
+<li>可以将其它更名为.repo.bak，其后缀失效，故文件失效</li>
+<li>也可以打开其它文件，更改相关字段，使其失效（太麻烦，不建议</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3，修改光盘yum源文件<ul>
+<li>将enabled=0改为1，使其生效</li>
+<li>baseurl字段改为file:///mnt/cdrom（地址为光盘挂载地址</li>
+</ul>
+</li>
+<li>注意<ul>
+<li>Linux中有些配置文件，有其特定格式</li>
+<li>不可随便加缩进</li>
+<li>有时中间位置也不可加注释，只允许在行首加注释</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="源码包管理"><a href="#源码包管理" class="headerlink" title="源码包管理"></a>源码包管理</h2><ul>
+<li>源码包和RPM包的区别<ul>
+<li>安装前，考虑二者概念上不同；安装后，考虑的是软件安装位置的不同</li>
+<li>RPM包安装位置：系统默认<ul>
+<li>/etc：配置文件安装目录</li>
+<li>/usr/bin/：可执行命令安装位置</li>
+<li>/usr/lib/：程序所使用函数库保存位置</li>
+<li>/usr/share/doc/：基本软件使用手册安装位置</li>
+<li>/usr/share/man/：帮助文件保存位置</li>
+</ul>
+</li>
+<li>源码包安装位置：手工指定<ul>
+<li>安装在指定位置中，一般是/usr/local/软件名/</li>
+</ul>
+</li>
+<li>安装位置不同带来的影响<ul>
+<li>1，RPM安装的可使用系统服务管理命令（如service）来管理。如RPM安装的Apache的启动方法：service httpd start或/etc/rc.d/init.d/httpd start（绝对路径来启动）</li>
+<li>2，源码包安装的服务不能被服务管理命令管理，因其没有安装到默认路径，所以只能用绝对路径的方式，如/usr/local/apache2/bin/apachectl  start</li>
+<li>其它<ul>
+<li>归根结底采用绝对路径的方式来启动</li>
+<li>service是redhat系列专有，还有其它服务管理命令（都针对rpm安装的）</li>
+<li>service命令不能管理源码包安装的，因安装位置的差异</li>
+<li>service之所以可操作httpd等，是因为可以到rpm安装的默认目录下寻找相应软件，等效于绝对路径启动软件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>源码包安装过程<ul>
+<li>1，安装准备<ul>
+<li>安装C语言编译器</li>
+<li>下载源码包</li>
+</ul>
+</li>
+<li>2，安装注意事项<ul>
+<li>源码包保存位置：/usr/local/src/（下载保存在此位置</li>
+<li>软件安装位置：/usr/local/</li>
+<li>如何确定安装过程报错<ul>
+<li>安装过程停止（不停止若出现error等，可忽略</li>
+<li>并出现error、warning或no的提示</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3，安装过程<ul>
+<li>下载源码包并解压缩，并进入解压缩的目录<ul>
+<li>INSTALL：安装说明文件</li>
+<li>README：使用帮助文件</li>
+</ul>
+</li>
+<li>./configure：软件配置与检查<ul>
+<li>功能<ul>
+<li>定义需要的功能选项</li>
+<li>检测系统环境是否符合安装要求</li>
+<li>把定义好的功能选项和检测系统环境的信息写入makefile文件，用于后续的编辑</li>
+</ul>
+</li>
+<li>./configure —help：查看所有可支持的配置选项</li>
+<li>./configure —prefix=/usr/local/软件名称：定义安装的目录（软件名称可以自定义，前面路径一般不要更改</li>
+<li>执行后，生成makefile文件</li>
+</ul>
+</li>
+<li>make<ul>
+<li>调用gcc，编译源码包为机器语言</li>
+<li>只是编译过程，并未向安装目录正式写入数据</li>
+<li>make clean可以清空编译后产生的临时文件，恢复软件包的初始状态（不必重下载</li>
+</ul>
+</li>
+<li>make install<ul>
+<li>编译安装过程</li>
+<li>开始向安装目录写入数据，正式安装</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>4，源码包的下载<ul>
+<li>不需要卸载命令</li>
+<li>直接删除目录即可，不会遗留任何垃圾文件</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="脚本安装包"><a href="#脚本安装包" class="headerlink" title="脚本安装包"></a>脚本安装包</h2><ul>
+<li>简介<ul>
+<li>脚本安装包并不是独立的软件包类型，常见安装的是源码包</li>
+<li>是人为把安装过程写成了自动安装的脚本，只要执行脚本，定义简单的参数，就可完成安装</li>
+<li>类似Windows下软件安装方式</li>
+</ul>
+</li>
+<li>以Webmin安装为例（基于web页面的Linux图形操作界面）<ul>
+<li>下载解压缩并进入解压缩后目录</li>
+<li>执行安装脚本</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/备份与恢复/" rel="next" title="备份与恢复">
+                <i class="fa fa-chevron-left"></i> 备份与恢复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/启动管理/" rel="prev" title="启动管理">
+                启动管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#软件包管理"><span class="nav-text">软件包管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#软件包分类"><span class="nav-text">软件包分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RPM包管理"><span class="nav-text">RPM包管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#源码包管理"><span class="nav-text">源码包管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本安装包"><span class="nav-text">脚本安装包</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Kali,tool,Web渗透,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="BurpSuite简介 web安全工具中的瑞士军刀；Java开发；倘若只有一个工具供选择，一定选择burp 统一的集成工具；发现全部现代web安全漏洞 所用的工具共享一个能处理并显示http消息的可扩展框架，模块之间无缝交换信息 portSwigger公司开发">
+<meta name="keywords" content="Kali,tool,Web渗透">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali实战-BurpSuite">
+<meta property="og:url" content="http://21guns.top/2018/01/27/Kali实战-BurpSuite/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="BurpSuite简介 web安全工具中的瑞士军刀；Java开发；倘若只有一个工具供选择，一定选择burp 统一的集成工具；发现全部现代web安全漏洞 所用的工具共享一个能处理并显示http消息的可扩展框架，模块之间无缝交换信息 portSwigger公司开发">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T11:48:36.984Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kali实战-BurpSuite">
+<meta name="twitter:description" content="BurpSuite简介 web安全工具中的瑞士军刀；Java开发；倘若只有一个工具供选择，一定选择burp 统一的集成工具；发现全部现代web安全漏洞 所用的工具共享一个能处理并显示http消息的可扩展框架，模块之间无缝交换信息 portSwigger公司开发">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/27/Kali实战-BurpSuite/">
+
+
+
+
+
+  <title>Kali实战-BurpSuite | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/27/Kali实战-BurpSuite/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kali实战-BurpSuite</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-27T19:30:50+08:00">
+                2018-01-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Kali相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Kali相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="BurpSuite"><a href="#BurpSuite" class="headerlink" title="BurpSuite"></a>BurpSuite</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>web安全工具中的瑞士军刀；Java开发；倘若只有一个工具供选择，一定选择burp</li>
+<li>统一的集成工具；发现全部现代web安全漏洞</li>
+<li>所用的工具共享一个能处理并显示http消息的可扩展框架，模块之间无缝交换信息</li>
+<li>portSwigger公司开发<a id="more"></a><ul>
+<li>非开源</li>
+<li>分为free版和professional版；</li>
+<li>free版无主动扫描功能（但仍旧强大</li>
+<li>kali中集成free版</li>
+</ul>
+</li>
+<li>kali中默认安装有open版的Java，足以运行burp，但安装 oracle版Java会更好</li>
+<li>改变字体可避免中文乱码，默认是英文，options-display</li>
+</ul>
+<h2 id="proxy模块"><a href="#proxy模块" class="headerlink" title="proxy模块"></a>proxy模块</h2><ul>
+<li>其下标签简介<ul>
+<li>intercept<ul>
+<li>决定截断功能的开关</li>
+<li>可以选择数据包的丢弃，继续发送等动作</li>
+<li>action键，发往其它模块的</li>
+</ul>
+</li>
+<li>http history<ul>
+<li>http数据包的，历史纪录</li>
+</ul>
+</li>
+<li>web sockets history<ul>
+<li>有些请求没有http界面</li>
+<li>如网页的API请求</li>
+</ul>
+</li>
+<li>option<ul>
+<li>设置监听地址和端口，默认8080端口和loopback本地环回地址（仅本机使用</li>
+<li>也可以监听所有网卡，其他主机指定其IP作为代理服务器</li>
+<li>request handling可以设置其抓取的流量发往指定的地址和端口，而不是原有的目标地址<ul>
+<li>设置强制使用SSL连接，如下：</li>
+<li>即使原与目标的通信是明文的http通信，设置后，经burp后与目标的通信会采用SSL加密的方式</li>
+<li>设置不可见代理，如下：</li>
+<li>如pc版的微信客户端，其与微信服务器的通信不使用浏览器，其通信仍基于http，但客户端程序并没有设置代理的功能；设置不可见代理便是为这种通信基于http但无法设置代理的程序</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>invisible不可见代理问题<ul>
+<li>如pc版的微信客户端，其与微信服务器的通信不使用浏览器，其通信仍基于http，但客户端程序并没有设置代理的功能；设置不可见代理便是为这种通信基于http但无法设置代理的程序</li>
+<li>但，客户端是没有代理功能的，可以利用dns域名解析解决：<ul>
+<li>a主机上的微信客户端，b主机上的burp，<a href="http://xn--a-hg7am8fsufcrosxk.com" target="_blank" rel="noopener">微信服务器a.com</a></li>
+<li>更改a主机的host文件，使微信服务器a.com的域名指向b主机，即a端的客户端程序的流量发向b端的burp</li>
+<li>b端的burp作为中间人，可对流量进行修改，<a href="http://xn--a-228a6g474bzoooxp74a.com" target="_blank" rel="noopener">后发往真正的a.com</a></li>
+<li>b端的burp收到来自a.com的响应后，再发往a端的客户程序</li>
+<li>至此，截短代理完成</li>
+</ul>
+</li>
+<li>但，往往微信客户端和burp是位于同一主机的，利用dns不可取，因为：<ul>
+<li>因为客户端和burp在同一主机</li>
+<li>burp将截获的流量发往真正目标服务器时，其解析的依然是本身</li>
+<li>所以造成一个循环，流量最终发不到真正服务器</li>
+</ul>
+</li>
+<li>利用，可解决上述问题，即客户端程序与burp位于同一主机的情况：<ul>
+<li>位于options-connections-hostname resolution</li>
+<li>添加主机解析记录</li>
+<li>burp截取到客户端程序的流量，准备发送至真正服务器时</li>
+<li>便不会依赖主机的host文件，而优先考虑此设置</li>
+</ul>
+</li>
+<li>是否看主机头问题<ul>
+<li>一般代理<ul>
+<li>针对浏览器等能设置代理的</li>
+<li>GET <a href="http://a.com/test.php" target="_blank" rel="noopener">http://a.com/test.php</a> http/1.1</li>
+<li>host：<a href="http://a.com" target="_blank" rel="noopener">a.com</a></li>
+<li>get的是绝对路径，不关注host字段</li>
+</ul>
+</li>
+<li>不可见代理<ul>
+<li>针对微信客户端等不支持代理设置的</li>
+<li>GET /test.php http/1.1</li>
+<li>host：<a href="http://a.com" target="_blank" rel="noopener">a.com</a></li>
+<li>get的是相对路径，再发时会关注host头，拼接成完整地址</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>客户端程序发送的http请求无host头问题<ul>
+<li>客户端时，需要看host头，与请求的页面拼接成最终目标地址</li>
+<li>但是无host头，最终的拼接就会有问题</li>
+<li>前期由客户端到burp时，通过dns欺骗即修改host文件，将目标域名的IP解析为burp所在主机</li>
+<li>后期burp到真正目标时，proxy listeners-edit proxy-requests handing，添加redirect to host/port，将流量指向真正目标主机和端口</li>
+</ul>
+</li>
+<li>客户端程序与其服务器通信设计多目标域名问题<ul>
+<li>通常某程序通信时会涉及多个目标域名，<a href="http://xn--a-ch1b.xn--comb-221g.com" target="_blank" rel="noopener">如a.com和b.com</a></li>
+<li>burp可以监听多个本地网卡，系统可以设置多个类似127.0.0.1的本地环回网卡</li>
+<li>或者监听一个网卡，而监听多个端口，通过添加记录，每条记录都是一个proxy</li>
+<li>如127:8081为proxy1，127:8082为proxy2</li>
+<li>前期修改host文件，a.com指向8081端口，b.com指向8082端口，如此，实现客户端到burp的通信</li>
+<li>后期，edit每条记录，即每个proxy，都选择invisable proxy，<a href="http://xn--8081a-r18ht70gls8a.com" target="_blank" rel="noopener">8081的指向a.com</a>，<a href="http://xn--8082b-r18ht70gls8a.com" target="_blank" rel="noopener">8082的指向b.com</a>，实现burp到真正服务器的通信（编辑redirect to host）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>证书问题<ul>
+<li>截断代理时，若目标是https，则浏览器会暴证书不可靠错误，影响后续操作</li>
+<li>一种方法，浏览器导入burp的证书：proxy-option-proxy listener-CA certificate按键，导出至本地（选择第一个），再从本地导入至浏览器，即浏览器安装此证书</li>
+<li>另一种方法：代理打开的情况下，浏览器访问<a href="http://burp，下载证书后，再导入（证书导入浏览器过程同上" target="_blank" rel="noopener">http://burp，下载证书后，再导入（证书导入浏览器过程同上</a></li>
+</ul>
+</li>
+<li>截断相关<ul>
+<li>注意截断和代理的区别，intercept is on控制截断的开关，关闭时，代理仍是开启状态，通过浏览器的通信仍走burp</li>
+<li>截断打开的状态时，浏览器会暂时卡住，等待burp操作（drop丢弃，forward继续发送</li>
+<li>默认proxy下的的截断，只会截断客户端到服务端方向的请求，而不会截断服务端到客户端的响应（repeater 模块下可实现</li>
+<li>可在option中设置响应的截断，且可以编辑截断请求和响应时的规则，以及截断socket message时的设置</li>
+<li>可以对响应进行截断并修改，response modification中，如擦除隐藏表单</li>
+</ul>
+</li>
+<li>其它问题<ul>
+<li>也可以对响应进行截断并修改，option标签中，response modification处</li>
+<li>可以进行match and replace，提交数据时完成自动修改，option标签中，如设置替换UA头</li>
+<li>http history中历史访问记录中，存在原始的访问请求，也存在经过修改的记录，除了request（origin request）和response，多了auto-modified request一栏</li>
+</ul>
+</li>
+</ul>
+<h2 id="target模块"><a href="#target模块" class="headerlink" title="target模块"></a>target模块</h2><ul>
+<li>site map<ul>
+<li>site map栏，可显示所访问的历史记录，层级化显示</li>
+<li>黑色的表已实际访问的，灰色的指页面中存在，并未实际访问</li>
+<li>对每条的访问记录可以进行高亮标识，也可用于filter</li>
+<li>对每条访问记录，可以进行add comment，即添加注释，提前做好记录，日后方便查看（也可用于filter</li>
+</ul>
+</li>
+<li>filter<ul>
+<li>通过filter实现过滤功能，自行勾选选项（target模块中上方条栏</li>
+</ul>
+</li>
+<li>scope<ul>
+<li>可用scope进行过滤，同zap中scope概念类似</li>
+<li>注意：排除掉logout页面</li>
+</ul>
+</li>
+</ul>
+<h2 id="spider模块"><a href="#spider模块" class="headerlink" title="spider模块"></a>spider模块</h2><ul>
+<li>spider模块用于爬网，同其它工具，分为自动爬网和手动爬网</li>
+<li>自动爬网<ul>
+<li>sitemap中，右键，spider the host/branch（前者爬主机，后者爬某特定目录</li>
+</ul>
+</li>
+<li>手动爬网<ul>
+<li>开启代理，使流量通过burp</li>
+<li>关闭截断，防止请求卡在burp，避免手动forward</li>
+<li>手动点击web内各链接，过后，所有的访问出现在burp</li>
+<li>spider模块可查看spider状态，target下可查看爬取记录</li>
+</ul>
+</li>
+<li>spider-control<ul>
+<li>显示spider状态</li>
+<li>设置spider的开启或关闭</li>
+<li>清空待爬取队列</li>
+<li>scope设置，用于分组、过滤</li>
+</ul>
+</li>
+<li>spider-option<ul>
+<li>爬虫基本设置，爬取URL深底等</li>
+<li>application login，有些页面需要进行身份认证，在此设置认证信息（使用向导或提前设置</li>
+<li>requests header，请求头相关设置</li>
+</ul>
+</li>
+<li>compare sitemap功能<ul>
+<li>爬取完毕可以进行保存，菜单项：burp-save state</li>
+<li>结果的保存很有意义：可以不同账号登录应用，以二者身份进行扫描爬取，对比二者所访问资源不同，从而发现应用在访问控制方面的不足（此缺陷不同于sql和xss等技术性漏洞，一般扫描工具不会发现，但burp提供对比二者结果来发现此问题的功能</li>
+<li>target-site map，右键记录，compare site map，按向导设置，比较两次结果的差异</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kali/" rel="tag"># Kali</a>
+          
+            <a href="/tags/tool/" rel="tag"># tool</a>
+          
+            <a href="/tags/Web渗透/" rel="tag"># Web渗透</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/27/Kali实战-Vega/" rel="next" title="Kali实战-Vega">
+                <i class="fa fa-chevron-left"></i> Kali实战-Vega
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/27/Kali实战-nmap/" rel="prev" title="Kali实战-nmap">
+                Kali实战-nmap <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#BurpSuite"><span class="nav-text">BurpSuite</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#proxy模块"><span class="nav-text">proxy模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#target模块"><span class="nav-text">target模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#spider模块"><span class="nav-text">spider模块</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

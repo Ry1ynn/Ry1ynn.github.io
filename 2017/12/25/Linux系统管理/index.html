@@ -1,0 +1,1136 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux系统管理进程管理 简介 进程简介 正在执行的程序或命令 每个进程都是运行实体 有自己地址空间 占用一定系统资源">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统管理">
+<meta property="og:url" content="http://21guns.top/2017/12/25/Linux系统管理/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="Linux系统管理进程管理 简介 进程简介 正在执行的程序或命令 每个进程都是运行实体 有自己地址空间 占用一定系统资源">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T08:35:43.425Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统管理">
+<meta name="twitter:description" content="Linux系统管理进程管理 简介 进程简介 正在执行的程序或命令 每个进程都是运行实体 有自己地址空间 占用一定系统资源">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/25/Linux系统管理/">
+
+
+
+
+
+  <title>Linux系统管理 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/25/Linux系统管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux系统管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:29:49+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux系统管理"><a href="#Linux系统管理" class="headerlink" title="Linux系统管理"></a>Linux系统管理</h1><h2 id="进程管理"><a href="#进程管理" class="headerlink" title="进程管理"></a>进程管理</h2><ul>
+<li>简介<ul>
+<li>进程简介<ul>
+<li>正在执行的程序或命令</li>
+<li>每个进程都是运行实体</li>
+<li>有自己地址空间</li>
+<li>占用一定系统资源<a id="more"></a></li>
+</ul>
+</li>
+<li>进程管理的作用<ul>
+<li>判断服务器健康状态：top</li>
+<li>查看系统中所有进程：ps，pstree</li>
+<li>杀死进程（正常关闭失效时才考虑）：kill</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>进程查看<ul>
+<li>PS命令：查看所有进程<ul>
+<li>ps aux<ul>
+<li>查看系统当前所有进程，BSD操作系统格式（即Unix格式</li>
+<li>a：所有前台进程</li>
+<li>x：所有后台进程</li>
+<li>u：进程由哪个用户触发</li>
+</ul>
+</li>
+<li>ps -le<ul>
+<li>查看所有进程，Linux标准格式</li>
+<li>l：显示详细信息</li>
+<li>e：所有进程的意思</li>
+</ul>
+</li>
+<li>输出结果分析<ul>
+<li>一条记录为一个进程</li>
+<li>USER：当前进程由哪个用户产生</li>
+<li>PID：进程ID<ul>
+<li>init进程pid为1</li>
+<li>所有进程的父进程</li>
+</ul>
+</li>
+<li>%CPU：占用CPU的百分比</li>
+<li>%MEM：占用的物理内存百分比</li>
+<li>VSZ：占用虚拟内存的大小，单位KB</li>
+<li>RSS：占用实际物理内存的大小，单位KB</li>
+<li>TTY：是在哪个终端运行的<ul>
+<li>很多系统进程的tty为？：表示内核调用</li>
+<li>tty1-tty7：本地控制台终端</li>
+<li>tty1-tty6:  本地字符界面终端</li>
+<li>tty7:本地图形终端</li>
+<li>pts/0-256：虚拟终端</li>
+<li>ctrl+ alt+ F1/2：切换终端</li>
+</ul>
+</li>
+<li>STAT：进程状态<ul>
+<li>R：运行</li>
+<li>S：睡眠</li>
+<li>T：停止状态</li>
+<li>s：包含子进程</li>
+<li>+：位于后台</li>
+</ul>
+</li>
+<li>START：进程启动时间</li>
+<li>TIME：占用CPU的运行时间，而非系统时间</li>
+<li>COMMAND：产生此进程的命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>top命令：判断服务器健康状态<ul>
+<li>top 或top -d<ul>
+<li>默认三秒刷新</li>
+<li>d参数指定top每隔几秒更新</li>
+</ul>
+</li>
+<li>交互模式下可用命名<ul>
+<li>？或h：帮助信息</li>
+<li>P：以CPU使用率排序，默认</li>
+<li>M：以内存使用率排序</li>
+<li>N：以pid排序</li>
+<li>q：退出top</li>
+</ul>
+</li>
+<li>输出结果分析<ul>
+<li>第一行：任务队列信息：top<ul>
+<li>系统当前时间</li>
+<li>系统已经运行的时间</li>
+<li>当前已登录的用户数</li>
+<li>系统在之前1分钟、5分钟、15分钟的平均负载<ul>
+<li>小于1，负载较小</li>
+<li>大于1，超出负荷</li>
+<li>判断标准也取决于CPU核数，单核的以1来判断</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第二行：进程信息：Tasks<ul>
+<li>系统中进程总数</li>
+<li>正在运行的进程数</li>
+<li>睡眠的进程数</li>
+<li>正在停止的进程</li>
+<li>僵尸进程<ul>
+<li>表示正在终止，但还未终止完全</li>
+<li>zombie关键字</li>
+<li>如果不是0，需手工检查僵尸进程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>第三行：CPU信息：%Cpus<ul>
+<li>0.1%us：用户模式占用的CPU百分比</li>
+<li>0.1%sy：系统模式占用的CPU百分比</li>
+<li>0.0%ni：改变过优先级的用户进程占用的CPU百分比</li>
+<li>99.7%id：空闲CPU的占用百分比<ul>
+<li>剩余CPU资源</li>
+<li>最主要看zhegeq</li>
+</ul>
+</li>
+<li>0.1%wa：等待输入输出的进程的…</li>
+<li>%hi：硬中断请求服务占用的…</li>
+<li>%si：软中断请求服务占用的…</li>
+<li>%st：虚拟时间百分比。当有虚拟机时，虚拟CPU等待实际CPU的时间百分比</li>
+</ul>
+</li>
+<li>第四行：物理内存信息：MeM<ul>
+<li>total：物理内存总量，单位KB</li>
+<li>used：已使用的</li>
+<li>free：空闲的</li>
+<li>buffers：作为缓冲的</li>
+</ul>
+</li>
+<li>第五行：交换分区信息：Swap<ul>
+<li>total，used，free</li>
+<li>cached：作为缓存的交换分区的大小</li>
+</ul>
+</li>
+<li>重点关注<ul>
+<li>第一行的平均负载</li>
+<li>第三行的CPU剩余</li>
+<li>第四行的空闲物理内存</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>pstree：查看进程树<ul>
+<li>-p：显示进程PID</li>
+<li>-u：显示进程所属用户</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>终止管理<ul>
+<li>kill命令<ul>
+<li>kill  [信号]  PID <ul>
+<li>按照进程ID杀死进程</li>
+<li>常见重启或强制结束，即1或9</li>
+</ul>
+</li>
+<li>kill -l：查看可用的进程信号<ul>
+<li>1:SIGHUP：重启进程：立即关闭进程，重新读取配置文件后重启</li>
+<li>9:SIGKILL：强制终止进程</li>
+<li>15:SIGTERM：正常结束进程，kill的默认信号</li>
+</ul>
+</li>
+<li>杀死单个进程</li>
+</ul>
+</li>
+<li>killall命令<ul>
+<li>killall  [选项]  [信号]  进程名<ul>
+<li>按照进程名杀死进程</li>
+<li>-i：交互式，询问是否杀死某进程</li>
+<li>-I：忽略进程名大小写</li>
+</ul>
+</li>
+<li>可按照父进程名杀死多个子进程</li>
+</ul>
+</li>
+<li>pkill命令<ul>
+<li>pkill  [选项]  [信号]  进程名<ul>
+<li>按照进程名杀死进程</li>
+<li>-t：按照终端号踢出用户<ul>
+<li>w：查询本机已经登录的用户</li>
+<li>pkill  -t -9 pts/1 ：强制杀死从pts/1虚拟终端登录的进程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>按照终端号杀死对个进程</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="工作管理"><a href="#工作管理" class="headerlink" title="工作管理"></a>工作管理</h2><ul>
+<li>进程可放入后台（类似win最小化<ul>
+<li>1，命令后加&amp;<ul>
+<li>放入后台依然运行</li>
+<li>如tar -zcf etc.tar.gz /etc   &amp;</li>
+</ul>
+</li>
+<li>2，命令执行过程中，按ctrl+z（+c会强制终止）<ul>
+<li>放入后台暂停运行</li>
+<li>如top命令时</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查看后台工作：jobs或jobs -l<ul>
+<li>l：显示工作的pid</li>
+<li>每条记录的第一个字段为工作号</li>
+<li>+：最近一个放入后台的工作，默认优先恢复</li>
+<li>-：倒数第二个放入后台的工作，默认第二个恢复</li>
+<li>第三个没有+、-等符号</li>
+</ul>
+</li>
+<li>后台暂停的工作恢复到前台执行：fg %工作号<ul>
+<li>%工作号：指定要恢复的工作</li>
+<li>%可省略</li>
+<li>工作号和pid是有区别的</li>
+</ul>
+</li>
+<li>后台暂停的工作恢复到后台执行：bg %工作号<ul>
+<li>若此命令是top（等与用户交互的命令），是不能在后台运行的</li>
+<li>与用户交互的命名如top，不能在后台运行，会失去其交互的意义，必须在前台运行来与用户交互</li>
+<li>如top、vi</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统资源查看"><a href="#系统资源查看" class="headerlink" title="系统资源查看"></a>系统资源查看</h2><ul>
+<li>vmstat：监控系统资源<ul>
+<li>vmstat+刷新延时+刷新次数</li>
+<li>如，vmstat 1  3（监控3次，间隔1秒</li>
+<li>类似top，但比较简洁</li>
+</ul>
+</li>
+<li>dmesg：显示开机时内核检测信息<ul>
+<li>如，dmesg  |  grep CPU</li>
+<li>开机时会显示，此命令可再次显示其信息</li>
+</ul>
+</li>
+<li>free：查看内存使用状态<ul>
+<li>free -b/k/m/g</li>
+<li>b：以字节为单位显示</li>
+<li>k：以KB为单位，默认也如此</li>
+<li>m：以MB</li>
+<li>g：以GB</li>
+</ul>
+</li>
+<li>查看CPU信息<ul>
+<li>cat /proc/cpuinfo</li>
+<li>或者利用dmesg</li>
+</ul>
+</li>
+<li>uptime命令<ul>
+<li>显示系统启用时间和平均负载</li>
+<li>top命令的第一行结果</li>
+<li>w命令也可看到此数据</li>
+</ul>
+</li>
+<li>uname命令：查看系统和内核信息<ul>
+<li>-a：查看系统所有相关信息</li>
+<li>-r：查看内核版本</li>
+<li>-s：查看内核名称</li>
+</ul>
+</li>
+<li>判断系统当前位数<ul>
+<li>file /bin/ls</li>
+<li>来间接查看</li>
+</ul>
+</li>
+<li>查询当前系统发行版本<ul>
+<li>lsb_release  -a</li>
+</ul>
+</li>
+<li>lsof：列出某进程调用或打开的文件的信息<ul>
+<li>-c 字符串：只列出以指定字符串开头的进程打开的…</li>
+<li>-u  用户名：只列出某个用户的进程打开的…</li>
+<li>-p pid：只列出某个pid进程打开的文件</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统定时任务"><a href="#系统定时任务" class="headerlink" title="系统定时任务"></a>系统定时任务</h2><ul>
+<li>crond可用于服务管理与访问控制<ul>
+<li>一般是启动状态且设置为自启动</li>
+<li>services crond restart，利用services启动或重启</li>
+</ul>
+</li>
+<li>用户的crontab设置<ul>
+<li>使用前先启动crond服务</li>
+<li>crontab + 选项<ul>
+<li>-e：编辑crontab定时任务</li>
+<li>-l：查询crontab任务</li>
+<li>-r：删除当前用户所有的crontab任务（若要删除一个，按e编辑</li>
+</ul>
+</li>
+<li>-e，进入crontab编辑界面<ul>
+<li>格式：xxxxx+所执行任务</li>
+<li>第一个x：一小时中第几分钟（0-59</li>
+<li>第二个x：一天中第几小时（0-23</li>
+<li>第三个x：一个月中第几天（1-31</li>
+<li>第四个x：一年中第几个月（1-12</li>
+<li>第五个x：一周中第几天（0-7，0、7都表示周日</li>
+<li>特殊符号<ul>
+<li><em>：表任何时间，如第一个为</em>表一小时中每分钟都执行一次</li>
+<li>，：表不连续时间，如第二个的8,12,16 表每天的八点、12点、16点执行一次命令</li>
+<li>-：代表连续的时间范围，如最后的1-6表示周一到周六</li>
+<li><em>/n：表每隔多久执行一次，如第一个的</em>/10表示每隔十分钟执行一遍</li>
+</ul>
+</li>
+<li>其它<ul>
+<li>45 22 <em>   </em>   *  + 命令：22点45分执行命令（每天</li>
+<li>星期几和每月的第几天最好不要同时出现，易混淆</li>
+<li>最小的识别范围为分钟</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>举例说明<ul>
+<li>定时关机或重启</li>
+<li>定义执行某自定义脚本，如备份脚本</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/Linux常用命令/" rel="next" title="Linux常用命令">
+                <i class="fa fa-chevron-left"></i> Linux常用命令
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/shell编程/" rel="prev" title="shell编程">
+                shell编程 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux系统管理"><span class="nav-text">Linux系统管理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进程管理"><span class="nav-text">进程管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作管理"><span class="nav-text">工作管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统资源查看"><span class="nav-text">系统资源查看</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统定时任务"><span class="nav-text">系统定时任务</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

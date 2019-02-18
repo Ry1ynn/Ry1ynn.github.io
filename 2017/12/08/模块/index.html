@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="python,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="模块模块介绍 python中模块  有过C语言编程经验的朋友都知道在C语言中如果要引用sqrt函数，必须用语句#include &amp;lt;math.h&amp;gt;引入math.h这个头文件，否则是无法正常进行调用的。 在Python中有一个概念叫做模块（module），这个和C语言中的头文件以及Java中的包很类似，比如在Python中要调用sqrt函数，必须用import关键字引入math这个模块，下">
+<meta name="keywords" content="python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模块">
+<meta property="og:url" content="http://21guns.top/2017/12/08/模块/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="模块模块介绍 python中模块  有过C语言编程经验的朋友都知道在C语言中如果要引用sqrt函数，必须用语句#include &amp;lt;math.h&amp;gt;引入math.h这个头文件，否则是无法正常进行调用的。 在Python中有一个概念叫做模块（module），这个和C语言中的头文件以及Java中的包很类似，比如在Python中要调用sqrt函数，必须用import关键字引入math这个模块，下">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/57570069.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/9812729.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/90508024.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/5528407.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/85926038.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/3129180.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/15239689.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/2442836.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/16213652.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/10939695.jpg">
+<meta property="og:updated_time" content="2019-02-18T08:01:05.063Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="模块">
+<meta name="twitter:description" content="模块模块介绍 python中模块  有过C语言编程经验的朋友都知道在C语言中如果要引用sqrt函数，必须用语句#include &amp;lt;math.h&amp;gt;引入math.h这个头文件，否则是无法正常进行调用的。 在Python中有一个概念叫做模块（module），这个和C语言中的头文件以及Java中的包很类似，比如在Python中要调用sqrt函数，必须用import关键字引入math这个模块，下">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-8/57570069.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/08/模块/">
+
+
+
+
+
+  <title>模块 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/08/模块/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">模块</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-08T15:50:55+08:00">
+                2017-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/基础/" itemprop="url" rel="index">
+                    <span itemprop="name">基础</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h1><h2 id="模块介绍"><a href="#模块介绍" class="headerlink" title="模块介绍"></a>模块介绍</h2><ul>
+<li><p>python中模块</p>
+<ul>
+<li>有过C语言编程经验的朋友都知道在C语言中如果要引用<code>sqrt函数</code>，必须用语句<code>#include &lt;math.h&gt;</code>引入math.h这个头文件，否则是无法正常进行调用的。</li>
+<li>在Python中有一个概念叫做模块（module），这个和C语言中的头文件以及Java中的包很类似，比如在Python中要调用<code>sqrt函数</code>，必须用import关键字引入math这个模块，下面就来了解一下Python中的模块。</li>
+<li>说的通俗点：模块就好比是工具包，要想使用这个工具包中的工具(就好比函数)，就需要导入这个模块</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>import</p>
+<ul>
+<li>在Python中用关键字<code>import</code>来引入某个模块，比如要引用模块math，就可以在文件最开始的地方用import math来引入。</li>
+<li><code>import module1,mudule2...</code></li>
+<li>当解释器遇到import语句，如果模块在当前的搜索路径就会被导入。</li>
+<li>引用格式：<code>模块名.函数名</code><ul>
+<li>须加上模块名调用</li>
+<li>因为可能存在这样一种情况：在多个模块中含有相同名称的函数，此时如果只是通过函数名来调用，解释器无法知道到底要调用哪个函数。所以如果像上述这样引入模块的时候，调用函数必须加上模块名</li>
+</ul>
+</li>
+<li>只需要用到模块中的某个函数，只需要引入该函数即可，<code>from 模块名 import 函数名1,函数名2....</code></li>
+<li>不仅可以引入函数，还可以引入一些全局变量、类等</li>
+<li>注意:<ul>
+<li>通过这种方式引入的时候，调用函数时只能给出函数名，不能给出模块名，但是当两个模块中含有相同名称函数的时候，后面一次引入会覆盖前一次引入。也就是说假如模块A中有函数function( )，在模块B中也有函数function( )，如果引入A中的function在先、B中的function在后，那么当调用function函数的时候，是去执行模块B中的function函数。</li>
+<li>如果想一次性引入math中所有的东西，还可以通过from math import *来实现</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>from…import</p>
+<ul>
+<li>Python的from语句让你从模块中导入一个指定的部分到当前命名空间中</li>
+<li>语法：<code>from modname import name1[, name2[, ... nameN]]</code></li>
+<li>例，<code>from fib import fibonacci</code><ul>
+<li>不会把整个fib模块导入到当前的命名空间中，它只会将fib里的fibonacci单个引入</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>from … import *</p>
+<ul>
+<li>把一个模块的所有内容全都导入到当前的命名空间也是可行的</li>
+<li><code>from modname import *</code></li>
+<li>这提供了一个简单的方法来导入一个模块中的所有项目。然而这种声明不该被过多地使用。</li>
+</ul>
+</li>
+<li><p>as</p>
+</li>
+</ul>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">In [<span class="number">1</span>]: <span class="keyword">import</span> time <span class="keyword">as</span> tt</span><br><span class="line">In [<span class="number">2</span>]: time.sleep(<span class="number">1</span>)</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">NameError                                 Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-2</span><span class="number">-07</span>a34f5b1e42&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">----&gt; 1 time.sleep(1)</span><br><span class="line"></span><br><span class="line">NameError: name <span class="string">'time'</span> <span class="keyword">is</span> <span class="keyword">not</span> defined</span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: </span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: </span><br><span class="line"></span><br><span class="line">In [<span class="number">3</span>]: tt.sleep(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: </span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: </span><br><span class="line"></span><br><span class="line">In [<span class="number">4</span>]: <span class="keyword">from</span> time <span class="keyword">import</span> sleep <span class="keyword">as</span> sp</span><br><span class="line"></span><br><span class="line">In [<span class="number">5</span>]: sleep(<span class="number">1</span>)</span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">NameError                                 Traceback (most recent call last)</span><br><span class="line">&lt;ipython-input<span class="number">-5</span><span class="number">-82e5</span>c2913b44&gt; <span class="keyword">in</span> &lt;module&gt;()</span><br><span class="line">----&gt; 1 sleep(1)</span><br><span class="line"></span><br><span class="line">NameError: name <span class="string">'sleep'</span> <span class="keyword">is</span> <span class="keyword">not</span> defined</span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: </span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: </span><br><span class="line"></span><br><span class="line">In [<span class="number">6</span>]: sp(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">7</span>]:</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>定位模块</p>
+<p>当你导入一个模块，Python解析器对模块位置的搜索顺序是：</p>
+<ul>
+<li>当前目录</li>
+<li>如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。</li>
+<li>如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/</li>
+<li>模块搜索路径存储在system模块的sys.path变量中。变量里包含当前目录，PYTHONPATH和由安装过程决定的默认目录。</li>
+</ul>
+</li>
+</ul>
+<h2 id="模块制作"><a href="#模块制作" class="headerlink" title="模块制作"></a>模块制作</h2><ul>
+<li><p>自定义模块</p>
+<ul>
+<li><p>python中，每个Python文件都可以作为一个模块，模块的名字就是文件的名字</p>
+</li>
+<li><p>如test.py中定义了函数add</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a+b</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>调用自定义模块</p>
+<ul>
+<li><p>那么在其他文件中就可以先import test，然后通过test.add(a,b)来调用了</p>
+</li>
+<li><p>也可以通过from test import add来引入</p>
+</li>
+<li><p>demo：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> test</span><br><span class="line"></span><br><span class="line">result = test.add(<span class="number">11</span>,<span class="number">22</span>)</span><br><span class="line">print(result)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>测试模块</p>
+<ul>
+<li><p>在实际开中，当一个开发人员编写完一个模块后，为了让模块能够在项目中达到想要的效果，这个开发人员会自行在py文件中添加一些测试信息</p>
+</li>
+<li><p>如，test.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(a,b)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> a+b</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用来进行测试</span></span><br><span class="line">ret = add(<span class="number">12</span>,<span class="number">22</span>)</span><br><span class="line">print(<span class="string">'int test.py file,,,,12+22=%d'</span>%ret)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>若其他py文件中引入此文件，测试的那段代码也会执行</p>
+<p>如main.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> test</span><br><span class="line"></span><br><span class="line">result = test.add(<span class="number">11</span>,<span class="number">22</span>)</span><br><span class="line">print(result)</span><br><span class="line"></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">int test.py file,,,,12+22=34</span></span><br><span class="line"><span class="string">33</span></span><br><span class="line"><span class="string">'''</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>可发现test.py中的测试代码，应该是单独执行test.py文件时才应该执行的，不应该是其他的文件中引用而执行</li>
+<li>为了解决这个问题，python在执行一个文件时有个变量<code>__name__</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>直接运行此文件</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/57570069.jpg" alt></p>
+</li>
+<li><p>其他文件中import此文件</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/9812729.jpg" alt></p>
+</li>
+<li><p>小结</p>
+<ul>
+<li>可以根据<strong>name</strong>变量的结果能够判断出，是直接执行的python脚本还是被引入执行的，从而能够有选择性的执行测试代码</li>
+<li><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/90508024.jpg" alt></li>
+</ul>
+</li>
+</ul>
+<h2 id="模块中-all"><a href="#模块中-all" class="headerlink" title="模块中__all__"></a>模块中<code>__all__</code></h2><ul>
+<li><p>没有all</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/5528407.jpg" alt></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/85926038.jpg" alt></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/3129180.jpg" alt></p>
+</li>
+<li><p>有all</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/15239689.jpg" alt></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/2442836.jpg" alt></p>
+</li>
+<li><p>总结</p>
+<ul>
+<li>如果一个文件中有<strong>all</strong>变量，那么也就意味着这个变量中的元素，会在from xxx import <em>时导入，不在的不会导入（私有化）；只有在from A import </em>才有作用</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h2 id="python中的包"><a href="#python中的包" class="headerlink" title="python中的包"></a>python中的包</h2><h3 id="概念引入"><a href="#概念引入" class="headerlink" title="概念引入"></a>概念引入</h3><ol>
+<li><p>有两个模块功能有些联系：</p>
+<p>如recvmsg.py和sendmsg.py</p>
+</li>
+<li><p>将其放入同一个文件夹下：</p>
+<p>msg文件夹存放这两个文件</p>
+</li>
+<li><p>使用<code>import 文件夹.模块</code>的方式导入：</p>
+<p>如<code>import msg.sendmsg</code></p>
+</li>
+<li><p>使用<code>from 文件夹 import 模块</code>的方式导入：</p>
+<p>如<code>from msg import *</code>，</p>
+<p>此时并没有导入文件夹msg下的模块</p>
+</li>
+<li><p>msg文件下创建<code>__init__.py</code>文件：</p>
+<p><code>touch __init__.py</code></p>
+</li>
+<li><p>其文件内容为：</p>
+<p><code>__all__ = [&quot;sendmsg&quot;, &quot;recvmsg&quot;]</code></p>
+</li>
+<li><p>重新测试步骤4</p>
+<p>此时成功导入文件夹msg下的所有模块</p>
+</li>
+</ol>
+<ul>
+<li>总结：<ul>
+<li>包将有联系的模块组织在一起，即放到同一个文件夹下，并且在这个文件夹创建一个名字为<code>__init__.py</code> 文件，那么这个文件夹就称之为<code>包</code></li>
+<li>有效避免模块名称冲突问题，让应用组织结构更加清晰</li>
+</ul>
+</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><ul>
+<li><p><code>__init__.py</code>的作用：</p>
+<ul>
+<li><code>__init__.py</code> 控制着包的导入行为</li>
+<li><code>__init__.py</code>可以是空文件，也可以有Python代码，因为<code>__init__.py</code>本身就是一个模块，而它的模块名就是对应的包名。</li>
+</ul>
+</li>
+<li><h3 id="all"><a href="#all" class="headerlink" title="__all__"></a><code>__all__</code></h3><ul>
+<li>在<code>__init__.py</code>文件中，定义一个<code>__all__</code>变量，它控制着 from 包名 import *时导入的模块</li>
+</ul>
+</li>
+<li><p>(了解)可以在<strong>init</strong>.py文件中编写内容</p>
+<ul>
+<li><p>可以在这个文件中编写语句，当导入时，这些语句就会被执行</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/16213652.jpg" alt></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-8/10939695.jpg" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="扩展：嵌套的包"><a href="#扩展：嵌套的包" class="headerlink" title="扩展：嵌套的包"></a>扩展：嵌套的包</h3><ul>
+<li><p>假定我们的包的例子有如下的目录结构：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Phone/</span><br><span class="line">    __init__.py</span><br><span class="line">    common_util.py</span><br><span class="line">    Voicedta/</span><br><span class="line">        __init__.py</span><br><span class="line">        Pots.py</span><br><span class="line">        Isdn.py</span><br><span class="line">    Fax/</span><br><span class="line">        __init__.py</span><br><span class="line">        G3.py</span><br><span class="line">    Mobile/</span><br><span class="line">        __init__.py</span><br><span class="line">        Analog.py</span><br><span class="line">        igital.py</span><br><span class="line">    Pager/</span><br><span class="line">        __init__.py</span><br><span class="line">        Numeric.py</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>Phone 是最顶层的包，Voicedta 等是它的子包</p>
+</li>
+<li><p>我们可以这样导入子包：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Phone.Mobile.Analog</span><br><span class="line">Phone.Mobile.Analog.dial()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>你也可使用 from-import 实现不同需求的导入</p>
+</li>
+</ul>
+</li>
+<li><p>第一种方法是只导入顶层的子包，然后使用属性/点操作符向下引用子包树：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Phone <span class="keyword">import</span> Mobile</span><br><span class="line">Mobile.Analog.dial(<span class="string">'555-1212'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>此外，我们可以还引用更多的子包：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Phone.Mobile <span class="keyword">import</span> Analog</span><br><span class="line">Analog.dial(<span class="string">'555-1212'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>事实上，你可以一直沿子包的树状结构导入：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> Phone.Mobile.Analog <span class="keyword">import</span> dial</span><br><span class="line">dial(<span class="string">'555-1212'</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在我们上边的目录结构中，我们可以发现很多的 <code>__init__.py</code> 文件。这些是初始化模块，from-import 语句导入子包时需要用到它。 如果没有用到，他们可以是空文件。</p>
+</li>
+<li><p>包同样支持 from-import all 语句：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> package.module <span class="keyword">import</span> *</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然而，这样的语句会导入哪些文件取决于操作系统的文件系统。所以我们在<code>__init__.py</code> 中加入 <code>__all__</code> 变量。该变量包含执行这样的语句时应该导入的模块的名字。它由一个模块名字符串列表组成.。</p>
+</li>
+</ul>
+<h2 id="模块发布"><a href="#模块发布" class="headerlink" title="模块发布"></a>模块发布</h2><ol>
+<li>mymodule目录结构体如下：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── setup.py</span><br><span class="line">├── suba</span><br><span class="line">│   ├── aa.py</span><br><span class="line">│   ├── bb.py</span><br><span class="line">│   └── __init__.py</span><br><span class="line">└── subb</span><br><span class="line">    ├── cc.py</span><br><span class="line">    ├── dd.py</span><br><span class="line">    └── __init__.py</span><br></pre></td></tr></table></figure>
+<p>2.编辑setup.py文件</p>
+<p>py_modules需指明所需包含的py文件</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> distutils.core <span class="keyword">import</span> setup</span><br><span class="line"></span><br><span class="line">setup(name=<span class="string">"dongGe"</span>, version=<span class="string">"1.0"</span>, description=<span class="string">"dongGe's module"</span>, author=<span class="string">"dongGe"</span>, py_modules=[<span class="string">'suba.aa'</span>, <span class="string">'suba.bb'</span>, <span class="string">'subb.cc'</span>, <span class="string">'subb.dd'</span>])</span><br></pre></td></tr></table></figure>
+<p>3.构建模块</p>
+<p>python setup.py build</p>
+<p>构建后目录结构</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── build</span><br><span class="line">│   └── lib.linux-i686<span class="number">-2.7</span></span><br><span class="line">│       ├── suba</span><br><span class="line">│       │   ├── aa.py</span><br><span class="line">│       │   ├── bb.py</span><br><span class="line">│       │   └── __init__.py</span><br><span class="line">│       └── subb</span><br><span class="line">│           ├── cc.py</span><br><span class="line">│           ├── dd.py</span><br><span class="line">│           └── __init__.py</span><br><span class="line">├── setup.py</span><br><span class="line">├── suba</span><br><span class="line">│   ├── aa.py</span><br><span class="line">│   ├── bb.py</span><br><span class="line">│   └── __init__.py</span><br><span class="line">└── subb</span><br><span class="line">    ├── cc.py</span><br><span class="line">    ├── dd.py</span><br><span class="line">    └── __init__.py</span><br></pre></td></tr></table></figure>
+<p>4.生成发布压缩包</p>
+<p>python setup.py sdist</p>
+<p>打包后,生成最终发布压缩包dongGe-1.0.tar.gz , 目录结构</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── build</span><br><span class="line">│   └── lib.linux-i686<span class="number">-2.7</span></span><br><span class="line">│       ├── suba</span><br><span class="line">│       │   ├── aa.py</span><br><span class="line">│       │   ├── bb.py</span><br><span class="line">│       │   └── __init__.py</span><br><span class="line">│       └── subb</span><br><span class="line">│           ├── cc.py</span><br><span class="line">│           ├── dd.py</span><br><span class="line">│           └── __init__.py</span><br><span class="line">├── dist</span><br><span class="line">│   └── dongGe<span class="number">-1.0</span>.tar.gz</span><br><span class="line">├── MANIFEST</span><br><span class="line">├── setup.py</span><br><span class="line">├── suba</span><br><span class="line">│   ├── aa.py</span><br><span class="line">│   ├── bb.py</span><br><span class="line">│   └── __init__.py</span><br><span class="line">└── subb</span><br><span class="line">    ├── cc.py</span><br><span class="line">    ├── dd.py</span><br><span class="line">    └── __init__.py</span><br></pre></td></tr></table></figure>
+<h2 id="模块安装及使用"><a href="#模块安装及使用" class="headerlink" title="模块安装及使用"></a>模块安装及使用</h2><ul>
+<li><p>安装方式（手动）</p>
+<ol>
+<li><p>找到模块的压缩包</p>
+</li>
+<li><p>解压</p>
+</li>
+<li><p>进入文件夹</p>
+</li>
+<li><p>执行命令<code>python setup.py install</code></p>
+</li>
+</ol>
+</li>
+</ul>
+<ul>
+<li>注意：<ul>
+<li>如果在install的时候，执行目录安装，可以使用<code>python setup.py install --prefix=安装路径</code></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>模块的引入</p>
+<ul>
+<li><p>在程序中，使用from import 即可完成对安装的模块使用</p>
+<p><code>from 模块名 import 模块名或者*</code></p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/08/异常/" rel="next" title="异常">
+                <i class="fa fa-chevron-left"></i> 异常
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/08/补充知识/" rel="prev" title="补充知识">
+                补充知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#模块"><span class="nav-text">模块</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#模块介绍"><span class="nav-text">模块介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块制作"><span class="nav-text">模块制作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块中-all"><span class="nav-text">模块中__all__</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#python中的包"><span class="nav-text">python中的包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念引入"><span class="nav-text">概念引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#all"><span class="nav-text">__all__</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展：嵌套的包"><span class="nav-text">扩展：嵌套的包</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块发布"><span class="nav-text">模块发布</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模块安装及使用"><span class="nav-text">模块安装及使用</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

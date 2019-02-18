@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Linux系统安全应用Linux基本安全 CentOS7的安装 Box虚拟机安装 安装增强功能 其他   配置本地YUM源">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统安全应用">
+<meta property="og:url" content="http://21guns.top/2017/12/25/Linux系统安全应用/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="Linux系统安全应用Linux基本安全 CentOS7的安装 Box虚拟机安装 安装增强功能 其他   配置本地YUM源">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T08:33:47.247Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统安全应用">
+<meta name="twitter:description" content="Linux系统安全应用Linux基本安全 CentOS7的安装 Box虚拟机安装 安装增强功能 其他   配置本地YUM源">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/12/25/Linux系统安全应用/">
+
+
+
+
+
+  <title>Linux系统安全应用 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/12/25/Linux系统安全应用/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux系统安全应用</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-25T16:29:49+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux相关/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux相关</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Linux系统安全应用"><a href="#Linux系统安全应用" class="headerlink" title="Linux系统安全应用"></a>Linux系统安全应用</h1><h2 id="Linux基本安全"><a href="#Linux基本安全" class="headerlink" title="Linux基本安全"></a>Linux基本安全</h2><ul>
+<li>CentOS7的安装<ul>
+<li>Box虚拟机安装</li>
+<li>安装增强功能</li>
+<li>其他</li>
+</ul>
+</li>
+<li>配置本地YUM源<a id="more"></a><ul>
+<li>目的<ul>
+<li>确保以后在使用过程中进行快速有效的软件安装，在线下载慢</li>
+</ul>
+</li>
+<li>什么是yum<ul>
+<li>基于RPM的软件更新机制</li>
+<li>自动解决操蛋的依赖关系</li>
+<li>软件包由统一的yum软件仓库提供</li>
+</ul>
+</li>
+<li>软件仓库的提供方式<ul>
+<li>FTP服务，ftp协议</li>
+<li>HTTP服务，http协议</li>
+<li>本地目录，file协议</li>
+</ul>
+</li>
+<li>RPM软件包的来源<ul>
+<li>Red Hat发布的RPM包集合</li>
+<li>第三方组织，如EPEL源</li>
+<li>用户自定义发布的</li>
+</ul>
+</li>
+<li>简单步骤<ul>
+<li>前期准备，针对服务端<ul>
+<li>1，配置网卡静态IP地址</li>
+<li>2，配置主机名</li>
+<li>3，配置主机记录，hosts文件。<br>建立静态IP与主机名的关联。</li>
+</ul>
+</li>
+<li>思路<ul>
+<li>A主机作为服务端，含有软件仓库<ul>
+<li>挂载光盘，由光盘拷贝至本地，也就是源在本地目录</li>
+<li>通过本地源安装ftp服务，并配置，将光盘目录拷贝到ftp站点。启动服务。</li>
+<li>配置vsFTPd安全<ul>
+<li>防火墙允许ftp服务</li>
+<li>添加允许的tcp端口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>B主机作为客户端，测试yum源是否可用<ul>
+<li>修改yum源配置文件，ftp方式访问服务端yum源</li>
+<li>Yum安装软件测试，服务端构建的本地yum是否可用</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>利用PXE远程装机服务批量部署Linux<ul>
+<li>目的<ul>
+<li>批量安装linux系统。</li>
+<li>统一，高效，标准，安全</li>
+</ul>
+</li>
+<li>简要步骤<ul>
+<li>安装并配置dhcp服务<ul>
+<li>Yum安装</li>
+<li>编辑配置文件，指定PXE引导服务器，指定引导文件（模块）</li>
+<li>启动服务</li>
+</ul>
+</li>
+<li>安装tftp-server和syslinux<ul>
+<li>前者是引导模块的远程启动服务，后者是引导模块</li>
+<li>都使用yum安装</li>
+<li>Tftp不是独立运行的，需要借助xinetd服务，修改xinetd配置文件来启动tftp，配置文件中可以见到tftp的工作目录，记为1目录。启动xinet从而启动tftp。</li>
+<li>将引导文件拷贝至其工作目录，在syslinux中</li>
+<li>Centos7的安装光盘已经拷贝到本地，作为yum仓库，从其中拷贝相应文件到此目录</li>
+<li>同上，yum源中获取启动菜单配置文件，并编辑</li>
+<li>总之，tftp工作目录中放置许多系统启动的相关文件</li>
+</ul>
+</li>
+<li>安装kickstart，并配置自动化安装<ul>
+<li>是一个自动化安装工具，功能类似系统安装时图形界面，相当于批量化的所有主机的系统配置，如语言，网络配置，密码等</li>
+<li>Yum安装后，启动，从而打开配置的窗口<ul>
+<li>配置时，软件包选择处有bug，之后解决</li>
+<li>配置完成，保存为ks.cfg文件</li>
+<li>从其他配置文件 anaconda-ks.cfg拷贝软件信息，复制到ks.cfg内容中，弥补之前bug</li>
+<li>Ks.cfg复制到ftp工作目录下</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配置防火墙<ul>
+<li>允许dhcp ，ftp服务</li>
+<li>允许udp的69端口，也就是tftp</li>
+</ul>
+</li>
+<li>同一网段，新建虚拟机，利用pxe进行远程安装，测试是否成功<ul>
+<li>安装界面，新增通过pxe安装选项</li>
+<li>实现自动化安装，避免各种配置</li>
+<li>Kickstart中实现了配置</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>思路<ul>
+<li>Syslinux，kickstart及centos7安装光盘中提供系统安装的必要文件及配置文件</li>
+<li>Tftp充当文件服务器，其工作目录存放各种文件</li>
+<li>dhcp指定pxe引导服务器和引导文件<ul>
+<li>引导服务器为tftp等服务所在的主机</li>
+<li>引导文件位于tftp工作目录</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统更新安全<ul>
+<li>安装EPEL源<ul>
+<li>系统安装后，默认的软件包</li>
+<li>EPEL，扩展的软件包</li>
+<li>有兼容性，不会与其他产生冲突</li>
+<li>Yum安装epel源</li>
+<li>安装后，可下载许多第三方软件，系统默认不提供的</li>
+</ul>
+</li>
+<li>使用yum update更新系统时不升级内核<ul>
+<li>系统与硬件存在兼容，内核升级后可能导致服务器不能正常启动。</li>
+<li>故不要随意升级内核</li>
+<li>更改yum配置文件，设置更新时不更新内核</li>
+</ul>
+</li>
+<li>关闭自动下载更新<ul>
+<li>业务系统稳定时，更新后可能会对其造成影响</li>
+<li>更新前先对补丁包进行测试，确保不会对已有业务系统造成影响</li>
+<li>故要设置为手动更新<ul>
+<li>Cronie，yum-cron要启动，没有则先安装</li>
+<li>修改yum-cron.conf文件，即改为手动</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>账号的基本安全<ul>
+<li>注释掉系统不需要的用户和用户组<ul>
+<li>注意<ul>
+<li>最小的权限+最少的服务=最大的安全</li>
+<li>不建议直接删除，#注释</li>
+<li>修改文件：要修改，先备份</li>
+</ul>
+</li>
+<li>相关文件<ul>
+<li>etc/passwd用户账号配置文件<ul>
+<li>记录的格式，以及字段的意义</li>
+<li>记录中字段的分割符为冒号</li>
+</ul>
+</li>
+<li>etc/group用户组账号配置文件</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>将非登录用户的shell设为sbin/nologin<ul>
+<li>登录用户如常见的root用户</li>
+<li>非登录用户如程序用户，用来运行程序或执行调用，如mysql用户</li>
+<li>Usermod命令，s参数指定shell</li>
+</ul>
+</li>
+<li>锁定一段时间内不使用的账号<ul>
+<li>某员工离职，最好锁定，使其不可登录。<br>不可删除，有的数据可能与其有关</li>
+<li>Usermod命令，L参数锁定</li>
+<li>shadow文件中其记录的密码字段前多了！，便无法登录</li>
+</ul>
+</li>
+<li>给账号，组账号，账号口令，组账号口令文件设置不可更改属性，即加锁<ul>
+<li>防止非授权用户获得权限</li>
+<li>chattr +i加锁，-i解锁；lsattr查看是否加锁</li>
+<li>passwd，shadow，group，gshadow为用户账号，用户密码，组账号，组账号口令</li>
+<li>加锁后，不允许添加删除用户；解锁后可尽行增删改操作，操作完再加锁</li>
+<li>有四个文件需要加锁，四条命令，可编写脚本，一次运行</li>
+</ul>
+</li>
+<li>账号口令的安全设置<ul>
+<li>常见安全设置<ul>
+<li>密码有效期</li>
+<li>密码最小长度限制</li>
+<li>强制用户下次登录修改密码，chage -d修改有效期为0</li>
+</ul>
+</li>
+<li>两种方式<ul>
+<li>针对新建用户，/etc/login.defs</li>
+<li>针对已有用户，chage命令</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>命令历史限制<ul>
+<li>减少记录的命令条数<ul>
+<li>etc/profile，HISTSIZE字段，默认1000</li>
+</ul>
+</li>
+<li>注销时自动清空历史命令记录<ul>
+<li>修改～/.bash_logout文件，添加<br>history -c<br>clear</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>终端自动注销<ul>
+<li>~/.bash_profile</li>
+<li>添加export TIMEOUT =600</li>
+</ul>
+</li>
+<li>Su命令切换用户<ul>
+<li>切换用户，如su -root</li>
+<li>Root向任意用户，不需要验证密码</li>
+<li>普通用户向其他用户，验证目标用户密码</li>
+</ul>
+</li>
+<li>限制使用su命令的用户<ul>
+<li>启用pam_wheel认证模块<ul>
+<li>/etc/pam.d/su</li>
+<li>取消认证模块那一行的注释来启用</li>
+</ul>
+</li>
+<li>将允许的用户加入wheel用户组<ul>
+<li>gpasswd -a 用户 wheel</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Sudo机制提升权限<ul>
+<li>以目标用户身份执行授权的命令，如root</li>
+<li>初次执行sudo，验证当前用户密码，不需要验证目标用户密码</li>
+<li>配置文件，/etc/sudoers</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>引导与登录安全配置<ul>
+<li>重置root密码<ul>
+<li>Centos7与以前版本不同，忘记root密码，并采用GRUB2为启动器，无法通过单用户模式重置root密码</li>
+<li>简单步骤<ul>
+<li>1，启动系统，GRUB2启动显屏时，按下e进入编辑模式</li>
+<li>2，在linux行的行尾添加“rd.break”，按“ctrl+x”进入</li>
+<li>3，mount -o remount,rw /sysroot/ 命令，重新挂载系统分区</li>
+<li>4，chroot /sysroot/命令，改变根</li>
+<li>5，passwd root命令，根据提示输入密码和确认密码，更改密码</li>
+<li>6，若系统启用了selinux，需touch /.autorelable，否则无法正常启动系统</li>
+<li>7，ctrl + d ，退出</li>
+<li>8，reboot重启</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>为GRUB2菜单加上防编辑密码<ul>
+<li>防止恶意用户像上面一样更改root密码，欲进入编辑模式，需通过账号和密码验证才可。</li>
+<li>大体步骤<ul>
+<li>1，grub2-passwd-pbkdf2命令，输入待加密的密码，生成加密值</li>
+<li>2，复制密文，“grub.”开始</li>
+<li>3，编辑grub配置文件，“vim /boot/grub2/grub.cfg”</li>
+<li>4，第一个menuentry前添加<ul>
+<li>set superusers=”admin”</li>
+<li>password_pbkdf2 admin 密文</li>
+</ul>
+</li>
+<li>5，保存，退出，再次修改root密码来测试<ul>
+<li>按e欲进入编辑模式，提示输入用户名密码来登录</li>
+<li>输入错误不允许进入，无法进入编辑页面</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修复MBR<ul>
+<li>MBR为主引导记录<ul>
+<li>硬盘的0柱面，0磁头，1扇区为主引导扇区</li>
+<li>共512字节<ul>
+<li>446Byte为bootloader，主引导记录主要指此</li>
+<li>64为Partition table</li>
+<li>2为magic number</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>大体步骤<ul>
+<li>1，先进行备份，再破坏<ul>
+<li>1，dd命令将sdr的MBR备份<ul>
+<li>命令：<br>dd if=/dev/sda of=/root/mbr.bak count=1 bs=512</li>
+<li>Linux是文件形式的系统，大部分数据以文件形式存在</li>
+<li>Mbr是非文件形式，备份需要用dd，而非cp</li>
+</ul>
+</li>
+<li>2，用zero设备生成446字节的0写入mbr来进行破坏<ul>
+<li>命令：<br>dd if=/dev/zero of=/dev/sda count=1 bs=446</li>
+<li>dev是设备的映射目录</li>
+<li>zero是产生0的设备</li>
+</ul>
+</li>
+<li>3，重启后发现系统已坏</li>
+</ul>
+</li>
+<li>2，装入系统安装光盘，引导界面选择troubleshoot</li>
+<li>3，选择救援模式，rescue a centos system</li>
+<li>4，选择continue，以rw模式挂载分区</li>
+<li>5，进入救援模式</li>
+<li>6，grub2-install –root-directory=/mnt/sysimage /dev/sda 重建bootloader</li>
+<li>7，sync写入系统</li>
+<li>8，reboot重启系统，验证修复成功</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>修复GRUB<ul>
+<li>GRUB配置文件<ul>
+<li>其丢失后，开机后会直接进入grub页面，显示grub&gt;，致使系统正常启动失败</li>
+<li>配置文件极其复杂，建议安装系统后进行备份</li>
+</ul>
+</li>
+<li>大体步骤<ul>
+<li>1，先备份后破坏<ul>
+<li>复制boot下grub2目录下所有文件进行备份</li>
+<li>删除grub.cfg配置文件来破坏</li>
+</ul>
+</li>
+<li>2，重启系统，grub&gt;状态下输入一系列命令设置启动参数<ul>
+<li>命令自行百度</li>
+<li>Tab键会有提示</li>
+<li>最后boot重启</li>
+</ul>
+</li>
+<li>3，root登录，还原备份的配置文件</li>
+<li>4，重启测试是否修复成功</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>远程访问安全SSH<ul>
+<li>SSH简介<ul>
+<li>安全shell，安全的远程连接</li>
+<li>隧道技术，提供安全复制SCP，安全文件传输协议SFTP，X会话转发和端口转发</li>
+<li>取代telnet，嗅探时抓到的全部是密文形式</li>
+</ul>
+</li>
+<li>SSH的一般用途<ul>
+<li>概括：远程登录主机并执行命令；支持隧道和X11连接；使用SFTP和SCP来传输文件</li>
+<li>0，SCP，SFTP，rsync等命令都可以通过ssh隧道来实现特定功能</li>
+<li>1，远程主机shell访问<ul>
+<li>第一次连接需要下载并保存证书</li>
+<li>登陆后可执行命令</li>
+<li>取代telnet和rlogin等使用明文的不安全协议</li>
+</ul>
+</li>
+<li>2，在远程主机执行单一命令，取代rsh</li>
+<li>3，通过scp命令将文件在本地与远程主机之间复制，实现下载和上传功能</li>
+<li>4，利用SFTP进行文件传输<ul>
+<li>与scp不同，提供交互界面</li>
+<li>比FTP安全</li>
+</ul>
+</li>
+<li>5，结合rsync进行有效的备份</li>
+<li>6，端口转发</li>
+<li>7，从远程主机转发X会话</li>
+<li>8，使用sshfs将远程主机的目录安全的挂载到本地</li>
+</ul>
+</li>
+<li>SSH安全性和配置最佳实践<ul>
+<li>1，限制root用户登录<ul>
+<li>Root用户仅限制为控制台访问</li>
+<li>进制通过ssh访问</li>
+<li>修改配置文件的permitrootlogin处</li>
+</ul>
+</li>
+<li>2，配置TCP wrapper，对远程主机进行访问控制<ul>
+<li>有两个文件，etc下的hosts.deny和hosts.allow</li>
+<li>针对进程的访问控制，如以上文件内容中，sshd: ALL</li>
+<li>这两个文件的修改是即时生效的，不需要重启等操作</li>
+</ul>
+</li>
+<li>3，个人笔记本电脑上，关闭ssh服务并卸载ssh服务器包<ul>
+<li>针对个人笔记本或工作站等不需要远程登录的主机</li>
+<li>关闭及卸载仅针对服务端，不影响客户端；不可被远程连接，可远程连接其他</li>
+</ul>
+</li>
+<li>4，控制用户账号，限制其对ssh的访问<ul>
+<li>etc下ssh下sshd_config 配置文件</li>
+<li>通过添加Allowusers和Denyusers字段来控制</li>
+</ul>
+</li>
+<li>5，仅使用ssh protocol 2<ul>
+<li>版本1不太安全，不建议使用</li>
+<li>sshd_config中Protocol 字段 值设置为2</li>
+</ul>
+</li>
+<li>6，配置活动时间间隔，不支持闲置回话<ul>
+<li>clientActive Interval 字段，超过一段时间不操作就退出</li>
+<li>Client Active Count Max字段，设置为0为不支持闲置会话，但会有错误发生，默认为3即可</li>
+</ul>
+</li>
+<li>7，禁用空密码，设置密码重试次数<ul>
+<li>permitemptypasswords 字段为no</li>
+<li>Maxauthtries字段设置次数</li>
+</ul>
+</li>
+<li>8，禁用基于主机的身份验证， hostbaseauthentication</li>
+<li>9，禁用用户的.rhosts文件<ul>
+<li>ignorerhosts字段</li>
+<li>rhosts文件是用户自己设置的控制用户登录的文件，启用会不安全</li>
+</ul>
+</li>
+<li>10，限制ssh，将侦听绑定到指定的网络接口与端口<ul>
+<li>很现实的问题，服务器有两块网卡，外网和内网，禁止外网IP用ssh</li>
+<li>listenaddress字段</li>
+<li>port字段</li>
+</ul>
+</li>
+<li>11，始终保持ssh补丁版本更新<ul>
+<li>openssh</li>
+<li>openssh-client </li>
+<li>Openssh-server</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配置ssh身份认证<ul>
+<li>登录验证对象<ul>
+<li>服务器中的本地用户账号</li>
+</ul>
+</li>
+<li>登录验证方式<ul>
+<li>密码验证：用户名和密码是否匹配</li>
+<li>秘钥对验证：客户私钥和服务器公钥是否匹配</li>
+<li>配置文件中存在两种验证方式的关闭以及公钥库文件的存放位置</li>
+</ul>
+</li>
+<li>构建秘钥对验证的ssh体系<ul>
+<li>1，客户端创建秘钥对<ul>
+<li>ssh-keygen -t rsa命令，指定类型为rsa</li>
+<li>创建的秘钥对针对的是当前登录用户，如root</li>
+<li>创建时可为私钥提供口令短语</li>
+<li>私钥文件id_rsa，类似钥匙</li>
+<li>公钥文件id_rsa.pub，类似锁</li>
+</ul>
+</li>
+<li>2，上传公钥文件到服务器并将其内容写入公钥库文件<ul>
+<li>公钥库文件由配置文件决定，默认.ssh目录下的authorized_keys，其内容存放公钥信息</li>
+<li>ssh-copy-is admin@ip <ul>
+<li>针对服务端的admin账号</li>
+<li>操作时需要admin的登录密码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>3，测试<ul>
+<li>如果设置秘钥口令短语，在这需要验证</li>
+<li>连接的是本地的root和远程的admin</li>
+<li>本地root的锁（公钥）去锁定远程的admin账号，在用root的钥匙（私钥）去解</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配置SFTP安全<ul>
+<li>SFTP 账号直接使用系统账号，系统新建几个账号供sftp使用</li>
+<li>为sftp账号建立相应账号</li>
+<li>sftp通过ssh的配置文件而配置，sshd_config </li>
+<li>目录权限设置<ul>
+<li>针对Chrootderectory设置的目录及所有的上级文件夹的目录权限</li>
+<li>属主和属组必须是root</li>
+<li>只有属主也就是root有写权限，也就是说最大权限为755</li>
+<li>由于文件夹权限问题，sftp账号都不具有写权限，因此宿主目录创建一个具有写权限的目录，用于资源共享</li>
+</ul>
+</li>
+<li>具体配置自行Google</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>远程访问安全VNC<ul>
+<li>简介<ul>
+<li>虚拟网络计算机</li>
+<li>类似Windows的远程桌面</li>
+<li>ssh为命令行模式，vnc为图形界面</li>
+</ul>
+</li>
+<li>安装VNC-server <ul>
+<li>yum安装，安装在服务端</li>
+<li>tigervnc -server 和tigervnc。注：针对的是centos的vnc</li>
+</ul>
+</li>
+<li>服务端 配置VNC-server并启动<ul>
+<li>通过配置文件的文件名可以指定支持的连接，如3表示连接3</li>
+<li>配置文件内容可以指定连接的用户，针对服务端，如admin用户</li>
+<li>切换到admin用户后启动，与前面相对应</li>
+<li>首次运行，需要配置口令</li>
+</ul>
+</li>
+<li>客户端 测试连接<ul>
+<li>Linux端，安装tigervnc，vncviewer启动，弹出窗口，输入服务端IP:3，输入为admin设置的口令</li>
+<li>Windows端，安装tigervnc，运行tigervnc viewer，输入同上</li>
+<li>3表示之前服务端配置文件设置的连接</li>
+</ul>
+</li>
+<li>使用的简单总结<ul>
+<li>服务端指定连接ID为3，允许连接的用户admin，和为admin设置的口令</li>
+<li>客户端提供连接ID和用户和用户口令来连接客户端</li>
+<li>这样的连接是不安全的</li>
+</ul>
+</li>
+<li>利用ssh隧道，增加安全性<ul>
+<li>构建端口转发（隧道），本地IP的5903到远程IP的5903</li>
+<li>ssh连接远程目标主机</li>
+<li>ssh连接成功后，vncviewer连接，注：连接的IP为127.0.0.1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>服务进程安全控制<ul>
+<li>systemd的优势<ul>
+<li>并行处理所有服务，加快开机速度<ul>
+<li>旧init启动脚本依序一项项启动模式，类似单序列串行，不相关的服务也要排队进行</li>
+<li>CPU是多核心，可以并行多个任务，操作系统也是多任务，不必让不相关进程排队等待</li>
+<li>systemd解决了这样的问题，可并发处理多任务</li>
+</ul>
+</li>
+<li>统一管理，on-demand，按需启动服务<ul>
+<li>仅需要一个systemd服务加systemctl指令来处理，不需要额外指令的支持，不像systemV需要其他指令</li>
+<li>可以常驻内存，按需处理后续的daemon启动任务</li>
+</ul>
+</li>
+<li>服务依存关系自我检查<ul>
+<li>自动检查服务启动所需的依存关系，方便好多</li>
+</ul>
+</li>
+<li>根据daemon功能进行分类<ul>
+<li>daemon为守护进程</li>
+<li>定义所有的服务为一个服务单元unit，并归类于不同的服务类别type中</li>
+<li>如系统服务service，套接字服务socket，多目标服务target等</li>
+<li>旧的init仅分为独立和超级守护进程，显然不够</li>
+</ul>
+</li>
+<li>将多个守护进程集合成一个群组<ul>
+<li>类似于systemV的init有多个运行级别</li>
+<li>将多个功能集成一个target项目，构建了一个操作项目</li>
+<li>执行某个target就执行了多个daemon，营造了某种操作环境</li>
+</ul>
+</li>
+<li>向下兼容旧的init服务脚本</li>
+</ul>
+</li>
+<li>其配置文件保存的主要目录<ul>
+<li>/usr/lib/systemd/system，记作目录1<ul>
+<li>存放各服务主要的启动脚本</li>
+<li>类似etc/init.d下的文件</li>
+</ul>
+</li>
+<li>/run/systemd/system，目录2<ul>
+<li>系统执行过程中产生的服务脚本</li>
+<li>优先级比前者高</li>
+</ul>
+</li>
+<li>/etc/systemd/system，目录3<ul>
+<li>管理员依据系统需求所创建的执行脚本</li>
+<li>类似/etc/rc.d/rc5.d/S*的功能</li>
+<li>优先级比前者高</li>
+</ul>
+</li>
+<li>总结<ul>
+<li>系统开机是否执行某服务是看目录3，实为链接文件</li>
+<li>实际执行的脚本文件文件位于1，若修改设置，去1修改</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>systemd的unit类型分类说明<ul>
+<li>.service<ul>
+<li>一般服务类型，主要指系统服务</li>
+<li>包括服务器本身所需的本机服务和网络服务</li>
+</ul>
+</li>
+<li>.socket <ul>
+<li>主要用于内部进程信息交换</li>
+</ul>
+</li>
+<li>.target <ul>
+<li>执行环境类型</li>
+<li>一群unit的集合，可能包含多个service和socket</li>
+</ul>
+</li>
+<li>.mount和.automount <ul>
+<li>文件系统挂载相关服务</li>
+</ul>
+</li>
+<li>.path <ul>
+<li>检测特定的文件或目录类型</li>
+</ul>
+</li>
+<li>.timer <ul>
+<li>循环执行的服务</li>
+<li>有时间特征的，如某一刻将要执行的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>systenctl命令格式<ul>
+<li>systemctl command unit</li>
+<li>可用command<ul>
+<li>start，stop，restart</li>
+<li>reload：重新载入unit的配置，修改后的配置生效</li>
+<li>enable，disable：开机自启动与否</li>
+<li>status，is-active，is-enable</li>
+<li>mask，unmask：强制注销的设置及取消</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>服务单元unit的常见状态<ul>
+<li>systemctl status unit命令</li>
+<li>运行状态<ul>
+<li>active（running</li>
+<li>active（exited：仅运行一次就结束的</li>
+<li>active（waiting：处于等待状态</li>
+<li>inactive</li>
+</ul>
+</li>
+<li>daemon的预设状态<ul>
+<li>也就是这个unit的原先属性</li>
+<li>enable，disable：是否开机自启</li>
+<li>static：自己不启动，由其他服务唤醒</li>
+<li>mask<ul>
+<li>被设置为强制注销状态</li>
+<li>此daemon无论如何不会启动；</li>
+<li>可通过unmask取消</li>
+<li>当注销一个服务时，systemctl将服务链接到/dev/null空设备</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>查看系统服务<ul>
+<li>列出已经启动的unit<ul>
+<li>systemctl list-units</li>
+<li>后面子命令可以不写</li>
+</ul>
+</li>
+<li>列出已经安装的unit<ul>
+<li>systemctl list-unit-files</li>
+</ul>
+</li>
+<li>列出指定类型的<ul>
+<li>systemctl list-units —type=service —all</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>通过systemctl管理不同操作环境（target unit<ul>
+<li>在centos 7预设下，有26个target unit<ul>
+<li>graphical：GUI模式，包含multi-user</li>
+<li>multi-user：纯字符模式</li>
+<li>rescue：救援模式</li>
+<li>emergency：紧急模式，无法进入救援时</li>
+<li>shutdown：关机</li>
+<li>getty：修改tty设置</li>
+</ul>
+</li>
+<li>systemctl command unit.target<ul>
+<li>常用command<ul>
+<li>get-default：取得目前的target</li>
+<li>set-default：设置为下一次启动时的模式</li>
+<li>isolate：直接切换到后面的模式，实时的，无需重启</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>提供简单指令进行模式切换。<ul>
+<li>systemctl poweroff</li>
+<li>reboot</li>
+<li>suspend：暂停</li>
+<li>hibernate：休眠</li>
+<li>rescue</li>
+<li>emergency</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分析各服务依存关系<ul>
+<li>systemctl list-dependencies [unit] [—reverse]</li>
+<li>reverse参数，反向追踪谁在使用此unit</li>
+<li>不加unit，会分析当前target使用哪些unit</li>
+</ul>
+</li>
+<li>systemctl服务配置文件<ul>
+<li>存放目录<ul>
+<li>如/usr/lib/systemd/system/sshd.service </li>
+</ul>
+</li>
+<li>其内容通常由三个字段组成<ul>
+<li>unit字段<ul>
+<li>unit本身的说明</li>
+<li>与其他daemon的设置，如启动先后问题</li>
+</ul>
+</li>
+<li>service/socket/timer等<ul>
+<li>不同unit type对应相对应的配置项目，如sshd.service 服务就使用SERVICE这个字段</li>
+<li>此字段内指定服务启动脚本，环境变量等</li>
+</ul>
+</li>
+<li>install字段<ul>
+<li>指定此unit会安装到哪些target中</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配置文件参数说明<ul>
+<li>unit字段部分<ul>
+<li>description<ul>
+<li>使用systemctl list-units或systemctl status时，输出的说明信息</li>
+</ul>
+</li>
+<li>documentation<ul>
+<li>更详尽的说明信息</li>
+<li>其帮助信息可以位于<ul>
+<li>某URL</li>
+<li>某条命令</li>
+<li>某本地文档</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>after<ul>
+<li>说明在某daemon之后才可以启动</li>
+<li>仅仅说明启动顺序，并非强制要求，也非依存关系</li>
+</ul>
+</li>
+<li>before<ul>
+<li>与上相反，在某之前</li>
+</ul>
+</li>
+<li>require<ul>
+<li>明确定义在某daemon启动后才可以启动</li>
+<li>指定依存关系</li>
+</ul>
+</li>
+<li>wants<ul>
+<li>与上相反</li>
+<li>启动了之后还需要启动什么才可以构建出更好的操作环境</li>
+<li>目的是建立更好的应用环境</li>
+</ul>
+</li>
+<li>conflicts<ul>
+<li>代表冲突的服务</li>
+<li>若此参数值为a，则a启动后，此unit不可启动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>service部分（service为例，也可为target等<ul>
+<li>Type：启动方式，会影响execstart</li>
+<li>ExecStart：实际要执行的daemon指令或脚本程序</li>
+<li>…</li>
+</ul>
+</li>
+<li>install部分<ul>
+<li>WantedBy：表示此unit是附加在哪个target下</li>
+<li>Also：当前unit为enable时，此选项的也会enable，解决服务依存关系</li>
+<li>Alias</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>配置文件实例说明<ul>
+<li>vsftpd配置文件</li>
+<li>以getty为例讲解多重的重复设置</li>
+<li>定制自己的服务</li>
+</ul>
+</li>
+<li>systemctl服务针对timer的配置文件<ul>
+<li>定制在未来某个时间或定期循环执行的服务<ul>
+<li>前提<ul>
+<li>系统的timer.target要启动</li>
+<li>要有xxx.service的服务</li>
+<li>要有xxx.timer的定时启动服务存在</li>
+</ul>
+</li>
+<li>例如定期备份的循环任务</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>centos 7.x默认的启动服务简介</li>
+<li>centis 7.x 常用的其他服务简介</li>
+</ul>
+</li>
+<li>弱口令检测</li>
+<li>开放端口安全检测</li>
+<li>日志分析与安全</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/25/启动管理/" rel="next" title="启动管理">
+                <i class="fa fa-chevron-left"></i> 启动管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/25/简介和系统安装/" rel="prev" title="简介和系统安装">
+                简介和系统安装 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux系统安全应用"><span class="nav-text">Linux系统安全应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux基本安全"><span class="nav-text">Linux基本安全</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

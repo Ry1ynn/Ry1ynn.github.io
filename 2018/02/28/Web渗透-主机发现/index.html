@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,渗透测试,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="主动信息收集_主机发现主动信息收集简介 直接与目标系统交互通信（被动的不会直接与目标进行交互 无法避免留下访问的痕迹 通过日志分析可溯源   使用受控的第三方进行探测 使用代理或已经被控制的主机 做好被封杀的准备">
+<meta name="keywords" content="Web安全,渗透测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="主动信息收集_主机发现">
+<meta property="og:url" content="http://21guns.top/2018/02/28/Web渗透-主机发现/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="主动信息收集_主机发现主动信息收集简介 直接与目标系统交互通信（被动的不会直接与目标进行交互 无法避免留下访问的痕迹 通过日志分析可溯源   使用受控的第三方进行探测 使用代理或已经被控制的主机 做好被封杀的准备">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T11:48:55.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="主动信息收集_主机发现">
+<meta name="twitter:description" content="主动信息收集_主机发现主动信息收集简介 直接与目标系统交互通信（被动的不会直接与目标进行交互 无法避免留下访问的痕迹 通过日志分析可溯源   使用受控的第三方进行探测 使用代理或已经被控制的主机 做好被封杀的准备">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/28/Web渗透-主机发现/">
+
+
+
+
+
+  <title>主动信息收集_主机发现 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-主机发现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">主动信息收集_主机发现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T19:31:33+08:00">
+                2018-02-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web安全/" itemprop="url" rel="index">
+                    <span itemprop="name">Web安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="主动信息收集-主机发现"><a href="#主动信息收集-主机发现" class="headerlink" title="主动信息收集_主机发现"></a>主动信息收集_主机发现</h1><h2 id="主动信息收集简介"><a href="#主动信息收集简介" class="headerlink" title="主动信息收集简介"></a>主动信息收集简介</h2><ul>
+<li>直接与目标系统交互通信（被动的不会直接与目标进行交互</li>
+<li>无法避免留下访问的痕迹<ul>
+<li>通过日志分析可溯源</li>
+</ul>
+</li>
+<li>使用受控的第三方进行探测<ul>
+<li>使用代理或已经被控制的主机</li>
+<li>做好被封杀的准备<a id="more"></a></li>
+<li>使用噪声迷惑目标，淹没真实的探测流量</li>
+</ul>
+</li>
+<li>扫描<ul>
+<li>发送不同的探测，根据返回结果判断目标状态</li>
+</ul>
+</li>
+</ul>
+<h2 id="发现"><a href="#发现" class="headerlink" title="发现"></a>发现</h2><ul>
+<li>识别存活的主机<ul>
+<li>潜在的被攻击对象</li>
+</ul>
+</li>
+<li>输出一个IP地址列表</li>
+<li>2、3、4层发现</li>
+</ul>
+<h2 id="发现-二层发现"><a href="#发现-二层发现" class="headerlink" title="发现_二层发现"></a>发现_二层发现</h2><ul>
+<li><p>简介</p>
+<ul>
+<li>面向：数据链路层</li>
+<li>优点：扫描速度快，探测结果准确可靠</li>
+<li>缺点：不可路由，只可发现本网段内的</li>
+<li>使用协议：arp协议</li>
+<li>主机发现时，Wireshark抓包分析流量，以加深印象</li>
+</ul>
+</li>
+<li><p>工具之arping</p>
+<ul>
+<li><p>命令行工具</p>
+<ul>
+<li>只可跟一个IP，不可跟网段或多个地址</li>
+<li>可利用shell编程，写成sh脚本，实现多个IP或一个字段的探测</li>
+</ul>
+</li>
+<li><p>arping</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>xxx.xxx.xxx.xxx
+
+
+
+-c 1
+
+- 加IP地址
+- -c指定arp包的个数，即请求次数
+</code></pre><ul>
+<li><p>arping +网关IP -d</p>
+<ul>
+<li>可用于发现本网络中的arp欺骗</li>
+<li>检查网关地址，若发现两个不同mac地址，则存在arp欺骗</li>
+<li>-d参数，检查重复的响应（如两个不同mac地址响应同一个IP</li>
+</ul>
+</li>
+<li><p>可结合管道符|及grep及cut，去除繁杂信息，得到特定的IP字段</p>
+</li>
+<li><p>可利用shell编程，写成sh脚本，实现多个IP或一个字段的探测</p>
+</li>
+</ul>
+<ul>
+<li><p>工具之nmap</p>
+<ul>
+<li>nmap 1.1.1.1-254 -sn<ul>
+<li>ping扫描，且不对端口进行扫描</li>
+<li>支持IP地址段的方式（或0/24的形式</li>
+</ul>
+</li>
+<li>nmap -iL iplist.txt -sn<ul>
+<li>跟文件，实现多个IP的扫描</li>
+</ul>
+</li>
+<li>严格来讲，-sn参数不仅仅是二层发现<ul>
+<li>不只arp</li>
+<li>也会涉及dns（ptr记录查找主机名</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>工具之netdiscover</p>
+<ul>
+<li>简介<ul>
+<li>专用于二层发现</li>
+<li>可用于无线和交换网络环境</li>
+<li>主动和被动探测</li>
+<li>也使用arp协议</li>
+</ul>
+</li>
+<li>主动<ul>
+<li>功能类似arping和nmap的二层发现</li>
+<li>netdiscover -i eth0 -r 1.1.1.0/24</li>
+<li>netdiscover -l iplist.txt</li>
+</ul>
+</li>
+<li>被动<ul>
+<li>netdiscover -p</li>
+<li>主动arp容易触发报警</li>
+<li>不主动发包，网卡置成混杂模式，默默在网络中监听</li>
+<li>其它主机发arp，其会接收到（因arp是基于广播的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>工具之scapy</p>
+<ul>
+<li>简介<ul>
+<li>作为python库进行调用</li>
+<li>也可以作为单独的工具使用</li>
+<li>抓包、分析、创建、修改、注入网络流量</li>
+<li>命令行键入scapy，进入其界面<ul>
+<li>若有warning信息，可能需安装其它</li>
+<li>apt-get install python-gnuplot</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>常用<ul>
+<li>ARP().display()：显示arp字段信息</li>
+<li>sr1()：传入arp请求，发起请求，并返回响应</li>
+</ul>
+</li>
+<li>大体流程（单独使用<ul>
+<li>arp=ARP()：赋值给变量arp</li>
+<li>arp.pdst=x.x.x.x：设置字段值（目标IP地址</li>
+<li>arp.display()：查看修改后的字段值</li>
+<li>res=sr1(arp)：发起请求，并将响应赋值给res变量</li>
+<li>res.display()：打印出响应信息（可得目标mac地址</li>
+</ul>
+</li>
+<li>因为作为python的库，所以可写成py脚本</li>
+</ul>
+</li>
+</ul>
+<h2 id="发现-三层发现"><a href="#发现-三层发现" class="headerlink" title="发现_三层发现"></a>发现_三层发现</h2><ul>
+<li>简介<ul>
+<li>优点<ul>
+<li>可路由</li>
+<li>速度比较快</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>速度比二层慢</li>
+<li>经常被边界防火墙过滤</li>
+</ul>
+</li>
+<li>IP协议、ICMP协议（主）</li>
+</ul>
+</li>
+<li>工具之ping<ul>
+<li>使用两种类型的icmp<ul>
+<li>icmp0-15，共有16种类型</li>
+<li>请求：type 8</li>
+<li>响应：type 0</li>
+</ul>
+</li>
+<li>icmp的另一应用：路由追踪traceroute<ul>
+<li>Windows下是trace命令（功能类似，实现原理有差异</li>
+<li>如，traceroute <a href="http://www.sina.com" target="_blank" rel="noopener">www.sina.com</a>（返回路由器近端的接口地址</li>
+<li>类似ping -R <a href="http://www.sina.com" target="_blank" rel="noopener">www.sina.com</a>（返回路由器远端接口地址</li>
+</ul>
+</li>
+<li>ping IP -c 4（-c指定次数</li>
+<li>可结合管道符、grep、cut提取特定信息</li>
+<li>也可应用于shell脚本</li>
+</ul>
+</li>
+</ul>
+<h2 id="发现-四层发现"><a href="#发现-四层发现" class="headerlink" title="发现_四层发现"></a>发现_四层发现</h2><ul>
+<li>简介<ul>
+<li>是四层发现阶段，而非端口扫描阶段，两者截然不同</li>
+<li>虽然是四层发现，涉及tcp/udp的端口，但仅针对IP是否存活，不关注端口的状态问题，关注点还是主机是否存活</li>
+<li>优点<ul>
+<li>可路由且结果可靠（比三层要准确一些</li>
+<li>不太可能被防火墙过滤（即使端口关闭，探测时也会有一定响应信息，故不会被过滤</li>
+<li>甚至可以发现所有端口都被过滤的主机（访问国关闭端口也可能会有响应</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>基于状态过滤的防火墙可能过滤掉其扫描（但情况很少</li>
+<li>全端口扫描速度慢（tcp和udp各有65535个</li>
+</ul>
+</li>
+<li>TCP<ul>
+<li>未经请求的ack-rst<ul>
+<li>正常过程：SYN包-SYN+ACK-SYN，三次握手后建立连接，再请求资源传输资源等过程</li>
+<li>扫描或发现时：不三次握手，直接发送一个ACK（无故发送），目标会返回RST（reset，因为前面莫名其妙的ack包）</li>
+<li>基于此，通过是否有RST返回，判断目标主机是否存活（无论端口是否开放</li>
+</ul>
+</li>
+<li>SYN-SYN+ACK或RST<ul>
+<li>也可基于正常情况来判断</li>
+<li>若请求端口开放，则会有syn+ack返回，主机存活</li>
+<li>若端口关闭，则返回rst，主机也存活</li>
+<li>若没有响应，则可认为主机不存活</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UDP<ul>
+<li>ICMP端口不可达/一去不复返<ul>
+<li>若目标主机存活，但端口关闭，则会一个端口不可达响应</li>
+<li>若目标不存活，或者目标存活但端口开放，则一去不复返，无响应</li>
+<li>注：仅发现主机是否存活，不关注端口状态</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>TCP发现<ul>
+<li>scapy大体流程<ul>
+<li>i=IP()：构建IP包并赋值给i</li>
+<li>t=TCP()：构建TCP包并赋值给t</li>
+<li>r=(I/t)：合并IP和TCP，构建完整tcp请求</li>
+<li>r[IP].dst=x.x.x.x：设置目标的IP地址</li>
+<li>r[TCP].flags =‘A’：设置发送ack</li>
+<li>r.display()：查看一下完整的包头信息</li>
+<li>a=sr1(r)：发送构造好的请求</li>
+<li>a.display()：可看到响应包中flag字段为r，即rst</li>
+<li>注意<ul>
+<li>若IP存活，则会返回rst类型的响应</li>
+<li>若不存活，则无任何响应</li>
+<li>不考虑端口的问题，即r[TCP].dport字段，无论端口开放与否，都不会影响上述判断</li>
+<li>同样，可应用于python脚本</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>UDP发现<ul>
+<li>scapy大体流程<ul>
+<li>i=IP()：构建IP包并赋值给i</li>
+<li>u=UDP()：构建UDP包并赋值给u</li>
+<li>r=(I/u)：合并IP和UDP，构建完整udp请求</li>
+<li>r.[UDP].dport =7777: 设置一个不常见的端口用来探测，原因看上述udp探测原理</li>
+<li>a=sr1(r)：发送请求</li>
+<li>a.display：显示响应信息<ul>
+<li>若目标存活，则返回一个目标不可达（因为端口很怪异，一般是不开放的</li>
+<li>若不存活，则无响应</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>可应用于py脚本</li>
+<li>udp发现是不可靠的，准确性不高</li>
+</ul>
+</li>
+<li>工具之nmap<ul>
+<li>nmap 1.1.1.1-254 -PU53333 -sn<ul>
+<li>基于udp中icmp的扫描（icmp端口不可达</li>
+<li>跟一个不常见的端口</li>
+<li>-sn表只进行四层的发现，不进行端口层面的扫描</li>
+</ul>
+</li>
+<li>nmap 1.1.1.1-254 -PU53333 -sn<ul>
+<li>基于tcp中ack的扫描</li>
+<li>跟哪个端口无所谓，其打开或关闭不影响结果</li>
+<li>-sn表只进行四层的发现，不进行端口层面的扫描</li>
+</ul>
+</li>
+<li>扫描都不是绝对准确的，多种方式互相结合</li>
+</ul>
+</li>
+<li>工具之hping3<ul>
+<li>hping3 —udp 1.1.1.1 -c 1<ul>
+<li>-c指定发送次数</li>
+<li>—udp，基于udp，同样是利用icmp不可达</li>
+</ul>
+</li>
+<li>hping3 1.1.1.1<ul>
+<li>默认是tcp扫描</li>
+<li>不是基于ack-rst的方式</li>
+<li>基于flag 0-ack、rst的方式</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/渗透测试/" rel="tag"># 渗透测试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/28/渗透测试方法/" rel="next" title="渗透测试方法">
+                <i class="fa fa-chevron-left"></i> 渗透测试方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/18/信息安全概述/" rel="prev" title="信息安全概述">
+                信息安全概述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主动信息收集-主机发现"><span class="nav-text">主动信息收集_主机发现</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#主动信息收集简介"><span class="nav-text">主动信息收集简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发现"><span class="nav-text">发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发现-二层发现"><span class="nav-text">发现_二层发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发现-三层发现"><span class="nav-text">发现_三层发现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发现-四层发现"><span class="nav-text">发现_四层发现</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
