@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,信息安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="4-操作系统安全防护技术 目录 操作系统概述 操作系统的安全威胁 操作系统安全防护">
+<meta name="keywords" content="NISP,信息安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统安全防护技术">
+<meta property="og:url" content="http://21guns.top/2018/07/05/操作系统安全防护技术/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="4-操作系统安全防护技术 目录 操作系统概述 操作系统的安全威胁 操作系统安全防护">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-18/54788386.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-18/10303833.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-18/5518684.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-19/68545089.jpg">
+<meta property="og:updated_time" content="2019-02-18T12:16:21.505Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统安全防护技术">
+<meta name="twitter:description" content="4-操作系统安全防护技术 目录 操作系统概述 操作系统的安全威胁 操作系统安全防护">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-18/54788386.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/07/05/操作系统安全防护技术/">
+
+
+
+
+
+  <title>操作系统安全防护技术 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/07/05/操作系统安全防护技术/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作系统安全防护技术</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T13:34:03+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP一级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP一级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="4-操作系统安全防护技术"><a href="#4-操作系统安全防护技术" class="headerlink" title="4-操作系统安全防护技术"></a>4-操作系统安全防护技术</h1><ul>
+<li>目录<ul>
+<li>操作系统概述</li>
+<li>操作系统的安全威胁</li>
+<li>操作系统安全防护</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="4-1-操作系统概述"><a href="#4-1-操作系统概述" class="headerlink" title="4.1-操作系统概述"></a>4.1-操作系统概述</h2><ul>
+<li><p>历史：</p>
+<ul>
+<li>世界上第一台计算机，诞生于1946年</li>
+<li>20世纪70年代中期开始出现计算机操作系统</li>
+</ul>
+</li>
+<li><p>操作系统的位置</p>
+<ul>
+<li><p>面向系统资源</p>
+<ul>
+<li>操作系统必须尽可能提高资源利用率</li>
+</ul>
+</li>
+<li><p>面向用户</p>
+<ul>
+<li>操作系统必须提供方便易用的用户界面</li>
+</ul>
+</li>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-18/54788386.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>操作系统的定义</p>
+<ul>
+<li>一组控制和管理计算机硬件和软件资源</li>
+<li>合理地对各类作业进行调度以及方便用户的程序集合</li>
+<li>直接运行在裸机上的最基本的系统软件</li>
+<li>其他任何软件都必须在操作系统的支持下才能运行</li>
+<li>可以说操作系统是连接用户和计算机硬件的接口</li>
+</ul>
+</li>
+<li><p>操作系统的特征</p>
+<ul>
+<li>并发，concurrence</li>
+<li>共享，sharing</li>
+<li>虚拟，virtual</li>
+<li>异步，asynchronism</li>
+</ul>
+</li>
+<li><p>操作系统的作用</p>
+<ul>
+<li>管理系统中各种资源<ul>
+<li>所有硬件部分称为硬件资源，而程序和数据等信息称为软件资源</li>
+<li>CPU管理</li>
+<li>存储管理</li>
+<li>设备管理</li>
+<li>文件管理</li>
+<li>网络与通信管理</li>
+</ul>
+</li>
+<li>为用户提供良好的界面（为用户提供了两种接口<ul>
+<li>作业控制级接口<ul>
+<li>联机用户接口</li>
+<li>脱机用户接口</li>
+</ul>
+</li>
+<li>程序级接口</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>操作系统的分类</p>
+<ul>
+<li>按机型：大型、中型、小型、微型机</li>
+<li>按用户数目：单用户操作系统和多用户操作系统</li>
+<li>按功能特征：批处理、实时、分时操作系统</li>
+<li>按应用领域：<ul>
+<li>桌面操作系统，如win10</li>
+<li>服务器操作系统，如CentOS，Redhat</li>
+<li>嵌入式操作系统，如Android，iOS</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>常见操作系统</p>
+<ul>
+<li>Windows：问世于1985，除了日常使用，也用于低阶和中阶服务器</li>
+<li>Linux：1991年，可安装在各种计算机硬件设备中，是类Unix操作系统</li>
+<li>Mac OS：基于Unix内核的图形化操作系统；普通pc上无法安装，运行在苹果系列电脑</li>
+<li>Android：基于Linux V2.6内核的综合操作系统，手机或平板电脑或其他领域</li>
+<li>iOS：iPhone、iPod、touch及iPad使用</li>
+</ul>
+</li>
+<li><p>思考：</p>
+<ul>
+<li>常见的个人操作系统有几类？（Windows和Linux）</li>
+<li>简述操作系统和程序的关系？（操作系统是一个平台，任何软硬件都必须以他为基础来实现，程序是运行在操作系统上的子程序）</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-2-操作系统的安全威胁"><a href="#4-2-操作系统的安全威胁" class="headerlink" title="4.2-操作系统的安全威胁"></a>4.2-操作系统的安全威胁</h2><h3 id="漏洞和漏洞扫描"><a href="#漏洞和漏洞扫描" class="headerlink" title="漏洞和漏洞扫描"></a>漏洞和漏洞扫描</h3><ul>
+<li><p>漏洞定义：</p>
+<ul>
+<li>系统漏洞，也称为系统脆弱性</li>
+<li>是指计算机系统在硬件、软件、协议的设计、具体实现以及系统安全策略上存在的缺陷和不足</li>
+</ul>
+</li>
+<li><p>漏洞的特性</p>
+<ul>
+<li>漏洞的事件局限性</li>
+<li>漏洞的广泛性</li>
+<li>漏洞的隐蔽性</li>
+<li>漏洞的被发现性</li>
+</ul>
+</li>
+<li><p>漏洞产生原因</p>
+<ul>
+<li>程序逻辑结构设计不合理，不严谨</li>
+<li>程序设计错误也是一个重要因素</li>
+<li>由于目前硬件无法解决特定的问题，使编程人员只得通过软件设计来表现出硬件功能而产生的漏洞</li>
+</ul>
+</li>
+<li><p>漏洞的生命周期</p>
+<ul>
+<li><p>漏洞从客观存在到被发现、利用，到大规模危害和逐渐消失，这期间存在一个生命周期</p>
+</li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-18/10303833.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>系统漏洞的防范</p>
+<ul>
+<li>提升防火墙技术</li>
+<li>加强病毒防范措施</li>
+<li>注重漏洞扫描技术的应用</li>
+<li>强化端口解析以及加强数据备份工作</li>
+</ul>
+</li>
+<li><p>漏洞扫描</p>
+<ul>
+<li>是对计算机系统或其他网络设备进行相关检测，找出安全隐患和可以被攻击者利用的漏洞</li>
+</ul>
+</li>
+<li><p>漏洞扫描的必要性</p>
+<ul>
+<li>防火墙的局限性和脆弱性</li>
+<li>针对IDS的逃避技术</li>
+<li>网络隐患扫描系统浮出水面</li>
+</ul>
+</li>
+<li><p>扫描工具的选择</p>
+<ul>
+<li>漏洞库中的漏洞数量</li>
+<li>扫描工具的易用性</li>
+<li>是否可以生成漏洞报告</li>
+<li>对于漏洞修复行为的分析和建议</li>
+<li>安全性</li>
+<li>工具的性能及价格</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h3 id="恶意代码"><a href="#恶意代码" class="headerlink" title="恶意代码"></a>恶意代码</h3><ul>
+<li><p>恶意代码的定义：</p>
+<ul>
+<li>unwanted code</li>
+<li>是指故意编制或设置的，对网络或系统会产生威胁或潜在威胁的计算机代码</li>
+</ul>
+</li>
+<li><p>恶意代码的攻击机制</p>
+<ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-18/5518684.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>常见的恶意代码</p>
+<ul>
+<li>病毒</li>
+<li>木马</li>
+<li>蠕虫</li>
+</ul>
+</li>
+<li><p>计算机病毒</p>
+<ul>
+<li>computer，virus，CV</li>
+<li>指编制或者在计算机程序中插入的破坏计算机功能或者破坏数据，影响计算机使用并且能能够自我复制的一组计算机指令或程序代码</li>
+</ul>
+</li>
+<li><p>计算机病毒的特性</p>
+<ul>
+<li>寄生性</li>
+<li>传染性</li>
+<li>潜伏性</li>
+<li>隐蔽性</li>
+<li>破坏性</li>
+<li>可触发性</li>
+</ul>
+</li>
+<li><p>计算机病毒的危害</p>
+<ul>
+<li>破会操作系统的处理器管理功能</li>
+<li>破坏操作系统的文件管理功能</li>
+<li>破坏操作系统的存储管理功能</li>
+<li>直接破坏计算机系统的硬件功能</li>
+</ul>
+</li>
+<li><p>计算机病毒的表现形式</p>
+<ul>
+<li>机器不能正常启动</li>
+<li>运行速度降低</li>
+<li>内存空间迅速减小</li>
+<li>文件内容和长度有所改变</li>
+<li>经常出现死机现象</li>
+<li>外部设备工作异常</li>
+</ul>
+</li>
+<li><p>计算机病毒传播途径</p>
+<ul>
+<li>电脑的硬件设备</li>
+<li>移动存储设备</li>
+<li>电脑网络</li>
+</ul>
+</li>
+<li><p>计算机病毒的防范</p>
+<ul>
+<li>建立良好的安全习惯</li>
+<li>关闭或删除系统中不需要的服务</li>
+<li>经常升级安全补丁</li>
+<li>使用复杂的密码</li>
+<li>迅速隔离受感染的计算机</li>
+<li>了解一些病毒知识</li>
+<li>安装专业的杀毒软件进行全面监控</li>
+<li>安装个人防火墙进行防黑</li>
+<li>安全管理类软件</li>
+</ul>
+</li>
+<li><p>计算机木马</p>
+<ul>
+<li>木马，Trojan，来源于希腊神话特洛伊木马</li>
+<li>利用计算机程序漏洞侵入后窃取他人文件、财产与隐私的的程序</li>
+<li>是一种后门程序，常被黑客用作控制远程计算机的工具</li>
+</ul>
+</li>
+<li><p>木马的组成</p>
+<ul>
+<li>硬件部分<ul>
+<li>建立木马连接所必须的硬件实体</li>
+</ul>
+</li>
+<li>软件部分<ul>
+<li>实现远程连接所必须的软件程序</li>
+</ul>
+</li>
+<li>具体连接部分<ul>
+<li>通过Internet在服务端和控制端之间建立一条木马通道所必须的元素</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>木马的传播</p>
+<ul>
+<li>通过电子邮件的附件传播</li>
+<li>通过下载文件传播</li>
+<li>通过网页传播</li>
+<li>通过聊天工具传播</li>
+</ul>
+</li>
+<li><p>木马的种类</p>
+<ul>
+<li>网络游戏木马</li>
+<li>网银木马</li>
+<li>即时通讯软件木马</li>
+<li>网页点击类木马</li>
+<li>下载类木马</li>
+<li>代理类木马</li>
+<li>隐藏类木马</li>
+<li>FTP木马</li>
+</ul>
+</li>
+<li><p>木马的危害</p>
+<ul>
+<li>盗取网游账号，威胁虚拟财产的安全</li>
+<li>盗取网银信息，威胁真实财产的安全</li>
+<li>利用即时通讯软件盗取我们的身份，传播木马病毒</li>
+<li>给我们的电脑开后门，使我们的电脑可能被黑客控制</li>
+</ul>
+</li>
+<li><p>防治木马的措施</p>
+<ul>
+<li>安装杀毒软件和个人防火墙，并及时升级</li>
+<li>把个人防火墙设置好安全等级，防止未知程序向外传送数据</li>
+<li>可以考虑使用安全性好的浏览器和电子邮件客户端工具</li>
+<li>若使用ie浏览器，应该安装卡卡安全助手或360安全浏览器，防止恶意网站在自己电脑上安装不明软件和浏览器插件，以免被木马趁机侵入</li>
+</ul>
+</li>
+<li><p>蠕虫</p>
+<ul>
+<li>Worm</li>
+<li>蠕虫病毒使一种常见的计算机病毒</li>
+<li>利用网络进行复制和传播</li>
+<li>传染途径是通过网络和电子邮件</li>
+</ul>
+</li>
+<li><p>蠕虫病毒和普通病毒的区别</p>
+<ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-19/68545089.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>蠕虫的基本程序结构</p>
+<ul>
+<li>传播模块（负责蠕虫的传播）<ul>
+<li>扫描模块</li>
+<li>攻击模块</li>
+<li>复制模块</li>
+</ul>
+</li>
+<li>隐藏模块（侵入主机后，隐藏蠕虫程序，防止被用户发现）</li>
+<li>目的功能模块（实现对计算机的控制，监视或破坏等功能）</li>
+</ul>
+</li>
+<li><p>蠕虫的传播过程</p>
+<ul>
+<li>扫描：<ul>
+<li>由蠕虫的扫描功能模块负责探测存在漏洞的主机，当程序向某个主机发送探测漏洞的信息并收到成功的反馈信息后，就得到一个可传播的对象</li>
+</ul>
+</li>
+<li>攻击：<ul>
+<li>攻击模块按漏洞攻击步骤自动攻击步骤1中找到的对象，取得该主机的权限，一般为管理员权限，获得一个shell</li>
+</ul>
+</li>
+<li>复制：<ul>
+<li>复制模块通过原主机和新主机的交互将蠕虫程序复制到新主机并启动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>蠕虫病毒的特点</p>
+<ul>
+<li>较强的独立性</li>
+<li>利用漏洞主动攻击</li>
+<li>传播更快更广</li>
+</ul>
+</li>
+<li><p>蠕虫病毒的防范</p>
+<ul>
+<li>安装正版杀毒软件、个人防火墙，并及时升级，上网时打开杀毒软件实时监控功能</li>
+<li>使用安全漏洞扫描软件，弥补操作系统和应用程序的漏洞</li>
+<li>不浏览不良网站，不随意下载安装可疑插件</li>
+<li>不接受qq、msn，Email等传来的可疑文件和连接</li>
+</ul>
+</li>
+</ul>
+<h3 id="端口扫描的威胁"><a href="#端口扫描的威胁" class="headerlink" title="端口扫描的威胁"></a>端口扫描的威胁</h3><ul>
+<li>端口扫描威胁<ul>
+<li>端口扫描通常指对目标计算机的所有端口发送同一信息，然后根据返回端口状态来分析目标计算机的端口是否打开或可用</li>
+</ul>
+</li>
+<li>端口扫描目的<ul>
+<li>判断目标主机上开放了哪些服务</li>
+<li>判断目标主机的操作系统</li>
+</ul>
+</li>
+<li>什么是扫描器<ul>
+<li>是一种自动检测远程或本地主机安全性弱点的程序</li>
+<li>通过使用扫描器可不留痕迹的发现远程服务器的各种TCP端口的分配及提供的服务和他们的软件版本</li>
+<li>这就让我们间接的或直观的了解到远程主机所存在的安全问题</li>
+</ul>
+</li>
+<li>为何需要扫描器<ul>
+<li>由于网络技术的发展，网络规模迅速增长和计算机系统日益复杂，导致新的系统漏洞层出不穷</li>
+<li>由于系统管理员的疏忽或缺乏经验，导致有的漏洞依然存在</li>
+<li>许多人出于好奇或别有用心，不停地窥视网上资源</li>
+</ul>
+</li>
+<li>扫描器的功能<ul>
+<li>扫描目标主机识别其工作状态，开关机</li>
+<li>识别目标主机端口的状态，监听或关闭</li>
+<li>识别目标主机系统及服务程序的类型和版本</li>
+<li>根据已知漏洞信息，分析系统脆弱点</li>
+<li>生成扫描结果报告</li>
+</ul>
+</li>
+<li>思考<ul>
+<li>常见的服务端口？（http-80，ftp-21，telnet-23，远程桌面-3389</li>
+<li>根据木马特点，怎么应对木马攻击？（木马的检测和查杀，除了依靠杀毒软件和安全防护软件等常用手段外，还可以通过全面检测系统的注册表，文件，网络连接，运行的进程等实现人工的分析)</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-3-操作系统安全防护"><a href="#4-3-操作系统安全防护" class="headerlink" title="4.3-操作系统安全防护"></a>4.3-操作系统安全防护</h2><h3 id="安全防护策略"><a href="#安全防护策略" class="headerlink" title="安全防护策略"></a>安全防护策略</h3><ul>
+<li>制定操作系统安全策略</li>
+<li>关闭不必要的服务</li>
+<li>关闭不必要的端口</li>
+<li>开启审核策略</li>
+<li>开启密码策略</li>
+</ul>
+<h3 id="补丁程序"><a href="#补丁程序" class="headerlink" title="补丁程序"></a>补丁程序</h3><ul>
+<li>补丁程序：修复系统漏洞的程序</li>
+<li>补丁的分类<ul>
+<li>高危漏洞的补丁</li>
+<li>软件安全更新的补丁</li>
+<li>可选的高危漏洞补丁</li>
+<li>其他及功能性更新补丁</li>
+<li>无效补丁</li>
+</ul>
+</li>
+</ul>
+<h3 id="终端防护软件"><a href="#终端防护软件" class="headerlink" title="终端防护软件"></a>终端防护软件</h3><ul>
+<li>这里所说的防护软件一般是指计算机病毒防护软件</li>
+<li>即常说的病毒防护软件或杀毒软件</li>
+<li>终端防护软件的一些常识：<ul>
+<li>杀毒软件不可能查杀所有病毒</li>
+<li>杀毒软件能查到的病毒，不一定能杀掉</li>
+<li>一台电脑每个操作系统不必同时安装两套或两套以上的杀毒软件</li>
+<li>杀毒软件对被感染的文件杀毒有多种方式：<ul>
+<li>清除</li>
+<li>删除</li>
+<li>禁止访问</li>
+<li>隔离</li>
+<li>不处理</li>
+</ul>
+</li>
+<li></li>
+</ul>
+</li>
+</ul>
+<h3 id="个人防火墙"><a href="#个人防火墙" class="headerlink" title="个人防火墙"></a>个人防火墙</h3><ul>
+<li>简介<ul>
+<li>personal firewall，PFW</li>
+<li>不需要特定的网络设备，用户在计算机上安装即可，可设置特定的规则阻止来自外部网络的攻击保护操作系统的安全</li>
+<li>通俗讲，个人电脑上的带网络防护的杀毒软件、个人防火墙软件、Windows或Linux系统自带的防火墙，都算是个人防火墙</li>
+</ul>
+</li>
+<li>放火墙功能<ul>
+<li>过滤不安全的服务和非法用户，防止未授权的用户访问内部网络</li>
+<li>能控制对内部网络的访问权，根据用户的安全策略，允许内部网络的一部分主机被外部网络访问，而另一部分被很好的保护</li>
+<li>能对网络安全进行监控</li>
+</ul>
+</li>
+<li>放火墙的分类<ul>
+<li>按构件的性质<ul>
+<li>软件</li>
+<li>硬件</li>
+<li>芯片级防火墙</li>
+</ul>
+</li>
+<li>按结构<ul>
+<li>单一主机式</li>
+<li>路由器集成式</li>
+<li>分布式防火墙</li>
+</ul>
+</li>
+<li>按被应用部署的位置<ul>
+<li>边界</li>
+<li>个人</li>
+<li>混合防火墙</li>
+</ul>
+</li>
+<li>按性能<ul>
+<li>百兆级</li>
+<li>千兆级防火墙</li>
+</ul>
+</li>
+<li>按采用的技术<ul>
+<li>包过滤</li>
+<li>状态检测</li>
+<li>应用代理防火墙</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>思考<ul>
+<li>简述个人防火墙的优缺点<ul>
+<li>优点：<ul>
+<li>成本低，不需要额外的硬件资源，可以抵挡外部的攻击</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>对公共网络只有一个物理接口，个人防火墙本身可能会易受到威胁</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-4-实验"><a href="#4-4-实验" class="headerlink" title="4.4-实验"></a>4.4-实验</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/05/网络安全防护技术/" rel="next" title="网络安全防护技术">
+                <i class="fa fa-chevron-left"></i> 网络安全防护技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/14/信息安全技术-密码学/" rel="prev" title="信息安全技术-密码学">
+                信息安全技术-密码学 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4-操作系统安全防护技术"><span class="nav-text">4-操作系统安全防护技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-操作系统概述"><span class="nav-text">4.1-操作系统概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-操作系统的安全威胁"><span class="nav-text">4.2-操作系统的安全威胁</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#漏洞和漏洞扫描"><span class="nav-text">漏洞和漏洞扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恶意代码"><span class="nav-text">恶意代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#端口扫描的威胁"><span class="nav-text">端口扫描的威胁</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-操作系统安全防护"><span class="nav-text">4.3-操作系统安全防护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全防护策略"><span class="nav-text">安全防护策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#补丁程序"><span class="nav-text">补丁程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#终端防护软件"><span class="nav-text">终端防护软件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个人防火墙"><span class="nav-text">个人防火墙</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-4-实验"><span class="nav-text">4.4-实验</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

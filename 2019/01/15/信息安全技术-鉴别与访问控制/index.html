@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,信息安全,访问控制,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.1-身份鉴别标识与鉴别 标识：是实体身份的一种计算机表达，每个实体与计算机内部的一个身份表达绑定 鉴别：确认实体是它所表明的，提供了关于某个实体身份的保证，某一实体确信与之打交道的实体正是所需要的实体 标识与鉴别的作用： 作为访问控制的一种必要支持，访问控制的执行依赖于确认的身份 作为数据源认证的一种方法">
+<meta name="keywords" content="NISP,信息安全,访问控制">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全技术-鉴别与访问控制">
+<meta property="og:url" content="http://21guns.top/2019/01/15/信息安全技术-鉴别与访问控制/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="1.1-身份鉴别标识与鉴别 标识：是实体身份的一种计算机表达，每个实体与计算机内部的一个身份表达绑定 鉴别：确认实体是它所表明的，提供了关于某个实体身份的保证，某一实体确信与之打交道的实体正是所需要的实体 标识与鉴别的作用： 作为访问控制的一种必要支持，访问控制的执行依赖于确认的身份 作为数据源认证的一种方法">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:34:10.563Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全技术-鉴别与访问控制">
+<meta name="twitter:description" content="1.1-身份鉴别标识与鉴别 标识：是实体身份的一种计算机表达，每个实体与计算机内部的一个身份表达绑定 鉴别：确认实体是它所表明的，提供了关于某个实体身份的保证，某一实体确信与之打交道的实体正是所需要的实体 标识与鉴别的作用： 作为访问控制的一种必要支持，访问控制的执行依赖于确认的身份 作为数据源认证的一种方法">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/01/15/信息安全技术-鉴别与访问控制/">
+
+
+
+
+
+  <title>信息安全技术-鉴别与访问控制 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/01/15/信息安全技术-鉴别与访问控制/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全技术-鉴别与访问控制</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-15T20:24:07+08:00">
+                2019-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-1-身份鉴别"><a href="#1-1-身份鉴别" class="headerlink" title="1.1-身份鉴别"></a>1.1-身份鉴别</h1><h2 id="标识与鉴别"><a href="#标识与鉴别" class="headerlink" title="标识与鉴别"></a>标识与鉴别</h2><ul>
+<li>标识：是实体身份的一种计算机表达，每个实体与计算机内部的一个身份表达绑定</li>
+<li>鉴别：确认实体是它所表明的，提供了关于某个实体身份的保证，某一实体确信与之打交道的实体正是所需要的实体</li>
+<li>标识与鉴别的作用：<ul>
+<li>作为访问控制的一种必要支持，访问控制的执行依赖于确认的身份</li>
+<li>作为数据源认证的一种方法<a id="more"></a></li>
+<li>作为审计追踪的支持</li>
+</ul>
+</li>
+</ul>
+<h2 id="鉴别的基本概念"><a href="#鉴别的基本概念" class="headerlink" title="鉴别的基本概念"></a>鉴别的基本概念</h2><ul>
+<li>鉴别系统的构成：验证者、被验证者、可信赖者</li>
+<li>鉴别的类型：单向鉴别、双向鉴别、第三方鉴别</li>
+<li>鉴别的方式：<ul>
+<li>基于实体所知（知识、密码、PIN码</li>
+<li>基于实体所有（身份证、钥匙、智能卡、令牌</li>
+<li>基于实体特征（指纹、笔迹、声音、视网膜</li>
+<li>双因素、多因素认证</li>
+</ul>
+</li>
+</ul>
+<h2 id="基于实体所知的鉴别"><a href="#基于实体所知的鉴别" class="headerlink" title="基于实体所知的鉴别"></a>基于实体所知的鉴别</h2><ul>
+<li>使用最广泛的身份鉴别方法：实现简单、成本低、提供弱鉴别</li>
+<li>面临的威胁：暴力破解、木马窃取、线路窃听、重放攻击</li>
+</ul>
+<h2 id="密码暴力破解安全防护"><a href="#密码暴力破解安全防护" class="headerlink" title="密码暴力破解安全防护"></a>密码暴力破解安全防护</h2><ul>
+<li>使用安全的密码（自己容易记，别人不好猜</li>
+<li>系统、应用安全策略（账号锁定策略</li>
+<li>随机验证码<ul>
+<li>变形</li>
+<li>干扰</li>
+<li>滑块</li>
+<li>图像识别</li>
+</ul>
+</li>
+</ul>
+<h2 id="木马窃取密码安全防护"><a href="#木马窃取密码安全防护" class="headerlink" title="木马窃取密码安全防护"></a>木马窃取密码安全防护</h2><ul>
+<li>使用密码输入控件<ul>
+<li>安全的输入框，避免从输入框中还原密码</li>
+<li>软键盘，对抗击键记录</li>
+<li>随机排列字符，对抗屏幕截图重现</li>
+</ul>
+</li>
+</ul>
+<h2 id="密码嗅探攻击安全防护"><a href="#密码嗅探攻击安全防护" class="headerlink" title="密码嗅探攻击安全防护"></a>密码嗅探攻击安全防护</h2><ul>
+<li>加密：单向函数</li>
+<li>攻击者很容易构造一张q与p对应的表，表中的p尽可能包含所期望的值<ul>
+<li>解决办法：在口令中使用随机数</li>
+</ul>
+</li>
+<li>一次性口令：每次鉴别中所使用的密码不同<ul>
+<li>有效应对密码嗅探及重放攻击</li>
+</ul>
+</li>
+<li>实现机制<ul>
+<li>两端共同拥有一串随机口令，在该串的某一位置保持同步</li>
+<li>两端共同使用一个随机序列生成器，在该序列生成器的初态保持同步</li>
+<li>使用时间戳，两端维持同步的时钟</li>
+</ul>
+</li>
+</ul>
+<h2 id="密码嗅探及重放攻击防护"><a href="#密码嗅探及重放攻击防护" class="headerlink" title="密码嗅探及重放攻击防护"></a>密码嗅探及重放攻击防护</h2><ul>
+<li>挑战机制<ul>
+<li>客户端：请求登录</li>
+<li>服务器：给出随机数作为挑战请求</li>
+<li>将登录信息（用户名、密码）与随机数合并，使用单向函数（如MD5）生产字符串，作为应答返回服务器</li>
+<li>服务认证后返回结果</li>
+</ul>
+</li>
+</ul>
+<h2 id="基于实体所有的鉴别"><a href="#基于实体所有的鉴别" class="headerlink" title="基于实体所有的鉴别"></a>基于实体所有的鉴别</h2><ul>
+<li>采用较多的鉴别方法<ul>
+<li>使用用户所持有的东西来验证用户的身份</li>
+<li>用于鉴别的东西通常不容易复制</li>
+</ul>
+</li>
+<li>鉴别物体<ul>
+<li>IC卡：将微电子芯片，嵌入符合卡基，做成卡片形式的信息载体</li>
+<li>内存卡</li>
+<li>逻辑加密卡</li>
+<li>CPU卡</li>
+</ul>
+</li>
+<li>特点：难以复制、安全性高</li>
+<li>安全威胁及防护<ul>
+<li>损坏：封装应坚固耐用，承受日常使用中各种可能导致卡片损坏的行为</li>
+<li>复制<ul>
+<li>保证IC卡中存储和处理的各种信息不被非法访问、复制、篡改或破坏PIN码甚至其他技术实现对数据的安全防护</li>
+<li>确保逻辑安全措施得到落实</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="基于实体特征的鉴别方法"><a href="#基于实体特征的鉴别方法" class="headerlink" title="基于实体特征的鉴别方法"></a>基于实体特征的鉴别方法</h2><ul>
+<li>使用每个人所具有的唯一生理特征</li>
+<li>如：指纹——数据采集设备——数据输入通道——数据匹配——认证结果</li>
+<li>鉴别方式：指纹、手掌、静脉、视网膜、语音、面部扫描</li>
+<li>鉴别系统的有效性判断<ul>
+<li>错误拒绝率（FRR</li>
+<li>错误接受率（FAR</li>
+<li>交叉错判率（CER）：FRR=FAR的交叉点，CER用来反映系统的准确度</li>
+</ul>
+</li>
+</ul>
+<h2 id="单点登录"><a href="#单点登录" class="headerlink" title="单点登录"></a>单点登录</h2><ul>
+<li>单一身份认证，身份信息集中管理，一次认证就可访问其授权的所有网络资源</li>
+<li>实质是安全凭证在多个应用系统之间的传递或共享</li>
+<li>安全优势：</li>
+</ul>
+<h2 id="Kerberos协议"><a href="#Kerberos协议" class="headerlink" title="Kerberos协议"></a>Kerberos协议</h2><ul>
+<li>典型的单点登录协议</li>
+<li>麻省理工开发，用于通信实体间的身份认证</li>
+<li>基于对称密码算法为用户提供安全的单点登录服务</li>
+<li>包含可信第三方认证服务</li>
+<li>优点：<ul>
+<li>避免本地保存密码会话及会话中传输密码</li>
+<li>客户端和服务器可实现互认</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kerberos体系构成"><a href="#Kerberos体系构成" class="headerlink" title="Kerberos体系构成"></a>Kerberos体系构成</h2><ul>
+<li>运行环境构成<ul>
+<li>密钥分发中心KDC<ul>
+<li>系统核心，负责维护所有用户的账号信息</li>
+<li>AS和TGS：AS-认证服务器，TGS-票据授权服务器</li>
+</ul>
+</li>
+<li>应用服务器</li>
+<li>客户端</li>
+</ul>
+</li>
+<li>其他概念<ul>
+<li>票据许可票据-TGT</li>
+<li>服务许可票据-SGT</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kerberos认证过程-三次通信"><a href="#Kerberos认证过程-三次通信" class="headerlink" title="Kerberos认证过程-三次通信"></a>Kerberos认证过程-三次通信</h2><p>认证过程由三个阶段组成，例如需要访问OA</p>
+<ul>
+<li>第一次：获得票据许可票据TGT</li>
+<li>第二次：获得服务许可票据SGT</li>
+<li>第三次：获得服务</li>
+</ul>
+<h2 id="Kerberos工作过程-获得TGT"><a href="#Kerberos工作过程-获得TGT" class="headerlink" title="Kerberos工作过程-获得TGT"></a>Kerberos工作过程-获得TGT</h2><ul>
+<li>客户机向AS发送访问TGS请求（明文）<ul>
+<li>请求信息：用户名、IP地址、时间戳、随机数</li>
+<li>AS验证用户（只验证是否存在</li>
+</ul>
+</li>
+<li>AS给予应答<ul>
+<li>TGT（包含TGS会话密钥），使用KDC密码加密</li>
+<li>其他信息（包含TGS会话密钥），使用用户密码加密</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kerberos工作过程-获得SGT"><a href="#Kerberos工作过程-获得SGT" class="headerlink" title="Kerberos工作过程-获得SGT"></a>Kerberos工作过程-获得SGT</h2><ul>
+<li>客户机向TGS发送访问应用服务请求<ul>
+<li>请求信息使用TGS会话密钥加密（包含认证信息</li>
+<li>包含访问应用服务名称（http</li>
+</ul>
+</li>
+<li>TGS验证认证信息（包含用户名等）后，给予应答<ul>
+<li>SGT</li>
+<li>客户机与应用服务器之间的会话密钥</li>
+</ul>
+</li>
+</ul>
+<h2 id="Kerberos工作过程-获得服务"><a href="#Kerberos工作过程-获得服务" class="headerlink" title="Kerberos工作过程-获得服务"></a>Kerberos工作过程-获得服务</h2><ul>
+<li>客户机向应用服务器请求服务<ul>
+<li>SGT（使用http服务器密码加密</li>
+<li>认证信息</li>
+</ul>
+</li>
+<li>应用服务器（验证认证信息<ul>
+<li>提供服务器验证信息（如果需要验证服务器</li>
+</ul>
+</li>
+</ul>
+<h2 id="AAA协议"><a href="#AAA协议" class="headerlink" title="AAA协议"></a>AAA协议</h2><ul>
+<li>认证、授权、计费（authentication、authorization、accounting</li>
+<li>常见AAA协议：radius协议、tacacs+协议、diameter协议</li>
+</ul>
+<h1 id="1-2-访问控制"><a href="#1-2-访问控制" class="headerlink" title="1.2-访问控制"></a>1.2-访问控制</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><ul>
+<li>什么是：为用户对系统提供最大限度共享的基础上，对用户的访问进行管理，防止对信息的非授权窜改和滥用</li>
+<li>作用：<ul>
+<li>保证用户在系统安全策略下正常工作</li>
+<li>拒绝非法用户的非授权访问请求</li>
+<li>拒绝合法用户越权的服务请求</li>
+</ul>
+</li>
+<li>访问控制模型：对一系列访问控制规则集合的描述，可以是非形式化的，也可以是形式化的</li>
+<li>组成：<ul>
+<li>主体</li>
+<li>客体</li>
+<li>访问控制实施</li>
+<li>访问控制决策</li>
+</ul>
+</li>
+<li>分类<ul>
+<li>自主访问控制模型DAC<ul>
+<li>访问矩阵模型<ul>
+<li>访问控制列表ACL</li>
+<li>权能列表 capacity list</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>强制访问控制模型MAC<ul>
+<li>保密性模型<ul>
+<li>Bell-Lapudula模型</li>
+</ul>
+</li>
+<li>完整性模型<ul>
+<li>BIba模型</li>
+<li>Clark-Wilson模型</li>
+</ul>
+</li>
+<li>混合策略模型<ul>
+<li>Chinese wall模型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>基于角色访问控制模型RBAC</li>
+</ul>
+</li>
+</ul>
+<h2 id="自主访问控制模型-DAC"><a href="#自主访问控制模型-DAC" class="headerlink" title="自主访问控制模型-DAC"></a>自主访问控制模型-DAC</h2><ul>
+<li>何为？<ul>
+<li>客体的属主（创建者）决定该客体的访问权限</li>
+<li>灵活，具有较好的易用性和可拓展性</li>
+<li>安全性不高</li>
+</ul>
+</li>
+<li>实现机制：访问控制表/矩阵</li>
+<li><p>实现方法：访问控制表ACL、访问能力表capacity list</p>
+</li>
+<li><p>访问许可</p>
+<ul>
+<li>描述主体对客体所具有的控制权</li>
+<li>定义了改变访问模式的能力或向其他主体传送这种能力的能力</li>
+</ul>
+</li>
+<li><p>访问模式</p>
+<ul>
+<li>描述主机对客体所具有的访问权</li>
+<li>指明主体对客体可进行何种形式的特定访问操作：读/写/运行</li>
+</ul>
+</li>
+<li><p>访问许可的类型</p>
+<ul>
+<li>等级型</li>
+<li>有主型Owner：每个客体设置一个拥有者（一般是客体的生成者），拥有者是唯一有权修改客体访问控制表的主体，拥有者对其客体具有全部控制权</li>
+<li>自由型Laissez-faire</li>
+</ul>
+</li>
+<li><p>自主访问控制模型实现方式</p>
+<ul>
+<li>访问控制表<ul>
+<li>权限与客体关联</li>
+<li>在客体上附加一个主体明细表的方法来表示访问控制矩阵</li>
+</ul>
+</li>
+<li>访问能力表<ul>
+<li>权限与主体关联</li>
+<li>为每个用户维护一个表，表示主体可以访问的客体及权限</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>访问控制表与访问能力表的比较</p>
+<p>|              |    ACL     |     CL     |<br>| :———-: | :——–: | :——–: |<br>|   保存位置   |    客体    |    主体    |<br>| 浏览访问权限 |    容易    |    困难    |<br>| 访问权限传递 |    困难    |    容易    |<br>| 访问权限回收 |    容易    |    困难    |<br>|     使用     | 集中式系统 | 分布式系统 |</p>
+</li>
+<li><p>优点</p>
+<ul>
+<li>根据主体的身份和访问权限进行决策</li>
+<li>具有某种访问能力的主体能够自主的将访问权的某个子集授予其他主体</li>
+<li>灵活性高，被大量采用</li>
+</ul>
+</li>
+<li><p>缺点</p>
+<ul>
+<li>安全性不高</li>
+<li>信息在传递过程中其访问权限关系会被改变</li>
+</ul>
+</li>
+</ul>
+<h2 id="强制访问控制模型"><a href="#强制访问控制模型" class="headerlink" title="强制访问控制模型"></a>强制访问控制模型</h2><ul>
+<li>何为？主体和客体都有一个固定的安全属性，系统用该安全属性来决定一个主体是否可以访问某个客体</li>
+<li>特点<ul>
+<li>安全属性是强制的，任何主体都无法变更</li>
+<li>安全性较高，应用于军事等安全要求较高的系统</li>
+</ul>
+</li>
+<li>常见的几种：BLP模型、Biba模型、Clark-Wilson模型、Chinese Wall模型</li>
+</ul>
+<h2 id="BLP模型"><a href="#BLP模型" class="headerlink" title="BLP模型"></a>BLP模型</h2><ul>
+<li>BLP模型概念<ul>
+<li>一种模拟军事安全策略的计算机访问控制模型</li>
+<li>第一个严格形式化的安全模型</li>
+<li>多级访问控制模型，用于保证系统信息的机密性</li>
+</ul>
+</li>
+<li>BLP模型访问控制策略<ul>
+<li>包括自主安全策略与强制安全策略</li>
+<li>强制安全策略为每一个主体和客体都分配了安全级，根据安全级进行访问控制</li>
+</ul>
+</li>
+<li>BLP模型的组成<ul>
+<li>主体集：S</li>
+<li>客体集：O</li>
+<li>安全级：<ul>
+<li>密级：绝密、机密、秘密、公开</li>
+<li>范畴：军事、外交、商务</li>
+</ul>
+</li>
+<li>安全级之间关系：密级高于或等于关系、范畴包含关系</li>
+</ul>
+</li>
+<li>BLP模型规则<ul>
+<li>机密性<ul>
+<li>不上读：主体不可读，安全级别高于它的客体</li>
+<li>不下写：主体不可将信息写入安全级别低于它的客体</li>
+</ul>
+</li>
+<li>当一个高等级的主体必须与另一个低等级的主体通信，即高等级的主体写信息到低等级的客体，以便低等级的主体可以读<ul>
+<li>主体有一个最高等级和一个当前安全等级，最高安全等级必须支配当前等级</li>
+<li>主体可以从最高安全等级降低下来，以便与低等级的实体通信</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>BLP模型的关键点<ul>
+<li>第一个安全策略形式化的数字模型</li>
+<li>多级安全模型，强调机密性</li>
+<li>访问控制机制（两个重要规则<ul>
+<li>不下读：主体不可读，安全级别高于它的客体</li>
+<li>不下写：主体不可将信息写入安全级别低于它的客体</li>
+</ul>
+</li>
+<li>优点：机密性高，有效防止机密信息泄漏</li>
+<li>缺点：缺乏完整性，非法窜改、破坏成为可能</li>
+</ul>
+</li>
+</ul>
+<h2 id="Biba模型"><a href="#Biba模型" class="headerlink" title="Biba模型"></a>Biba模型</h2><ul>
+<li><p>概念</p>
+<ul>
+<li>与BLP模型数学上对偶的，完整性保护模型</li>
+<li>多级访问控制模型，保护数据完整性</li>
+</ul>
+</li>
+<li><p>访问控制策略</p>
+<ul>
+<li>强制安全策略为每一个主体和客体都分配了完整级，根据完整级进行访问控制</li>
+</ul>
+</li>
+<li><p>构成</p>
+<ul>
+<li>完整级<ul>
+<li>安全级：绝密、机密、秘密、公开</li>
+<li>范畴：军事、外交、商务</li>
+</ul>
+</li>
+<li><p>完整级存在支配关系：与BLP类似，安全级高于或等于，范畴包含</p>
+</li>
+<li><p>安全策略</p>
+<ul>
+<li>想上读：主体可以读客体，当且仅当客体的完整级别支配主体的完整级</li>
+<li>向下写：主体可以写客体，当且仅当主体的完整级别支配客体的完整级</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>关键点</p>
+<ul>
+<li>强调完整性的访问控制策略模型</li>
+<li>多级安全模型，数学上与BLP模型对偶</li>
+<li>访问控制机制（两个重要规则<ul>
+<li>向下写</li>
+<li>向上读</li>
+</ul>
+</li>
+<li><p>优点：完整性高、有效的防止非法篡改、破坏</p>
+</li>
+<li><p>缺点：机密性缺乏，无法保护机密信息泄漏</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Clark-Wilson模型"><a href="#Clark-Wilson模型" class="headerlink" title="Clark-Wilson模型"></a>Clark-Wilson模型</h2><ul>
+<li>确保商业数据完整性的访问控制模型，侧重于满足商业应用的安全需求</li>
+<li>访问控制策略：每次操作前和操作后，数据都必须满足这个一致性条件</li>
+<li>目标：解决商业系统最关心的问题：系统数据的完整性以及对这些操作的完整性</li>
+<li>一致性状态：数据满足给定属性，就称数据处于一个一致性状态，如<ul>
+<li>今天到目前为止存入金额的总数：D</li>
+<li>今天到目前为止提取金额的总数：W</li>
+<li>昨天为止所有账户的金额总数：YB</li>
+<li>今天到目前为止所有账户的金额总数：TB</li>
+<li>一致性属性：D+YB-W=TB</li>
+</ul>
+</li>
+<li>相关术语<ul>
+<li>自由数据条目UDI</li>
+<li>受限数据条目CDI</li>
+<li>转换程序TP</li>
+<li>完整性检查程序IVP</li>
+</ul>
+</li>
+</ul>
+<h2 id="Chinese-Wall模型"><a href="#Chinese-Wall模型" class="headerlink" title="Chinese Wall模型"></a>Chinese Wall模型</h2><ul>
+<li>一种等同于考虑保密性与完整性的访问控制模型</li>
+<li>主要解决商业应用中的利益冲突问题</li>
+<li>在商业领域的应用与BLP模型在军事领域中的作用相当</li>
+<li>公司数据集CD：与某家公司相关的若干客体</li>
+<li>利益冲突COI类：若干相互竞争的公司的数据集</li>
+<li>若干有竞争关系的数据集构成了利益冲突类，如<ul>
+<li>银行COI类（银行a、b、c</li>
+<li>石油公司COI类（公司x、y、z</li>
+</ul>
+</li>
+</ul>
+<h2 id="自主、强制访问控制的比较"><a href="#自主、强制访问控制的比较" class="headerlink" title="自主、强制访问控制的比较"></a>自主、强制访问控制的比较</h2><ul>
+<li>自主<ul>
+<li>细粒度</li>
+<li>灵活性高</li>
+<li>配置效率低</li>
+</ul>
+</li>
+<li>强制<ul>
+<li>控制粒度大</li>
+<li>灵活性不高</li>
+<li>安全性强</li>
+</ul>
+</li>
+</ul>
+<h2 id="基于角色的访问控制"><a href="#基于角色的访问控制" class="headerlink" title="基于角色的访问控制"></a>基于角色的访问控制</h2><ul>
+<li>RBAC模型<ul>
+<li>系统内置多个角色，将权限与角色进行关联</li>
+<li>用户必须成为某个角色才能获得权限</li>
+</ul>
+</li>
+<li>访问控制策略<ul>
+<li>根据用户所担任的角色来决定用户在系统中的访问权限</li>
+<li>用户必须成为某个角色，且还必须激活这一角色，才能对一个对象进行访问或执行某种操作</li>
+</ul>
+</li>
+<li>RBAC模型四种类型<ul>
+<li>RBAC0，基本模型，规定了所有RBAC的基本内容，四种要素，用户U，角色R，会话S，权限P</li>
+<li>RBAC1，包含RBAC0，加入安全等级及角色继承关系</li>
+<li>RBAC2，包含RBAC0，加入约束条件，例如财务和会计不能为同一人</li>
+<li>RBAC3，结合了RBAC1、RBAC2</li>
+</ul>
+</li>
+</ul>
+<h2 id="基于规则的访问控制"><a href="#基于规则的访问控制" class="headerlink" title="基于规则的访问控制"></a>基于规则的访问控制</h2><ul>
+<li><p>特点</p>
+<ul>
+<li>在RBAC模型的基础上加入规则，实现了企业安全策略的灵活动态调整</li>
+</ul>
+</li>
+<li><p>模型类型</p>
+<ul>
+<li>功能级访问控制模型</li>
+<li>数据集访问控制模型</li>
+</ul>
+</li>
+</ul>
+<h2 id="特权管理基础设施"><a href="#特权管理基础设施" class="headerlink" title="特权管理基础设施"></a>特权管理基础设施</h2><ul>
+<li>PMI是什么<ul>
+<li>与应用相关的授权服务管理</li>
+<li>建立在PKI提供的可信的身份认证服务的基础</li>
+<li>采用基于属性证书的授权模式</li>
+</ul>
+</li>
+<li>PMI的主要功能<ul>
+<li>对权限管理进行了系统的定义和描述</li>
+<li>系统地建立起对用户身份到应用授权的映射</li>
+<li>支持访问控制等应用</li>
+</ul>
+</li>
+</ul>
+<h2 id="PMI体系结构"><a href="#PMI体系结构" class="headerlink" title="PMI体系结构"></a>PMI体系结构</h2><ul>
+<li>PMI是属性证书、属性权威、属性证书库等部件的集合体，用来实现权限和属性证书的产生、管理、存储、分发和撤销等功能<ul>
+<li>SOA：信任源点</li>
+<li>AA：签发属性证书</li>
+<li>ARA：证书签发请求</li>
+<li>LDAP：属性证书发布查询</li>
+</ul>
+</li>
+<li>属性证书：以证书形式给出用户和权限的关系</li>
+</ul>
+<h2 id="PKI和PMI对比"><a href="#PKI和PMI对比" class="headerlink" title="PKI和PMI对比"></a>PKI和PMI对比</h2><ul>
+<li>PKI<ul>
+<li>你是谁？</li>
+<li>身份与公钥绑定</li>
+<li>身份鉴别（护照</li>
+<li>RCA-CA-RA，LDAP，CRL</li>
+</ul>
+</li>
+<li>PMI<ul>
+<li>你能做什么？</li>
+<li>身份（角色）与角色（属性、权限）绑定</li>
+<li>授权管理（签证</li>
+<li>SOA-AA-ARA，LDAP，ACRL</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+            <a href="/tags/访问控制/" rel="tag"># 访问控制</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/15/信息安全法规标准/" rel="next" title="信息安全法规标准">
+                <i class="fa fa-chevron-left"></i> 信息安全法规标准
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/16/信息安全技术-安全漏洞与数据库安全/" rel="prev" title="信息安全技术-安全漏洞与数据库安全">
+                信息安全技术-安全漏洞与数据库安全 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1-身份鉴别"><span class="nav-text">1.1-身份鉴别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#标识与鉴别"><span class="nav-text">标识与鉴别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#鉴别的基本概念"><span class="nav-text">鉴别的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于实体所知的鉴别"><span class="nav-text">基于实体所知的鉴别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码暴力破解安全防护"><span class="nav-text">密码暴力破解安全防护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#木马窃取密码安全防护"><span class="nav-text">木马窃取密码安全防护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码嗅探攻击安全防护"><span class="nav-text">密码嗅探攻击安全防护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码嗅探及重放攻击防护"><span class="nav-text">密码嗅探及重放攻击防护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于实体所有的鉴别"><span class="nav-text">基于实体所有的鉴别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于实体特征的鉴别方法"><span class="nav-text">基于实体特征的鉴别方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单点登录"><span class="nav-text">单点登录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kerberos协议"><span class="nav-text">Kerberos协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kerberos体系构成"><span class="nav-text">Kerberos体系构成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kerberos认证过程-三次通信"><span class="nav-text">Kerberos认证过程-三次通信</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kerberos工作过程-获得TGT"><span class="nav-text">Kerberos工作过程-获得TGT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kerberos工作过程-获得SGT"><span class="nav-text">Kerberos工作过程-获得SGT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kerberos工作过程-获得服务"><span class="nav-text">Kerberos工作过程-获得服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AAA协议"><span class="nav-text">AAA协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2-访问控制"><span class="nav-text">1.2-访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自主访问控制模型-DAC"><span class="nav-text">自主访问控制模型-DAC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#强制访问控制模型"><span class="nav-text">强制访问控制模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BLP模型"><span class="nav-text">BLP模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Biba模型"><span class="nav-text">Biba模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Clark-Wilson模型"><span class="nav-text">Clark-Wilson模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chinese-Wall模型"><span class="nav-text">Chinese Wall模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自主、强制访问控制的比较"><span class="nav-text">自主、强制访问控制的比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于角色的访问控制"><span class="nav-text">基于角色的访问控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基于规则的访问控制"><span class="nav-text">基于规则的访问控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特权管理基础设施"><span class="nav-text">特权管理基础设施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PMI体系结构"><span class="nav-text">PMI体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PKI和PMI对比"><span class="nav-text">PKI和PMI对比</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

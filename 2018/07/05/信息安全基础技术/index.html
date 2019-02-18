@@ -1,0 +1,1506 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,信息安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="2-信息安全基础技术 目录 密码学 数字证书与公钥基础设施 身份认证 访问控制 安全审计">
+<meta name="keywords" content="NISP,信息安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全基础技术">
+<meta property="og:url" content="http://21guns.top/2018/07/05/信息安全基础技术/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="2-信息安全基础技术 目录 密码学 数字证书与公钥基础设施 身份认证 访问控制 安全审计">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/83713367.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/86936363.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/79025362.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/26366138.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/24364775.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/29023909.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/29105804.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/44288707.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/39270225.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/79191810.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/28359727.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/61585757.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/5412237.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/21375359.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-17/76058761.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-17/45490851.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-17/10116355.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-17/72084118.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-17/5301468.jpg">
+<meta property="og:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-17/53415148.jpg">
+<meta property="og:updated_time" content="2019-02-18T12:14:51.798Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全基础技术">
+<meta name="twitter:description" content="2-信息安全基础技术 目录 密码学 数字证书与公钥基础设施 身份认证 访问控制 安全审计">
+<meta name="twitter:image" content="http://ot12pfxkm.bkt.clouddn.com/17-12-15/83713367.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/07/05/信息安全基础技术/">
+
+
+
+
+
+  <title>信息安全基础技术 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/07/05/信息安全基础技术/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全基础技术</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T13:34:03+08:00">
+                2018-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP一级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP一级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="2-信息安全基础技术"><a href="#2-信息安全基础技术" class="headerlink" title="2-信息安全基础技术"></a>2-信息安全基础技术</h1><ul>
+<li>目录<ul>
+<li>密码学</li>
+<li>数字证书与公钥基础设施</li>
+<li>身份认证</li>
+<li>访问控制</li>
+<li>安全审计</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="2-1-密码学"><a href="#2-1-密码学" class="headerlink" title="2.1-密码学"></a>2.1-密码学</h2><h3 id="威胁、安全属性与密码学技术"><a href="#威胁、安全属性与密码学技术" class="headerlink" title="威胁、安全属性与密码学技术"></a>威胁、安全属性与密码学技术</h3><ul>
+<li><p>如下表：</p>
+<p>| 攻击威胁                     | 所破坏的属性 | 解决问题所采用的密码学技术           |<br>| —————————- | ———— | ———————————— |<br>| 截获（泄露信息）             | 机密性       | 对称密码和非对称密码                 |<br>| 篡改（修改信息）             | 完整性       | 哈希函数、数字签名、对称和非对称密码 |<br>| 伪造（伪造信息来源           | 真实性       | 数字签名                             |<br>| 否认（事后否认发送信息和行为 | 不可否认行   | 数字签名                             |</p>
+</li>
+</ul>
+<h3 id="密码学发展"><a href="#密码学发展" class="headerlink" title="密码学发展"></a>密码学发展</h3><ol>
+<li>第一：古代-19世纪末，古典密码</li>
+<li>第二：20世纪初-1949，近代密码</li>
+<li>第三：从香农于1949年发表的划时代论文‘the communication theory of secret system’开始，现代密码</li>
+<li>第四：从1976W.Diffie和M.Hellman发表论文’New Directions in Cryptography’开始，公钥密码</li>
+</ol>
+<ul>
+<li>阶段：<ul>
+<li>古典密码</li>
+<li>近代密码</li>
+<li>现代密码</li>
+<li>公钥密码</li>
+</ul>
+</li>
+</ul>
+<h3 id="古典密码学"><a href="#古典密码学" class="headerlink" title="古典密码学"></a>古典密码学</h3><ul>
+<li>古典密码体制的安全性在于：<ul>
+<li>保持算法本身的保密性</li>
+</ul>
+</li>
+<li>受到算法限制：<ul>
+<li>不适合大规模生产</li>
+<li>不适合较大的或者人员变动较大的组织</li>
+<li>用户无法了解算法的安全性</li>
+</ul>
+</li>
+</ul>
+<h3 id="近代密码学"><a href="#近代密码学" class="headerlink" title="近代密码学"></a>近代密码学</h3><ul>
+<li>20世纪初-1949</li>
+<li>主要标志：<ul>
+<li>机械密码/机电密码</li>
+<li>用机电代替手工</li>
+</ul>
+</li>
+<li>近代密码体制是用机械或电动机械实现的，最著名的如转轮机（Rotor machine）<ul>
+<li>转轮密码及enigma，二战期间，德国最高级密码机</li>
+<li>英国typex打字密码机</li>
+</ul>
+</li>
+</ul>
+<h3 id="现在密码学"><a href="#现在密码学" class="headerlink" title="现在密码学"></a>现在密码学</h3><ul>
+<li>1949-1975</li>
+<li>新特点：<ul>
+<li>数据的安全是基于密钥而不是算法的保密</li>
+</ul>
+</li>
+</ul>
+<h3 id="公钥密码学"><a href="#公钥密码学" class="headerlink" title="公钥密码学"></a>公钥密码学</h3><ul>
+<li>1976年以后</li>
+<li>使得发送端和接收端无密钥传输的保密通信成为可能</li>
+</ul>
+<h3 id="加密与解密"><a href="#加密与解密" class="headerlink" title="加密与解密"></a>加密与解密</h3><ul>
+<li><p>明文（plaintext ）：原始消息，被屏蔽消息，未经加密的消息</p>
+</li>
+<li><p>密文（Ciphertext）或密报（cryptogram）：明文经密码变换而成的一种隐蔽形式</p>
+</li>
+<li><p>加密员或密码员（cryptography）：对密码进行加密操作的人员</p>
+</li>
+<li><p>截获：</p>
+<ul>
+<li><p>一个非授权方介入系统，窃听传输的信息，导致信息泄露，</p>
+</li>
+<li><p>破坏密码保密性</p>
+</li>
+<li><p>非授权方可是人，可是程序</p>
+</li>
+<li><p>截获攻击主要包括：</p>
+<ul>
+<li>通过嗅探和监听等手段截获信息，从而推测有用信息</li>
+<li>如用户口令、账号、文件或程序的不正当复制</li>
+</ul>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/83713367.jpg" alt></p>
+</li>
+</ul>
+</li>
+<li><p>加密，encryption</p>
+<ul>
+<li>明文变为密文的过程</li>
+<li>可懂的语言变换成人类或机器不可懂得语言</li>
+</ul>
+</li>
+<li><p>解密，Decryption</p>
+<ul>
+<li>密文恢复出原明文的过程</li>
+<li>加密的逆过程</li>
+<li>把不可懂语言变换为可懂的语言</li>
+</ul>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/86936363.jpg" alt></p>
+</li>
+</ul>
+<h3 id="对称密码算法"><a href="#对称密码算法" class="headerlink" title="对称密码算法"></a>对称密码算法</h3><blockquote>
+<p> 加密可采用密码算法实现，密码算法从密钥使用角度，可分为对称密码算法和非对称密码算法</p>
+</blockquote>
+<ul>
+<li><p>也称单钥或私钥密码算法</p>
+</li>
+<li><p>加密密钥和解密密钥相同（或实质上相同，即从一个易推出另一个）</p>
+</li>
+<li><p>如，DES，3DES，IDEA，AES</p>
+</li>
+<li><p>密钥相对较短，一般采用128，192或256比特</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/79025362.jpg" alt></p>
+</li>
+<li><p>优点：</p>
+<ul>
+<li>效率高，算法简单，系统开销小</li>
+<li>适合加密大量数据</li>
+<li>明文长度与密文长度相等</li>
+</ul>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>需要以安全方式进行密钥交换</li>
+<li>密钥管理复杂</li>
+<li>无法解决消息的篡改、否认等问题</li>
+</ul>
+</li>
+</ul>
+<h3 id="非对称密码算法"><a href="#非对称密码算法" class="headerlink" title="非对称密码算法"></a>非对称密码算法</h3><ul>
+<li>又叫公钥密码算法，public-key cipher</li>
+<li>加密密钥和解密密钥不同（或者从一个很难推出另一个）<ul>
+<li>对外公开的密钥，公开密钥，公钥，public key</li>
+<li>必须保密的，私有密钥，私钥，private key</li>
+</ul>
+</li>
+<li>如，RSA，ECC，ElGamal</li>
+<li>公钥加密，私钥解密（或私钥加密，公钥解密）</li>
+<li><p>密钥长度512-2048位</p>
+<h3 id="非对称加密与解密"><a href="#非对称加密与解密" class="headerlink" title="非对称加密与解密"></a>非对称加密与解密</h3></li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/26366138.jpg" alt></p>
+</li>
+</ul>
+<h3 id="非对称密码学特点"><a href="#非对称密码学特点" class="headerlink" title="非对称密码学特点"></a>非对称密码学特点</h3><ul>
+<li>优势：<ul>
+<li>密钥分发数目与参与者数目相同</li>
+<li>在有大量参与者的情况下易于密钥管理</li>
+<li>安全</li>
+<li>支持数字签名和不可否认性</li>
+<li>无需事先与对方建立关系，交换密钥</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>速度相对较慢</li>
+<li>可能比同等强度的对称密码算法慢10到100倍</li>
+<li>加密后，密文变长</li>
+</ul>
+</li>
+<li></li>
+</ul>
+<h3 id="混合加密"><a href="#混合加密" class="headerlink" title="混合加密"></a>混合加密</h3><ul>
+<li><p>Alice的加密过程</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/24364775.jpg" alt></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/29023909.jpg" alt></p>
+</li>
+<li><p>bob在接收端的解密过程</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/29105804.jpg" alt></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/44288707.jpg" alt></p>
+</li>
+</ul>
+<h3 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h3><ul>
+<li>对称密码和非对称密码算法主要解决信息的机密性问题，而实际系统和网络还可能受到消息篡改等记录<ul>
+<li>篡改攻击包括：修改消息内容，改变程序使其不能正确运行等</li>
+</ul>
+</li>
+<li>哈希函数可用来保证信息的完整性</li>
+<li>哈希函数（HASH函数），也称为杂凑函数或单向散列函数</li>
+<li>接受一个消息作为输入，产生一个称为哈希值的输出，输出的哈希值也可称为散列值，消息摘要（message digest，MD）</li>
+</ul>
+<h3 id="哈希函数-完整性"><a href="#哈希函数-完整性" class="headerlink" title="哈希函数-完整性"></a>哈希函数-完整性</h3><ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/39270225.jpg" alt></p>
+</li>
+</ul>
+<h3 id="MD5算法"><a href="#MD5算法" class="headerlink" title="MD5算法"></a>MD5算法</h3><ul>
+<li>md，message digest，消息摘要</li>
+<li>输入：任意长度的消息</li>
+<li>输出：128位消息摘要</li>
+<li>处理：以512位输入数据块为单位</li>
+</ul>
+<h3 id="SHA-1-算法"><a href="#SHA-1-算法" class="headerlink" title="SHA-1 算法"></a>SHA-1 算法</h3><ul>
+<li>sha，secure hash algorithm，安全哈希算法</li>
+<li>输入：最大长度为264位的 消息</li>
+<li>输出：160位消息摘要</li>
+<li>处理：输入以512位数据块为单位处理</li>
+</ul>
+<h3 id="比较sha1和md5"><a href="#比较sha1和md5" class="headerlink" title="比较sha1和md5"></a>比较sha1和md5</h3><ul>
+<li>散列值长度<ul>
+<li>MD5 128位</li>
+<li>SHA1，160位</li>
+</ul>
+</li>
+<li>安全性<ul>
+<li>sha1算法被视为MD5的替代候选法</li>
+</ul>
+</li>
+<li>速度<ul>
+<li>sha1慢些</li>
+</ul>
+</li>
+</ul>
+<h3 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h3><ul>
+<li><p>除了保护信息的机密性和完整性，密码学技术也可以解决信息的可鉴别性（真实性或认证性）和不可否认性</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/79191810.jpg" alt></p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/28359727.jpg" alt></p>
+</li>
+<li><p>数字签名的基本特点</p>
+<ul>
+<li>能与被签的文件在物理上不可分割</li>
+<li>签名者不可否认自己的签名</li>
+<li>签名不能被伪造</li>
+<li>容易被验证</li>
+</ul>
+</li>
+<li><p>数字签名是传统物理签名的数字化，基本要求</p>
+<ul>
+<li>能与所签文件绑定</li>
+<li>签名者不能否认自己的签名</li>
+<li>签名不能被伪造</li>
+<li>容易被验证</li>
+</ul>
+</li>
+</ul>
+<h3 id="数字签名的应用"><a href="#数字签名的应用" class="headerlink" title="数字签名的应用"></a>数字签名的应用</h3><ul>
+<li><p>可信性：</p>
+<ul>
+<li>签名让文件接收者相信签名者是慎重的在文件上签名的</li>
+</ul>
+</li>
+<li><p>不可重用性：</p>
+<ul>
+<li>签名不可重用，即使同意消息在不同时刻的签名也是有有区别的；</li>
+<li>如果将签名部分提取出来，附加在别的消息后面，验证签名会失败</li>
+<li>因为签名和所签名消息是一一对应的，消息不同签名内容也不同，因此签名无法重复使用</li>
+</ul>
+</li>
+<li><p>数据完整性</p>
+<ul>
+<li>文件签名后，文件不能改变</li>
+</ul>
+</li>
+<li><p>不可伪造性</p>
+<ul>
+<li>签名能证明签名者而不是其他人在文件上签名，任何人都不能伪造签名</li>
+</ul>
+</li>
+<li><p>不可否认性</p>
+<ul>
+<li>在签名者否认自己签名时，签名接受这可以请求可信第二方进行仲裁</li>
+</ul>
+</li>
+</ul>
+<h3 id="思考："><a href="#思考：" class="headerlink" title="思考："></a>思考：</h3><ul>
+<li>对称密钥体制和非对称密钥体制的优缺点是？</li>
+</ul>
+<h2 id="2-2-数字证书和公钥基础设施"><a href="#2-2-数字证书和公钥基础设施" class="headerlink" title="2.2-数字证书和公钥基础设施"></a>2.2-数字证书和公钥基础设施</h2><h3 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h3><ul>
+<li>绑定用户身份和公钥</li>
+<li>网络世界的电子身份证<ul>
+<li>与现实世界的类似</li>
+<li>能证明个人、团体或设备的身份</li>
+</ul>
+</li>
+<li>包含相关信息<ul>
+<li>姓名、地址、等信息</li>
+<li>所有者的公钥</li>
+</ul>
+</li>
+<li>拥有者拥有证书公钥对应的私钥</li>
+<li>由可信的颁发机构颁发<ul>
+<li>如身份证由公安局颁发</li>
+</ul>
+</li>
+<li>颁发机构对证书进行签名<ul>
+<li>与身份证上的公安局的盖章类似</li>
+<li>可以由颁发机构证明证书是否有效</li>
+<li>可防止擅改证书上的任何信息</li>
+</ul>
+</li>
+</ul>
+<h3 id="数字证书示例"><a href="#数字证书示例" class="headerlink" title="数字证书示例"></a>数字证书示例</h3><ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/61585757.jpg" alt></p>
+</li>
+</ul>
+<p>  <img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/5412237.jpg" alt></p>
+<p>  <img src="http://ot12pfxkm.bkt.clouddn.com/17-12-15/21375359.jpg" alt></p>
+<h3 id="公钥基础设施"><a href="#公钥基础设施" class="headerlink" title="公钥基础设施"></a>公钥基础设施</h3><ul>
+<li>PKI，public key infrastructure</li>
+<li>利用公开密钥技术建立的提供信息安全服务的在线基础设施</li>
+<li>利用加密、数字签名、数字证书来保护应用、通信等安全</li>
+<li>一个包括硬件、软件、人员、策略和规程的集合</li>
+<li>实现基于公钥密码体制的密钥和数字证书的产生、管理、存储等</li>
+<li>如同电力基础设施为家用电器提供电力一样，pki为各种应用提供安全保障，提供网络信任基础</li>
+</ul>
+<h3 id="CA-认证权威机构"><a href="#CA-认证权威机构" class="headerlink" title="CA:认证权威机构"></a>CA:认证权威机构</h3><ul>
+<li><p>简介：</p>
+<ul>
+<li>CA专门负责数字证书的产生、发放和管理，以保证数字证书的真实可靠</li>
+<li>是 PKI的核心</li>
+<li>负责管理所有用户证书，把用户的公钥和用户的其他信息捆绑在一起，在网上验证用户的身份</li>
+</ul>
+</li>
+<li><p>主要功能</p>
+<ul>
+<li>签发数字证书<ul>
+<li>签发证书</li>
+<li>更新证书</li>
+</ul>
+</li>
+<li>管理数字证书<ul>
+<li>撤销、查询</li>
+<li>审计、统计</li>
+</ul>
+</li>
+<li>验证数字证书<ul>
+<li>黑名单验证（CRL</li>
+</ul>
+</li>
+<li>RA的设立、审查及管理</li>
+</ul>
+</li>
+</ul>
+<h3 id="RA：证书注册机构"><a href="#RA：证书注册机构" class="headerlink" title="RA：证书注册机构"></a>RA：证书注册机构</h3><ul>
+<li>证书注册权威，Registration Authority</li>
+<li>受理用户的数字证书申请<ul>
+<li>对证书申请者身份进行审核并提交CA制证</li>
+<li>类似与申请身份证的派出所</li>
+</ul>
+</li>
+<li>提供证书生命期的维护工作<ul>
+<li>受理用户证书申请</li>
+<li>协助颁发用户证书</li>
+<li>审核用户真实身份</li>
+<li>受理证书更新请求</li>
+<li>受理证书吊销</li>
+</ul>
+</li>
+</ul>
+<h3 id="目录服务（LDAP）"><a href="#目录服务（LDAP）" class="headerlink" title="目录服务（LDAP）"></a>目录服务（LDAP）</h3><ul>
+<li>证书的存储库，提供了证书的保存、修改、删除和获取的能力</li>
+<li>CA采用LDAP标准的目录服务存放证书，其作用与数据库相同，优点是在修改操作少的情况下，对于访问的效率比传统数据库要高</li>
+</ul>
+<h3 id="CRL"><a href="#CRL" class="headerlink" title="CRL"></a>CRL</h3><ul>
+<li>CRL，certificates revocation list，证书撤销列表，也成证书黑名单</li>
+<li>在证书的有效期期间，因为某种原因（如人员调动，私钥泄露等），导致相应的的数字证书内容不再是真实可信，此时，进行证书撤销，说明该证书已经失效</li>
+<li>CRL中列出了被撤销的证书序列号</li>
+</ul>
+<h3 id="证书载体"><a href="#证书载体" class="headerlink" title="证书载体"></a>证书载体</h3><ul>
+<li>内存、IC卡、软盘……</li>
+<li>USB-KEY</li>
+</ul>
+<h3 id="PKI-CA技术的典型应用"><a href="#PKI-CA技术的典型应用" class="headerlink" title="PKI/CA技术的典型应用"></a>PKI/CA技术的典型应用</h3><ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-17/76058761.jpg" alt></p>
+</li>
+</ul>
+<h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><ul>
+<li>什么是数字证书，其作用是？</li>
+</ul>
+<h2 id="2-3-身份认证"><a href="#2-3-身份认证" class="headerlink" title="2.3-身份认证"></a>2.3-身份认证</h2><h3 id="身份认证基本方法"><a href="#身份认证基本方法" class="headerlink" title="身份认证基本方法"></a>身份认证基本方法</h3><ul>
+<li>身份认证是用户登录系统或网站的第一道安全防线，如输入账号口令来登录，</li>
+<li>身份认证是在网络中确认操作者身份的过程</li>
+<li>身份认证一般依据以下三种基本情况或三种情况的组合来鉴别用户身份<ul>
+<li>用户所知道的东西：如口令，密钥</li>
+<li>用户拥有的东西，如印章，U盾（USB key）</li>
+<li>用户所具有的生物特征，如指纹，声音，人脸等</li>
+</ul>
+</li>
+</ul>
+<h3 id="静态口令认证"><a href="#静态口令认证" class="headerlink" title="静态口令认证"></a>静态口令认证</h3><ul>
+<li><p>根据“用户所知”进行认证的方法有：静态口令认证、短信口令认证、和动态口令认证等</p>
+</li>
+<li><p>静态口令</p>
+<ul>
+<li><p>口令固定不变，并且长期有效</p>
+</li>
+<li><p>弱鉴别（weak authentication）</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-17/45490851.jpg" alt></p>
+</li>
+</ul>
+<h3 id="静态口令认证缺点"><a href="#静态口令认证缺点" class="headerlink" title="静态口令认证缺点"></a>静态口令认证缺点</h3></li>
+<li><p>通信窃取</p>
+<ul>
+<li>窃听获得明文的用户名和口令</li>
+<li>重放攻击-截获登录数据（明/密），重放攻击</li>
+</ul>
+</li>
+<li>字典攻击<ul>
+<li>选择有意义的单词或数字作字典</li>
+</ul>
+</li>
+<li>暴力攻击<ul>
+<li>穷举全部可能组合猜测口令</li>
+</ul>
+</li>
+<li>外部泄露<ul>
+<li>搜索存有口令的纸片或文件</li>
+</ul>
+</li>
+<li>窥探<ul>
+<li>安装监视器或从背后窥探</li>
+</ul>
+</li>
+<li>社交工程<ul>
+<li>冒充合法用户、假冒管理员，骗取口令</li>
+</ul>
+</li>
+</ul>
+<h3 id="短信口令认证"><a href="#短信口令认证" class="headerlink" title="短信口令认证"></a>短信口令认证</h3><ul>
+<li>利用移动网络获取动态口令的认证方式</li>
+<li>以手机短信方式请求包含6位随机数的动态口令，用户认证跟系统以短信形式发送随机的的6位动态口令到用户的手机上，用户在认证是输出口令即可</li>
+<li>由于手机与用户绑定较紧密，短信口令生成与使用场合是物理哥觉得，因此口令在通路上被截取的几率较低</li>
+</ul>
+<h3 id="动态口令认证"><a href="#动态口令认证" class="headerlink" title="动态口令认证"></a>动态口令认证</h3><ul>
+<li>动态口令，又称一次性口令，one time password，OTP</li>
+<li>口令动态性：每次变化，无需人工干预</li>
+<li>口令随机性：随机性强，难以猜测</li>
+</ul>
+<h3 id="动态口令应用示例"><a href="#动态口令应用示例" class="headerlink" title="动态口令应用示例"></a>动态口令应用示例</h3><ul>
+<li>刮刮卡</li>
+<li>动态令牌</li>
+</ul>
+<h3 id="U盾，usb-key"><a href="#U盾，usb-key" class="headerlink" title="U盾，usb-key"></a>U盾，usb-key</h3><ul>
+<li>根据用户所有进行认证的方法有U盾、电子印章</li>
+<li>usb-key认证，近几年发展起来的一种方便、安全的身份认证技术</li>
+<li>采用软硬件结合的挑战/应答认证模式</li>
+<li>usb-key是一种usb接口的硬件设备，其内置单片机或智能卡芯片，可存储用户的密钥或数字证书，利用usb-key内置的密码算法实现对用户身份的认证</li>
+<li>挑战/应答认证模式，即认证系统发送一个随机书（挑战），用户使用usb-key中的密钥和算法计算出一个数值，认证系统对该数值进行检验，若正确则认为为合法用户</li>
+</ul>
+<h3 id="基于生物特征的身份认证"><a href="#基于生物特征的身份认证" class="headerlink" title="基于生物特征的身份认证"></a>基于生物特征的身份认证</h3><ul>
+<li>每个人所具有的唯一生理特征<ul>
+<li>指纹、视网膜、声音等</li>
+</ul>
+</li>
+<li>指纹<ul>
+<li>一些曲线和分叉及一些非常微小的特征</li>
+<li>提取指纹中的一些特征并且存储这些特征信息，节省资源，快速查询</li>
+</ul>
+</li>
+<li>手掌、手型<ul>
+<li>手掌有折痕，起皱，还有凹槽</li>
+<li>包括每个手指的指纹</li>
+<li>人手的形状，表示了手的几何特征</li>
+</ul>
+</li>
+<li>视网膜扫描<ul>
+<li>扫描眼球后方的视网膜上面的血管的图案</li>
+</ul>
+</li>
+<li>虹膜扫描<ul>
+<li>虹膜是眼睛中位于瞳孔周围的一圈彩色的部分</li>
+<li>虹膜有其独有的方案，分叉，颜色，等</li>
+</ul>
+</li>
+<li>语音识别<ul>
+<li>记录时说几个不同的单词，然后识别系统将这些单词混杂杂一起，让其再次读出给出的一系列单词</li>
+</ul>
+</li>
+<li>面部扫描<ul>
+<li>人都有不同的骨骼结构</li>
+</ul>
+</li>
+</ul>
+<h3 id="指纹识别的实现原理"><a href="#指纹识别的实现原理" class="headerlink" title="指纹识别的实现原理"></a>指纹识别的实现原理</h3><ul>
+<li><p>通过特殊的光电扫描和计算机图像处理技术，对指纹进行采集、分析和对比等，自动、迅速、准确的认证出个人身份</p>
+</li>
+<li><p>指纹识别的过程：</p>
+<ul>
+<li><p>按照用户的和姓名等信息将其存在指纹数据库中的模板指纹调出来，然后再用用户输入的指纹与该模板的指纹相匹配，以确定这两幅指纹是否出自同一幅指纹</p>
+</li>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-17/10116355.jpg" alt></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="虹膜识别的实现原理"><a href="#虹膜识别的实现原理" class="headerlink" title="虹膜识别的实现原理"></a>虹膜识别的实现原理</h3><ul>
+<li>虹膜时环绕在瞳孔四周有色彩的部分</li>
+<li>每个虹膜有独特结构</li>
+<li>每个人虹膜各不相同，左右眼也可能不一样</li>
+<li>虹膜成型后不再发生改变（出生后6-18月）</li>
+</ul>
+<h3 id="其他身份认证技术"><a href="#其他身份认证技术" class="headerlink" title="其他身份认证技术"></a>其他身份认证技术</h3><ul>
+<li>单点登录<ul>
+<li>SSO,single-sign on</li>
+<li>用户只需要在登录时进行一次注册，就可以访问多个系统，不必重复输入用户名和密码来确定身份</li>
+</ul>
+</li>
+<li>Kerberos<ul>
+<li>提供了一个网络环境下的身份认证框架结构</li>
+<li>实现采用对称密钥加密技术</li>
+<li>公开发布的版本有版本4和版本5</li>
+<li>安全性、可靠性、可伸缩性、透明性</li>
+</ul>
+</li>
+<li>远程用户拨号认证系统（RADIUS）<ul>
+<li>是一种C/S结构的协议，客户端最初时NAS服务器，现在任意运行RADIUS客户端软件的计算机都可以成为RADIUS的客户端</li>
+<li>基本设计组件有认证、授权和记账（AAA）</li>
+<li>简单精确，可扩充</li>
+</ul>
+</li>
+<li>使用UDP端口，1812，1813</li>
+</ul>
+<h2 id="2-4-访问控制"><a href="#2-4-访问控制" class="headerlink" title="2.4-访问控制"></a>2.4-访问控制</h2><h3 id="访问控制的概念和目标"><a href="#访问控制的概念和目标" class="headerlink" title="访问控制的概念和目标"></a>访问控制的概念和目标</h3><ul>
+<li>访问控制：针对越权使用资源的防御措施</li>
+<li>目标：<ul>
+<li>防止对任何资源（如计算资源、通信资源或信息资源）进行未授权的访问</li>
+<li>从而使资源在授权范围内使用，决定用户能做什么，也决定代表一定用户利益的程序能做什么</li>
+</ul>
+</li>
+</ul>
+<h3 id="访问控制的作用"><a href="#访问控制的作用" class="headerlink" title="访问控制的作用"></a>访问控制的作用</h3><ul>
+<li>未授权访问：<ul>
+<li>包括未经授权的使用、泄露、修改等</li>
+<li>非法用户对系统资源的使用</li>
+<li>合法用户对系统资源的非法使用</li>
+</ul>
+</li>
+<li>作用<ul>
+<li>机密性，完整性和可用性</li>
+</ul>
+</li>
+</ul>
+<h3 id="主体与客体"><a href="#主体与客体" class="headerlink" title="主体与客体"></a>主体与客体</h3><ul>
+<li>主体<ul>
+<li>发起者，是一个主动的实体，可以操作被动实体的相关信息或数据</li>
+<li>用户、进程、程序等</li>
+</ul>
+</li>
+<li>客体<ul>
+<li>一种被动实体，被操作的对象，规定需要保护的资源</li>
+<li>文件、存储介质、程序、进程等</li>
+</ul>
+</li>
+<li>主体：接受客体相关数据和信息，也可能改变客体的相关信息</li>
+<li>一个主体为了完成任务，可以创建另外的主体，这些自主体可以在网络上不同的计算机上运行，并由父主体控制他们</li>
+<li>客体：始终是提供、驻留信息或数据的实体</li>
+<li>主体和客体的关系是相对的，角色额可以互换</li>
+</ul>
+<h3 id="控制策略"><a href="#控制策略" class="headerlink" title="控制策略"></a>控制策略</h3><ul>
+<li>是主体对客体的相关访问规则集合，即属性集合，访问策略体现了一种授权行为，也是客体对主体某些操作行为的默认</li>
+<li>访问控制是主体依据某些控制策略或访问权限，对客体本身或其资源赋予不同访问权限的能力，从而保障数据资源在合法范围内得以有效使用和管理</li>
+<li>访问控制安全策略实施遵循最小特权原则，在主体执行操作是，按照主体所需权力的最小化原则分配给主体权利。最大限度地限制主体实施授权行为，避免突发事件、操作错误和未授权主体等意外情况可能给系统造成的危险</li>
+</ul>
+<h3 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h3><ul>
+<li>规定主体可以对客体执行的操作<ul>
+<li>读、写、执行、拒绝访问</li>
+</ul>
+</li>
+</ul>
+<h3 id="自主访问控制"><a href="#自主访问控制" class="headerlink" title="自主访问控制"></a>自主访问控制</h3><ul>
+<li>DAC，是一种广泛应用的访问控制方法</li>
+<li>采用这种方法，资源的所有者（往往也是创建者）可以规定谁有权访问他们的资源，用户（或用户进程）可以选择与其他用户共享资源</li>
+</ul>
+<h3 id="访问控制矩阵"><a href="#访问控制矩阵" class="headerlink" title="访问控制矩阵"></a>访问控制矩阵</h3><ul>
+<li><p>矩阵元素：规定了相应用户对应于相应的文件被准予的访问许可、访问权限</p>
+</li>
+<li><p>图示：</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-17/72084118.jpg" alt></p>
+</li>
+</ul>
+<h3 id="自主访问控制的特点"><a href="#自主访问控制的特点" class="headerlink" title="自主访问控制的特点"></a>自主访问控制的特点</h3><ul>
+<li>优点：<ul>
+<li>根据主体的身份和访问权限进行决策</li>
+<li>具有某种访问能力的主体能够自主地将访问权的某个子集授予其他主机</li>
+<li>灵活性高，被大量采用</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>信息在传递过程中其访问权限关系会被改变</li>
+</ul>
+</li>
+</ul>
+<h3 id="强制访问控制的含义"><a href="#强制访问控制的含义" class="headerlink" title="强制访问控制的含义"></a>强制访问控制的含义</h3><ul>
+<li>强制访问控制MAC，是指主体和客体都有一个固定的安全属性，系统用该安全属性来决定一个主体是否可以访问某个客体，如果系统认为具有某一个安全属性的主体不适合访问某个客体，那么任何其他主体都无法使该主体具有访问该客体的权利</li>
+<li>主体和客体分配有一个安全属性</li>
+<li>应用于军事等安全要求较高的的系统</li>
+<li>可与自主访问控制结合使用</li>
+</ul>
+<h3 id="自主访问控制与强制访问控制的比较"><a href="#自主访问控制与强制访问控制的比较" class="headerlink" title="自主访问控制与强制访问控制的比较"></a>自主访问控制与强制访问控制的比较</h3><ul>
+<li>自主访问控制<ul>
+<li>细粒高</li>
+<li>灵活性高</li>
+<li>配置效率低</li>
+</ul>
+</li>
+<li>强制访问控制<ul>
+<li>控制粒度大</li>
+<li>灵活性不高</li>
+<li>安全性强</li>
+</ul>
+</li>
+</ul>
+<h3 id="基于角色的访问控制（RBAC"><a href="#基于角色的访问控制（RBAC" class="headerlink" title="基于角色的访问控制（RBAC"></a>基于角色的访问控制（RBAC</h3><ul>
+<li><p>RBAC的基本思想是根据用户所担任的角色来决定用户在系统中的访问权限</p>
+</li>
+<li><p>一个用户必须扮演某种角色，而且还必须激活这一角色，才能对一个对象进行访问或执行某种操作</p>
+</li>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-17/5301468.jpg" alt></p>
+</li>
+</ul>
+<h3 id="RBAC模型的特点"><a href="#RBAC模型的特点" class="headerlink" title="RBAC模型的特点"></a>RBAC模型的特点</h3><ul>
+<li>便于授权管理（角色的变动远远低于个体的变动）</li>
+<li>便于处理工作分级，如文件等资源分级管理</li>
+<li>利用安全约束，容易实现各种安全策略，如最小特权、职责分离等</li>
+<li>便于任务分担，不同角色完成不同任务</li>
+</ul>
+<h3 id="思考-1"><a href="#思考-1" class="headerlink" title="思考"></a>思考</h3><ul>
+<li>什么是访问控制，其目的是什么</li>
+</ul>
+<h2 id="2-5-安全审计"><a href="#2-5-安全审计" class="headerlink" title="2.5-安全审计"></a>2.5-安全审计</h2><ul>
+<li>即便是采用了很多方法来保障计算机或网络安全，但仍然不可避免系统感染病毒或数据安全受到威胁。受到威胁后，如何从安全事故中恢复过来，使系统尽快运作起来，需要预先采取一些措施</li>
+<li>安全审计是提高安全性的重要工具，它能够再现问题，以帮助时候的责任追查和数据恢复等</li>
+<li>审计技术的的出现早于计算机技术，它按照时间顺序产生、记录系统事件，并对其进行检查。</li>
+<li>安全审计可以跟踪和监测系统中的异常事件，也可以监视系统中其他安全机制的运行情况</li>
+</ul>
+<ul>
+<li>计算机审计，Audit是按照一定的安全策略，记录历史操作事件，并利用记录进行分析，发现系统漏洞，入侵行为等，并改善系统性能和安全性的一系列过程</li>
+<li>安全审计是对访问控制的必要补充用，他会对用于使用何种信息资源、使用的事件，以及如何使用（执行何种操作）进行记录和监控</li>
+<li>通过对系统和用户进行充分和适当审计，能够分析发现安全事件的原因，并提供相应的证据</li>
+</ul>
+<ul>
+<li>日志是安全审计系统的主要组成部分。为了维护自身系统资源的运行状况，计算机系统一般会有相应的日志系统，记录有关日常事件或误操作警报的日期及时间</li>
+<li>受到可疑攻击或安全威胁后，可以通过查看事件安全日志来确认可疑或恶意的行为，</li>
+<li>例如，通过查看事件日志，发现非工作事件某个用户成功登录账户，则可能有人切确了账号和口令</li>
+<li>日志中有多次登录失败的记录，则有可能有攻击者尝试进入系统</li>
+</ul>
+<ul>
+<li><p>图示</p>
+<p><img src="http://ot12pfxkm.bkt.clouddn.com/17-12-17/53415148.jpg" alt></p>
+</li>
+</ul>
+<ul>
+<li>安全审计可以分为被动式审计和主动式审计两种</li>
+<li>被动审计是简单记录一些活动，并不做处理</li>
+<li>主动式审计一般包括：结束一个登录会话、拒绝一些主机的访问（包括web站点，FTP服务器和电子邮件服务器）、跟踪非法活动的源位置等行为</li>
+</ul>
+<ul>
+<li>安全审计的四个作用：<ul>
+<li>威慑和警告潜在的攻击者和滥用授权的合法用户。</li>
+<li>提供有价值的系统使用日志，帮助系统管理员及时发现系统入侵行为额或潜在的系统漏洞</li>
+<li>发生故障后，可以帮助评估故障损失、重建事件和数据恢复</li>
+<li>对系统控制、安全策略与规程中特定的改变做出评价和反馈，便于修订决策和部署</li>
+</ul>
+</li>
+</ul>
+<h3 id="思考-2"><a href="#思考-2" class="headerlink" title="思考"></a>思考</h3><ul>
+<li>什么是安全审计，其作用是什么？</li>
+</ul>
+<h2 id="2-6-实验（待）"><a href="#2-6-实验（待）" class="headerlink" title="2.6-实验（待）"></a>2.6-实验（待）</h2><h2 id="2-7-总结："><a href="#2-7-总结：" class="headerlink" title="2.7-总结："></a>2.7-总结：</h2><ul>
+<li>密码学</li>
+<li>数字证书与公钥基础设施</li>
+<li>身份认证</li>
+<li>访问控制</li>
+<li>安全审计</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/05/应用与数据安全/" rel="next" title="应用与数据安全">
+                <i class="fa fa-chevron-left"></i> 应用与数据安全
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/05/网络安全防护技术/" rel="prev" title="网络安全防护技术">
+                网络安全防护技术 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-信息安全基础技术"><span class="nav-text">2-信息安全基础技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-密码学"><span class="nav-text">2.1-密码学</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#威胁、安全属性与密码学技术"><span class="nav-text">威胁、安全属性与密码学技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码学发展"><span class="nav-text">密码学发展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#古典密码学"><span class="nav-text">古典密码学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#近代密码学"><span class="nav-text">近代密码学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#现在密码学"><span class="nav-text">现在密码学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公钥密码学"><span class="nav-text">公钥密码学</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加密与解密"><span class="nav-text">加密与解密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对称密码算法"><span class="nav-text">对称密码算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称密码算法"><span class="nav-text">非对称密码算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称加密与解密"><span class="nav-text">非对称加密与解密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非对称密码学特点"><span class="nav-text">非对称密码学特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混合加密"><span class="nav-text">混合加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希函数"><span class="nav-text">哈希函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#哈希函数-完整性"><span class="nav-text">哈希函数-完整性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MD5算法"><span class="nav-text">MD5算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SHA-1-算法"><span class="nav-text">SHA-1 算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#比较sha1和md5"><span class="nav-text">比较sha1和md5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字签名"><span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字签名的应用"><span class="nav-text">数字签名的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考："><span class="nav-text">思考：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-数字证书和公钥基础设施"><span class="nav-text">2.2-数字证书和公钥基础设施</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数字证书"><span class="nav-text">数字证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数字证书示例"><span class="nav-text">数字证书示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公钥基础设施"><span class="nav-text">公钥基础设施</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CA-认证权威机构"><span class="nav-text">CA:认证权威机构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RA：证书注册机构"><span class="nav-text">RA：证书注册机构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录服务（LDAP）"><span class="nav-text">目录服务（LDAP）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CRL"><span class="nav-text">CRL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#证书载体"><span class="nav-text">证书载体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PKI-CA技术的典型应用"><span class="nav-text">PKI/CA技术的典型应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考"><span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-身份认证"><span class="nav-text">2.3-身份认证</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#身份认证基本方法"><span class="nav-text">身份认证基本方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态口令认证"><span class="nav-text">静态口令认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态口令认证缺点"><span class="nav-text">静态口令认证缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#短信口令认证"><span class="nav-text">短信口令认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态口令认证"><span class="nav-text">动态口令认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态口令应用示例"><span class="nav-text">动态口令应用示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#U盾，usb-key"><span class="nav-text">U盾，usb-key</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于生物特征的身份认证"><span class="nav-text">基于生物特征的身份认证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指纹识别的实现原理"><span class="nav-text">指纹识别的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虹膜识别的实现原理"><span class="nav-text">虹膜识别的实现原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他身份认证技术"><span class="nav-text">其他身份认证技术</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-访问控制"><span class="nav-text">2.4-访问控制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制的概念和目标"><span class="nav-text">访问控制的概念和目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制的作用"><span class="nav-text">访问控制的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主体与客体"><span class="nav-text">主体与客体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#控制策略"><span class="nav-text">控制策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#授权"><span class="nav-text">授权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自主访问控制"><span class="nav-text">自主访问控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制矩阵"><span class="nav-text">访问控制矩阵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自主访问控制的特点"><span class="nav-text">自主访问控制的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#强制访问控制的含义"><span class="nav-text">强制访问控制的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自主访问控制与强制访问控制的比较"><span class="nav-text">自主访问控制与强制访问控制的比较</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于角色的访问控制（RBAC"><span class="nav-text">基于角色的访问控制（RBAC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RBAC模型的特点"><span class="nav-text">RBAC模型的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#思考-1"><span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-安全审计"><span class="nav-text">2.5-安全审计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思考-2"><span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-实验（待）"><span class="nav-text">2.6-实验（待）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-7-总结："><span class="nav-text">2.7-总结：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

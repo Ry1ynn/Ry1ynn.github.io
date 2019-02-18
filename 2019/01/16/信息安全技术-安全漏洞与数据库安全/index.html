@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,信息安全,安全漏洞,数据库安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.1-安全漏洞的产生与发展安全漏洞的基本概念 何为漏洞？ 也称脆弱性，计算机系统天生的类似基因的缺陷，在使用和发展过程中产生意想不到的问题（冯诺伊曼  漏洞的含义：">
+<meta name="keywords" content="NISP,信息安全,安全漏洞,数据库安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全技术-安全漏洞与数据库安全">
+<meta property="og:url" content="http://21guns.top/2019/01/16/信息安全技术-安全漏洞与数据库安全/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="1.1-安全漏洞的产生与发展安全漏洞的基本概念 何为漏洞？ 也称脆弱性，计算机系统天生的类似基因的缺陷，在使用和发展过程中产生意想不到的问题（冯诺伊曼  漏洞的含义：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:34:19.953Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全技术-安全漏洞与数据库安全">
+<meta name="twitter:description" content="1.1-安全漏洞的产生与发展安全漏洞的基本概念 何为漏洞？ 也称脆弱性，计算机系统天生的类似基因的缺陷，在使用和发展过程中产生意想不到的问题（冯诺伊曼  漏洞的含义：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/01/16/信息安全技术-安全漏洞与数据库安全/">
+
+
+
+
+
+  <title>信息安全技术-安全漏洞与数据库安全 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/01/16/信息安全技术-安全漏洞与数据库安全/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全技术-安全漏洞与数据库安全</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-16T20:24:07+08:00">
+                2019-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-1-安全漏洞的产生与发展"><a href="#1-1-安全漏洞的产生与发展" class="headerlink" title="1.1-安全漏洞的产生与发展"></a>1.1-安全漏洞的产生与发展</h1><h2 id="安全漏洞的基本概念"><a href="#安全漏洞的基本概念" class="headerlink" title="安全漏洞的基本概念"></a>安全漏洞的基本概念</h2><ul>
+<li><p>何为漏洞？</p>
+<p>也称脆弱性，计算机系统天生的类似基因的缺陷，在使用和发展过程中产生意想不到的问题（冯诺伊曼</p>
+</li>
+<li><p>漏洞的含义：<a id="more"></a></p>
+<ul>
+<li>漏洞本身随着信息技术的发展而具有不同的含义和范畴</li>
+<li>基于访问控制的定义，逐步发展到，设计系统安全流程、设计、实施、内部控制等全过程的定义</li>
+</ul>
+</li>
+<li><p>学者们对漏洞的定义</p>
+<ul>
+<li>从访问控制角度定义</li>
+<li>从风险管理角度的定义</li>
+<li>使用状态空间描述的方法定义</li>
+</ul>
+</li>
+<li><p>标准机构的定义</p>
+<ul>
+<li>存在于评估对象中，违反安全功能要求的弱点</li>
+<li>威胁源可以攻击或触发的信息系统、系统安全流程、内部控制或实施中的弱点</li>
+<li>威胁可以利用的一个或一组资产的弱点；是评估对象TOE中的弱点；是在信息系统或其环境的设计及实施中的缺陷、弱点或特性</li>
+</ul>
+</li>
+<li><p>漏洞的理解</p>
+<ul>
+<li>从生命周期的角度出发</li>
+<li>信息技术、产品、系统在需求、设计、实现、配置、维护和使用等过程中</li>
+<li>有意或无意产生的缺陷</li>
+<li>这些缺陷一旦被恶意主体所利用</li>
+<li>就会造成对信息产品或系统的安全损害</li>
+<li>从而影响构建于信息产品或系统之上正常服务的运行</li>
+<li>危害信息产品或系统的安全属性</li>
+</ul>
+</li>
+<li><p>安全缺陷：是信息系统或产品自身“与生俱来”的特征，是其的固有成分</p>
+</li>
+</ul>
+<h2 id="漏洞产生的原因"><a href="#漏洞产生的原因" class="headerlink" title="漏洞产生的原因"></a>漏洞产生的原因</h2><ul>
+<li>技术原因：<ul>
+<li>软件系统复杂性提高，质量难以控制，安全性降低</li>
+<li>公用模版的使用引发了安全问题</li>
+</ul>
+</li>
+<li>经济原因<ul>
+<li>柠檬市场效应（没人再愿意花高成本造高质量产品</li>
+</ul>
+</li>
+<li>环境原因<ul>
+<li>从传统的封闭、静态和可控变为开放、动态和难控</li>
+<li>攻易守难</li>
+</ul>
+</li>
+</ul>
+<h2 id="漏洞的分类"><a href="#漏洞的分类" class="headerlink" title="漏洞的分类"></a>漏洞的分类</h2><ul>
+<li>分类的目的<ul>
+<li>准确的区分和描述不同的漏洞</li>
+<li>有助于漏洞的发布、存储和查询</li>
+</ul>
+</li>
+<li>分类实例：<ul>
+<li>NVD：代码注入等21种类型</li>
+<li>CNNVD：根据漏洞形成分成22种类型</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-2-安全漏洞的发现与修复"><a href="#1-2-安全漏洞的发现与修复" class="headerlink" title="1.2-安全漏洞的发现与修复"></a>1.2-安全漏洞的发现与修复</h1><ul>
+<li>漏洞的发现<ul>
+<li>静态漏洞挖掘</li>
+<li>动态漏洞挖掘</li>
+</ul>
+</li>
+</ul>
+<h2 id="静态漏洞挖掘"><a href="#静态漏洞挖掘" class="headerlink" title="静态漏洞挖掘"></a>静态漏洞挖掘</h2><ul>
+<li>不运行代码而直接对代码进行漏洞挖掘的方法</li>
+<li>适用对象<ul>
+<li>完整的或不完整的源代码</li>
+<li>二进制代码</li>
+<li>中间代码片段</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>流分析</li>
+<li>符号执行</li>
+<li>模型检测</li>
+</ul>
+</li>
+</ul>
+<h2 id="动态漏洞挖掘"><a href="#动态漏洞挖掘" class="headerlink" title="动态漏洞挖掘"></a>动态漏洞挖掘</h2><ul>
+<li>在代码运行的状态下，通过检测代码的运行状态，或根据测试用例结果来挖掘漏洞的方法</li>
+<li>特点：与静态相比，动态分析方法的优势在于其分析结果的精确，即误报率低</li>
+<li>方法<ul>
+<li>模糊测试</li>
+<li>动态污染传播</li>
+</ul>
+</li>
+</ul>
+<h2 id="安全漏洞的修复"><a href="#安全漏洞的修复" class="headerlink" title="安全漏洞的修复"></a>安全漏洞的修复</h2><ul>
+<li>安装补丁是主要技术手段之一</li>
+<li>补丁修复相关问题<ul>
+<li>打什么样的补丁？补丁质量问题</li>
+<li>如何打补丁？操作方式问题</li>
+<li>什么时间打补丁？修复时机问题</li>
+</ul>
+</li>
+<li>补丁分类<ul>
+<li>文件类型：源代码形式、二进制形式</li>
+<li>内存角度：文件补丁（冷补丁）、内存补丁（热补丁）</li>
+</ul>
+</li>
+<li>补丁安装时要注意的问题<ul>
+<li>补丁安装部署之前需要经过必要的测试</li>
+<li>需要从可靠来源不断获取最新补丁信息</li>
+<li>安装补丁时，要做好备份和相应的应急措施</li>
+</ul>
+</li>
+<li>标准化的安全配置：美军率先推行标准化的安全配置与核查IAVA</li>
+<li>根据漏洞分析和风险评估的安全加固：传统的安全加固手段越来越难以应付日益复杂的攻击行为，漏洞信息的及时披露和分发越来越重要</li>
+<li>加固核查与问责：通过安全审计核实漏洞消除情况和效果。</li>
+</ul>
+<h1 id="1-3-漏洞案例与利用"><a href="#1-3-漏洞案例与利用" class="headerlink" title="1.3-漏洞案例与利用"></a>1.3-漏洞案例与利用</h1><p>（见metasploit相关）</p>
+<h1 id="1-4-数据库安全"><a href="#1-4-数据库安全" class="headerlink" title="1.4-数据库安全"></a>1.4-数据库安全</h1><h2 id="数据库系统基本概念"><a href="#数据库系统基本概念" class="headerlink" title="数据库系统基本概念"></a>数据库系统基本概念</h2><ul>
+<li>数据库：长期存储在计算机内的、有组织的、可共享的数据集合</li>
+<li>DBMS：<ul>
+<li>一种操纵和管理数据库的大型软件</li>
+<li>用于建立、使用、维护数据库</li>
+<li>对数据库进行统一的管理和控制</li>
+<li>以保证数据库的安全性和完整性</li>
+</ul>
+</li>
+<li>用户请求——DBMS——数据库（类似：用户请求——图书管理员——图书馆）</li>
+<li>数据库系统关系<ul>
+<li>数据库—操作系统—DBMS—应用开发工具—应用系统</li>
+<li>数据库和DBMS：数据库管理员</li>
+<li>应用开发工具：程序员</li>
+<li>应用系统：用户</li>
+</ul>
+</li>
+</ul>
+<h2 id="关系型数据库系统特点"><a href="#关系型数据库系统特点" class="headerlink" title="关系型数据库系统特点"></a>关系型数据库系统特点</h2><ul>
+<li>数据结构化和共享性<ul>
+<li>库、表、字段</li>
+<li>结构化查询语言SQL</li>
+</ul>
+</li>
+<li>数据独立性：物理独立性、逻辑独立性</li>
+<li>数据的完整性约束<ul>
+<li>实体完整性（通过主键约束条件</li>
+<li>参照完整性（通过主外键约束条件</li>
+<li>用户自定义完整性（通过CHECK子句</li>
+</ul>
+</li>
+<li>数据由DBMS统一管理和控制：查询引擎、事务控制、数据存储模块</li>
+</ul>
+<h2 id="结构化查询语句"><a href="#结构化查询语句" class="headerlink" title="结构化查询语句"></a>结构化查询语句</h2><ul>
+<li>SQL语句格式<ul>
+<li>基本语句约30条，每条语句都请求DBMS完成一个动作</li>
+<li>如：delete from table_name where column_name &lt; 1<ul>
+<li>delete：动词</li>
+<li>from：关键字</li>
+<li>有表名、列名</li>
+<li>where引导子句</li>
+<li>where后跟表达式</li>
+</ul>
+</li>
+<li>SQL语句分类<ul>
+<li>数据定义：create</li>
+<li>数据查询：select</li>
+<li>数据操纵：update</li>
+<li>数据控制：grant</li>
+<li>事务控制：begin</li>
+<li>嵌入式/服务端编程：open</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据库安全"><a href="#数据库安全" class="headerlink" title="数据库安全"></a>数据库安全</h2><ul>
+<li>保密性：数据泄漏</li>
+<li>完整性：执行正确的修改操作</li>
+<li>可用性：数据库死锁，性能下降或无法访问</li>
+</ul>
+<h2 id="数据库安全需求"><a href="#数据库安全需求" class="headerlink" title="数据库安全需求"></a>数据库安全需求</h2><ul>
+<li>物理数据库完整性</li>
+<li>逻辑数据库完整性</li>
+<li>数据单元安全性</li>
+<li>可审计</li>
+<li>访问控制</li>
+</ul>
+<h2 id="数据库安全措施"><a href="#数据库安全措施" class="headerlink" title="数据库安全措施"></a>数据库安全措施</h2><ul>
+<li>用户标识与鉴别<ul>
+<li>用户鉴别<ul>
+<li>操作系统</li>
+<li>数据库</li>
+<li>第三方</li>
+</ul>
+</li>
+<li>用户管理策略<ul>
+<li>默认账号管理</li>
+<li>账号锁定策略</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>授权与访问控制<ul>
+<li>设置用户对不同的数据对象允许的操作权限<ul>
+<li>系统权限：数据库实例级或数据库级</li>
+<li>模式权限：数据库对象：表、视图</li>
+<li>数据对象权限：数据对象：记录级</li>
+</ul>
+</li>
+<li>资源控制<ul>
+<li>CPU资源</li>
+<li>会话资源<ul>
+<li>每用户session</li>
+<li>连接超时</li>
+<li>死锁控制</li>
+</ul>
+</li>
+<li>存储资源<ul>
+<li>护具存储空间限制</li>
+<li>临时存储空间限制</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据加密<ul>
+<li>数据加密方式<ul>
+<li>传输加密</li>
+<li>存储加密</li>
+</ul>
+</li>
+<li>数据存储加密层级<ul>
+<li>os层加密</li>
+<li>DBMS内核层加密</li>
+<li>DBMS外层加密</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>安全审计<ul>
+<li>数据库审计（也称标准审计<ul>
+<li>用户级审计：安全审计员设置，用户行为审计</li>
+<li>系统级审计：管理员设置，用户授权或系统权限操作审计</li>
+</ul>
+</li>
+<li>细粒度审计<ul>
+<li>监视对数据对象的操作</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据库完整性"><a href="#数据库完整性" class="headerlink" title="数据库完整性"></a>数据库完整性</h2><ul>
+<li>完整性保证：完整性约束</li>
+<li>完整功能性约束条件<ul>
+<li>实体完整性（primary key定义，唯一，不为空</li>
+<li>域完整性（表定义中的check、foreign key约束，default、not null定义</li>
+<li>参照完整性（foreign key定义，关联</li>
+<li>用户定义完整性（生成时定义，非空，唯一，布尔</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据备份与恢复"><a href="#数据备份与恢复" class="headerlink" title="数据备份与恢复"></a>数据备份与恢复</h2><ul>
+<li>备份：数据冗余技术<ul>
+<li>数据转储</li>
+<li>日志文件</li>
+</ul>
+</li>
+<li>恢复：从冗余数据中实施数据库恢复<ul>
+<li>事务故障的恢复（事务处理</li>
+<li>系统故障的恢复（事务处理</li>
+<li>介质故障的恢复（通过转储数据恢复</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据库运行安全防护"><a href="#数据库运行安全防护" class="headerlink" title="数据库运行安全防护"></a>数据库运行安全防护</h2><ul>
+<li><p>数据库面临的安全威胁：特权滥用、平台级数据库漏洞、SQL注入、拒绝服务攻击、不健全的审计和认证、数据泄漏、数据库通信协议漏洞</p>
+</li>
+<li><p>层层设防：防护体系建设</p>
+<ul>
+<li>SQL请求—用户标识与鉴别–DBMS存取控制–数据加密–审计追踪</li>
+<li>对应于：各种应用–安全边界–查询引擎—DBMS选件–事务引擎</li>
+</ul>
+</li>
+<li><p>检查、监控、审计（事前、中、后</p>
+<ul>
+<li><p>事前检测：安全特性检测</p>
+<ul>
+<li>安全配置：补丁、协议</li>
+<li>账号：用户名密码、口令策略、权限</li>
+<li>存储过程</li>
+<li>触发器</li>
+<li>备份</li>
+</ul>
+</li>
+<li>事中运行监控</li>
+<li>事后审计<ul>
+<li>审计对象（对谁进行审计<ul>
+<li>标准审计（系统级、用户级</li>
+<li>细粒度审计（对象级</li>
+</ul>
+</li>
+<li>审计内容（对什么行为进行审计<ul>
+<li>访问数据库应用程序、位置及用户信息</li>
+<li>用户操作的数据、操作是否成功</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+            <a href="/tags/安全漏洞/" rel="tag"># 安全漏洞</a>
+          
+            <a href="/tags/数据库安全/" rel="tag"># 数据库安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/15/信息安全技术-鉴别与访问控制/" rel="next" title="信息安全技术-鉴别与访问控制">
+                <i class="fa fa-chevron-left"></i> 信息安全技术-鉴别与访问控制
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/17/信息安全技术-操作系统安全/" rel="prev" title="信息安全技术-操作系统安全">
+                信息安全技术-操作系统安全 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1-安全漏洞的产生与发展"><span class="nav-text">1.1-安全漏洞的产生与发展</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安全漏洞的基本概念"><span class="nav-text">安全漏洞的基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞产生的原因"><span class="nav-text">漏洞产生的原因</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#漏洞的分类"><span class="nav-text">漏洞的分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2-安全漏洞的发现与修复"><span class="nav-text">1.2-安全漏洞的发现与修复</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#静态漏洞挖掘"><span class="nav-text">静态漏洞挖掘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态漏洞挖掘"><span class="nav-text">动态漏洞挖掘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全漏洞的修复"><span class="nav-text">安全漏洞的修复</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-3-漏洞案例与利用"><span class="nav-text">1.3-漏洞案例与利用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-4-数据库安全"><span class="nav-text">1.4-数据库安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库系统基本概念"><span class="nav-text">数据库系统基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关系型数据库系统特点"><span class="nav-text">关系型数据库系统特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结构化查询语句"><span class="nav-text">结构化查询语句</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库安全"><span class="nav-text">数据库安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库安全需求"><span class="nav-text">数据库安全需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库安全措施"><span class="nav-text">数据库安全措施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库完整性"><span class="nav-text">数据库完整性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据备份与恢复"><span class="nav-text">数据备份与恢复</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库运行安全防护"><span class="nav-text">数据库运行安全防护</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

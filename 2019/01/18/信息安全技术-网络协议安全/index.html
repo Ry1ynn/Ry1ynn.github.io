@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,信息安全,网络协议安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.1-网络协议 开放系统互联，ISO/OSI，七层 OSI安全架构：基于八类安全机制，提供五类安全服务  物理层 电气、机械、规程特性； 比特流转换为电压 双绞线、同轴电缆、光纤">
+<meta name="keywords" content="NISP,信息安全,网络协议安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全技术-网络协议安全">
+<meta property="og:url" content="http://21guns.top/2019/01/18/信息安全技术-网络协议安全/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="1.1-网络协议 开放系统互联，ISO/OSI，七层 OSI安全架构：基于八类安全机制，提供五类安全服务  物理层 电气、机械、规程特性； 比特流转换为电压 双绞线、同轴电缆、光纤">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:33:35.316Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全技术-网络协议安全">
+<meta name="twitter:description" content="1.1-网络协议 开放系统互联，ISO/OSI，七层 OSI安全架构：基于八类安全机制，提供五类安全服务  物理层 电气、机械、规程特性； 比特流转换为电压 双绞线、同轴电缆、光纤">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/01/18/信息安全技术-网络协议安全/">
+
+
+
+
+
+  <title>信息安全技术-网络协议安全 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/01/18/信息安全技术-网络协议安全/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全技术-网络协议安全</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T20:24:07+08:00">
+                2019-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-1-网络协议"><a href="#1-1-网络协议" class="headerlink" title="1.1-网络协议"></a>1.1-网络协议</h1><ul>
+<li>开放系统互联，ISO/OSI，七层</li>
+<li>OSI安全架构：基于八类安全机制，提供五类安全服务</li>
+</ul>
+<h2 id="物理层"><a href="#物理层" class="headerlink" title="物理层"></a>物理层</h2><ul>
+<li>电气、机械、规程特性；</li>
+<li>比特流转换为电压</li>
+<li>双绞线、同轴电缆、光纤<a id="more"></a></li>
+<li>中继器、集线器</li>
+<li>100BaseT等标准</li>
+</ul>
+<h2 id="数据链路层"><a href="#数据链路层" class="headerlink" title="数据链路层"></a>数据链路层</h2><ul>
+<li>物理寻址（MAC地址），网络拓扑</li>
+<li>差错控制，检错和纠错</li>
+<li>封装成帧</li>
+<li>流量控制（滑动窗口</li>
+<li>网卡、网桥、交换机</li>
+<li>PPP、HDLC、ARP等协议</li>
+<li>以太网协议标准，分两个子层<ul>
+<li>LLC：逻辑链路控制子层<ul>
+<li>IEEE 802.2 </li>
+<li>为上层提供统一接口</li>
+<li>使上层独立于下层的物理介质</li>
+<li>提供流量控制、排序等服务</li>
+</ul>
+</li>
+<li>MAC：媒体访问控制子层<ul>
+<li>IEEE 802.3</li>
+<li>烧录到网卡ROM</li>
+<li>48b的MAC地址</li>
+<li>唯一性</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h2><ul>
+<li>逻辑寻址（IP地址）、路由选择、分组交换</li>
+<li>三层交换机、路由器</li>
+</ul>
+<h2 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h2><ul>
+<li>端到端、建立逻辑连接</li>
+<li>寻址基于端口号</li>
+<li>UDP、TCP</li>
+</ul>
+<h2 id="会话层"><a href="#会话层" class="headerlink" title="会话层"></a>会话层</h2><ul>
+<li>不同应用程序的数据隔离</li>
+<li>会话建立、维持、终止</li>
+<li>同步服务</li>
+<li>会话控制（单向或双向</li>
+</ul>
+<h2 id="表示层"><a href="#表示层" class="headerlink" title="表示层"></a>表示层</h2><ul>
+<li>数据格式、协议、字符转换</li>
+<li>数据加解密、解压缩</li>
+<li>ASCII、GIF、JPEG等格式</li>
+</ul>
+<h2 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h2><ul>
+<li>应用的接口，面向用户</li>
+<li>网络访问流处理</li>
+<li>流量控制</li>
+<li>错误恢复</li>
+<li>FTP、HTTP等协议</li>
+</ul>
+<h2 id="分层结构的优点"><a href="#分层结构的优点" class="headerlink" title="分层结构的优点"></a>分层结构的优点</h2><ul>
+<li>降低复杂性（大问题切割成小问题，分散至各层</li>
+<li>促进标准化工作</li>
+<li>各层之间相互独立，一层的变化不会影响其他层</li>
+<li>协议开发模块化</li>
+<li>简化理解与学习</li>
+</ul>
+<h2 id="数据的封装与分用"><a href="#数据的封装与分用" class="headerlink" title="数据的封装与分用"></a>数据的封装与分用</h2><ul>
+<li>数据封装：数据发送时，从高到低，依次封装</li>
+<li>数据解封装：数据接收时，从低到高，依次解封装</li>
+</ul>
+<h2 id="TCP-IP与OSI的对应"><a href="#TCP-IP与OSI的对应" class="headerlink" title="TCP/IP与OSI的对应"></a>TCP/IP与OSI的对应</h2><ul>
+<li>应用层：会话层、表示层、应用层</li>
+<li>传输层：传输层</li>
+<li>网际互联层：网络层</li>
+<li>网络借口层：物理层、数据链路层</li>
+</ul>
+<h1 id="1-2-网络接口层安全"><a href="#1-2-网络接口层安全" class="headerlink" title="1.2-网络接口层安全"></a>1.2-网络接口层安全</h1><h2 id="网络接口层"><a href="#网络接口层" class="headerlink" title="网络接口层"></a>网络接口层</h2><ul>
+<li>主要协议：ARP、RARP</li>
+<li>安全问题<ul>
+<li>损坏：自然灾害、动物破坏、老化、误操作</li>
+<li>干扰：大功率电器、电源线路、电磁辐射</li>
+<li>电磁泄漏：传输线路电磁泄漏</li>
+<li>欺骗：ARP欺骗</li>
+<li>嗅探：常见二层协议是明文通信的（以太、ARP等</li>
+<li>拒绝服务：mac flooding、arp flooding</li>
+</ul>
+</li>
+</ul>
+<h2 id="ARP欺骗"><a href="#ARP欺骗" class="headerlink" title="ARP欺骗"></a>ARP欺骗</h2><ul>
+<li>ARP相关：IP地址到mac地址、arp请求-广播、arp响应-单播、各主机存在映射表</li>
+<li>缺陷：对arp响应没有身份认证，即攻击者也可响应，这样在请求者的映射表中就记录了错误的记录，在以后的发送中，就发到了攻击者那，从而达到欺骗的目的</li>
+<li>欺骗大概过程：<ul>
+<li>a:1.1.1.1、b:2.2.2.2、c:3.3.3.3</li>
+<li>a发arp请求，谁的IP是2.2.2.2？即问2.2.2.2的MAC地址是什么？</li>
+<li>b和c都能收到</li>
+<li>正常情况，与其符合的才响应，即应该b响应</li>
+<li>但c出于欺骗目的，c对a响应，说我的IP是2.2.2.2，即2.2.2.2对应的Mac是b</li>
+<li>同时b对a说，1.1.1.1的mac是d</li>
+<li>a找不到d，即不能与a正常通信（低级攻击，使ab不能通信</li>
+<li>若c告诉a：b的mac为c、告诉b：a的mac为c</li>
+<li>c就成为二者中间人，中间人攻击（高级攻击）</li>
+</ul>
+</li>
+</ul>
+<h2 id="ARP欺骗防御"><a href="#ARP欺骗防御" class="headerlink" title="ARP欺骗防御"></a>ARP欺骗防御</h2><ul>
+<li>使用静态ARP缓存</li>
+<li>IP与MAC地址绑定</li>
+<li>ARP防御工具</li>
+</ul>
+<p>注：PC端防御做的较好，而手机端薄弱，故少连公共Wi-Fi，信息很容易被中间人窃取</p>
+<h1 id="1-3-网络互联层安全"><a href="#1-3-网络互联层安全" class="headerlink" title="1.3-网络互联层安全"></a>1.3-网络互联层安全</h1><h2 id="网络互联层"><a href="#网络互联层" class="headerlink" title="网络互联层"></a>网络互联层</h2><ul>
+<li>主要协议：IP、ICMP、IGMP</li>
+<li>IP是TCP/IP协议族中最核心的协议</li>
+<li>IP协议特点：不可靠、无连接（传输层实现可靠传输</li>
+<li>安全问题：<ul>
+<li>拒绝服务：分片攻击teardrop、死亡之ping</li>
+<li>欺骗：IP源地址欺骗</li>
+<li>窃听：嗅探</li>
+<li>伪造：IP数据包伪造</li>
+</ul>
+</li>
+</ul>
+<h2 id="ping-of-death"><a href="#ping-of-death" class="headerlink" title="ping of death"></a>ping of death</h2><ul>
+<li>ping-测试另一台主机是否可达</li>
+<li>查看网络上主机是否处于活动状态</li>
+<li>ping原理：发送ICMP回显请求报文给目的主机，并等待ICMP回显应答，根据回显应答的内容来判断目的主机的状况</li>
+<li>ping之所以会造成伤害是因为：早期操作系统在处理ICMP协议数据包时存在漏洞，如下：</li>
+<li>ICMP协议的报文长度时固定的，大小为64KB，早期很多操作系统在接收ICMP数据报文的时候，只会开辟64KB的缓存区用于存放接收到的数据包</li>
+<li>一旦发送过来的ICMP数据包的实际尺寸超过64KB（65535B），操作系统将收到的数据报文向缓存区填写时，报文长度大于64KB，就会产生一个缓存溢出，结果将导致TCP/IP协议堆栈的崩溃，造成主机的重启动或死机</li>
+<li>ping程序有一个“-l”参数可指定发送数据包的大小，故很容易实现此攻击，如：ping -l 65536 1.1.1.1</li>
+<li>若对方主机存在这样一个漏洞，就会形成一次拒绝服务攻击，成为死亡之ping</li>
+<li>如今操作系统都已做了修补，对可发送的数据包大小进行了限制，如攻击时，会显示：Bad value for option -l，valid range is from 0 to 65500</li>
+</ul>
+<h2 id="泪滴（Teardrop）"><a href="#泪滴（Teardrop）" class="headerlink" title="泪滴（Teardrop）"></a>泪滴（Teardrop）</h2><ul>
+<li>泪滴也成为分片攻击，利用TCP/IP协议的问题，拒绝服务攻击，由于第一个实现此攻击的程序为teardrop，故也称泪滴</li>
+<li>数据包过大时，要发送端要进行分片，然后在接收端进行重组</li>
+<li>正常分片：0-9、9-13、13-19</li>
+<li>错误分片：0-9、6-13、13-19，第一、二个分片会有重叠，在接收端重组时会崩溃，故导致错误发生</li>
+</ul>
+<h2 id="Smurf攻击"><a href="#Smurf攻击" class="headerlink" title="Smurf攻击"></a>Smurf攻击</h2><ul>
+<li>利用IP欺骗和ICMP回应包引起目标主机网络拥塞，实现Dos攻击</li>
+<li>攻击原理：<ul>
+<li>在构造数据包时将源地址设置为被攻击主机的地址</li>
+<li>而将目的地址设为广播地址</li>
+<li>故，大量的ICMP echo 回应包被发送给被攻击主机，使其因网络拥塞而无法提供服务</li>
+<li>比ping of death洪水的流量高出1或2个数量级</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-4-传输层安全"><a href="#1-4-传输层安全" class="headerlink" title="1.4-传输层安全"></a>1.4-传输层安全</h1><h2 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h2><ul>
+<li>传输控制协议，面向连接，可靠的，字节流服务</li>
+<li>提供可靠性服务：确认、超时重传、流量控制等</li>
+</ul>
+<h2 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h2><ul>
+<li>用户数据包协议，面向事务，不可靠</li>
+<li>特点：无连接、不可靠、协议简单、占用资源少、效率高</li>
+</ul>
+<h2 id="端口号"><a href="#端口号" class="headerlink" title="端口号"></a>端口号</h2><ul>
+<li>TCP/UDP通过16bit来识别应用程序</li>
+<li>知名端口号由internet号分配机构来管理</li>
+<li>现状<ul>
+<li>1-255：知名的网络服务</li>
+<li>256-1024：unix操作系统特定的端口号</li>
+<li>1024-5000：临时分配的端口号</li>
+<li>5000以上：保留给应用程序</li>
+</ul>
+</li>
+</ul>
+<h2 id="TCP建立连接-三次握手"><a href="#TCP建立连接-三次握手" class="headerlink" title="TCP建立连接-三次握手"></a>TCP建立连接-三次握手</h2><ul>
+<li>SYN——SYN、ACK——ACK</li>
+</ul>
+<h2 id="传输层安全"><a href="#传输层安全" class="headerlink" title="传输层安全"></a>传输层安全</h2><ul>
+<li>拒绝服务：syn flood/udp flood、smurf</li>
+<li>欺骗：TCP会话劫持</li>
+<li>窃听：嗅探</li>
+<li>伪造：数据包伪造</li>
+</ul>
+<h2 id="SYN洪水攻击"><a href="#SYN洪水攻击" class="headerlink" title="SYN洪水攻击"></a>SYN洪水攻击</h2><ul>
+<li>原理：三次握手只进行到前两次，客户端syn，服务端syn、ack，但客户端迟迟不发ack，服务端就一直处于等待状态</li>
+<li>被攻击者主机一直处于等待状态，耗费大量资源，其再也收不到正常网络包，只有dos包</li>
+<li>syn flood攻击包的源地址都是伪造的，追查工作难</li>
+<li>被攻击主机积累了大量的syn半连接，可用netstat查看：netstat -an | grep SYN</li>
+<li>SYN洪水攻击比较难以防御，如下几种解决办法<ul>
+<li>缩短SYN timeout时间（等待时间太长就不等了</li>
+<li>设置SYN cookie</li>
+<li>负反馈策略</li>
+<li>退让策略</li>
+<li>分布式DNS负载均衡</li>
+<li>防火墙</li>
+</ul>
+</li>
+</ul>
+<h2 id="UDP-flood"><a href="#UDP-flood" class="headerlink" title="UDP flood"></a>UDP flood</h2><ul>
+<li>大量UDP小包冲击应用服务器（DNS、radius认证等</li>
+<li>利用系统服务形成流量（echo chargen</li>
+<li>利用正常UDP服务发送大流量形成网络拥塞</li>
+<li>UDP洪水主要是利用主机能自动进行回复的服务（例如使用udp协议的chargen服务和echo服务）来进行攻击</li>
+<li>很多提供www和mail等服务的，一般是unix服务器，其默认打开一些被黑客恶意利用的UDP服务；如echo服务会显示接收到的每一个数据包，而原本作为测试功能的chargen服务会在收到每一个数据包时随机反馈一些字符</li>
+</ul>
+<h2 id="LAND攻击"><a href="#LAND攻击" class="headerlink" title="LAND攻击"></a>LAND攻击</h2><ul>
+<li>运用IP Spoofing技术送出一连串SYN数据包给目标主机，让目标主机误以为这些数据包是由自己发送的</li>
+<li>由于目标主机在处理这些数据包的时候，他自己并无法回应给自己SYN-ACK数据包，因而造成系统宕机</li>
+<li>即构造一个数据包，目的地址和源地址均是被攻击者，其自己无法给自己回应，故……</li>
+<li>Land是因特网上最常见的拒绝服务攻击类型，由rootshell发现</li>
+<li>原理：向目标即发送大量的源地址和目的地址相同的包，造成目标机解析Land包时占用大量的系统资源，从而使其瘫痪</li>
+</ul>
+<h1 id="1-5-应用层安全"><a href="#1-5-应用层安全" class="headerlink" title="1.5-应用层安全"></a>1.5-应用层安全</h1><h2 id="应用层协议"><a href="#应用层协议" class="headerlink" title="应用层协议"></a>应用层协议</h2><ul>
+<li>定义了，运行在不同端系统上的，应用程序，如何相互传递报文</li>
+<li>常见：域名解析-DNS、电子邮件-SMTP和POP3、文件传输-FTP、网页浏览-HTTP</li>
+</ul>
+<h2 id="安全问题-明文"><a href="#安全问题-明文" class="headerlink" title="安全问题-明文"></a>安全问题-明文</h2><ul>
+<li>截获流量，得到明文传输的敏感信息</li>
+</ul>
+<h2 id="DNS欺骗"><a href="#DNS欺骗" class="headerlink" title="DNS欺骗"></a>DNS欺骗</h2><ul>
+<li>正常DNS查询：递归、迭代</li>
+<li>欺骗：<ul>
+<li>用户a查询test网站的IP</li>
+<li>向dns1查询</li>
+<li>dns1不知道，继续向dns2查询</li>
+<li>dns2知道，返回结果1.1.1.1</li>
+<li>攻击者修改为2.2.2.2</li>
+<li>故dns1得到为2.2，故用户a得到也为2.2</li>
+<li>多个用户向dns1查询，故其可以影响多个用户</li>
+</ul>
+</li>
+</ul>
+<h2 id="安全问题"><a href="#安全问题" class="headerlink" title="安全问题"></a>安全问题</h2><ul>
+<li>拒绝服务：超长URL链接</li>
+<li>欺骗：跨站脚本、钓鱼式攻击、cookie欺骗</li>
+<li>窃听：数据泄露</li>
+<li>伪造：应用数据篡改</li>
+<li>暴力破解：应用认证口令暴力破解</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+            <a href="/tags/网络协议安全/" rel="tag"># 网络协议安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/17/信息安全技术-恶意代码防范/" rel="next" title="信息安全技术-恶意代码防范">
+                <i class="fa fa-chevron-left"></i> 信息安全技术-恶意代码防范
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/18/信息安全保障/" rel="prev" title="信息安全保障">
+                信息安全保障 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1-网络协议"><span class="nav-text">1.1-网络协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#物理层"><span class="nav-text">物理层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据链路层"><span class="nav-text">数据链路层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络层"><span class="nav-text">网络层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层"><span class="nav-text">传输层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#会话层"><span class="nav-text">会话层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表示层"><span class="nav-text">表示层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层"><span class="nav-text">应用层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分层结构的优点"><span class="nav-text">分层结构的优点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的封装与分用"><span class="nav-text">数据的封装与分用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP-IP与OSI的对应"><span class="nav-text">TCP/IP与OSI的对应</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2-网络接口层安全"><span class="nav-text">1.2-网络接口层安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络接口层"><span class="nav-text">网络接口层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP欺骗"><span class="nav-text">ARP欺骗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP欺骗防御"><span class="nav-text">ARP欺骗防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-3-网络互联层安全"><span class="nav-text">1.3-网络互联层安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#网络互联层"><span class="nav-text">网络互联层</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ping-of-death"><span class="nav-text">ping of death</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#泪滴（Teardrop）"><span class="nav-text">泪滴（Teardrop）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Smurf攻击"><span class="nav-text">Smurf攻击</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-4-传输层安全"><span class="nav-text">1.4-传输层安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP"><span class="nav-text">TCP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP"><span class="nav-text">UDP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口号"><span class="nav-text">端口号</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP建立连接-三次握手"><span class="nav-text">TCP建立连接-三次握手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#传输层安全"><span class="nav-text">传输层安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SYN洪水攻击"><span class="nav-text">SYN洪水攻击</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UDP-flood"><span class="nav-text">UDP flood</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LAND攻击"><span class="nav-text">LAND攻击</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-5-应用层安全"><span class="nav-text">1.5-应用层安全</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#应用层协议"><span class="nav-text">应用层协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全问题-明文"><span class="nav-text">安全问题-明文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS欺骗"><span class="nav-text">DNS欺骗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全问题"><span class="nav-text">安全问题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

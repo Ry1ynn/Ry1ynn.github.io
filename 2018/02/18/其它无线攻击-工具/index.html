@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Kali,无线攻击,Tool,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="01-MAC地址绑定攻击1.1-简介 管理员误以为MAC地址绑定是一种安全机制 AP限制可以关联的客户端MAC地址，白名单的思想 准备测试AP 完成基本的AP配置 开启open认证（测试用，所以不采用WEP或WPA">
+<meta name="keywords" content="Kali,无线攻击,Tool">
+<meta property="og:type" content="article">
+<meta property="og:title" content="其它无线攻击&amp;工具">
+<meta property="og:url" content="http://21guns.top/2018/02/18/其它无线攻击-工具/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="01-MAC地址绑定攻击1.1-简介 管理员误以为MAC地址绑定是一种安全机制 AP限制可以关联的客户端MAC地址，白名单的思想 准备测试AP 完成基本的AP配置 开启open认证（测试用，所以不采用WEP或WPA">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:20:15.785Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="其它无线攻击&amp;工具">
+<meta name="twitter:description" content="01-MAC地址绑定攻击1.1-简介 管理员误以为MAC地址绑定是一种安全机制 AP限制可以关联的客户端MAC地址，白名单的思想 准备测试AP 完成基本的AP配置 开启open认证（测试用，所以不采用WEP或WPA">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/02/18/其它无线攻击-工具/">
+
+
+
+
+
+  <title>其它无线攻击&工具 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/其它无线攻击-工具/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">其它无线攻击&工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="01-MAC地址绑定攻击"><a href="#01-MAC地址绑定攻击" class="headerlink" title="01-MAC地址绑定攻击"></a>01-MAC地址绑定攻击</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1-简介"></a>1.1-简介</h2><ul>
+<li>管理员误以为MAC地址绑定是一种安全机制</li>
+<li>AP限制可以关联的客户端MAC地址，白名单的思想</li>
+<li>准备测试AP<ul>
+<li>完成基本的AP配置</li>
+<li>开启open认证（测试用，所以不采用WEP或WPA<a id="more"></a></li>
+<li>开启无线过滤（只有添加进白名单的MAC地址，其对应的STA才允许加入网络</li>
+</ul>
+</li>
+<li>突破思路：修改MAC地址绕过过滤，即伪造自己的MAC地址，改为白名单中的，绕过白名单过滤，以实现上网</li>
+<li>总结：<ul>
+<li>虽然可以实现上网，但是修改了MAC地址，这样同一个AP下，有两个相同的MAC地址，会产生冲突，影响通信质量</li>
+<li>如，H用户改为了U的MAC地址，H用户pingAP时，AP的响应包可能会发往U（因为二者 MAC地址相同），H端就会产生丢包</li>
+<li>当U退出此网络时，H便充当U，这时MAC地址不会冲突，通信质量也可以保证，当U重新上线时，MAC又冲突，通信质量又下降</li>
+<li>可以作为对正常用户U的攻击手段，使其网速慢</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-2-大体流程"><a href="#1-2-大体流程" class="headerlink" title="1.2-大体流程"></a>1.2-大体流程</h2><ol>
+<li>开启airmon监听，airodump抓包，得到某AP下连接的用户U的MAC地址，MAC1</li>
+<li>macchanger改变本网卡的MAC地址为MAC1，便可以突破白名单的过滤</li>
+<li>成功后，便可发现本网卡已得到AP分配的IP地址，实现上网</li>
+<li>另一方面，此时，若用户U也在线，便可以拉低U的网速</li>
+</ol>
+<h1 id="02-aircrqck-ng-suite其它工具"><a href="#02-aircrqck-ng-suite其它工具" class="headerlink" title="02-aircrqck-ng suite其它工具"></a>02-aircrqck-ng suite其它工具</h1><h2 id="2-1-airdecap-ng"><a href="#2-1-airdecap-ng" class="headerlink" title="2.1-airdecap-ng"></a>2.1-airdecap-ng</h2><ul>
+<li>去除802.11头<ul>
+<li>airdecap-ng -b <ap mac> 1.pcap</ap></li>
+</ul>
+</li>
+<li>解密wep加密数据<ul>
+<li>airdecap-ng -w <wep key>-b <ap mac> 1.pcap</ap></wep></li>
+<li>必须有与ap建立关联关系</li>
+</ul>
+</li>
+<li>解密WPA加密数据<ul>
+<li>airdecap-ng -e kifi -p <psk> -b <ap mac> 1.pcap</ap></psk></li>
+<li>抓包文件中必须包含4步握手信息，否则无解</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-2-airserv-ng"><a href="#2-2-airserv-ng" class="headerlink" title="2.2-airserv-ng"></a>2.2-airserv-ng</h2><ul>
+<li>通过网络提供无线网卡服务器<ul>
+<li>某些网卡不支持客户端/服务器模式</li>
+</ul>
+</li>
+<li>启动无线侦听</li>
+<li>服务器端<ul>
+<li>airserv-ng -p 3333 -d wlan2mon</li>
+</ul>
+</li>
+<li>客户端<ul>
+<li>airodump-ng 192.168.1.1:3333</li>
+</ul>
+</li>
+<li>某些防火墙会影响c/s间的通信</li>
+</ul>
+<h2 id="2-3-airtun-ng"><a href="#2-3-airtun-ng" class="headerlink" title="2.3-airtun-ng"></a>2.3-airtun-ng</h2><ul>
+<li>无线入侵检测wIDS<ul>
+<li>无线密码和BSSID</li>
+<li>需要获取握手信息</li>
+</ul>
+</li>
+<li>中继和存放<ul>
+<li>repeate/replay</li>
+</ul>
+</li>
+<li>wIDS<ul>
+<li>WEP: airtun-ng -a <ap mac> -w SKA wlan2mon</ap></li>
+<li>WPA: airtun-ng -a <ap mac> -p PSK -e kifi wlan2mon</ap></li>
+<li>ifconfig at0 up</li>
+<li>四步握手</li>
+<li>理论上支持多AP的wIDS，但2个AP以上时可靠性会下降<ul>
+<li>WPA: airtun-ng -a <ap mac> -p PSK -e kifi1 wlan2mon</ap></li>
+<li>ifconfig at1 up</li>
+<li>多ap不同信道时airodump -c 1，11 wlan2mon</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>repeate<ul>
+<li>WDS/bridge</li>
+<li>扩展无线侦听的距离</li>
+<li>要求两块网卡都置入monitor模式</li>
+<li>airtun-ng -a <ap mac> –repeat –bssid <ap mac> -i wlan0mon wlan2mon</ap></ap></li>
+<li>wlan0mon ：收包的网卡</li>
+<li>wlqn2mon：发包的网卡</li>
+<li>-a：发包的源地址</li>
+<li>—bssid ：过滤只发指定源地址的包（可选</li>
+</ul>
+</li>
+<li>replay<ul>
+<li>将抓取的cap文件重放到指定网卡</li>
+<li>airtun-ng -a <source mac> -r 1.cap <interface></interface></li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-其它工具"><a href="#2-4-其它工具" class="headerlink" title="2.4-其它工具"></a>2.4-其它工具</h2><ul>
+<li>bessid-ng</li>
+<li>fern-wifi-cracker</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kali/" rel="tag"># Kali</a>
+          
+            <a href="/tags/无线攻击/" rel="tag"># 无线攻击</a>
+          
+            <a href="/tags/Tool/" rel="tag"># Tool</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/18/WPA企业-无线侦听/" rel="next" title="WPA企业&无线侦听">
+                <i class="fa fa-chevron-left"></i> WPA企业&无线侦听
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/18/Linux无线协议栈及常用命令/" rel="prev" title="Linux无线协议栈及常用命令">
+                Linux无线协议栈及常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-MAC地址绑定攻击"><span class="nav-text">01-MAC地址绑定攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-简介"><span class="nav-text">1.1-简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-大体流程"><span class="nav-text">1.2-大体流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-aircrqck-ng-suite其它工具"><span class="nav-text">02-aircrqck-ng suite其它工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-airdecap-ng"><span class="nav-text">2.1-airdecap-ng</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-airserv-ng"><span class="nav-text">2.2-airserv-ng</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-airtun-ng"><span class="nav-text">2.3-airtun-ng</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-其它工具"><span class="nav-text">2.4-其它工具</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

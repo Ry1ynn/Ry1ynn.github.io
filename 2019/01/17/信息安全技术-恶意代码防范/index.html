@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,恶意代码,信息安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="恶意代码发展史 冯诺伊曼提出概念、磁芯大战、莫里斯父子、莫里斯病毒、熊猫烧香、工业病毒、蠕虫、木马……  发展趋势 传播速度：爆发、传播速度越来越快 攻击意图：游戏、炫耀到恶意牟利 功能：分工越来越细 实现技术：不断变化 传播范围：呈现多平台传播的特征">
+<meta name="keywords" content="NISP,恶意代码,信息安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全技术-恶意代码防范">
+<meta property="og:url" content="http://21guns.top/2019/01/17/信息安全技术-恶意代码防范/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="恶意代码发展史 冯诺伊曼提出概念、磁芯大战、莫里斯父子、莫里斯病毒、熊猫烧香、工业病毒、蠕虫、木马……  发展趋势 传播速度：爆发、传播速度越来越快 攻击意图：游戏、炫耀到恶意牟利 功能：分工越来越细 实现技术：不断变化 传播范围：呈现多平台传播的特征">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:34:30.222Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全技术-恶意代码防范">
+<meta name="twitter:description" content="恶意代码发展史 冯诺伊曼提出概念、磁芯大战、莫里斯父子、莫里斯病毒、熊猫烧香、工业病毒、蠕虫、木马……  发展趋势 传播速度：爆发、传播速度越来越快 攻击意图：游戏、炫耀到恶意牟利 功能：分工越来越细 实现技术：不断变化 传播范围：呈现多平台传播的特征">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/01/17/信息安全技术-恶意代码防范/">
+
+
+
+
+
+  <title>信息安全技术-恶意代码防范 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/01/17/信息安全技术-恶意代码防范/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全技术-恶意代码防范</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T20:24:07+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="恶意代码发展史"><a href="#恶意代码发展史" class="headerlink" title="恶意代码发展史"></a>恶意代码发展史</h2><ul>
+<li>冯诺伊曼提出概念、磁芯大战、莫里斯父子、莫里斯病毒、熊猫烧香、工业病毒、蠕虫、木马……</li>
+</ul>
+<h2 id="发展趋势"><a href="#发展趋势" class="headerlink" title="发展趋势"></a>发展趋势</h2><ul>
+<li>传播速度：爆发、传播速度越来越快</li>
+<li>攻击意图：游戏、炫耀到恶意牟利</li>
+<li>功能：分工越来越细</li>
+<li>实现技术：不断变化</li>
+<li>传播范围：呈现多平台传播的特征<a id="more"></a></li>
+</ul>
+<h2 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h2><ul>
+<li>运行平台</li>
+<li>传播方式<ul>
+<li>移动存储<ul>
+<li>自动播放功能：Windows默认自动执行autorun.inf指定的文件</li>
+<li>设置：组策略编辑器</li>
+</ul>
+</li>
+<li>文件传播<ul>
+<li>文件感染</li>
+<li>软件捆绑：强制安装和默认安装</li>
+</ul>
+</li>
+<li>网络传播：<ul>
+<li>网页（木马伪装为页面元素、利用脚本运行的漏洞、伪装为缺失的组件、通过脚本运行调用某些com组件）、</li>
+<li>邮件（社会工程学、邮件客户端漏洞、</li>
+<li>即时通讯、共享</li>
+</ul>
+</li>
+<li>主动放置<ul>
+<li>利用系统提供的上传渠道FTP、论坛</li>
+<li>攻击者已获得系统控制权</li>
+<li>攻击者是系统开发者</li>
+</ul>
+</li>
+<li>软件漏洞<ul>
+<li>利用各种系统漏洞：缓冲区溢出：冲击波、震荡波</li>
+<li>IIS的Unicode解码漏洞：红色代码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>工作机制</li>
+<li>危害</li>
+</ul>
+<h2 id="加载方式"><a href="#加载方式" class="headerlink" title="加载方式"></a>加载方式</h2><ul>
+<li>随系统启动而加载<ul>
+<li>开始菜单中的启动项</li>
+<li>启动配置文件：autorun.bat、win.ini、system.ini</li>
+<li>注册表启动项：<ul>
+<li>优势隐蔽性强和方式多样</li>
+<li>加载位置：load键值、userinit键值</li>
+</ul>
+</li>
+<li>系统服务<ul>
+<li>优势：隐蔽性强、无需用户登录、权限较高</li>
+<li>加载方式：单独服务、替换系统服务程序</li>
+</ul>
+</li>
+<li>组策略<ul>
+<li>优势：类似启动项，但隐蔽性更高</li>
+<li>不足：需要用户登录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>随文件执行加载<ul>
+<li>感染/文件捆绑</li>
+<li>浏览器插件：优势隐蔽性强、清理困难</li>
+<li>修改文件关联<ul>
+<li>原理：正常情况下txt文本文件关联到记事本打开，病毒修改后，txt文本文件关联到病毒文件打开</li>
+<li>优势：隐蔽性强，可关联任意类型文件，甚至可以关联目录</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>其他</li>
+</ul>
+<h2 id="恶意代码生存技术"><a href="#恶意代码生存技术" class="headerlink" title="恶意代码生存技术"></a>恶意代码生存技术</h2><ul>
+<li>进程保护<ul>
+<li>进程守护</li>
+<li>超级权限</li>
+</ul>
+</li>
+<li>检测对抗<ul>
+<li>反动态调试</li>
+<li>反静态调试</li>
+</ul>
+</li>
+</ul>
+<h2 id="进程守护"><a href="#进程守护" class="headerlink" title="进程守护"></a>进程守护</h2><ul>
+<li>恶意代码主程序：实现恶意代码主功能</li>
+<li>守护程序<ul>
+<li>监视并保护主进程正常运行</li>
+<li>组织主程序的退出</li>
+<li>重启主程序</li>
+<li>从备份中还原主程序</li>
+<li>从网络中重新下载主程序</li>
+</ul>
+</li>
+</ul>
+<h2 id="进程保护-设备驱动程序"><a href="#进程保护-设备驱动程序" class="headerlink" title="进程保护-设备驱动程序"></a>进程保护-设备驱动程序</h2><ul>
+<li><p>为什么是设备驱动程序？</p>
+<p>恶意代码通过将自身注册成为设备驱动，从而获得较高权限，阻止反病毒软件对他的查杀并干扰反恶意代码软件的正常进行</p>
+</li>
+<li><p>特点</p>
+<ul>
+<li>非常高的权限</li>
+<li>安全模式下下可工作</li>
+<li>无法直接查杀</li>
+</ul>
+</li>
+</ul>
+<h2 id="检测对抗技术-反动静态调试"><a href="#检测对抗技术-反动静态调试" class="headerlink" title="检测对抗技术-反动静态调试"></a>检测对抗技术-反动静态调试</h2><ul>
+<li>动态调试的发现<ul>
+<li>伪断点</li>
+<li>校验和，发现调试</li>
+<li>检测运行环境，发现调试工具</li>
+</ul>
+</li>
+<li><p>反动态调试的发现</p>
+<ul>
+<li>封锁键盘输入和屏幕显示</li>
+<li>中止调试软件</li>
+<li>恶意代码程序自动退出</li>
+</ul>
+</li>
+<li><p>反静态调试的实现</p>
+<ul>
+<li>加壳：对恶意代码的可执行二进制程序进行压缩，使其执行流程发生变化</li>
+<li>加密：随着加密密钥的变化，恶意代码会产生不同的表现形式，进一步提高了其抗静态分析的能力</li>
+<li>代码混淆：通过插入伪指令、混淆程序数据和控制流等方法，防止静态分析和检测</li>
+</ul>
+</li>
+</ul>
+<h2 id="恶意代码隐藏技术"><a href="#恶意代码隐藏技术" class="headerlink" title="恶意代码隐藏技术"></a>恶意代码隐藏技术</h2><ul>
+<li><p>隐藏通常包括本地隐藏和通信隐藏</p>
+<ul>
+<li>其中本地隐藏主要有：文件隐藏、进程隐藏、网络连接隐藏、内核模块隐藏、编译器隐藏</li>
+<li>通信隐藏主要有：通信内容隐藏和传输通道隐藏</li>
+</ul>
+</li>
+<li><p>rootlet技术</p>
+<ul>
+<li>本地隐藏，就是rootkit技术</li>
+<li>恶意代码的隐藏或多或少都与rootkit技术相关</li>
+</ul>
+</li>
+<li>本地隐藏技术：本地隐藏是指为了防止本地系统管理人员觉察而采取的隐藏手段，本地系统管理人员通常使用：查看进程列表、查看目录、查看内核模块、查看系统网络连接状态等管理命令来检测系统是否被植入了恶意代码</li>
+<li>进程隐藏<ul>
+<li>进程迷惑<ul>
+<li>随机进程名：每次启动生成不一样的进程名，退出后无法查找</li>
+<li>系统进程类命名<ul>
+<li>windows.exe</li>
+<li>system1.exe</li>
+<li>Kernel.exe</li>
+</ul>
+</li>
+<li>相似进程名：同名不同路径的进程</li>
+<li>hidetool：利用其可以轻松在任务管理器中将某些进程隐藏掉</li>
+</ul>
+</li>
+<li>DLL注入<ul>
+<li>动态连接库文件</li>
+<li>DLL注入技术是恶意代码将DLL文件放进某个进程的地址空间里，让他成为那个进程的一部分</li>
+<li>优势<ul>
+<li>无进程</li>
+<li>隐蔽性强</li>
+<li>消除难度大</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>网络隐藏<ul>
+<li>端口复用<ul>
+<li>重复利用系统网络打开的端口传送数据，这样既欺骗防火墙，又可以少开新端口</li>
+<li>端口复用是在保证端口默认服务正常工作的条件下用，具有很强的欺骗性</li>
+</ul>
+</li>
+<li>无端口：使用无端口的协议</li>
+<li>反向端口：端口反向连接技术，是指恶意代码攻击的服务端（被控制端）主动连接客户端（控制端</li>
+</ul>
+</li>
+<li>系统隐藏<ul>
+<li>隐藏、系统文件：默认情况下，Windows不显示隐藏文件和系统文件，恶意代码将自身属性设置为隐藏和系统文件以实现隐藏</li>
+<li>流文件隐藏：ADS交换数据流<ul>
+<li>NTFS文件系统下，每个文件都可以有多个数据流</li>
+<li>一个文件以流的形式附加到另一个文件载体中，流文件对explorer.exe等文件管理软件不可见，病毒可以利用此方式进行隐藏</li>
+<li>NTFS数据流后门</li>
+</ul>
+</li>
+<li>hook技术<ul>
+<li>钩子体制允许应用程序截获处理Windows消息或特定事件</li>
+<li>在目标窗口处理消息前处理它</li>
+<li>SSDT hook：可改变操作系统的处理流程，实现隐藏进程、文件等效果，甚至可以骗过冰刃、Xuetr等内核级工具</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="查杀案例"><a href="#查杀案例" class="headerlink" title="查杀案例"></a>查杀案例</h2><p>查杀熊猫烧香</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/恶意代码/" rel="tag"># 恶意代码</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/17/信息安全技术-操作系统安全/" rel="next" title="信息安全技术-操作系统安全">
+                <i class="fa fa-chevron-left"></i> 信息安全技术-操作系统安全
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/18/信息安全技术-网络协议安全/" rel="prev" title="信息安全技术-网络协议安全">
+                信息安全技术-网络协议安全 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#恶意代码发展史"><span class="nav-text">恶意代码发展史</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#发展趋势"><span class="nav-text">发展趋势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分类"><span class="nav-text">分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加载方式"><span class="nav-text">加载方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恶意代码生存技术"><span class="nav-text">恶意代码生存技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程守护"><span class="nav-text">进程守护</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程保护-设备驱动程序"><span class="nav-text">进程保护-设备驱动程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#检测对抗技术-反动静态调试"><span class="nav-text">检测对抗技术-反动静态调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#恶意代码隐藏技术"><span class="nav-text">恶意代码隐藏技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#查杀案例"><span class="nav-text">查杀案例</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

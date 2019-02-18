@@ -1,0 +1,1338 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,信息安全,操作系统安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.1-操作系统安全概述操作系统的功能 用户与计算机硬件之间的接口 操作系统为用户提供了虚拟计算机，把硬件的复杂性与用户隔离 计算机系统的资源管理者 CPU管理 存储管理 设备管理">
+<meta name="keywords" content="NISP,信息安全,操作系统安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全技术-操作系统安全">
+<meta property="og:url" content="http://21guns.top/2019/01/17/信息安全技术-操作系统安全/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="1.1-操作系统安全概述操作系统的功能 用户与计算机硬件之间的接口 操作系统为用户提供了虚拟计算机，把硬件的复杂性与用户隔离 计算机系统的资源管理者 CPU管理 存储管理 设备管理">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:34:14.315Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全技术-操作系统安全">
+<meta name="twitter:description" content="1.1-操作系统安全概述操作系统的功能 用户与计算机硬件之间的接口 操作系统为用户提供了虚拟计算机，把硬件的复杂性与用户隔离 计算机系统的资源管理者 CPU管理 存储管理 设备管理">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/01/17/信息安全技术-操作系统安全/">
+
+
+
+
+
+  <title>信息安全技术-操作系统安全 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/01/17/信息安全技术-操作系统安全/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全技术-操作系统安全</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-17T20:24:07+08:00">
+                2019-01-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-1-操作系统安全概述"><a href="#1-1-操作系统安全概述" class="headerlink" title="1.1-操作系统安全概述"></a>1.1-操作系统安全概述</h1><h2 id="操作系统的功能"><a href="#操作系统的功能" class="headerlink" title="操作系统的功能"></a>操作系统的功能</h2><ul>
+<li>用户与计算机硬件之间的接口</li>
+<li>操作系统为用户提供了虚拟计算机，把硬件的复杂性与用户隔离</li>
+<li>计算机系统的资源管理者<ul>
+<li>CPU管理</li>
+<li>存储管理</li>
+<li>设备管理<a id="more"></a></li>
+<li>文件管理</li>
+<li>网络与通信管理</li>
+<li>用户接口</li>
+</ul>
+</li>
+</ul>
+<h2 id="操作系统安全目标"><a href="#操作系统安全目标" class="headerlink" title="操作系统安全目标"></a>操作系统安全目标</h2><ul>
+<li>标识系统中的用户，进行身份鉴别</li>
+<li>依据系统安全策略对用户的操作进行访问控制，防止用户和外来入侵者对计算机资源的非法访问</li>
+<li>监督系统运行的安全性</li>
+<li>保证系统自身的安全和完整性</li>
+</ul>
+<h2 id="操作系统安全机制"><a href="#操作系统安全机制" class="headerlink" title="操作系统安全机制"></a>操作系统安全机制</h2><ul>
+<li><p>标识与鉴别</p>
+<ul>
+<li>用户身份合法性鉴别</li>
+<li>操作系统登录</li>
+</ul>
+</li>
+<li><p>访问控制</p>
+<ul>
+<li>防止对资源的非法使用</li>
+<li>限制访问主体对访问客体的访问权限</li>
+<li>DAC、MAC、RBAC</li>
+</ul>
+</li>
+<li><p>最小特权管理</p>
+<ul>
+<li>限制、分割用户和进程对系统资源的访问权限</li>
+<li>必不可少的权限</li>
+</ul>
+</li>
+<li><p>信道保护</p>
+<ul>
+<li>可信通路（trusted path</li>
+<li>安全键（SAK</li>
+</ul>
+</li>
+<li><p>安全审计</p>
+<ul>
+<li>对系统中有关安全的活动进行记录、检查以及审核</li>
+<li>审计一般是一个独立的过程</li>
+</ul>
+</li>
+<li><p>内存存取保护</p>
+<ul>
+<li>进程间/系统进程内存保护</li>
+<li>段式保护、页式保护和段页式保护</li>
+</ul>
+</li>
+<li><p>文件系统保护</p>
+<ul>
+<li>分区</li>
+<li>文件共享</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-2-Windows系统安全机制"><a href="#1-2-Windows系统安全机制" class="headerlink" title="1.2-Windows系统安全机制"></a>1.2-Windows系统安全机制</h1><h2 id="系统标识与鉴别-安全主体"><a href="#系统标识与鉴别-安全主体" class="headerlink" title="系统标识与鉴别-安全主体"></a>系统标识与鉴别-安全主体</h2><ul>
+<li>安全主体类型<ul>
+<li>用户账号<ul>
+<li>本地用户</li>
+<li>域用户</li>
+</ul>
+</li>
+<li>组账号<ul>
+<li>everyone组</li>
+<li>network组</li>
+</ul>
+</li>
+<li>计算机</li>
+<li>服务</li>
+</ul>
+</li>
+<li>安全标识符（security identify，SID<ul>
+<li>是安全主体的代表，标识用户、组和计算机账户的唯一编码</li>
+<li>范例：S-1-5-21-213213……（whoami /user可查看</li>
+</ul>
+</li>
+</ul>
+<h2 id="用户鉴别"><a href="#用户鉴别" class="headerlink" title="用户鉴别"></a>用户鉴别</h2><ul>
+<li>登录信息管理体制</li>
+<li>登录验证<ul>
+<li>本地登录验证</li>
+<li>远程登录验证</li>
+</ul>
+</li>
+<li>账号信息存储（SAM：安全账号管理<ul>
+<li>运行期锁定、存储格式加密</li>
+<li>仅对system账号有权限，通过服务进行访问控制</li>
+</ul>
+</li>
+<li>Windows用户身份鉴别：本地登录<ul>
+<li>GINA，Graphical identification and authentication，图形化识别和验证</li>
+<li>LSA，local security authority，本地安全授权</li>
+<li>过程：账号密码—GINA—LSA—SAM—本地信息库对比—登录成功</li>
+</ul>
+</li>
+<li>远程登录鉴别协议<ul>
+<li>SMB，server message block，口令明文传输</li>
+<li>LM，LAN manager，口令哈希传输，强度低</li>
+<li>NTLM，NT LAN manager，提高口令散列加密强度、挑战/响应机制</li>
+<li>Kerberos：为分布式网络提供单一身份验证</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统访问控制-ACL"><a href="#系统访问控制-ACL" class="headerlink" title="系统访问控制-ACL"></a>系统访问控制-ACL</h2><ul>
+<li>访问控制列表，access control list，ACL<ul>
+<li>NTFS文件系统支持</li>
+<li>权限存储流文件系统中</li>
+<li>自主访问控制</li>
+<li>灵活性高，安全性不高</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统访问控制-用户账号控制"><a href="#系统访问控制-用户账号控制" class="headerlink" title="系统访问控制-用户账号控制"></a>系统访问控制-用户账号控制</h2><ul>
+<li>用户账号控制，user account control，uac<ul>
+<li>完全访问令牌</li>
+<li>标准受限访问令牌</li>
+</ul>
+</li>
+</ul>
+<h2 id="文件系统安全"><a href="#文件系统安全" class="headerlink" title="文件系统安全"></a>文件系统安全</h2><ul>
+<li>NTFS文件系统权限控制（ACL<ul>
+<li>文件、文件夹、注册表键值、打印机等对象</li>
+</ul>
+</li>
+<li>安全加密<ul>
+<li>EFS，encrypting file system<ul>
+<li>Windows内置，与文件系统高度集成</li>
+<li>对Windows用户透明</li>
+<li>对称与非对称算法结合</li>
+</ul>
+</li>
+<li>bitlocker<ul>
+<li>对整个操作系统卷加密</li>
+<li>解决设备物理丢失安全问题</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统审计机制"><a href="#系统审计机制" class="headerlink" title="系统审计机制"></a>系统审计机制</h2><ul>
+<li>Windows日志<ul>
+<li>系统</li>
+<li>应用程序</li>
+<li>安全</li>
+<li>设置</li>
+</ul>
+</li>
+<li>应用程序和服务日志</li>
+<li>应用访问日志<ul>
+<li>FTP访问日志</li>
+<li>IIS访问日志</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统安全策略"><a href="#系统安全策略" class="headerlink" title="系统安全策略"></a>系统安全策略</h2><ul>
+<li>账户策略<ul>
+<li>密码策略</li>
+<li>账户锁定策略</li>
+</ul>
+</li>
+<li>本地策略<ul>
+<li>审核策略</li>
+<li>用户权限分配</li>
+<li>安全选项</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统安全配置"><a href="#系统安全配置" class="headerlink" title="系统安全配置"></a>系统安全配置</h2><ol>
+<li>安全配置前置工作<ul>
+<li>安全的安装<ul>
+<li>分区设置：不要只使用一个分区</li>
+<li>系统补丁：SP+hotfix</li>
+</ul>
+</li>
+<li>补丁更新设置<ul>
+<li>检查更新</li>
+<li>自动下载安装或手动</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>账号安全设置<ul>
+<li>保护账号安全<ul>
+<li>默认管理账号administrator更名</li>
+<li>设置好的口令：自己容易记，别人不好猜</li>
+</ul>
+</li>
+<li>系统账号策略设置<ul>
+<li>密码策略：避免系统出现弱口令（如长度最小值、最短使用期限、强制密码历史，即使用几次的历史密码不允许使用</li>
+<li>账号锁定策略：应对口令暴力破解（如账号锁定时间、账号锁定阀值、重置账号锁定计数器</li>
+</ul>
+</li>
+<li>账号安全选项设置</li>
+<li>账号权限控制-用户权限分配<ul>
+<li>从网络访问这台计算机</li>
+<li>拒绝从网络访问这台计算机</li>
+<li>管理审核和安全日志</li>
+<li>从远程系统强制关机</li>
+</ul>
+</li>
+<li>账号权限控制-设置唤醒密码<ul>
+<li>设置唤醒计算机时的登录密码</li>
+<li>设置屏幕保护恢复时的登录密码</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>关闭自动播放<ul>
+<li>自动播放功能：为方便用户而设计</li>
+<li>恶意代码借助存储介质传播的方式</li>
+<li>关闭自动播放：可以有效阻断U盘病毒的传播路径</li>
+</ul>
+</li>
+<li>远程访问控制<ul>
+<li>网络访问控制<ul>
+<li>防火墙设置：确保启用Windows自带防火墙</li>
+<li>防火墙高级配置<ul>
+<li>出战规则</li>
+<li>入站规则</li>
+<li>连接安全规则</li>
+<li>监视<ul>
+<li>防火墙</li>
+<li>连接安全规则</li>
+<li>安全关联</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>共享安全防护<ul>
+<li>共享相关风险<ul>
+<li>IPC$的安全问题（空会话连接导致信息泄漏</li>
+<li>管理共享风险（远程文件操作</li>
+<li>普通共享的风险（远程文件操作</li>
+</ul>
+</li>
+<li>关闭管理共享<ul>
+<li>空会话连接控制：本地安全策略设置中对匿名访问的限制</li>
+<li>关闭管理共享：修改注册表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>本地安全策略<ul>
+<li>审核策略</li>
+<li>用户权限分配</li>
+<li>安全选项（位置：管理工具-本地安全策略-安全设置-本地策略-安全选项<ul>
+<li>交互式登录：无须按ctrl+alt+del，设置为已禁用</li>
+<li>交互式登录：不显示最后的用户名，设置为已启用</li>
+<li>设备：将CD-ROM的访问权限仅限于本地登录的用户，设置为已启用</li>
+<li>网络访问：不允许SAM账号的匿名枚举，设置为已启用</li>
+<li>网络访问：可匿名访问的共享，删除策略设置里的值</li>
+<li>网络访问：可匿名访问的命名管道，删除策略设置里的值</li>
+<li>网络访问：可远程访问的注册表路径，删除策略设置里的值</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>服务运行安全设置<ul>
+<li>Windows服务：win服务程序是一个长时间运行的可执行程序，不需要用户的交互、登录</li>
+<li>关闭不需要的：如计划任务、远程操作注册表</li>
+<li>控制服务权限：system（本地系统）、local service、network service</li>
+</ul>
+</li>
+<li>使用第三方安全增强软件<ul>
+<li>防病毒软件<ul>
+<li>要安装：恶意代码是终端安全的最大威胁</li>
+<li>确保病毒库更新：病毒防护软件主要工作机制是特征码扫描</li>
+<li>开启云查杀</li>
+</ul>
+</li>
+<li>系统安全防护软件<ul>
+<li>系统安全防护软件</li>
+<li>影子系统</li>
+<li>主机入侵检测</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h1 id="1-3-Linux系统安全机制"><a href="#1-3-Linux系统安全机制" class="headerlink" title="1.3-Linux系统安全机制"></a>1.3-Linux系统安全机制</h1><h2 id="系统标识与鉴别"><a href="#系统标识与鉴别" class="headerlink" title="系统标识与鉴别"></a>系统标识与鉴别</h2><ul>
+<li>安全主体<ul>
+<li>用户：身份标识（User ID</li>
+<li>组：身份标识（Group ID</li>
+</ul>
+</li>
+<li>用户与组基本概念<ul>
+<li>文件必须有所有者</li>
+<li>用户必须属于某个或多个组</li>
+<li>用户与组的关系灵活（一对多、多对多都可以</li>
+<li>root用户拥有所有权限</li>
+</ul>
+</li>
+<li>账号信息存储<ul>
+<li>用户信息<ul>
+<li>/etc/passwd（账号</li>
+<li>/etc/shadow（密码</li>
+</ul>
+</li>
+<li>组信息<ul>
+<li>/etc/group</li>
+<li>/etc/gshadow</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用户信息文件-passwd<ul>
+<li>用于存放用户信息</li>
+<li>特点：文本格式、全局可读</li>
+<li>存储条目格式：name:coded-passwd:UID:GID:userinfo:homedirectory:shell</li>
+</ul>
+</li>
+<li>用户账号影子文件-shadow<ul>
+<li>用于存放用户密码散列、密码管理信息等</li>
+<li>特点：文本格式、仅对root可读可写</li>
+<li>存储条目格式：name:passwd:lastchg:min:max:warn:inactive:expire:flag</li>
+</ul>
+</li>
+<li>口令鉴别<ul>
+<li>本地登录</li>
+<li>远程登录（telnet、FTP等</li>
+</ul>
+</li>
+<li>主机信任（基于证书</li>
+<li>PAM（可插拔验证模块</li>
+</ul>
+<h2 id="系统访问控制-权限模式"><a href="#系统访问控制-权限模式" class="headerlink" title="系统访问控制-权限模式"></a>系统访问控制-权限模式</h2><ul>
+<li>文件/目录权限基本概念<ul>
+<li>权限类型：读、写、执行</li>
+<li>权限表示方式：模式位</li>
+<li>如：drwxr-xr-x</li>
+</ul>
+</li>
+<li>权限的数字表示法：rwx=111=7，r-x=101=5</li>
+<li>权限的特殊属性：SUID（临时获得文件属主权限，故用户可以更改自己密码，而原本用户对改密码文件是没有权限的）、SGID、Sticky（防删除</li>
+</ul>
+<h2 id="安全审计-日志系统"><a href="#安全审计-日志系统" class="headerlink" title="安全审计-日志系统"></a>安全审计-日志系统</h2><ul>
+<li>系统日志类型<ul>
+<li>连接时间日志<ul>
+<li>/var/log/wtmp和/var/run/utmp</li>
+<li>由多个程序执行，记录用户登录时间</li>
+</ul>
+</li>
+<li>进程统计<ul>
+<li>由系统内核执行，为系统基本服务提供命令使用统计</li>
+</ul>
+</li>
+<li>错误日志<ul>
+<li>/var/log/messages</li>
+<li>由syslogd守护记录，制定注意的事项</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>应用程序日志：如HTTP、FTP等创建的日志</li>
+</ul>
+<h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><ul>
+<li>文件系统类型<ul>
+<li>日志文件系统：Rxt4、Ext3、XFS、JFS等</li>
+</ul>
+</li>
+<li>文件系统安全<ul>
+<li>访问权限</li>
+<li>文件系统加密<ul>
+<li>eCryptfs（Enterprise Cryptographic Filesystem</li>
+<li>基于内核，安全性高，用户操作便利</li>
+<li>加密元数据写在每个加密文件的头部，方便迁移、备份</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="特权管理"><a href="#特权管理" class="headerlink" title="特权管理"></a>特权管理</h2><ul>
+<li>特权划分<ul>
+<li>分割管理权限，30多种管理特权</li>
+<li>根用户（root）拥有所有特权</li>
+<li>普通用户特权操作实现：setuid、setgid</li>
+</ul>
+</li>
+<li>特权保护：保护root账号<ul>
+<li>不直接使用root登录，普通用户su成为root</li>
+<li>控制root权限使用</li>
+</ul>
+</li>
+</ul>
+<h2 id="系统安全配置-1"><a href="#系统安全配置-1" class="headerlink" title="系统安全配置"></a>系统安全配置</h2><ol>
+<li>安全配置前置工作<ul>
+<li>系统安装<ul>
+<li>使用官方/正版软件</li>
+<li>分区挂载重要目录：根目录/，用户目录/home，临时目录/tmp等应该分开到不同的磁盘分区</li>
+<li>自定义安装，选择需要的软件包：不安装全部软件包，尤其是那些不需要的网路服务包</li>
+</ul>
+</li>
+<li>系统补丁<ul>
+<li>及时安装系统补丁</li>
+<li>更新补丁前，先在测试系统上对补丁的可用性和兼容性进行验证</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>账号和口令安全<ul>
+<li>账号通用配置<ul>
+<li>检查、清除系统中多余账号（检查：cat /etc/passwd、cat /etc/shadow</li>
+<li>锁定账号<ul>
+<li>特殊保留的系统伪账户，可以设置锁定登录</li>
+<li>锁定命令：#passwd -l 用户名</li>
+<li>解锁命令：#passwd -u 用户名</li>
+</ul>
+</li>
+<li>禁用root之外的所有超级用户<ul>
+<li>打开系统账号文件/etc/passwd</li>
+<li>若用户ID=0，则表示该用户拥有超级用户的权限</li>
+<li>检查是否有多个ID=0</li>
+<li>禁用或删除多余的账号</li>
+</ul>
+</li>
+<li>检查是否存在空口令账户<ul>
+<li>执行命令：awk -F:’(== “”){print $1}’ /etc/shadow</li>
+<li>如果存在空口令账户，则对其进行锁定，或要求增加密码</li>
+<li>要确认空口令账户是否和已有应用关联，增加密码是否会引起应用无法连接的问题</li>
+</ul>
+</li>
+<li>设置账户锁定登录失败锁定次数、锁定时间（system-auth文件</li>
+<li>修改账户超时值，设置自动注销时间（profile文件</li>
+</ul>
+</li>
+<li>保护root账号<ul>
+<li>root账号权限很高</li>
+<li>保护措施<ul>
+<li>禁止使用root登录系统</li>
+<li>只允许普通用户登陆，可通过su命令切换到root</li>
+<li>不随意把root shell留在终端上</li>
+<li>不把当前目录./和普通用户的bin目录放在root账号的环境变量PATH中</li>
+<li>不以root运行其他用户的或不熟悉的程序</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>口令安全策略<ul>
+<li>使用安全口令：口令长度、字符要求</li>
+<li>口令修改策略<ul>
+<li>强制口令使用有效期</li>
+<li>设置口令修改提醒</li>
+<li>设置账户锁定登录失败锁定次数、锁定时间</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统服务配置<ul>
+<li>禁止危险的网络服务：telnet、FTP、echo、chargen、shell等</li>
+<li>关闭非必需的网络服务：talk、ntalk等</li>
+<li>确保最新版本：使用最新的、最安全的版本</li>
+</ul>
+</li>
+<li>远程登录安全<ul>
+<li>禁用telnet，使用SSH进行管理</li>
+<li>限制能够登录本机的IP地址（sshd_config文件</li>
+<li>禁止root用户远程登录（sshd_config</li>
+<li>限定信任主机</li>
+<li>修改banner 信息</li>
+</ul>
+</li>
+<li>文件和目录安全<ul>
+<li>保护重要的文件目录，限制用户访问<ul>
+<li>设置文件的属主和属性以进行保护</li>
+<li>重要的文件或目录设置为不可改变属性：chattr +i /etc/passwd</li>
+</ul>
+</li>
+<li>临时文件不应该有执行权限</li>
+<li>设置新创建文件的默认权限掩码：可根据要求设置新文件的默认访问权限，如仅允许文件属主访问，不允许其他人访问</li>
+<li>umask设置的是权限补码</li>
+<li>设置方法：<ul>
+<li>使用umask命令，如#umask 066</li>
+<li>编辑/etc/profile文件，设置umask值</li>
+</ul>
+</li>
+<li>检查SUID/SGID文件<ul>
+<li>SUID/SGID的程序在运行时，将有效用户ID改变为该程序的所有者（组）ID，因为可能存在一定的安全隐患</li>
+<li>找出系统中所有含s“位的程序，把不必要的s位去掉，或者把根本不用的直接删除，可防止用户滥用及提升权限的可能性</li>
+<li>查找SUID可执行程序#find / -perm -4000 -user 0 -ls</li>
+<li>查找SGID程序 # find / -perm -2000 -user 0 -ls</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>系统日志配置<ul>
+<li>审查日志中不正常情况<ul>
+<li>非常规时间登录</li>
+<li>日志残缺</li>
+<li>Su的使用</li>
+<li>服务的启动情况</li>
+</ul>
+</li>
+<li>启用syslog服务</li>
+<li>配置日志存储策略：打开syslog文件，检查其对日志存储空间的大小和时间的设置</li>
+<li>使用syslog设备：syslog.conf设置、使用syslog日志服务器</li>
+</ul>
+</li>
+<li>使用安全软件<ul>
+<li>启用主机防火墙</li>
+<li>使用最新版本安全软件：用官方的、最新的</li>
+<li>Linux下的防火墙框架iptables<ul>
+<li>已内嵌到Linux系统中、功能较强大</li>
+<li>功能：包过滤、NAT、数据包处理</li>
+<li>建议设置开机自启</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+            <a href="/tags/操作系统安全/" rel="tag"># 操作系统安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/16/信息安全技术-安全漏洞与数据库安全/" rel="next" title="信息安全技术-安全漏洞与数据库安全">
+                <i class="fa fa-chevron-left"></i> 信息安全技术-安全漏洞与数据库安全
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/17/信息安全技术-恶意代码防范/" rel="prev" title="信息安全技术-恶意代码防范">
+                信息安全技术-恶意代码防范 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1-操作系统安全概述"><span class="nav-text">1.1-操作系统安全概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统的功能"><span class="nav-text">操作系统的功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统安全目标"><span class="nav-text">操作系统安全目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#操作系统安全机制"><span class="nav-text">操作系统安全机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2-Windows系统安全机制"><span class="nav-text">1.2-Windows系统安全机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统标识与鉴别-安全主体"><span class="nav-text">系统标识与鉴别-安全主体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用户鉴别"><span class="nav-text">用户鉴别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统访问控制-ACL"><span class="nav-text">系统访问控制-ACL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统访问控制-用户账号控制"><span class="nav-text">系统访问控制-用户账号控制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统安全"><span class="nav-text">文件系统安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统审计机制"><span class="nav-text">系统审计机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统安全策略"><span class="nav-text">系统安全策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统安全配置"><span class="nav-text">系统安全配置</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-3-Linux系统安全机制"><span class="nav-text">1.3-Linux系统安全机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#系统标识与鉴别"><span class="nav-text">系统标识与鉴别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统访问控制-权限模式"><span class="nav-text">系统访问控制-权限模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安全审计-日志系统"><span class="nav-text">安全审计-日志系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文件系统"><span class="nav-text">文件系统</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#特权管理"><span class="nav-text">特权管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#系统安全配置-1"><span class="nav-text">系统安全配置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

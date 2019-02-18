@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,信息安全,密码学,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.1-发展历史发展 古代-19世纪末：古典密码 20世纪初-1949：近代密码 1949-1975，香农论文：现代密码 1976后，diffie、Hellman论文（密码新方向）；公钥密码  古典密码">
+<meta name="keywords" content="NISP,信息安全,密码学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全技术-密码学">
+<meta property="og:url" content="http://21guns.top/2019/01/14/信息安全技术-密码学/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="1.1-发展历史发展 古代-19世纪末：古典密码 20世纪初-1949：近代密码 1949-1975，香农论文：现代密码 1976后，diffie、Hellman论文（密码新方向）；公钥密码  古典密码">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:34:07.232Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全技术-密码学">
+<meta name="twitter:description" content="1.1-发展历史发展 古代-19世纪末：古典密码 20世纪初-1949：近代密码 1949-1975，香农论文：现代密码 1976后，diffie、Hellman论文（密码新方向）；公钥密码  古典密码">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/01/14/信息安全技术-密码学/">
+
+
+
+
+
+  <title>信息安全技术-密码学 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/01/14/信息安全技术-密码学/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全技术-密码学</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-14T20:24:07+08:00">
+                2019-01-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-1-发展历史"><a href="#1-1-发展历史" class="headerlink" title="1.1-发展历史"></a>1.1-发展历史</h1><h2 id="发展"><a href="#发展" class="headerlink" title="发展"></a>发展</h2><ol>
+<li>古代-19世纪末：古典密码</li>
+<li>20世纪初-1949：近代密码</li>
+<li>1949-1975，香农论文：现代密码</li>
+<li>1976后，diffie、Hellman论文（密码新方向）；公钥密码</li>
+</ol>
+<h2 id="古典密码"><a href="#古典密码" class="headerlink" title="古典密码"></a>古典密码<a id="more"></a></h2><ul>
+<li>安全性在于保持算法本身的保密性，受到算法限制<ul>
+<li>不适合大规模生产</li>
+<li>不适合较大的或人员变动较大的组织</li>
+<li>用户无法了解算法的安全性</li>
+</ul>
+</li>
+<li>简单分类<ul>
+<li>代替密码<ul>
+<li>单字母代替（流密码，一个个加密<ul>
+<li>单表代替密码</li>
+<li>多表代替密码</li>
+</ul>
+</li>
+<li>多字母替换（分组替换，多个一组，一组组加密</li>
+</ul>
+</li>
+<li>换位密码（ABC到CBA，打乱顺序</li>
+<li>以上两种组合</li>
+</ul>
+</li>
+<li>举例：公元前19世纪，古埃及，特殊符号代替象形文字写碑文</li>
+<li>隐写术，如藏头诗，起源古希腊战争中，头上不同符号表不同指令</li>
+<li>赛塔式密码，纸条绕在棒子上</li>
+<li>凯撒密码，简单替换密码，明文字母后移n位得密文</li>
+<li>单表系统密码：单字母代替密码容易被破解；明文与密文的对应表不是按顺序的，是打乱的（凯撒按序）如A对Q，B对C，随意配对，只保证26个字母没重复即可；<ul>
+<li>尽管相对凯撒这种按序的相对难于破解，但是无法抵御概率攻击</li>
+<li>明文中字母A出现的频率与密文中字母M出现的频率是相同的，基于此原理，进行统计概率攻击</li>
+</ul>
+</li>
+<li>多表加密系统：每个明文对应多个密文，如A对应XGV（A在第一位时取X……），B对应YHY，C对应ZIB，故明文ABC的密文为XHB；维数可以更多，越多越难破译；也有统计规律可循，但短密文不足以找到规律</li>
+<li>扩散 vs 混乱思想（香农提出）<ul>
+<li>扩散：将每一位明文的影响尽可能多的分布到多个密文中，以隐蔽明文的统计特性（一对多，数量多</li>
+<li>混乱：使密文的统计特性与明文、密钥之间的关系尽量复杂化（结构复杂</li>
+</ul>
+</li>
+</ul>
+<h2 id="近代密码学"><a href="#近代密码学" class="headerlink" title="近代密码学"></a>近代密码学</h2><ul>
+<li>标志是机械/机电密码，机电代替手工（加密的本质并没变），最著名的轮转机</li>
+<li>理想的加密方案，一次一密乱码本<ul>
+<li>OTP（one time pad），理论上不可破<ul>
+<li>不重复使用乱码本</li>
+<li>使用不可预知的随机数</li>
+</ul>
+</li>
+<li>应用：华盛顿-莫斯科“热线”、俄罗斯间谍、CIA</li>
+</ul>
+</li>
+</ul>
+<h2 id="现代密码学"><a href="#现代密码学" class="headerlink" title="现代密码学"></a>现代密码学</h2><ul>
+<li>新特点：安全性基于密钥而非算法的保密（从古典到近代本质并未变，机械代替手工而已</li>
+</ul>
+<h2 id="公钥密码学"><a href="#公钥密码学" class="headerlink" title="公钥密码学"></a>公钥密码学</h2><ul>
+<li>使得发送端和接收端无密钥传输的保密通信成为可能</li>
+</ul>
+<h1 id="1-2-基本概念"><a href="#1-2-基本概念" class="headerlink" title="1.2-基本概念"></a>1.2-基本概念</h1><h2 id="密码学两大部分"><a href="#密码学两大部分" class="headerlink" title="密码学两大部分"></a>密码学两大部分</h2><ul>
+<li>密码编码学（加密）</li>
+<li>密码分析学（破解）</li>
+</ul>
+<h2 id="相关术语"><a href="#相关术语" class="headerlink" title="相关术语"></a>相关术语</h2><ul>
+<li>加密：明到密；明文通过加密算法，在密钥的作用下变成密文（联想图）；加密算法即函数，密钥即参数，明文为输入，密文为输出</li>
+<li>解密：密到明；其它同上</li>
+<li>根据加密密钥和解密密钥是否相同，分为对称密钥和非对称</li>
+<li>有一密文，若要恢复为明文，算法和密钥缺一不可，故有两类，基于算法的和基于密钥的（古典密码基于算法，现代密码基于密钥</li>
+<li>密钥空间：即密钥的比特序列长度，密钥空间越大，即密钥越长，密钥越难破解</li>
+<li>现代密码学中，加密算法大部分是公开的，故确保安全的就是密钥，即此是基于密钥的（古典基于算法</li>
+<li>kerchhoff假设：攻击者什么都知道，唯一不知道密钥</li>
+<li>密钥管理：自产生到销毁的整个过程，如产生、存储、分发等</li>
+<li>香农：提出扩散&amp;混乱；在理想密码系统中，密文的统计特性与其使用的密钥独立</li>
+</ul>
+<h2 id="密码分析的典型方式"><a href="#密码分析的典型方式" class="headerlink" title="密码分析的典型方式"></a>密码分析的典型方式</h2><ul>
+<li>唯密文攻击：攻击者仅知道一些密文</li>
+<li>已知明文攻击：攻击者知道一些明文和相应密文</li>
+<li>选择明文攻击：可以选择一些明文，并得到相应的密文（中途岛海战，AF表中途岛）；攻击者有密文x而不知其明文是什么，让受害者加密a-c，发现a加密后为x，故得到密文x的明文是a；</li>
+<li>选择密文攻击：可以选择一些密文，并得到相应的明文（暂时控制解密机）；攻击者掌握对解密机的访问权限，可构造任意密文对应的明文</li>
+<li>旁路攻击：手机外面的信息来破解密码，而不是直接处理里面的东西，间接攻击的意思；如检测加解密过程所消耗的能量来计算过程时间；</li>
+<li>重放攻击：攻击者捕获一些数据并重新提交，希望用来欺骗接受设备让其以为这是合法信息；时间戳和序列号是对付它的两种方式；</li>
+<li>统计式攻击：对密文进行统计分析，得到统计规律，并与明文的统计规律进行对照，从而得到相关对应</li>
+</ul>
+<h2 id="密码体制分类"><a href="#密码体制分类" class="headerlink" title="密码体制分类"></a>密码体制分类</h2><ul>
+<li>受限制的算法 vs 基于密钥的算法：前者基于算法，后者基于密钥</li>
+<li>对称密码 vs 非对称密码：加解密的密钥是否相同，后者有公钥和私钥；前者如DES、AES，后者如RSA、ECC</li>
+<li>分组密码 vs 流密码；一组组加密和一个个加密</li>
+<li>代替密码 vs 置换（换位）密码：前者a替换为b，后者顺序打乱</li>
+</ul>
+<h2 id="密钥管理"><a href="#密钥管理" class="headerlink" title="密钥管理"></a>密钥管理</h2><ul>
+<li>密钥的生存周期：授权使用该密钥的周期，主要有：产生、分配、使用、更新/替换、撤销、销毁<ul>
+<li>拥有大量密文有助于密码分析，若一个密钥使用时间太长，会给攻击者增大收集密文的机会</li>
+<li>假设一个密钥受到危及，限制密钥的使用期限就会限制安全危险的发生</li>
+</ul>
+</li>
+<li>密钥的分配<ul>
+<li>无中心的密钥分配模式：</li>
+<li>中心化的分配模式：</li>
+<li>公钥密码体制的分配模式（最常用）</li>
+</ul>
+</li>
+<li>密钥管理的其他阶段<ul>
+<li>密钥使用：注意内存的密钥泄漏</li>
+<li>密钥存储：现更多存储在USB key中</li>
+<li>密钥更新：从旧密钥中产生新密钥、公私钥重新生成</li>
+<li>密钥备份：可信第三方托管或使用主密钥（公钥）加密保存；主要针对加密密钥</li>
+<li>密码销毁：不同于撤销，这是物理上彻底粉碎</li>
+</ul>
+</li>
+<li>所有的密码技术都依赖于密钥，因此很重要</li>
+<li>密钥的管理本身是一个很复杂的课题，而且是保证安全性的关键点</li>
+<li>密钥管理方法因所使用的密码体制（如对称和非对称）而异</li>
+</ul>
+<h1 id="1-3-密码学算法"><a href="#1-3-密码学算法" class="headerlink" title="1.3-密码学算法"></a>1.3-密码学算法</h1><h2 id="对称密码算法"><a href="#对称密码算法" class="headerlink" title="对称密码算法"></a>对称密码算法</h2><ul>
+<li>加解密密钥相同，或者形式上不同但实质上相同</li>
+<li>典型算法：DES、3DES、AES、</li>
+<li>优点：效率高</li>
+<li>缺点：安全交换密钥问题以及密钥管理复杂（密文可以公开传递，但密钥要通过安全信道传递给对方，安全信道怎么实现？）</li>
+</ul>
+<h2 id="数据加密标准DES"><a href="#数据加密标准DES" class="headerlink" title="数据加密标准DES"></a>数据加密标准DES</h2><ul>
+<li>DES，一种对称密钥算法，密钥长度56b（加上奇偶校验，通常写成64b</li>
+<li>采用分组加密算法，64b为一组</li>
+<li>基本思想：混乱和扩散</li>
+<li>使用标准的算术运算和逻辑运算</li>
+<li>产生：1973年，NBS公开征集标准加密算法、IBM提出、76年发布、98年美政府不将其作为标准（因其安全性受到挑战</li>
+<li>加解密过程<ul>
+<li>明文，每64b作为一单位块m，对每个m操作</li>
+<li>输入64b明文–初始置换—16轮迭代–交换左右32b—初始逆置换–输出64b密文（一轮迭代对应一子密钥）</li>
+<li>解密过程与加密过程相似，只不过16轮迭代的子密钥顺序倒过来</li>
+<li>DES逆（DES（m）） = m</li>
+</ul>
+</li>
+<li>DES的强度<ul>
+<li>密钥长度=56b（差和线不实用<ul>
+<li>强力攻击：2^55次</li>
+<li>差分密码分析：2的47次方</li>
+<li>线性密码分析：2的43次方</li>
+</ul>
+</li>
+<li>举例：76年-2000W美金计算机-一天、93年-100w美金计算机-3.5h、98年-EFF破译了-DES破译机（破解成本越来越低）</li>
+</ul>
+</li>
+</ul>
+<h2 id="高级数据加密标准AES"><a href="#高级数据加密标准AES" class="headerlink" title="高级数据加密标准AES"></a>高级数据加密标准AES</h2><ul>
+<li>产生过程：……</li>
+</ul>
+<h2 id="对称密码算法的优缺点："><a href="#对称密码算法的优缺点：" class="headerlink" title="对称密码算法的优缺点："></a>对称密码算法的优缺点：</h2><ul>
+<li>优点：<ul>
+<li>效率高、算法简单、系统开销小</li>
+<li>适合加密大量数据</li>
+<li>明文长度与密文长度相等（因为使用的是算术运算和逻辑运算）</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>需要以安全方式进行密钥交换</li>
+<li>密钥管理复杂</li>
+</ul>
+</li>
+</ul>
+<h2 id="对称密码小结"><a href="#对称密码小结" class="headerlink" title="对称密码小结"></a>对称密码小结</h2><ul>
+<li>DES是应用最广泛的对称密码算法（由于计算能力的快速发展，DES不再被认为是安全的</li>
+<li>IDEA在欧洲应用较多</li>
+<li>AES将在未来最主要、最常用的对称密码算法</li>
+</ul>
+<h2 id="公钥密码算法（非对称密码算法"><a href="#公钥密码算法（非对称密码算法" class="headerlink" title="公钥密码算法（非对称密码算法"></a>公钥密码算法（非对称密码算法</h2><ul>
+<li>公钥、私钥</li>
+<li>RSA、ECC、ElGamal、DH（Diffie与Hellman发表的第一个，以其名字命名）</li>
+<li>优点：解决密钥传递问题（如DH算法）、密钥管理简单、提供数字签名等服务</li>
+<li>缺：计算复杂、耗用资源多（联想对称的优缺</li>
+</ul>
+<h2 id="公钥密码的重要特性"><a href="#公钥密码的重要特性" class="headerlink" title="公钥密码的重要特性"></a>公钥密码的重要特性</h2><ul>
+<li>加解密密钥不同</li>
+<li>知道加密算法，从加密密钥得到解密密钥在计算上不可行</li>
+<li>两个密钥中任何一个都可用作加密而另一个用作解密（并非绝对的公钥解密私钥加密）</li>
+<li>单向陷门函数：已知x求y容易，而已知y求x困难</li>
+</ul>
+<h2 id="DH密钥交换"><a href="#DH密钥交换" class="headerlink" title="DH密钥交换"></a>DH密钥交换</h2><ul>
+<li>DH交换及密钥产生（见算法动画图解，迪菲赫尔曼密钥交换</li>
+</ul>
+<h2 id="RSA公钥密码体制"><a href="#RSA公钥密码体制" class="headerlink" title="RSA公钥密码体制"></a>RSA公钥密码体制</h2><ul>
+<li>三人名字命名</li>
+<li>分组加密算法，0～n-1间，n为Z</li>
+<li>数学基础是欧拉定理，并建立在大数分解困难性之上</li>
+<li>目前应用最广泛的公钥密码算法</li>
+<li>只在美国申请专利，且于00年到期</li>
+</ul>
+<h2 id="数字签名算法DSA"><a href="#数字签名算法DSA" class="headerlink" title="数字签名算法DSA"></a>数字签名算法DSA</h2><ul>
+<li>NIST提出，并作为数字签名标准DSS，但招致大量反对<ul>
+<li>DSA不能用于加密或密钥分配</li>
+<li>由NSA研制，可能有后门</li>
+<li>比RSA慢</li>
+<li>可能侵犯其他专利</li>
+<li>RSA是事实上标准（RSA也有签名功能</li>
+</ul>
+</li>
+</ul>
+<h2 id="公钥密码的应用"><a href="#公钥密码的应用" class="headerlink" title="公钥密码的应用"></a>公钥密码的应用</h2><table>
+<thead>
+<tr>
+<th>算法</th>
+<th>加解密</th>
+<th>数字签名</th>
+<th>密钥交换</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RSA</td>
+<td>是</td>
+<td>是</td>
+<td>是</td>
+</tr>
+<tr>
+<td>Dieffie-Hellman</td>
+<td></td>
+<td></td>
+<td>是</td>
+</tr>
+<tr>
+<td>DSS</td>
+<td></td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<h2 id="公钥密码体制的优缺点"><a href="#公钥密码体制的优缺点" class="headerlink" title="公钥密码体制的优缺点"></a>公钥密码体制的优缺点</h2><ul>
+<li>优点<ul>
+<li>解决密钥传递问题</li>
+<li>大大减少密钥持有量（对称AB、AC各有一套，而非对称中A有私，而B、C有其公，前者四个，后者三个</li>
+<li>提供对称无法或很难提供的服务（如数字签名</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>计算复杂、耗用资源大</li>
+<li>非堆成会导致得到的密文变长</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-4-散列函数与消息鉴别"><a href="#1-4-散列函数与消息鉴别" class="headerlink" title="1.4-散列函数与消息鉴别"></a>1.4-散列函数与消息鉴别</h1><h2 id="哈希函数（散列函数）"><a href="#哈希函数（散列函数）" class="headerlink" title="哈希函数（散列函数）"></a>哈希函数（散列函数）</h2><ul>
+<li>哈希函数：将任意长度的输入，映射成较短的定长的的输出</li>
+<li>作用：完整性校验</li>
+<li>主要算法：MD5、SHA-1</li>
+<li>数学性质：单向性、弱抗碰撞性、强抗碰撞性（碰撞即不同a、b有相同的hash值，如下）</li>
+<li>原理：hash值同消息一起发送至接收者，接受者对该消息进行hash，看得到的新hash与旧hash是否一样，不一样则遭篡改</li>
+</ul>
+<h2 id="hash函数的特点"><a href="#hash函数的特点" class="headerlink" title="hash函数的特点"></a>hash函数的特点</h2><ul>
+<li>H能够应用到任意长度的数据上</li>
+<li>H能够生成大小固定的输出（较短</li>
+<li>对于任意给定的x，H(x)的计算相对简单</li>
+<li>对于给定的散列值h，要找到H(x)=h的x在计算上是不可行的（即单向性</li>
+<li>对于给定的消息x，要找到另一个消息y满足H(y)=H(x)在计算上是不可行的（两个不同的输入，哪怕只有1b不同，经过hash后，也截然不同</li>
+<li>MD5（输出是128b）、SHA（160b）</li>
+<li>仍有缺陷：如MD5，输出只有128b，尽管很大，但是有限，而输入是无限的，无限对应有限，一定存在a、b不同，但hash值相同的情况，即碰撞（md5与sha-1都有碰撞的问题，只不过可能性不同，一个128b一个160b）</li>
+<li>尽管存在碰撞，但仍使用，因为找两个hash值相同的a、b成本高（要清楚，在理论上是有缺陷的）</li>
+</ul>
+<h2 id="MD5算法"><a href="#MD5算法" class="headerlink" title="MD5算法"></a>MD5算法</h2><ul>
+<li>message digest，消息摘要</li>
+<li>输入：任意长度的消息（无限</li>
+<li>输出：128b消息摘要（有限</li>
+<li>处理：以512b作为块为单位</li>
+</ul>
+<h2 id="SHA-1算法"><a href="#SHA-1算法" class="headerlink" title="SHA-1算法"></a>SHA-1算法</h2><ul>
+<li>secure hash algorithm，安全哈希算法，NIST开发，后经修订作为SHA-1，其基于MD4设计</li>
+<li>输入：最大长度2的64次方 b</li>
+<li>输出：160b消息摘要</li>
+<li>处理：同MD5</li>
+</ul>
+<h2 id="SHA-1vs-MD5"><a href="#SHA-1vs-MD5" class="headerlink" title="SHA-1vs MD5"></a>SHA-1vs MD5</h2><ul>
+<li>散列值长度：m-128b，s-160b</li>
+<li>安全性：sha好一些，但其设计原则没有公开</li>
+<li>速度：sha慢一些</li>
+</ul>
+<h2 id="消息鉴别"><a href="#消息鉴别" class="headerlink" title="消息鉴别"></a>消息鉴别</h2><ul>
+<li>对收到的消息进行鉴别，证明确实是来自声称的发送方，且没有被修改过</li>
+<li>作用：完整性校验、时间和顺序校验</li>
+<li>消息认证方式：Message encryption、Hash function（常用，如上）、MAC</li>
+<li>基于hash的消息，兼具有完整性，即hash可用于消息鉴别，看消息是否被篡改，hash还可用在web应用的密码上，密码不是明文存储，而是转为hash值后存储在数据库</li>
+</ul>
+<h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><ul>
+<li>附加在数据单元上的一些数据，或者对数据单元所做的密码变换，这种数据或者数据变换，能使数据单元的接收者确认数据单元的来源和完整性，并且保护数据防止被人伪造</li>
+<li>作用：不可伪造性、不可否认性、保证消息完整性</li>
+<li>基于RSA的数字签名——抗抵赖性<ul>
+<li>用户A，发送者<ul>
+<li>数据，经过hash算法，得到hash值</li>
+<li>用户a私钥加密，得hash值的密文</li>
+<li>密文随消息发送出去</li>
+</ul>
+</li>
+<li>用户B，接收者<ul>
+<li>得到数据+密文</li>
+<li>取下密文，用户a公钥解密，得hash值1</li>
+<li>取下数据，经过hash算法，得hash值2</li>
+<li>若两hash值相同，说明未被篡改，保证完整性</li>
+<li>也说明该数据是由用户A的私钥加密的，即用户A签名的，防止其抵赖</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>加密hash值得到的密文，即数字签名</li>
+<li>数字签名功能：抗抵赖，保证完整性（如上</li>
+<li>数字签名的基本条件<ul>
+<li>签名者不能否认自己的签名</li>
+<li>接收者能够验证签名，而其他任何人都不能伪造签名</li>
+<li>当关于签名的真伪发生争执时，存在一个仲裁机构或第三方，能够解决争执</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-5-密码学应用之PKI体系"><a href="#1-5-密码学应用之PKI体系" class="headerlink" title="1.5-密码学应用之PKI体系"></a>1.5-密码学应用之PKI体系</h1><p>（以上为基础）</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><ul>
+<li><p>网络存在的典型安全隐患：假冒、窃听、篡改、冒名传送、否认传送……</p>
+</li>
+<li><p>信息安全要素举例</p>
+<ul>
+<li>你是谁？我是Tom——认证</li>
+<li>怎么确定你就是你？口令是123——鉴别</li>
+<li>我能干什么？你能干a，不能干b——授权</li>
+<li>如何让别人无法偷听？我有密钥——机密性</li>
+<li>如何保证不能被窜改？我有数字签名——完整性</li>
+<li>我偷了机密文件，但我不承认。我有你的罪证——防抵赖（如上基于RSA的数字签名</li>
+</ul>
+</li>
+<li><p>密码技术在信息安全中的作用</p>
+<p>| 信息安全要素       | 威胁                             | 密码技术                                 |<br>| —————— | ——————————– | —————————————- |<br>| 机密性             | 窃听、非法窃取资料、敏感信息泄露 | 对称和非对称加密、数字信封               |<br>| 完整性             | 窜改、重放攻击、破坏             | 哈希函数和消息认证码、数据加密、数字签名 |<br>| 可鉴别性（身份认证 | 冒名                             | 口令和共享秘密、数字证书和数字签名       |<br>| 不可否认性         | 否认已收到、否认已发送           | 数字签名、证据存储                       |<br>| 授权与访问控制     | 非法存取资料、越权访问           | 属性证书、访问控制                       |</p>
+</li>
+<li><p>在公钥密码体系中</p>
+<ul>
+<li>a用b的公钥加密信息，b用b的私钥解密</li>
+<li>那么对a来说，如何证明这个公钥是b的，即公钥与人身份的绑定</li>
+<li>数字证书来证明</li>
+<li>那数字证书的正确与否怎么保证，要有一个可靠的机构来颁发，引出CA-认证中心</li>
+</ul>
+</li>
+</ul>
+<h2 id="PKI-CA体系"><a href="#PKI-CA体系" class="headerlink" title="PKI/CA体系"></a>PKI/CA体系</h2><ul>
+<li>PKI—公钥基础设施，CA—认证中心</li>
+<li><p>PKI，public key infrastructure</p>
+<ul>
+<li>建立在公开密钥技术的基础上</li>
+<li>提供信息安全服务</li>
+<li>利用加密、数字签名、数字证书等技术来保障安全</li>
+<li>一种在线基础设施，同电力基础设施</li>
+</ul>
+</li>
+<li><p>PKI/CA</p>
+<ul>
+<li>建立在公开密钥技术的基础上</li>
+<li>硬件、软件、人员和应用程序的集合</li>
+<li>具备生产、管理、存储、核发、废止等证书管理能力</li>
+<li>从运营、管理、规范、法律、人员等多个角度，来解决网络信任问题</li>
+</ul>
+</li>
+<li><p>PKI体系对象-四类实体</p>
+<ul>
+<li>CA—认证权威（证书的认证机构</li>
+<li>RA—注册权威（证书的注册机构</li>
+<li>证书存放管理（目录服务</li>
+<li>证书持有者和应用程序<h2 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h2></li>
+</ul>
+</li>
+<li><p>是什么</p>
+<ul>
+<li>一段电子数据</li>
+<li>经证书权威机构CA签名</li>
+<li>包含拥有者身份信息和公开密钥的数据体</li>
+</ul>
+</li>
+<li><p>格式：国际标准X.509定义</p>
+</li>
+<li><p>生命周期：证书申请、生成、存储、发布、废止</p>
+</li>
+<li><p>基本内容</p>
+<ul>
+<li>颁证机构（CA是谁？谁颁的？</li>
+<li>证书颁发机构的签名</li>
+<li>证书持有者名字（颁给谁的？）</li>
+<li>证书持有者的公钥（标识</li>
+<li>证书有效期</li>
+</ul>
+</li>
+<li><p>（科普，12306自己专门有CA，故好多浏览器会提示不安全</p>
+</li>
+<li>不同类型的证书<ul>
+<li>根证书</li>
+<li>个人证书（银行USB-key</li>
+<li>代码签名证书</li>
+<li>服务器证书（即常见网站证书</li>
+</ul>
+</li>
+</ul>
+<h2 id="CA：证书发放机构"><a href="#CA：证书发放机构" class="headerlink" title="CA：证书发放机构"></a>CA：证书发放机构</h2><ul>
+<li>是PKI的核心</li>
+<li>主要功能<ul>
+<li>签发数字证书<ul>
+<li>签发</li>
+<li>更新</li>
+</ul>
+</li>
+<li>管理数字证书<ul>
+<li>撤销、查询</li>
+<li>审计、统计</li>
+</ul>
+</li>
+<li>验证数字证书<ul>
+<li>黑名单验证（CRL</li>
+<li>在线认证（OCSP</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="RA：证书注册机构"><a href="#RA：证书注册机构" class="headerlink" title="RA：证书注册机构"></a>RA：证书注册机构</h2><ul>
+<li>证书注册权威，Registration Authority</li>
+<li>受理用户的数字证书申请<ul>
+<li>对证书申请者进行审核并提交CA制证</li>
+<li>类似申请身份证的派出所</li>
+</ul>
+</li>
+<li>提供证书生命期的维护工作<ul>
+<li>受理证书申请、更新、吊销请求</li>
+<li>协助颁发用户证书</li>
+<li>审核用户真实身份</li>
+</ul>
+</li>
+</ul>
+<h2 id="目录服务"><a href="#目录服务" class="headerlink" title="目录服务"></a>目录服务</h2><ul>
+<li>信息的存储库，证书的保存、修改、删除和获取</li>
+<li>CA采用LDAP标准的目录服务，来存放证书，作用类似于数据库，优点是：在修改操作少的情况下，访问效率比传统数据库要高</li>
+</ul>
+<h2 id="CRL"><a href="#CRL" class="headerlink" title="CRL"></a>CRL</h2><ul>
+<li>certificate revocation list，证书撤销列表，即证书黑名单</li>
+<li>在证书的有效期间，因某原因（人员调动、私钥泄露），导致证书不再真实可信，此时进行证书撤销，说明此证书无效</li>
+<li>CRL中列出了被撤销的证书序列号</li>
+</ul>
+<h2 id="PKI-CA的典型应用"><a href="#PKI-CA的典型应用" class="headerlink" title="PKI/CA的典型应用"></a>PKI/CA的典型应用</h2><ul>
+<li>电子商务领域：银行、网购</li>
+<li>电子政务：公文扭转、政务门户</li>
+<li>访问控制：门禁（物理）、win登录（逻辑</li>
+<li>硬件设备：web服务器、域名控制器、VPN</li>
+<li>通信：Wi-Fi部署</li>
+<li>软件开发领域：代码签名</li>
+</ul>
+<h2 id="CA工作流程"><a href="#CA工作流程" class="headerlink" title="CA工作流程"></a>CA工作流程</h2><p>怎么连接的：（联想图</p>
+<p>用户A——RA——CA——目录服务器——应用程序等其他用户</p>
+<ul>
+<li>用户A想要申请证书</li>
+<li>发送注册信息给RA</li>
+<li>RA审核用户身份</li>
+<li>审核通过的注册请求发送给CA</li>
+<li>CA为用户A签发证书下载凭证，通过RA转交给用户A（并未实际制作证书，只是说可以凭证去下载了）</li>
+<li>用户A生成公钥私钥对</li>
+<li>将公钥交给CA，此时CA既有公钥信息，又有身份信息，就可以制作证书了</li>
+<li>用户A凭借下载凭证，将证书下载到本地</li>
+<li>同时，CA为了管理证书，将证书公布出去，即发到其连接的目录服务器中</li>
+<li>其他的应用程序就可以通过在目录服务器中的证书：<ul>
+<li>获取用户的身份信息</li>
+<li>进行证书废止检查</li>
+<li>检查证书有效期</li>
+<li>解密数据</li>
+</ul>
+</li>
+</ul>
+<h1 id="1-6-密码学应用之VPN体系"><a href="#1-6-密码学应用之VPN体系" class="headerlink" title="1.6-密码学应用之VPN体系"></a>1.6-密码学应用之VPN体系</h1><ul>
+<li>虚拟专用网络，virtual private network</li>
+<li>解决出差员工、合作伙伴接入公司局域网的问题</li>
+</ul>
+<h2 id="VPN的类型"><a href="#VPN的类型" class="headerlink" title="VPN的类型"></a>VPN的类型</h2><ul>
+<li>按协议层次：二层、三层、四层、应用层VPN</li>
+<li>按应用范围：远程访问VPN、内联网VPN、外联网VPN</li>
+<li>按体系结构：网关到网关VPN、主机到网关VPN、主机到主机VPN</li>
+</ul>
+<h2 id="工作原理及关键技术"><a href="#工作原理及关键技术" class="headerlink" title="工作原理及关键技术"></a>工作原理及关键技术</h2><ul>
+<li>隧道技术</li>
+<li>加解密技术</li>
+<li>密钥管理技术</li>
+<li>使用者与设备身份认证技术</li>
+<li>访问控制技术</li>
+</ul>
+<h2 id="隧道技术"><a href="#隧道技术" class="headerlink" title="隧道技术"></a>隧道技术</h2><ul>
+<li>本质区别在于：用户在隧道中传输的数据包，是被封装在哪种数据包中（隧道技术即再封装）</li>
+<li>按拓扑结构分为点对点隧道和点对多隧道，VPN主要采用点对点隧道</li>
+<li>目前有多种VPN隧道：L2TP、PPTP（二层）、IPSec（三层）、MPLS、SSL（传输层</li>
+</ul>
+<h2 id="VPN有关协议的工作原理"><a href="#VPN有关协议的工作原理" class="headerlink" title="VPN有关协议的工作原理"></a>VPN有关协议的工作原理</h2><ul>
+<li>二层隧道协议：主要有三种<ul>
+<li>PPTP：微软、Ascend、3COM等公司支持</li>
+<li>L2F：Cisco、北方电信等公司支持，在disco路由器中有支持</li>
+<li>L2PT：由IETF起草，微软、Ascend等公司参于，结合上述两协议优点，成为二层隧道协议的工业标准</li>
+</ul>
+</li>
+<li>IPSec协议<ul>
+<li>是一个协议包，而非单个协议，已积累大量标准文件集</li>
+<li>安全协议由三个主要协议组成：加密、认证算法</li>
+<li>internet安全协商和密钥管理协议（ISAKMP）是其另一个重要组件；ISAKMP提供了用于应用层服务的通用格式，他支持IPSec协议放的密钥管理需求</li>
+</ul>
+</li>
+<li>SSL协议</li>
+<li></li>
+</ul>
+<h2 id="IPSec协议体系"><a href="#IPSec协议体系" class="headerlink" title="IPSec协议体系"></a>IPSec协议体系</h2><p>（可分为两大类</p>
+<ul>
+<li>封装协议：<ul>
+<li>封装协议定义了IPSec数据包的数据结构、加密和认证结构</li>
+<li>支持两种封装协议：ESP、AH</li>
+<li>不同类型的VPN结构，IPSec提供两种模式的封装：Tunnel和Transport</li>
+</ul>
+</li>
+<li>密钥管理协议：IKE</li>
+</ul>
+<h2 id="AH认证头部"><a href="#AH认证头部" class="headerlink" title="AH认证头部"></a>AH认证头部</h2><ul>
+<li>AH主要提供数据来源认证、数据完整性验证和防报文回放攻击功能</li>
+<li>AH不提供机密性保证</li>
+<li>使用50作为协议号</li>
+<li>包含两种模式：传输模式和隧道模式<ul>
+<li>隧道模式：需要为每个包创建一个新的IP包头</li>
+<li>传输模式：不需要创建新的IP包头</li>
+</ul>
+</li>
+</ul>
+<h2 id="AH隧道模式封装结构"><a href="#AH隧道模式封装结构" class="headerlink" title="AH隧道模式封装结构"></a>AH隧道模式封装结构</h2><ul>
+<li>旧：IP包头+数据</li>
+<li>新：新IP包头+AH +原IP包头+数据</li>
+<li>即新IP报头+AH报头+原IP报头+TCP/UDP报头+应用程序数据</li>
+<li>其中AH报头=下一个报头+长度+安全参数索引（SPI）+序列号+认证数据（hash检查和</li>
+</ul>
+<h2 id="AH传输模式封装结构"><a href="#AH传输模式封装结构" class="headerlink" title="AH传输模式封装结构"></a>AH传输模式封装结构</h2><ul>
+<li>旧：IP包头+数据</li>
+<li>新：IP包头+AH+数据（二者之间插入AH，并不添加新IP报头</li>
+<li>即：IP报头+AH报头++TCP/UDP报头+应用程序数据</li>
+<li>其中AH报头=下一个报头+长度+安全参数索引（SPI）+序列号+认证数据（hash检查和</li>
+</ul>
+<h2 id="负载安全封装ESP"><a href="#负载安全封装ESP" class="headerlink" title="负载安全封装ESP"></a>负载安全封装ESP</h2><ul>
+<li>除了AH协议有的功能外，ESP还提供对IP报文的加密功能</li>
+<li>可以：加密IP包后面的所有数据</li>
+<li>使用50作为协议号</li>
+<li>两种模式：隧道模式和传输模式</li>
+</ul>
+<h2 id="ESP隧道模式封装结构"><a href="#ESP隧道模式封装结构" class="headerlink" title="ESP隧道模式封装结构"></a>ESP隧道模式封装结构</h2><ul>
+<li>旧：IP包头+数据</li>
+<li>新：新IP包头+ESP头+加密（原IP包头+数据）+ESP尾部+ESP验证</li>
+</ul>
+<h2 id="ESP传输模式封装"><a href="#ESP传输模式封装" class="headerlink" title="ESP传输模式封装"></a>ESP传输模式封装</h2><ul>
+<li>旧：IP包头+数据</li>
+<li>新：IP包头+ESP头+加密（数据）+ESP尾部+ESP验证（esp头插入二者之间，只对数据进行加密）</li>
+</ul>
+<h2 id="SA-安全联盟"><a href="#SA-安全联盟" class="headerlink" title="SA-安全联盟"></a>SA-安全联盟</h2><ul>
+<li>安全联盟SA是构成IPSec的基础</li>
+<li>SA是两个通信实体经过协商建立起来的一种协定。<ul>
+<li>决定了用来保护数据包安全的IPSec协议（esp或ah模式transport或tunnel）</li>
+<li>转码方式（加密方式md5、aes、des</li>
+<li>密钥及密钥的有效时间</li>
+</ul>
+</li>
+<li>任何IPSec实施方案始终会构建一个SA数据库，即SADB，由它来维护IPSec协议，用来保障数据包安全的sa记录</li>
+</ul>
+<h2 id="SA-安全联盟如何建立"><a href="#SA-安全联盟如何建立" class="headerlink" title="SA 安全联盟如何建立"></a>SA 安全联盟如何建立</h2><ul>
+<li>SA的创建可以由管理员人工的配置完成</li>
+<li>但，手工维护易出错，而且手工建立的SA没有生存周期限制，永不过期，除非手工删除，因此有安全隐患</li>
+<li>SA的创建也可以通过某些协议来自动协商完成</li>
+<li>动态完成，可以解决手工配置的问题</li>
+</ul>
+<h2 id="IKE"><a href="#IKE" class="headerlink" title="IKE"></a>IKE</h2><ul>
+<li>internet key exchange</li>
+<li>能自动的实现密钥的交换，简化了手工配置的复杂性，同时也解决了IPsec难以扩展的特性</li>
+<li>主要功能：<ul>
+<li>协商SA的安全特性</li>
+<li>密钥的自动生成</li>
+<li>易于管理和配置</li>
+</ul>
+</li>
+</ul>
+<h2 id="ISAKMP协议"><a href="#ISAKMP协议" class="headerlink" title="ISAKMP协议"></a>ISAKMP协议</h2><ul>
+<li>安全联盟密钥管理协议，RFC2408</li>
+<li>定义了协商、建立、修改和删除SA的过程和包格式</li>
+<li>其只是为协商、修改、删除SA的方法提供了一个通用的框架，并没有定义具体的SA格式</li>
+<li>这个通用的框架是与密钥交换独立的，可以被不同的密钥交换协议使用</li>
+<li>可以利用UDP或TCP，端口都是500，一般情况用UDP</li>
+</ul>
+<h2 id="ISAKMP协商阶段和协商模式"><a href="#ISAKMP协商阶段和协商模式" class="headerlink" title="ISAKMP协商阶段和协商模式"></a>ISAKMP协商阶段和协商模式</h2><ul>
+<li>阶段1：    <ul>
+<li>认证对等体</li>
+<li>协商安全联盟</li>
+<li>两种模式：main mode和aggressive mode</li>
+</ul>
+</li>
+<li>阶段2:<ul>
+<li>协商IPSec SAs/SPIs</li>
+<li>单一工作模式：快速模式</li>
+</ul>
+</li>
+</ul>
+<h2 id="IKE补充"><a href="#IKE补充" class="headerlink" title="IKE补充"></a>IKE补充</h2><ul>
+<li>IKE阶段一完成后会产生一个共享密钥，用于阶段2的数据加密使用</li>
+<li>IKE第一阶段–协商SA参数（用DH，SA交换、密钥交换、ID交换等工作</li>
+</ul>
+<h2 id="IPSec与IKE的关系"><a href="#IPSec与IKE的关系" class="headerlink" title="IPSec与IKE的关系"></a>IPSec与IKE的关系</h2><h2 id="SSL协议"><a href="#SSL协议" class="headerlink" title="SSL协议"></a>SSL协议</h2><ul>
+<li><p>SSL，secure socket layer，安全套接协议，netscape提出</p>
+</li>
+<li><p>TLS，transport layer security，IETF的TLS工作组基于SSL3.0提出的</p>
+</li>
+<li><p>使用公开密钥体制和X.509数字证书技术保护信息传输的机密性和完整性，适用于点对点之间的信息传输，常用web server方式</p>
+</li>
+<li><p>位于TCP上、应用层下，为上层应用在网络间建立一条安全通道</p>
+</li>
+<li><p>可以独立与应用层，从而使应用层协议可以直接建立在SSL上</p>
+</li>
+<li><p>提供：服务器认证、客户认证（可选）、链路上的数据完整性和数据保密性等保护功能</p>
+</li>
+<li><p>包含：SSL记录协议、SSL握手协议、SSL更改密码说明协议、SSL警告协议</p>
+</li>
+<li><p>SSL记录协议：所有的传输数据都被封装在记录中，提供机密性和完整性两种服务</p>
+</li>
+<li><p>SSL记录协议：包括记录头和记录数据格式</p>
+</li>
+<li><p>SSL握手协议：使服务器和客户端相互认证身份、协商加密和MAC算法以及用来保护在SSL记录中发送数据的加密应用，在传输数据前，必须使用握手协议</p>
+</li>
+<li><p>SSL handshake protocol</p>
+<ul>
+<li>鉴别、协商加密算法和密钥</li>
+<li>提供连接安全性<ul>
+<li>身份鉴别，单向/双向鉴别</li>
+<li>协议过程可靠，防中间人攻击</li>
+<li>协商密钥安全</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>SSL record protocol</p>
+<ul>
+<li>在TCP之上，用来封装更高层的协议</li>
+<li>提供连接安全性<ul>
+<li>保密性，使用了对称密码算法</li>
+<li>完整性，使用HMAC算法</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>SSL协议安全性</p>
+<ul>
+<li><p>保密性</p>
+<ul>
+<li>对于每个连接都有唯一的会话密码</li>
+<li>采用对称密码体制加密会话数据</li>
+</ul>
+</li>
+<li><p>完整性</p>
+<ul>
+<li>保障传输数据完整性    </li>
+<li>采用HMAC</li>
+</ul>
+</li>
+<li>可鉴别性<ul>
+<li>使用非对称算法，支持使用数字证书鉴别</li>
+<li>单向、双向鉴别</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>通信过程……</p>
+</li>
+<li><p>HTTPS：保护web通信</p>
+</li>
+</ul>
+<h2 id="IPSec-VPN和SSL-VPN的比较"><a href="#IPSec-VPN和SSL-VPN的比较" class="headerlink" title="IPSec VPN和SSL VPN的比较"></a>IPSec VPN和SSL VPN的比较</h2><table>
+<thead>
+<tr>
+<th>项目÷</th>
+<th>IPSec VPN</th>
+<th>SSL VPN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>身份验证</td>
+<td>双向/数字证书</td>
+<td>单/双向数字证书</td>
+</tr>
+<tr>
+<td>加密</td>
+<td>依靠执行加密</td>
+<td>基于web浏览器加密</td>
+</tr>
+<tr>
+<td>全程安全性</td>
+<td>端到边缘</td>
+<td>端到端/用户到资源</td>
+</tr>
+<tr>
+<td>可访问性</td>
+<td>已经定义好受控用户</td>
+<td>任何时间/地点</td>
+</tr>
+<tr>
+<td>费用</td>
+<td>高</td>
+<td>低</td>
+</tr>
+<tr>
+<td>安装</td>
+<td>需要长时间配置</td>
+<td>即插即用</td>
+</tr>
+<tr>
+<td>易用性</td>
+<td>需要培训</td>
+<td>简单友好</td>
+</tr>
+<tr>
+<td>应用支持</td>
+<td>所有基于IP协议的服务</td>
+<td>HTTP/TELNET/NMTP/FTP</td>
+</tr>
+<tr>
+<td>用户</td>
+<td>适合于企业内部使用</td>
+<td>客户/合作伙伴/供应商</td>
+</tr>
+</tbody>
+</table>
+<p>可伸缩性    ——比较困呐——容易配置和扩展</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+            <a href="/tags/密码学/" rel="tag"># 密码学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/05/操作系统安全防护技术/" rel="next" title="操作系统安全防护技术">
+                <i class="fa fa-chevron-left"></i> 操作系统安全防护技术
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/01/15/信息安全法规标准/" rel="prev" title="信息安全法规标准">
+                信息安全法规标准 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1-发展历史"><span class="nav-text">1.1-发展历史</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#发展"><span class="nav-text">发展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#古典密码"><span class="nav-text">古典密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#近代密码学"><span class="nav-text">近代密码学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#现代密码学"><span class="nav-text">现代密码学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公钥密码学"><span class="nav-text">公钥密码学</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2-基本概念"><span class="nav-text">1.2-基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#密码学两大部分"><span class="nav-text">密码学两大部分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关术语"><span class="nav-text">相关术语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码分析的典型方式"><span class="nav-text">密码分析的典型方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密码体制分类"><span class="nav-text">密码体制分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#密钥管理"><span class="nav-text">密钥管理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-3-密码学算法"><span class="nav-text">1.3-密码学算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对称密码算法"><span class="nav-text">对称密码算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据加密标准DES"><span class="nav-text">数据加密标准DES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级数据加密标准AES"><span class="nav-text">高级数据加密标准AES</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对称密码算法的优缺点："><span class="nav-text">对称密码算法的优缺点：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对称密码小结"><span class="nav-text">对称密码小结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公钥密码算法（非对称密码算法"><span class="nav-text">公钥密码算法（非对称密码算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公钥密码的重要特性"><span class="nav-text">公钥密码的重要特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DH密钥交换"><span class="nav-text">DH密钥交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RSA公钥密码体制"><span class="nav-text">RSA公钥密码体制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字签名算法DSA"><span class="nav-text">数字签名算法DSA</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公钥密码的应用"><span class="nav-text">公钥密码的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#公钥密码体制的优缺点"><span class="nav-text">公钥密码体制的优缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-4-散列函数与消息鉴别"><span class="nav-text">1.4-散列函数与消息鉴别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#哈希函数（散列函数）"><span class="nav-text">哈希函数（散列函数）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hash函数的特点"><span class="nav-text">hash函数的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MD5算法"><span class="nav-text">MD5算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SHA-1算法"><span class="nav-text">SHA-1算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SHA-1vs-MD5"><span class="nav-text">SHA-1vs MD5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息鉴别"><span class="nav-text">消息鉴别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字签名"><span class="nav-text">数字签名</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-5-密码学应用之PKI体系"><span class="nav-text">1.5-密码学应用之PKI体系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PKI-CA体系"><span class="nav-text">PKI/CA体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字证书"><span class="nav-text">数字证书</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CA：证书发放机构"><span class="nav-text">CA：证书发放机构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RA：证书注册机构"><span class="nav-text">RA：证书注册机构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#目录服务"><span class="nav-text">目录服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CRL"><span class="nav-text">CRL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PKI-CA的典型应用"><span class="nav-text">PKI/CA的典型应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CA工作流程"><span class="nav-text">CA工作流程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-6-密码学应用之VPN体系"><span class="nav-text">1.6-密码学应用之VPN体系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#VPN的类型"><span class="nav-text">VPN的类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工作原理及关键技术"><span class="nav-text">工作原理及关键技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隧道技术"><span class="nav-text">隧道技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VPN有关协议的工作原理"><span class="nav-text">VPN有关协议的工作原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPSec协议体系"><span class="nav-text">IPSec协议体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AH认证头部"><span class="nav-text">AH认证头部</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AH隧道模式封装结构"><span class="nav-text">AH隧道模式封装结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AH传输模式封装结构"><span class="nav-text">AH传输模式封装结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#负载安全封装ESP"><span class="nav-text">负载安全封装ESP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ESP隧道模式封装结构"><span class="nav-text">ESP隧道模式封装结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ESP传输模式封装"><span class="nav-text">ESP传输模式封装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SA-安全联盟"><span class="nav-text">SA-安全联盟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SA-安全联盟如何建立"><span class="nav-text">SA 安全联盟如何建立</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IKE"><span class="nav-text">IKE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ISAKMP协议"><span class="nav-text">ISAKMP协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ISAKMP协商阶段和协商模式"><span class="nav-text">ISAKMP协商阶段和协商模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IKE补充"><span class="nav-text">IKE补充</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPSec与IKE的关系"><span class="nav-text">IPSec与IKE的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SSL协议"><span class="nav-text">SSL协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IPSec-VPN和SSL-VPN的比较"><span class="nav-text">IPSec VPN和SSL VPN的比较</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/04/Scrapy爬虫框架-1/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/04/爬虫原理-数据抓取-3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -272,7 +272,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/04/Scrapy爬虫框架-1/" itemprop="url">Scrapy爬虫框架-1</a></h1>
+                <a class="post-title-link" href="/2018/01/04/爬虫原理-数据抓取-3/" itemprop="url">爬虫原理&数据抓取-3</a></h1>
         
 
         <div class="post-meta">
@@ -356,21 +356,11 @@
 
       
         
-          <h1 id="Scrapy爬虫框架-01"><a href="#Scrapy爬虫框架-01" class="headerlink" title="Scrapy爬虫框架_01"></a>Scrapy爬虫框架_01</h1><ul>
-<li>目录<ul>
-<li>配置安装</li>
-<li>scrapy简介</li>
-<li>入门案例</li>
-<li>Scrapy Shell</li>
-<li>Item Pipeline</li>
-</ul>
-</li>
-</ul>
-<h2 id="00-配置安装"><a href="#00-配置安装" class="headerlink" title="00-配置安装"></a>00-配置安装</h2><ul>
-<li>Windows安装：
+          <h1 id="爬虫原理与数据爬取"><a href="#爬虫原理与数据爬取" class="headerlink" title="爬虫原理与数据爬取"></a>爬虫原理与数据爬取</h1><h2 id="06-urllib2：Handler处理器和自定义Opener"><a href="#06-urllib2：Handler处理器和自定义Opener" class="headerlink" title="06-urllib2：Handler处理器和自定义Opener"></a>06-urllib2：Handler处理器和自定义Opener</h2><h3 id="6-1-简介"><a href="#6-1-简介" class="headerlink" title="6.1-简介"></a>6.1-简介</h3><ul>
+<li>opener是 urllib2.OpenerDirector 的实例，我们之前一直都在使用的urlopen，它是一个特殊的opener（也就是模块帮我们构建好的）。
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/04/Scrapy爬虫框架-1/#more" rel="contents">
+            <a class="btn" href="/2018/01/04/爬虫原理-数据抓取-3/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -421,7 +411,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/04/Scrapy爬虫框架-2/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/04/爬虫原理-数据抓取-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -440,7 +430,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/04/Scrapy爬虫框架-2/" itemprop="url">Scrapy爬虫框架-2</a></h1>
+                <a class="post-title-link" href="/2018/01/04/爬虫原理-数据抓取-1/" itemprop="url">爬虫原理&数据抓取-1</a></h1>
         
 
         <div class="post-meta">
@@ -524,23 +514,179 @@
 
       
         
-          <h1 id="Scrapy爬虫框架"><a href="#Scrapy爬虫框架" class="headerlink" title="Scrapy爬虫框架"></a>Scrapy爬虫框架</h1><ul>
-<li>目录<ul>
-<li>Spider</li>
-<li>CrawlSpider</li>
-<li>Resquest/Response</li>
-<li>Downloader Middlewares</li>
-<li>Settings</li>
+          <h1 id="爬虫原理与数据抓取"><a href="#爬虫原理与数据抓取" class="headerlink" title="爬虫原理与数据抓取"></a>爬虫原理与数据抓取</h1><h2 id="00-简介"><a href="#00-简介" class="headerlink" title="00-简介"></a>00-简介</h2><ul>
+<li><p>可选择的IDE和编辑器</p>
+<ul>
+<li>IDE：PyCharm 、 Visual Studio</li>
+<li>编辑器：Vim 、Sublime Text等</li>
 </ul>
 </li>
-</ul>
+<li><p>可选择的Python版本</p>
+<ul>
+<li>尽管Python3 是大势所趋，但是我们目前的课程还是基于Python2.7版本</li>
+<li>理由如下：
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/04/Scrapy爬虫框架-2/#more" rel="contents">
+            <a class="btn" href="/2018/01/04/爬虫原理-数据抓取-1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
+        
+      
+    </li></ul></li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/04/Scrapy实战项目/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/04/Scrapy实战项目/" itemprop="url">Scrapy实战项目</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T17:06:11+08:00">
+                2018-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ul>
+<li>GitHub地址：<a href="https://github.com/Ry1ynn/Zhihu_user" target="_blank" rel="noopener">https://github.com/Ry1ynn/Zhihu_user</a></li>
+</ul>
+
+          
         
       
     </div>
@@ -587,7 +733,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/线程/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/04/非结构化数据-结构化数据提取-4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -606,7 +752,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/线程/" itemprop="url">线程</a></h1>
+                <a class="post-title-link" href="/2018/01/04/非结构化数据-结构化数据提取-4/" itemprop="url">非结构化数据&结构化数据提取-4</a></h1>
         
 
         <div class="post-meta">
@@ -618,8 +764,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:54+08:00">
-                2018-01-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T17:06:11+08:00">
+                2018-01-04
               </time>
             
 
@@ -652,8 +798,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/进阶/" itemprop="url" rel="index">
-                    <span itemprop="name">进阶</span>
+                  <a href="/categories/python/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
                   </a>
                 </span>
 
@@ -690,14 +836,175 @@
 
       
         
-          <h1 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h1><h2 id="01-多线程-threading"><a href="#01-多线程-threading" class="headerlink" title="01-多线程-threading"></a>01-多线程-threading</h2><ul>
-<li>python的thread模块是比较底层的模块，python的threading模块是对thread做了一些包装的，可以更加方便的被使用</li>
-</ul>
-<h3 id="1-1-使用threading模块"><a href="#1-1-使用threading模块" class="headerlink" title="1.1-使用threading模块"></a>1.1-使用threading模块</h3><ul>
-<li><p>单线程执行
+          <h1 id="非结构化数据与结构化数据提取"><a href="#非结构化数据与结构化数据提取" class="headerlink" title="非结构化数据与结构化数据提取"></a>非结构化数据与结构化数据提取</h1><h2 id="07-Json模块与JsonPath"><a href="#07-Json模块与JsonPath" class="headerlink" title="07-Json模块与JsonPath"></a>07-Json模块与JsonPath</h2><ul>
+<li>JSON(JavaScript Object Notation) 是一种轻量级的数据交换格式，它使得人们很容易的进行阅读和编写。同时也方便了机器进行解析和生成。适用于进行数据交互的场景，比如网站前台与后台之间的数据交互。<ul>
+<li>JSON和XML的比较可谓不相上下。</li>
+<li>Python 2.7中自带了JSON模块，直接<code>import json</code>就可以使用了。</li>
+<li>官方文档：<a href="http://docs.python.org/library/json.html" target="_blank" rel="noopener">http://docs.python.org/library/json.html</a></li>
+<li>Json在线解析网站：<a href="http://www.json.cn/#" target="_blank" rel="noopener">http://www.json.cn/#</a>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/02/线程/#more" rel="contents">
+            <a class="btn" href="/2018/01/04/非结构化数据-结构化数据提取-4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/04/非结构化数据-结构化数据提取-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/04/非结构化数据-结构化数据提取-3/" itemprop="url">非结构化数据&结构化数据提取-3</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T17:06:11+08:00">
+                2018-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="非结构化数据-amp-结构化数据提取"><a href="#非结构化数据-amp-结构化数据提取" class="headerlink" title="非结构化数据&amp;结构化数据提取"></a>非结构化数据&amp;结构化数据提取</h1><h2 id="05-BeautifulSoup4解析器"><a href="#05-BeautifulSoup4解析器" class="headerlink" title="05-BeautifulSoup4解析器"></a>05-BeautifulSoup4解析器</h2><h3 id="5-1-CSS-选择器：BeautifulSoup4"><a href="#5-1-CSS-选择器：BeautifulSoup4" class="headerlink" title="5.1-CSS 选择器：BeautifulSoup4"></a>5.1-CSS 选择器：BeautifulSoup4</h3><ul>
+<li><p>和 lxml 一样，Beautiful Soup 也是一个HTML/XML的解析器，主要的功能也是如何解析和提取 HTML/XML 数据。</p>
+</li>
+<li><p>lxml 只会局部遍历，而Beautiful Soup 是基于HTML DOM的，会载入整个文档，解析整个DOM树，因此时间和内存开销都会大很多，所以性能要低于lxml。
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/04/非结构化数据-结构化数据提取-3/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -748,7 +1055,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/正则表达式/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/04/动态HTML处理-机器图像识别-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -767,7 +1074,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/正则表达式/" itemprop="url">正则表达式</a></h1>
+                <a class="post-title-link" href="/2018/01/04/动态HTML处理-机器图像识别-2/" itemprop="url">动态HTML处理&机器图像识别-2</a></h1>
         
 
         <div class="post-meta">
@@ -779,8 +1086,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:54+08:00">
-                2018-01-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-04T17:06:11+08:00">
+                2018-01-04
               </time>
             
 
@@ -813,8 +1120,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/进阶/" itemprop="url" rel="index">
-                    <span itemprop="name">进阶</span>
+                  <a href="/categories/python/爬虫/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫</span>
                   </a>
                 </span>
 
@@ -851,347 +1158,18 @@
 
       
         
-          <h1 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h1><h2 id="01-概述"><a href="#01-概述" class="headerlink" title="01-概述"></a>01-概述</h2><ul>
-<li>正则表达式，又称正规表示式、正规表示法、正规表达式、规则表达式、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），是计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列匹配某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些匹配某个模式的文本。</li>
-<li>Regular Expression的“Regular”一般被译为“正则”、“正规”、“常规”。此处的“Regular”即是“规则”、“规律”的意思，Regular Expression即“描述某种规则的表达式”之意。</li>
-</ul>
-<h2 id="02-re模块操作"><a href="#02-re模块操作" class="headerlink" title="02-re模块操作"></a>02-re模块操作
+          <h1 id="动态HTML处理-amp-机器图像识别"><a href="#动态HTML处理-amp-机器图像识别" class="headerlink" title="动态HTML处理&amp;机器图像识别"></a>动态HTML处理&amp;机器图像识别</h1><h2 id="03-案例1：网站模拟登录"><a href="#03-案例1：网站模拟登录" class="headerlink" title="03-案例1：网站模拟登录"></a>03-案例1：网站模拟登录</h2><ul>
+<li><p>code
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/02/正则表达式/#more" rel="contents">
+            <a class="btn" href="/2018/01/04/动态HTML处理-机器图像识别-2/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </h2></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/网络概述/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ry1ynn's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/02/网络概述/" itemprop="url">网络概述</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:54+08:00">
-                2018-01-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/进阶/" itemprop="url" rel="index">
-                    <span itemprop="name">进阶</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="网络概述"><a href="#网络概述" class="headerlink" title="网络概述"></a>网络概述</h1><ul>
-<li>知识点<ol>
-<li>tcp/ip协议介绍</li>
-<li>ip地址的分类</li>
-<li>端口、端口号</li>
-<li>(重点)socket
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/02/网络概述/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ol></li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/网络通信过程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ry1ynn's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/02/网络通信过程/" itemprop="url">网络通信过程</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:54+08:00">
-                2018-01-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/进阶/" itemprop="url" rel="index">
-                    <span itemprop="name">进阶</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="网络通信过程详解"><a href="#网络通信过程详解" class="headerlink" title="网络通信过程详解"></a>网络通信过程详解</h1><h2 id="01-packet-tracer网络通信过程"><a href="#01-packet-tracer网络通信过程" class="headerlink" title="01-packet tracer网络通信过程"></a>01-packet tracer网络通信过程</h2><ul>
-<li>略</li>
-</ul>
-<h2 id="02-两台电脑联网"><a href="#02-两台电脑联网" class="headerlink" title="02-两台电脑联网"></a>02-两台电脑联网</h2><ul>
-<li>略</li>
-</ul>
-<h2 id="03-通过集线器组网"><a href="#03-通过集线器组网" class="headerlink" title="03-通过集线器组网"></a>03-通过集线器组网</h2><ul>
-<li>集线器又名hub
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/02/网络通信过程/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
+    </p></li></ul></div>
     
     
     
@@ -1226,7 +1204,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1274,7 +1252,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-count">117</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1285,7 +1263,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -1296,7 +1274,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">45</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

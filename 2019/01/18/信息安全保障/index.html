@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,信息安全,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.1-背景 信息安全CIA：保密性、完整性、可用性  完整性（越高表示数据越可信）  数据一致性 数据未遭篡改 权限未滥用">
+<meta name="keywords" content="NISP,信息安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全保障">
+<meta property="og:url" content="http://21guns.top/2019/01/18/信息安全保障/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="1.1-背景 信息安全CIA：保密性、完整性、可用性  完整性（越高表示数据越可信）  数据一致性 数据未遭篡改 权限未滥用">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-18T12:33:25.609Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全保障">
+<meta name="twitter:description" content="1.1-背景 信息安全CIA：保密性、完整性、可用性  完整性（越高表示数据越可信）  数据一致性 数据未遭篡改 权限未滥用">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/01/18/信息安全保障/">
+
+
+
+
+
+  <title>信息安全保障 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/01/18/信息安全保障/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全保障</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T20:24:07+08:00">
+                2019-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-1-背景"><a href="#1-1-背景" class="headerlink" title="1.1-背景"></a>1.1-背景</h1><ul>
+<li><p>信息安全CIA：保密性、完整性、可用性</p>
+</li>
+<li><p>完整性（越高表示数据越可信）</p>
+<ul>
+<li>数据一致性</li>
+<li>数据未遭篡改</li>
+<li>权限未滥用<a id="more"></a></li>
+</ul>
+</li>
+<li><p>信息安全特征：系统的、动态的、无边界的、非传统的、潜在不确定的、相对而非绝对的（没有绝对的安全）</p>
+</li>
+<li><p>信息安全的范畴</p>
+<ul>
+<li>信息技术问题：技术系统的安全问题</li>
+<li><p>组织管理问题：人+技术系统+组织内部环境</p>
+</li>
+<li><p>……</p>
+</li>
+</ul>
+</li>
+<li><p>安全问题产生根源</p>
+<ul>
+<li>病毒？漏洞？黑客？皆非根本</li>
+<li>内因：信息系统自身存在脆弱性<ul>
+<li>过程复杂</li>
+<li>结构复杂</li>
+<li>应用复杂</li>
+</ul>
+</li>
+<li>外因：威胁与破坏（又包括人为人为和环境</li>
+</ul>
+</li>
+<li><p>信息安全发展阶段</p>
+<ul>
+<li>通信安全：<ul>
+<li>解决传输数据安全</li>
+<li>威胁：搭线窃听、密码学分析</li>
+<li>措施：加密</li>
+</ul>
+</li>
+<li>计算机安全<ul>
+<li>数据处理和存储时的数据保护</li>
+<li>威胁：非法访问、恶意代码、弱口令</li>
+<li>措施：访问控制技术</li>
+<li>这时候出现等级制度TCSEC<ul>
+<li>A：A1</li>
+<li>B：B1，B2，B3</li>
+<li>C：C1，C2</li>
+<li>D：D1</li>
+<li>（去掉a和d，剩下五个就是我国的等保级别）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>信息系统安全<ul>
+<li>也就是网络安全</li>
+<li>保护比数据更精炼的信息，确保信息在存储、处理、传输中的安全</li>
+<li>威胁：网络入侵、病毒破坏、信息对抗</li>
+<li>措施：防火墙、防病毒、漏洞扫描、入侵检测、PKI、VPN等</li>
+</ul>
+</li>
+<li>信息保障安全<ul>
+<li>网络化社会中，新世纪信息技术应用于人类社会各个方面</li>
+<li>意识到：技术很重要，但技术不是一切，信息系统很重要，只有服务与组织业务使命才有意义</li>
+<li>信息安全从技术扩展到管理，从静态扩展到动态</li>
+<li>通过技术、管理、工程等融合，形成对安全的保障</li>
+<li>威胁：黑客、恐怖分子、信息站、自然灾害</li>
+<li>措施：技术安全保障体系、安全管理体系、人员培训等</li>
+</ul>
+</li>
+<li>网络空间安全/信息保障安全<ul>
+<li>上升到国家安全的重要程度</li>
+<li>从传统防御的信息保障IA，发展到威慑为主的防御、攻击、情报三位一体的信息保障/网络安全的网络空间安全</li>
+<li>网络防御-Defense（运维</li>
+<li>网络攻击-Offense（威慑</li>
+<li>网络利用-Exploitation（情报</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>信息安全保障是一种立体保障（运行+人+技术</p>
+</li>
+</ul>
+<h1 id="1-2-概念与模型"><a href="#1-2-概念与模型" class="headerlink" title="1.2-概念与模型"></a>1.2-概念与模型</h1><h2 id="基于时间的PDR模型（P保护，D检测，R响应"><a href="#基于时间的PDR模型（P保护，D检测，R响应" class="headerlink" title="基于时间的PDR模型（P保护，D检测，R响应"></a>基于时间的PDR模型（P保护，D检测，R响应</h2><ul>
+<li>思想：承认漏洞，正式威胁，适度防护，加强检测，落实反应，建立威慑</li>
+<li>出发点：任何防护措施都是基于时间的，是可以被攻破的</li>
+<li>核心、本质：给出攻防时间表<ul>
+<li>固定防守，测试攻击时间</li>
+<li>固定攻击手法，测试防守时间</li>
+</ul>
+</li>
+<li>缺点：难以适应网络安全环境的快速变化</li>
+</ul>
+<h2 id="P2DR模型-分布式动态主动模型"><a href="#P2DR模型-分布式动态主动模型" class="headerlink" title="P2DR模型-分布式动态主动模型"></a>P2DR模型-分布式动态主动模型</h2><ul>
+<li>PDR模型强调落实反应</li>
+<li>P2DR模型则更强调控制和对抗，即强调系统安全的动态性</li>
+<li>以安全检测、漏洞监测和自适应填充“安全间隙”为循环来提高网络安全</li>
+<li>特别考虑人为的管理因素</li>
+</ul>
+<h3 id="P-policy，策略"><a href="#P-policy，策略" class="headerlink" title="P-policy，策略"></a>P-policy，策略</h3><ul>
+<li>模型的核心：所有的防护、检测、响应都是依据安全策略来实施的</li>
+<li>策略体系的建立包括安全策略的制定、评估与执行</li>
+<li>策略包括：访问控制、加密通信、身份认证、备份恢复策略</li>
+</ul>
+<h3 id="2-protection-防护"><a href="#2-protection-防护" class="headerlink" title="2-protection 防护"></a>2-protection 防护</h3><ul>
+<li>通过传统的静态安全技术和方法提高网络的防护能力</li>
+<li>主要包括<ul>
+<li>访问控制技术：ACL、firewall</li>
+<li>信息加密技术</li>
+<li>身份认证技术</li>
+<li>一次性口令</li>
+<li>X.509 </li>
+</ul>
+</li>
+</ul>
+<h3 id="D-detection-检测"><a href="#D-detection-检测" class="headerlink" title="D-detection 检测"></a>D-detection 检测</h3><ul>
+<li>利用检测工具，监视、分析、审计网络活动，了解判断网络系统的安全状态</li>
+<li>使安全防护从被动防护演变进主动防御，是整个模型动态性的体现</li>
+<li>主要方法：<ul>
+<li>实时监控</li>
+<li>检测</li>
+<li>报警</li>
+</ul>
+</li>
+</ul>
+<h3 id="R-response-响应"><a href="#R-response-响应" class="headerlink" title="R-response 响应"></a>R-response 响应</h3><ul>
+<li>在检测到安全漏洞和安全事件时，通过及时的响应措施将网络系统的安全性调整到风险最低的状态</li>
+<li>评估系统受到的危害与损失，恢复系统功能和数据，启动备份系统等</li>
+<li>主要方法：<ul>
+<li>关闭服务</li>
+<li>跟踪</li>
+<li>反击</li>
+<li>消除影响</li>
+</ul>
+</li>
+</ul>
+<h2 id="P2DR模型中的数学法则"><a href="#P2DR模型中的数学法则" class="headerlink" title="P2DR模型中的数学法则"></a>P2DR模型中的数学法则</h2><ul>
+<li>假设S系统的防护、检测、反应的时间关系如下：<ul>
+<li>Pt：防护时间（有效防御攻击的时间</li>
+<li>Dt：检测时间（发起攻击到检测到的时间</li>
+<li>Rt：反应时间（检测到攻击到处理完成时间</li>
+<li>Et：暴露时间</li>
+</ul>
+</li>
+<li>则该系统防护、检测和反应的时间关系如下：<ul>
+<li>若Pt&gt;Dt+Rt，那么S是安全的</li>
+<li>若Pt&lt;Dt+Rt，那么Et=（Dt+Rt）-Pt</li>
+</ul>
+</li>
+</ul>
+<h2 id="P2DR模型的安全目标"><a href="#P2DR模型的安全目标" class="headerlink" title="P2DR模型的安全目标"></a>P2DR模型的安全目标</h2><ul>
+<li><p>依据P2DR模型构筑的网络安全体系</p>
+<ul>
+<li>在统一安全策略的控制下</li>
+<li>在综合运用防护工具基础上</li>
+<li>利用检测工具检测评估网络系统的安全状态</li>
+<li>通过及时的响应措施将网络系统调整到风险最低的安全状态</li>
+</ul>
+</li>
+<li><p>再看P2DR</p>
+<ul>
+<li><p>安全管理的持续性，安全策略的动态性</p>
+<p>以实时监视网络活动、发现威胁和弱点来调整和填补网络漏洞</p>
+</li>
+<li><p>可测即可控</p>
+<p>通过经常对网络系统的评估把握系统风险点，及时弱化甚至堵塞系统的安全漏洞</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="IATF-深度防御保障模型"><a href="#IATF-深度防御保障模型" class="headerlink" title="IATF-深度防御保障模型"></a>IATF-深度防御保障模型</h2><ul>
+<li>信息保障技术框架，IATF</li>
+<li>美国国家安全局NSA制定</li>
+<li>其代表理论为：深度防御defense-in-depth</li>
+<li>在关于实现信息保障目标的过程和方法上，IATF论述了系统工程、系统采购、风险管理、认证和鉴定以及生命周期支持等过程，指出了一条较为清晰的建设信息保障体系的路子</li>
+</ul>
+<h2 id="何谓深度防御"><a href="#何谓深度防御" class="headerlink" title="何谓深度防御"></a>何谓深度防御</h2><ul>
+<li>IATF强调人、技术、操作这三个核心要素，从多种不同的角度对信息系统进行防护</li>
+<li>IATF关注四个信息安全保障领域（三保护一支撑）<ul>
+<li>本地计算环境</li>
+<li>区域边界（本地计算环境的外缘</li>
+<li>网络和基础设施</li>
+<li>支撑性基础设施</li>
+</ul>
+</li>
+<li>在此基础上，对信息系统就可以做到多层防护，实现组织的任务/业务运作，这样的防护被称为“深度防护战略”</li>
+</ul>
+<h2 id="IATF的三要素"><a href="#IATF的三要素" class="headerlink" title="IATF的三要素"></a>IATF的三要素</h2><ul>
+<li><p>人，people</p>
+<ul>
+<li>信息保障体系的核心，是第一位的要素，同时也是最脆弱的</li>
+<li>基于这样的认识，安全管理在安全保障体系中愈显重要，包括：意识培训、组织管理、技术管理、操作管理</li>
+</ul>
+</li>
+<li><p>技术，technology</p>
+<ul>
+<li>技术是实现信息保障的重要手段</li>
+<li>动态的技术体系：防护、检测、响应、恢复</li>
+</ul>
+</li>
+<li>操作，operation<ul>
+<li>也叫运行，构成安全保障的主动防御体系</li>
+<li>是将各方面技术紧密结合在一起的主动的过程，包括<ul>
+<li>风险评估、安全监控、安全审计</li>
+<li>跟踪告警、入侵检测、响应恢复</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="保护计算环境"><a href="#保护计算环境" class="headerlink" title="保护计算环境"></a>保护计算环境</h2><ul>
+<li>目标：使用信息保障技术确保数据在进人、离开或驻留客户机和服务器时具有保密性、完整性和可用性</li>
+<li>方法<ul>
+<li>使用安全的操作系统</li>
+<li>使用安全的应用程序（安全消息传递、安全浏览、文件保护等</li>
+<li>主机入侵检测</li>
+<li>防病毒系统</li>
+<li>主机脆弱性扫描</li>
+<li>文件完整性保护</li>
+</ul>
+</li>
+</ul>
+<h2 id="保护区域边界"><a href="#保护区域边界" class="headerlink" title="保护区域边界"></a>保护区域边界</h2><ul>
+<li>什么是边界<ul>
+<li>域指由单一授权通过专用或物理安全措施所控制的环境，包括物理环境和逻辑环境</li>
+<li>区域的网络设备与其他网络设备的接入点被称为区域边界</li>
+</ul>
+</li>
+<li>目标<ul>
+<li>对进出某区域（物理区域或逻辑区域）的数据流进行有效的控制与监视</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>病毒、恶意代码防御</li>
+<li>防火墙</li>
+<li>入侵检测</li>
+<li>边界护卫</li>
+<li>远程访问</li>
+<li>多级别安全</li>
+</ul>
+</li>
+</ul>
+<h2 id="保护网络和基础设施"><a href="#保护网络和基础设施" class="headerlink" title="保护网络和基础设施"></a>保护网络和基础设施</h2><ul>
+<li>目标：网络和支持它的基础设施必须<ul>
+<li>防止数据非法泄漏</li>
+<li>防止受到拒绝服务的攻击</li>
+<li>防止受到保护的信息在发送过程中的时延、误传或未发送</li>
+</ul>
+</li>
+<li>方法<ul>
+<li>骨干网可用性</li>
+<li>无线网络安全框架</li>
+<li>系统高度互联和虚拟专用网</li>
+</ul>
+</li>
+</ul>
+<h2 id="支撑性基础设施建设"><a href="#支撑性基础设施建设" class="headerlink" title="支撑性基础设施建设"></a>支撑性基础设施建设</h2><ul>
+<li>目标：为安全保障服务提供一套相互关联的活动与基础设施<ul>
+<li>密钥管理功能</li>
+<li>检测和响应功能</li>
+</ul>
+</li>
+<li>方法：<ul>
+<li>密钥管理</li>
+<li>优先权管理</li>
+<li>证书管理</li>
+<li>入侵检测</li>
+<li>审计、配置</li>
+<li>信息调查、收集</li>
+</ul>
+</li>
+</ul>
+<h2 id="信息系统安全保障"><a href="#信息系统安全保障" class="headerlink" title="信息系统安全保障"></a>信息系统安全保障</h2><ul>
+<li>信息系统保障是在信息系统的整个生命周期中，从技术、管理、工程和人员等方面提出安全保障要求，确保信息系统的保密性、完整性和可用性，降低安全风险到可接受的程度，从而保障系统实现组织机构的使命</li>
+</ul>
+<h2 id="信息系统安全保障模型"><a href="#信息系统安全保障模型" class="headerlink" title="信息系统安全保障模型"></a>信息系统安全保障模型</h2><ul>
+<li>保障要素<ul>
+<li>技术</li>
+<li>工程</li>
+<li>管理</li>
+<li>人员</li>
+</ul>
+</li>
+<li>生命周期<ul>
+<li>计划组织</li>
+<li>开发采购</li>
+<li>实施交付</li>
+<li>运行维护</li>
+<li>废弃</li>
+</ul>
+</li>
+<li>安全特征<ul>
+<li>保密性</li>
+<li>完整性</li>
+<li>可用性</li>
+</ul>
+</li>
+</ul>
+<h2 id="信息系统安全保障安全特征"><a href="#信息系统安全保障安全特征" class="headerlink" title="信息系统安全保障安全特征"></a>信息系统安全保障安全特征</h2><ul>
+<li><p>确保信息的安全特征</p>
+<p>确保信息的保密性、完整性和可用性特征，从而实现和贯彻组织机构策略并将风险减低到可接受的程度</p>
+</li>
+<li><p>保护资产</p>
+<p>达到保护组织机构信息和信息系统资产</p>
+</li>
+<li><p>最终保障业务使命</p>
+<p>从而保障组织机构实现其业务使命的最终目的</p>
+</li>
+</ul>
+<h1 id="1-3-实践"><a href="#1-3-实践" class="headerlink" title="1.3-实践"></a>1.3-实践</h1><h2 id="国外信息安全保障体系的最新趋势"><a href="#国外信息安全保障体系的最新趋势" class="headerlink" title="国外信息安全保障体系的最新趋势"></a>国外信息安全保障体系的最新趋势</h2><h3 id="国际"><a href="#国际" class="headerlink" title="国际"></a>国际</h3><ul>
+<li>战略：发布网络安全战略</li>
+<li>组织：设立网络安全协调机构</li>
+<li>军事：成立网络站司令部，网络站称为热门话题</li>
+<li>外交：信息安全成为国际多边或双边谈判的实质性内容</li>
+<li>关键基础设施仍然是信息安全保障的最核心内容</li>
+</ul>
+<h3 id="各个国家"><a href="#各个国家" class="headerlink" title="各个国家"></a>各个国家</h3><ul>
+<li>美国信安保障战略：一个轮回 三届政府 四个文件</li>
+<li>美国CNCI，网络曼哈顿计划，三道防线，十二项提议</li>
+<li>英国：注重信安标准组织建设，强化网络监控</li>
+<li>德国：第一个建立电子政务标准，注重基线安全防御</li>
+<li>法国：强化四大安全目标</li>
+<li>俄罗斯：注重测评、分级管理</li>
+</ul>
+<h3 id="分析总结——基本做法"><a href="#分析总结——基本做法" class="headerlink" title="分析总结——基本做法"></a>分析总结——基本做法</h3><ul>
+<li>将信息安全视为国家安全的重要组成部分是主流</li>
+<li>积极推动信息安全立法和标准规范建设是主流</li>
+<li>重视对基础网络和重要信息系统的监管和安全测评是主流</li>
+<li>普遍重视信息安全事件应急响应</li>
+<li>普遍认识到公共私营合作伙伴关系的重要性，一方面政府加强管理力度，一方面充分利用社会资源</li>
+</ul>
+<h2 id="我国信息安全保障工作发展阶段"><a href="#我国信息安全保障工作发展阶段" class="headerlink" title="我国信息安全保障工作发展阶段"></a>我国信息安全保障工作发展阶段</h2><ul>
+<li>01-02:启动，相关小组成立</li>
+<li>03-05：逐步展开，积极推进</li>
+<li>06-今：深化落实</li>
+</ul>
+<h2 id="保障基本思路"><a href="#保障基本思路" class="headerlink" title="保障基本思路"></a>保障基本思路</h2><ul>
+<li>以维护国家利益为根本出发点，服从和服务于国家发展和安全</li>
+<li>突出保障重点，推动自主创新，为国家发展和社会建设提供强有力支持</li>
+<li>从法律管理技术等多方面入手，采取多种安全措施动员和组织全社会力量，共同构建国家信息安全保障体系</li>
+</ul>
+<h2 id="保障基本目标"><a href="#保障基本目标" class="headerlink" title="保障基本目标"></a>保障基本目标</h2><ul>
+<li>保障和促进信息化发展</li>
+<li>维护企业与公民的合法权益</li>
+<li>构建安全可信的网络信息传播秩序</li>
+<li>保护互联网知识产权</li>
+</ul>
+<h2 id="保障需求"><a href="#保障需求" class="headerlink" title="保障需求"></a>保障需求</h2><ul>
+<li>如何制定：法规符合性、业务需求、风险评估</li>
+</ul>
+<h2 id="信心安全评测"><a href="#信心安全评测" class="headerlink" title="信心安全评测"></a>信心安全评测</h2><ul>
+<li>依照相关标准，从多个角度对xx进行测试和评估</li>
+<li>测评对象：信息产品安全、信息系统安全、服务商资质、信息安全人员资质测评</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/信息安全/" rel="tag"># 信息安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/01/18/信息安全技术-网络协议安全/" rel="next" title="信息安全技术-网络协议安全">
+                <i class="fa fa-chevron-left"></i> 信息安全技术-网络协议安全
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/01/Tools自动签到/" rel="prev" title="Tools自动签到">
+                Tools自动签到 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">52</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-1-背景"><span class="nav-text">1.1-背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-2-概念与模型"><span class="nav-text">1.2-概念与模型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#基于时间的PDR模型（P保护，D检测，R响应"><span class="nav-text">基于时间的PDR模型（P保护，D检测，R响应</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2DR模型-分布式动态主动模型"><span class="nav-text">P2DR模型-分布式动态主动模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#P-policy，策略"><span class="nav-text">P-policy，策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-protection-防护"><span class="nav-text">2-protection 防护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D-detection-检测"><span class="nav-text">D-detection 检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R-response-响应"><span class="nav-text">R-response 响应</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2DR模型中的数学法则"><span class="nav-text">P2DR模型中的数学法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2DR模型的安全目标"><span class="nav-text">P2DR模型的安全目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IATF-深度防御保障模型"><span class="nav-text">IATF-深度防御保障模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#何谓深度防御"><span class="nav-text">何谓深度防御</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#IATF的三要素"><span class="nav-text">IATF的三要素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护计算环境"><span class="nav-text">保护计算环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护区域边界"><span class="nav-text">保护区域边界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保护网络和基础设施"><span class="nav-text">保护网络和基础设施</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支撑性基础设施建设"><span class="nav-text">支撑性基础设施建设</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息系统安全保障"><span class="nav-text">信息系统安全保障</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息系统安全保障模型"><span class="nav-text">信息系统安全保障模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息系统安全保障安全特征"><span class="nav-text">信息系统安全保障安全特征</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#1-3-实践"><span class="nav-text">1.3-实践</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#国外信息安全保障体系的最新趋势"><span class="nav-text">国外信息安全保障体系的最新趋势</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#国际"><span class="nav-text">国际</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#各个国家"><span class="nav-text">各个国家</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析总结——基本做法"><span class="nav-text">分析总结——基本做法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#我国信息安全保障工作发展阶段"><span class="nav-text">我国信息安全保障工作发展阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保障基本思路"><span class="nav-text">保障基本思路</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保障基本目标"><span class="nav-text">保障基本目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#保障需求"><span class="nav-text">保障需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信心安全评测"><span class="nav-text">信心安全评测</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
