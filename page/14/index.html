@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/网络概述/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/闭包-装饰器/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -272,7 +272,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/网络概述/" itemprop="url">网络概述</a></h1>
+                <a class="post-title-link" href="/2018/01/02/闭包-装饰器/" itemprop="url">闭包_装饰器</a></h1>
         
 
         <div class="post-meta">
@@ -356,22 +356,21 @@
 
       
         
-          <h1 id="网络概述"><a href="#网络概述" class="headerlink" title="网络概述"></a>网络概述</h1><ul>
-<li>知识点<ol>
-<li>tcp/ip协议介绍</li>
-<li>ip地址的分类</li>
-<li>端口、端口号</li>
-<li>(重点)socket
+          <h1 id="面向对象进阶"><a href="#面向对象进阶" class="headerlink" title="面向对象进阶"></a>面向对象进阶</h1><h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><h3 id="01-函数引用"><a href="#01-函数引用" class="headerlink" title="01-函数引用"></a>01-函数引用</h3><ul>
+<li><p>示例</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"--- in test1 func----"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#调用函数</span></span><br><span class="line">test1()</span><br><span class="line"></span><br><span class="line"><span class="comment">#引用函数</span></span><br><span class="line">ret = test1</span><br><span class="line"></span><br><span class="line">print(id(ret))</span><br><span class="line">print(id(test1))</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过引用调用函数</span></span><br><span class="line">ret()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行结果
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/02/网络概述/#more" rel="contents">
+            <a class="btn" href="/2018/01/02/闭包-装饰器/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ol></li></ul></div>
+    </p></li></ul></div>
     
     
     
@@ -581,7 +580,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/元类/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/进程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -600,7 +599,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/元类/" itemprop="url">元类</a></h1>
+                <a class="post-title-link" href="/2018/01/02/进程/" itemprop="url">进程</a></h1>
         
 
         <div class="post-meta">
@@ -684,22 +683,187 @@
 
       
         
-          <h1 id="面向对象进阶"><a href="#面向对象进阶" class="headerlink" title="面向对象进阶"></a>面向对象进阶</h1><h2 id="元类"><a href="#元类" class="headerlink" title="元类"></a>元类</h2><h3 id="01-类也是对象"><a href="#01-类也是对象" class="headerlink" title="01-类也是对象"></a>01-类也是对象</h3><ul>
-<li><p>在大多数编程语言中，类就是一组用来描述如何生成一个对象的代码段。</p>
+          <h1 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h1><h2 id="01-多任务的引入"><a href="#01-多任务的引入" class="headerlink" title="01-多任务的引入"></a>01-多任务的引入</h2><ul>
+<li><p>现实生活中：</p>
 <ul>
-<li><p>在Python中这一点仍然成立：</p>
+<li>有很多的场景中的事情是同时进行的，比如开车的时候 手和脚共同来驾驶汽车，再比如唱歌跳舞也是同时进行的</li>
+<li>试想，如果把唱歌和跳舞这2件事情分开依次完成的话，估计就没有那么好的效果了（想一下场景：先唱歌，然后在跳舞，O(∩_∩)O哈哈~）</li>
+</ul>
 </li>
-<li><p>示例：
+<li><p>程序中
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/02/元类/#more" rel="contents">
+            <a class="btn" href="/2018/01/02/进程/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </p></li></ul></li></ul></div>
+    </p></li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/垃圾回收/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/02/垃圾回收/" itemprop="url">垃圾回收</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:54+08:00">
+                2018-01-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h1><h2 id="垃圾回收-1"><a href="#垃圾回收-1" class="headerlink" title="垃圾回收-1"></a>垃圾回收-1</h2><h3 id="01-小整数对象池"><a href="#01-小整数对象池" class="headerlink" title="01-小整数对象池"></a>01-小整数对象池</h3><ul>
+<li>整数在程序中的使用非常广泛，Python为了优化速度，使用了小整数对象池，<br>避免为整数频繁申请和销毁内存空间。</li>
+<li>Python 对小整数的定义是 [-5, 257)<br>这些整数对象是提前建立好的，不会被垃圾回收。在一个 Python<br>的程序中，所有位于这个范围内的整数使用的都是同一个对象.</li>
+<li>同理，单个字母也是这样的。</li>
+<li>但是当定义2个相同的字符串时，引用计数为0，触发垃圾回收</li>
+</ul>
+<h3 id="02-大整数对象池"><a href="#02-大整数对象池" class="headerlink" title="02-大整数对象池"></a>02-大整数对象池
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/01/02/垃圾回收/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </h3></div>
     
     
     
@@ -903,7 +1067,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/网络通信过程/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/网络概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -922,7 +1086,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/网络通信过程/" itemprop="url">网络通信过程</a></h1>
+                <a class="post-title-link" href="/2018/01/02/网络概述/" itemprop="url">网络概述</a></h1>
         
 
         <div class="post-meta">
@@ -1006,185 +1170,22 @@
 
       
         
-          <h1 id="网络通信过程详解"><a href="#网络通信过程详解" class="headerlink" title="网络通信过程详解"></a>网络通信过程详解</h1><h2 id="01-packet-tracer网络通信过程"><a href="#01-packet-tracer网络通信过程" class="headerlink" title="01-packet tracer网络通信过程"></a>01-packet tracer网络通信过程</h2><ul>
-<li>略</li>
-</ul>
-<h2 id="02-两台电脑联网"><a href="#02-两台电脑联网" class="headerlink" title="02-两台电脑联网"></a>02-两台电脑联网</h2><ul>
-<li>略</li>
-</ul>
-<h2 id="03-通过集线器组网"><a href="#03-通过集线器组网" class="headerlink" title="03-通过集线器组网"></a>03-通过集线器组网</h2><ul>
-<li>集线器又名hub
+          <h1 id="网络概述"><a href="#网络概述" class="headerlink" title="网络概述"></a>网络概述</h1><ul>
+<li>知识点<ol>
+<li>tcp/ip协议介绍</li>
+<li>ip地址的分类</li>
+<li>端口、端口号</li>
+<li>(重点)socket
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/02/网络通信过程/#more" rel="contents">
+            <a class="btn" href="/2018/01/02/网络概述/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/02/闭包-装饰器/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ry1ynn's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/02/闭包-装饰器/" itemprop="url">闭包_装饰器</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T16:09:54+08:00">
-                2018-01-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/" itemprop="url" rel="index">
-                    <span itemprop="name">python</span>
-                  </a>
-                </span>
-
-                
-                
-                  ， 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/python/进阶/" itemprop="url" rel="index">
-                    <span itemprop="name">进阶</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="面向对象进阶"><a href="#面向对象进阶" class="headerlink" title="面向对象进阶"></a>面向对象进阶</h1><h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><h3 id="01-函数引用"><a href="#01-函数引用" class="headerlink" title="01-函数引用"></a>01-函数引用</h3><ul>
-<li><p>示例</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test1</span><span class="params">()</span>:</span></span><br><span class="line">    print(<span class="string">"--- in test1 func----"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#调用函数</span></span><br><span class="line">test1()</span><br><span class="line"></span><br><span class="line"><span class="comment">#引用函数</span></span><br><span class="line">ret = test1</span><br><span class="line"></span><br><span class="line">print(id(ret))</span><br><span class="line">print(id(test1))</span><br><span class="line"></span><br><span class="line"><span class="comment">#通过引用调用函数</span></span><br><span class="line">ret()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运行结果
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/01/02/闭包-装饰器/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></li></ul></div>
+    </li></ol></li></ul></div>
     
     
     
@@ -1312,6 +1313,12 @@
                     <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
                       
                         <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
                   </span>
                 
                   <span class="links-of-author-item">
