@@ -78,18 +78,18 @@
 
 
 
-<meta name="description" content="01-相关知识点 当你导入一个模块，Python解析器对模块位置的搜索顺序是：  当前目录 如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。 如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/ 模块搜索路径存储在system模块的sys.path变量中。变量里包含当前目录，PYTHONPATH和由安">
+<meta name="description" content="01-相关知识点 当你导入一个模块，Python解析器对模块位置的搜索顺序是： 当前目录 如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。 如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/ 模块搜索路径存储在system模块的sys.path变量中。变量里包含当前目录，PYTHONPATH和由安装">
 <meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python ModuleNotFoundError解决及思考">
 <meta property="og:url" content="http://21guns.top/2019/04/05/python ModuleNotFoundError解决及思考/index.html">
 <meta property="og:site_name" content="Ry1ynn&#39;s blogs">
-<meta property="og:description" content="01-相关知识点 当你导入一个模块，Python解析器对模块位置的搜索顺序是：  当前目录 如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。 如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/ 模块搜索路径存储在system模块的sys.path变量中。变量里包含当前目录，PYTHONPATH和由安">
+<meta property="og:description" content="01-相关知识点 当你导入一个模块，Python解析器对模块位置的搜索顺序是： 当前目录 如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。 如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/ 模块搜索路径存储在system模块的sys.path变量中。变量里包含当前目录，PYTHONPATH和由安装">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-05T11:40:43.604Z">
+<meta property="og:updated_time" content="2019-04-05T12:11:54.077Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python ModuleNotFoundError解决及思考">
-<meta name="twitter:description" content="01-相关知识点 当你导入一个模块，Python解析器对模块位置的搜索顺序是：  当前目录 如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。 如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/ 模块搜索路径存储在system模块的sys.path变量中。变量里包含当前目录，PYTHONPATH和由安">
+<meta name="twitter:description" content="01-相关知识点 当你导入一个模块，Python解析器对模块位置的搜索顺序是： 当前目录 如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。 如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/ 模块搜索路径存储在system模块的sys.path变量中。变量里包含当前目录，PYTHONPATH和由安装">
 
 
 
@@ -344,20 +344,22 @@
 
       
         <h2 id="01-相关知识点"><a href="#01-相关知识点" class="headerlink" title="01-相关知识点"></a>01-相关知识点</h2><ul>
-<li><p>当你导入一个模块，Python解析器对模块位置的搜索顺序是：</p>
-<ul>
+<li>当你导入一个模块，Python解析器对模块位置的搜索顺序是：<ul>
 <li>当前目录</li>
 <li>如果不在当前目录，Python则搜索在shell变量PYTHONPATH下的每个目录。</li>
 <li>如果都找不到，Python会察看默认路径。UNIX下，默认路径一般为/usr/local/lib/python/</li>
 <li>模块搜索路径存储在system模块的sys.path变量中。变量里包含当前目录，PYTHONPATH和由安装过程决定的默认目录。<a id="more"></a></li>
 </ul>
 </li>
-<li><p>查看当前shell：<code>echo $SHELL</code></p>
-</li>
+<li>查看当前shell：<code>echo $SHELL</code></li>
 <li>更改shell：<code>cash -s /bin/zsh</code></li>
-<li>bash对应~/.bash_profile，zsh对应~/.zsh_profile</li>
-<li>PYTHONPATH在shell的配置文件（即*sh_profile）中定义，如<code>export PYTHONPATH=&quot;xxx/yyy&quot;</code></li>
-<li>*sh_profile修改后要重启系统后生效，若要立即生效<code>source ~/.zsh.profile</code></li>
+<li>不同shell有不同的配置文件<ul>
+<li>bash对应~/.bash_profile</li>
+<li>zsh对应~/.zshrc</li>
+</ul>
+</li>
+<li>PYTHONPATH在shell的配置文件中定义，如<code>export PYTHONPATH=&quot;xxx/yyy&quot;</code></li>
+<li><code>.zshrc</code>修改后要重启系统后生效，若要立即生效<code>source ~/.zshrc</code></li>
 <li><code>pip3 show pandas</code>，查看其详细信息，可得其所在目录</li>
 </ul>
 <h2 id="02-实操"><a href="#02-实操" class="headerlink" title="02-实操"></a>02-实操</h2><ol>
@@ -365,10 +367,10 @@
 </li>
 <li><p><code>echo $SHELL</code>得当前shell为<code>/bin/zsh</code></p>
 </li>
-<li><p><code>vim ~/.zsh_profile</code>（原先并不存在，可由bash_profile复制而来）</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">2 # Setting PATH for Python 3.7</span><br><span class="line">3 # The original version is saved in .bash_profile.pysave</span><br><span class="line">4 PATH="/Library/Frameworks/Python.framework/Versions/3.7/bin:$&#123;PATH&#125;"</span><br><span class="line">5 export PATH</span><br><span class="line">6</span><br><span class="line">7 #py相关环境变量，import时会用到</span><br><span class="line">8 export PYTHONPATH="/usr/local/lib/python3.7/site-packages"</span><br></pre></td></tr></table></figure>
+<li><p><code>vim ~/.zshrc</code>（原先并不存在，可由bash_profile复制而来）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> py相关环境变量，import时会用到</span><br><span class="line">export PYTHONPATH="/usr/local/lib/python3.7/site-packages"</span><br></pre></td></tr></table></figure>
 </li>
-<li><p><code>source ~/.zsh_profile</code>使配置生效</p>
+<li><p><code>source ~/.zshrc</code>使配置生效</p>
 </li>
 <li><p>经测试，问题解决。</p>
 </li>
