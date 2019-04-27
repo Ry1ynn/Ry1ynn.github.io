@@ -1,0 +1,1400 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,NISP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="02-Web主流安全威胁2.1-注入攻击 注入攻击 SQL注入 命令注入 其他注入   注入攻击发生在当不可信的数据作为命令或者查询语句的一部分，被发送给解释器的时候。攻击者发送的恶意数据可以欺骗解释器，以执行计划外的命令或者访问未被授权的数据">
+<meta name="keywords" content="Web安全,NISP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全技术-web应用安全与攻防技术-Web主流安全威胁">
+<meta property="og:url" content="http://21guns.top/2019/04/24/信息安全技术-web应用安全与攻防技术-Web主流安全威胁/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="02-Web主流安全威胁2.1-注入攻击 注入攻击 SQL注入 命令注入 其他注入   注入攻击发生在当不可信的数据作为命令或者查询语句的一部分，被发送给解释器的时候。攻击者发送的恶意数据可以欺骗解释器，以执行计划外的命令或者访问未被授权的数据">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-27T13:27:56.541Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全技术-web应用安全与攻防技术-Web主流安全威胁">
+<meta name="twitter:description" content="02-Web主流安全威胁2.1-注入攻击 注入攻击 SQL注入 命令注入 其他注入   注入攻击发生在当不可信的数据作为命令或者查询语句的一部分，被发送给解释器的时候。攻击者发送的恶意数据可以欺骗解释器，以执行计划外的命令或者访问未被授权的数据">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/04/24/信息安全技术-web应用安全与攻防技术-Web主流安全威胁/">
+
+
+
+
+
+  <title>信息安全技术-web应用安全与攻防技术-Web主流安全威胁 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/04/24/信息安全技术-web应用安全与攻防技术-Web主流安全威胁/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全技术-web应用安全与攻防技术-Web主流安全威胁</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-24T09:34:26+08:00">
+                2019-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="02-Web主流安全威胁"><a href="#02-Web主流安全威胁" class="headerlink" title="02-Web主流安全威胁"></a>02-Web主流安全威胁</h1><h2 id="2-1-注入攻击"><a href="#2-1-注入攻击" class="headerlink" title="2.1-注入攻击"></a>2.1-注入攻击</h2><ul>
+<li>注入攻击<ul>
+<li>SQL注入</li>
+<li>命令注入</li>
+<li>其他注入</li>
+</ul>
+</li>
+<li>注入攻击发生在当不可信的数据作为命令或者查询语句的一部分，被发送给解释器的时候。攻击者发送的恶意数据可以欺骗解释器，以执行计划外的命令或者访问未被授权的数据<a id="more"></a></li>
+<li>注入漏洞通常能在SQL、LDAP、XPath或是NoSQL查询语句、OS命令、XML解析器、SMTP包头、表达式语句及ORM查询语句中找到</li>
+<li>常见类型：SQL注入、OS命令注入、XML注入、LDAP注入</li>
+</ul>
+<h3 id="SQL注入攻击"><a href="#SQL注入攻击" class="headerlink" title="SQL注入攻击"></a>SQL注入攻击</h3><ul>
+<li>当应用程序将用户输入的内容，拼接到SQL语句中，一起提交给数据库执行时，就会产生SQL注入威胁</li>
+<li>由于用户的输入，也是SQL语句的一部分，所以攻击者可以利用这部分可以控制的内容，注入自己定义的语句，改变SQL语句执行逻辑，让数据库执行任意自己需要的指令。通过控制部分SQL语句，攻击者可以查询数据库中任何自己需要的数据，利用数据库的一些特性，可以直接获取数据库服务器的系统权限。</li>
+</ul>
+<h3 id="SQL注入防御"><a href="#SQL注入防御" class="headerlink" title="SQL注入防御"></a>SQL注入防御</h3><ul>
+<li>防止注入漏洞需要将数据与命令语句、查询语句分隔开来</li>
+<li>最佳选择是使用安全的API，完全避免使用解释器，或提供参数化界面的接口，或迁移到ORM或实体框架</li>
+<li>检测参数：可以通过对用户输入参数进行过滤和检查，去除拼接数据或检查合法性</li>
+<li>敏感信息加密</li>
+<li>低权限账户连接数据库</li>
+<li>预处理执行SQL语句：使用预处理执行SQL语句，对所有传入SQL语句中的变量，做绑定。这样，用户拼接进来的变量，无论内容是什么，都会被当作替代符号“？”所替代的值，数据库也不会把恶意用户拼接进来的数据，当作部分SQL语句去解析。</li>
+</ul>
+<h3 id="OS命令注入"><a href="#OS命令注入" class="headerlink" title="OS命令注入"></a>OS命令注入</h3><ul>
+<li>黑客通过把html代码输入一个输入机制（例如缺乏有效验证限制的表格域）来改变网页的动态生成的内容。一个恶意黑客可利用这种攻击方法来非法获取数据或网络资源。</li>
+<li>预防：对于命令注入，最主要的方法是对表单输入或者选择的内容进行验证。</li>
+<li>与SQL注入区别：sql注入数据库相关，命令注入操作系统相关，大同小异。</li>
+</ul>
+<h2 id="2-2-XSS"><a href="#2-2-XSS" class="headerlink" title="2.2-XSS"></a>2.2-XSS</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>XSS攻击：跨站脚本攻击-cross site scripting-XSS，层叠样式表CSS</li>
+<li>XSS跨站脚本，是一种迫使web站点回显可执行代码的攻击技术，而这些可执行代码由攻击者提供，最终为用户浏览器加载。</li>
+<li>不同于大多数攻击（一般只涉及攻击者和受害者），XSS涉及到三方，即攻击者、客户端与网站。</li>
+<li>此类型的漏洞由于被骇客用来编写危害性更大的phishing攻击而变得广为人知。</li>
+<li>跨站脚本攻击是到目前为止最受关注的、威胁最高的攻击手段；</li>
+<li>通过xss攻击，攻击者可以窃取网页访问者保存在终端的各种账号信息，并且可以通过脚本盗窃用户的cookie，劫持用户与web服务器的会话；</li>
+</ul>
+<h3 id="反射性xss"><a href="#反射性xss" class="headerlink" title="反射性xss"></a>反射性xss</h3><ul>
+<li>通过给别人发送带有恶意脚本代码参数的URL，当URL地址被打开时，特有的恶意代码参数被html解析、执行。</li>
+<li>其特点是非持久化，必须用户点击带有特定参数的链接才能引起；</li>
+<li>反射性xss漏洞的关键在于攻击者需要构造一个能够触发脚本运行的URL，并诱骗受害者点击这个URL，点击之后，服务器就会响应并注入脚本到客户端的浏览器；</li>
+</ul>
+<h3 id="存储型xss"><a href="#存储型xss" class="headerlink" title="存储型xss"></a>存储型xss</h3><ul>
+<li>是指用户提交给web应用程序的数据首先旧被永久的保存在服务器的数据库、文件系统或者其他地方，后面且未做任何编码就能显示到web页面，当其他用户浏览该链接时就会造成xss攻击</li>
+<li>最典型的是05年在myspace发现的xss漏洞以及利用该漏洞的samy MySpace worm；</li>
+</ul>
+<h3 id="xss对web的威胁"><a href="#xss对web的威胁" class="headerlink" title="xss对web的威胁"></a>xss对web的威胁</h3><ul>
+<li>主要体现在黑客所注入的脚本，这些脚本主要实现的目的有：</li>
+<li>盗取用户的cookie，劫持会话</li>
+<li>获取用户敏感信息</li>
+<li>讲访问重定向，重定向到钓鱼网站</li>
+</ul>
+<h3 id="xss防御"><a href="#xss防御" class="headerlink" title="xss防御"></a>xss防御</h3><ul>
+<li>对所有用户提交内容进行可靠的输入验证，进行编码替代，例如&lt; = &amp;lt, &gt; &amp;gt<ul>
+<li>包括对URL、查询关键字、http头、post数据等，仅接受指定长度范围内，采取适当格式，采用所预期的字符的内容提交</li>
+</ul>
+</li>
+<li>确认接受的内容被妥善的规范化，仅包含最小的、安全的tag，没有javascript，去掉任何对远程内容的饮用（尤其是样式表和javascript），使用http only 的cookie</li>
+<li>部署xss攻击防御产品</li>
+</ul>
+<h2 id="2-3-认证会话管理"><a href="#2-3-认证会话管理" class="headerlink" title="2.3-认证会话管理"></a>2.3-认证会话管理</h2><h3 id="身份认证和会话管理"><a href="#身份认证和会话管理" class="headerlink" title="身份认证和会话管理"></a>身份认证和会话管理</h3><ul>
+<li>身份认证：最常见的登录功能，往往是提交用户名和密码，在安全性要求更高的情况下，有防止密码暴力破解的验证码，基于客户端的证书，物理口令卡等</li>
+<li>会话管理：http本身是无状态的，利用会话管理机制来实现连接识别，身份认证的结果往往是获得一个令牌，通常放在cookie中，之后对用户身份的识别根据这个授权的令牌进行识别，而不需要每次都要登录</li>
+</ul>
+<h3 id="身份认证漏洞与影响"><a href="#身份认证漏洞与影响" class="headerlink" title="身份认证漏洞与影响"></a>身份认证漏洞与影响</h3><table>
+<thead>
+<tr>
+<th>漏洞</th>
+<th>影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>弱密码</td>
+<td>增加了破解密码和词典攻击的风险</td>
+</tr>
+<tr>
+<td>配置文件中使用明文凭据</td>
+<td>可访问服务器的内部人员都能直接访问凭据</td>
+</tr>
+<tr>
+<td>通过网络传递明文凭据</td>
+<td>攻击者可通过监控网络来盗取身份验证凭据并窃取身份</td>
+</tr>
+<tr>
+<td>账户的特权加强</td>
+<td>与进程和账户泄漏相关的风险增加</td>
+</tr>
+<tr>
+<td>混用个性化数据的身份验证数据</td>
+<td>个性化数据适于永久的cookie，而身份验证的cookie不应是永久的</td>
+</tr>
+</tbody>
+</table>
+<h3 id="认证漏洞案例"><a href="#认证漏洞案例" class="headerlink" title="认证漏洞案例"></a>认证漏洞案例</h3><ul>
+<li>登录认证次数没有限制：web登录认证界面，没有验证码，也没有次数限制，通过暴力破解工具，可遍历字典，尝试破解登录</li>
+<li>用户忘记密码后，密码找回功能太过简单：比如密码找回利用密保问题，但密保问题设计逻辑存在一定问题，如密保问题”你最喜欢的颜色是什么？”</li>
+</ul>
+<h3 id="http会话管理概述"><a href="#http会话管理概述" class="headerlink" title="http会话管理概述"></a>http会话管理概述</h3><ul>
+<li>http是无状态的：一个客户端计算机上运行web浏览器必须建立一个新的传输控制协议TCP的网络连接到每一个新的web服务器的http get或POST请求。web服务器，因此不能依赖于建立的tcp比单个http get或post较长的运行网络连接</li>
+<li>会话管理是由web开发人员用来进行http协议无状态会话状态支持的技术。例如，一旦用户验证自己的web服务器，他的下一个http请求（get或post）不应导致web服务器重新认证</li>
+<li>在存储的会话ID和相应的会话数据（用户名，账号等，在web服务器上）目前使用了多种技术，包括但不限于：本地存储和数据库等。</li>
+</ul>
+<h3 id="会话劫持攻击"><a href="#会话劫持攻击" class="headerlink" title="会话劫持攻击"></a>会话劫持攻击</h3><ul>
+<li>http会话劫持</li>
+<li>web应用程序是通过2种方式来判断和跟踪不同用户的：cookie或者session。<ul>
+<li>cookie是存储在本地计算机上的，过期时间很长，所以针对cookie的攻击手段一般是盗取用户cookie然后伪造cookie冒充该用户</li>
+<li>session由于其存在与服务端，随着会话的注销而失效（很快过期），往往难以利用，故一般来说session较cookie认证安全</li>
+</ul>
+</li>
+</ul>
+<h3 id="会话重放攻击"><a href="#会话重放攻击" class="headerlink" title="会话重放攻击"></a>会话重放攻击</h3><ul>
+<li>重放攻击与cookie</li>
+<li>我们监听http数据传输的截获的敏感数据大多数就是存放在 cookie中的数据。</li>
+<li>其实在web安全中的其他方式（非网络监听）盗取cookie与提交cookie也是一种重放攻击。</li>
+<li>我们有时候可以轻松复制别人的cookie直接获得相应的权限</li>
+</ul>
+<h3 id="会话管理漏洞案例"><a href="#会话管理漏洞案例" class="headerlink" title="会话管理漏洞案例"></a>会话管理漏洞案例</h3><ul>
+<li>没有会话超时限制：</li>
+<li>关闭浏览器，但会话不失效</li>
+<li>应用程序超时设置不当名，用户使用公共计算机访问网站。离开时，该用户没有点击退出，而是直接关闭浏览器。攻击者在一个小时后能使用相同浏览器通过身份认证</li>
+</ul>
+<h3 id="认证和会话管理漏洞防御"><a href="#认证和会话管理漏洞防御" class="headerlink" title="认证和会话管理漏洞防御"></a>认证和会话管理漏洞防御</h3><ul>
+<li>增强口令安全</li>
+<li>认证凭证安全加密存储</li>
+<li>网络传递认证凭证采用ssl加密</li>
+<li>避免用户账户权限加强</li>
+<li>身份认证设计完善</li>
+</ul>
+<h2 id="2-4-CSRF"><a href="#2-4-CSRF" class="headerlink" title="2.4-CSRF"></a>2.4-CSRF</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>跨站请求伪造（cross-site request forgery），csrf</li>
+<li>即攻击者通过调用第三方网站的恶意脚本或者利用程序来伪造请求，当然并不需要相用户端伪装任何具有欺骗性的内容，在用户不知情时攻击者直接利用用户的浏览器向攻击的应用程序提交一个已经预测好请求参数的操作数据包，利用的实质是劫持用户的会话状态，强行提交攻击者构造的具有”操作行为”的数据包。</li>
+</ul>
+<h3 id="攻击关键"><a href="#攻击关键" class="headerlink" title="攻击关键"></a>攻击关键</h3><ul>
+<li>伪造一个已经预测好请求参数的操作数据包<ul>
+<li>get请求，URL即包含了请求的参数</li>
+<li>post请求，需要借助ajax实现</li>
+</ul>
+</li>
+<li>在用户没有退出正常会话时，引诱用户点击提交伪造的请求</li>
+</ul>
+<h3 id="CSRF的检测"><a href="#CSRF的检测" class="headerlink" title="CSRF的检测"></a>CSRF的检测</h3><ul>
+<li>检测应用程序是否存在该漏洞的方法是查看是否每个链接和表单都提供了不可预测的CSRF令牌。没有这样的令牌，攻击者就能够伪造恶意请求</li>
+<li>重点关注那些调用能够改变状态功能的链接和表格，因为他们是跨站请求伪造攻击的最重要的目标</li>
+<li>请注意：会话cookie、源IP地址和其他浏览器自动发送的信息不能作为防攻击令牌，因为这些信息已经包含咋伪造的请求中。</li>
+</ul>
+<h3 id="CSRF预防方案"><a href="#CSRF预防方案" class="headerlink" title="CSRF预防方案"></a>CSRF预防方案</h3><ul>
+<li>为每个链接和表单都提供了不可预测的CSRF令牌，令牌可以基于表单的隐藏字段实现，但不能通过cookie实现</li>
+<li>要求用户证明他们要提交请求，可以通过重新认证的方式或者其他能够证实他们是真实用户的方法（比如验证码</li>
+<li>在特殊场合，增加多级验证（例如提示确认页面或再次输入手机验证码），也能很好的防护CSRF</li>
+</ul>
+<h3 id="预防CSRF案例"><a href="#预防CSRF案例" class="headerlink" title="预防CSRF案例"></a>预防CSRF案例</h3><ul>
+<li>对于POST表单请求的预防</li>
+<li>要求所有POST请求都包含一个伪随机值</li>
+<li>当用户访问站点时，该站点该生成一个（密码上很强壮的）伪随机值（作为表单值和cookie值）</li>
+<li>当一个post请求被发动到站点时，只有表单值和cookie值相同时，该请求才会被认为是有效的。</li>
+<li>当然，为了增加复杂性，可以将cookie进行进一步的hash运算以增加攻击难度。</li>
+</ul>
+<h2 id="2-5-访问控制-amp-敏感信息泄漏-amp-有漏洞的组件"><a href="#2-5-访问控制-amp-敏感信息泄漏-amp-有漏洞的组件" class="headerlink" title="2.5-访问控制&amp;敏感信息泄漏&amp;有漏洞的组件"></a>2.5-访问控制&amp;敏感信息泄漏&amp;有漏洞的组件</h2><h3 id="访问控制权限错误"><a href="#访问控制权限错误" class="headerlink" title="访问控制权限错误"></a>访问控制权限错误</h3><ul>
+<li>访问控制权限错误，意指一个已经授权的用户，通过更改访问时的一个参数，从而访问到了原本其并没有得到授权的对象</li>
+<li>常见表现形式：水平权限、垂直权限</li>
+</ul>
+<h3 id="水平权限访问控制错误案例"><a href="#水平权限访问控制错误案例" class="headerlink" title="水平权限访问控制错误案例"></a>水平权限访问控制错误案例</h3><ul>
+<li>当当手机客户端，查看任意订单漏洞（包括收件人电话地址等信息</li>
+<li>壹药网越权访问其他用户信息包括地址、姓名、手机号等</li>
+</ul>
+<h3 id="访问控制错误预防"><a href="#访问控制错误预防" class="headerlink" title="访问控制错误预防"></a>访问控制错误预防</h3><ul>
+<li>用户权限与身份严格管理，任何动作执行都需要检验身份</li>
+<li>检查访问，任何来自不可信源的直接对象引用都必须通过访问控制检测，确保该用户对请求的对象有访问权限</li>
+</ul>
+<p>###敏感信息泄漏概述</p>
+<ul>
+<li>敏感数据和这些数据的备份，包括静态数据、传输中的数据甚至是客户浏览器中的数据往往存在被泄漏的可能</li>
+<li>攻击者通常不直接攻击加密系统。他们往往通过诸如窃取密钥、发起中间人攻击或从服务器窃取明文数据等方式对传输中的或者客户浏览器中的数据进行破解</li>
+</ul>
+<h3 id="敏感信息泄漏表现形式"><a href="#敏感信息泄漏表现形式" class="headerlink" title="敏感信息泄漏表现形式"></a>敏感信息泄漏表现形式</h3><ul>
+<li>在此领域最常见的漏洞是：应该加密的数据不进行加密</li>
+<li>在使用加密的情况下，常见的问题是不安全的密钥生成和管理和使用弱算法是很普遍的，特别是使用弱的哈希算法来保护密码</li>
+<li>浏览器的漏洞也很普遍，且可以很轻易的检测到，但是很难大规模的利用</li>
+</ul>
+<h3 id="敏感数据防护检查"><a href="#敏感数据防护检查" class="headerlink" title="敏感数据防护检查"></a>敏感数据防护检查</h3><p>对于敏感数据，应当确保：</p>
+<ul>
+<li>当这些数据被长期存储的时候，无论存储在哪里，他们是否都被加密，特别是对这些数据的备份？</li>
+<li>无论内部数据还是外部数据，传输时是否是明文传输？在互联网中传输明文数据是非常危险的。</li>
+<li>是否还在使用任何旧的活脆弱的加密算法？</li>
+<li>加密密钥的生成是否是脆弱的，或者缺少恰当的密钥管理或缺少密钥回转？</li>
+<li>当浏览器接受或发送敏感数据时，是否有浏览器安全指令或头文件丢失？</li>
+</ul>
+<h3 id="敏感信息泄漏案例"><a href="#敏感信息泄漏案例" class="headerlink" title="敏感信息泄漏案例"></a>敏感信息泄漏案例</h3><ul>
+<li>案例1：一个网站上所有需要身份验证的网页都没有使用SSL。攻击者只需要监控网络数据流（比如一个开放的无线网络或其社区的有线网络），并窃取一个已验证的受害者的会话cookie。然后，攻击者利用这个cookie执行重放攻击并接管用户的会话从而访问用户的隐私数据</li>
+<li>案例2：密码数据库使用unsalted的哈希算法去存储每个人的密码。一个文件上传漏洞使黑客能够获取密码文件。所有这些unsalted哈希的密码通过彩虹表暴力破解方式破解。</li>
+</ul>
+<h3 id="敏感信息泄漏的预防"><a href="#敏感信息泄漏的预防" class="headerlink" title="敏感信息泄漏的预防"></a>敏感信息泄漏的预防</h3><ul>
+<li>预测一些威胁，加密这些数据的存储以确保免受这些威胁</li>
+<li>对于没有必要存放的、重要的敏感数据，应当尽快清除</li>
+<li>确保使用了合适的强大的标准算法和强大的密钥，并且密钥管理到位</li>
+<li>确保使用密码专用算法存储密码，如：bcrypt、PBKDF2或者scrypt</li>
+</ul>
+<h3 id="使用有漏洞的组件概述"><a href="#使用有漏洞的组件概述" class="headerlink" title="使用有漏洞的组件概述"></a>使用有漏洞的组件概述</h3><ul>
+<li>一些含有漏洞的组件（如框架库）可以被自动化工具发现和利用。攻击者通过扫描或者手动分析识别问题组件，然后根据需要定制攻击代码并实施攻击</li>
+<li>大多数的应用都存在这些问题。因为大多数的开发团队并不会把及时更新组件/库作为他们的工作重心</li>
+<li>在很多情况下，开发者都不了解他们所使用的全部组件，更不用说组件的版本了。组件的依赖性使情况更加糟糕</li>
+</ul>
+<h3 id="组件漏洞案例"><a href="#组件漏洞案例" class="headerlink" title="组件漏洞案例"></a>组件漏洞案例</h3><ul>
+<li>struts2开发框架漏洞</li>
+<li>openssl漏洞导致内存泄漏</li>
+</ul>
+<h3 id="使用含有已知漏洞的组件预防"><a href="#使用含有已知漏洞的组件预防" class="headerlink" title="使用含有已知漏洞的组件预防"></a>使用含有已知漏洞的组件预防</h3><ul>
+<li>使用最新版本的组件</li>
+<li>软件项目应该有如下的流程：<ol>
+<li>标示您正在使用的所有组件及其版本，包括所有的组件（比如版本插件</li>
+<li>在公共数据库（漏洞库），项目邮件列表和安全邮件列表中时刻关注这些组件的安全信息并保证他们是最新的</li>
+<li>建立组件使用的安全策略，比如需要某些软件开发实践，通过安全性测试和可接受的授权许可</li>
+<li>在适当的情况下，考虑增加对组件的安全封装，去掉不使用的功能或安全薄弱的或组件易受攻击的方面</li>
+</ol>
+</li>
+</ul>
+<h1 id="03-安全攻击与防御"><a href="#03-安全攻击与防御" class="headerlink" title="03-安全攻击与防御"></a>03-安全攻击与防御</h1><h2 id="3-1-信息收集"><a href="#3-1-信息收集" class="headerlink" title="3.1-信息收集"></a>3.1-信息收集</h2><h3 id="安全攻击与防护"><a href="#安全攻击与防护" class="headerlink" title="安全攻击与防护"></a>安全攻击与防护</h3><ul>
+<li>攻击的过程（踩点-定位-入侵-后门-痕迹<ul>
+<li>信息收集</li>
+<li>目标分析</li>
+<li>实施攻击</li>
+<li>方便再次进入</li>
+<li>打扫战场</li>
+</ul>
+</li>
+<li>防护：针对以上提到的行为了解其原理并考虑应对措施</li>
+</ul>
+<h3 id="信息收集-入侵的第一步"><a href="#信息收集-入侵的第一步" class="headerlink" title="信息收集-入侵的第一步"></a>信息收集-入侵的第一步</h3><ul>
+<li>为何要收集信息（知己知彼，百战不殆<ul>
+<li>获取攻击目标大概信息</li>
+<li>为下一步攻击做准备</li>
+<li>利用收集的信息直接攻击</li>
+</ul>
+</li>
+</ul>
+<h3 id="信息收集与分析案例"><a href="#信息收集与分析案例" class="headerlink" title="信息收集与分析案例"></a>信息收集与分析案例</h3><ul>
+<li>信息收集的概念：情报学中的一个领域</li>
+<li>传统的信息收集：案例：著名的照片泄密案</li>
+<li>互联网时代的信息收集<ul>
+<li>信息技术的发展使得数据大量被生产出来</li>
+<li>案例：明星的家庭住址</li>
+</ul>
+</li>
+</ul>
+<h3 id="收集哪些信息"><a href="#收集哪些信息" class="headerlink" title="收集哪些信息"></a>收集哪些信息</h3><ul>
+<li>目标系统的信息系统相关资料<ul>
+<li>域名、网络拓扑、操纵系统、应用软件</li>
+<li>相关脆弱性</li>
+</ul>
+</li>
+<li>目标系统的组织相关资料<ul>
+<li>组织架构及关联组织</li>
+<li>地理位置细节</li>
+<li>电话号码、邮件等联系方式</li>
+<li>近期重大事件</li>
+<li>员工简介</li>
+</ul>
+</li>
+<li>其他可能令攻击者感性去的任何信息</li>
+</ul>
+<h3 id="公开信息收集-搜索引擎"><a href="#公开信息收集-搜索引擎" class="headerlink" title="公开信息收集-搜索引擎"></a>公开信息收集-搜索引擎</h3><ul>
+<li>快速定位<ul>
+<li>Google“5sf67.jsp”可找到存在此脚本的web网站</li>
+<li>Google 搜索”teweb/default.tml”就可以找到开放着远程web连接的服务器</li>
+</ul>
+</li>
+<li>信息挖掘<ul>
+<li>定点采集（Google搜索”.doc + website”挖掘信息</li>
+<li>隐藏信息（.mdb, .ini, .txt, .old, .bak, .001……</li>
+<li>后台入口</li>
+</ul>
+</li>
+</ul>
+<h3 id="互联网社工库"><a href="#互联网社工库" class="headerlink" title="互联网社工库"></a>互联网社工库</h3><ul>
+<li>待收集</li>
+</ul>
+<h3 id="网络信息收集-域名收集"><a href="#网络信息收集-域名收集" class="headerlink" title="网络信息收集-域名收集"></a>网络信息收集-域名收集</h3><ul>
+<li>whois<ul>
+<li>whose是一个标准服务，可以用来查询域名是否被注册以及注册的详细资料</li>
+<li>whois可以查询到的信息：域名所有者、域名及IP地址对应信息、联系方式、域名到期/注册日期</li>
+</ul>
+</li>
+</ul>
+<h3 id="系统及应用信息收集-端口扫描"><a href="#系统及应用信息收集-端口扫描" class="headerlink" title="系统及应用信息收集-端口扫描"></a>系统及应用信息收集-端口扫描</h3><ul>
+<li>原理：通过端口扫描确定主机开放的端口，不同的端口对应着不同的网络服务</li>
+<li>扫描方式：全扫描、半打开扫描、隐秘扫描、漏洞扫描</li>
+<li>端口扫描-Nmap：扫描器之王（使用详情见其他笔记</li>
+</ul>
+<h3 id="信息收集与分析工具-扫描器"><a href="#信息收集与分析工具-扫描器" class="headerlink" title="信息收集与分析工具-扫描器"></a>信息收集与分析工具-扫描器</h3><ul>
+<li>网络设备漏洞扫描器（如Cisco auditing tools</li>
+<li>集成化的漏洞扫描器（如Nessus</li>
+<li>专业web扫描软件（如appscan</li>
+<li>数据库漏洞扫描器（如iss database scanner</li>
+</ul>
+<h2 id="3-2-漏洞利用"><a href="#3-2-漏洞利用" class="headerlink" title="3.2-漏洞利用"></a>3.2-漏洞利用</h2><h3 id="利用人性懒惰-密码破解"><a href="#利用人性懒惰-密码破解" class="headerlink" title="利用人性懒惰-密码破解"></a>利用人性懒惰-密码破解</h3><ul>
+<li>密码破解方法<ul>
+<li>暴力猜解</li>
+</ul>
+</li>
+<li>密码破解工具<ul>
+<li>密码暴力破解工具</li>
+<li>密码字典生成工具</li>
+</ul>
+</li>
+<li>密码破解防御<ul>
+<li>密码生成技巧</li>
+<li>密码管理策略</li>
+</ul>
+</li>
+</ul>
+<h3 id="暴力猜解法一散列值破解"><a href="#暴力猜解法一散列值破解" class="headerlink" title="暴力猜解法一散列值破解"></a>暴力猜解法一散列值破解</h3><ul>
+<li>已知密码的散列算法及散列值的破解方法<ul>
+<li>Linux密码散列值</li>
+<li>Windows密码散列值（LM-Hash）</li>
+</ul>
+</li>
+<li>获取散列值工具：pwdump7.exe、gethashes.exe、Cain</li>
+<li>破解散列值工具：John the ripper、lophtcrack</li>
+<li>从网站等公开渠道得到散列值破解结果</li>
+</ul>
+<h3 id="基于内存信息的读取"><a href="#基于内存信息的读取" class="headerlink" title="基于内存信息的读取"></a>基于内存信息的读取</h3><ul>
+<li>神器：mimikatz（如何使用自行百度</li>
+</ul>
+<h3 id="暴力猜解法二远程密码破解"><a href="#暴力猜解法二远程密码破解" class="headerlink" title="暴力猜解法二远程密码破解"></a>暴力猜解法二远程密码破解</h3><ul>
+<li>如远程暴力破解unix口令：<code>brutessh.exe -h ip -IP -u root -d mypasslist.txt</code></li>
+</ul>
+<h3 id="密码字典-密码破解关键"><a href="#密码字典-密码破解关键" class="headerlink" title="密码字典-密码破解关键"></a>密码字典-密码破解关键</h3><ul>
+<li>字典生成器<ul>
+<li>根据用户规则快速生成各类密码字典</li>
+<li>攻击者常用的工具</li>
+</ul>
+</li>
+<li>密码字典作用<ul>
+<li>提高密码破解效率</li>
+<li>密码破解知识的具体体现</li>
+</ul>
+</li>
+</ul>
+<h3 id="口令攻击方式"><a href="#口令攻击方式" class="headerlink" title="口令攻击方式"></a>口令攻击方式</h3><ul>
+<li>暴力破解<ul>
+<li>手工方式：社会工程学、尝试默认口令</li>
+<li>自动猜测</li>
+<li>工具：John、LC、hydra</li>
+</ul>
+</li>
+<li>嗅探窃听<ul>
+<li>网络截获、键盘监听</li>
+<li>工具：sniffer、IKS</li>
+</ul>
+</li>
+</ul>
+<h3 id="metasploit框架"><a href="#metasploit框架" class="headerlink" title="metasploit框架"></a>metasploit框架</h3><ul>
+<li>利用msf中mysql相应模块破解mysql</li>
+<li>msf同样可破解其他，如tomcat</li>
+</ul>
+<h3 id="密码破解安全防御"><a href="#密码破解安全防御" class="headerlink" title="密码破解安全防御"></a>密码破解安全防御</h3><ul>
+<li>设置好的密码：自己容易记，别人不好猜</li>
+<li>系统及应用安全策略：账户锁定策略</li>
+<li>随机验证码</li>
+<li>其他密码管理策略<ul>
+<li>密码专用/分级，不同应用/系统/网站不同密码</li>
+<li>专用密码管理工具</li>
+<li>A、B角</li>
+</ul>
+</li>
+</ul>
+<h3 id="利用人性弱点-社会工程学攻击"><a href="#利用人性弱点-社会工程学攻击" class="headerlink" title="利用人性弱点-社会工程学攻击"></a>利用人性弱点-社会工程学攻击</h3><ul>
+<li>什么是社会工程学攻击：利用人性弱点（本能反应、贪婪、易于信任）进行欺骗获取利益的攻击方法</li>
+<li>社会工程学的危险<ul>
+<li>永远有效的攻击方法</li>
+<li>人是最不可控的因素</li>
+</ul>
+</li>
+<li>人性的弱点<ul>
+<li>信任权威</li>
+<li>信任共同爱好</li>
+<li>获得好处后报答</li>
+<li>期望守信</li>
+<li>期望社会认可</li>
+<li>短缺资源的渴望</li>
+</ul>
+</li>
+<li>传统的社会工程学：中奖通知、欠费电话、退税短信、催交房租</li>
+<li>网络社会中的社会工程学<ul>
+<li>直接用于攻击<ul>
+<li>正面攻击（直接索取</li>
+<li>建立信任</li>
+<li>利用同情、内疚和胁迫</li>
+</ul>
+</li>
+<li>间接用于攻击<ul>
+<li>口令破解中的社会工程学利用</li>
+<li>网络攻击中的社会工程学利用</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>社会工程学防御<ul>
+<li>安全意识培训<ul>
+<li>知道什么是社会工程攻击</li>
+<li>社会工程学利用什么</li>
+</ul>
+</li>
+<li>建立相应的安全响应应对措施<ul>
+<li>构建完善的技术防御体系</li>
+<li>有效的安全管理体系和操作流程</li>
+</ul>
+</li>
+<li>注意保护个人隐私（生日、手机号码</li>
+</ul>
+</li>
+</ul>
+<h3 id="利用系统缺陷-拒绝服务攻击"><a href="#利用系统缺陷-拒绝服务攻击" class="headerlink" title="利用系统缺陷-拒绝服务攻击"></a>利用系统缺陷-拒绝服务攻击</h3><ul>
+<li>拒绝服务攻击：让被攻击的系统无法正常进行服务的攻击方式（是一类攻击方式的统称）</li>
+<li><p>拒绝服务攻击方式</p>
+<ul>
+<li>利用系统、协议或服务的漏洞<ul>
+<li>利用TCP协议实现缺陷</li>
+<li>利用操作系统或应用软件的漏洞</li>
+</ul>
+</li>
+<li>目标系统服务资源能力<ul>
+<li>利用大量数据挤占网络带宽</li>
+<li>利用大量请求消耗系统性能</li>
+</ul>
+</li>
+<li>混合型</li>
+</ul>
+</li>
+<li><p>典型的拒绝服务攻击方式：syn flood、udp flood、teardrop、smurf、land……</p>
+</li>
+<li>分布式拒绝服务攻击DDOS</li>
+</ul>
+<h3 id="拒绝服务攻击的防御"><a href="#拒绝服务攻击的防御" class="headerlink" title="拒绝服务攻击的防御"></a>拒绝服务攻击的防御</h3><ul>
+<li>管理防御<ul>
+<li>业务连续性计划（组织共同承担，应对Dos攻击</li>
+<li>协调机制（运营商、公安部门、专家团队</li>
+</ul>
+</li>
+<li>技术防御<ul>
+<li>安全设备（防火墙、抗dos设备</li>
+<li>增强网络带宽</li>
+<li>自身强壮性（风险评估、补丁、安全加固、资源控制</li>
+</ul>
+</li>
+<li>检测防御：应急响应（构建检测体系</li>
+</ul>
+<h3 id="利用系统开发缺陷-缓冲区溢出"><a href="#利用系统开发缺陷-缓冲区溢出" class="headerlink" title="利用系统开发缺陷-缓冲区溢出"></a>利用系统开发缺陷-缓冲区溢出</h3><ul>
+<li>攻击原理：缓冲区溢出攻击利用编写不够严谨的程序，通过向程序的缓冲区写入超过预定长度的数据，造成缓存的溢出，从而破坏程序的堆栈，导致程序执行流程的改变</li>
+<li>缓冲区溢出的危害<ul>
+<li>最大数量的漏洞类型</li>
+<li>漏洞危害等级高</li>
+</ul>
+</li>
+</ul>
+<h3 id="缓冲区溢出基础"><a href="#缓冲区溢出基础" class="headerlink" title="缓冲区溢出基础"></a>缓冲区溢出基础</h3><ul>
+<li>堆栈：一段连续分配的内存空间</li>
+<li><p>堆栈特点</p>
+<ul>
+<li>后进先出</li>
+<li>堆栈生长方向与内存地址方向相反</li>
+</ul>
+</li>
+<li>指针：指向内存单元的地址</li>
+<li><p>寄存器：</p>
+<ul>
+<li>暂存指令、数据和位址</li>
+<li>ESP（栈顶）、EBP（栈底）、EIP（返回地址）</li>
+</ul>
+</li>
+<li><p>攻击过程</p>
+<ul>
+<li>如果可以精确控制内存跳转地址，就可以执行指定代码，获得权限或破坏系统</li>
+<li>寻找程序漏洞-编制缓冲区溢出程序-精确控制跳转地址-执行设定的代码-获得系统权限或破坏系统</li>
+</ul>
+</li>
+<li><p>漏洞的利用：metasploit使用（见其他笔记</p>
+</li>
+<li><p>如何防范</p>
+<ul>
+<li>用户：补丁、防火墙</li>
+<li>开发人员<ul>
+<li>编写安全代码，对输入数据进行验证</li>
+<li>使用相对安全的函数</li>
+</ul>
+</li>
+<li>系统<ul>
+<li>缓冲区不可执行技术</li>
+<li>虚拟化技术</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="3-3-后门及日志"><a href="#3-3-后门及日志" class="headerlink" title="3.3-后门及日志"></a>3.3-后门及日志</h2><h3 id="后门设置的方法"><a href="#后门设置的方法" class="headerlink" title="后门设置的方法"></a>后门设置的方法</h3><ul>
+<li>后门可以作什么<ul>
+<li>方便下次直接进入</li>
+<li>监视用户所有行为、隐私</li>
+<li>完全控制用户主机</li>
+</ul>
+</li>
+<li>后门设置的类型<ul>
+<li>账号后门<ul>
+<li>现有管理员账号密码/新建账号/升级现有账号权限</li>
+<li>普通账号shell设置setuid</li>
+</ul>
+</li>
+<li>漏洞后门</li>
+<li>木马（rootkit</li>
+<li>脚本后门</li>
+</ul>
+</li>
+</ul>
+<h3 id="后门的清除及防范"><a href="#后门的清除及防范" class="headerlink" title="后门的清除及防范"></a>后门的清除及防范</h3><ul>
+<li>账号后门<ul>
+<li>管理员账号：定期更换密码</li>
+<li>定期检查系统是否有多余账号和具有管理员权限的账号</li>
+<li>检查Linux系统中的setuid程序</li>
+</ul>
+</li>
+<li>漏洞后门<ul>
+<li>补丁</li>
+</ul>
+</li>
+<li>后门木马<ul>
+<li>杀毒软件</li>
+<li>系统检查：服务、进程、端口</li>
+<li>完整性检验</li>
+</ul>
+</li>
+<li>脚本后门<ul>
+<li>安全脚本备份</li>
+<li>网页防篡改</li>
+</ul>
+</li>
+</ul>
+<h3 id="攻击痕迹清除"><a href="#攻击痕迹清除" class="headerlink" title="攻击痕迹清除"></a>攻击痕迹清除</h3><ul>
+<li>清除/改写日志<ul>
+<li>要知道常见的日志存放路径</li>
+<li>修改系统日期</li>
+</ul>
+</li>
+<li>删除中间文件</li>
+<li>删除创建的用户</li>
+</ul>
+<h3 id="攻击痕迹清除防护措施-日志保护"><a href="#攻击痕迹清除防护措施-日志保护" class="headerlink" title="攻击痕迹清除防护措施-日志保护"></a>攻击痕迹清除防护措施-日志保护</h3><ul>
+<li>日志设置<ul>
+<li>尽可能多的信息</li>
+<li>日志时间</li>
+<li>日志空间</li>
+</ul>
+</li>
+<li>日志权限</li>
+<li>日志存储<ul>
+<li>本地路径及备份方式</li>
+<li>网络存储（日志服务器</li>
+</ul>
+</li>
+</ul>
+<h3 id="日志分析重点"><a href="#日志分析重点" class="headerlink" title="日志分析重点"></a>日志分析重点</h3><ul>
+<li>日期 时间（确定攻击的时间</li>
+<li>源IP（确定攻击者IP</li>
+<li>请求方法（部分情况下要关注post操作</li>
+<li>请求链接（查找链接中的特殊字符串</li>
+<li>状态代码（了解操作结果</li>
+</ul>
+<h3 id="日志分析"><a href="#日志分析" class="headerlink" title="日志分析"></a>日志分析</h3><ul>
+<li>关注超长的记录<ul>
+<li>http协议对URL长度没有限制</li>
+<li>一般网站正常情况下不需要太长的URL</li>
+</ul>
+</li>
+<li>关注记录中的非正常编码<ul>
+<li>例如红色代码蠕虫攻击会形成如下记录（略</li>
+</ul>
+</li>
+<li>关注日志请求链接中的关键字<ul>
+<li>cmd、select、xp_cmdshell、post等</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>信息收集与分析</li>
+<li>基于人性弱点的攻击：密码破解、社会工程学</li>
+<li>基于系统及协议缺陷的攻击：拒绝服务，电子欺骗</li>
+<li>基于软件开发缺陷的攻击：缓冲区溢出、sql注入、跨站脚本</li>
+<li>后门与日志分析</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/23/强化学习-Sarsa/" rel="next" title="强化学习-Sarsa">
+                <i class="fa fa-chevron-left"></i> 强化学习-Sarsa
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/26/强化学习-DQN/" rel="prev" title="强化学习-DQN">
+                强化学习-DQN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#02-Web主流安全威胁"><span class="nav-text">02-Web主流安全威胁</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-注入攻击"><span class="nav-text">2.1-注入攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入攻击"><span class="nav-text">SQL注入攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL注入防御"><span class="nav-text">SQL注入防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OS命令注入"><span class="nav-text">OS命令注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-XSS"><span class="nav-text">2.2-XSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反射性xss"><span class="nav-text">反射性xss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储型xss"><span class="nav-text">存储型xss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xss对web的威胁"><span class="nav-text">xss对web的威胁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#xss防御"><span class="nav-text">xss防御</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-认证会话管理"><span class="nav-text">2.3-认证会话管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#身份认证和会话管理"><span class="nav-text">身份认证和会话管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#身份认证漏洞与影响"><span class="nav-text">身份认证漏洞与影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#认证漏洞案例"><span class="nav-text">认证漏洞案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http会话管理概述"><span class="nav-text">http会话管理概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话劫持攻击"><span class="nav-text">会话劫持攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话重放攻击"><span class="nav-text">会话重放攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#会话管理漏洞案例"><span class="nav-text">会话管理漏洞案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#认证和会话管理漏洞防御"><span class="nav-text">认证和会话管理漏洞防御</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-CSRF"><span class="nav-text">2.4-CSRF</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#攻击关键"><span class="nav-text">攻击关键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF的检测"><span class="nav-text">CSRF的检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSRF预防方案"><span class="nav-text">CSRF预防方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预防CSRF案例"><span class="nav-text">预防CSRF案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-访问控制-amp-敏感信息泄漏-amp-有漏洞的组件"><span class="nav-text">2.5-访问控制&amp;敏感信息泄漏&amp;有漏洞的组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制权限错误"><span class="nav-text">访问控制权限错误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#水平权限访问控制错误案例"><span class="nav-text">水平权限访问控制错误案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#访问控制错误预防"><span class="nav-text">访问控制错误预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#敏感信息泄漏表现形式"><span class="nav-text">敏感信息泄漏表现形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#敏感数据防护检查"><span class="nav-text">敏感数据防护检查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#敏感信息泄漏案例"><span class="nav-text">敏感信息泄漏案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#敏感信息泄漏的预防"><span class="nav-text">敏感信息泄漏的预防</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用有漏洞的组件概述"><span class="nav-text">使用有漏洞的组件概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组件漏洞案例"><span class="nav-text">组件漏洞案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用含有已知漏洞的组件预防"><span class="nav-text">使用含有已知漏洞的组件预防</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-安全攻击与防御"><span class="nav-text">03-安全攻击与防御</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-信息收集"><span class="nav-text">3.1-信息收集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全攻击与防护"><span class="nav-text">安全攻击与防护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息收集-入侵的第一步"><span class="nav-text">信息收集-入侵的第一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息收集与分析案例"><span class="nav-text">信息收集与分析案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#收集哪些信息"><span class="nav-text">收集哪些信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#公开信息收集-搜索引擎"><span class="nav-text">公开信息收集-搜索引擎</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#互联网社工库"><span class="nav-text">互联网社工库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络信息收集-域名收集"><span class="nav-text">网络信息收集-域名收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统及应用信息收集-端口扫描"><span class="nav-text">系统及应用信息收集-端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息收集与分析工具-扫描器"><span class="nav-text">信息收集与分析工具-扫描器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-漏洞利用"><span class="nav-text">3.2-漏洞利用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#利用人性懒惰-密码破解"><span class="nav-text">利用人性懒惰-密码破解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴力猜解法一散列值破解"><span class="nav-text">暴力猜解法一散列值破解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于内存信息的读取"><span class="nav-text">基于内存信息的读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#暴力猜解法二远程密码破解"><span class="nav-text">暴力猜解法二远程密码破解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码字典-密码破解关键"><span class="nav-text">密码字典-密码破解关键</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#口令攻击方式"><span class="nav-text">口令攻击方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#metasploit框架"><span class="nav-text">metasploit框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#密码破解安全防御"><span class="nav-text">密码破解安全防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用人性弱点-社会工程学攻击"><span class="nav-text">利用人性弱点-社会工程学攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用系统缺陷-拒绝服务攻击"><span class="nav-text">利用系统缺陷-拒绝服务攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拒绝服务攻击的防御"><span class="nav-text">拒绝服务攻击的防御</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用系统开发缺陷-缓冲区溢出"><span class="nav-text">利用系统开发缺陷-缓冲区溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓冲区溢出基础"><span class="nav-text">缓冲区溢出基础</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-后门及日志"><span class="nav-text">3.3-后门及日志</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#后门设置的方法"><span class="nav-text">后门设置的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后门的清除及防范"><span class="nav-text">后门的清除及防范</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#攻击痕迹清除"><span class="nav-text">攻击痕迹清除</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#攻击痕迹清除防护措施-日志保护"><span class="nav-text">攻击痕迹清除防护措施-日志保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志分析重点"><span class="nav-text">日志分析重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#日志分析"><span class="nav-text">日志分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

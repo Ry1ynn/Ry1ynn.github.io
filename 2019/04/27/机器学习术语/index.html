@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="机器学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="原地址：https://developers.google.com/machine-learning/crash-course/framing/ml-terminology 问题构建：机器学习主要术语 什么是（监督式）机器学习： 机器学习系统、 通过学习如何组合输入信息、 来对从未见过的数据做出有用的预测。">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习术语">
+<meta property="og:url" content="http://21guns.top/2019/04/27/机器学习术语/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="原地址：https://developers.google.com/machine-learning/crash-course/framing/ml-terminology 问题构建：机器学习主要术语 什么是（监督式）机器学习： 机器学习系统、 通过学习如何组合输入信息、 来对从未见过的数据做出有用的预测。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-27T14:11:27.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习术语">
+<meta name="twitter:description" content="原地址：https://developers.google.com/machine-learning/crash-course/framing/ml-terminology 问题构建：机器学习主要术语 什么是（监督式）机器学习： 机器学习系统、 通过学习如何组合输入信息、 来对从未见过的数据做出有用的预测。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/04/27/机器学习术语/">
+
+
+
+
+
+  <title>机器学习术语 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/04/27/机器学习术语/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习术语</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-27T11:10:37+08:00">
+                2019-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>原地址：https://developers.google.com/machine-learning/crash-course/framing/ml-terminology</code></p>
+<h2 id="问题构建：机器学习主要术语"><a href="#问题构建：机器学习主要术语" class="headerlink" title="问题构建：机器学习主要术语"></a>问题构建：机器学习主要术语</h2><ul>
+<li>什么是（监督式）机器学习：<ul>
+<li>机器学习系统、</li>
+<li>通过学习如何组合输入信息、</li>
+<li>来对从未见过的数据做出有用的预测。<a id="more"></a></li>
+</ul>
+</li>
+</ul>
+<h3 id="01-标签"><a href="#01-标签" class="headerlink" title="01-标签"></a>01-标签</h3><ul>
+<li>标签是我们要预测的事物；</li>
+<li>即简单线性回归中的 <code>y</code> 变量；</li>
+<li>标签可以是小麦未来价格、图片中动物品种、音频剪辑含义或其他。</li>
+</ul>
+<h3 id="02-特征"><a href="#02-特征" class="headerlink" title="02-特征"></a>02-特征</h3><ul>
+<li>特征是输入变量；</li>
+<li>即简单线性回归中的 <code>x</code> 变量；</li>
+<li>简单的机器学习项目可能会使用单个特征，而复杂的机器学习项目可能会使用数百万个特征，按如下方式指定：<code>x1,x2,...xN</code></li>
+<li>在垃圾邮件检测器示例中，特征可能包括：<ul>
+<li>邮件文本中的字词</li>
+<li>发件人的地址</li>
+<li>发送邮件的时段</li>
+<li>邮件中包含“一种奇怪的把戏”这样的短语（一看就是垃圾邮件</li>
+</ul>
+</li>
+</ul>
+<h3 id="03-样本"><a href="#03-样本" class="headerlink" title="03-样本"></a>03-样本</h3><ul>
+<li><p>样本是指数据的特定实例：<strong>x</strong>；</p>
+</li>
+<li><p>用粗体 <strong>x</strong> 表示是矢量，既有大小也有方向(权重)；</p>
+</li>
+<li><p>将样本分为以下两类：</p>
+<ul>
+<li>有标签样本</li>
+<li>无标签样本<h4 id="3-1-有标签样本"><a href="#3-1-有标签样本" class="headerlink" title="3.1-有标签样本"></a>3.1-有标签样本</h4></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><strong>有标签样本</strong>同时包含特征x和标签y；</li>
+<li>即：<code>labeled examples: {features, label}: (x, y)</code>； </li>
+<li>使用有标签样本来<strong>训练</strong>模型；</li>
+<li>如，在我们的垃圾邮件检测器示例中，有标签样本是用户明确标记为“垃圾邮件”或“非垃圾邮件”的各个电子邮件；</li>
+<li><p>再如，下表为房价信息<a href="https://developers.google.com/machine-learning/crash-course/california-housing-data-description" target="_blank" rel="noopener">数据集</a>中抽取的 5 个有标签样本：</p>
+<p>  | housingMedianAge （特征） | totalRooms （特征） | totalBedrooms （特征） | medianHouseValue （标签） |<br>| :———————— | :—————— | :——————— | :———————— |<br>| 15                        | 5612                | 1283                   | 66900                     |<br>| 19                        | 7650                | 1901                   | 80100                     |<br>| 17                        | 720                 | 174                    | 85700                     |<br>| 14                        | 1501                | 337                    | 73400                     |<br>| 20                        | 1454                | 326                    | 65500                     |</p>
+</li>
+</ul>
+<h4 id="3-2-有标签样本"><a href="#3-2-有标签样本" class="headerlink" title="3.2-有标签样本"></a>3.2-有标签样本</h4><ul>
+<li><p><strong>无标签样本</strong>包含特征，但不包含标签；</p>
+</li>
+<li><p>即：<code>unlabeled examples: {features, ?}: (x, ?)</code> ；</p>
+</li>
+<li><p>在使用有标签样本训练模型之后，会使用该模型，预测无标签样本的标签；</p>
+</li>
+<li><p>如，在垃圾邮件检测器示例中，无标签样本是用户尚未添加标签的新电子邮件；</p>
+</li>
+<li><p>再如，下表为房价信息数据集(同上)的3个无标签样本，其中不包含 <code>medianHouseValue</code>：</p>
+<p>  | housingMedianAge （特征） | totalRooms （特征） | totalBedrooms （特征） |<br>| :———————— | :—————— | :——————— |<br>| 42                        | 1686                | 361                    |<br>| 34                        | 1226                | 180                    |<br>| 33                        | 1077                | 271                    |</p>
+</li>
+</ul>
+<h3 id="04-模型"><a href="#04-模型" class="headerlink" title="04-模型"></a>04-模型</h3><ul>
+<li>模型定义了特征与标签之间的关系；</li>
+<li>例如，垃圾邮件检测模型可能会将某些特征与“垃圾邮件”紧密联系起来；</li>
+<li>模型生命周期有两个阶段：训练 &amp; 推断；</li>
+<li><strong>训练</strong><ul>
+<li>指创建或<strong>学习</strong>模型；</li>
+<li>即，向模型展示有标签样本，让模型逐渐学习特征与标签之间的关系。</li>
+</ul>
+</li>
+<li><strong>推断</strong><ul>
+<li>指将训练后的模型应用于无标签样本；</li>
+<li>即使用经过训练的模型做出有用的预测<code>y&#39;</code>（y表真正标签，y’表预测标签）；</li>
+<li>例如，在推断期间，可以针对新的无标签样本预测 <code>medianHouseValue</code>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="05-回归与分类"><a href="#05-回归与分类" class="headerlink" title="05-回归与分类"></a>05-回归与分类</h3><ul>
+<li><p><strong>回归</strong>模型</p>
+<ul>
+<li>可预测连续值；</li>
+<li>例如，可预测：一栋房产的价值、用户点击广告的概率。</li>
+</ul>
+</li>
+<li><p><strong>分类</strong>模型</p>
+<ul>
+<li>可预测离散值；</li>
+<li>例如，可预测：某个邮件是垃圾邮件or非垃圾邮件、图片是狗or猫。</li>
+</ul>
+</li>
+</ul>
+<h3 id="06-习题"><a href="#06-习题" class="headerlink" title="06-习题"></a>06-习题</h3><h4 id="6-1-监督式学习："><a href="#6-1-监督式学习：" class="headerlink" title="6.1-监督式学习："></a>6.1-监督式学习：</h4><p><code>假设要开发一种监督式机器学习模型，来预测指定的电子邮件是“垃圾邮件”or“非垃圾邮件”。哪些表述正确？</code></p>
+<ul>
+<li>主题标头中的字词适合做标签。F（其可做优质特征，但不能做标签，标签只有两种：垃圾or非垃圾）</li>
+<li>有些标签可能不可靠。T（数据集中的数据是来自于人的，人难免出错而将标签弄错）</li>
+<li>我们将使用无标签样本来训练模型。F（有标签样本用于训练，而无标签的用户测试）</li>
+<li>未标记为“垃圾邮件”或“非垃圾邮件”的电子邮件是无标签样本。T（毫无疑问，无需解释）</li>
+</ul>
+<h4 id="6-2-特征和标签"><a href="#6-2-特征和标签" class="headerlink" title="6.2-特征和标签"></a>6.2-特征和标签</h4><p><code>假设一家在线鞋店希望创建一种监督式机器学习模型，以便为用户提供合乎个人需求的鞋子推荐。也就是说，该模型会向小马推荐某些鞋子，而向小美推荐另外一些鞋子。以下哪些表述正确？</code></p>
+<ul>
+<li>鞋的美观程度是一项实用特征。F（合适的特征应该是具体且可量化的；美观程度是一种模糊而不可量化的概念）</li>
+<li>鞋码是一项实用特征。T（鞋码是一种可量化的标志，可能对用户是否喜欢推荐的鞋子有很大影响）</li>
+<li>用户喜欢的鞋子是一种实用标签。F（喜好不是可观察且可量化的指标；能做到最好的就是针对用户的喜好来找出可观察的代理指标）</li>
+<li>“用户点击鞋子描述”是一项实用标签。F（用户点击描述是因为想进一步了解自己喜欢的鞋子；因此，<em>用户点击鞋子描述</em>可作为<em>用户的喜好</em>的可观察的代理指标，可用来训练合适的标签）</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/26/强化学习-Sarsa-lambda/" rel="next" title="强化学习-Sarsa(lambda)">
+                <i class="fa fa-chevron-left"></i> 强化学习-Sarsa(lambda)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/27/信息安全管理-概述/" rel="prev" title="信息安全管理-概述">
+                信息安全管理-概述 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题构建：机器学习主要术语"><span class="nav-text">问题构建：机器学习主要术语</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-标签"><span class="nav-text">01-标签</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-特征"><span class="nav-text">02-特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-样本"><span class="nav-text">03-样本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-有标签样本"><span class="nav-text">3.1-有标签样本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-有标签样本"><span class="nav-text">3.2-有标签样本</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-模型"><span class="nav-text">04-模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-回归与分类"><span class="nav-text">05-回归与分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06-习题"><span class="nav-text">06-习题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-监督式学习："><span class="nav-text">6.1-监督式学习：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-特征和标签"><span class="nav-text">6.2-特征和标签</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="强化学习,Q-Learning,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简单介绍一下强化学习中有名的算法, Q-learning">
+<meta name="keywords" content="强化学习,Q-Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习之Q-learning">
+<meta property="og:url" content="http://21guns.top/2019/04/13/强化学习-Q-learning/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="简单介绍一下强化学习中有名的算法, Q-learning">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-13T07:30:39.722Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强化学习之Q-learning">
+<meta name="twitter:description" content="简单介绍一下强化学习中有名的算法, Q-learning">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/04/13/强化学习-Q-learning/">
+
+
+
+
+
+  <title>强化学习之Q-learning | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/04/13/强化学习-Q-learning/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">强化学习之Q-learning</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-13T15:26:33+08:00">
+                2019-04-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>简单介绍一下强化学习中有名的算法, Q-learning<br><a id="more"></a></p>
+<h3 id="01-行为准则"><a href="#01-行为准则" class="headerlink" title="01-行为准则"></a>01-行为准则</h3><ul>
+<li>做事情会有一个行为准则, 比如”不写完作业就不准看电视”</li>
+<li>所以在写作业的状态下, 好的行为就是继续写作业, 直到写完它, 会被奖励；不好的行为就是没写完就跑去看电视了，会被惩罚</li>
+<li>这种事情做多了, 就变成我们的记忆或经验。</li>
+<li>Q learning 也是一个决策过程, 与上述情况差不多，比如：</li>
+<li>假设现在处于写作业的状态，现在有两种选择：1-继续写作业；2-跑去看电视</li>
+<li>如果选择2-看电视, 现在就变成了看电视状态, 仍然有两种选择，又选择了2-看电视, 直到最后爸妈回家, 我得到惩罚。</li>
+<li>我深刻记下这次经历, 并在脑海中将 “没写完作业就看电视” 这种行为设置为负面行为。</li>
+</ul>
+<h3 id="02-Q-Learning决策"><a href="#02-Q-Learning决策" class="headerlink" title="02-Q-Learning决策"></a>02-Q-Learning决策</h3><ul>
+<li>再看看 Q learning 是如何来决策的：</li>
+<li>假设行为准则已学习好了，即a1（继续写作业）是好行为、a2（跑去看电视）是不好行为；</li>
+<li>现在处于状态s1（写作业状态）, 有两个行为 a1, a2可选择；</li>
+<li>根据经验, 在s1 状态下, 选择a1会奖励，选择a2会惩罚，即a2的潜在奖励比a1高；</li>
+<li>潜在奖励可用一个有关于 s 和 a 的 Q 表格表示；</li>
+<li>在Q表中，Q(s1, a1)=1 &gt; Q(s1, a2)=-2, 故作出决策即选择 a1作为下一个行为</li>
+<li>现在状态更新成s2（还是写作业状态），仍然有两个选择a1和a2</li>
+<li>重复上述过程, 在Q 表中寻找 Q(s2, a1) 、Q(s2, a2) 的值, 并比较大小, 选取较大的一个行为如a1</li>
+<li>选择a1后状态变为s3，不断重复上面的决策过程，直至结束。写完作业得到奖励。</li>
+</ul>
+<h3 id="03-Q-Learning-更新"><a href="#03-Q-Learning-更新" class="headerlink" title="03-Q-Learning 更新"></a>03-Q-Learning 更新</h3><ul>
+<li>Q learning 决策方法如上，看完决策, 再看这张Q表是怎样更新的：</li>
+<li>回到之前的流程, 根据Q表的估计，Q(s1, a1)值比较大, 故在s1选择a1，并到达s2</li>
+<li>到达一个新状态时，要开始更新用于决策的 Q 表</li>
+<li>其实到达新状态s2时，并没有在实际中采取行为, 而是想象/估计一下：在s2上采取了a1、2两种行为后，哪一个的 Q 值比较大（此时的值是估计值）；</li>
+<li>比如Q(s2, a1)  &gt; Q(s2, a2)，故把大的 Q(s2, a1) 乘上一个衰减值 gamma (如0.9) ，再加上到达s2时所获取的奖励 R (此时还未获奖励，故奖励为 0)，即(Q * gamma) + R；</li>
+<li>将(Q * gamma) + R作为现实Q(s1, a1) 的值, 而之前那个是根据 Q 表估计的值，即有了现实值和估计值的概念；</li>
+<li>有了现实值和估计值，就可以更新Q(s1, a1) ；</li>
+<li>将估计值与现实值的差乘以学习效率 alpha，再加上旧值Q(s1, a1) ，就变成新的值，即新值 = |估计-现实| * alpha；</li>
+<li>但要注意，上述在s2状态找最大的Q值时，是想象估计的，并没有实际去做；</li>
+<li>s2 的行为决策是要等到更新完成之后才做的（即先想象后实际）；</li>
+<li>上述便是off-policy的 Q learning 是如何决策和学习优化决策的过程。</li>
+</ul>
+<h3 id="04-Q-Learning-整体算法"><a href="#04-Q-Learning-整体算法" class="headerlink" title="04-Q-Learning 整体算法"></a>04-Q-Learning 整体算法</h3><ul>
+<li>每次更新我们都用到了 Q 现实值和 Q 估计值；</li>
+<li>而且Q learning 的迷人之处就是在 Q现实值中, 也包含了一个 Q(s2) 的最大估计值，将对下一步衰减的最大估计，和当前所得到的奖励当成这一步的现实</li>
+<li>算法中一些参数的意义：<ul>
+<li>Epsilon greedy：用在决策上的一种策略；如 epsilon = 0.9 时，说明有90% 的情况我会按照 Q 表的最优值选择行为, 10% 的时间使用随机选行为</li>
+<li>alpha：学习率、来决定这次的误差有多少是要被学习的、是一个小于1 的数</li>
+<li>gamma：对未来 reward 的衰减值</li>
+</ul>
+</li>
+</ul>
+<h3 id="05-Q-Learning-中的-Gamma"><a href="#05-Q-Learning-中的-Gamma" class="headerlink" title="05-Q-Learning 中的 Gamma"></a>05-Q-Learning 中的 Gamma</h3><ul>
+<li>重写Q(s1) 的公式, 将Q(s2) 拆开，因为Q(s2)可以像 Q(s1)一样，是关于Q(s3) 的，然后以此类推不停写下去，得到最终公式（公式略了，理解意思就好）</li>
+<li>可看出Q(s1) 是有关于之后的所有奖励, 但这些奖励正在衰减, 离s1 越远的状态，衰减越严重</li>
+<li>通俗理解：<ul>
+<li>想象 Qlearning 的机器人天生近视眼；</li>
+<li>gamma = 1 时, 机器人有眼镜, 在s1看到的Q是未来没有任何衰变的reward, 即机器人能清楚看到之后所有步的全部价值；</li>
+<li>但当 gamma =0, 近视机器人没了眼镜, 只能摸到眼前的 reward，也就只在乎最近的大奖励；</li>
+<li>如果 gamma 从0 变到 1，逐渐戴上眼镜，其对远处的价值看得越清楚；</li>
+<li>故机器人渐渐变得有远见, 不仅仅只看眼前的利益, 也为未来着想。</li>
+</ul>
+</li>
+</ul>
+<p>ps：原教程地址：<a href="https://morvanzhou.github.io/tutorials/machine-learning/ML-intro/4-03-q-learning/" target="_blank" rel="noopener">https://morvanzhou.github.io/tutorials/machine-learning/ML-intro/4-03-q-learning/</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/强化学习/" rel="tag"># 强化学习</a>
+          
+            <a href="/tags/Q-Learning/" rel="tag"># Q-Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/强化学习-算法分类/" rel="next" title="强化学习算法分类">
+                <i class="fa fa-chevron-left"></i> 强化学习算法分类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/14/卷积神经网络-CNN/" rel="prev" title="卷积神经网络-CNN">
+                卷积神经网络-CNN <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-行为准则"><span class="nav-text">01-行为准则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-Q-Learning决策"><span class="nav-text">02-Q-Learning决策</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-Q-Learning-更新"><span class="nav-text">03-Q-Learning 更新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-Q-Learning-整体算法"><span class="nav-text">04-Q-Learning 整体算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-Q-Learning-中的-Gamma"><span class="nav-text">05-Q-Learning 中的 Gamma</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,安全管理,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="01-基本概念 通过学习，应该掌握：  信息安全管理对于保障信息系统安全的作用； 信息安全管理体系、风险管理和信息安全管理控制措施的含义 建立和完善信息安全管理体系的一般方法 信息安全风险管理的方法和一般原则 各个信息安全管理控制措施的作用及最佳实践   信息安全管理定义">
+<meta name="keywords" content="NISP,安全管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全管理-概述">
+<meta property="og:url" content="http://21guns.top/2019/04/27/信息安全管理-概述/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="01-基本概念 通过学习，应该掌握：  信息安全管理对于保障信息系统安全的作用； 信息安全管理体系、风险管理和信息安全管理控制措施的含义 建立和完善信息安全管理体系的一般方法 信息安全风险管理的方法和一般原则 各个信息安全管理控制措施的作用及最佳实践   信息安全管理定义">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-27T13:22:12.929Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全管理-概述">
+<meta name="twitter:description" content="01-基本概念 通过学习，应该掌握：  信息安全管理对于保障信息系统安全的作用； 信息安全管理体系、风险管理和信息安全管理控制措施的含义 建立和完善信息安全管理体系的一般方法 信息安全风险管理的方法和一般原则 各个信息安全管理控制措施的作用及最佳实践   信息安全管理定义">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/04/27/信息安全管理-概述/">
+
+
+
+
+
+  <title>信息安全管理-概述 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/04/27/信息安全管理-概述/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全管理-概述</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-27T21:19:58+08:00">
+                2019-04-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="01-基本概念"><a href="#01-基本概念" class="headerlink" title="01-基本概念"></a>01-基本概念</h1><ul>
+<li><p>通过学习，应该掌握：</p>
+<ul>
+<li>信息安全管理对于保障信息系统安全的作用；</li>
+<li>信息安全管理体系、风险管理和信息安全管理控制措施的含义</li>
+<li>建立和完善信息安全管理体系的一般方法</li>
+<li>信息安全风险管理的方法和一般原则</li>
+<li>各个信息安全管理控制措施的作用及最佳实践</li>
+</ul>
+</li>
+<li><p>信息安全管理定义<a id="more"></a></p>
+<ul>
+<li>信息：</li>
+<li>信息安全：</li>
+<li>管理：</li>
+<li>信息安全管理：管理者为实现信息安全目标（信息资产的CIA特性，以及业务运作的持续）而进行的计划、组织、指挥、协调和控制的一系列活动</li>
+</ul>
+</li>
+<li>管理的对象：包括人员在内的各类信息相关资产</li>
+<li>以建立体系的方式实施信息安全管理的必要性：<ul>
+<li>信息安全的攻击和防护严重不对称，相对来说攻击成功很容易，防护成功却极为困难</li>
+<li>信息安全水平的高低遵循木桶原理：信息安全水平有多高，取决于防护最薄弱的环节</li>
+</ul>
+</li>
+<li>信息安全管理体系的定义<ul>
+<li>体系：相互关联和相互作用的一组要素</li>
+<li>管理体系：</li>
+<li>信息安全管理体系：<ul>
+<li>整体管理体系的一部分，基于业务风险的方法，来建立、实施、运作、监视、评审、保持和改进信息安全</li>
+<li>建立信息安全方针和目标并达到这些目标的体系</li>
+<li>为达到组织信息安全目标的策略、程序、指南和相关资源的框架</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>信息安全管理体系的构成要素<ul>
+<li>信息安全组织架构</li>
+<li>信息安全方针</li>
+<li>信息安全规划活动</li>
+<li>信息安全职责</li>
+<li>信息安全相关的实践、规程、过程和资源</li>
+<li>（上述要素即相互关联又相互作用）</li>
+</ul>
+</li>
+</ul>
+<h1 id="02-基本概念和作用"><a href="#02-基本概念和作用" class="headerlink" title="02-基本概念和作用"></a>02-基本概念和作用</h1><ul>
+<li><p>信息安全管理体系的特点</p>
+<ul>
+<li>信息安全管理体系要求组织通过确定信息安全管理体系范围，制定信息安全方针，明确管理职责，以风险评估为基础选择控制目标和措施等一系列活动来建立信息安全管理体系</li>
+<li>体系的建立基于系统、全面、科学的信息安全风险评估，体现以预防控制为主的思想，强调遵守国家有关信息安全的法律、法规及其他合同方面的要求</li>
+<li>强调全过程和动态控制，本着控制费用与风险平衡的原则合理选择安全控制方式；强调保护组织所拥有的关键性信息资产，而不是全部信息资产，确保信息的保密性、完整性和可用性，保持组织的竞争优势和业务的持续性</li>
+</ul>
+</li>
+<li><p>狭义和广义的信息安全管理体系</p>
+<ul>
+<li>狭义：指按照ISO27001标准定义的ISMS</li>
+<li>广义：泛指任何一种有关信息安全的管理体系</li>
+</ul>
+</li>
+<li><p>信息安全管理是组织整体管理的重要、固有组成部分，是组织实现其业务目标的重要保障</p>
+</li>
+<li><p>人的作用</p>
+<ul>
+<li>信息系统是人机交互系统</li>
+<li>应对风险需要人为的管理过程</li>
+<li>设备的有效利用是人为的管理过程</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>信息安全管理的作用<ul>
+<li>如今，信息安全问题已经成为组织业务正常运营和持续发展的最大威胁</li>
+<li>信息安全问题本质上是人的问题，单凭技术是无法实现从”最大威胁”到”最可靠防线”转变的；</li>
+<li>实现信息安全是一个多层面、多因素的过程，也取决于制定信息安全方针策略标准规范、建立有效的监督审计机制等多方面非技术努力</li>
+<li>如果组织想当然地制定一些控制措施和引入某些技术产品，难免存在挂一漏万、顾此失彼的问题，使信息安全这只”木桶”出现若干短板，从而无法提高信息安全水平。<ul>
+<li>信息安全管理，是组织完整的管理体系中一个重要的环节，它构成了信息安全具有能动性的部分</li>
+<li>理解并重视管理对于信息安全的关键作用，执行适宜的、易于理解、方便操作的安全策略对实现信息安全目标、进而实现业务目标至关重要</li>
+<li>组织建立一个管理框架，让好的安全策略在这个框架内实施，并不断得到修正，才可能为业务的正常持续运作提供可靠的信息安全保障</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>信息安全管理是信息安全技术的融合剂，保障各项技术措施能够发挥作用</li>
+</ul>
+<h1 id="03-信息安全管理体系的作用"><a href="#03-信息安全管理体系的作用" class="headerlink" title="03-信息安全管理体系的作用"></a>03-信息安全管理体系的作用</h1><ul>
+<li>对内<ul>
+<li>能够保护关键信息资产和知识产权，维持竞争优势</li>
+<li>在系统受侵袭时，确保业务持续开展并将损失降到最低程度</li>
+<li>建立起信息安全审计框架，实施督查检查</li>
+<li>建立起文档化的信息安全管理规范，实现有法可依，有章可循</li>
+<li>强化员工的信息安全意识，建立良好的安全作业习惯，培育组织的信息安全企业文化</li>
+<li>按照风险管理的思想建立起自我持续改进和发展的信息安全管理体制，用最低的成本，达到可接受的信息安全水平，从根本上保证业务的持续性</li>
+</ul>
+</li>
+<li><p>对外</p>
+<ul>
+<li>能够使各利益相关方对组织充满信心</li>
+<li>能够帮助界定外包时双方的信息安全责任</li>
+<li>可以使组织更好地满足客户或其他组织的审计要求</li>
+<li>可以使组织更好地符合法律法规的要求</li>
+<li>若通过了ISO27001认证，能够提高组织的公信度</li>
+<li>可以明确要求供应商提高信息安全水平，保证数据交换中的信息安全</li>
+</ul>
+</li>
+<li><p>实施信息安全管理的关键成功要素（CSF）</p>
+<ul>
+<li>组织的信息安全方针和活动能够反映组织的业务目标</li>
+<li>组织实施信息安全的方法和框架与组织的文化相一致</li>
+<li>管理者能够给予信息安全实质性的、可见的支持和承诺</li>
+<li>管理者对信息安全需求、信息安全风险、风险评估及风险管理有深入理解</li>
+<li>向全员和其他相关方分发并宣传信息安全方针、策略和标准</li>
+<li>管理者为信息安全建设提供足够的资金</li>
+<li>向全员提供适当的信息安全培训和教育</li>
+<li>建立有效的信息安全事件管理过程</li>
+<li>建立有效的信息安全测量体系</li>
+</ul>
+</li>
+</ul>
+<h1 id="04-信息安全管理的作用"><a href="#04-信息安全管理的作用" class="headerlink" title="04-信息安全管理的作用"></a>04-信息安全管理的作用</h1><ul>
+<li>信息安全管理是信息安全技术的融合剂，保障各项技术措施能够发挥作用</li>
+<li>保险柜一定安全吗<ul>
+<li>如果把钥匙落在锁眼上会怎样？</li>
+<li>技术措施需要配合正确的使用才能发挥作用</li>
+</ul>
+</li>
+<li>解决信息安全问题，成败通常取决于两个因素：技术、管理</li>
+<li>安全技术是信息安全控制的重要手段，但光有安全技术还不行，要让安全技术发挥应有的作用，必然要有适当的管理程序，否则，安全技术只能趋于僵化和失败</li>
+<li>说安全技术是信息安全的构筑材料，信息安全管理就是粘合剂和催化剂</li>
+<li>技术和产品是基础，管理才是关键</li>
+<li>产品和技术，要通过管理的组织职能才能发挥最佳作用</li>
+<li>技术不高但管理良好的系统远比技术高超但管理混乱的系统安全</li>
+<li>只有将有效的安全管理从始至终贯彻落实于安全建设的方方面面，信息安全的长期性和稳定性才能有所保证</li>
+<li>根本上说，信息安全是个管理过程，而不是技术过程</li>
+<li>人们常说，三分技术，七分管理，可见管理对信息安全的重要性</li>
+<li>信息安全”技管并重”的原则<ul>
+<li>对于信息安全，到底是技术更重要，还是管理更重要</li>
+<li>强调信息安全管理，并不是要削弱信息安全技术的作用，开展强调信息安全管理要处理好管理和技术的关系</li>
+<li>技管并重</li>
+</ul>
+</li>
+<li>信息安全管理能预防、组织或减少信息安全事件的发生<ul>
+<li>统计结果显示，所有信息安全事故中，20%-30%是黑客入侵或其他外部原因造成，70%-80%是内部员工的疏忽或有意泄密造成的</li>
+<li>安全事件的发生和安全隐患的存在，与其说是技术原因，不如说是管理不善造成的</li>
+<li>因此，防止发生信息安全事件不应仅从技术着手，同时更应该加强信息安全管理</li>
+</ul>
+</li>
+<li>对信息安全的正确理解<ul>
+<li>安全不是产品的简单堆积</li>
+<li>也不是一次性的静态过程</li>
+<li>他是人员、技术、操纵三者紧密结合的系统工程</li>
+<li>是不断演进、循环发展的动态过程</li>
+</ul>
+</li>
+</ul>
+<h1 id="05-信息安全管理方法"><a href="#05-信息安全管理方法" class="headerlink" title="05-信息安全管理方法"></a>05-信息安全管理方法</h1><ul>
+<li>风险评估是信息安全管理的基础<ul>
+<li>风险评估主要对ISMS范围内的信息资产进行鉴定和估价，然后对信息资产面对的各种威胁和脆弱性进行评估，同时对已存在的或规划的安全控制措施进行界定</li>
+<li>信息安全管理体系的确立需要信息安全需求</li>
+<li>信息安全需求获取的主要手段是安全风险评估</li>
+<li>信息安全风险评估是信息安全管理体系建立的基础，没有风险评估，信息安全管理体系的建立就没有依据</li>
+</ul>
+</li>
+<li><p>风险处理是信息安全管理的核心</p>
+<ul>
+<li>风险处理是对风险评估活动识别出的风险进行决策，采取适当的控制措施处理不能接受的风险，将风险控制在可接受的范围</li>
+<li>风险评估活动只能揭示组织面临的风险，不能改变风险状况</li>
+<li>只有通过风险处理活动，组织的信息安全能力才会提升，信息安全需求才能被满足，才能实现其信息安全目标</li>
+<li>信息安全管理的核心就是这些风险处理措施的集合</li>
+</ul>
+</li>
+<li><p>风险管理是信息安全管理的根本方法</p>
+<ul>
+<li>应对风险评估的结果进行相应的风险处理。本质上，风险处理的最佳集合就是信息安全管理体系的控制措施集合</li>
+<li>梳理出这些风险控制措施集合的过程也就是信息安全管理体系的建立过程</li>
+<li>周期性的风险评估与风险处理活动即形成对风险的动态管理</li>
+<li>动态的风险管理是进行信息安全管理、实现信息安全目标、维持信息安全水平的根本方法</li>
+</ul>
+</li>
+<li>控制措施是管理风险的具体手段<ul>
+<li>管理风险的具体手段是控制措施</li>
+<li>风险处理时，需要选择并确定适当的控制目标和控制措施。只有落实适当的控制措施，那些不可接受的高风险才能降低到可接受的水平之内</li>
+</ul>
+</li>
+<li>控制措施的类别<ul>
+<li>从手段来看，可分为技术性、管理性、物理性、法律性等</li>
+<li>从功能来看，可分为预防性、检测性、纠正性、威慑性等</li>
+<li>从影响范围来看，常被分为安全方针、信息安全组织、资产管理、人力资源安全、物理和环境安全、通信和操作管理、访问控制、信息系统获取开发和维护、信息安全事件管理、业务连续性管理和符合性11个类别/域</li>
+</ul>
+</li>
+<li><p>过程、过程方法的概念</p>
+<ul>
+<li>过程process：一组将输入转化为输出的相互关联或相互作用的活动</li>
+<li>过程方法process approach<ul>
+<li>一个组织内诸过程的系统的运用，连同这些过程的识别和相互作用及其管理，可称之为”过程方法”</li>
+<li>系统地识别和管理组织所运用的过程，特别是这些过程之间的相互作用，称为”过程方法”</li>
+</ul>
+</li>
+<li>过程的分解<ul>
+<li>过程和子过程的每一个方面都是受控的，过程的输出才是有保障的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>PDCA循环：</p>
+<ul>
+<li>P（规划）——D（实施）——C（检查）——A（处置）</li>
+<li>PDCA也称”戴明环”，美国人戴明提出</li>
+<li>P，plan，计划，确定方针和目标，确定活动计划</li>
+<li>D，Do，实施，实际去做，实现计划中内容</li>
+<li>C，check，检查，总结执行计划的结果，注意效果，找出问题</li>
+<li>A，act，行动，对总结检查的结果进行处理，成功地经验加以肯定并适当推广，标准化；失败的教训加以总结，以免重视；未解决的问题放到下一个PDCA循环</li>
+</ul>
+</li>
+<li>PDCA循环的特征与作用<ul>
+<li>特点一：按顺序进行，他靠组织的力量来推动，像车轮一样向前进，周而复始，不断循环</li>
+<li>特点二：组织中每个部分，甚至个人，均可以PDCA循环，大环套小环，一层一层解决问题</li>
+<li>特点三：每通过一次PDCA循环，都要进行总结，提出新目标，再进行第二次PDCA循环</li>
+</ul>
+</li>
+<li>PDCA循环的作用<ul>
+<li>PDCA循环，能够提供一种优秀的过程方法，以实现持续改进</li>
+<li>遵循PDCA循环，能使任何一项活动都有效地进行</li>
+</ul>
+</li>
+</ul>
+<h1 id="06-信息安全管理实施"><a href="#06-信息安全管理实施" class="headerlink" title="06- 信息安全管理实施"></a>06- 信息安全管理实施</h1><ul>
+<li>信息安全管理体系<ul>
+<li>ISMS是一种常见的对组织信息安全进行全面、系统管理的方法</li>
+<li>ISMS是由ISO27001定义的一种有关信息安全的管理体系，是一种典型的基于风险管理和过程方法的管理体系</li>
+<li>周期性的风险评估、内部审核、有效性测量、管理评审，是ISMS规定的四个必要活动，能确保ISMS进入良性循环、持续自我改进</li>
+</ul>
+</li>
+<li><p>信息安全管理体系持续改进的PDCA循环过程</p>
+<ul>
+<li>信息安全管理体系是PDCA动态持续改进的一个循环体</li>
+<li>输入——循环体（规划和建立-实施和运行-监视和评审-保持和改进）——输出</li>
+</ul>
+</li>
+<li><p>用PDCA来理解什么是信息安全管理体系</p>
+<ul>
+<li>ISMS的核心内容可以概括为四句话<ul>
+<li>规定你应该做什么并形成文件：plan</li>
+<li>做文件已规定的事情：Do</li>
+<li>评审你所做的事情的符合性：Check</li>
+<li>采取纠正和预防措施，持续改进：Act</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>ISO27000标准族日益完善，已经开发和计划开发的标准有60余项</p>
+</li>
+<li><p>信息安全等级保护</p>
+<ul>
+<li>信息安全等级保护也是一种常见的对组织的信息安全进行全面、系统管理的实施方法</li>
+<li>依据《计算机信息系统安全保护条例》对信息安全进行全面管理的一套机制</li>
+<li>将信息系统按照重要性和受破坏程度分成五个安全保护等级，不同保护等级的系统分别给予不同级别的保护</li>
+<li>系统定级、安全建设/整改、自查、等级测评、系统备案和监督检查是信息安全等级保护的六个规定活动</li>
+</ul>
+</li>
+<li><p>NIST SP 800 规范</p>
+<ul>
+<li>参照NIST SP 800进行建设也是一种常见的对组织的信息安全进行全面、系统管理的实施方法</li>
+<li>NIST SP 800是由美国国家标准与技术研究院发布的一系列特别出版物，是关于计算机安全的指南文档</li>
+<li>美国《联邦信息安全管理法案》，专门制定NIST负责开展信息安全标准、指导方针的制定</li>
+</ul>
+</li>
+<li><p>三种典型的信息安全管理实施方法的区别和联系</p>
+<p>|             | 应用对象                         | 应用特点                                                     |<br>| ———– | ——————————– | ———————————————————— |<br>| ISMS        | 各种类型的组织（有体系建设需求） | 完全以市场化需求为主，不具备强制性。以风险管理方法为基础，如果实施体系认证，必须完全满足27001标准要求 |<br>| 等级保护    | 国家基础网络和重要信息系统       | 作为我国一项基础制度加以推行，有一定强制性。主要目标是有效地提高我国信息和信息系统安全建设的整体水平，重点保障基础信息网络和重要信息系统的安全 |<br>| NIST SP 800 | 联邦机构或非政府组织             | 与FIPS不同，是非强制性的。但联邦机构应采纳FIPS中要求使用的NIST SP以及OMB要求的特定NIST SP。以风险管理方法为基础，应用时有一定的灵活性 |</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+            <a href="/tags/安全管理/" rel="tag"># 安全管理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/27/机器学习术语/" rel="next" title="机器学习术语">
+                <i class="fa fa-chevron-left"></i> 机器学习术语
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/27/线性回归/" rel="prev" title="线性回归">
+                线性回归 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-基本概念"><span class="nav-text">01-基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-基本概念和作用"><span class="nav-text">02-基本概念和作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-信息安全管理体系的作用"><span class="nav-text">03-信息安全管理体系的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-信息安全管理的作用"><span class="nav-text">04-信息安全管理的作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-信息安全管理方法"><span class="nav-text">05-信息安全管理方法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#06-信息安全管理实施"><span class="nav-text">06- 信息安全管理实施</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

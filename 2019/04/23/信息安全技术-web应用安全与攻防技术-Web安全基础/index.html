@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="Web安全,NISP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="01-Web安全基础1.1-web工作机制 架构：web服务器、中间件、数据库   用户——web浏览器——接入网络——web服务器。用户发出请求，服务器根据请求的URL的地址连接，找到对应的网页文件，发送给用户，两者对话的“官方语言”是HTTP。网页文件是用文本描述的，html/xml格式，在用户浏览器中有个解释器，把这些文本描述的页面恢复成图文并茂、有声有影的可是页面  通常情况下，用户要访问">
+<meta name="keywords" content="Web安全,NISP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全技术-web应用安全与攻防技术-Web安全基础">
+<meta property="og:url" content="http://21guns.top/2019/04/23/信息安全技术-web应用安全与攻防技术-Web安全基础/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="01-Web安全基础1.1-web工作机制 架构：web服务器、中间件、数据库   用户——web浏览器——接入网络——web服务器。用户发出请求，服务器根据请求的URL的地址连接，找到对应的网页文件，发送给用户，两者对话的“官方语言”是HTTP。网页文件是用文本描述的，html/xml格式，在用户浏览器中有个解释器，把这些文本描述的页面恢复成图文并茂、有声有影的可是页面  通常情况下，用户要访问">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-27T13:26:29.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全技术-web应用安全与攻防技术-Web安全基础">
+<meta name="twitter:description" content="01-Web安全基础1.1-web工作机制 架构：web服务器、中间件、数据库   用户——web浏览器——接入网络——web服务器。用户发出请求，服务器根据请求的URL的地址连接，找到对应的网页文件，发送给用户，两者对话的“官方语言”是HTTP。网页文件是用文本描述的，html/xml格式，在用户浏览器中有个解释器，把这些文本描述的页面恢复成图文并茂、有声有影的可是页面  通常情况下，用户要访问">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/04/23/信息安全技术-web应用安全与攻防技术-Web安全基础/">
+
+
+
+
+
+  <title>信息安全技术-web应用安全与攻防技术-Web安全基础 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/04/23/信息安全技术-web应用安全与攻防技术-Web安全基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全技术-web应用安全与攻防技术-Web安全基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-23T11:14:49+08:00">
+                2019-04-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="01-Web安全基础"><a href="#01-Web安全基础" class="headerlink" title="01-Web安全基础"></a>01-Web安全基础</h1><h2 id="1-1-web工作机制"><a href="#1-1-web工作机制" class="headerlink" title="1.1-web工作机制"></a>1.1-web工作机制</h2><ul>
+<li>架构：web服务器、中间件、数据库</li>
+</ul>
+<ol>
+<li><p>用户——web浏览器——接入网络——web服务器。用户发出请求，服务器根据请求的URL的地址连接，找到对应的网页文件，发送给用户，两者对话的“官方语言”是HTTP。网页文件是用文本描述的，html/xml格式，在用户浏览器中有个解释器，把这些文本描述的页面恢复成图文并茂、有声有影的可是页面</p>
+</li>
+<li><p>通常情况下，用户要访问的页面都存在web服务器的某个固定目录下，是一些.html或.xml文件，用户通过页面上的超链接即URL地址可以在网站页面之间”跳跃”，这就是静态的网页。<a id="more"></a></p>
+<p>后来人们觉得这种方式只能单向的给用户展示信息，信息发布还可以，但让用户做一些比如身份认证、投票选举之类的事情就比较麻烦，由此产生了动态网页的概念；所谓动态就是利用flash、PHP、asp、Java等技术在网页中嵌入一些可运行的“小程序”，用户浏览器在解释页面时，看到这些小程序就启动运行它。</p>
+<p>小程序的用法很灵湖，可以展示一段动画（如flash），也可以在你的pc上生成一个文件，或者接收你输入的一段信息，这样就可以根据你的“想法”，对页面进行定制处理</p>
+</li>
+<li><p>“小程序”的使用让web服务模式有了“双向交流”的能力，web服务模式也可以像传统软件一样进行各种事务处理，如编辑文件、利息计算、提交表格等</p>
+<p>这些“小程序”可以嵌入在页面中，也可以以文件的形式单独存放在web服务器的目录里，如.asp、.php、.jsp文件等，并且可以在开发时指定是在用户端运行，还是在服务器端运行；</p>
+<p>这样功能性的小程序越来越多，形成常用的工具包，单独管理，web业务开发时，直接使用就可以了，这就是中间件服务器，他实际上是web服务器处理能力的扩展。</p>
+</li>
+<li><p>静态网页与“小程序”都是事前设计好的，一般不经常改动，但网站上很多内容需要经常的更新，如新闻等，这些变动的数据放在静态的程序中显然不合适，传统的方法是数据与程序分离，采用专业的数据库；</p>
+<p>web开发者在web服务器后面增加了一个数据库服务器，这些经常变化的数据存进数据库，可以随时更新。当用户请求页面时，“小程序”根据用户要求的页面，涉及到动态数据的地方，利用sql数据库语言，从数据中读取最新的数据，生成“完整”页面，最后送给用户，如股市行情曲线，就是由一个不断刷新的小程序控制。</p>
+</li>
+<li><p>除了应用数据需要变化，用户的一些状态信息、属性信息也需要临时记录而web服务器本来是不记录这些信息的，只管答复你的要求，后来web技术为了”友好互动”，需要记住用户的访问信息，建立了一些新的通讯机制</p>
+<p>cookie：把一些用户的参数，如账户名、口令等信息存放在客户端的硬盘临时文件中，用户在此访问这个网站时，参数也一同送给服务器，服务器就能识别身份。</p>
+<p>session：把用户的一些参数信息存在服务器的内存中，或写在服务器的硬盘文件中，用户时不可见的，cookie与session可以结合使用。</p>
+</li>
+<li><p>cookie在用户端，一般采用加密方式存放就可以了；session在服务器端，信息集中，被篡改问题很严重，所以一般放在内存里，尽量不存放在硬盘上。</p>
+</li>
+</ol>
+<h2 id="1-2-http协议"><a href="#1-2-http协议" class="headerlink" title="1.2-http协议"></a>1.2-http协议</h2><h3 id="简介："><a href="#简介：" class="headerlink" title="简介："></a>简介：</h3><ul>
+<li>超文本传输协议</li>
+<li>90年提出，当前version 1.1</li>
+<li>http设计用来将超文本标记语言html文档从web服务器传送到web浏览器</li>
+<li>http是一个请求和回应协议：客户机发送请求，服务器对请求给出回应</li>
+<li>http使用可靠的tcp连接，默认tcp端口80</li>
+</ul>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><ul>
+<li>支持客户/服务器模式</li>
+<li>简单快速：客户向服务器请求服务时，只需传送请求方法和路径</li>
+<li>灵活：http允许传输任意类型的数据对象。正在传输的类型由content-type加以决定</li>
+<li>无连接：其含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。</li>
+<li>http协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就比较快。</li>
+</ul>
+<h3 id="协议结构"><a href="#协议结构" class="headerlink" title="协议结构"></a>协议结构</h3><ul>
+<li>http会话<ul>
+<li>requests<ul>
+<li>请求行：方法，URL，协议/版本</li>
+<li>消息报头</li>
+<li>请求正文</li>
+</ul>
+</li>
+<li>response<ul>
+<li>状态行：协议，状态，代码描述（1xx-提示信息、2xx-成功、3xx-重定向、4xx-客户端错误、5xx-服务器端错误）</li>
+<li>消息报头</li>
+<li>响应正文</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="请求方法"><a href="#请求方法" class="headerlink" title="请求方法"></a>请求方法</h3><ul>
+<li>请求方法：规定了客户与服务器联系的类型不同</li>
+<li>v1.1 支持7种请求方法：GET、POST、HEAD、OPTIONS、PUT、DELETE、TRACE</li>
+<li>get与post最常用<ul>
+<li>get：把所有请求的数据都放在URL中，从URL中可以直接看到，但最大传输的信息量是2KB</li>
+<li>post：把请求的数据放在请求的数据体中，在URL中不可见，长度不受限，常用于提交表单</li>
+</ul>
+</li>
+</ul>
+<h3 id="http请求URL"><a href="#http请求URL" class="headerlink" title="http请求URL"></a>http请求URL</h3><ul>
+<li>URL是一种特殊类型的URI，包含了用于查找某个资源的足够的信息</li>
+<li><code>http://host[:port][abs_path]</code><ul>
+<li>http表示要通过http协议来定位网络资源</li>
+<li>host表示合法的internet主机域名或IP地址</li>
+<li>port指定一个端口号，为空则使用缺省端口80</li>
+<li>abs_path：制定请求的资源的URI（如果URL中没有给出abs_path，那么当它作为请求URI时，必须以“/”的形式给出，通常这个工作浏览器自动帮我们完成。</li>
+</ul>
+</li>
+</ul>
+<h3 id="协议缺陷"><a href="#协议缺陷" class="headerlink" title="协议缺陷"></a>协议缺陷</h3><ul>
+<li>数据未加密<ul>
+<li>http协议没有加密功能，传输的数据都是以明文显示，因此在传输过程中可能会被攻击者截取账号及密码等重要信息</li>
+<li>解决：利用ssl加密</li>
+</ul>
+</li>
+<li>无状态协议<ul>
+<li>http不会记录前一次传输的数据信息，因此无法实现服务器和客户端的交互</li>
+<li>解决：利用cookie和session机制</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-http协议分析工具"><a href="#1-3-http协议分析工具" class="headerlink" title="1.3-http协议分析工具"></a>1.3-http协议分析工具</h2><ul>
+<li>webscarab</li>
+<li>burpsuite（常用，见相关笔记</li>
+</ul>
+<h2 id="1-4-cookie和session机制"><a href="#1-4-cookie和session机制" class="headerlink" title="1.4-cookie和session机制"></a>1.4-cookie和session机制</h2><h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><ul>
+<li><p>http协议本身是无状态协议，http不会记录前一次传输的数据信息，因此无法实现服务器和客户端的交互。</p>
+</li>
+<li><p>而很多情况下，我们和服务器之间的一个会话不是一个动作就完成了，所以我们希望能在客服端和服务器这个交互的会话期间内，服务器能够保持对客户端会话的识别，也就是保持对http的状态性</p>
+</li>
+<li><p>cookie，有时也用其复数形式cookies，指某些网站为了辨别用户身份、进行session跟踪而存储在用户本地终端上的数据（通常经过加密</p>
+</li>
+<li><p>cookie的动机：客户端在浏览多个页面时，提供事务transaction的功能，为服务器提供状态管理</p>
+</li>
+<li><p>如实现授权管理，用户不用每个页面都输入用户名和密码</p>
+</li>
+<li><p>每个cookie都有一定的URL范围，客户请求这个范围的URL，都要提供这个cookie</p>
+</li>
+<li><p>cookie由服务器向客户端写入，包含在http响应头中的setcookie字段，格式如下：</p>
+<p><code>set-cookie name | value | path | domain | expires</code></p>
+</li>
+<li><p>cookie被写入到客户端的internet temporary files文件夹内，当客户端请求域名范围内的URL时，会读取cookie文件，并在http请求头中显示</p>
+</li>
+<li><p>cookie的安全</p>
+<ul>
+<li>一般由服务器向客户端写入，可以包含个性化信息，有时也会被web站点设计包含站点的认证信息</li>
+<li>分为永久性cookie和会话cookie，永久cookie保存在客户端硬盘中，会话cookie在会话结束后失效</li>
+<li>脚本语音，可以盗取cookie，当cookie中包含用户的敏感信息时，因此攻击者可以利用xss技术，盗取cookie信息，这样会造成用户信息泄漏，甚至重放攻击。</li>
+</ul>
+</li>
+</ul>
+<h3 id="session机制"><a href="#session机制" class="headerlink" title="session机制"></a>session机制</h3><ul>
+<li>session，相对于cookie，就是将会话信息存储在服务器端，而非客户端，并且存储于服务端内存中，会话结束而失效</li>
+<li>session机制的实现，是在服务端保存状态。相比客户端cookie存储，安全性更高</li>
+<li>当用户第一次访问web站点时，由服务器记录会话，并生成sessionID来标识一个客户端的会话。同时，通过cookie向客户端传递这个sessionID</li>
+<li>客户端后续的会话，会由浏览器自动携带这个sessionID，服务器根据保存的sessionID和收到的sessionID来判断会话信息</li>
+<li>session由于保存在服务器端的内存中，生存周期较短，不容易泄漏，并可以有效防止重放攻击。相比cookie技术更安全</li>
+<li>但是session必须依赖cookie技术。若客户端禁用了cookie，那么必须依赖URL重写等技术来实现客户端携带sessionID信息。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Web安全/" rel="tag"># Web安全</a>
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/15/生成对抗网络-GAN/" rel="next" title="生成对抗网络-GAN">
+                <i class="fa fa-chevron-left"></i> 生成对抗网络-GAN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/23/强化学习-Sarsa/" rel="prev" title="强化学习-Sarsa">
+                强化学习-Sarsa <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-Web安全基础"><span class="nav-text">01-Web安全基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-web工作机制"><span class="nav-text">1.1-web工作机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-http协议"><span class="nav-text">1.2-http协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介："><span class="nav-text">简介：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特点"><span class="nav-text">特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协议结构"><span class="nav-text">协议结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#请求方法"><span class="nav-text">请求方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#http请求URL"><span class="nav-text">http请求URL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协议缺陷"><span class="nav-text">协议缺陷</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-http协议分析工具"><span class="nav-text">1.3-http协议分析工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-cookie和session机制"><span class="nav-text">1.4-cookie和session机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cookie"><span class="nav-text">cookie</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#session机制"><span class="nav-text">session机制</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
