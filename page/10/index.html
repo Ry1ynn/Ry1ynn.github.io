@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/Linux无线协议栈及常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/无线渗透工具/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -272,7 +272,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/18/Linux无线协议栈及常用命令/" itemprop="url">Linux无线协议栈及常用命令</a></h1>
+                <a class="post-title-link" href="/2018/02/18/无线渗透工具/" itemprop="url">无线渗透工具</a></h1>
         
 
         <div class="post-meta">
@@ -345,474 +345,171 @@
 
       
         
-          <h1 id="Linux无线协议栈及常用命令"><a href="#Linux无线协议栈及常用命令" class="headerlink" title="Linux无线协议栈及常用命令"></a>Linux无线协议栈及常用命令</h1><h2 id="协议栈简介"><a href="#协议栈简介" class="headerlink" title="协议栈简介"></a>协议栈简介</h2><ul>
-<li>两个层面<ul>
-<li>内核层面<ul>
-<li>面向硬件</li>
-<li>内核提供的网络接口</li>
-<li>为不同厂家生产的不同设备及驱动，提供一个统一接口，即network stack网络协议栈</li>
+          <h1 id="无线渗透实操"><a href="#无线渗透实操" class="headerlink" title="无线渗透实操"></a>无线渗透实操</h1><h2 id="01-aircrack-ng简介"><a href="#01-aircrack-ng简介" class="headerlink" title="01-aircrack-ng简介"></a>01-aircrack-ng简介</h2><ul>
+<li>无线渗透和审计神器</li>
+<li>包含各种功能的工具套件（而非单个工具）<ul>
+<li>网络监测</li>
+<li>嗅探抓包</li>
+<li>包注入</li>
+<li>密码破解
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/18/无线渗透工具/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/WPS攻击/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/18/WPS攻击/" itemprop="url">WPS攻击</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="01-简介"><a href="#01-简介" class="headerlink" title="01-简介"></a>01-简介</h2><ul>
+<li>WPS<ul>
+<li>WPS，wireless protected setup</li>
+<li>Wi-Fi联盟2006年开发的一项技术</li>
+<li>2011年被发现安全设计漏洞</li>
 </ul>
 </li>
-<li>用户层面
+<li>使用场景<ul>
+<li>前提：终端设备（如PC、手机、USB网卡）和AP都支持WPS功能</li>
+<li>路由器和网卡各按一个按钮就能接入无线
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/Linux无线协议栈及常用命令/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/WPA企业-无线侦听/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ry1ynn's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/18/WPA企业-无线侦听/" itemprop="url">WPA企业&无线侦听</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
-                2018-02-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/无线安全/" itemprop="url" rel="index">
-                    <span itemprop="name">无线安全</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="01-WPA企业"><a href="#01-WPA企业" class="headerlink" title="01-WPA企业"></a>01-WPA企业</h2><ul>
-<li><p>hostapd-wpe</p>
-<ul>
-<li>取代了FreeRADIUS-wpe</li>
-<li>EAP-FAST/MSCHAPv2 (Phase 0)</li>
-<li>PEAP/MSCHAPv2</li>
-<li>EAP-TTLS/MSCHAPv2</li>
-<li>EAP-TTLS/MSCHAP</li>
-<li>EAP-TTLS/CHAP</li>
-<li>EAP-TTLS/PAP
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/WPA企业-无线侦听/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/WPA攻击/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ry1ynn's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/18/WPA攻击/" itemprop="url">WPA攻击</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
-                2018-02-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/无线安全/" itemprop="url" rel="index">
-                    <span itemprop="name">无线安全</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="01-姿势一：普通的WPA破解"><a href="#01-姿势一：普通的WPA破解" class="headerlink" title="01-姿势一：普通的WPA破解"></a>01-姿势一：普通的WPA破解</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1-简介"></a>1.1-简介</h2><ul>
-<li>基于字典的破解，字典越大，命中率越高，若密码异常复杂，则不会破解出来（即使字典很大，不包含也白搭）</li>
-<li>WPA2比WPA1更加安全，理论上是这样，因为其加密算法更加安全，但现实中，无论是WPA还是WPA2，如果设置高强度密码，则破解难度都很大，几乎都是难以破解（故实际中，二者破解难度可以看作是一样的）</li>
-<li>破解WPA是有一定运气成分的</li>
-<li>字典来源
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/WPA攻击/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/802-11头部/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ry1ynn's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/18/802-11头部/" itemprop="url">802.11头部</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
-                2018-02-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/无线安全/" itemprop="url" rel="index">
-                    <span itemprop="name">无线安全</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="802-11头部"><a href="#802-11头部" class="headerlink" title="802.11头部"></a>802.11头部</h1><h2 id="预备知识点"><a href="#预备知识点" class="headerlink" title="预备知识点"></a>预备知识点</h2><ul>
-<li><p>MAC layer address（MAC子层）</p>
-<ul>
-<li>Basic service set ID（BSSID</li>
-<li>是BSS的唯一标识，infrastructure模式中BSSID就是AP的MAC地址</li>
-<li>当AP支持多BSS时，随机生成每个BSSID
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/802-11头部/#more" rel="contents">
+            <a class="btn" href="/2018/02/18/WPS攻击/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1016,7 +713,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/无线网络运行模式/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/Linux无线协议栈及常用命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -1035,7 +732,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/18/无线网络运行模式/" itemprop="url">无线网络运行模式</a></h1>
+                <a class="post-title-link" href="/2018/02/18/Linux无线协议栈及常用命令/" itemprop="url">Linux无线协议栈及常用命令</a></h1>
         
 
         <div class="post-meta">
@@ -1108,16 +805,319 @@
 
       
         
-          <h1 id="无线网络运行模式"><a href="#无线网络运行模式" class="headerlink" title="无线网络运行模式"></a>无线网络运行模式</h1><h2 id="也称无线网络架构，有两种"><a href="#也称无线网络架构，有两种" class="headerlink" title="也称无线网络架构，有两种"></a>也称无线网络架构，有两种</h2><ul>
-<li>infrastructure：AP维护SSID</li>
-<li>Ad-Hoc：STA维护SSID</li>
+          <h1 id="Linux无线协议栈及常用命令"><a href="#Linux无线协议栈及常用命令" class="headerlink" title="Linux无线协议栈及常用命令"></a>Linux无线协议栈及常用命令</h1><h2 id="协议栈简介"><a href="#协议栈简介" class="headerlink" title="协议栈简介"></a>协议栈简介</h2><ul>
+<li>两个层面<ul>
+<li>内核层面<ul>
+<li>面向硬件</li>
+<li>内核提供的网络接口</li>
+<li>为不同厂家生产的不同设备及驱动，提供一个统一接口，即network stack网络协议栈</li>
 </ul>
-<h2 id="SSID"><a href="#SSID" class="headerlink" title="SSID"></a>SSID</h2><ul>
-<li>服务集标识符，即网络名称</li>
-<li>每一个基础架构网络都需要一个SSID
+</li>
+<li>用户层面
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/无线网络运行模式/#more" rel="contents">
+            <a class="btn" href="/2018/02/18/Linux无线协议栈及常用命令/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/802-11头部/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/18/802-11头部/" itemprop="url">802.11头部</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="802-11头部"><a href="#802-11头部" class="headerlink" title="802.11头部"></a>802.11头部</h1><h2 id="预备知识点"><a href="#预备知识点" class="headerlink" title="预备知识点"></a>预备知识点</h2><ul>
+<li><p>MAC layer address（MAC子层）</p>
+<ul>
+<li>Basic service set ID（BSSID</li>
+<li>是BSS的唯一标识，infrastructure模式中BSSID就是AP的MAC地址</li>
+<li>当AP支持多BSS时，随机生成每个BSSID
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/18/802-11头部/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/WPA攻击/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/18/WPA攻击/" itemprop="url">WPA攻击</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="01-姿势一：普通的WPA破解"><a href="#01-姿势一：普通的WPA破解" class="headerlink" title="01-姿势一：普通的WPA破解"></a>01-姿势一：普通的WPA破解</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1-简介"></a>1.1-简介</h2><ul>
+<li>基于字典的破解，字典越大，命中率越高，若密码异常复杂，则不会破解出来（即使字典很大，不包含也白搭）</li>
+<li>WPA2比WPA1更加安全，理论上是这样，因为其加密算法更加安全，但现实中，无论是WPA还是WPA2，如果设置高强度密码，则破解难度都很大，几乎都是难以破解（故实际中，二者破解难度可以看作是一样的）</li>
+<li>破解WPA是有一定运气成分的</li>
+<li>字典来源
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/18/WPA攻击/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1207,7 +1207,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">113</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
