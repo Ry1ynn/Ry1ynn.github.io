@@ -89,7 +89,7 @@
 <meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/RawDataToFeatureVector.svg">
 <meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/FloatingPointFeatures.svg">
 <meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/OneHotEncoding.svg">
-<meta property="og:updated_time" content="2019-05-01T05:17:46.030Z">
+<meta property="og:updated_time" content="2019-05-01T11:36:55.022Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="特征工程">
 <meta name="twitter:description" content="表示：特征工程 传统编程的关注点是代码，而在机器学习中，关注点为特征表示； 也就是说，开发者通过添加和改善特征来调整模型。  01-原始数据映射到特征">
@@ -444,6 +444,43 @@
 <li>在这种情况下，常用方法是使用<a href="https://developers.google.com/machine-learning/glossary#sparse_representation" target="_blank" rel="noopener">稀疏表示法</a>，其中仅存储非零值；</li>
 <li>在稀疏表示法中，仍然为每个特征值学习独立的模型权重，如上所述。</li>
 </ul>
+<h3 id="07-良好特征的特点"><a href="#07-良好特征的特点" class="headerlink" title="07-良好特征的特点"></a>07-良好特征的特点</h3><h4 id="7-1-避免很少使用的离散特征值"><a href="#7-1-避免很少使用的离散特征值" class="headerlink" title="7.1-避免很少使用的离散特征值"></a>7.1-避免很少使用的离散特征值</h4><ul>
+<li>良好的特征值应该在数据集中出现大约 5 次以上；<ul>
+<li>这样一来，模型就可以学习该特征值与标签是如何关联的；</li>
+<li>也就是说，大量离散值相同的样本可让模型有机会了解不同设置中的特征，从而判断何时可以对标签很好地做出预测；</li>
+<li>例如，<code>house_type</code> 特征可能包含大量样本，即出现多次，就适合作为特征，<code>house_type: victorian</code></li>
+</ul>
+</li>
+<li>相反，如果某个特征的值仅出现一次或者很少出现，则模型就无法根据该特征进行预测；<ul>
+<li>因为每个值只使用一次，模型无法从中学习任何规律；</li>
+<li>例如，<code>unique_house_id</code> 只出现一次，就不适合作为特征，<code>unique_house_id: 8SK982ZZ1242Z</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="7-2-最好具有清晰明确的含义"><a href="#7-2-最好具有清晰明确的含义" class="headerlink" title="7.2-最好具有清晰明确的含义"></a>7.2-最好具有清晰明确的含义</h4><ul>
+<li>每个特征应该具有清晰明确的含义；</li>
+<li>例如，房龄适合作为特征，可立即识别是以年为单位的房龄：<code>house_age: 27</code>；</li>
+<li>相反，对于下方特征值，除了coder本人，其他人很难知道含义：<code>house_age: 851472000</code>；</li>
+<li>在某些情况下，混乱的数据会导致含义不清晰的值，例如， user_age 的来源没有检查值恰当与否：<code>user_age: 277</code>；</li>
+</ul>
+<h4 id="7-3-实际数据内不要掺入特殊值"><a href="#7-3-实际数据内不要掺入特殊值" class="headerlink" title="7.3-实际数据内不要掺入特殊值"></a>7.3-实际数据内不要掺入特殊值</h4><ul>
+<li>良好的浮点特征不包含超出范围的异常断点或特殊的值；</li>
+<li>例如，假设一个特征具有 0 到 1 之间的浮点值，那么如下值是可以接受的：<code>quality_rating: 0.37</code></li>
+</ul>
+<ul>
+<li>不过，若用户没有输入 <code>quality_rating</code>，则数据集可能使用如下特殊值来表示不存在该值：<code>quality_rating: -1</code>;</li>
+<li><p>为解决特殊值的问题，需将该特征转换为两个特征：</p>
+<ul>
+<li>特征一：存储质量评分，不含特殊值；</li>
+<li>特征二：存储布尔值，表示是否提供了 <code>quality_rating</code>（可为该布尔值特征指定一个名称，如 <code>is_quality_rating_defined</code>）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="7-4-考虑上游不稳定性"><a href="#7-4-考虑上游不稳定性" class="headerlink" title="7.4-考虑上游不稳定性"></a>7.4-考虑上游不稳定性</h4><ul>
+<li>特征的定义不应随时间发生变化；</li>
+<li>例如，下列值是有用的，因为城市名称一般不会改变：<code>city_id: &quot;br/sao_paulo&quot;</code></li>
+<li>反例如，值“219”目前代表圣保罗，但这种表示，在未来运行其他模型时，可能轻易发生变化：<code>inferred_city_cluster: &quot;219&quot;</code>。</li>
+</ul>
 
       
     </div>
@@ -690,7 +727,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#表示：特征工程"><span class="nav-text">表示：特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-原始数据映射到特征"><span class="nav-text">01-原始数据映射到特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-映射数值"><span class="nav-text">02-映射数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-映射分类值"><span class="nav-text">03-映射分类值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-产生限制"><span class="nav-text">04-产生限制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-限制一：将学习适用于所有街道的单一权重"><span class="nav-text">4.1-限制一：将学习适用于所有街道的单一权重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-限制二：没有将-street-name-可能有多个值的情况考虑在内"><span class="nav-text">4.2-限制二：没有将 street_name 可能有多个值的情况考虑在内</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-热编码"><span class="nav-text">05-热编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06-稀疏表示法"><span class="nav-text">06-稀疏表示法</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#表示：特征工程"><span class="nav-text">表示：特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-原始数据映射到特征"><span class="nav-text">01-原始数据映射到特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-映射数值"><span class="nav-text">02-映射数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-映射分类值"><span class="nav-text">03-映射分类值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-产生限制"><span class="nav-text">04-产生限制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-限制一：将学习适用于所有街道的单一权重"><span class="nav-text">4.1-限制一：将学习适用于所有街道的单一权重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-限制二：没有将-street-name-可能有多个值的情况考虑在内"><span class="nav-text">4.2-限制二：没有将 street_name 可能有多个值的情况考虑在内</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-热编码"><span class="nav-text">05-热编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06-稀疏表示法"><span class="nav-text">06-稀疏表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#07-良好特征的特点"><span class="nav-text">07-良好特征的特点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-1-避免很少使用的离散特征值"><span class="nav-text">7.1-避免很少使用的离散特征值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-最好具有清晰明确的含义"><span class="nav-text">7.2-最好具有清晰明确的含义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-3-实际数据内不要掺入特殊值"><span class="nav-text">7.3-实际数据内不要掺入特殊值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-4-考虑上游不稳定性"><span class="nav-text">7.4-考虑上游不稳定性</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
