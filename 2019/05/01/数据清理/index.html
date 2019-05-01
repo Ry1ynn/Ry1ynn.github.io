@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="机器学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="表示：清理数据 从果园到水果店，专门有人花费时间，将坏苹果剔除、给可挽救的苹果涂上蜡； 机器学习工程师，也将花费大量的时间，挑出坏样本、加工可以挽救的样本； 因为，即使是非常少量的“坏苹果”，也会破坏掉一个大规模数据集。">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据清理">
+<meta property="og:url" content="http://21guns.top/2019/05/01/数据清理/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="表示：清理数据 从果园到水果店，专门有人花费时间，将坏苹果剔除、给可挽救的苹果涂上蜡； 机器学习工程师，也将花费大量的时间，挑出坏样本、加工可以挽救的样本； 因为，即使是非常少量的“坏苹果”，也会破坏掉一个大规模数据集。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/ScalingNoticingOutliers.svg">
+<meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/ScalingLogNormalization.svg">
+<meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/ScalingClipping.svg">
+<meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/ScalingBinningPart1.svg">
+<meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/ScalingBinningPart2.svg">
+<meta property="og:updated_time" content="2019-05-01T13:24:21.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据清理">
+<meta name="twitter:description" content="表示：清理数据 从果园到水果店，专门有人花费时间，将坏苹果剔除、给可挽救的苹果涂上蜡； 机器学习工程师，也将花费大量的时间，挑出坏样本、加工可以挽救的样本； 因为，即使是非常少量的“坏苹果”，也会破坏掉一个大规模数据集。">
+<meta name="twitter:image" content="https://developers.google.com/machine-learning/crash-course/images/ScalingNoticingOutliers.svg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/05/01/数据清理/">
+
+
+
+
+
+  <title>数据清理 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/01/数据清理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据清理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-01T21:23:47+08:00">
+                2019-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="表示：清理数据"><a href="#表示：清理数据" class="headerlink" title="表示：清理数据"></a>表示：清理数据</h2><ul>
+<li>从果园到水果店，专门有人花费时间，将坏苹果剔除、给可挽救的苹果涂上蜡；</li>
+<li>机器学习工程师，也将花费大量的时间，挑出坏样本、加工可以挽救的样本；</li>
+<li>因为，即使是非常少量的“坏苹果”，也会破坏掉一个大规模数据集。<a id="more"></a></li>
+</ul>
+<h3 id="01-缩放特征值"><a href="#01-缩放特征值" class="headerlink" title="01-缩放特征值"></a>01-缩放特征值</h3><ul>
+<li><strong>缩放</strong>是指将浮点特征值从自然范围（如100～900）转换为标准范围（如0～1、-1～+1）；</li>
+<li>若某个特征集只包含一个特征，则缩放没有太大用处，甚至根本没用；</li>
+<li>若特征集包含多个特征，则缩放特征可以：<ul>
+<li>使得梯度下降法更快速地收敛；</li>
+<li>可以避免“NaN 陷阱”：、<ul>
+<li>当某个值在训练期间超出浮点精确率限制时，可能变为NaN；</li>
+<li>模型中的一个数值变成NaN，因为有数学运算，所以会导致模型中的其他数值也变成 NaN（类比0乘任何数得0）</li>
+</ul>
+</li>
+<li>帮助模型为每个特征确定合适的权重（若没有进行特征缩放，则模型会对范围较大的特征投入过多精力）</li>
+</ul>
+</li>
+<li>不需要对每个浮点特征进行完全相同的缩放；<ul>
+<li>如特征A的范围是-1到+1，特征B的范围是-3到+3，即使二者不同，也不会产生太大影响；</li>
+<li>不过，若特征 B 的范围是 5000 到 100000，二者差的太大，则会导致糟糕响应。</li>
+</ul>
+</li>
+</ul>
+<h3 id="02-处理极端离群值"><a href="#02-处理极端离群值" class="headerlink" title="02-处理极端离群值"></a>02-处理极端离群值</h3><ul>
+<li><p>如下曲线图表示的是加利福尼亚州住房数据集中称为 <code>roomsPerPerson</code> 的特征（roomsPerPerson`  = 相应地区的房间总数 / 相应地区的人口总数）；</p>
+</li>
+<li><p>该曲线图显示，在加利福尼亚州的绝大部分地区，人均房间数为 1 到 2 间，不过，有一个异类（图 4. 一个非常非常长的尾巴）</p>
+<p><img src="https://developers.google.com/machine-learning/crash-course/images/ScalingNoticingOutliers.svg" alt="roomsPerPerson 曲线图，其中几乎所有值都聚集在 0 到 4 之间，但是有一个非常长的尾巴一直延伸到每人 55 个房间"></p>
+</li>
+<li><p>如何最大限度降低这些极端离群值的影响？</p>
+</li>
+<li><p>一种方法是对每个值取对数，对数缩放可稍稍缓解这种影响，但仍然存在离群值这个大尾巴；（图 5. 对数缩放仍然留有尾巴）</p>
+<p><img src="https://developers.google.com/machine-learning/crash-course/images/ScalingLogNormalization.svg" alt="log(roomsPerPerson) 曲线图，其中 99% 的值都聚集在 0.4 到 1.8 之间，但仍然有一个长尾巴延伸到 4.2 左右。"></p>
+</li>
+</ul>
+<ul>
+<li><p>采用另一种方法，若只是简单地将 <code>roomsPerPerson</code> 的最大值“限制”为某个任意值（如 4.0），会怎样？（图 6. 将特征值限制到 4.0）</p>
+<p><img src="https://developers.google.com/machine-learning/crash-course/images/ScalingClipping.svg" alt="roomsPerPerson 曲线图，其中所有值均在 -0.3 到 4.0 之间。曲线图是钟形的，但在 4.0 处有个异常的小峰值"></p>
+</li>
+</ul>
+<ul>
+<li>将特征值限制到 4.0 并不意味着忽略所有大于 4.0 的值，而是说，所有大于 4.0 的值都将变成 4.0，这就解释了 4.0 处那个小峰值；</li>
+<li>尽管存在这个小峰值，但是缩放后的特征集依然比原始数据有用。</li>
+</ul>
+<h3 id="03-分箱"><a href="#03-分箱" class="headerlink" title="03-分箱"></a>03-分箱</h3><ul>
+<li><p>如下曲线图显示了加利福尼亚州不同纬度的房屋相对普及率（洛杉矶大致在纬度 34 处，旧金山在纬度 38 处）；（图 7. 每个纬度的房屋数）</p>
+<p><img src="https://developers.google.com/machine-learning/crash-course/images/ScalingBinningPart1.svg" alt="每个纬度的房屋数曲线图。曲线图极其不规则，在纬度 36 左右出现低谷，并在纬度 34 和 38 左右出现巨大峰值。"></p>
+</li>
+<li><p>数据集中，纬度<code>latitude</code> 是一个浮点值，不过将 <code>latitude</code> 表示为浮点特征没有意义；</p>
+<ul>
+<li>是因为纬度和房屋价值之间不存在线性关系（如纬度 35 处的房屋并不比纬度 34 处的房屋贵 35/34）；</li>
+<li>但是，纬度能很好地预测房屋价值。</li>
+</ul>
+</li>
+<li><p>为了将纬度变为一项实用的预测指标，对纬度进行“分箱”，如下（图 8. 分箱值）：</p>
+</li>
+</ul>
+<p><img src="https://developers.google.com/machine-learning/crash-course/images/ScalingBinningPart2.svg" alt="每个纬度的房屋数曲线图。曲线图分为"></p>
+<ul>
+<li>现在拥有 11 个不同的布尔值特征（<code>LatitudeBin1 …… LatitudeBin11</code>），而非浮点特征；</li>
+<li><p>拥有 11 个不同的特征有点不方便，因此将它们统一成一个 11 元素矢量，如可将纬度 37.4 表示为：<code>[0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0]</code></p>
+</li>
+<li><p>分箱之后，模型可以为每个纬度学习完全不同的权重。</p>
+</li>
+</ul>
+<h3 id="04-清查"><a href="#04-清查" class="headerlink" title="04-清查"></a>04-清查</h3><ul>
+<li><p>数据集中的很多样本是不可靠的，原因如下：</p>
+<ul>
+<li><strong>遗漏值。</strong> 如，忘记为某个房屋的年龄输入值。</li>
+<li><strong>重复样本。</strong> 如，错误地将同一条记录上传了两次。</li>
+<li><strong>不良标签。</strong> 如，错误地将一颗橡树的图片标记为枫树。</li>
+<li><strong>不良特征值。</strong> 如，输入了多余的位数。</li>
+</ul>
+</li>
+<li><p>一旦检测到存在这些问题，需要将相应样本从数据集中移除，从而“修正”不良样本；</p>
+<ul>
+<li>要检测遗漏值或重复样本：可编写一个简单的程序；</li>
+<li>要检测不良特征值或标签：会比较棘手</li>
+</ul>
+</li>
+<li><p>除了检测不良样本外，也要检测集合中的不良数据；</p>
+<ul>
+<li>直方图：用于可视化集合中数据的很好机制；</li>
+<li>收集统计信息也会有所帮助：如最大值和最小值、均值和中间值、标准偏差</li>
+</ul>
+</li>
+<li><p>关注生成离散特征的最常见值列表，例如：</p>
+<ul>
+<li><code>country:uk</code> 的样本数是否符合预期？</li>
+<li><code>language:jp</code> 是否应该作为数据集中的最常用语言？</li>
+</ul>
+</li>
+</ul>
+<h3 id="05-了解数据"><a href="#05-了解数据" class="headerlink" title="05-了解数据"></a>05-了解数据</h3><ul>
+<li><p>遵循以下规则：</p>
+<ul>
+<li>记住预期的数据状态；</li>
+<li>确认数据是否满足这些预期（或者可以解释为何数据不满足预期）；</li>
+<li>检查训练数据与其他来源的数据是否一致。</li>
+</ul>
+</li>
+<li><p>像处理代码一样谨慎处理数据，良好的机器学习依赖于良好的数据。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/01/特征工程/" rel="next" title="特征工程">
+                <i class="fa fa-chevron-left"></i> 特征工程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#表示：清理数据"><span class="nav-text">表示：清理数据</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-缩放特征值"><span class="nav-text">01-缩放特征值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-处理极端离群值"><span class="nav-text">02-处理极端离群值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-分箱"><span class="nav-text">03-分箱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-清查"><span class="nav-text">04-清查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-了解数据"><span class="nav-text">05-了解数据</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
