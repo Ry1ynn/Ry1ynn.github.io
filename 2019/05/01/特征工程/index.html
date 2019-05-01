@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="机器学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="表示：特征工程 传统编程的关注点是代码，而在机器学习中，关注点为特征表示； 也就是说，开发者通过添加和改善特征来调整模型。  01-原始数据映射到特征">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="特征工程">
+<meta property="og:url" content="http://21guns.top/2019/05/01/特征工程/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="表示：特征工程 传统编程的关注点是代码，而在机器学习中，关注点为特征表示； 也就是说，开发者通过添加和改善特征来调整模型。  01-原始数据映射到特征">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/RawDataToFeatureVector.svg">
+<meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/FloatingPointFeatures.svg">
+<meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/OneHotEncoding.svg">
+<meta property="og:updated_time" content="2019-05-01T05:17:46.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="特征工程">
+<meta name="twitter:description" content="表示：特征工程 传统编程的关注点是代码，而在机器学习中，关注点为特征表示； 也就是说，开发者通过添加和改善特征来调整模型。  01-原始数据映射到特征">
+<meta name="twitter:image" content="https://developers.google.com/machine-learning/crash-course/images/RawDataToFeatureVector.svg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/05/01/特征工程/">
+
+
+
+
+
+  <title>特征工程 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/01/特征工程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">特征工程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-01T13:16:34+08:00">
+                2019-05-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="表示：特征工程"><a href="#表示：特征工程" class="headerlink" title="表示：特征工程"></a>表示：特征工程</h2><ul>
+<li>传统编程的关注点是代码，而在机器学习中，关注点为特征表示；</li>
+<li>也就是说，开发者通过添加和改善特征来调整模型。</li>
+</ul>
+<h3 id="01-原始数据映射到特征"><a href="#01-原始数据映射到特征" class="headerlink" title="01-原始数据映射到特征"></a>01-原始数据映射到特征<a id="more"></a></h3><ul>
+<li>图1左侧：来自输入数据源的原始数据，右侧：<strong>特征矢量</strong>，即组成数据集中样本的浮点值集；</li>
+<li><strong>特征工程</strong>：将原始数据转换为特征矢量；</li>
+<li><p>进行特征工程需要大量时间。</p>
+</li>
+<li><p>许多机器学习模型将特征表示为实数向量，因为特征值要与模型权重相乘。</p>
+<p><img src="https://developers.google.com/machine-learning/crash-course/images/RawDataToFeatureVector.svg" alt="原始数据通过称为特征工程的流程映射到特征向量。"></p>
+<pre><code>**图 1. 特征工程将原始数据映射到机器学习特征。**
+</code></pre></li>
+</ul>
+<h3 id="02-映射数值"><a href="#02-映射数值" class="headerlink" title="02-映射数值"></a>02-映射数值</h3><ul>
+<li><p>整数、浮点数据不需要特殊编码，因为本身就可与数字权重相乘；</p>
+</li>
+<li><p>如图 2 所示，将原始整数值 6 转换为特征值 6.0 并没有多大的意义；</p>
+<p><img src="https://developers.google.com/machine-learning/crash-course/images/FloatingPointFeatures.svg" alt="可直接从原始数据复制的特征示例"></p>
+<pre><code>**图 2. 将整数值映射到浮点值。**
+</code></pre></li>
+</ul>
+<h3 id="03-映射分类值"><a href="#03-映射分类值" class="headerlink" title="03-映射分类值"></a>03-映射分类值</h3><ul>
+<li><p>分类特征具有一组离散的可能值；</p>
+</li>
+<li><p>例如，一个名为 <code>street_name</code> 的特征，其中的选项有：</p>
+<p><code>{&#39;Charleston Road&#39;, &#39;North Shoreline Boulevard&#39;, &#39;Shorebird Way&#39;, &#39;Rengstorff Avenue&#39;}</code></p>
+</li>
+<li><p>由于模型不能将字符串与权重相乘，因此，使用特征工程将字符串转换为数字值；</p>
+<ul>
+<li>可定义一个从特征值到整数的映射（将其称为可能值的<strong>词汇表</strong>）；</li>
+<li>世界上的每条街道并非都会出现在我们的数据集中，因此可将其他街道分组为一个“其他”类别（称为 <strong>OOV（词汇表外）分桶</strong>）。</li>
+</ul>
+</li>
+<li><p>通过上述方法，可以按照以下方式将街道名称映射到数字：</p>
+<ul>
+<li>将 Charleston Road 映射到 0</li>
+<li>将 North Shoreline Boulevard 映射到 1</li>
+<li>将 Shorebird Way 映射到 2</li>
+<li>将 Rengstorff Avenue 映射到 3</li>
+<li>将所有其他街道 (OOV) 映射到 4</li>
+</ul>
+</li>
+</ul>
+<h3 id="04-产生限制"><a href="#04-产生限制" class="headerlink" title="04-产生限制"></a>04-产生限制</h3><ul>
+<li>不过，若直接将这些索引数字纳入到模型中，会产生一些限制；</li>
+</ul>
+<h4 id="4-1-限制一：将学习适用于所有街道的单一权重"><a href="#4-1-限制一：将学习适用于所有街道的单一权重" class="headerlink" title="4.1-限制一：将学习适用于所有街道的单一权重"></a>4.1-限制一：将学习适用于所有街道的单一权重</h4><ul>
+<li><p>例如，如果学习到 <code>street_name</code> 的权重为 6；</p>
+<ul>
+<li>Charleston Road：将其乘以 0；</li>
+<li>North Shoreline Boulevard：乘以 1，依此类推；</li>
+</ul>
+</li>
+<li><p>如果有一个使用 <code>street_name</code> 作为特征来预测房价的模型：</p>
+<ul>
+<li>根据街道名称对房价进行线性调整的可能性不大；</li>
+<li>此外，这会假设您已根据平均房价对街道排序；</li>
+</ul>
+</li>
+<li><p>我们的模型需要灵活地为每条街道学习不同的权重，这些权重将添加到利用其他特征估算的房价中。</p>
+</li>
+</ul>
+<h4 id="4-2-限制二：没有将-street-name-可能有多个值的情况考虑在内"><a href="#4-2-限制二：没有将-street-name-可能有多个值的情况考虑在内" class="headerlink" title="4.2-限制二：没有将 street_name 可能有多个值的情况考虑在内"></a>4.2-限制二：没有将 <code>street_name</code> 可能有多个值的情况考虑在内</h4><ul>
+<li>例如，许多房屋位于两条街道的拐角处；</li>
+<li>若模型包含单个索引，则无法在 <code>street_name</code> 值中对该信息进行编码。</li>
+</ul>
+<h3 id="05-热编码"><a href="#05-热编码" class="headerlink" title="05-热编码"></a>05-热编码</h3><ul>
+<li><p>要去除这两个限制，可以为模型中的每个分类特征创建一个二元向量来表示这些值：</p>
+<ul>
+<li>对于适用于样本的值，将相应向量元素设为 <code>1</code>；</li>
+<li>将剩下的其他元素设为 <code>0</code>。</li>
+</ul>
+</li>
+<li><p>该向量的长度等于词汇表中的元素数，如26个字母为词汇表，则<code>acd：1011……</code></p>
+</li>
+<li><p>只有一个值为 1 的表示法：<strong>独热编码</strong>；有多个值为 1 的表示法：<strong>多热编码</strong>。</p>
+</li>
+<li><p>图 3 所示为街道 Shorebird Way 的独热编码。在此二元矢量中，代表 Shorebird Way 的元素的值为 <code>1</code>，而代表所有其他街道的元素的值为 <code>0</code>：</p>
+<p><img src="https://developers.google.com/machine-learning/crash-course/images/OneHotEncoding.svg" alt="通过独热编码将字符串值（“Shorebird Way”）映射到稀疏向量。"></p>
+<pre><code>**图 3. 通过独热编码映射街道地址。**
+</code></pre></li>
+<li><p>该方法能够有效地为每个特征值（如街道名称）创建布尔变量；</p>
+<ul>
+<li>若房屋位于 Shorebird Way 街道上，则只有 Shorebird Way 的二元值为 1，因此，该模型仅使用 Shorebird Way 的权重。</li>
+<li>若房屋位于两条街道的拐角处，则将两个二元值设为 1，并且模型将使用它们各自的权重。</li>
+</ul>
+</li>
+<li><p>独热编码会扩展到：不希望直接与权重相乘的数字数据（如邮政编码）。</p>
+</li>
+</ul>
+<h3 id="06-稀疏表示法"><a href="#06-稀疏表示法" class="headerlink" title="06-稀疏表示法"></a>06-稀疏表示法</h3><ul>
+<li>假设数据集中有 100 万个不同的街道名称；</li>
+<li>若创建一个包含 100 万个元素的二元向量，其中只有 1 或 2 个元素为 ture，则非常低效：占用大量存储空间、耗费很长计算时间；</li>
+<li>在这种情况下，常用方法是使用<a href="https://developers.google.com/machine-learning/glossary#sparse_representation" target="_blank" rel="noopener">稀疏表示法</a>，其中仅存储非零值；</li>
+<li>在稀疏表示法中，仍然为每个特征值学习独立的模型权重，如上所述。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/30/学习速率/" rel="next" title="学习速率">
+                <i class="fa fa-chevron-left"></i> 学习速率
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">我们的征途是星辰大海</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">115</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#表示：特征工程"><span class="nav-text">表示：特征工程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-原始数据映射到特征"><span class="nav-text">01-原始数据映射到特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-映射数值"><span class="nav-text">02-映射数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-映射分类值"><span class="nav-text">03-映射分类值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-产生限制"><span class="nav-text">04-产生限制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-限制一：将学习适用于所有街道的单一权重"><span class="nav-text">4.1-限制一：将学习适用于所有街道的单一权重</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-限制二：没有将-street-name-可能有多个值的情况考虑在内"><span class="nav-text">4.2-限制二：没有将 street_name 可能有多个值的情况考虑在内</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-热编码"><span class="nav-text">05-热编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06-稀疏表示法"><span class="nav-text">06-稀疏表示法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
