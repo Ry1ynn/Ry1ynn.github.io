@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/GradientDescentStartingPoint.svg">
 <meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/GradientDescentNegativeGradient.svg">
 <meta property="og:image" content="https://developers.google.com/machine-learning/crash-course/images/GradientDescentGradientStep.svg">
-<meta property="og:updated_time" content="2019-04-30T13:49:35.467Z">
+<meta property="og:updated_time" content="2019-05-01T03:22:06.838Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="梯度下降法">
 <meta name="twitter:description" content="降低损失：梯度下降法01-引言 迭代方法图，包含一个标题为“计算参数更新”的华而不实的绿框，如下：   现在，将用更实质的方法代替这种华而不实的算法；">
@@ -402,6 +402,46 @@
 <li><p>然后，梯度下降法会重复此过程，逐渐接近最低点。</p>
 </li>
 </ul>
+<h3 id="04-随机梯度下降法"><a href="#04-随机梯度下降法" class="headerlink" title="04-随机梯度下降法"></a>04-随机梯度下降法</h3><ul>
+<li>在梯度下降法中，<strong>批量</strong>：用于在单次迭代中，计算梯度的样本总数；</li>
+<li>到目前为止，我们一直假定批量是指整个数据集：<ul>
+<li>就 Google 的规模而言，数据集通常包含数十亿（甚至更多）样本；</li>
+<li>此外，Google 数据集通常包含海量特征；</li>
+<li>因此，一个批量可能相当巨大；</li>
+<li>若是超大批量，则单次迭代就可能要花费很长时间进行计算。</li>
+</ul>
+</li>
+<li><p>包含随机抽样样本的大型数据集可能包含冗余数据：</p>
+<ul>
+<li>实际上，批量越大，出现冗余的可能性就越高；</li>
+<li>一些冗余可能有助于消除杂乱的梯度；</li>
+<li>但超大批量所具备的预测价值往往并不比大型批量高。</li>
+</ul>
+</li>
+<li><p>可以通过更少的计算量得出正确的平均梯度：</p>
+<ul>
+<li>从数据集中随机选择样本；</li>
+<li>可以用小得多的数据集估算出较大的平均值；</li>
+<li>（尽管过程非常杂乱）</li>
+</ul>
+</li>
+<li><p><strong>随机梯度下降法</strong> (<strong>SGD</strong>) 将上述想法运用到极致：</p>
+<ul>
+<li>其每次迭代只使用一个样本（批量大小为 1）；</li>
+<li>若进行足够的迭代，SGD 也可以发挥作用，但过程会非常杂乱</li>
+</ul>
+</li>
+<li>“随机”：构成各个批量的一个样本都是随机选择的；</li>
+</ul>
+<ul>
+<li><strong>小批量随机梯度下降法</strong>（<strong>小批量 SGD</strong>）：<ul>
+<li>是介于全批量迭代与 SGD 之间的折衷方案；</li>
+<li>小批量通常包含 10-1000 个随机选择的样本；</li>
+<li>小批量 SGD 可以减少 SGD 中的杂乱样本数量，且比全批量更高效（百家之所长）</li>
+</ul>
+</li>
+<li>梯队下降法不仅适用于单个特征，当然，也适用于包含多个特征的特征集。</li>
+</ul>
 
       
     </div>
@@ -441,6 +481,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/30/学习速率/" rel="prev" title="学习速率">
+                学习速率 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -519,7 +563,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -648,7 +692,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#降低损失：梯度下降法"><span class="nav-text">降低损失：梯度下降法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-引言"><span class="nav-text">01-引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-梯度下降法"><span class="nav-text">02-梯度下降法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-具体过程"><span class="nav-text">03-具体过程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#降低损失：梯度下降法"><span class="nav-text">降低损失：梯度下降法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-引言"><span class="nav-text">01-引言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-梯度下降法"><span class="nav-text">02-梯度下降法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-具体过程"><span class="nav-text">03-具体过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-随机梯度下降法"><span class="nav-text">04-随机梯度下降法</span></a></li></ol></li></ol></div>
             
 
           </div>
