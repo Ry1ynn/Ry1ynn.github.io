@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="强化学习,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="GitHub地址：https://github.com/Ry1ynn/DQN-code 莫烦python教程地址：https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/4-3-DQN3/ 下面是相关代码及注释（环境模块未深究代码实现） 注：暂未完全搞懂！待学习">
+<meta name="keywords" content="强化学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="强化学习-DQN-代码实现">
+<meta property="og:url" content="http://21guns.top/2019/05/06/强化学习-DQN-代码实现/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="GitHub地址：https://github.com/Ry1ynn/DQN-code 莫烦python教程地址：https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/4-3-DQN3/ 下面是相关代码及注释（环境模块未深究代码实现） 注：暂未完全搞懂！待学习">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-06T13:33:01.638Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="强化学习-DQN-代码实现">
+<meta name="twitter:description" content="GitHub地址：https://github.com/Ry1ynn/DQN-code 莫烦python教程地址：https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/4-3-DQN3/ 下面是相关代码及注释（环境模块未深究代码实现） 注：暂未完全搞懂！待学习">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/05/06/强化学习-DQN-代码实现/">
+
+
+
+
+
+  <title>强化学习-DQN-代码实现 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/06/强化学习-DQN-代码实现/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">强化学习-DQN-代码实现</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-06T21:14:24+08:00">
+                2019-05-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>GitHub地址：<a href="https://github.com/Ry1ynn/DQN-code" target="_blank" rel="noopener">https://github.com/Ry1ynn/DQN-code</a></p>
+<p>莫烦python教程地址：<a href="https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/4-3-DQN3/" target="_blank" rel="noopener">https://morvanzhou.github.io/tutorials/machine-learning/reinforcement-learning/4-3-DQN3/</a></p>
+<p>下面是相关代码及注释（环境模块未深究代码实现）</p>
+<p>注：暂未完全搞懂！待学习<a id="more"></a></p>
+<h2 id="main-py"><a href="#main-py" class="headerlink" title="main.py"></a>main.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> maze_env <span class="keyword">import</span> Maze   <span class="comment"># 环境模块，只看思想，未深究代码实现</span></span><br><span class="line"><span class="keyword">from</span> RL_brain <span class="keyword">import</span> DeepQNetwork   <span class="comment"># RL的大脑，负责思维和决策</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_maze</span><span class="params">()</span>:</span></span><br><span class="line">    step = <span class="number">0</span>    <span class="comment"># 用来控制何时学习的变量；步数，开始为0</span></span><br><span class="line">    <span class="keyword">for</span> episode <span class="keyword">in</span> range(<span class="number">300</span>):  <span class="comment"># 共训练300回合/轮</span></span><br><span class="line">        observation = env.reset()   <span class="comment"># 初始化环境，返回state的观测值（state与observation同义），此处为格子位置</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">            env.render()    <span class="comment"># 刷新可视化环境（为了能看清每一步是怎么走的）</span></span><br><span class="line"></span><br><span class="line">            action = RL.choose_action(observation)  <span class="comment"># 根据观测值即位置来选择动作</span></span><br><span class="line">            observation_, reward, done = env.step(action)   <span class="comment"># 执行动作并返回新观测值（即新格子的地址）、奖励与done标记</span></span><br><span class="line">            RL.store_transition(observation, action, reward, observation_)      <span class="comment"># 将记忆（新旧观测值、动作、奖励）存储下来</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment"># 控制学习的起始时间、频率</span></span><br><span class="line">            <span class="keyword">if</span> (step &gt; <span class="number">200</span>) <span class="keyword">and</span> (step % <span class="number">5</span> == <span class="number">0</span>):</span><br><span class="line">                RL.learn()</span><br><span class="line"></span><br><span class="line">            observation = observation_      <span class="comment"># 将新观测值作为下一次的初始观测值（本回合内的下一次）</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 当天堂/地狱，结束循环，即结束本回合，进入下一个</span></span><br><span class="line">            <span class="keyword">if</span> done:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">            step += <span class="number">1</span>       <span class="comment"># 总步数+1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 全部回合结束，销毁环境</span></span><br><span class="line">    print(<span class="string">'game over'</span>)</span><br><span class="line">    env.destroy()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    <span class="string">'''</span></span><br><span class="line"><span class="string">    同Q-learning，仍是迷宫游戏</span></span><br><span class="line"><span class="string">    不同的是采取DQN算法</span></span><br><span class="line"><span class="string">    '''</span></span><br><span class="line">    env = Maze()    <span class="comment"># 构建环境</span></span><br><span class="line">    <span class="comment"># 构建RL机器人，一系列操作（如执行、学习）的执行者</span></span><br><span class="line">    RL = DeepQNetwork(env.n_actions, env.n_features,</span><br><span class="line">                      learning_rate=<span class="number">0.01</span>,</span><br><span class="line">                      reward_decay=<span class="number">0.9</span>,</span><br><span class="line">                      e_greedy=<span class="number">0.9</span>,</span><br><span class="line">                      replace_target_iter=<span class="number">200</span>,</span><br><span class="line">                      memory_size=<span class="number">2000</span>,</span><br><span class="line">                    <span class="comment">#   output_graph=True</span></span><br><span class="line">                      )</span><br><span class="line">    env.after(<span class="number">100</span>, run_maze)        <span class="comment"># tkinter的形式来调用run_maze函数，100为间隔时间，单位ms</span></span><br><span class="line">    env.mainloop()      <span class="comment"># 环境模块由tkinter实现，在此启动tkinter，即以窗口形式显示环境                 </span></span><br><span class="line">    RL.plot_cost()      <span class="comment"># 显示神经网络的误差曲线</span></span><br></pre></td></tr></table></figure>
+<h2 id="RL-brain-py"><a href="#RL-brain-py" class="headerlink" title="RL_brain.py"></a>RL_brain.py</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> maze_env <span class="keyword">import</span> Maze</span><br><span class="line"></span><br><span class="line">np.random.seed(<span class="number">1</span>)   <span class="comment"># 设置随机数生成器的种子；若设置相同的种子，则每次生成的随机数也相同，若不设置则随机数不同</span></span><br><span class="line">tf.set_random_seed(<span class="number">1</span>)   <span class="comment"># python有自带的seed函数，此处np、tf的设置种子函数与其同思想</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 离线学习的DQN算法</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">DeepQNetwork</span>:</span></span><br><span class="line">    <span class="comment"># 定义初始值</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            self,</span></span></span><br><span class="line"><span class="function"><span class="params">            n_actions,</span></span></span><br><span class="line"><span class="function"><span class="params">            n_features,</span></span></span><br><span class="line"><span class="function"><span class="params">            learning_rate=<span class="number">0.01</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            reward_decay=<span class="number">0.9</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            e_greedy=<span class="number">0.9</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            replace_target_iter=<span class="number">300</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            memory_size=<span class="number">500</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            batch_size=<span class="number">32</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">            e_greedy_increment=None,</span></span></span><br><span class="line"><span class="function"><span class="params">            output_graph=False, # 是否输出tensorboard文件</span></span></span><br><span class="line"><span class="function"><span class="params">    )</span>:</span></span><br><span class="line">        self.n_actions = n_actions      <span class="comment"># 动作空间的大小，为4</span></span><br><span class="line">        self.n_features = n_features    <span class="comment"># 观测值的维度；为2；如(x,y）坐标表示一个点，就可说state的维度为2，即feature为2；基本思想便是通过feature来预测action（在这feature与state同义）</span></span><br><span class="line">        self.lr = learning_rate         <span class="comment"># 学习率</span></span><br><span class="line">        self.gamma = reward_decay       <span class="comment"># 奖励衰减值</span></span><br><span class="line">        self.epsilon_max = e_greedy     <span class="comment"># 贪婪度（根据Q表选行为的概率，否则其他方式，如随机选）</span></span><br><span class="line">        self.replace_target_iter = replace_target_iter      <span class="comment"># 替换target_net参数的频率（每x步）</span></span><br><span class="line">        self.memory_size = memory_size      <span class="comment"># 记忆上限</span></span><br><span class="line">        self.batch_size = batch_size        <span class="comment"># 神经网络中，随机梯度下降时用到的批量；批量是在单次迭代中，计算梯度的样本总数；</span></span><br><span class="line">        self.epsilon_increment = e_greedy_increment     <span class="comment">#</span></span><br><span class="line">        self.epsilon = <span class="number">0</span> <span class="keyword">if</span> e_greedy_increment <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">else</span> self.epsilon_max     <span class="comment"># </span></span><br><span class="line"></span><br><span class="line">        self.learn_step_counter = <span class="number">0</span>     <span class="comment"># 总的学习步数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 初始化记忆</span></span><br><span class="line">        self.memory = np.zeros((self.memory_size, n_features * <span class="number">2</span> + <span class="number">2</span>))      <span class="comment"># 初始值为0；要存[s,a,r,s_]，s和s_各有2个维度，a和r各1个，故x2+2</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 建立所需的2个神经网络</span></span><br><span class="line">        self._build_net()</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 替代参数</span></span><br><span class="line">        t_params = tf.get_collection(<span class="string">'target_net_params'</span>)</span><br><span class="line">        e_params = tf.get_collection(<span class="string">'eval_net_params'</span>)</span><br><span class="line">        self.replace_target_op = [tf.assign(t, e) <span class="keyword">for</span> t, e <span class="keyword">in</span> zip(t_params, e_params)]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 创建session（tensorflow运行必需的）</span></span><br><span class="line">        self.sess = tf.Session()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 是否输出tensorboard文件</span></span><br><span class="line">        <span class="keyword">if</span> output_graph:</span><br><span class="line">            <span class="comment"># $ tensorboard --logdir=logs，shell中运行，将其作为日志路径；随后IP:6006访问</span></span><br><span class="line">            tf.summary.FileWriter(<span class="string">"logs/"</span>, self.sess.graph)</span><br><span class="line"></span><br><span class="line">        self.sess.run(tf.global_variables_initializer())       <span class="comment"># 初始化所有变量；tf要用sess的run来运行功能语句，是其基本语法</span></span><br><span class="line">        self.cost_his = []      <span class="comment"># 记录误差，plot_cost会用到</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 构建神经网络</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_build_net</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 构建 evaluate_net 神经网络，及时提升/更新参数</span></span><br><span class="line">        <span class="comment"># 共两个输入：state状态值、Q值</span></span><br><span class="line">        self.s = tf.placeholder(tf.float32, [<span class="keyword">None</span>, self.n_features], name=<span class="string">'s'</span>)  <span class="comment"># 输入，用来接收observation观测值，即状态值</span></span><br><span class="line">        self.q_target = tf.placeholder(tf.float32, [<span class="keyword">None</span>, self.n_actions], name=<span class="string">'Q_target'</span>)  <span class="comment"># 输入，用来接收q_target的值，即Q值</span></span><br><span class="line">        <span class="comment"># 添加层</span></span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">'eval_net'</span>):     <span class="comment"># 层的配置</span></span><br><span class="line">            c_names = [<span class="string">'eval_net_params'</span>, tf.GraphKeys.GLOBAL_VARIABLES]    <span class="comment"># c_names是一个集合，里面存储着变量；要通过集合名来调用变量</span></span><br><span class="line">            n_l1 = <span class="number">10</span>       <span class="comment"># 第一层有10个节点；有上下左右4个动作，故第二层有4个节点）</span></span><br><span class="line">            w_initializer = tf.random_normal_initializer(<span class="number">0.</span>, <span class="number">0.3</span>)       <span class="comment"># 权重weight的初始值，为介于0-0.3的随机值</span></span><br><span class="line">            b_initializer = tf.constant_initializer(<span class="number">0.1</span>)        <span class="comment"># 偏移bias的初始值，为常数0.1</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 第一层</span></span><br><span class="line">            <span class="keyword">with</span> tf.variable_scope(<span class="string">'l1'</span>):</span><br><span class="line">                <span class="comment"># 用c_names集合中的变量，对权重和偏移进行赋值</span></span><br><span class="line">                w1 = tf.get_variable(<span class="string">'w1'</span>, [self.n_features, n_l1], initializer=w_initializer, collections=c_names)</span><br><span class="line">                b1 = tf.get_variable(<span class="string">'b1'</span>, [<span class="number">1</span>, n_l1], initializer=b_initializer, collections=c_names)</span><br><span class="line">                <span class="comment"># 计算真实值，与预测值相比较得损失</span></span><br><span class="line">                l1 = tf.nn.relu(tf.matmul(self.s, w1) + b1)     <span class="comment"># 由(s,w1,b1)而得l1层真实值；matmul为矩阵乘法；relu激励函数，将直线“掰弯”变为非线性</span></span><br><span class="line"></span><br><span class="line">            <span class="comment"># 第二层</span></span><br><span class="line">            <span class="keyword">with</span> tf.variable_scope(<span class="string">'l2'</span>):</span><br><span class="line">                w2 = tf.get_variable(<span class="string">'w2'</span>, [n_l1, self.n_actions], initializer=w_initializer, collections=c_names)</span><br><span class="line">                b2 = tf.get_variable(<span class="string">'b2'</span>, [<span class="number">1</span>, self.n_actions], initializer=b_initializer, collections=c_names)</span><br><span class="line">                self.q_eval = tf.matmul(l1, w2) + b2        <span class="comment"># 无激励函数，仍线性</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 构建target_net神经网络，（注释参看eval_net的)</span></span><br><span class="line">        <span class="comment"># 一个输入</span></span><br><span class="line">        self.s_ = tf.placeholder(tf.float32, [<span class="keyword">None</span>, self.n_features], name=<span class="string">'s_'</span>)</span><br><span class="line">        <span class="comment"># 添加层</span></span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">'target_net'</span>):</span><br><span class="line">            c_names = [<span class="string">'target_net_params'</span>, tf.GraphKeys.GLOBAL_VARIABLES]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 第一层</span></span><br><span class="line">            <span class="keyword">with</span> tf.variable_scope(<span class="string">'l1'</span>):</span><br><span class="line">                w1 = tf.get_variable(<span class="string">'w1'</span>, [self.n_features, n_l1], initializer=w_initializer, collections=c_names)</span><br><span class="line">                b1 = tf.get_variable(<span class="string">'b1'</span>, [<span class="number">1</span>, n_l1], initializer=b_initializer, collections=c_names)</span><br><span class="line">                l1 = tf.nn.relu(tf.matmul(self.s_, w1) + b1)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># 第二层</span></span><br><span class="line">            <span class="keyword">with</span> tf.variable_scope(<span class="string">'l2'</span>):</span><br><span class="line">                w2 = tf.get_variable(<span class="string">'w2'</span>, [n_l1, self.n_actions], initializer=w_initializer, collections=c_names)</span><br><span class="line">                b2 = tf.get_variable(<span class="string">'b2'</span>, [<span class="number">1</span>, self.n_actions], initializer=b_initializer, collections=c_names)</span><br><span class="line">                self.q_next = tf.matmul(l1, w2) + b2</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 定义损失如何计算</span></span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">'loss'</span>):</span><br><span class="line">            <span class="comment"># target为神经网络得到的预测值，eval为真实值，通过二者得损失</span></span><br><span class="line">            self.loss = tf.reduce_mean(tf.squared_difference(self.q_target, self.q_eval))       <span class="comment"># 先二者差的平方，再平均值</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 训练（通过优化器减少损失)</span></span><br><span class="line">        <span class="keyword">with</span> tf.variable_scope(<span class="string">'train'</span>):</span><br><span class="line">            self._train_op = tf.train.RMSPropOptimizer(self.lr).minimize(self.loss)     <span class="comment"># lr为学习率；使用优化器，力求减少损失</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 存储记忆（当前和下一步state、行为、奖励）</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">store_transition</span><span class="params">(self, s, a, r, s_)</span>:</span></span><br><span class="line">        <span class="comment"># 如果对象没有此属性，则创建且初始化为0</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> hasattr(self, <span class="string">'memory_counter'</span>):     <span class="comment"># hasattr判断对象是否包含对应的属性</span></span><br><span class="line">            self.memory_counter = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># (s,a,r,s_)为一条记忆记录</span></span><br><span class="line">        transition = np.hstack((s, [a, r], s_))     <span class="comment"># hstack沿着水平方向将数组堆叠起来（vstack沿竖直方向</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 用新记录代替旧记录</span></span><br><span class="line">        index = self.memory_counter % self.memory_size      <span class="comment"># 计算索引；记忆是有上限的，故满了之后，要覆盖旧的；不论满与不满，索引都可(%size)得</span></span><br><span class="line">        self.memory[index, :] = transition      <span class="comment"># 插入记录或称覆盖记录</span></span><br><span class="line"></span><br><span class="line">        self.memory_counter += <span class="number">1</span>    <span class="comment"># 记忆数量+1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 选择行为</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">choose_action</span><span class="params">(self, observation)</span>:</span></span><br><span class="line">        observation = observation[np.newaxis, :]      <span class="comment"># 原本观测值的维数与tf输入所需的不符，故升维</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 贪婪度=0.x，x0%的可能按最优Q值选择行为</span></span><br><span class="line">        <span class="keyword">if</span> np.random.uniform() &lt; self.epsilon:</span><br><span class="line">            actions_value = self.sess.run(self.q_eval, feed_dict=&#123;self.s: observation&#125;)     <span class="comment"># 变量赋值，并得到相应动作的Q值</span></span><br><span class="line">            action = np.argmax(actions_value)       <span class="comment"># 选择具有最大值的动作</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 贪婪度=0.x，1-x0%的可能随机选行为</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            action = np.random.randint(<span class="number">0</span>, self.n_actions)</span><br><span class="line">        <span class="keyword">return</span> action</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 学习</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">learn</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># 按照频率来替代参数</span></span><br><span class="line">        <span class="keyword">if</span> self.learn_step_counter % self.replace_target_iter == <span class="number">0</span>:</span><br><span class="line">            self.sess.run(self.replace_target_op)</span><br><span class="line">            print(<span class="string">'\ntarget_params_replaced\n'</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 从记忆库中抽取批量记忆</span></span><br><span class="line">        <span class="keyword">if</span> self.memory_counter &gt; self.memory_size:</span><br><span class="line">            sample_index = np.random.choice(self.memory_size, size=self.batch_size)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sample_index = np.random.choice(self.memory_counter, size=self.batch_size)</span><br><span class="line">        batch_memory = self.memory[sample_index, :]</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 得到相应的Q值</span></span><br><span class="line">        q_next, q_eval = self.sess.run(</span><br><span class="line">            [self.q_next, self.q_eval],</span><br><span class="line">            feed_dict=&#123;</span><br><span class="line">                self.s_: batch_memory[:, -self.n_features:],  <span class="comment"># fixed params</span></span><br><span class="line">                self.s: batch_memory[:, :self.n_features],  <span class="comment"># newest params</span></span><br><span class="line">            &#125;)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># change q_target w.r.t q_eval's action</span></span><br><span class="line">        q_target = q_eval.copy()</span><br><span class="line">        batch_index = np.arange(self.batch_size, dtype=np.int32)</span><br><span class="line">        eval_act_index = batch_memory[:, self.n_features].astype(int)</span><br><span class="line">        reward = batch_memory[:, self.n_features + <span class="number">1</span>]</span><br><span class="line">        q_target[batch_index, eval_act_index] = reward + self.gamma * np.max(q_next, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="string">"""</span></span><br><span class="line"><span class="string">        For example in this batch I have 2 samples and 3 actions:</span></span><br><span class="line"><span class="string">        q_eval =</span></span><br><span class="line"><span class="string">        [[1, 2, 3],</span></span><br><span class="line"><span class="string">         [4, 5, 6]]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        q_target = q_eval =</span></span><br><span class="line"><span class="string">        [[1, 2, 3],</span></span><br><span class="line"><span class="string">         [4, 5, 6]]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        Then change q_target with the real q_target value w.r.t the q_eval's action.</span></span><br><span class="line"><span class="string">        For example in:</span></span><br><span class="line"><span class="string">            sample 0, I took action 0, and the max q_target value is -1;</span></span><br><span class="line"><span class="string">            sample 1, I took action 2, and the max q_target value is -2:</span></span><br><span class="line"><span class="string">        q_target =</span></span><br><span class="line"><span class="string">        [[-1, 2, 3],</span></span><br><span class="line"><span class="string">         [4, 5, -2]]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        So the (q_target - q_eval) becomes:</span></span><br><span class="line"><span class="string">        [[(-1)-(1), 0, 0],</span></span><br><span class="line"><span class="string">         [0, 0, (-2)-(6)]]</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        We then backpropagate this error w.r.t the corresponding action to network,</span></span><br><span class="line"><span class="string">        leave other action as error=0 cause we didn't choose it.</span></span><br><span class="line"><span class="string">        """</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 训练神经网络</span></span><br><span class="line">        _, self.cost = self.sess.run([self._train_op, self.loss],</span><br><span class="line">                                     feed_dict=&#123;self.s: batch_memory[:, :self.n_features],</span><br><span class="line">                                                self.q_target: q_target&#125;)</span><br><span class="line">        self.cost_his.append(self.cost)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># increasing epsilon</span></span><br><span class="line">        self.epsilon = self.epsilon + self.epsilon_increment <span class="keyword">if</span> self.epsilon &lt; self.epsilon_max <span class="keyword">else</span> self.epsilon_max</span><br><span class="line">        self.learn_step_counter += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 显示误差，即学习效果（可选）</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">plot_cost</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">        plt.plot(np.arange(len(self.cost_his)), self.cost_his)</span><br><span class="line">        plt.ylabel(<span class="string">'Cost'</span>)      <span class="comment"># 纵坐标名称</span></span><br><span class="line">        plt.xlabel(<span class="string">'training steps'</span>)        <span class="comment"># 横坐标名称</span></span><br><span class="line">        plt.show()      <span class="comment"># 显示图像</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</span><br><span class="line">    env = Maze()</span><br><span class="line">    RL = DeepQNetwork(env.n_actions, env.n_features,</span><br><span class="line">                      learning_rate=<span class="number">0.01</span>,</span><br><span class="line">                      reward_decay=<span class="number">0.9</span>,</span><br><span class="line">                      e_greedy=<span class="number">0.9</span>,</span><br><span class="line">                      replace_target_iter=<span class="number">200</span>,</span><br><span class="line">                      memory_size=<span class="number">2000</span>,</span><br><span class="line">                      <span class="comment"># output_graph=True</span></span><br><span class="line">                      )</span><br><span class="line"></span><br><span class="line">    observation = env.reset()</span><br><span class="line">    print(observation)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/强化学习/" rel="tag"># 强化学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/04/验证/" rel="next" title="验证">
+                <i class="fa fa-chevron-left"></i> 验证
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">好好学习 天天向上</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">124</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#main-py"><span class="nav-text">main.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RL-brain-py"><span class="nav-text">RL_brain.py</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
