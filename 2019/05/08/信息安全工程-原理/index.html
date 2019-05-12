@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="系统工程（SE）的一般过程  发掘可续需求 定义系统要求 设计系统体系结构 开发详细设计 实现系统">
+<meta name="keywords" content="NISP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全工程-原理">
+<meta property="og:url" content="http://21guns.top/2019/05/08/信息安全工程-原理/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="系统工程（SE）的一般过程  发掘可续需求 定义系统要求 设计系统体系结构 开发详细设计 实现系统">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-08T01:37:19.484Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全工程-原理">
+<meta name="twitter:description" content="系统工程（SE）的一般过程  发掘可续需求 定义系统要求 设计系统体系结构 开发详细设计 实现系统">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/05/08/信息安全工程-原理/">
+
+
+
+
+
+  <title>信息安全工程-原理 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/08/信息安全工程-原理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全工程-原理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-08T09:36:06+08:00">
+                2019-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><p>系统工程（SE）的一般过程</p>
+<ul>
+<li>发掘可续需求</li>
+<li>定义系统要求</li>
+<li>设计系统体系结构</li>
+<li>开发详细设计</li>
+<li>实现系统<a id="more"></a></li>
+<li>（上述均要经过：评估有效性</li>
+</ul>
+</li>
+<li><p>信息系统安全工程（ISSE）过程</p>
+<ul>
+<li>理解ISSE的含义：将系统工程思想应用于信息安全领域，在系统生命周期的各阶段充分考虑和实施安全措施</li>
+<li>了解系统生命周期的概念和组成阶段：发掘信息保护需求、设计系统安全体系结构、开展详细安全设计、实施系统安全、评估信息保护的有效性</li>
+</ul>
+</li>
+</ul>
+<h3 id="信息系统安全工程实施过程"><a href="#信息系统安全工程实施过程" class="headerlink" title="信息系统安全工程实施过程"></a>信息系统安全工程实施过程</h3><ol>
+<li>发掘信息保护需求</li>
+<li>确定系统安全要求</li>
+<li>设计系统安全体系结构</li>
+<li>开发详细安全设计</li>
+<li>实现系统安全</li>
+</ol>
+<ul>
+<li>（上述均要经过：评估信息保护有效性—支持认证和认可</li>
+</ul>
+<h3 id="发掘信息保护需求"><a href="#发掘信息保护需求" class="headerlink" title="发掘信息保护需求"></a>发掘信息保护需求</h3><ul>
+<li>本阶段主要活动<ul>
+<li>分析组织的使命和业务</li>
+<li>评估信息安全风险</li>
+<li>识别安全服务、安全管理角色、职责及设计约束</li>
+</ul>
+</li>
+<li>发掘信息保护需求主体<ul>
+<li>信息系统安全工程实施人员</li>
+<li>信息系统用户/所有者</li>
+</ul>
+</li>
+<li>CSDN 5名作者被拘，同时给予CSDN行政警告处罚，这是落实等级保护制度以来的首例”罚单”，按照等保要求建设就不会出问题吗？</li>
+<li>上述信息系统在政策规性方面的要求并不高，但是其安全事件却产生了较大影响</li>
+<li>上述事件都是由于没有有效识别自身业务的安全风险（如个人隐私保护），没有提出安全目标、没有制定安全基线，导致没有实施原本必要的安全措施而产生的</li>
+</ul>
+<h3 id="确定系统安全要求"><a href="#确定系统安全要求" class="headerlink" title="确定系统安全要求"></a>确定系统安全要求</h3><ul>
+<li>本阶段主要活动<ul>
+<li>定义系统安全背景环境</li>
+<li>定义安全操作概念</li>
+<li>定义系统安全要求基线</li>
+</ul>
+</li>
+<li>明确保障目标。信息安全是信息化的重要组成部分，信息化是业务发展的重要组成部分，应该根据业务目标和信息系统的目标来确定信息安全保障策略</li>
+<li>保障的目标是：业务安全，而不是简单的IT安全</li>
+<li>信息系统用途、架构等特征对安全风险特征的影响<ul>
+<li>任何系统都是有风险的</li>
+<li>同样一项IT技术应用在不同的业务系统中，其风险程度不一定相同，甚至千差万别</li>
+<li>同等的应用系统，采用不同的技术架构，其安全风险也是不同的</li>
+</ul>
+</li>
+<li>综上，从信息安全工程/保障的角度定义或描述信息系统时，应以保障业务安全的思想为基础，清楚认识业务安全风险以及为业务提供服务/支撑的信息系统的安全风险，从而科学、全面地认识信息系统及其安全属性</li>
+</ul>
+<h3 id="设计系统安全体系结构"><a href="#设计系统安全体系结构" class="headerlink" title="设计系统安全体系结构"></a>设计系统安全体系结构</h3><ul>
+<li>定义与设计的区别<ul>
+<li>定义系统要求与设计系统体系结构</li>
+</ul>
+</li>
+<li>该阶段主要活动<ul>
+<li>设计并分析系统安全体系结构</li>
+<li>向体系结构分配安全服务</li>
+<li>选择安全机制类别</li>
+</ul>
+</li>
+<li>根据安全需求有针对性地设计安全措施是非常有必要的<ul>
+<li>安全设计要依据安全需求</li>
+<li>安全设计要具备可行性和一定前瞻性</li>
+<li>达到风险——需求——设计的一致性和协调性</li>
+</ul>
+</li>
+</ul>
+<h3 id="OSI安全体系结构"><a href="#OSI安全体系结构" class="headerlink" title="OSI安全体系结构"></a>OSI安全体系结构</h3><ul>
+<li>OSI安全体系结构定义了系统应当提供的五类安全服务，以及提供这些服务的八类安全机制；</li>
+<li>某种安全服务可以通过一种或多种安全机制提供，某种安全机制可用于提供一种或多种安全服务</li>
+</ul>
+<h3 id="开展详细安全设计"><a href="#开展详细安全设计" class="headerlink" title="开展详细安全设计"></a>开展详细安全设计</h3><ul>
+<li>本阶段主要活动<ul>
+<li>进行均衡取舍研究<ul>
+<li>考虑优先级、成本、进度、性能以及残余安全风险</li>
+</ul>
+</li>
+<li>定义系统安全设计元素<ul>
+<li>向系统安全设计元素分配安全机制</li>
+<li>识别备选的商用或政府提供的现有安全产品，并识别需要定制的安全产品</li>
+<li>检验并最终确定设计元素和系统接口，包括内部及外部接口</li>
+<li>指定安全规范，如编制安全编码规范等</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="实施系统安全"><a href="#实施系统安全" class="headerlink" title="实施系统安全"></a>实施系统安全</h3><ul>
+<li>该阶段主要活动<ul>
+<li>支持安全实现和集成</li>
+<li>支持测试与评估</li>
+<li>支持安全培训</li>
+</ul>
+</li>
+</ul>
+<h3 id="实施信息系统安全工程重点"><a href="#实施信息系统安全工程重点" class="headerlink" title="实施信息系统安全工程重点"></a>实施信息系统安全工程重点</h3><ul>
+<li>安全工程应重点把握：<ul>
+<li>风险、需求、设计、实施的一致性和协调性</li>
+</ul>
+</li>
+</ul>
+<h3 id="评估信息保护有效性"><a href="#评估信息保护有效性" class="headerlink" title="评估信息保护有效性"></a>评估信息保护有效性</h3><ul>
+<li>信息安全工作需要覆盖系统全生命周期<ul>
+<li>信息安全工作不是一劳永逸的，需要在全生命周期予以重视</li>
+<li>要与风险管理、安全保障等思想相结合，综合认识信息安全问题是覆盖全生命周期</li>
+</ul>
+</li>
+<li>持续的风险评估和风险控制是保障系统安全的必要工作<ul>
+<li>持续的风险是信息安全保障的一项基础性工作</li>
+<li>持续的风险评估为新的安全决策和需求提供重要依据</li>
+</ul>
+</li>
+<li>评估信息保护有效性贯穿于ISSE整个生命周期</li>
+</ul>
+<h3 id="ISSE活动中支持认证和认可的活动"><a href="#ISSE活动中支持认证和认可的活动" class="headerlink" title="ISSE活动中支持认证和认可的活动"></a>ISSE活动中支持认证和认可的活动</h3><ul>
+<li>发掘信息保护需求：如识别指定的批准机构</li>
+<li>定义信息系统安全要求：如确保系统安全背景环境、操作概念和要求获得认证和认可机构的认同</li>
+<li>设计系统安全体系结构：如为风险分析准备并提交最终的体系结构文档</li>
+<li>开展详细的安全设计：如为风险分析准备并提交详细设计文档</li>
+<li>实现系统安全：如确保已经完成了认证和认可所需要的全部文档</li>
+</ul>
+<h3 id="信息安全工程监理模型"><a href="#信息安全工程监理模型" class="headerlink" title="信息安全工程监理模型"></a>信息安全工程监理模型</h3><ul>
+<li>信息安全工程监理阶段、监理管理和控制手段和监理支撑要素</li>
+</ul>
+<h3 id="招标阶段各方责任及目标"><a href="#招标阶段各方责任及目标" class="headerlink" title="招标阶段各方责任及目标"></a>招标阶段各方责任及目标</h3><ul>
+<li>协助用户单位明确信息安全工程需求，确定工程建设目标</li>
+<li>促使承建单位编制的信息安全方案符合国家和业主单位的相关规定，满足需求，合理可行</li>
+<li>促使用户单位、承建单位锁签订合同在技术上、经济上的合理性</li>
+<li>加强工程实施方案的合法性、合理性、与安全工程需求和设计方案的符合性</li>
+<li>促使工程计划、设计方案满足工程需求，符合相关的法律、法规和标准，并与工程建设合同相符，具有可验证性</li>
+<li>协助业主单位、承建单位消除设计文档在进入工程实施前可预见的缺陷</li>
+<li>明确工程实施计划，对于计划的调整必须合理、受控</li>
+<li>促使工程实施过程满足承建合同的要求，并与工程设计方案、工程计划相符</li>
+</ul>
+<h3 id="验收阶段各方责任及目标"><a href="#验收阶段各方责任及目标" class="headerlink" title="验收阶段各方责任及目标"></a>验收阶段各方责任及目标</h3><ul>
+<li>明确工程项目测试验收方案的符合性及可行性</li>
+<li>促使工程的最终功能和性能符合承建合同、法律、法规和标准的要求</li>
+<li>推动承建单位所提供的工程各阶段形成的技术、管理文档的内容和种类符合相关标准</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/07/信息安全工程-能力评估/" rel="next" title="信息安全工程-能力评估">
+                <i class="fa fa-chevron-left"></i> 信息安全工程-能力评估
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/11/算法基础/" rel="prev" title="算法基础">
+                算法基础 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">好好学习 天天向上</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息系统安全工程实施过程"><span class="nav-text">信息系统安全工程实施过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发掘信息保护需求"><span class="nav-text">发掘信息保护需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确定系统安全要求"><span class="nav-text">确定系统安全要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计系统安全体系结构"><span class="nav-text">设计系统安全体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OSI安全体系结构"><span class="nav-text">OSI安全体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开展详细安全设计"><span class="nav-text">开展详细安全设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实施系统安全"><span class="nav-text">实施系统安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实施信息系统安全工程重点"><span class="nav-text">实施信息系统安全工程重点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#评估信息保护有效性"><span class="nav-text">评估信息保护有效性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ISSE活动中支持认证和认可的活动"><span class="nav-text">ISSE活动中支持认证和认可的活动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息安全工程监理模型"><span class="nav-text">信息安全工程监理模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#招标阶段各方责任及目标"><span class="nav-text">招标阶段各方责任及目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验收阶段各方责任及目标"><span class="nav-text">验收阶段各方责任及目标</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

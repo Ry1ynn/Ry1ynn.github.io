@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="风险管理综述信息安全风险管理大纲 风险管理基础 风险相关基本概念 风险管理概述 风险相关政策与标准   风险管理主要内容 风险管理的基本内容和过程 信息系统生命周期与信息安全风险管理   风险评估">
+<meta name="keywords" content="NISP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全管理-风险管理">
+<meta property="og:url" content="http://21guns.top/2019/05/12/信息安全管理-风险管理/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="风险管理综述信息安全风险管理大纲 风险管理基础 风险相关基本概念 风险管理概述 风险相关政策与标准   风险管理主要内容 风险管理的基本内容和过程 信息系统生命周期与信息安全风险管理   风险评估">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-12T07:54:45.780Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全管理-风险管理">
+<meta name="twitter:description" content="风险管理综述信息安全风险管理大纲 风险管理基础 风险相关基本概念 风险管理概述 风险相关政策与标准   风险管理主要内容 风险管理的基本内容和过程 信息系统生命周期与信息安全风险管理   风险评估">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/05/12/信息安全管理-风险管理/">
+
+
+
+
+
+  <title>信息安全管理-风险管理 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/12/信息安全管理-风险管理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全管理-风险管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T15:53:03+08:00">
+                2019-05-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="风险管理综述"><a href="#风险管理综述" class="headerlink" title="风险管理综述"></a>风险管理综述</h2><h3 id="信息安全风险管理大纲"><a href="#信息安全风险管理大纲" class="headerlink" title="信息安全风险管理大纲"></a>信息安全风险管理大纲</h3><ul>
+<li>风险管理基础<ul>
+<li>风险相关基本概念</li>
+<li>风险管理概述</li>
+<li>风险相关政策与标准</li>
+</ul>
+</li>
+<li>风险管理主要内容<ul>
+<li>风险管理的基本内容和过程</li>
+<li>信息系统生命周期与信息安全风险管理</li>
+</ul>
+</li>
+<li>风险评估<a id="more"></a><ul>
+<li>风险评估工作形式</li>
+<li>风险评估方法</li>
+<li>风险评估的实施流程</li>
+<li>风险评估工具</li>
+</ul>
+</li>
+</ul>
+<h3 id="信息安全风险概念"><a href="#信息安全风险概念" class="headerlink" title="信息安全风险概念"></a>信息安全风险概念</h3><ul>
+<li>风险：事态的概率及其结果的组合</li>
+<li>信息安全风险：指人为或自然的威胁利用信息系统及其管理体系中存在的脆弱性导致安全事件的发生及其对组织造成的影响</li>
+<li>信息安全风险会破坏组织信息资产的保密性、完整性或可用性等属性</li>
+</ul>
+<h3 id="风险的构成"><a href="#风险的构成" class="headerlink" title="风险的构成"></a>风险的构成</h3><ul>
+<li>五个方面：<ul>
+<li>起源（威胁源</li>
+<li>方式（威胁行为</li>
+<li>途径（脆弱性</li>
+<li>受体（资产</li>
+<li>后果（影响</li>
+</ul>
+</li>
+</ul>
+<h2 id="风险相关基础概念"><a href="#风险相关基础概念" class="headerlink" title="风险相关基础概念"></a>风险相关基础概念</h2><h3 id="资产"><a href="#资产" class="headerlink" title="资产"></a>资产</h3><ul>
+<li>资产：任何对组织有价值的东西，是要保护的对象</li>
+<li>资产以多种形式存在（多种分类方法<ul>
+<li>物理的（如计算设备）和逻辑的（如体系结构</li>
+<li>硬件的（如计算机主板）和软件的（如操作系统软件</li>
+<li>有形的（如机房）和无形的（如品牌</li>
+<li>静态的（如设施）和动态的（如人员</li>
+<li>技术的（如计算机硬件）和管理的（如业务目标</li>
+</ul>
+</li>
+</ul>
+<h3 id="威胁"><a href="#威胁" class="headerlink" title="威胁"></a>威胁</h3><ul>
+<li>可能导致对系统或组织危害的不希望事故潜在起因</li>
+<li>引起风险的外因</li>
+<li>威胁源采取恰当的威胁方式才可能引发风险</li>
+<li>威胁举例<ul>
+<li>操作失误</li>
+<li>滥用授权</li>
+<li>行为抵赖</li>
+<li>社会工程等</li>
+</ul>
+</li>
+</ul>
+<h3 id="脆弱性"><a href="#脆弱性" class="headerlink" title="脆弱性"></a>脆弱性</h3><ul>
+<li>可能被威胁所利用的资产或若干资产的薄弱环节</li>
+<li>造成风险的内因</li>
+<li>脆弱性本身并不对资产构成危害，但是在一定条件得到满足时，脆弱性会被威胁源利用恰当的威胁方式对信息资产造成危害</li>
+<li>脆弱性举例<ul>
+<li>系统程序代码缺陷</li>
+<li>系统设备安全配置错误</li>
+<li>系统操作流程有缺陷</li>
+</ul>
+</li>
+</ul>
+<h3 id="可能性"><a href="#可能性" class="headerlink" title="可能性"></a>可能性</h3><ul>
+<li>某件事发生的机会</li>
+<li>威胁源利用脆弱性造成不良后果的机会</li>
+<li>举例<ul>
+<li>脆弱性只有国家级测试人员采用专业工具才能利用，发生不良后果的机会很小</li>
+<li>系统存在漏洞，但只在与互联网物理隔离的局域网运行，发生不良后果的机会较小</li>
+</ul>
+</li>
+</ul>
+<h3 id="对风险概念的理解"><a href="#对风险概念的理解" class="headerlink" title="对风险概念的理解"></a>对风险概念的理解</h3><ul>
+<li>威胁源采用某种威胁方式利用脆弱性造成对资产不良后果的严重性</li>
+<li>威胁源——（采取）威胁方式——（利用）脆弱性——（造成）风险</li>
+<li>如，网站存在sql注入漏洞，普通攻击者利用自动化攻击工具很容易控制网站，修改网站内容，从而损害国家政府部门声誉</li>
+</ul>
+<h3 id="对信息安全风险的理解"><a href="#对信息安全风险的理解" class="headerlink" title="对信息安全风险的理解"></a>对信息安全风险的理解</h3><ul>
+<li>信息安全风险是指一种特定的威胁利用一种或一组脆弱性造成组织的信息相关资产损失或损害的可能性</li>
+<li>信息安全风险是指信息资产的保密性、完整性和可用性遭到破坏的可能性</li>
+<li>信息安全风险只考虑那些对组织有负面影响的事件</li>
+</ul>
+<h3 id="信息安全风险评估"><a href="#信息安全风险评估" class="headerlink" title="信息安全风险评估"></a>信息安全风险评估</h3><ul>
+<li>是依据有关信息安全技术与管理标准，对信息系统及由其处理、传输和存储的信息的保密性、完整性和可用性等安全属性进行评价的过程</li>
+<li>他要评估资产面临的威胁以及威胁利用脆弱性导致安全事件的可能性，并结合安全事件所涉及的资产价值来判断安全事件一旦发生对组织造成的影响</li>
+</ul>
+<h3 id="风险处理、管理"><a href="#风险处理、管理" class="headerlink" title="风险处理、管理"></a>风险处理、管理</h3><ul>
+<li>风险处理：选择并且执行措施来更改风险的过程</li>
+<li>风险管理：识别、控制、消除或最小化可能影响系统资源不确定因素的过程</li>
+</ul>
+<h3 id="安全措施-控制措施"><a href="#安全措施-控制措施" class="headerlink" title="安全措施/控制措施"></a>安全措施/控制措施</h3><ul>
+<li>保护资产，抵御威胁，减少脆弱性，降低安全事件的影响，以及打击信息犯罪而实施的各种实践、规程和机制，它是管理风险的具体手段和方法</li>
+<li>根据安全需求部署，用来防范威胁，降低风险的措施</li>
+<li>举例<ul>
+<li>部署防火墙、入侵检测、审计系统</li>
+<li>测试环节</li>
+<li>应急体系</li>
+</ul>
+</li>
+</ul>
+<h3 id="残余风险"><a href="#残余风险" class="headerlink" title="残余风险"></a>残余风险</h3><ul>
+<li>采取安全措施后，信息系统仍然可能存在的风险</li>
+<li>有些残余风险是在综合考虑了安全成本与效益后不去控制的风险</li>
+<li>残余风险应受到密切监视，它可能会在将来诱发新的安全事件</li>
+<li>举例<ul>
+<li>风险列表中有10项风险，根据风险成本效益分析，只有前8项需要控制，则前8项处理后剩余的风险加上另2项风险为残余风险，一段时间内系统处于风险可接受水平</li>
+</ul>
+</li>
+</ul>
+<h3 id="风险相关要素之间的关系"><a href="#风险相关要素之间的关系" class="headerlink" title="风险相关要素之间的关系"></a>风险相关要素之间的关系</h3><ul>
+<li>图略</li>
+</ul>
+<h2 id="信息安全风险管理概述"><a href="#信息安全风险管理概述" class="headerlink" title="信息安全风险管理概述"></a>信息安全风险管理概述</h2><h3 id="实施风险管理的主要原则"><a href="#实施风险管理的主要原则" class="headerlink" title="实施风险管理的主要原则"></a>实施风险管理的主要原则</h3><ul>
+<li>风险管理创造和保护价值</li>
+<li>风险管理是所有组织过程不可分割的一个部分，促进组织的持续改进</li>
+<li>风险管理是透明的，参与人员应包含广泛，同时考虑人员和文化因素</li>
+<li>风险管理是定制的，并具有体系化、结构化的特点</li>
+<li>风险管理是动态的、反复的和响应变化的</li>
+</ul>
+<h3 id="风险管理的范围和对象"><a href="#风险管理的范围和对象" class="headerlink" title="风险管理的范围和对象"></a>风险管理的范围和对象</h3><ul>
+<li>信息安全的概念涵盖了信息、信息载体和信息环境三个方面的安全<ul>
+<li>信息载体指承载信息的媒介，即用于记录、传输、积累和保存信息的实体，如纸张、硬盘</li>
+<li>信息环境指信息及信息载体所处的环境，包括物理平台、系统平台、网络平台和应用平台等硬环境和软环境</li>
+</ul>
+</li>
+<li>信息安全风险管理涉及信息安全上述三方面包含的所有相关对象</li>
+<li>对于一个具体的信息系统，风险管理选择的范围和对象重点应有所不同</li>
+</ul>
+<h2 id="信息安全风险相关政策与标准"><a href="#信息安全风险相关政策与标准" class="headerlink" title="信息安全风险相关政策与标准"></a>信息安全风险相关政策与标准</h2><h3 id="相关政策要求"><a href="#相关政策要求" class="headerlink" title="相关政策要求"></a>相关政策要求</h3><ul>
+<li>2003年的，《国家信息化领导小组关于加强信息安全保障工作的意见》</li>
+<li>2006年，《关于开展信息安全风险评估工作的意见》</li>
+<li>2008年，《关于加强国家电子政务工程建设项目信息安全风险评估工作的通知》</li>
+</ul>
+<h3 id="《关于开展信息安全风险评估工作的意见》的实施要求"><a href="#《关于开展信息安全风险评估工作的意见》的实施要求" class="headerlink" title="《关于开展信息安全风险评估工作的意见》的实施要求"></a>《关于开展信息安全风险评估工作的意见》的实施要求</h3><ul>
+<li>信息安全风险评估工作应当贯穿信息系统全生命周期。规划设计阶段、验收时均应实施风险评估；运行后应定期实施</li>
+<li>应通过信息安全风险评估为信息系统确定安全等级提供证据，根据风险评估的结果检验网络与信息系统的防护水平是否符合等级保护的要求</li>
+</ul>
+<h3 id="《关于开展信息安全风险评估工作的意见》的管理要求"><a href="#《关于开展信息安全风险评估工作的意见》的管理要求" class="headerlink" title="《关于开展信息安全风险评估工作的意见》的管理要求"></a>《关于开展信息安全风险评估工作的意见》的管理要求</h3><ul>
+<li>相关人云必须遵守法律法规，并承担责任义务</li>
+<li>评估工作的发起方必须采取保密措施，与评估人员签订保密协议</li>
+<li>评估工作必须遵循å国家的有关规定进行</li>
+</ul>
+<h3 id="《关于加强国家电子政务工程建设项目信息安全风险评估工作的通知》"><a href="#《关于加强国家电子政务工程建设项目信息安全风险评估工作的通知》" class="headerlink" title="《关于加强国家电子政务工程建设项目信息安全风险评估工作的通知》"></a>《关于加强国家电子政务工程建设项目信息安全风险评估工作的通知》</h3><ul>
+<li>电子政务工程建设项目应开展风险评估工作</li>
+<li>项目建设单位应在试运行期间开展风险评估，作为项目验收的重要依据</li>
+<li>项目验收申请时，应提交信息安全风险评估报告</li>
+<li>系统投入运行后，应定期开展风险评估</li>
+</ul>
+<h3 id="风险管理相关的国内外标准"><a href="#风险管理相关的国内外标准" class="headerlink" title="风险管理相关的国内外标准"></a>风险管理相关的国内外标准</h3><ul>
+<li>信息安全风险评估规范</li>
+<li>……风险管理指南</li>
+<li>……风险管理</li>
+<li>实施风险评估指南等</li>
+</ul>
+<h2 id="信息安全风险管理的基本内容和过程"><a href="#信息安全风险管理的基本内容和过程" class="headerlink" title="信息安全风险管理的基本内容和过程"></a>信息安全风险管理的基本内容和过程</h2><h3 id="信息安全风险管理工作内容"><a href="#信息安全风险管理工作内容" class="headerlink" title="信息安全风险管理工作内容"></a>信息安全风险管理工作内容</h3><ul>
+<li><p>《信息安全风险管理指南》：四个阶段，两个贯穿</p>
+<ul>
+<li>四阶段：背景建立-风险评估-风险处理-批准监督</li>
+</ul>
+</li>
+<li>两个贯穿：监控审查、沟通咨询</li>
+</ul>
+<h3 id="背景建立"><a href="#背景建立" class="headerlink" title="背景建立"></a>背景建立</h3><ul>
+<li>背景建立是信息安全风险管理的第一步骤，确定风险管理的对象和范围，确立实施风险管理的准备，进行相关信息的调查和分析<ul>
+<li>风险管理准备：确定对象、组件团队、指定计划、获得支持</li>
+<li>信息系统调查：信息系统的业务目标、技术和管理上的特点</li>
+<li>信息系统分析：信息系统的体系结构、关键要素</li>
+<li>信息安全分析：分析安全要求、分析安全环境</li>
+</ul>
+</li>
+</ul>
+<h3 id="风险评估"><a href="#风险评估" class="headerlink" title="风险评估"></a>风险评估</h3><ul>
+<li>信息安全风险管理要依靠风险评估的结果来确定随后的风险处理和批准监督活动<ul>
+<li>风险评估准备：指定风险评估方案、选择评估方法</li>
+<li>风险要素识别：发现系统存在的威胁、脆弱性和控制措施</li>
+<li>风险分析：判断风险发生的可能性和影响的程度</li>
+<li>风险结果判定：综合分析结果判定风险等级</li>
+</ul>
+</li>
+</ul>
+<h3 id="风险处理"><a href="#风险处理" class="headerlink" title="风险处理"></a>风险处理</h3><ul>
+<li>风险处理是为了将风险始终控制在可接受的范围内：<ul>
+<li>现存风险判断：判断信息系统哪些风险可以接受，哪些不可以</li>
+<li>处理目标确认：不可接受的风险需要控制到怎样的程度</li>
+<li>处理措施选择：选择风险处理方式，确定风险控制措施</li>
+<li>处理措施实施：指定具体安全方案，部署控制措施</li>
+</ul>
+</li>
+</ul>
+<h3 id="常用的四类风险处置方法"><a href="#常用的四类风险处置方法" class="headerlink" title="常用的四类风险处置方法"></a>常用的四类风险处置方法</h3><ul>
+<li>减低风险<ul>
+<li>通过对面临风险的资产采取保护措施来降低风险</li>
+<li>首先应当考虑的风险处置措施，通常在安全投入小于负面影响价值的情况下采用</li>
+<li>保护措施可以从构成风险的五个方面（即威胁源、威胁行为、脆弱性、资产和影响）来降低风险</li>
+</ul>
+</li>
+<li>转移风险<ul>
+<li>通过将面临风险的资产或其价值转移到更安全的地方来避免或降低风险</li>
+<li>通常只有当风险不能被降低或避免、且被第三方（被转嫁方）接受时才被采用。</li>
+<li>一般用于那些低概率、但一旦风险发生时会对组织产生重大影响的风险</li>
+<li>如购买保险、服务外包</li>
+</ul>
+</li>
+<li>规避风险<ul>
+<li>通过不使用面临风险的资产来避免风险，如<ul>
+<li>在没有足够安全保障的信息系统中，不处理特别敏感的信息，从而防止敏感信息的泄漏</li>
+<li>对于只处理内部业务的信息系统，不使用互联网，从而避免外部的有害侵入和不良攻击</li>
+</ul>
+</li>
+<li>通常在风险的损失无法接受，又难以通过控制措施减低风险的情况下</li>
+</ul>
+</li>
+<li>接受风险<ul>
+<li>接受风险是选择对风险不采取进一步的处理措施，接受风险可能带来的结果</li>
+<li>用于那些在采取了降低风险和避免风险措施后，出于实际和经济方面的原因，只要组织进行运营，就必然存在并必须接受的风险</li>
+<li>接受风险不意味着不闻不问，需要对风险态势变化进行持续的监控，一旦发展为无法接受的风险就要进一步采取措施</li>
+</ul>
+</li>
+</ul>
+<h3 id="批准监督"><a href="#批准监督" class="headerlink" title="批准监督"></a>批准监督</h3><ul>
+<li>批准：是指机构的决策层依据风险评估和风险处理的结果是否满足信息系统的安全要求，做出是否认可风险管理活动的决定</li>
+<li>监督：是指检查机构及其信息系统以及信息安全相关的环境有无变化，监督变化因素是否有可能引入新风险</li>
+</ul>
+<h3 id="监控审查的意义"><a href="#监控审查的意义" class="headerlink" title="监控审查的意义"></a>监控审查的意义</h3><ul>
+<li>监控与审查可以及时发现已经出现或即将出现的变化、偏差和延误等问题，并采取适当的措施进行控制和纠正，从而减少因此造成的损失，保证信息安全风险管理主循环的有效性</li>
+<li>类似信息系统工程中的监理</li>
+</ul>
+<h3 id="沟通咨询"><a href="#沟通咨询" class="headerlink" title="沟通咨询"></a>沟通咨询</h3><ul>
+<li>通过畅通的交流和充分的沟通，保持行动的协调和一致；通过有效的培训和方便的咨询，保证行动者具有足够的知识和技能，就是沟通咨询的意义所在</li>
+<li>为所有层面的相关人员提供咨询和培训等，以提高人员的安全意识、知识和技能</li>
+</ul>
+<h2 id="信息系统使命周期与信息安全风险管理"><a href="#信息系统使命周期与信息安全风险管理" class="headerlink" title="信息系统使命周期与信息安全风险管理"></a>信息系统使命周期与信息安全风险管理</h2><h3 id="信息系统生命周期与信息安全风险管理的关系"><a href="#信息系统生命周期与信息安全风险管理的关系" class="headerlink" title="信息系统生命周期与信息安全风险管理的关系"></a>信息系统生命周期与信息安全风险管理的关系</h3><ul>
+<li>信息系统生命周期的每个阶段，有不同的信息安全目标</li>
+<li>为了达到其安全目标，每一阶段都需要相应的风险管理手段作为支持</li>
+<li>信息安全目标就是要实现信息系统的基本安全特性（即信息安全基本属性），并达到所需的保障级别</li>
+</ul>
+<h3 id="系统规划阶段的安全目标"><a href="#系统规划阶段的安全目标" class="headerlink" title="系统规划阶段的安全目标"></a>系统规划阶段的安全目标</h3><ul>
+<li>明确信息系统安全建设的目的，对信息系统安全建设实现的可能性进行分析论证并设计出总体安全规划方案</li>
+<li>为了保证安全目标的实现，需要对信息系统规划阶段中可能引入安全风险的环节进行风险管理，从而降低在项目后期处理相同安全风险所带来的高额成本</li>
+</ul>
+<h3 id="系统设计阶段的安全目标"><a href="#系统设计阶段的安全目标" class="headerlink" title="系统设计阶段的安全目标"></a>系统设计阶段的安全目标</h3><ul>
+<li>依据规划阶段输出的总体安全规划方案来设计信息系统安全的实现结构（包括功能划分、接口协议和性能指标）和实施方案</li>
+<li>在设计信息系统的实现结构和实施方案时，在技术的选择、配合、管理等众多的环节均容易引入安全风险，因此对关键的环节应提出必要的安全要求并有针对性地进行风险管理</li>
+</ul>
+<h3 id="系统实施阶段的安全目标"><a href="#系统实施阶段的安全目标" class="headerlink" title="系统实施阶段的安全目标"></a>系统实施阶段的安全目标</h3><ul>
+<li>按照规划和设计阶段所定义的信息系统安全实施方案<ul>
+<li>采购设备和软件，开发定制功能</li>
+<li>集成、部署、配置和测试信息系统的安全机制</li>
+<li>培训人员</li>
+<li>对是否允许系统投入运行进行批准监督</li>
+</ul>
+</li>
+</ul>
+<h3 id="系统运维阶段的安全目标"><a href="#系统运维阶段的安全目标" class="headerlink" title="系统运维阶段的安全目标"></a>系统运维阶段的安全目标</h3><ul>
+<li>在信息系统经过授权投入运行之后，确保在运行过程中，以及信息系统或其运行环境发生变化时维持系统的正常运行和安全性</li>
+</ul>
+<h3 id="系统废弃阶段的安全目标"><a href="#系统废弃阶段的安全目标" class="headerlink" title="系统废弃阶段的安全目标"></a>系统废弃阶段的安全目标</h3><ul>
+<li>确保对信息系统的过时或无用部分进行安全报废处理，防止信息系统的安全要求和安全功能遭到破坏</li>
+</ul>
+<h2 id="信息安全风险评估-1"><a href="#信息安全风险评估-1" class="headerlink" title="信息安全风险评估"></a>信息安全风险评估</h2><h3 id="风险评估工作形式"><a href="#风险评估工作形式" class="headerlink" title="风险评估工作形式"></a>风险评估工作形式</h3><ul>
+<li>信息安全风险评估分为自评估、检查评估两种形式</li>
+<li>自评估为主，自评估和检查评估相互结合、互为补充</li>
+<li>自评估和检查评估可依托自身技术力量进行，也可委托第三方机构提供技术支持</li>
+</ul>
+<h3 id="自评估"><a href="#自评估" class="headerlink" title="自评估"></a>自评估</h3><ul>
+<li>信息系统拥有、运营或使用单位发起的对本单位信息系统进行的风险评估</li>
+<li>由发起方实施<ul>
+<li>优点<ul>
+<li>有利于降低实施的费用</li>
+<li>有利于保密</li>
+<li>有利于发挥行业和部门内人员的业务特长</li>
+<li>有利于提高相关人员的安全意识和评估能力</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>可能结果不够深入准确</li>
+<li>客观性易受影响</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>由委托方实施<ul>
+<li>优点<ul>
+<li>过程比较规范</li>
+<li>客观性比较好</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>对业务了解存在局限性</li>
+<li>不利于保密</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="检查评估"><a href="#检查评估" class="headerlink" title="检查评估"></a>检查评估</h3><ul>
+<li>信息系统上级管理部门组织的或国家有关职能部门依法开展的风险评估</li>
+<li>优点<ul>
+<li>具有权威性</li>
+<li>通过行政手段加强信息安全，具有强制性</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>间隔时间较长，难以贯穿信息系统的生命周期</li>
+<li>一般是以抽样的方式进行，难以覆盖全部评估对象</li>
+</ul>
+</li>
+</ul>
+<h3 id="风险评估、检查评估和等级保护测评之间的关系"><a href="#风险评估、检查评估和等级保护测评之间的关系" class="headerlink" title="风险评估、检查评估和等级保护测评之间的关系"></a>风险评估、检查评估和等级保护测评之间的关系</h3><ul>
+<li>等保测评、安全检查都是在既定安全基线的基础上开展的符合性测评，其中等保测评是符合国家安全要求的测评，安全检查是符合行业主管安全要求的符合性测评</li>
+<li>而风险评估是在国家、行业安全要求的基础上，以被评估系统特定安全要求为目标而开展的风险识别、风险分析、风险评价活动</li>
+</ul>
+<h3 id="定性风险分析"><a href="#定性风险分析" class="headerlink" title="定性风险分析"></a>定性风险分析</h3><ul>
+<li>定性风险分析在风险评价时，往往需要凭借分析者的经验和直觉，或者业界的标准和惯例，为风险诸要素的大小或高低程度定性分级</li>
+<li>定性风险分析更具主观性</li>
+<li>后果或影响的定性量度<ul>
+<li>1-可以忽略-无伤害，低财务损失</li>
+<li>2-较小-立即受控制，中等财务损失</li>
+<li>5-灾难性-持续能力中断，巨大财务损失</li>
+</ul>
+</li>
+<li>可能性的定性量度<ul>
+<li>A-几乎肯定-预期在大多数情况发生</li>
+<li>E-罕见-仅在例外的情况下可能发生</li>
+</ul>
+</li>
+</ul>
+<h3 id="定性风险分析-矩阵法"><a href="#定性风险分析-矩阵法" class="headerlink" title="定性风险分析-矩阵法"></a>定性风险分析-矩阵法</h3><ul>
+<li>依据预设的等级划分规则判定风险结果</li>
+<li>以此类推，得到所有重要资产的风险值，并根据风险等级划分表，确定风险等级（表自行百度，横-影响，纵-可能性</li>
+</ul>
+<h3 id="定量风险分析"><a href="#定量风险分析" class="headerlink" title="定量风险分析"></a>定量风险分析</h3><ul>
+<li>定量风险分析试图是在风险评估与成本效益分析期间收集的各个组成部分计算客观数字值，定量风险分析更具有客观性</li>
+<li>例如，用替换成本、生产率损失成本、品牌名誉成本以及其他直接和间接商业价值来估计各项资产的真实价值</li>
+<li>定量分析主要试图从财务数字上对安全风险进行评估，得出可以量化的风险分析结果，准确度量风险的可能性和损失量</li>
+<li>因为定量分析处理 数字和金额价值，他必须有公式</li>
+</ul>
+<h3 id="定量风险分析——年度预期损失法"><a href="#定量风险分析——年度预期损失法" class="headerlink" title="定量风险分析——年度预期损失法"></a>定量风险分析——年度预期损失法</h3><ul>
+<li>步骤一：评估资产：根据资产价值（AV）清单，计算资产总价值及损失对财务的直接和间接影响</li>
+<li>步骤二：确定单一预期损失SLE<ul>
+<li>SLE是指发生一次风险引起的收入损失总额</li>
+<li>SLE是分配给单个事件的金额，代表一个具体威胁利用漏洞时将面临的潜在损失（SLE类似于定性风险分析的影响</li>
+<li>将资产价值与暴露系数相乘（EF）计算出SLE。暴露系数表示为现实威胁对某个资产造成的损失百分比</li>
+</ul>
+</li>
+<li>步骤三：确定年发生率ARO<ul>
+<li>ARO是一年中风险发生的次数</li>
+</ul>
+</li>
+<li>步骤4-确定年预期损失ALE<ul>
+<li>ALE是不采取任何减轻风险的措施在一年中可能损失的总金额。SLE乘以ARO即可计算出该值（ALE类似于定性风险分析的相对级别</li>
+<li>ALE= SLE<em> ARO = AV</em> EF * ARO</li>
+</ul>
+</li>
+<li>步骤5-确定控制成本<ul>
+<li>控制成本就是为了规避企业所存在风险的发生而应投入的费用</li>
+</ul>
+</li>
+<li>步骤6-安全投资收益ROSI<ul>
+<li>ROSI= （实施控制前的ALE）- （实施控制后的ALE） - （年控制成本）</li>
+</ul>
+</li>
+</ul>
+<h3 id="风险评估常用方法-定量分析"><a href="#风险评估常用方法-定量分析" class="headerlink" title="风险评估常用方法-定量分析"></a>风险评估常用方法-定量分析</h3><p>定量评估计算案例</p>
+<ul>
+<li>计算由于人员疏忽或设备老化对一个计算机机房所造成火灾的风险</li>
+<li>假设：<ul>
+<li>组织在3年前计算机机房资产价值100万，当年曾经发生过一次火灾导致损失100万</li>
+<li>组织目前计算机机房资产价值为1000万；</li>
+<li>经过和当地消防部门沟通以及组织历史安全事件记录发现，组织所在地及周边在5年来发生过3次火灾</li>
+<li>该组织额定的财务投资收益比是30%</li>
+</ul>
+</li>
+<li>由上述条件可计算风险组织的年度预期损失及ROSI，为组织提供一个良好的风险管理财务清单</li>
+<li>根据历史数据获得EF：10万 / 100万 x 100% = 10%</li>
+<li>根据EF计算目前组织的SLE：1000万 x 10% = 100万</li>
+<li>根据历史数据中的ARO计算ALE：100万 x （3/5） = 60万</li>
+<li>此时获得年度预期损失值，组织需根据该损失衡量风险可接受度，如果风险不可接受则需进一步计算风险的处置成本及安全收益：ROSI = （实施控制前的ALE） - （实施控制后的ALE）- （年控制成本）</li>
+<li>组织定义安全目标，假如组织希望火灾发生后对组织的损失降低70%，则，实施控制后的ALE应为：<ul>
+<li>60万 x （1-70%） = 18万</li>
+<li>年控制成本 = （60-18） x 30% = 12.6万</li>
+<li>则：ROSI = 60 - 18 - 12.8 = 29.4万</li>
+</ul>
+</li>
+<li>至此，组织通过年投入12.6万获得每年29.4万的安全投资收益</li>
+</ul>
+<h3 id="定性分析与定量分析"><a href="#定性分析与定量分析" class="headerlink" title="定性分析与定量分析"></a>定性分析与定量分析</h3><ul>
+<li>定量<ul>
+<li>优点<ul>
+<li>结果可用货币和具体数据来表达；</li>
+<li>按财务影响确定风险优先级；按财务价值确定资产优先级</li>
+<li>通过安全投资收益分析推动风险管理</li>
+<li>随着组织建立的历史数据记录而获得经验，其精确度将随时间的推移而提高</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>分配给风险的影响值以参与者的主观意见为基础</li>
+<li>达成可靠结果和一致性意见的流程非常耗时</li>
+<li>计算可能会非常复杂且耗时</li>
+<li>流程专业技术性强，参与者若未获得指导则无法轻松执行流程</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>定性<ul>
+<li>优点<ul>
+<li>可以对风险的处置排定优先顺序</li>
+<li>更容易达成一致意见</li>
+<li>无需量化威胁频率</li>
+<li>无需确定资产的财务价值</li>
+<li>更便于非安全或计算机专业人员的参与</li>
+</ul>
+</li>
+<li>缺点<ul>
+<li>在重要的风险之间没有足够的区别</li>
+<li>没有为成本效益分析，难以证明投资控制措施是否正确</li>
+<li>结果取决于风险管理团队的素质，经验和知识技能</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="半定量风险分析"><a href="#半定量风险分析" class="headerlink" title="半定量风险分析"></a>半定量风险分析</h3><ul>
+<li>在风险分析过程中综合使用定性和定量风险分析技术对风险要素赋值的方式，实现对风险各要素的度量数值化</li>
+<li>在实际的风险分析活动中，经常采用半定量的风险分析方法</li>
+</ul>
+<h3 id="风险评估的实施流程"><a href="#风险评估的实施流程" class="headerlink" title="风险评估的实施流程"></a>风险评估的实施流程</h3><ul>
+<li>风险评估准备</li>
+<li>风险要素识别</li>
+<li>风险分析</li>
+<li>风险结果判定</li>
+</ul>
+<h3 id="风险评估准备"><a href="#风险评估准备" class="headerlink" title="风险评估准备"></a>风险评估准备</h3><ul>
+<li>背景建立</li>
+<li>制定风险评估计划</li>
+<li>制定风险评估方案</li>
+<li>选择风险评估方法和工具</li>
+<li>制定组织机构自己的风险评估准则</li>
+<li>获得风险管理决策层的认可、批准和支持</li>
+<li>风险要素识别</li>
+</ul>
+<h3 id="风险要素识别"><a href="#风险要素识别" class="headerlink" title="风险要素识别"></a>风险要素识别</h3><ul>
+<li>风险评估准备</li>
+<li>资产识别与赋值</li>
+<li>威胁识别与赋值</li>
+<li>脆弱性识别与赋值</li>
+<li>确认已有的安全措施</li>
+<li>风险分析</li>
+</ul>
+<h3 id="资产识别"><a href="#资产识别" class="headerlink" title="资产识别"></a>资产识别</h3><ul>
+<li>资产识别在整个风险评估中起什么作用<ul>
+<li>两点：是整个风险评估工作的起点和终点</li>
+</ul>
+</li>
+<li>资产识别的重点和难点是什么？<ul>
+<li>一线：业务战略-信息化战略-系统特征（管理/技术）</li>
+</ul>
+</li>
+<li>资产识别的方法有哪些<ul>
+<li>资产分类：树状法</li>
+<li>自然形态分类（勾画资产树：管理、技术……逐渐往下细化</li>
+<li>信息形态分类（信息环境、信息载体、信息）</li>
+</ul>
+</li>
+</ul>
+<h3 id="威胁识别"><a href="#威胁识别" class="headerlink" title="威胁识别"></a>威胁识别</h3><ul>
+<li>威胁识别与资产识别是何关系？<ul>
+<li>点和面：重点识别和全面识别</li>
+</ul>
+</li>
+<li>威胁识别的重点和难点是什么？<ul>
+<li>三问：”敌人”在哪？效果如何？如何取证？</li>
+</ul>
+</li>
+<li>威胁识别的方法有哪些？<ul>
+<li>日志分析</li>
+<li>历史安全事件</li>
+<li>专家经验</li>
+<li>互联网信息检索</li>
+</ul>
+</li>
+</ul>
+<h3 id="威胁分类"><a href="#威胁分类" class="headerlink" title="威胁分类"></a>威胁分类</h3><ul>
+<li>人为故意威胁：威胁意图评估、威胁能力评估、操作限制评估</li>
+<li>人为非故意威胁：判定威胁源、评估威胁源特点、评估威胁源环境</li>
+<li>自然威胁：地震、海啸、洪水</li>
+</ul>
+<h3 id="脆弱性识别"><a href="#脆弱性识别" class="headerlink" title="脆弱性识别"></a>脆弱性识别</h3><ul>
+<li>脆弱性识别与威胁识别是何关系？<ul>
+<li>验证：以资产为对象，对威胁识别进行验证</li>
+</ul>
+</li>
+<li>脆弱性识别的难点是什么？<ul>
+<li>三性：隐蔽性、欺骗性、复杂性</li>
+</ul>
+</li>
+<li>脆弱性识别的方法有哪些？<ul>
+<li>管理脆弱性（如缺少管理制度</li>
+<li>结构脆弱性（如安全域划分不当</li>
+<li>操作脆弱性（如安全审计员业务生疏</li>
+<li>技术脆弱性（如系统有bug</li>
+<li>物理脆弱性（如一层的肠子没有防护栏</li>
+</ul>
+</li>
+</ul>
+<h3 id="常见脆弱性识别工作方式"><a href="#常见脆弱性识别工作方式" class="headerlink" title="常见脆弱性识别工作方式"></a>常见脆弱性识别工作方式</h3><table>
+<thead>
+<tr>
+<th>脆弱性识别方式</th>
+<th>工作对象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>安全配置核查</td>
+<td>服务器、网络设备、终端、中间件</td>
+</tr>
+<tr>
+<td>漏洞扫描</td>
+<td>主机、应用程序</td>
+</tr>
+<tr>
+<td>渗透测试</td>
+<td>系统各个层面</td>
+</tr>
+<tr>
+<td>安全架构分析</td>
+<td>系统各个层面</td>
+</tr>
+<tr>
+<td>数据流分析</td>
+<td>网络中的数据流</td>
+</tr>
+<tr>
+<td>访谈</td>
+<td>管理人员及系统开发、运维技术人员</td>
+</tr>
+</tbody>
+</table>
+<h3 id="确认已有的安全机制"><a href="#确认已有的安全机制" class="headerlink" title="确认已有的安全机制"></a>确认已有的安全机制</h3><ul>
+<li>考虑<ul>
+<li>预防性措施</li>
+<li>检测性措施</li>
+<li>纠正性措施</li>
+<li>威慑性措施</li>
+</ul>
+</li>
+</ul>
+<h3 id="风险结果判定"><a href="#风险结果判定" class="headerlink" title="风险结果判定"></a>风险结果判定</h3><ul>
+<li>风险分析</li>
+<li>评估风险的等级</li>
+<li>综合评估风险状况</li>
+<li>风险处理</li>
+</ul>
+<p>##风险评估工具</p>
+<h3 id="风险评估与管理工具"><a href="#风险评估与管理工具" class="headerlink" title="风险评估与管理工具"></a>风险评估与管理工具</h3><ul>
+<li>基于标准的工具，如基于ISO 27005开发的</li>
+<li>基于知识的工具，综合各种风险分析方法，形成知识库，以此为基础完成综合评估</li>
+<li>基于模型的工具，对典型系统的资产、威胁、脆弱性建立量化或半量化的模型</li>
+</ul>
+<h3 id="系统基础平台风险评估工具"><a href="#系统基础平台风险评估工具" class="headerlink" title="系统基础平台风险评估工具"></a>系统基础平台风险评估工具</h3><ul>
+<li>脆弱性扫描工具：基于网络的扫描器、基于主机的扫描器、分布式网络扫描器、数据库脆弱性扫描器</li>
+<li>渗透性测试工具：黑客工具、脚本文件</li>
+</ul>
+<h3 id="风险评估辅助工具"><a href="#风险评估辅助工具" class="headerlink" title="风险评估辅助工具"></a>风险评估辅助工具</h3><ul>
+<li>检查列表、入侵检测系统、安全审计工具、拓扑发现工具和资产信息收集系统，用于评估过程参考的评估指标库、知识库、漏洞库、算法库和模型库</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/11/算法基础/" rel="next" title="算法基础">
+                <i class="fa fa-chevron-left"></i> 算法基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">好好学习 天天向上</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#风险管理综述"><span class="nav-text">风险管理综述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息安全风险管理大纲"><span class="nav-text">信息安全风险管理大纲</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息安全风险概念"><span class="nav-text">信息安全风险概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险的构成"><span class="nav-text">风险的构成</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#风险相关基础概念"><span class="nav-text">风险相关基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#资产"><span class="nav-text">资产</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#威胁"><span class="nav-text">威胁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脆弱性"><span class="nav-text">脆弱性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可能性"><span class="nav-text">可能性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对风险概念的理解"><span class="nav-text">对风险概念的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对信息安全风险的理解"><span class="nav-text">对信息安全风险的理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息安全风险评估"><span class="nav-text">信息安全风险评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险处理、管理"><span class="nav-text">风险处理、管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安全措施-控制措施"><span class="nav-text">安全措施/控制措施</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#残余风险"><span class="nav-text">残余风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险相关要素之间的关系"><span class="nav-text">风险相关要素之间的关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息安全风险管理概述"><span class="nav-text">信息安全风险管理概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实施风险管理的主要原则"><span class="nav-text">实施风险管理的主要原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险管理的范围和对象"><span class="nav-text">风险管理的范围和对象</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息安全风险相关政策与标准"><span class="nav-text">信息安全风险相关政策与标准</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#相关政策要求"><span class="nav-text">相关政策要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#《关于开展信息安全风险评估工作的意见》的实施要求"><span class="nav-text">《关于开展信息安全风险评估工作的意见》的实施要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#《关于开展信息安全风险评估工作的意见》的管理要求"><span class="nav-text">《关于开展信息安全风险评估工作的意见》的管理要求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#《关于加强国家电子政务工程建设项目信息安全风险评估工作的通知》"><span class="nav-text">《关于加强国家电子政务工程建设项目信息安全风险评估工作的通知》</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险管理相关的国内外标准"><span class="nav-text">风险管理相关的国内外标准</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息安全风险管理的基本内容和过程"><span class="nav-text">信息安全风险管理的基本内容和过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息安全风险管理工作内容"><span class="nav-text">信息安全风险管理工作内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景建立"><span class="nav-text">背景建立</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险评估"><span class="nav-text">风险评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险处理"><span class="nav-text">风险处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用的四类风险处置方法"><span class="nav-text">常用的四类风险处置方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#批准监督"><span class="nav-text">批准监督</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监控审查的意义"><span class="nav-text">监控审查的意义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#沟通咨询"><span class="nav-text">沟通咨询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息系统使命周期与信息安全风险管理"><span class="nav-text">信息系统使命周期与信息安全风险管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息系统生命周期与信息安全风险管理的关系"><span class="nav-text">信息系统生命周期与信息安全风险管理的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统规划阶段的安全目标"><span class="nav-text">系统规划阶段的安全目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统设计阶段的安全目标"><span class="nav-text">系统设计阶段的安全目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统实施阶段的安全目标"><span class="nav-text">系统实施阶段的安全目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统运维阶段的安全目标"><span class="nav-text">系统运维阶段的安全目标</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统废弃阶段的安全目标"><span class="nav-text">系统废弃阶段的安全目标</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#信息安全风险评估-1"><span class="nav-text">信息安全风险评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#风险评估工作形式"><span class="nav-text">风险评估工作形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自评估"><span class="nav-text">自评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查评估"><span class="nav-text">检查评估</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险评估、检查评估和等级保护测评之间的关系"><span class="nav-text">风险评估、检查评估和等级保护测评之间的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定性风险分析"><span class="nav-text">定性风险分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定性风险分析-矩阵法"><span class="nav-text">定性风险分析-矩阵法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定量风险分析"><span class="nav-text">定量风险分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定量风险分析——年度预期损失法"><span class="nav-text">定量风险分析——年度预期损失法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险评估常用方法-定量分析"><span class="nav-text">风险评估常用方法-定量分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定性分析与定量分析"><span class="nav-text">定性分析与定量分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#半定量风险分析"><span class="nav-text">半定量风险分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险评估的实施流程"><span class="nav-text">风险评估的实施流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险评估准备"><span class="nav-text">风险评估准备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险要素识别"><span class="nav-text">风险要素识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#资产识别"><span class="nav-text">资产识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#威胁识别"><span class="nav-text">威胁识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#威胁分类"><span class="nav-text">威胁分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脆弱性识别"><span class="nav-text">脆弱性识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见脆弱性识别工作方式"><span class="nav-text">常见脆弱性识别工作方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#确认已有的安全机制"><span class="nav-text">确认已有的安全机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险结果判定"><span class="nav-text">风险结果判定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险评估与管理工具"><span class="nav-text">风险评估与管理工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统基础平台风险评估工具"><span class="nav-text">系统基础平台风险评估工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#风险评估辅助工具"><span class="nav-text">风险评估辅助工具</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

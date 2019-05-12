@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="NISP,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="安全工程能力成熟度模型的价值 SSE-CMM为信息安全工程过程改进建立一个框架模型 通过SSE-CMM的学习了解 信息安全工程通常要实施哪些活动？ 评价和改进这些过程指标是什么？">
+<meta name="keywords" content="NISP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息安全工程-能力评估">
+<meta property="og:url" content="http://21guns.top/2019/05/07/信息安全工程-能力评估/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="安全工程能力成熟度模型的价值 SSE-CMM为信息安全工程过程改进建立一个框架模型 通过SSE-CMM的学习了解 信息安全工程通常要实施哪些活动？ 评价和改进这些过程指标是什么？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-07T13:27:38.333Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息安全工程-能力评估">
+<meta name="twitter:description" content="安全工程能力成熟度模型的价值 SSE-CMM为信息安全工程过程改进建立一个框架模型 通过SSE-CMM的学习了解 信息安全工程通常要实施哪些活动？ 评价和改进这些过程指标是什么？">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/05/07/信息安全工程-能力评估/">
+
+
+
+
+
+  <title>信息安全工程-能力评估 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/07/信息安全工程-能力评估/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息安全工程-能力评估</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-07T21:25:56+08:00">
+                2019-05-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP二级</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="安全工程能力成熟度模型的价值"><a href="#安全工程能力成熟度模型的价值" class="headerlink" title="安全工程能力成熟度模型的价值"></a>安全工程能力成熟度模型的价值</h3><ul>
+<li>SSE-CMM为信息安全工程过程改进建立一个框架模型</li>
+<li>通过SSE-CMM的学习了解<ul>
+<li>信息安全工程通常要实施哪些活动？</li>
+<li>评价和改进这些过程指标是什么？<a id="more"></a></li>
+</ul>
+</li>
+</ul>
+<h3 id="何为SSE-CMM"><a href="#何为SSE-CMM" class="headerlink" title="何为SSE-CMM"></a>何为SSE-CMM</h3><ul>
+<li>系统安全工程能力成熟模型</li>
+<li>描述了一个组织的系统安全工程过程必须包含的基本特征<ul>
+<li>这些特征是完善的安全工程保证</li>
+<li>也是系统安全工程实施的度量标准</li>
+<li>还是一个易于理解的评估系统安全工程实施的框架</li>
+</ul>
+</li>
+</ul>
+<h3 id="SSE-CMM的作用"><a href="#SSE-CMM的作用" class="headerlink" title="SSE-CMM的作用"></a>SSE-CMM的作用</h3><ul>
+<li>帮助获取组织选择合格的投标者，以统一的标准对安全工程过程进行监管提高工程实施质量，减少争议</li>
+<li>帮助工程组织通过可重复、可预测的过程减少返工、提高质量、降低成本；改进安全工程实施能力；获得证明安全工程实施能力的资质</li>
+<li>帮助认证评估组织获得独立于系统和产品的可重用的过程评估标准用来确定被评估者将安全工程集成在系统工程之中，并且其系统安全工程是可信的</li>
+</ul>
+<h3 id="SSE-CMM覆盖范围"><a href="#SSE-CMM覆盖范围" class="headerlink" title="SSE-CMM覆盖范围"></a>SSE-CMM覆盖范围</h3><ul>
+<li>SSE-CMM涉及到可信产品或者系统整个生命周期的安全工程活动，其中包括概念定义、需求分析、设计、开发、集成、安装、运行、维护和终止</li>
+<li>覆盖整个组织的活动，包括管理、组织和工程活动等，而不仅仅是系统安全的工程活动</li>
+<li>它不是孤立了工程，而是与其它工程并行且相互作用，包括企业工程、软件工程、硬件工程、基建工程、人力资源工程、系统管理等</li>
+<li>与其它组织的相互作用，涉及开发者、产品供应商、采购者等</li>
+<li>SSE-CMM可应用于所有类型和大小的安全工程机构，如商务机构、政府机构和学术机构</li>
+</ul>
+<h3 id="SSE-CMM发展历史"><a href="#SSE-CMM发展历史" class="headerlink" title="SSE-CMM发展历史"></a>SSE-CMM发展历史</h3><ul>
+<li>93年4月 美国国家安全局开始酝酿</li>
+<li>97年第一个版本</li>
+<li>目前v3</li>
+</ul>
+<h3 id="SSE-CMM体系结构"><a href="#SSE-CMM体系结构" class="headerlink" title="SSE-CMM体系结构"></a>SSE-CMM体系结构</h3><p>两维模型：</p>
+<ul>
+<li>域维：由所有定义的安全工程过程区构成</li>
+<li><p>能力维：代表组织实施这一过程的能力</p>
+</li>
+<li><p>域维</p>
+<ul>
+<li>基本实施</li>
+<li>过程区</li>
+<li>过程类</li>
+</ul>
+</li>
+<li><p>能力维</p>
+<ul>
+<li>通用实践</li>
+<li>公共特征</li>
+<li>能力级别</li>
+</ul>
+</li>
+<li><p>SSE-CMM能力成熟度评价</p>
+<ul>
+<li>通过设置这两个相互依赖的维，SSE-CMM在各个能力级别上覆盖了整个安全活动范围</li>
+<li>给每个PA赋予一个能力级别评分，所得到的两维图形便形象地反映一个工程组织整体上的系统安全工程能力成熟度，也间接的反映其工作结果的质量及其安全上的可信度</li>
+</ul>
+</li>
+<li><p>域维-22个PA分成三类</p>
+<ul>
+<li>系统安全工程涉及到三个过程类<ul>
+<li>工程过程类</li>
+<li>组织过程类</li>
+<li>项目过程类</li>
+</ul>
+</li>
+<li>工程过程类中包含11个过程区域，描述了系统安全工程中实施的与安全直接相关的活动</li>
+<li>组织和项目过程类包含11个过程区域，并不直接同系统安全相关，但常与11个工程过程区域一起用来度量系统安全队伍的过程能力成熟度</li>
+</ul>
+</li>
+<li><p>域维-工程类PA</p>
+<ul>
+<li>PA01-管理安全控制</li>
+<li>……</li>
+<li>PA11-核实和确认安全</li>
+</ul>
+</li>
+<li><p>域维-项目类和组织类PA</p>
+<ul>
+<li>PA12-保证质量</li>
+<li>PA22-与供应商协调</li>
+</ul>
+</li>
+<li><p>风险过程</p>
+<ul>
+<li>风险就是有害事件发生的可能性</li>
+<li>一个有害事件有三部分组成：威胁、脆弱性和影响</li>
+</ul>
+</li>
+<li><p>工程过程</p>
+<ul>
+<li>安全工程与其它科目一样，他是一个包括概念、设计、实现、测试、部署、运行、维护、退出的完整过程</li>
+<li>SSE-CMM强调的是安全工程是一个大的项目队伍中的一部分，需要与其它科目工程师的活动相互协调</li>
+</ul>
+</li>
+<li><p>保证过程</p>
+<ul>
+<li>保证是指安全需要得到满足的信任程度</li>
+<li><p>SSE-CMM的信任程度来自于安全工程过程可重复性的结果质量</p>
+<h3 id="PA10：确定安全需求"><a href="#PA10：确定安全需求" class="headerlink" title="PA10：确定安全需求"></a>PA10：确定安全需求</h3></li>
+<li><p>本过程区域实现依赖的7项基本实施</p>
+<ul>
+<li>理解用户的安全需求</li>
+<li>识别适用的法律、政策、标准和约束</li>
+<li>识别系统用途、确定系统安全关联性</li>
+<li>描述系统运行的安全视图</li>
+<li>定义高层的安全目标</li>
+<li>定义安全需求</li>
+<li>相关方安全需求达成一致，并获得系统用户的认可</li>
+</ul>
+</li>
+<li>一般情况下，用户最初的安全需求均比较模糊。如：符合xx政策要求、提高安全保障水平、抵抗一般攻击行为等<ul>
+<li>如”符合信息安全保障能力级别二级的要求”，就需要从安全措施和保障能力两个角度进行需求分析，并在安全措施中兼顾技术、管理、工程三个方面的内容</li>
+<li>如”抵抗一般性攻击”，不但要分析威胁源、威胁能力、威胁动机，还要分析信息系统自身存在的漏洞/脆弱性情况</li>
+<li>另：任何需求的分析或提出，都必须建立在明确的系统使命基础之上</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>帮助用户梳理需求是一项重要工作，必须依照其业务特点提出合适的安全性需求。以下均不可取</p>
+<ul>
+<li>需求完全靠用户</li>
+<li>套用其它行业需求</li>
+<li>照搬标准</li>
+</ul>
+</li>
+<li>需求提出过程不能忽略与相关法律法规和标准的符合性问题</li>
+<li>需牢记：需求分析越细致，与系统使命联系越紧密，安全工程的基础才越牢固</li>
+</ul>
+<h3 id="PA09-提供安全输入"><a href="#PA09-提供安全输入" class="headerlink" title="PA09-提供安全输入"></a>PA09-提供安全输入</h3><ul>
+<li>此过程区域包括以下6项基本实施：<ul>
+<li>理解安全输入需求</li>
+<li>确定安全约束和需要考虑的问题</li>
+<li>制定安全候选解决方案</li>
+<li>分析工程可选方案的安全性</li>
+<li>为工程组提供安全工程指南</li>
+<li>为运行系统的用户和管理员提供安全指南</li>
+</ul>
+</li>
+</ul>
+<h3 id="PA01-管理安全控制"><a href="#PA01-管理安全控制" class="headerlink" title="PA01-管理安全控制"></a>PA01-管理安全控制</h3><ul>
+<li>此过程区域包括以下4项基本实施<ul>
+<li>建立安全职责</li>
+<li>管理安全配置</li>
+<li>管理安全意识、培训和教育</li>
+<li>管理安全服务和控制机制</li>
+</ul>
+</li>
+<li>管理安全控制既是在工程实施过程中要着重把握的环节，解决工程实施完整性问题</li>
+<li>工程部署各个环节均要落实到位<ul>
+<li>落实人员和职责</li>
+<li>落实技术产品和技术措施的配置</li>
+<li>落实培训</li>
+<li>落实平稳移交（操作、维护、应急</li>
+<li>规避工程实施后，只有承建单位了解系统，业主单位不熟悉情况的风险</li>
+</ul>
+</li>
+</ul>
+<h3 id="PA08-监控安全态势"><a href="#PA08-监控安全态势" class="headerlink" title="PA08-监控安全态势"></a>PA08-监控安全态势</h3><ul>
+<li>此过程区域包括以下7项基本实施<ul>
+<li>分析事件记录</li>
+<li>监控威胁、脆弱性和影响等方面的变化</li>
+<li>识别安全事件</li>
+<li>监控安全防护措施的有效性</li>
+<li>评审安全态势</li>
+<li>管理安全事件响应</li>
+<li>保护安全监控得到的记录数据</li>
+</ul>
+</li>
+<li>安全工程实施部署后，应对系统的运行情况进行监控，该部分工作主要在试运行期间完成</li>
+<li>监控的内容应该包含<ul>
+<li>新系统是否按照设计要求，有效降低了风险</li>
+<li>新系统是否对原有系统产生影响，是否引入了新的风险</li>
+<li>分析新系统在功能和性能上的变化趋势，判断是否需要进一步调整</li>
+<li>对系统在试运行过程出现的事件进行详细记录和分析，并形成文档</li>
+</ul>
+</li>
+</ul>
+<h3 id="PA07-协调安全"><a href="#PA07-协调安全" class="headerlink" title="PA07-协调安全"></a>PA07-协调安全</h3><ul>
+<li>此过程区域包括以下4项基本实施<ul>
+<li>定义协调目标</li>
+<li>识别协调机制</li>
+<li>促进协调</li>
+<li>协调安全决策和建议</li>
+</ul>
+</li>
+<li>“信息安全人人有责”，特别是在安全工程过程中必须重视工程组织各方的沟通与协调工作，这项工作作用在”工程过程”的全部PA中</li>
+<li>作为系统承建单位应做到<ul>
+<li>熟悉工程组织各方的角色（定好位</li>
+<li>熟悉业主单位的组织形式和与信息系统相关的各部门职责（踩好点</li>
+<li>协调业主单位定义工程组各方职责</li>
+<li>提供工程项目沟通协调机制的解决方案</li>
+<li>工作过程中严格执行沟通协调机制</li>
+</ul>
+</li>
+</ul>
+<h3 id="PA11-验证和证实安全"><a href="#PA11-验证和证实安全" class="headerlink" title="PA11-验证和证实安全"></a>PA11-验证和证实安全</h3><ul>
+<li>此过程区域包括以下5项BP<ul>
+<li>制定验证和证实目标和计划</li>
+<li>制定验证和证实具体方法和严密等级</li>
+<li>执行验证</li>
+<li>执行证实</li>
+<li>提供验证和证实结果</li>
+</ul>
+</li>
+</ul>
+<h3 id="PA06-建立保证论据"><a href="#PA06-建立保证论据" class="headerlink" title="PA06-建立保证论据"></a>PA06-建立保证论据</h3><ul>
+<li>本过程区域包括以下5项基本实施<ul>
+<li>识别并确定用户的安全保障目标</li>
+<li>制定安全保障战略</li>
+<li>识别并控制保障证据</li>
+<li>分析证据</li>
+<li>提供保障论据</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结信息安全工程活动"><a href="#总结信息安全工程活动" class="headerlink" title="总结信息安全工程活动"></a>总结信息安全工程活动</h3><ul>
+<li>系统是干什么用的？</li>
+<li>系统面临哪些风险？</li>
+<li>要达到怎样的安全水平？</li>
+<li>哪些方法达到安全水平？</li>
+<li>总体思路？</li>
+<li>具体方案？</li>
+</ul>
+<h3 id="能力级别：代表安全工程组织的成熟级别"><a href="#能力级别：代表安全工程组织的成熟级别" class="headerlink" title="能力级别：代表安全工程组织的成熟级别"></a>能力级别：代表安全工程组织的成熟级别</h3><ul>
+<li>能力级别：<ul>
+<li>0-未实施</li>
+<li>1-非正规执行</li>
+<li>2-计划与跟踪</li>
+<li>3-充分定义</li>
+<li>4-量化控制</li>
+<li>5-连续改进</li>
+</ul>
+</li>
+<li>公共特征<ul>
+<li>执行基本实施</li>
+<li>计划执行、规范化执行、跟踪执行、验证执行</li>
+<li>定义标准过程、协调安全实施、执行已定义的过程</li>
+<li>建立可测量的质量目标、客观地管理过程的执行</li>
+<li>改进组织能力、改进过程的有效性</li>
+</ul>
+</li>
+</ul>
+<h3 id="能力级别-0级：未实施级"><a href="#能力级别-0级：未实施级" class="headerlink" title="能力级别-0级：未实施级"></a>能力级别-0级：未实施级</h3><ul>
+<li>没有公共特征</li>
+<li>不能成功执行过程区域中的全部基本实施</li>
+<li>如果某组织在某一过程区域的能力成熟度为0级，则该组织无法提供某一特定信息安全工程服务</li>
+</ul>
+<h3 id="能力级别-1级：非正规执行级"><a href="#能力级别-1级：非正规执行级" class="headerlink" title="能力级别-1级：非正规执行级"></a>能力级别-1级：非正规执行级</h3><ul>
+<li>该级别过程区域的基本实施均被执行，但未经过严格的计划和跟踪，而是基于个人的知识和努力</li>
+<li>该级别包括一个公共特征——执行基本实施<ul>
+<li>所有BP以某种方式执行</li>
+<li>工作产品的一致性、性能和质量会因为缺乏适当控制而存在极大的差异</li>
+</ul>
+</li>
+</ul>
+<h3 id="能力级别-2级：规划和跟踪级"><a href="#能力级别-2级：规划和跟踪级" class="headerlink" title="能力级别-2级：规划和跟踪级"></a>能力级别-2级：规划和跟踪级</h3><ul>
+<li>包括四个公共特征<ul>
+<li>规划执行：分配资源、指定责任、提供工具、将规划形成文档</li>
+<li>规范化执行：使用标准和规程、进行配置管理</li>
+<li>跟踪执行：跟踪过程实施、采取修正措施</li>
+<li>验证执行：验证工作过程、验证工作产品</li>
+</ul>
+</li>
+</ul>
+<h3 id="能力级别-3级：充分定义级"><a href="#能力级别-3级：充分定义级" class="headerlink" title="能力级别-3级：充分定义级"></a>能力级别-3级：充分定义级</h3><ul>
+<li>包括三个公共特征<ul>
+<li>定义标准化过程：指定标准化过程，从组织标准化过程中裁剪出针对特定需求的过程</li>
+<li>执行已定义过程：PA的实施使用充分定义的过程，对执行结果进行缺陷评审，使用充分定义的数据</li>
+<li>协调安全实施：执行组内、组间、外部协调</li>
+</ul>
+</li>
+</ul>
+<h3 id="能力级别-4级：量化控制级"><a href="#能力级别-4级：量化控制级" class="headerlink" title="能力级别-4级：量化控制级"></a>能力级别-4级：量化控制级</h3><ul>
+<li>包括两个公共特征<ul>
+<li>建立可测量的质量目标：为工作产品建立可测度的目标</li>
+<li>对执行情况实施客观管理：为工作过程能力建立量化测量和改进的标准</li>
+</ul>
+</li>
+</ul>
+<h3 id="能力级别-5级：持续改进级"><a href="#能力级别-5级：持续改进级" class="headerlink" title="能力级别-5级：持续改进级"></a>能力级别-5级：持续改进级</h3><ul>
+<li>包括两个特征<ul>
+<li>改进组织能力：建立过程有效性目标，持续改进标准过程</li>
+<li>改进过程有效性：进行因果分析，消除缺陷根源，持续改进已定义过程</li>
+</ul>
+</li>
+</ul>
+<h3 id="能力级别-示例"><a href="#能力级别-示例" class="headerlink" title="能力级别-示例"></a>能力级别-示例</h3><p>（以评估风险为例</p>
+<ul>
+<li>0级：没做</li>
+<li>1级：只要开展了评估风险的相关工作（保障评估、等保、检查</li>
+<li>二级：在开展评估风险工作的过程中能够做到”事前有计划，事中有跟踪，事后有审计”</li>
+<li>三级：同一个组织，不同的人员均使用同样的：”方案/模版/标准”来执行评估</li>
+<li>四级：同一个组织，不同的人员评估的效果/结果是一致的</li>
+<li>五级：组织还能够不断改进评估效能（如选用保障评估</li>
+</ul>
+<h3 id="SSE-CMM的使用"><a href="#SSE-CMM的使用" class="headerlink" title="SSE-CMM的使用"></a>SSE-CMM的使用</h3><ul>
+<li>SSE-CMM appraisal method（SSAM</li>
+<li>是一种组织或项目级的评估方法，通过多种数据集采集方法或区域待评估组织或项目相关的实践过程的信息，目的在于取得一个真实实践的基线，创建并支持用于改进的要素</li>
+<li>数据采集方法：问卷、访谈、证据复审</li>
+<li>评估阶段：规划，准备，现场，报告</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NISP/" rel="tag"># NISP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/06/强化学习-DQN-代码实现/" rel="next" title="强化学习-DQN-代码实现">
+                <i class="fa fa-chevron-left"></i> 强化学习-DQN-代码实现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/08/信息安全工程-原理/" rel="prev" title="信息安全工程-原理">
+                信息安全工程-原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">好好学习 天天向上</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安全工程能力成熟度模型的价值"><span class="nav-text">安全工程能力成熟度模型的价值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#何为SSE-CMM"><span class="nav-text">何为SSE-CMM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSE-CMM的作用"><span class="nav-text">SSE-CMM的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSE-CMM覆盖范围"><span class="nav-text">SSE-CMM覆盖范围</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSE-CMM发展历史"><span class="nav-text">SSE-CMM发展历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSE-CMM体系结构"><span class="nav-text">SSE-CMM体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PA10：确定安全需求"><span class="nav-text">PA10：确定安全需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PA09-提供安全输入"><span class="nav-text">PA09-提供安全输入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PA01-管理安全控制"><span class="nav-text">PA01-管理安全控制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PA08-监控安全态势"><span class="nav-text">PA08-监控安全态势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PA07-协调安全"><span class="nav-text">PA07-协调安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PA11-验证和证实安全"><span class="nav-text">PA11-验证和证实安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PA06-建立保证论据"><span class="nav-text">PA06-建立保证论据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结信息安全工程活动"><span class="nav-text">总结信息安全工程活动</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能力级别：代表安全工程组织的成熟级别"><span class="nav-text">能力级别：代表安全工程组织的成熟级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能力级别-0级：未实施级"><span class="nav-text">能力级别-0级：未实施级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能力级别-1级：非正规执行级"><span class="nav-text">能力级别-1级：非正规执行级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能力级别-2级：规划和跟踪级"><span class="nav-text">能力级别-2级：规划和跟踪级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能力级别-3级：充分定义级"><span class="nav-text">能力级别-3级：充分定义级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能力级别-4级：量化控制级"><span class="nav-text">能力级别-4级：量化控制级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能力级别-5级：持续改进级"><span class="nav-text">能力级别-5级：持续改进级</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#能力级别-示例"><span class="nav-text">能力级别-示例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSE-CMM的使用"><span class="nav-text">SSE-CMM的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

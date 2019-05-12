@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="算法,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="算法基础01-“软件”要求1.1-解析题目 背景介绍、问题提出 输入输出要求 输入输出样例 时间、空间限制及其它信息">
+<meta name="keywords" content="算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法基础">
+<meta property="og:url" content="http://21guns.top/2019/05/11/算法基础/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="算法基础01-“软件”要求1.1-解析题目 背景介绍、问题提出 输入输出要求 输入输出样例 时间、空间限制及其它信息">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-11T10:18:33.872Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="算法基础">
+<meta name="twitter:description" content="算法基础01-“软件”要求1.1-解析题目 背景介绍、问题提出 输入输出要求 输入输出样例 时间、空间限制及其它信息">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/05/11/算法基础/">
+
+
+
+
+
+  <title>算法基础 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/11/算法基础/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">算法基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-11T18:17:30+08:00">
+                2019-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/算法实践/" itemprop="url" rel="index">
+                    <span itemprop="name">算法实践</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="算法基础"><a href="#算法基础" class="headerlink" title="算法基础"></a>算法基础</h1><h2 id="01-“软件”要求"><a href="#01-“软件”要求" class="headerlink" title="01-“软件”要求"></a>01-“软件”要求</h2><h3 id="1-1-解析题目"><a href="#1-1-解析题目" class="headerlink" title="1.1-解析题目"></a>1.1-解析题目</h3><ul>
+<li>背景介绍、问题提出</li>
+<li>输入输出要求</li>
+<li>输入输出样例</li>
+<li>时间、空间限制及其它信息<a id="more"></a></li>
+</ul>
+<h3 id="1-2-输入输出"><a href="#1-2-输入输出" class="headerlink" title="1.2-输入输出"></a>1.2-输入输出</h3><ul>
+<li><p>输入，以EOF结束</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="built_in">scanf</span>(“%d”, &amp;n) != EOF) 	<span class="comment">// C</span></span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">cin</span> &gt;&gt; n)	<span class="comment">// C++</span></span><br><span class="line"><span class="comment">// EOF：win-ctrl+z；mac-control+d</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入，以0结束</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span> (<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)!=EOF &amp;&amp; n!=<span class="number">0</span>); <span class="comment">// C</span></span><br><span class="line"><span class="keyword">while</span> (<span class="built_in">cin</span>&gt;&gt;n &amp;&amp; n!=<span class="number">0</span>); <span class="comment">// C++</span></span><br><span class="line"><span class="comment">// 以0结束比EOF严格，故要&amp;“以EOF结束的”</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输入，先输入case数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cin</span> &gt;&gt; n;	<span class="comment">// C: scanf(“%d”, &amp;n);</span></span><br><span class="line"><span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;n; ++i)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>整行输入</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 法1，（xcode提示gets unsafe）</span></span><br><span class="line"><span class="keyword">char</span> buffer[<span class="number">256</span>];</span><br><span class="line">gets(buffer);</span><br><span class="line"><span class="comment">// 法2</span></span><br><span class="line"><span class="built_in">string</span> buffer;</span><br><span class="line">getline(<span class="built_in">cin</span>, buffer);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出，每个case之后有空行</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">// C++</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d\n\n"</span>, <span class="keyword">case</span>);		<span class="comment">// C</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>输出，case之间用空行分隔</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//除了第一个只输出case，其它都是空行+case</span></span><br><span class="line"><span class="comment">//即1-空2-空3-空x</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">8</span>; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(i&gt;<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;i&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="1-3-常见错误类型"><a href="#1-3-常见错误类型" class="headerlink" title="1.3-常见错误类型"></a>1.3-常见错误类型</h3><ul>
+<li>Compilation Error  编译错误</li>
+<li>Segmentation Fault  数组越界、堆栈溢出等</li>
+<li>Time Limit Error  运行时间超限</li>
+<li>Memory Limit Error  内存超限</li>
+<li>Wrong Answer  答案错误</li>
+<li>Presentation Error  格式错误</li>
+<li>Output Limit Error  输出超限</li>
+<li>Restricted Function  非法函数</li>
+</ul>
+<h3 id="1-4-程序调试"><a href="#1-4-程序调试" class="headerlink" title="1.4-程序调试"></a>1.4-程序调试</h3><ul>
+<li>重新读题、检查代码<ul>
+<li>数组是否开的够大（大数组开到全局，避免堆栈溢出）</li>
+<li>int ：2^31 ~ 2^31 – 1</li>
+<li>long long largenumbe： -2^63 ~ 2^63 - 1</li>
+<li>printf(“%lld\n”, largenumber);</li>
+</ul>
+</li>
+<li>构造测试数据<ul>
+<li>题目提供的测试数据一般较弱</li>
+<li>自行构造边界数据、特殊数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-5-复杂度估计"><a href="#1-5-复杂度估计" class="headerlink" title="1.5-复杂度估计"></a>1.5-复杂度估计</h3><ul>
+<li><p>估计程序空间复杂度</p>
+<ul>
+<li><p>默认空间限制：32M</p>
+</li>
+<li><p><code>char c[1000000];</code>  // 1M</p>
+</li>
+<li><p><code>int a[1000][1000];</code>  // 4M</p>
+</li>
+</ul>
+</li>
+<li><p>估计程序时间复杂度</p>
+<ul>
+<li>一般ZOJ可以接受的时间复杂度为10^6~10^7，基本为1s</li>
+</ul>
+</li>
+<li><p>| 数据范围 |    允许的时间复杂度     |<br>| :——: | :———————: |<br>|  10^20   |         O(logN)         |<br>|   10^9   |   O(logN)  O(sqrt(N))   |<br>|   10^6   |          O(N)           |<br>|   10^5   |        O(N logN)        |<br>|   10^4   | O(N logN)  O(N sqrt(N)) |<br>|   10^3   |         O(N^2)          |<br>|   10^2   |         O(N^3)          |<br>|    20    |         O(2^N)          |</p>
+</li>
+</ul>
+<h2 id="02-“硬件”要求"><a href="#02-“硬件”要求" class="headerlink" title="02-“硬件”要求"></a>02-“硬件”要求</h2><h3 id="2-1-学好数据结构"><a href="#2-1-学好数据结构" class="headerlink" title="2.1-学好数据结构"></a>2.1-学好数据结构</h3><ul>
+<li><p>常用数据结构：STL、String、树、图、Hash、并查集</p>
+</li>
+<li><p>String-字符串类</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 常见操作</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;		// 引入头文件</span></span></span><br><span class="line">s = <span class="string">"hello world"</span>;		<span class="comment">// 直接定义字符串</span></span><br><span class="line">s += <span class="string">"h"</span>;		<span class="comment">// 用+=拼接</span></span><br><span class="line">s2 = s + <span class="string">"asdf"</span>;		<span class="comment">// 用+构造新的</span></span><br><span class="line"><span class="keyword">if</span> (s &gt; s2)		<span class="comment">// 比较首字母ascii码，若相同则下一个</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 常用函数</span></span><br><span class="line">s.size()			<span class="comment">//字符串长度</span></span><br><span class="line">s.find(<span class="string">"hi"</span>)		<span class="comment">//查找子串，返回起始位置，不存在返回string::npos</span></span><br><span class="line">s.substr(<span class="number">0</span>, <span class="number">5</span>)		<span class="comment">//获取子串，与substr(5)同</span></span><br><span class="line">s.substr(a, b)		<span class="comment">//从a开始，截取b个（包括a位置）</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>STL容器：其实现了一些常见的数据结构</p>
+<ul>
+<li>vector：动态数组</li>
+<li>list：链表</li>
+<li>queue：队列</li>
+<li>set：集合</li>
+<li>map：字典、映射</li>
+<li>priority_queue：优先队列</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Iterator-迭代器</p>
+<ul>
+<li>可以把iterator看成某种指针，指向容器内部</li>
+<li>C语言中的指针就是一种特殊的Iterator</li>
+<li>Iterator和指针一样支持 * 和 -&gt; 操作</li>
+<li>可以用iterator的 ++ 运算符来遍历容器</li>
+<li>一般的容器都提供了begin() 和 end() 两个函数来得到指向容器头、尾的两个Iterator。其中begin指向头元素，end指向最后一个元素的后一个位置。</li>
+</ul>
+</li>
+<li><p>vector-向量</p>
+<ul>
+<li><p>常用操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">arr.clear();	<span class="comment">//清空所有元素</span></span><br><span class="line">arr.push_back(<span class="number">5</span>);	<span class="comment">//在最后添加一个元素</span></span><br><span class="line">arr.pop_back();	<span class="comment">//删除最后一个元素</span></span><br><span class="line">arr.erase(arr.begin() + <span class="number">5</span>);	<span class="comment">//删除指针指向的元素</span></span><br><span class="line">arr.insert(arr.begin() + <span class="number">5</span>, <span class="number">4</span>);	<span class="comment">//指针指向的元素前插入新元素</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>vector VS 数组</p>
+<ul>
+<li>vector的灵活性较好，不需要考虑长度问题，可减少编程复杂度，使用起来和数组一样方便。</li>
+<li>但是，vector的效率远低于数组，在效率要求较高时慎用</li>
+</ul>
+</li>
+<li><p>vector的遍历</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 法1</span></span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator vi=arr.begin(); vi!=arr.end(); ++vi) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *vi &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 法2</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; v.size(); ++i) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; v[i] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>queue-队列</p>
+<ul>
+<li><code>#include &lt;queue&gt; // 头文件</code><ul>
+<li>特殊的线性表；</li>
+<li>先进先出（FIFO）的数据结构；</li>
+<li>只允许在表的前端（front）进行删除操作，在表的后端（rear）进行插入操作；</li>
+<li>进行插入操作的端称为队尾，进行删除操作的成为队头；</li>
+<li>队列中没有元素时，称为空队列</li>
+<li>支持push 和 pop 操作</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>priority_queue-优先队列</p>
+<ul>
+<li><p><code>#include &lt; queue &gt; // 头文件</code></p>
+<ul>
+<li>用最大堆实现的优先队列；</li>
+<li>priority_queue中的元素支持 &lt; 操作符；</li>
+<li>priority_queue 不支持clear操作；</li>
+</ul>
+</li>
+<li><p>常用操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pq.top();	<span class="comment">//返回队列顶部的元素</span></span><br><span class="line">pq.push(<span class="number">5</span>);	<span class="comment">//将元素插入优先队列</span></span><br><span class="line">pq.pop();	<span class="comment">//删除队列顶部的元素</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>set-集合</p>
+<ul>
+<li><p><code>#include &lt;set&gt; //头文件</code></p>
+<ul>
+<li>有序的元素集合；</li>
+<li>set中的元素也要支持 &lt; 操作符；</li>
+<li>支持元素插入、删除和查找；</li>
+<li>复杂度为O(logN)</li>
+<li>双向迭代器，不支持随机访问</li>
+</ul>
+</li>
+<li><p>常用操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt; s;	<span class="comment">//定义</span></span><br><span class="line">s.insert(<span class="number">3</span>);	<span class="comment">//插入元素</span></span><br><span class="line">s.erase(<span class="number">5</span>);	<span class="comment">//删除指针指向的值</span></span><br><span class="line"><span class="keyword">if</span> (s.find(<span class="number">5</span>) == s.end())	<span class="comment">// 如果5不在集合（若没找到就返回尾部的迭代器）</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>set的遍历</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">set</span>&lt;<span class="keyword">int</span>&gt;::iterator si=s.begin(); si!=s.end(); ++si) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; *si &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//遍历的顺序是有序的</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>map-映射</p>
+<ul>
+<li><p><code>#include &lt;map&gt; //头文件</code></p>
+<ul>
+<li>实现任意两个类型元素之间的映射（类似键值对）；</li>
+<li><code>map&lt;string, int&gt; m;  // key, value</code>；</li>
+<li>1个key最多只能对应1个value；</li>
+</ul>
+</li>
+<li><p>常用操作</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt; m;	<span class="comment">//定义</span></span><br><span class="line">m[“haha”] = <span class="number">5</span>;	<span class="comment">//键值对</span></span><br><span class="line"><span class="keyword">if</span> (m.find(“hoho”) != m.end())	<span class="comment">//存在hoho为key的元素（find根据key查找是否存在相应元素，若存在则返回相应的迭代器，若不存在返回尾部的迭代器即end）</span></span><br><span class="line">m.erase(m.find(“heihei”));	<span class="comment">//删除指针所指的元素（find返回迭代器，类似指针）</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>map的遍历</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="built_in">map</span>&lt;<span class="built_in">string</span>, <span class="keyword">int</span>&gt;::iterator mi=m.begin(); mi!=m.end();++mi) &#123;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; mi-&gt;first &lt;&lt; <span class="string">" "</span> &lt;&lt; mi-&gt;second &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>如，实现字典，每个单词有一个解释，然后对于一些单词查询，输出对应的解释：<code>map&lt;string, string&gt; m;</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-学习常见算法"><a href="#2-2-学习常见算法" class="headerlink" title="2.2-学习常见算法"></a>2.2-学习常见算法</h3><ul>
+<li>常见题型<ul>
+<li>模拟题</li>
+<li>贪心题</li>
+<li>搜索题</li>
+<li>动态规划（DP）题</li>
+<li>图论题</li>
+<li>数学题</li>
+</ul>
+</li>
+<li>模拟<ul>
+<li>所谓模拟法：用计算机的某些操作，模拟现实世界中的事物的变化，从而完成相应任务的方法；</li>
+<li>实际上，一般会先根据题意，针对样例数据，用纸笔，模拟计算一遍，理清各数据之间的内在逻辑联系，从而理解题意，为建立数学模型、设计算法奠定基础；</li>
+<li>特点：细节要求很多，代码可能会很长很长</li>
+</ul>
+</li>
+<li>贪心<ul>
+<li>所谓贪心算法：在对问题求解时，总是做出在当前看来是最好的选择；</li>
+<li>也就是说，不从整体最优上加以考虑，所做出的仅是在某种意义上的局部最优解；</li>
+<li>贪心算法没有固定的算法框架，算法设计的关键是贪心策略的选择；</li>
+<li>注意：贪心算法不是对所有问题都能得到整体最优解，选择的贪心策略必须具备无后效性，即某个状态以后的过程不会影响以前的状态，只与当前状态有关；</li>
+<li>所以对所采用的贪心策略一定要仔细分析其是否满足无后效性；</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/08/信息安全工程-原理/" rel="next" title="信息安全工程-原理">
+                <i class="fa fa-chevron-left"></i> 信息安全工程-原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/12/信息安全管理-风险管理/" rel="prev" title="信息安全管理-风险管理">
+                信息安全管理-风险管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">好好学习 天天向上</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">128</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#算法基础"><span class="nav-text">算法基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01-“软件”要求"><span class="nav-text">01-“软件”要求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-解析题目"><span class="nav-text">1.1-解析题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-输入输出"><span class="nav-text">1.2-输入输出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-常见错误类型"><span class="nav-text">1.3-常见错误类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-程序调试"><span class="nav-text">1.4-程序调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-复杂度估计"><span class="nav-text">1.5-复杂度估计</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#02-“硬件”要求"><span class="nav-text">02-“硬件”要求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-学好数据结构"><span class="nav-text">2.1-学好数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-学习常见算法"><span class="nav-text">2.2-学习常见算法</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
