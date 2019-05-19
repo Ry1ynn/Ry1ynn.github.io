@@ -86,19 +86,19 @@
 <meta property="og:site_name" content="Ry1ynn&#39;s blogs">
 <meta property="og:description" content="01-WEP共享密钥破解1.1-简介 WEP的安全问题 一发布就被发现存在安全隐患，已经被WPA/WPA2取代 因安全原因，大部分AP已不设置WEP，且针对WEP的攻击复杂（没有必要学？no） 但人员安全意识薄弱，仍存在使用WEP的现象，如火车站、家用路由器等，此外，有的企业因某些因素，不得不使用WEP   WEP加密流程">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://21guns.top/18-2-2/53206916.jpg?ynotemdtimestamp=1550490828873">
-<meta property="og:image" content="http://21guns.top/18-2-3/98141407.jpg?ynotemdtimestamp=1550490828873">
-<meta property="og:image" content="http://21guns.top/18-2-3/59213738.jpg?ynotemdtimestamp=1550490828873">
-<meta property="og:image" content="http://21guns.top/18-2-3/34502255.jpg?ynotemdtimestamp=1550490828873">
-<meta property="og:image" content="http://21guns.top/18-2-3/28922540.jpg?ynotemdtimestamp=1550490828873">
-<meta property="og:image" content="http://21guns.top/18-2-3/23781071.jpg?ynotemdtimestamp=1550490828873">
-<meta property="og:image" content="http://21guns.top/18-2-3/74245642.jpg?ynotemdtimestamp=1550490828873">
-<meta property="og:image" content="http://21guns.top/18-2-3/73724415.jpg?ynotemdtimestamp=1550490828873">
-<meta property="og:updated_time" content="2019-05-17T03:39:18.296Z">
+<meta property="og:image" content="http://img.21guns.top/18-2-2/53206916.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://img.21guns.top/18-2-3/98141407.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://img.21guns.top/18-2-3/59213738.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://img.21guns.top/18-2-3/34502255.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://img.21guns.top/18-2-3/28922540.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://img.21guns.top/18-2-3/23781071.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://img.21guns.top/18-2-3/74245642.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:image" content="http://img.21guns.top/18-2-3/73724415.jpg?ynotemdtimestamp=1550490828873">
+<meta property="og:updated_time" content="2019-05-19T02:12:44.328Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WEP攻击">
 <meta name="twitter:description" content="01-WEP共享密钥破解1.1-简介 WEP的安全问题 一发布就被发现存在安全隐患，已经被WPA/WPA2取代 因安全原因，大部分AP已不设置WEP，且针对WEP的攻击复杂（没有必要学？no） 但人员安全意识薄弱，仍存在使用WEP的现象，如火车站、家用路由器等，此外，有的企业因某些因素，不得不使用WEP   WEP加密流程">
-<meta name="twitter:image" content="http://21guns.top/18-2-2/53206916.jpg?ynotemdtimestamp=1550490828873">
+<meta name="twitter:image" content="http://img.21guns.top/18-2-2/53206916.jpg?ynotemdtimestamp=1550490828873">
 
 
 
@@ -406,7 +406,7 @@
 </ul>
 <h2 id="1-2-WEP认证相关"><a href="#1-2-WEP认证相关" class="headerlink" title="1.2-WEP认证相关"></a>1.2-WEP认证相关</h2><ul>
 <li><p>认证过程</p>
-<p><img src="http://21guns.top/18-2-2/53206916.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<p><img src="http://img.21guns.top/18-2-2/53206916.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
 <ul>
 <li>STA发认证请求</li>
 <li>AP返回随机challenge消息</li>
@@ -419,7 +419,7 @@
 </ul>
 </li>
 <li><p>利用：</p>
-<p><img src="http://21guns.top/18-2-3/98141407.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<p><img src="http://img.21guns.top/18-2-3/98141407.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
 <ul>
 <li>在airodump抓包过程中，若恰好有新的客户端在认证，则可以抓到challenge的明文和经过密钥流加密后的密文</li>
 <li>明文和密文异或便可以得到原始的密钥流，keystream（由无线密码+IV组合，并加密后的密文，即这个密钥流也是一个密文</li>
@@ -460,7 +460,7 @@
 <li>与新STA加入AP的过程是一样的，同样可以获得xor文件</li>
 <li>aireplay-ng注入包：<code>aireplay-ng -0 1 -a MAC1 -c MAC2 wlan0mon</code></li>
 </ul>
-<p><img src="http://21guns.top/18-2-3/59213738.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<p><img src="http://img.21guns.top/18-2-3/59213738.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
 <ul>
 <li>一个包足矣让其二者断开，若失败则尝试多发</li>
 <li>-0：断开SAT与AP的连接</li>
@@ -502,7 +502,7 @@
 <li><p>执行后（是分为两个步骤的：认证和关联）</p>
 </li>
 </ul>
-<p><img src="http://21guns.top/18-2-3/34502255.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<p><img src="http://img.21guns.top/18-2-3/34502255.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
 <h3 id="（6）执行ARP重放及Deauthenticatiion触发ARP数据包"><a href="#（6）执行ARP重放及Deauthenticatiion触发ARP数据包" class="headerlink" title="（6）执行ARP重放及Deauthenticatiion触发ARP数据包"></a>（6）执行ARP重放及Deauthenticatiion触发ARP数据包</h3><ul>
 <li><p>促使AP发送大量IV的</p>
 <ul>
@@ -530,7 +530,7 @@
 <li><p><code>aireplay-ng -3 -b MAC1 -h MAC2 wlan0mon</code></p>
 </li>
 <li><p>但是此时并没有可用的ARP请求（由正常STA提供）</p>
-<p><img src="http://21guns.top/18-2-3/28922540.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<p><img src="http://img.21guns.top/18-2-3/28922540.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
 </li>
 </ul>
 </li>
@@ -541,10 +541,10 @@
 </ul>
 </li>
 <li><p>此时arp重放攻击中，就得到了ARP请求，开始进行攻击</p>
-<p><img src="http://21guns.top/18-2-3/23781071.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<p><img src="http://img.21guns.top/18-2-3/23781071.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
 </li>
 <li><p>airodump-ng抓包处可以看到#data字段值在不断增加（即正在收集IV</p>
-<p><img src="http://21guns.top/18-2-3/74245642.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<p><img src="http://img.21guns.top/18-2-3/74245642.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
 </li>
 </ul>
 </li>
@@ -560,7 +560,7 @@
 <li><p>破解密码是比较简单的，aircrack-ng</p>
 </li>
 <li><p><code>aircrack-ng xxx.cap</code>（后面跟cap即可，是airodump-ng抓包时保存到本地的</p>
-<p><img src="http://21guns.top/18-2-3/73724415.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
+<p><img src="http://img.21guns.top/18-2-3/73724415.jpg?ynotemdtimestamp=1550490828873" alt="img"></p>
 <ul>
 <li>KEY FOUND：依次是十六进制和ASCII码的密码（1234567890123</li>
 </ul>
@@ -698,8 +698,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/18/无线网络运行模式/" rel="next" title="无线网络运行模式">
-                <i class="fa fa-chevron-left"></i> 无线网络运行模式
+              <a href="/2018/02/18/WPA企业-无线侦听/" rel="next" title="WPA企业&无线侦听">
+                <i class="fa fa-chevron-left"></i> WPA企业&无线侦听
               </a>
             
           </div>
@@ -708,8 +708,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/18/WPA企业-无线侦听/" rel="prev" title="WPA企业&无线侦听">
-                WPA企业&无线侦听 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/18/802-11头部/" rel="prev" title="802.11头部">
+                802.11头部 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

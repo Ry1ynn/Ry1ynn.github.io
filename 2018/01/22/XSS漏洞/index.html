@@ -86,13 +86,13 @@
 <meta property="og:site_name" content="Ry1ynn&#39;s blogs">
 <meta property="og:description" content="XSS相关01-xss简介 简单分类：  反射型（非持续型，地址本不存在，需要攻击者自己构造） 存储型（持续性，多出现在留言板，评论等场景，危害较前者大） DOM型   利用：  可自己写代码搭建攻击平台（见后面cookie接受页面编写） 也借助网上在线xss平台（如sss中xss平台）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://21guns.top/18-1-20/41262893.jpg">
-<meta property="og:image" content="http://21guns.top/18-1-20/37723479.jpg">
-<meta property="og:updated_time" content="2019-05-17T03:39:31.817Z">
+<meta property="og:image" content="http://img.21guns.top/18-1-20/41262893.jpg">
+<meta property="og:image" content="http://img.21guns.top/18-1-20/37723479.jpg">
+<meta property="og:updated_time" content="2019-05-19T02:13:28.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="XSS漏洞">
 <meta name="twitter:description" content="XSS相关01-xss简介 简单分类：  反射型（非持续型，地址本不存在，需要攻击者自己构造） 存储型（持续性，多出现在留言板，评论等场景，危害较前者大） DOM型   利用：  可自己写代码搭建攻击平台（见后面cookie接受页面编写） 也借助网上在线xss平台（如sss中xss平台）">
-<meta name="twitter:image" content="http://21guns.top/18-1-20/41262893.jpg">
+<meta name="twitter:image" content="http://img.21guns.top/18-1-20/41262893.jpg">
 
 
 
@@ -374,10 +374,10 @@
 <li><p>触发端语句：<br><code>http://127.0.0.1/dvwa/vulnerabilities/xss_r/?name=&lt;script&gt;window.open(“http://127.0.0.1/cookie/xss.html”);&lt;/script&gt;</code>(可设置打开页面属性，不可见)</p>
 </li>
 <li><p>触发端页面</p>
-<p><img src="http://21guns.top/18-1-20/41262893.jpg" alt></p>
+<p><img src="http://img.21guns.top/18-1-20/41262893.jpg" alt></p>
 </li>
 <li><p>接受端语句</p>
-<p><img src="http://21guns.top/18-1-20/37723479.jpg" alt></p>
+<p><img src="http://img.21guns.top/18-1-20/37723479.jpg" alt></p>
 </li>
 <li><p>通过跨站漏洞，访问特定页面，获取cookie发送至服务端进行接受处理</p>
 </li>
@@ -398,7 +398,7 @@
 <li><p>过滤<script>或其它关键字（php代码中正则过滤）</p>
 <ul>
 <li><p>code</p>
-<p><img src="http://21guns.top/18-1-20/18900612.jpg" alt=""></p>
+<p><img src="http://img.21guns.top/18-1-20/18900612.jpg" alt=""></p>
 </li>
 <li><p>绕过：大小写绕过</p>
 </li>
@@ -407,7 +407,7 @@
 <li><p>过滤<script>关键字（正则中加i参数，不考虑大小写）</p>
 <ul>
 <li><p>code</p>
-<p><img src="http://21guns.top/18-1-20/19210410.jpg" alt=""></p>
+<p><img src="http://img.21guns.top/18-1-20/19210410.jpg" alt=""></p>
 </li>
 <li><p>绕过：</p>
 <ul>
@@ -421,7 +421,7 @@
 <li><p>过滤alert关键字，并不考虑大小写，一并过滤</p>
 <ul>
 <li><p>code</p>
-<p><img src="http://21guns.top/18-1-20/61762998.jpg" alt=""></p>
+<p><img src="http://img.21guns.top/18-1-20/61762998.jpg" alt=""></p>
 </li>
 <li><p>绕过</p>
 <ul>
@@ -435,17 +435,17 @@
 <li><p>变量接受封装过滤</p>
 <ul>
 <li><p>code</p>
-<p><img src="http://21guns.top/18-1-20/54047519.jpg" alt=""></p>
+<p><img src="http://img.21guns.top/18-1-20/54047519.jpg" alt=""></p>
 </li>
 <li><p>绕过：</p>
 <ul>
 <li><p>使其php代码失效，组合语句，重定向</p>
 </li>
 <li><p>失败的原因将输入的内容都放置在一个变量；成功的原因输入内容放在两个变量，并执行代码）</p>
-<p><img src="http://21guns.top/18-1-20/87117925.jpg" alt=""></p>
+<p><img src="http://img.21guns.top/18-1-20/87117925.jpg" alt=""></p>
 </li>
 <li><p>eval在js和PHP中同样用来执行语句；js中声明变量有var关键字，没$</p>
-<p><img src="http://21guns.top/18-1-20/35911443.jpg" alt=""></p>
+<p><img src="http://img.21guns.top/18-1-20/35911443.jpg" alt=""></p>
 </li>
 </ul>
 </li>
