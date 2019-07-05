@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="C/C++,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="知识点1 半导体存储器： 所说的内存就是这种，但还有其他 可分为：随机存取存储器（RAM）、只读存储器（ROM） 速度快，体积小   存储器分为：内存、外寸 内存分为：RAM（主存）、ROM">
+<meta name="keywords" content="C&#x2F;C++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C基础_01">
+<meta property="og:url" content="http://21guns.top/2019/07/05/C基础-01/index.html">
+<meta property="og:site_name" content="Ry1ynn&#39;s blogs">
+<meta property="og:description" content="知识点1 半导体存储器： 所说的内存就是这种，但还有其他 可分为：随机存取存储器（RAM）、只读存储器（ROM） 速度快，体积小   存储器分为：内存、外寸 内存分为：RAM（主存）、ROM">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-05T03:12:01.794Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C基础_01">
+<meta name="twitter:description" content="知识点1 半导体存储器： 所说的内存就是这种，但还有其他 可分为：随机存取存储器（RAM）、只读存储器（ROM） 速度快，体积小   存储器分为：内存、外寸 内存分为：RAM（主存）、ROM">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/07/05/C基础-01/">
+
+
+
+
+
+  <title>C基础_01 | Ry1ynn's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Ry1ynn's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/07/05/C基础-01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C基础_01</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-05T11:05:03+08:00">
+                2019-07-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-C/" itemprop="url" rel="index">
+                    <span itemprop="name">C/C+</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="知识点1"><a href="#知识点1" class="headerlink" title="知识点1"></a>知识点1</h1><ul>
+<li>半导体存储器：<ul>
+<li>所说的内存就是这种，但还有其他</li>
+<li>可分为：随机存取存储器（RAM）、只读存储器（ROM）</li>
+<li>速度快，体积小</li>
+</ul>
+</li>
+<li>存储器分为：内存、外寸<ul>
+<li>内存分为：RAM（主存）、ROM<a id="more"></a></li>
+<li>外存：硬盘、磁盘等</li>
+<li>主存 != 内存，内存 &gt; 主存</li>
+<li>容量的单位为字节数</li>
+</ul>
+</li>
+<li>进制转换问题（别想的太繁杂，记住主要原则，学会类比）<ul>
+<li>X转2进制<ul>
+<li>10转2进制<ul>
+<li>法1: 整数除2逆向取余，小数乘2正向取整（小数时不好结束，取几位即可</li>
+<li>法2: 自己想的8421-3210法，如13=8+4+1=3+2+0，即1101</li>
+</ul>
+</li>
+<li>8转2进制：8的每位用2的3位表示</li>
+<li>16转2进制：16的每位用2的4位表示</li>
+</ul>
+</li>
+<li>2进制转X<ul>
+<li>2转10：自己的8421-3210法，熟记2的n次幂，1、2、4、8、16、32、64、128（X转10也是此思想）</li>
+<li>2转8：每3位一组</li>
+<li>2转16：每4位一组</li>
+</ul>
+</li>
+<li>因此：可将2进制看作中介</li>
+</ul>
+</li>
+<li>数据，以补码形式存在</li>
+<li>冯诺伊曼：出入控运存</li>
+<li>数据与指令<ul>
+<li>本质上是相同的，都以二进制的形式存放在计算机中；</li>
+<li>二者功能不同：指令用于指导计算机去做什么以及怎样做，而数据是计算机操作的具体对象；</li>
+</ul>
+<ol start="3">
+<li>也可以根据访的时机来区分：二者都存储在存储器中，在取指令周期内取出的是指令，同理，在读数据周期内取出的为数据。</li>
+</ol>
+</li>
+<li>编程语言分类<ul>
+<li>在面向机器或面向用户的角度，可分为三大类，即机器语言、汇编语言以及高级语言；</li>
+<li>高级语言中有C/C++、Java、python、PHP 等，若有需要，也可进行细分，比如 CC++更面向底层，而 PHP 或 python 等对底层进行了进一步的封装，可以说更加面向用户。</li>
+<li>在程序执行的角度，可分为编译型语言和解释型语言。</li>
+</ul>
+</li>
+<li>编译型与解释型语言<ul>
+<li>编译型语言：在程序执行之前，源代码就翻译成机器指令，由于事先翻译了，所有执行时速度快，如 C/C++</li>
+<li>解释性语言：程序运行之前，不会事先翻译成机器指令，而是一边翻译一边执行，因此，执行速度相对较慢，如 python</li>
+</ul>
+</li>
+</ul>
+<h1 id="知识点2"><a href="#知识点2" class="headerlink" title="知识点2"></a>知识点2</h1><ul>
+<li>字节与字长<ul>
+<li>字长：CPU 一次可处理的数据的最大长度，其位数取決于具体的计算机</li>
+<li>字节：衡量数据量以及存储容量的基本单位，1 字节等于 8 位二进制信息</li>
+</ul>
+</li>
+<li>为何n位有符号数的范围负数比正数多一个？如：<ul>
+<li>8位有符号数的取值范围是-128 ~ +127</li>
+<li>16位有符号数的取值范围是-32768 ~ +32767</li>
+</ul>
+</li>
+<li>n位有符号数表示范围：<code>-2^(n-1) ~ 2^(n-1)-1</code>，暂不深究原理（意义不大且麻烦</li>
+<li>n位无符号数表示范围：<code>0 ~ 2^n - 1</code>，如8位无符号范围0～255</li>
+<li>1GB = 1024MB,1MB=1024KB,1KB=1024B,1B =8bit</li>
+</ul>
+<h1 id="知识点3"><a href="#知识点3" class="headerlink" title="知识点3"></a>知识点3</h1><ul>
+<li>无</li>
+</ul>
+<h1 id="知识点4"><a href="#知识点4" class="headerlink" title="知识点4"></a>知识点4</h1><ul>
+<li>C源程序的基本组成单位是函数（可以这么说，也可说语句是程序的基本组成</li>
+<li>预处理命令都以<code>#</code>开头</li>
+<li><code>include、scanf、type</code>非C语言中关键字</li>
+<li>为何printf()用%f输出double型，而scanf却用%lf？</li>
+<li>short int类型也涉及此问题：输出时%d、输入时%hf（h即half</li>
+<li>相关链接：<code>https://stackoverflow.com/questions/19809527/wrong-format-specifier-in-scanfd-unsigned-short-int-after-getspointer-ch</code></li>
+</ul>
+<h1 id="知识点5"><a href="#知识点5" class="headerlink" title="知识点5"></a>知识点5</h1><ul>
+<li><p><code>/</code>运算符：整数相除，结果也为整数，要想得小数，必须有浮点数的参与；</p>
+</li>
+<li><p><code>%</code>运算符的两个操作数：必须是整数，不能是浮点数；</p>
+</li>
+<li><p><code>++</code>运算符的操作数不是只能为整数，也可为其他，如浮点数；</p>
+</li>
+<li><p>数字形式的<code>8-3 = 5</code>，字符形式的<code>&#39;8&#39;-&#39;3&#39; = 5</code>，二者都等于5，对于字符形式来说，完全可以按照数字形式的来计算，因为字符背后也对应着数字，况且也挨着，如‘8’为56，‘3’为51；</p>
+</li>
+<li><p>逗号运算符考点</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;		<span class="comment">//n=1，直接忽视后面即可，只看第一个</span></span><br><span class="line">n = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);		<span class="comment">//n=3，不可光看最后，若前面是表达式，要把前面的表达式执行之后再看，如下</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>逗号与++运算符</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = y = <span class="number">1</span>;</span><br><span class="line">z = x++, y++, ++y;		<span class="comment">//xyz依次为2，3，1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//不可光看最后，若前面是表达式，要把前面的表达式执行之后再看，如下</span></span><br><span class="line">x = y = <span class="number">1</span>;</span><br><span class="line">z = (x++, y++, ++y);		<span class="comment">//xyz依次为2，3，3</span></span><br><span class="line"></span><br><span class="line">x = y = <span class="number">1</span>;</span><br><span class="line">z = (x++, y++, y++);		<span class="comment">//xyz依次为2，3，2</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>语句：若干运算符与数据组成的算式</p>
+</li>
+<li><p>表达式：</p>
+<ul>
+<li>程序的基本组成</li>
+<li>每条语句后面有一个分号；</li>
+<li>表达式加分号便可得到一个语句，或者表达式是语句的一部分；</li>
+<li>多个语句通过{}扩起来成为复合语句，即代码块</li>
+</ul>
+</li>
+<li><p>sizeof运算符</p>
+<ul>
+<li>得到某一数据或数据类型所占内存空间的大小</li>
+<li>以字节为单位</li>
+<li>参数可以是某个变量名，也可直接是某数据类型</li>
+</ul>
+</li>
+<li><p>自增自减运算符，若在自增/减时同时还参与运算：</p>
+<ul>
+<li>在前：先自增/减，再参与运算；</li>
+<li>在后：同上反</li>
+</ul>
+</li>
+<li><p>自动（隐形）类型转换</p>
+<ul>
+<li><p>算术运算：</p>
+<ul>
+<li>不同数据类型的数据在进行运算时，需转为同一种数据类型后才能开始运算；</li>
+<li>转换规则：以该算术表达式中，最长类型为目标</li>
+<li>即：char-&gt;short-&gt;int-&gt;long-&gt;float-&gt;double</li>
+</ul>
+</li>
+<li><p>赋值运算：</p>
+<ul>
+<li>右边类型自动转换为左边类型，有可能会丢失数据</li>
+<li>如<code>int a = 1.2;        //a 为 1；</code></li>
+</ul>
+</li>
+<li><p>举例说明</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">float</span> c = <span class="number">2.5</span>;</span><br><span class="line">i = i/c;</span><br><span class="line"><span class="comment">// i/c为4.000，遵循算术运算时的转换：int小于float，因此i先转float再计算，得float型</span></span><br><span class="line"><span class="comment">// i为4，遵循赋值运算时的转换：右转左，故得int型</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="知识点6"><a href="#知识点6" class="headerlink" title="知识点6"></a>知识点6</h1><ul>
+<li>无</li>
+</ul>
+<h1 id="知识点7"><a href="#知识点7" class="headerlink" title="知识点7"></a>知识点7</h1><ul>
+<li>数组长度、下标</li>
+<li>定义时：长度只可为常量<ul>
+<li>调用时：下标可常量，可变量</li>
+</ul>
+</li>
+<li>数组定义、存储方式<ul>
+<li>相同数据类型的变量的集合</li>
+<li>其在内存中的存储是连续的</li>
+</ul>
+</li>
+<li>数组定义：数据类型 数组名[数组长度]</li>
+<li>数组初始化<ul>
+<li>整体赋值：<code>a[3] = {1,2,3}</code></li>
+<li>部分赋值：<code>a[3] = {1,2}</code>（剩余元素补0）</li>
+<li>灵活赋值：<code>a[] = {1,2,3}</code>（不给长度，根据给的值灵活分配）</li>
+</ul>
+</li>
+<li>数组初始化与赋值<ul>
+<li>初始化：定义时就给值，称初始化</li>
+<li>赋值：定义之后才给值，称赋值（赋值名词的使用无需太严格）</li>
+</ul>
+</li>
+</ul>
+<h1 id="知识点8"><a href="#知识点8" class="headerlink" title="知识点8"></a>知识点8</h1><ul>
+<li><p>字符数组的赋值</p>
+<ul>
+<li>除了可以同普通数组一样进行赋值外</li>
+</ul>
+</li>
+<li>还可以通过字符串来行赋值<ul>
+<li>字符串最后会有一个<code>\0</code>，因此字符串形式的赋值会比普通形式的赋值默认多一个元素，用来存储<code>\0</code></li>
+<li>宽字节的字符数组，若用字符串来赋值，要加<code>L</code>前缀，如<code>wchar_t wA[]= L&quot;hello&quot;;</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="知识点9"><a href="#知识点9" class="headerlink" title="知识点9"></a>知识点9</h1><ul>
+<li><p>长度为10的数组逆序存储到原数组中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//要用到临时变量来做中介</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>/<span class="number">2</span>; i++)		<span class="comment">//注意，一定是/2 ！！！</span></span><br><span class="line">	&#123;</span><br><span class="line">		tmp = a[i];</span><br><span class="line">		a[i] = a[<span class="number">10</span> - i - <span class="number">1</span>];		<span class="comment">//别忘了 -1</span></span><br><span class="line">		a[<span class="number">10</span> - i - <span class="number">1</span>] = tmp;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//转换时，for循环别打印，等转换完成，再输出</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="知识点10"><a href="#知识点10" class="headerlink" title="知识点10"></a>知识点10</h1><ul>
+<li><p>三目运算符</p>
+<ul>
+<li><code>条件 ? 结果1 : 结果2</code></li>
+<li>条件为真，执行1，否则执行2</li>
+<li>为真即不为0，&gt;0、&lt;0均可</li>
+</ul>
+</li>
+<li><p>优先级比较：<code>括号 &gt; 逻辑非 &gt; 算术运算符 &gt; 关系运算符 &gt; 逻辑与 &gt; 逻辑或</code>（不必刻意记忆，了解便可</p>
+</li>
+<li><p>三角形相关</p>
+<ul>
+<li>构成条件：任意两边之和大于第三边：<code>(a+b)&gt;c &amp;&amp; (a+c)&gt;b &amp;&amp; (b+c)&gt;a</code></li>
+<li>等边：<code>a==b &amp;&amp; a==c</code></li>
+<li>等腰：<code>a==b||a==c||b==c</code></li>
+</ul>
+</li>
+<li><p>常见ascii码范围</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0-9: 48-57</span><br><span class="line">A-Z: 65-90</span><br><span class="line">a-z: 97-122</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断某字符是大写字母or小写字母or数字，<code>c &gt;= &#39;a&#39; &amp;&amp; c &lt;= &#39;z&#39;</code>，直接比较即可，不用记具体ascii码（因为本质都是比较ascii）</p>
+</li>
+<li><p>scanf_s安全版输入函数需要第三个参数：用于限定输入的最大长度</p>
+<ul>
+<li>如<code>scanf_s(&quot;%c&quot;, &amp;c, 1);</code></li>
+<li>但是输入整型时，不需要，仅<code>scanf_s(&quot;%d&quot;, &amp;n);</code>即可</li>
+<li>也验证了此类安全函数是为字符的输入准备的，以免越界现象</li>
+</ul>
+</li>
+<li><p><code>getchar</code>函数</p>
+<ul>
+<li>用于获取单个字符</li>
+<li>常用于消化字符，如键入某字符后的回车键</li>
+<li>有返回值（返回ascii码），可用字符变量或整型变量接受</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int c = getchar();</span><br><span class="line">char c = getchar();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>闰年：能被4整除但是不能被100整除，或者能被400整除的年份</p>
+</li>
+<li><p>三个数字排序（不使用数组和循环</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (a &gt; b)</span><br><span class="line">&#123;</span><br><span class="line">	Max = a;</span><br><span class="line">	Min = b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span>		<span class="comment">//别忘了这个else</span></span><br><span class="line">&#123;</span><br><span class="line">	Max = b;</span><br><span class="line">	Min = a;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (c &gt; Max)</span><br><span class="line">	Max = c;</span><br><span class="line"><span class="keyword">if</span> (c &lt; Min)</span><br><span class="line">	Min = c;</span><br><span class="line"></span><br><span class="line">Mid = (a + b + c) - Max - Min;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>判断某整数的位数：通过除运算</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>(a)		<span class="comment">//注意条件a != 0</span></span><br><span class="line">&#123;</span><br><span class="line">	a /= <span class="number">10</span>;</span><br><span class="line">	count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>思路</p>
+<p>|  a   |     a /= 10     | 位数count | 余数 |<br>| :–: | :————-: | :——-: | :–: |<br>| 123  | a = 123/10 = 12 | count = 1 |  3   |<br>|  12  |  a = 12/10 = 1  | count = 2 |  2   |<br>|  1   |  a = 1/10 = 0   | count = 3 |  1   |<br>|  0   |      结束       |           |      |</p>
+</li>
+<li><p>将某整数的各位分离出来（如上例子中，先想再敲）：通过取余运算</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//通过取余操作，将各位数提取出来存入数组，不过此时是逆序的</span></span><br><span class="line"><span class="comment">//也就是逆序取余的思想</span></span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> arr[] = &#123;<span class="number">0</span>&#125;		<span class="comment">//若不确定长度，则先这样初始化</span></span><br><span class="line"><span class="keyword">while</span>(a)		<span class="comment">//注意条件a != 0</span></span><br><span class="line">&#123;</span><br><span class="line">	arr[i] = a % <span class="number">10</span>;</span><br><span class="line">	a /= <span class="number">10</span>;</span><br><span class="line">	i++;		<span class="comment">//运行到最后，恰好是数组的长度（这样不需要提前得出位数count，直接while即可</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这样长度是i，再用新变量j遍历数组即可</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//逆序得到后，不用额外进行数组的逆序回去，只要在遍历的时候，逆着遍历就好了</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>要灵活运用取余和除运算，有大用处！！！</p>
+</li>
+<li><p>printf输出函数不是必须需要格式控制符，可以直接传入字符串打印，如<code>printf(&quot;123&quot;);</code>（此时传入的是地址，传入数组名时也是传地址，传普通变量名是传值</p>
+</li>
+<li><p>C语言中，<code>1&lt;a&lt;10</code>不可，只可<code>a&gt;1 &amp;&amp; a&lt;10</code>，不能写作一个</p>
+</li>
+<li><code>char c =0</code>是正确的，因为字符本质上也是数字</li>
+<li>case语句中定义变量需要添加大括号（case语句最好也要用大括号括，万无一失）</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-C/" rel="tag"># C/C++</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/26/信息安全管理-应急响应与灾难恢复/" rel="next" title="信息安全管理-应急响应与灾难恢复">
+                <i class="fa fa-chevron-left"></i> 信息安全管理-应急响应与灾难恢复
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">好好学习 天天向上</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">131</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">57</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点1"><span class="nav-text">知识点1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点2"><span class="nav-text">知识点2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点3"><span class="nav-text">知识点3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点4"><span class="nav-text">知识点4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点5"><span class="nav-text">知识点5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点6"><span class="nav-text">知识点6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点7"><span class="nav-text">知识点7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点8"><span class="nav-text">知识点8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点9"><span class="nav-text">知识点9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点10"><span class="nav-text">知识点10</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

