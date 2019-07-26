@@ -78,18 +78,18 @@
 
 
 
-<meta name="description" content="知识点1 半导体存储器： 所说的内存就是这种，但还有其他 可分为：随机存取存储器（RAM）、只读存储器（ROM） 速度快，体积小   存储器分为：内存、外寸 内存分为：RAM（主存）、ROM">
+<meta name="description" content="1-计算机基础知识半导体存储器： 所说的内存就是这种，但还有其他 可分为：随机存取存储器（RAM）、只读存储器（ROM） 速度快，体积小  存储器分为：内存、外寸 内存分为：RAM（主存）、ROM">
 <meta name="keywords" content="C&#x2F;C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C基础_01">
 <meta property="og:url" content="http://21guns.top/2019/07/05/C基础-01/index.html">
 <meta property="og:site_name" content="Ry1ynn&#39;s blogs">
-<meta property="og:description" content="知识点1 半导体存储器： 所说的内存就是这种，但还有其他 可分为：随机存取存储器（RAM）、只读存储器（ROM） 速度快，体积小   存储器分为：内存、外寸 内存分为：RAM（主存）、ROM">
+<meta property="og:description" content="1-计算机基础知识半导体存储器： 所说的内存就是这种，但还有其他 可分为：随机存取存储器（RAM）、只读存储器（ROM） 速度快，体积小  存储器分为：内存、外寸 内存分为：RAM（主存）、ROM">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-05T03:12:01.794Z">
+<meta property="og:updated_time" content="2019-07-07T23:41:41.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C基础_01">
-<meta name="twitter:description" content="知识点1 半导体存储器： 所说的内存就是这种，但还有其他 可分为：随机存取存储器（RAM）、只读存储器（ROM） 速度快，体积小   存储器分为：内存、外寸 内存分为：RAM（主存）、ROM">
+<meta name="twitter:description" content="1-计算机基础知识半导体存储器： 所说的内存就是这种，但还有其他 可分为：随机存取存储器（RAM）、只读存储器（ROM） 速度快，体积小  存储器分为：内存、外寸 内存分为：RAM（主存）、ROM">
 
 
 
@@ -343,21 +343,18 @@
       
 
       
-        <h1 id="知识点1"><a href="#知识点1" class="headerlink" title="知识点1"></a>知识点1</h1><ul>
-<li>半导体存储器：<ul>
+        <h1 id="1-计算机基础知识"><a href="#1-计算机基础知识" class="headerlink" title="1-计算机基础知识"></a>1-计算机基础知识</h1><h2 id="半导体存储器："><a href="#半导体存储器：" class="headerlink" title="半导体存储器："></a>半导体存储器：</h2><ul>
 <li>所说的内存就是这种，但还有其他</li>
 <li>可分为：随机存取存储器（RAM）、只读存储器（ROM）</li>
 <li>速度快，体积小</li>
 </ul>
-</li>
-<li>存储器分为：内存、外寸<ul>
+<h2 id="存储器分为：内存、外寸"><a href="#存储器分为：内存、外寸" class="headerlink" title="存储器分为：内存、外寸"></a>存储器分为：内存、外寸</h2><ul>
 <li>内存分为：RAM（主存）、ROM<a id="more"></a></li>
 <li>外存：硬盘、磁盘等</li>
 <li>主存 != 内存，内存 &gt; 主存</li>
 <li>容量的单位为字节数</li>
 </ul>
-</li>
-<li>进制转换问题（别想的太繁杂，记住主要原则，学会类比）<ul>
+<h2 id="进制转换问题（别想的太繁杂，记住主要原则，学会类比）"><a href="#进制转换问题（别想的太繁杂，记住主要原则，学会类比）" class="headerlink" title="进制转换问题（别想的太繁杂，记住主要原则，学会类比）"></a>进制转换问题（别想的太繁杂，记住主要原则，学会类比）</h2><ul>
 <li>X转2进制<ul>
 <li>10转2进制<ul>
 <li>法1: 整数除2逆向取余，小数乘2正向取整（小数时不好结束，取几位即可</li>
@@ -376,35 +373,32 @@
 </li>
 <li>因此：可将2进制看作中介</li>
 </ul>
+<h2 id="数据与指令"><a href="#数据与指令" class="headerlink" title="数据与指令"></a>数据与指令</h2><ul>
+<li><p>本质上是相同的，都以二进制的形式存放在计算机中；</p>
 </li>
-<li>数据，以补码形式存在</li>
-<li>冯诺伊曼：出入控运存</li>
-<li>数据与指令<ul>
-<li>本质上是相同的，都以二进制的形式存放在计算机中；</li>
-<li>二者功能不同：指令用于指导计算机去做什么以及怎样做，而数据是计算机操作的具体对象；</li>
+<li><p>二者功能不同：指令用于指导计算机去做什么以及怎样做，而数据是计算机操作的具体对象；</p>
+</li>
+<li><p>也可以根据访的时机来区分：二者都存储在存储器中，在取指令周期内取出的是指令，同理，在读数据周期内取出的为数据。</p>
+</li>
 </ul>
-<ol start="3">
-<li>也可以根据访的时机来区分：二者都存储在存储器中，在取指令周期内取出的是指令，同理，在读数据周期内取出的为数据。</li>
-</ol>
-</li>
-<li>编程语言分类<ul>
+<h2 id="编程语言分类"><a href="#编程语言分类" class="headerlink" title="编程语言分类"></a>编程语言分类</h2><ul>
 <li>在面向机器或面向用户的角度，可分为三大类，即机器语言、汇编语言以及高级语言；</li>
 <li>高级语言中有C/C++、Java、python、PHP 等，若有需要，也可进行细分，比如 CC++更面向底层，而 PHP 或 python 等对底层进行了进一步的封装，可以说更加面向用户。</li>
 <li>在程序执行的角度，可分为编译型语言和解释型语言。</li>
 </ul>
-</li>
-<li>编译型与解释型语言<ul>
+<h2 id="编译型与解释型语言"><a href="#编译型与解释型语言" class="headerlink" title="编译型与解释型语言"></a>编译型与解释型语言</h2><ul>
 <li>编译型语言：在程序执行之前，源代码就翻译成机器指令，由于事先翻译了，所有执行时速度快，如 C/C++</li>
 <li>解释性语言：程序运行之前，不会事先翻译成机器指令，而是一边翻译一边执行，因此，执行速度相对较慢，如 python</li>
 </ul>
-</li>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><ul>
+<li>数据，以补码形式存在</li>
+<li>冯诺伊曼：出入控运存</li>
 </ul>
-<h1 id="知识点2"><a href="#知识点2" class="headerlink" title="知识点2"></a>知识点2</h1><ul>
-<li>字节与字长<ul>
+<h1 id="2-计算机中的数"><a href="#2-计算机中的数" class="headerlink" title="2-计算机中的数"></a>2-计算机中的数</h1><h2 id="字节与字长"><a href="#字节与字长" class="headerlink" title="字节与字长"></a>字节与字长</h2><ul>
 <li>字长：CPU 一次可处理的数据的最大长度，其位数取決于具体的计算机</li>
 <li>字节：衡量数据量以及存储容量的基本单位，1 字节等于 8 位二进制信息</li>
 </ul>
-</li>
+<h2 id="表示范围"><a href="#表示范围" class="headerlink" title="表示范围"></a>表示范围</h2><ul>
 <li>为何n位有符号数的范围负数比正数多一个？如：<ul>
 <li>8位有符号数的取值范围是-128 ~ +127</li>
 <li>16位有符号数的取值范围是-32768 ~ +32767</li>
@@ -414,10 +408,10 @@
 <li>n位无符号数表示范围：<code>0 ~ 2^n - 1</code>，如8位无符号范围0～255</li>
 <li>1GB = 1024MB,1MB=1024KB,1KB=1024B,1B =8bit</li>
 </ul>
-<h1 id="知识点3"><a href="#知识点3" class="headerlink" title="知识点3"></a>知识点3</h1><ul>
+<h1 id="3-工具的安装"><a href="#3-工具的安装" class="headerlink" title="3-工具的安装"></a>3-工具的安装</h1><ul>
 <li>无</li>
 </ul>
-<h1 id="知识点4"><a href="#知识点4" class="headerlink" title="知识点4"></a>知识点4</h1><ul>
+<h1 id="4-基本程序编写-常量变量-输入输出"><a href="#4-基本程序编写-常量变量-输入输出" class="headerlink" title="4-基本程序编写-常量变量-输入输出"></a>4-基本程序编写-常量变量-输入输出</h1><ul>
 <li>C源程序的基本组成单位是函数（可以这么说，也可说语句是程序的基本组成</li>
 <li>预处理命令都以<code>#</code>开头</li>
 <li><code>include、scanf、type</code>非C语言中关键字</li>
@@ -425,15 +419,13 @@
 <li>short int类型也涉及此问题：输出时%d、输入时%hf（h即half</li>
 <li>相关链接：<code>https://stackoverflow.com/questions/19809527/wrong-format-specifier-in-scanfd-unsigned-short-int-after-getspointer-ch</code></li>
 </ul>
-<h1 id="知识点5"><a href="#知识点5" class="headerlink" title="知识点5"></a>知识点5</h1><ul>
-<li><p><code>/</code>运算符：整数相除，结果也为整数，要想得小数，必须有浮点数的参与；</p>
-</li>
-<li><p><code>%</code>运算符的两个操作数：必须是整数，不能是浮点数；</p>
-</li>
-<li><p><code>++</code>运算符的操作数不是只能为整数，也可为其他，如浮点数；</p>
-</li>
-<li><p>数字形式的<code>8-3 = 5</code>，字符形式的<code>&#39;8&#39;-&#39;3&#39; = 5</code>，二者都等于5，对于字符形式来说，完全可以按照数字形式的来计算，因为字符背后也对应着数字，况且也挨着，如‘8’为56，‘3’为51；</p>
-</li>
+<h1 id="5-运算符基础"><a href="#5-运算符基础" class="headerlink" title="5-运算符基础"></a>5-运算符基础</h1><ul>
+<li><code>/</code>运算符：整数相除，结果也为整数，要想得小数，必须有浮点数的参与；</li>
+<li><code>%</code>运算符的两个操作数：必须是整数，不能是浮点数；</li>
+<li><code>++</code>运算符的操作数不是只能为整数，也可为其他，如浮点数；</li>
+<li>数字形式的<code>8-3 = 5</code>，字符形式的<code>&#39;8&#39;-&#39;3&#39; = 5</code>，二者都等于5，对于字符形式来说，完全可以按照数字形式的来计算，因为字符背后也对应着数字，况且也挨着，如‘8’为56，‘3’为51；</li>
+</ul>
+<h2 id="逗号运算符"><a href="#逗号运算符" class="headerlink" title="逗号运算符"></a>逗号运算符</h2><ul>
 <li><p>逗号运算符考点</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">n = <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>;		<span class="comment">//n=1，直接忽视后面即可，只看第一个</span></span><br><span class="line">n = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>);		<span class="comment">//n=3，不可光看最后，若前面是表达式，要把前面的表达式执行之后再看，如下</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -463,8 +455,8 @@
 <li>在后：同上反</li>
 </ul>
 </li>
-<li><p>自动（隐形）类型转换</p>
-<ul>
+</ul>
+<h2 id="自动（隐形）类型转换"><a href="#自动（隐形）类型转换" class="headerlink" title="自动（隐形）类型转换"></a>自动（隐形）类型转换</h2><ul>
 <li><p>算术运算：</p>
 <ul>
 <li>不同数据类型的数据在进行运算时，需转为同一种数据类型后才能开始运算；</li>
@@ -482,12 +474,10 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">float</span> c = <span class="number">2.5</span>;</span><br><span class="line">i = i/c;</span><br><span class="line"><span class="comment">// i/c为4.000，遵循算术运算时的转换：int小于float，因此i先转float再计算，得float型</span></span><br><span class="line"><span class="comment">// i为4，遵循赋值运算时的转换：右转左，故得int型</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
-</ul>
-<h1 id="知识点6"><a href="#知识点6" class="headerlink" title="知识点6"></a>知识点6</h1><ul>
+<h1 id="6-VS基本用法"><a href="#6-VS基本用法" class="headerlink" title="6-VS基本用法"></a>6-VS基本用法</h1><ul>
 <li>无</li>
 </ul>
-<h1 id="知识点7"><a href="#知识点7" class="headerlink" title="知识点7"></a>知识点7</h1><ul>
+<h1 id="7-一维数组"><a href="#7-一维数组" class="headerlink" title="7-一维数组"></a>7-一维数组</h1><ul>
 <li>数组长度、下标</li>
 <li>定义时：长度只可为常量<ul>
 <li>调用时：下标可常量，可变量</li>
@@ -511,7 +501,7 @@
 </ul>
 </li>
 </ul>
-<h1 id="知识点8"><a href="#知识点8" class="headerlink" title="知识点8"></a>知识点8</h1><ul>
+<h1 id="8-字符数组与字符串处理函数"><a href="#8-字符数组与字符串处理函数" class="headerlink" title="8-字符数组与字符串处理函数"></a>8-字符数组与字符串处理函数</h1><ul>
 <li><p>字符数组的赋值</p>
 <ul>
 <li>除了可以同普通数组一样进行赋值外</li>
@@ -523,12 +513,12 @@
 </ul>
 </li>
 </ul>
-<h1 id="知识点9"><a href="#知识点9" class="headerlink" title="知识点9"></a>知识点9</h1><ul>
+<h1 id="9-三大结构-算法-流程图"><a href="#9-三大结构-算法-流程图" class="headerlink" title="9-三大结构-算法-流程图"></a>9-三大结构-算法-流程图</h1><ul>
 <li><p>长度为10的数组逆序存储到原数组中：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//要用到临时变量来做中介</span></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>/<span class="number">2</span>; i++)		<span class="comment">//注意，一定是/2 ！！！</span></span><br><span class="line">	&#123;</span><br><span class="line">		tmp = a[i];</span><br><span class="line">		a[i] = a[<span class="number">10</span> - i - <span class="number">1</span>];		<span class="comment">//别忘了 -1</span></span><br><span class="line">		a[<span class="number">10</span> - i - <span class="number">1</span>] = tmp;</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//转换时，for循环别打印，等转换完成，再输出</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h1 id="知识点10"><a href="#知识点10" class="headerlink" title="知识点10"></a>知识点10</h1><ul>
+<h1 id="10-选择结构if"><a href="#10-选择结构if" class="headerlink" title="10-选择结构if"></a>10-选择结构if</h1><ul>
 <li><p>三目运算符</p>
 <ul>
 <li><code>条件 ? 结果1 : 结果2</code></li>
@@ -588,6 +578,47 @@
 <li><code>char c =0</code>是正确的，因为字符本质上也是数字</li>
 <li>case语句中定义变量需要添加大括号（case语句最好也要用大括号括，万无一失）</li>
 </ul>
+<h1 id="11-选择结构switch"><a href="#11-选择结构switch" class="headerlink" title="11-选择结构switch"></a>11-选择结构switch</h1><ul>
+<li>switch-case结构只能基于整数值进行，而不能是浮点型</li>
+<li>default与case的顺序无关紧要，不影响结果</li>
+<li>switch结构能实现的，if结构也能实现，反之不然。</li>
+</ul>
+<h2 id="适应情况"><a href="#适应情况" class="headerlink" title="适应情况"></a>适应情况</h2><ul>
+<li>if结构适应情况<ul>
+<li>逻辑复杂</li>
+<li>分支较小</li>
+</ul>
+</li>
+<li>switch结构适应情况<ul>
+<li>逻辑简单</li>
+<li>分支较多</li>
+</ul>
+</li>
+</ul>
+<h2 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h2><ul>
+<li>switch缺点<ul>
+<li>只能基于整数值来进行匹配，不可浮点数</li>
+<li>只能判断是否相等，不可基于某区间范围来判断</li>
+<li>switch可实现的if都能实现，反之不然，即存在一定限制</li>
+</ul>
+</li>
+<li>if缺点<ul>
+<li>分支较多时用if会显得很乱</li>
+<li>多层if嵌套也会使得程序变得复杂</li>
+</ul>
+</li>
+</ul>
+<h1 id="12-VS调试机制、监视窗口"><a href="#12-VS调试机制、监视窗口" class="headerlink" title="12-VS调试机制、监视窗口"></a>12-VS调试机制、监视窗口</h1><ul>
+<li>无</li>
+</ul>
+<h1 id="13-VS内存窗口"><a href="#13-VS内存窗口" class="headerlink" title="13-VS内存窗口"></a>13-VS内存窗口</h1><ul>
+<li>如何调出内存窗口<ul>
+<li>前提：调试运行状态、断点已设置；</li>
+<li>点击调试-窗口-内存；</li>
+<li>可将&amp;+某变量直接拖入窗口，也可在窗口手动输入地址或&amp;+某变量</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -627,6 +658,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/08/C基础-02/" rel="prev" title="C基础-02">
+                C基础-02 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -705,7 +740,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">131</span>
+                  <span class="site-state-item-count">132</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -716,7 +751,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -834,7 +869,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点1"><span class="nav-text">知识点1</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点2"><span class="nav-text">知识点2</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点3"><span class="nav-text">知识点3</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点4"><span class="nav-text">知识点4</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点5"><span class="nav-text">知识点5</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点6"><span class="nav-text">知识点6</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点7"><span class="nav-text">知识点7</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点8"><span class="nav-text">知识点8</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点9"><span class="nav-text">知识点9</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#知识点10"><span class="nav-text">知识点10</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-计算机基础知识"><span class="nav-text">1-计算机基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#半导体存储器："><span class="nav-text">半导体存储器：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#存储器分为：内存、外寸"><span class="nav-text">存储器分为：内存、外寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进制转换问题（别想的太繁杂，记住主要原则，学会类比）"><span class="nav-text">进制转换问题（别想的太繁杂，记住主要原则，学会类比）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据与指令"><span class="nav-text">数据与指令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程语言分类"><span class="nav-text">编程语言分类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译型与解释型语言"><span class="nav-text">编译型与解释型语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他"><span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-计算机中的数"><span class="nav-text">2-计算机中的数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字节与字长"><span class="nav-text">字节与字长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表示范围"><span class="nav-text">表示范围</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-工具的安装"><span class="nav-text">3-工具的安装</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-基本程序编写-常量变量-输入输出"><span class="nav-text">4-基本程序编写-常量变量-输入输出</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#5-运算符基础"><span class="nav-text">5-运算符基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#逗号运算符"><span class="nav-text">逗号运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自动（隐形）类型转换"><span class="nav-text">自动（隐形）类型转换</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#6-VS基本用法"><span class="nav-text">6-VS基本用法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#7-一维数组"><span class="nav-text">7-一维数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#8-字符数组与字符串处理函数"><span class="nav-text">8-字符数组与字符串处理函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#9-三大结构-算法-流程图"><span class="nav-text">9-三大结构-算法-流程图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#10-选择结构if"><span class="nav-text">10-选择结构if</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#11-选择结构switch"><span class="nav-text">11-选择结构switch</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#适应情况"><span class="nav-text">适应情况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点"><span class="nav-text">优缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#12-VS调试机制、监视窗口"><span class="nav-text">12-VS调试机制、监视窗口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#13-VS内存窗口"><span class="nav-text">13-VS内存窗口</span></a></li></ol></div>
             
 
           </div>
