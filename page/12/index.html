@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-CSRF漏洞/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/07/05/信息安全概述/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -272,7 +272,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/28/Web渗透-CSRF漏洞/" itemprop="url">Web渗透-CSRF漏洞</a></h1>
+                <a class="post-title-link" href="/2018/07/05/信息安全概述/" itemprop="url">信息安全概述</a></h1>
         
 
         <div class="post-meta">
@@ -284,8 +284,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-28T19:31:33+08:00">
-                2018-02-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-05T13:34:03+08:00">
+                2018-07-05
               </time>
             
 
@@ -307,8 +307,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Web安全/" itemprop="url" rel="index">
-                    <span itemprop="name">Web安全</span>
+                  <a href="/categories/NISP一级/" itemprop="url" rel="index">
+                    <span itemprop="name">NISP一级</span>
                   </a>
                 </span>
 
@@ -345,23 +345,26 @@
 
       
         
-          <h1 id="Web渗透-CSRF漏洞"><a href="#Web渗透-CSRF漏洞" class="headerlink" title="Web渗透_CSRF漏洞"></a>Web渗透_CSRF漏洞</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
-<li>cross site request forgery，跨站请求伪造</li>
-<li>常与xss混淆，但实际不同</li>
-<li>从信任的角度<ul>
-<li>xss：利用客户端用户对站点的信任</li>
-<li>csrf：利用站点对客户端的信任（服务端的站点是默认不信任客户端用户的，这里信任的是经过身份验证后的用户</li>
-<li>信任方向相反
+          <h1 id="1-信息安全概述"><a href="#1-信息安全概述" class="headerlink" title="1-信息安全概述"></a>1-信息安全概述</h1><ul>
+<li>目录<ul>
+<li>信息与信息安全</li>
+<li>信息安全威胁</li>
+<li>信息安全发展阶段与形式</li>
+<li>信息安全保障</li>
+<li>信息系统安全保障</li>
+</ul>
+</li>
+</ul>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/28/Web渗透-CSRF漏洞/#more" rel="contents">
+            <a class="btn" href="/2018/07/05/信息安全概述/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></li></ul></div>
+    </div>
     
     
     
@@ -405,7 +408,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-XSS漏洞/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-基础知识/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -424,7 +427,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/28/Web渗透-XSS漏洞/" itemprop="url">Web渗透-XSS漏洞</a></h1>
+                <a class="post-title-link" href="/2018/02/28/Web渗透-基础知识/" itemprop="url">Web渗透-基础知识</a></h1>
         
 
         <div class="post-meta">
@@ -497,24 +500,29 @@
 
       
         
-          <h1 id="Web渗透-XSS漏洞"><a href="#Web渗透-XSS漏洞" class="headerlink" title="Web渗透_XSS漏洞"></a>Web渗透_XSS漏洞</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
-<li>攻击Web客户端<ul>
-<li>漏洞存在于服务器端，但被攻击却是客户端用户</li>
-<li>层级结构<ul>
-<li>客户端</li>
-<li>web服务器</li>
-<li>应用程序服务器</li>
-<li>数据库服务器
+          <h1 id="Kali实战-web渗透"><a href="#Kali实战-web渗透" class="headerlink" title="Kali实战-web渗透"></a>Kali实战-web渗透</h1><h2 id="web技术发展和攻击面"><a href="#web技术发展和攻击面" class="headerlink" title="web技术发展和攻击面"></a>web技术发展和攻击面</h2><ul>
+<li>web技术发展<ul>
+<li>静态web<ul>
+<li>当前的攻击主要针对web应用程序，如iis，apache</li>
+</ul>
+</li>
+<li>动态web<ul>
+<li>包含数据库，应用程序，web服务器及应用服务器</li>
+<li>cs架构到bs架构，后者只专注于服务端的开发，前者还需要客户端</li>
+<li>攻击主要针对数据库及应用程序（程序员自己开发的如电子商城</li>
+</ul>
+</li>
+<li>web攻击类型有数百种
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/28/Web渗透-XSS漏洞/#more" rel="contents">
+            <a class="btn" href="/2018/02/28/Web渗透-基础知识/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></li></ul></li></ul></div>
+    </li></ul></li></ul></div>
     
     
     
@@ -864,7 +872,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-主机发现/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-XSS漏洞/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -883,7 +891,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/28/Web渗透-主机发现/" itemprop="url">主动信息收集_主机发现</a></h1>
+                <a class="post-title-link" href="/2018/02/28/Web渗透-XSS漏洞/" itemprop="url">Web渗透-XSS漏洞</a></h1>
         
 
         <div class="post-meta">
@@ -956,25 +964,24 @@
 
       
         
-          <h1 id="主动信息收集-主机发现"><a href="#主动信息收集-主机发现" class="headerlink" title="主动信息收集_主机发现"></a>主动信息收集_主机发现</h1><h2 id="主动信息收集简介"><a href="#主动信息收集简介" class="headerlink" title="主动信息收集简介"></a>主动信息收集简介</h2><ul>
-<li>直接与目标系统交互通信（被动的不会直接与目标进行交互</li>
-<li>无法避免留下访问的痕迹<ul>
-<li>通过日志分析可溯源</li>
-</ul>
-</li>
-<li>使用受控的第三方进行探测<ul>
-<li>使用代理或已经被控制的主机</li>
-<li>做好被封杀的准备
+          <h1 id="Web渗透-XSS漏洞"><a href="#Web渗透-XSS漏洞" class="headerlink" title="Web渗透_XSS漏洞"></a>Web渗透_XSS漏洞</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>攻击Web客户端<ul>
+<li>漏洞存在于服务器端，但被攻击却是客户端用户</li>
+<li>层级结构<ul>
+<li>客户端</li>
+<li>web服务器</li>
+<li>应用程序服务器</li>
+<li>数据库服务器
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/28/Web渗透-主机发现/#more" rel="contents">
+            <a class="btn" href="/2018/02/28/Web渗透-XSS漏洞/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></li></ul></div>
+    </li></ul></li></ul></li></ul></div>
     
     
     
@@ -1018,7 +1025,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-基础知识/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/28/Web渗透-CSRF漏洞/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -1037,7 +1044,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/28/Web渗透-基础知识/" itemprop="url">Web渗透-基础知识</a></h1>
+                <a class="post-title-link" href="/2018/02/28/Web渗透-CSRF漏洞/" itemprop="url">Web渗透-CSRF漏洞</a></h1>
         
 
         <div class="post-meta">
@@ -1110,22 +1117,16 @@
 
       
         
-          <h1 id="Kali实战-web渗透"><a href="#Kali实战-web渗透" class="headerlink" title="Kali实战-web渗透"></a>Kali实战-web渗透</h1><h2 id="web技术发展和攻击面"><a href="#web技术发展和攻击面" class="headerlink" title="web技术发展和攻击面"></a>web技术发展和攻击面</h2><ul>
-<li>web技术发展<ul>
-<li>静态web<ul>
-<li>当前的攻击主要针对web应用程序，如iis，apache</li>
-</ul>
-</li>
-<li>动态web<ul>
-<li>包含数据库，应用程序，web服务器及应用服务器</li>
-<li>cs架构到bs架构，后者只专注于服务端的开发，前者还需要客户端</li>
-<li>攻击主要针对数据库及应用程序（程序员自己开发的如电子商城</li>
-</ul>
-</li>
-<li>web攻击类型有数百种
+          <h1 id="Web渗透-CSRF漏洞"><a href="#Web渗透-CSRF漏洞" class="headerlink" title="Web渗透_CSRF漏洞"></a>Web渗透_CSRF漏洞</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>cross site request forgery，跨站请求伪造</li>
+<li>常与xss混淆，但实际不同</li>
+<li>从信任的角度<ul>
+<li>xss：利用客户端用户对站点的信任</li>
+<li>csrf：利用站点对客户端的信任（服务端的站点是默认不信任客户端用户的，这里信任的是经过身份验证后的用户</li>
+<li>信任方向相反
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/28/Web渗透-基础知识/#more" rel="contents">
+            <a class="btn" href="/2018/02/28/Web渗透-CSRF漏洞/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1215,7 +1216,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">133</span>
+                  <span class="site-state-item-count">134</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
