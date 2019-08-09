@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/无线网硬件设备及基本概念/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/802-11头部/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -272,7 +272,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/18/无线网硬件设备及基本概念/" itemprop="url">无线网硬件设备及基本概念</a></h1>
+                <a class="post-title-link" href="/2018/02/18/802-11头部/" itemprop="url">802.11头部</a></h1>
         
 
         <div class="post-meta">
@@ -345,18 +345,15 @@
 
       
         
-          <h1 id="无线网硬件设备及基本概念"><a href="#无线网硬件设备及基本概念" class="headerlink" title="无线网硬件设备及基本概念"></a>无线网硬件设备及基本概念</h1><h2 id="无线网卡准备"><a href="#无线网卡准备" class="headerlink" title="无线网卡准备"></a>无线网卡准备</h2><ul>
-<li>物理机运行kali</li>
-<li>虚拟机运行kali<ul>
-<li>外置USB无线网卡<ul>
-<li>虚拟机软件支持将物理机上的网卡映射到虚拟机</li>
-<li>桥接模式下：尽管是无线网卡，虚拟机仍将其看作是有线网卡eth0，而非wlan0等</li>
-</ul>
-</li>
-<li>TL-WN722N（建议，一般没问题
+          <h1 id="802-11头部"><a href="#802-11头部" class="headerlink" title="802.11头部"></a>802.11头部</h1><h2 id="预备知识点"><a href="#预备知识点" class="headerlink" title="预备知识点"></a>预备知识点</h2><ul>
+<li><p>MAC layer address（MAC子层）</p>
+<ul>
+<li>Basic service set ID（BSSID</li>
+<li>是BSS的唯一标识，infrastructure模式中BSSID就是AP的MAC地址</li>
+<li>当AP支持多BSS时，随机生成每个BSSID
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/无线网硬件设备及基本概念/#more" rel="contents">
+            <a class="btn" href="/2018/02/18/802-11头部/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -407,7 +404,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/Linux无线协议栈及常用命令/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/WEP攻击/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -426,7 +423,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/18/Linux无线协议栈及常用命令/" itemprop="url">Linux无线协议栈及常用命令</a></h1>
+                <a class="post-title-link" href="/2018/02/18/WEP攻击/" itemprop="url">WEP攻击</a></h1>
         
 
         <div class="post-meta">
@@ -499,25 +496,24 @@
 
       
         
-          <h1 id="Linux无线协议栈及常用命令"><a href="#Linux无线协议栈及常用命令" class="headerlink" title="Linux无线协议栈及常用命令"></a>Linux无线协议栈及常用命令</h1><h2 id="协议栈简介"><a href="#协议栈简介" class="headerlink" title="协议栈简介"></a>协议栈简介</h2><ul>
-<li>两个层面<ul>
-<li>内核层面<ul>
-<li>面向硬件</li>
-<li>内核提供的网络接口</li>
-<li>为不同厂家生产的不同设备及驱动，提供一个统一接口，即network stack网络协议栈</li>
+          <h1 id="01-WEP共享密钥破解"><a href="#01-WEP共享密钥破解" class="headerlink" title="01-WEP共享密钥破解"></a>01-WEP共享密钥破解</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1-简介"></a>1.1-简介</h2><ul>
+<li>WEP的安全问题<ul>
+<li>一发布就被发现存在安全隐患，已经被WPA/WPA2取代</li>
+<li>因安全原因，大部分AP已不设置WEP，且针对WEP的攻击复杂（没有必要学？no）</li>
+<li>但人员安全意识薄弱，仍存在使用WEP的现象，如火车站、家用路由器等，此外，有的企业因某些因素，不得不使用WEP</li>
 </ul>
 </li>
-<li>用户层面
+<li>WEP加密流程
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/Linux无线协议栈及常用命令/#more" rel="contents">
+            <a class="btn" href="/2018/02/18/WEP攻击/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></li></ul></div>
+    </li></ul></div>
     
     
     
@@ -840,7 +836,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/27/Kali实战-基本工具/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/27/Kali实战-OWASP-ZAP/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -859,7 +855,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/27/Kali实战-基本工具/" itemprop="url">Kali实战-基本工具</a></h1>
+                <a class="post-title-link" href="/2018/01/27/Kali实战-OWASP-ZAP/" itemprop="url">Kali实战-OWASP_ZAP</a></h1>
         
 
         <div class="post-meta">
@@ -932,27 +928,23 @@
 
       
         
-          <h1 id="Kali实战-基本工具"><a href="#Kali实战-基本工具" class="headerlink" title="Kali实战-基本工具"></a>Kali实战-基本工具</h1><h2 id="Netcat"><a href="#Netcat" class="headerlink" title="Netcat"></a>Netcat</h2><ul>
-<li>简介<ul>
-<li>网络工具中的瑞士军刀</li>
-<li>可简称nc</li>
+          <h1 id="扫描工具之OWASP-ZAP"><a href="#扫描工具之OWASP-ZAP" class="headerlink" title="扫描工具之OWASP_ZAP"></a>扫描工具之OWASP_ZAP</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>Zed attack proxy ，开源，免费，跨平台</li>
+<li>基于Java语言</li>
+<li>web application集成渗透测试和漏洞挖掘工具</li>
 </ul>
-</li>
-<li>常用参数<ul>
-<li>v：显示详细信息</li>
-<li>n：只允许数字形式的IP地址，不进行dns解析<ul>
-<li>作为客户端</li>
-<li>不建议跟域名，域名解析任务交由nc，可能会比较慢
+<h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><ul>
+<li>保存session问题
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/27/Kali实战-基本工具/#more" rel="contents">
+            <a class="btn" href="/2018/01/27/Kali实战-OWASP-ZAP/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></li></ul></li></ul></div>
+    </li></ul></div>
     
     
     
@@ -996,7 +988,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/27/Kali实战-nmap/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/01/27/Kali实战-Beef/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -1015,7 +1007,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/27/Kali实战-nmap/" itemprop="url">Kali实战-nmap</a></h1>
+                <a class="post-title-link" href="/2018/01/27/Kali实战-Beef/" itemprop="url">Kali实战-Beef</a></h1>
         
 
         <div class="post-meta">
@@ -1088,25 +1080,21 @@
 
       
         
-          <h1 id="主动信息收集-nmap"><a href="#主动信息收集-nmap" class="headerlink" title="主动信息收集_nmap"></a>主动信息收集_nmap</h1><h2 id="target-specification"><a href="#target-specification" class="headerlink" title="target specification"></a>target specification</h2><ul>
-<li>-iL<ul>
-<li>-iL ip.txt</li>
-<li>从文件中获取待扫描的IP</li>
-</ul>
-</li>
-<li>-iR<ul>
-<li>-iR 100:随机选取100个IP</li>
-<li>随机选取，不用非得自己网段，世界各地的
+          <h1 id="Web渗透-Beef"><a href="#Web渗透-Beef" class="headerlink" title="Web渗透_Beef"></a>Web渗透_Beef</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><ul>
+<li>browser exploitation framework</li>
+<li>生成、交付payload（即自动生成js脚本，xss利用脚本</li>
+<li>Ruby语言编写（msf也基于ruby</li>
+<li>服务器端：管理hooked客户端
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/01/27/Kali实战-nmap/#more" rel="contents">
+            <a class="btn" href="/2018/01/27/Kali实战-Beef/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></li></ul></div>
+    </li></ul></div>
     
     
     
