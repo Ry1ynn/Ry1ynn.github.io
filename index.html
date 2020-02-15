@@ -253,6 +253,319 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2020/01/24/cve-2012-0003/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="21Guns's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/24/cve-2012-0003/" itemprop="url">cve-2012-0003漏洞分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-24T16:31:30+08:00">
+                2020-01-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/二进制安全/" itemprop="url" rel="index">
+                    <span itemprop="name">二进制安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="01-漏洞描述"><a href="#01-漏洞描述" class="headerlink" title="01-漏洞描述"></a>01-漏洞描述</h1><ul>
+<li>漏洞战争：微软的多媒体库 winmm.dll 在处理 MIDI 文件时，由于对数据处理不当导致的堆溢出，攻击者可在网页中嵌入恶意构造的 MIDI 文件来远程执行任意代码。</li>
+<li><a href="https://cve.mitre.org：Unspecified" target="_blank" rel="noopener">https://cve.mitre.org：Unspecified</a> vulnerability in winmm.dll in Windows Multimedia Library in Windows Media Player (WMP) in Microsoft Windows XP SP2 and SP3, Server 2003 SP2, Vista SP2, and Server 2008 SP2 allows remote attackers to execute arbitrary code via a crafted MIDI file, aka “MIDI Remote Code Execution Vulnerability.”</li>
+</ul>
+<h1 id="02-测试环境"><a href="#02-测试环境" class="headerlink" title="02-测试环境"></a>02-测试环境</h1><ul>
+<li>目标系统：Windows XP SP3（虚拟机</li>
+<li>OllyDebug：动态调试</li>
+<li>IDA Pro：静态分析</li>
+<li>IExplore 6、Media Player：漏洞软件</li>
+<li>Metasploit：漏洞复现、利用</li>
+<li>辅助工具：wget-保存mid文件到本地、gflags.exe-开启/关闭hpa、
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/24/cve-2012-0003/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2020/01/11/cve-2010-2883/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="21Guns's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/01/11/cve-2010-2883/" itemprop="url">cve-2010-2883漏洞分析</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-11T11:31:13+08:00">
+                2020-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/二进制安全/" itemprop="url" rel="index">
+                    <span itemprop="name">二进制安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>[TOC]</p>
+<h1 id="01-漏洞描述"><a href="#01-漏洞描述" class="headerlink" title="01-漏洞描述"></a>01-漏洞描述</h1><ul>
+<li>漏洞战争：Adobe Reader 和 Acrobat中的 Cooltype.dll 库在解析字体文件 SING 表中的 UniqueName项时存在的栈溢出漏洞，用户受骗打开了特制的 PDF 文件就有可能导致执行任意代码</li>
+<li><a href="https://cve.mitre.org：Stack-based" target="_blank" rel="noopener">https://cve.mitre.org：Stack-based</a> buffer overflow in CoolType.dll in Adobe Reader and Acrobat 9.x before 9.4, and 8.x before 8.2.5 on Windows and Mac OS X, allows remote attackers to execute arbitrary code or cause a denial of service (application crash) via a PDF document with a long field in a Smart INdependent Glyphlets (SING) table in a TTF font, as exploited in the wild in September 2010.</li>
+</ul>
+<h1 id="02-测试环境"><a href="#02-测试环境" class="headerlink" title="02-测试环境"></a>02-测试环境</h1><ul>
+<li>目标系统：Windows7 专业版（虚拟机</li>
+<li>OllyDebug：动态调试</li>
+<li>IDA Pro：静态分析</li>
+<li>PdfStreamDumper：提取PDF数据</li>
+<li>Adobe Reader 9.3.4：漏洞软件</li>
+<li>Metasploit：复现漏洞
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/01/11/cve-2010-2883/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/11/29/pandaVirus/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -821,315 +1134,6 @@
         
       
     </p></li></ul></li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/26/信息安全管理-管理体系/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="21Guns's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/26/信息安全管理-管理体系/" itemprop="url">信息安全管理-管理体系</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-26T11:21:39+08:00">
-                2019-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
-                    <span itemprop="name">NISP二级</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="信息安全管理体系基础"><a href="#信息安全管理体系基础" class="headerlink" title="信息安全管理体系基础"></a>信息安全管理体系基础</h2><h3 id="管理者履行管理职责的重要作用"><a href="#管理者履行管理职责的重要作用" class="headerlink" title="管理者履行管理职责的重要作用"></a>管理者履行管理职责的重要作用</h3><ul>
-<li>管理层切实履行相应的管理职责是ISMS能够成功实施的关键因素，会对ISMS建设产生推动作用</li>
-<li>管理者提供足够的资源是对ISMS建设实质性的支持</li>
-</ul>
-<h3 id="主要管理职责"><a href="#主要管理职责" class="headerlink" title="主要管理职责"></a>主要管理职责</h3><ul>
-<li>承担并履行职责
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/26/信息安全管理-管理体系/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/12/信息安全管理-风险管理/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="21Guns's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/12/信息安全管理-风险管理/" itemprop="url">信息安全管理-风险管理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-12T15:53:03+08:00">
-                2019-05-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
-                    <span itemprop="name">NISP二级</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="风险管理综述"><a href="#风险管理综述" class="headerlink" title="风险管理综述"></a>风险管理综述</h2><h3 id="信息安全风险管理大纲"><a href="#信息安全风险管理大纲" class="headerlink" title="信息安全风险管理大纲"></a>信息安全风险管理大纲</h3><ul>
-<li>风险管理基础<ul>
-<li>风险相关基本概念</li>
-<li>风险管理概述</li>
-<li>风险相关政策与标准</li>
-</ul>
-</li>
-<li>风险管理主要内容<ul>
-<li>风险管理的基本内容和过程</li>
-<li>信息系统生命周期与信息安全风险管理</li>
-</ul>
-</li>
-<li>风险评估
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/12/信息安全管理-风险管理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
     
     
     
