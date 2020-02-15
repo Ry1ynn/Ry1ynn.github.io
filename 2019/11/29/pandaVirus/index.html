@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="病毒分析,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC] 01-样本概况1.1-样本信息 基本信息   123456文件: C:\Users\15pb-win7\Desktop\xiongmao.exe大小: 30001 bytes修改时间: 2018年7月14日, 8:40:21MD5: 512301C535C88255C9A252FDF70B7A03SHA1: CA3A1070CFF311C0BA40AB60A8FE3266CFEFE87">
+<meta name="keywords" content="病毒分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="熊猫烧香病毒分析">
+<meta property="og:url" content="http://21guns.top/2019/11/29/pandaVirus/index.html">
+<meta property="og:site_name" content="21Guns&#39;s blogs">
+<meta property="og:description" content="[TOC] 01-样本概况1.1-样本信息 基本信息   123456文件: C:\Users\15pb-win7\Desktop\xiongmao.exe大小: 30001 bytes修改时间: 2018年7月14日, 8:40:21MD5: 512301C535C88255C9A252FDF70B7A03SHA1: CA3A1070CFF311C0BA40AB60A8FE3266CFEFE87">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003911.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3928.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003834.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003930.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003913.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003909.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3917.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003827.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003931.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003830.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003922.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003822.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003929.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003908.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003912.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3908.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003906.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003926.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003832.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003904.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003923.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003835.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003823.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003828.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003933.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3923.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3914.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3919.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003915.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003836.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003831.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003927.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003921.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003919.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003932.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003920.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003914.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003910.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003928.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3828.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3931.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003918.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003924.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003833.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3832.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003905.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003852.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3837.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003907.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003916.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003829.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3925.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003925.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3911.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-3835.jpg">
+<meta property="og:image" content="http://img2.21guns.top/2020-01-13-003917.jpg">
+<meta property="og:updated_time" content="2020-02-15T09:46:08.684Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="熊猫烧香病毒分析">
+<meta name="twitter:description" content="[TOC] 01-样本概况1.1-样本信息 基本信息   123456文件: C:\Users\15pb-win7\Desktop\xiongmao.exe大小: 30001 bytes修改时间: 2018年7月14日, 8:40:21MD5: 512301C535C88255C9A252FDF70B7A03SHA1: CA3A1070CFF311C0BA40AB60A8FE3266CFEFE87">
+<meta name="twitter:image" content="http://img2.21guns.top/2020-01-13-003911.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/11/29/pandaVirus/">
+
+
+
+
+
+  <title>熊猫烧香病毒分析 | 21Guns's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">21Guns's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/11/29/pandaVirus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="21Guns's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">熊猫烧香病毒分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-29T17:31:53+08:00">
+                2019-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/二进制安全/" itemprop="url" rel="index">
+                    <span itemprop="name">二进制安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h1 id="01-样本概况"><a href="#01-样本概况" class="headerlink" title="01-样本概况"></a>01-样本概况</h1><h2 id="1-1-样本信息"><a href="#1-1-样本信息" class="headerlink" title="1.1-样本信息"></a>1.1-样本信息</h2><ul>
+<li><p>基本信息</p>
+  <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">文件: C:\Users\<span class="number">15</span>pb-win7\Desktop\xiongmao.exe</span><br><span class="line">大小: <span class="number">30001</span> bytes</span><br><span class="line">修改时间: <span class="number">2018</span>年<span class="number">7</span>月<span class="number">14</span>日, <span class="number">8</span>:<span class="number">40</span>:<span class="number">21</span></span><br><span class="line">MD5: <span class="number">512301</span>C535C88255C9A252FDF70B7A03</span><br><span class="line">SHA1: CA3A1070CFF311C0BA40AB60A8FE3266CFEFE870</span><br><span class="line">CRC32: E334747C</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>病毒行为：</p>
+<p>  1.在系统目录下生成病毒程序并执行</p>
+<p>  2.修改注册表</p>
+<p>  3.添加启动项</p>
+<p>  4.目录下产生Desktop_ini文件</p>
+<p>  5.关闭网络共享</p>
+<p>  6.存在网络连接</p>
+<p>  7.有加密的流程传输</p>
+<p>  8.感染文件<a id="more"></a></p>
+</li>
+</ul>
+<h2 id="1-2-测试环境"><a href="#1-2-测试环境" class="headerlink" title="1.2-测试环境"></a>1.2-测试环境</h2><ul>
+<li><p>系统环境: </p>
+<ul>
+<li>Windows10-64位</li>
+<li>Windows7-32位</li>
+</ul>
+</li>
+<li><p>工具: </p>
+<ul>
+<li>010Editor：查看感染标记</li>
+<li>OllyDebug：动态调试</li>
+<li>IDA：静态调试</li>
+<li>PCHunter：进程查看及结束</li>
+<li>火绒剑：观察病毒行为</li>
+<li>Hash工具：计算病毒文件哈希值</li>
+<li>WSExplorer：查看病毒程序网络连接</li>
+<li>VS 2017：编写专杀工具</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-分析目标"><a href="#1-3-分析目标" class="headerlink" title="1.3-分析目标"></a>1.3-分析目标</h2><ol>
+<li><p>提取病毒样本</p>
+</li>
+<li><p>分析病毒行为</p>
+</li>
+<li><p>分析病毒代码细节，获取其执行流程</p>
+</li>
+<li><p>提取病毒特征、手动查杀及编写专杀工具</p>
+</li>
+</ol>
+<h1 id="02-具体行为分析"><a href="#02-具体行为分析" class="headerlink" title="02-具体行为分析"></a>02-具体行为分析</h1><h2 id="2-1-文件操作"><a href="#2-1-文件操作" class="headerlink" title="2.1-文件操作"></a>2.1-文件操作</h2><p>病毒创建了大量文件，并且会修改/感染正常的程序</p>
+<p><img src="http://img2.21guns.top/2020-01-13-003911.jpg" alt="image-20200113082906778"></p>
+<h2 id="2-2-注册表操作"><a href="#2-2-注册表操作" class="headerlink" title="2.2-注册表操作"></a>2.2-注册表操作</h2><p>创建了新的注册表项，并且通过修改注册表，实现病毒的自启动</p>
+<p><img src="http://img2.21guns.top/2020-01-13-3928.jpg" alt="image-20200113082918792"></p>
+<p><img src="http://img2.21guns.top/2020-01-13-003834.jpg" alt="img"></p>
+<h2 id="2-3-进程操作"><a href="#2-3-进程操作" class="headerlink" title="2.3-进程操作"></a>2.3-进程操作</h2><p>枚举进程来查看是否有杀毒软件，创建进程来运行自己产生的恶意程序spo、打开设备以便感染U盘等硬件设备</p>
+<p><img src="http://img2.21guns.top/2020-01-13-003930.jpg" alt="image-20200113082930916"></p>
+<h2 id="2-4-网络操作"><a href="#2-4-网络操作" class="headerlink" title="2.4-网络操作"></a>2.4-网络操作</h2><p>存在大量http请求可以实施DDos攻击，也可以发送数据包，以便上传私密信息到服务器，存在网络连接，以便用户从服务器下载木马等恶意程序</p>
+<p><img src="http://img2.21guns.top/2020-01-13-003913.jpg" alt="image-20200113082943094"></p>
+<h2 id="2-5-行为监控"><a href="#2-5-行为监控" class="headerlink" title="2.5-行为监控"></a>2.5-行为监控</h2><p>可以修改注册表来实现自启动项，会感染PE文件，进行自我删除和复制</p>
+<p><img src="http://img2.21guns.top/2020-01-13-003909.jpg" alt="img"></p>
+<p><img src="http://img2.21guns.top/2020-01-13-3917.jpg" alt="img"></p>
+<h2 id="2-6-执行监控"><a href="#2-6-执行监控" class="headerlink" title="2.6-执行监控"></a>2.6-执行监控</h2><p>其通过cmd命令删除了网络共享</p>
+<p><img src="http://img2.21guns.top/2020-01-13-003827.jpg" alt="image-20200113083017929"></p>
+<h1 id="03-恶意代码分析"><a href="#03-恶意代码分析" class="headerlink" title="03-恶意代码分析"></a>03-恶意代码分析</h1><h2 id="3-1-脱壳"><a href="#3-1-脱壳" class="headerlink" title="3.1-脱壳"></a>3.1-脱壳</h2><ul>
+<li><p>是否有壳：PEiD查看xiongmao.exe存在FSG 2.0的壳</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003931.jpg" alt="img"></p>
+</li>
+<li><p>x32Debug中打开xiongmao，单步跟踪直到<code>jmp dword ptr [ebx + 0xc]</code>，其跳往真实OEP处，利用Scylla插件进行脱壳，最后保存为xiongmao_dump_SCY.exe</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003830.jpg" alt="image-20200113083033910"></p>
+</li>
+<li><p>PEiD深度扫描xiongmao_dump_SCY.exe显示没壳，再查看其输入表也正常，说明脱壳成功</p>
+</li>
+</ul>
+<h2 id="3-2-整体流程"><a href="#3-2-整体流程" class="headerlink" title="3.2-整体流程"></a>3.2-整体流程</h2><ul>
+<li><p>IDA：Shift+F5 签名窗口中，添加delphi特征库，应用后可识别大量库函数，根据伪代码推测功能</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003922.jpg" alt="image-20200113083053799"></p>
+</li>
+<li><p>动态调试，看sub_405250功能，call之前，eax中传参是一堆杂乱的中文字符，call之后，将局部变量ebp-0x14中的值赋值给edx，此时是正常的中文，随后进行字符串的比较，因此可判定其为字符串解密函数，暂记做DecodeString，并在IDA中修改（快捷键n）</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003822.jpg" alt="image-20200113083120144"></p>
+</li>
+<li><p>经过IDA和OD的结合分析，最终可得到整体流程图，如下：</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003929.jpg" alt="image-20200113083132668"></p>
+</li>
+</ul>
+<h2 id="3-3-代码块sub-40819c"><a href="#3-3-代码块sub-40819c" class="headerlink" title="3.3-代码块sub-40819c"></a>3.3-代码块sub-40819c</h2><ul>
+<li><p>IDA：进入819c函数内部，某处出现了样本文件名，应该是敏感部分，要重点关注；此处有两个sub-xxx函数不知用途</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003908.jpg" alt="image-20200113083146999"></p>
+</li>
+<li><p>IDA：进入sub-4053ac内部，有一个获取系统目录的库函数，因此可初步判定其功能</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003912.jpg" alt="image-20200113083159177"></p>
+</li>
+<li><p>OD：验证上述推测是否成立，ctrl+g到4053a4处，内部下断运行至此，从堆栈中找到调用位置，取消内部断点调用位置下断重新运行，单步测试；运行后，将局部变量压栈，可见其就是系统目录，再与后面的子目录和文件名拼接，得到最终地址；推测正确，因此IDA中将其命名为GetSysDir以作标示</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-3908.jpg" alt="image-20200113083212322"></p>
+</li>
+<li><p>综上，本函数功能：复制自身xiongmao.exe到系统目录下并重命名为spo0lsv.exe，然后执行</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003906.jpg" alt="image-20200113083224716"></p>
+</li>
+</ul>
+<h2 id="3-4-代码块sub-40d18c"><a href="#3-4-代码块sub-40d18c" class="headerlink" title="3.4-代码块sub-40d18c"></a>3.4-代码块sub-40d18c</h2><ul>
+<li><p>双击进入，内部有三个函数：40a5b0、40c374、40bacc</p>
+</li>
+<li><p>进入40a5b0：创建线程，其线程回调函数为40a48c</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003926.jpg" alt="image-20191126141107618"></p>
+</li>
+<li><p>再进入40a48c：while循环执行409448</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003832.jpg" alt="image-20191126142958236"></p>
+</li>
+<li><p>再进入409448，发现’desktop_.ini’字符串，也有获取本地时间的行为，联想病毒在每个目录下创建ini且内容为日期的行为，推测此处便是代码执行处</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003904.jpg" alt="image-20191126143227261"></p>
+</li>
+<li><p>进入40c374，设置一个定时器</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003923.jpg" alt="image-20191126143539809"></p>
+</li>
+<li><p>进入timerfunc定时器回调函数，应该就是创建setup.exe文件</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003835.jpg" alt="image-20191126145205001"></p>
+</li>
+<li><p>进入40bacc，创建一个线程执行40ba8c</p>
+<p>  进入40ba8c，后再进入40b864，发现是网络连接相关</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003823.jpg" alt="image-20191126145556993"></p>
+</li>
+<li><p>综上，根据病毒行为以及代码中出现的敏感字符串、关键函数等，大致可了解sub-40d18c内部有三个函数，功能分别是：新建线程来创建desktop_.ini配置文件、设置计时器来创建setup.exe文件、创建线程进行网络连接</p>
+</li>
+</ul>
+<h2 id="3-5-代码块sub-40d088"><a href="#3-5-代码块sub-40d088" class="headerlink" title="3.5-代码块sub-40d088"></a>3.5-代码块sub-40d088</h2><ul>
+<li><p>进入函数，有6个计时器，分别执行6个函数，依次查看</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003828.jpg" alt="image-20191126150054902"></p>
+</li>
+<li><p>40cee4，添加启动项、修改注册表</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003933.jpg" alt="image-20191126154346012"></p>
+</li>
+<li><p>40d040，访问网站并获取系统目录，推测是从服务器下载恶意程序</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-3923.jpg" alt="image-20191126163600580"></p>
+</li>
+<li><p>40d048，内部有两个函数，第一个同40d040，第二个执行cmd命令关闭网络共享</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-3914.jpg" alt="image-20191126160004664"></p>
+</li>
+<li><p>407430，关闭杀毒软件服务、删除杀毒软件启动项（从字符串可见为常见的杀软</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-3919.jpg" alt="image-20191126160530506"></p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003915.jpg" alt="image-20191126160445800"></p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003836.jpg" alt="image-20191126160729078"></p>
+</li>
+<li><p>40cc4c，打开URL，访问网站获取内容</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003831.jpg" alt="image-20191126162911158"></p>
+</li>
+<li><p>40c728，类似40d040，都是下载恶意代码</p>
+</li>
+<li><p>综上，sub-40d088内部这几个函数分别实现了：添加启动项、修改注册表、下载恶意代码、访问网站获取内容、关闭杀软服务、删除杀软启动项、关闭网络共享</p>
+</li>
+</ul>
+<h2 id="3-6-启动过程分析"><a href="#3-6-启动过程分析" class="headerlink" title="3.6-启动过程分析"></a>3.6-启动过程分析</h2><ul>
+<li><p>ini配置文件的操作：获取当前路径，并将“Desktop_.ini”拼接到当前路径中，同时检查此文件是否存在，若文件存在，则删除</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003927.jpg" alt="image-20200113083258560"></p>
+</li>
+<li><p>ini配置文件操作完成后，进入新的流程：为了复制病毒信息以感染其他文件，故将病毒文件信息读取到内存中；同时也设置了标记信息</p>
+<p> <img src="http://img2.21guns.top/2020-01-13-003921.jpg" alt="image-20191128091045656"></p>
+</li>
+<li><p>随后跳往4082DB处：进行了标记检查工作，来判断病毒程序是否被多次运行</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003919.jpg" alt="image-20191128090924847"></p>
+</li>
+<li><p>随后代码中出现“spo0lcv.exe”字符串：找到运行的进程“spo0lsv.exe”并终止；病毒第一次执行时，需要将自身复制一份到系统目录下，并伪装成“spo0lsv.exe”启动；</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003932.jpg" alt="image-20200113083320628"></p>
+</li>
+<li><p>字符串比较后，若当前病毒文件已经复制到了系统目录下且被伪造成了“spo0lsv.exe”，则会跳转到40845E处：释放之前申请存放病毒文件信息的内存（OD调试时，可手动修改JZ条件，使之完成跳转）</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003920.jpg" alt="image-20191128101017016"></p>
+</li>
+<li><p>随之跳往 408741：获取标记并进行检查，当标记==1时，会进入 408477来进行进一步检查（此代码块只有被感染的程序才会执行，OD打开被感染文件进行调试</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003914.jpg" alt="image-20191128101935542"></p>
+</li>
+</ul>
+<h2 id="3-7-感染过程分析"><a href="#3-7-感染过程分析" class="headerlink" title="3.7-感染过程分析"></a>3.7-感染过程分析</h2><ul>
+<li><p>内部三个子模块：前二本地感染，第三通过网络</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003910.jpg" alt="image-20191127145219156"></p>
+</li>
+<li><p>创建感染线程：找到线程回调函数</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003928.jpg" alt="image-20191127145152729"></p>
+</li>
+<li><p>感染线程的线程回调函数：遍历驱动器盘符的数目，进入到驱动器中，遍历所有可感染文件以进行病毒复制</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-3828.jpg" alt="image-20191127151719814"></p>
+</li>
+<li><p>_FindAndInfectFile：遍历驱动器下的文件信息，将文件与文件夹进行了分类，排除了特殊文件夹；在判断是否为特殊文件夹的过程中，都是以大写形式进行对比的，以防止因大小写不同而造成错误；在这可跳到处理文件的地方</p>
+<p> <img src="http://img2.21guns.top/2020-01-13-3931.jpg" alt="image-20191127170811439"></p>
+</li>
+<li><p>_FindAndInfectFile：感染前的检查工作，ini中保存的时间与刚刚获取的时间进行比较，来判断是否已经被感染</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003918.jpg" alt="image-20200113083345505"></p>
+</li>
+<li><p>如4中，若当前获取到的是文件时，开始处理文件：对文件进行检查，只要后缀为“GHO”，就判定为ghost备份文件，直接删除，防止用户还原系统（真tm的坏）</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003924.jpg" alt="image-20191127172133510"></p>
+</li>
+<li><p>一旦删除了系统的备份文件，病毒就开始肆意感染：大致分为两种，一种是本地可执行文件（如exe为后缀的），另一种是Web网页文件（如html为后缀的）</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003833.jpg" alt="image-20191127193508763"></p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-3832.jpg" alt="image-20191127193912691"></p>
+</li>
+<li><p>感染exe等本地执行文件，_InfectFile：首先将目标文件读取到内存中并获取文件名及其大小、然后将自身文件复制到目标文件前并追加目标程序的原始文件、最后添加感染标记，结束感染过程</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003905.jpg" alt="image-20191127214435254"></p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003852.jpg" alt="image-20191127214817563"></p>
+</li>
+<li><p>被感染文件 ： 病毒文件 + 原文件 + 感染标识，标识如下 </p>
+<p> <img src="http://img2.21guns.top/2020-01-13-3837.jpg" alt="image-20200113083407839"></p>
+</li>
+</ul>
+<h2 id="3-8-自我保护行为"><a href="#3-8-自我保护行为" class="headerlink" title="3.8-自我保护行为"></a>3.8-自我保护行为</h2><ul>
+<li><p>若找到标记字符，则会跳转到408477，此代码块只有被感染的程序才会执行，现IDA中打开原病毒静态分析（也可OD中打开被感染程序动态分析</p>
+</li>
+<li><p>代码段408477：从被感染文件中分离提取出原始文件（由于感染文件时写入了标记信息，根据标记可得到原始文件），执行后，在被感染文件所在目录下释放出其原始文件</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003907.jpg" alt="image-20200113083433875"></p>
+</li>
+<li><p>代码段 408584：被感染文件的主要工作是维护进程中伪造的病毒程序spo0lsv. exe，若spo被删除，则会由被感染的程序再次生成（春风吹又生，除非删除所有被感染程序）</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003916.jpg" alt="image-20191128113200558"></p>
+</li>
+</ul>
+<h1 id="04-解决方案"><a href="#04-解决方案" class="headerlink" title="04-解决方案"></a>04-解决方案</h1><h2 id="4-1-病毒特征"><a href="#4-1-病毒特征" class="headerlink" title="4.1-病毒特征"></a>4.1-病毒特征</h2><ul>
+<li><p>病毒文件的哈希值如下：</p>
+<ul>
+<li>MD5: 512301C535C88255C9A252FDF70B7A03</li>
+<li>SHA1: CA3A1070CFF311C0BA40AB60A8FE3266CFEFE870</li>
+<li>CRC32: E334747C</li>
+</ul>
+</li>
+<li><p>被感染文件中，文件最后有感染表示标识：WhBoy + 原文件名 + exe + + ascii码为1的字符 + 随机数+ ascii码为2的字符</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003829.jpg" alt="image-20200113083415753"></p>
+</li>
+</ul>
+<h2 id="4-2-手工查杀"><a href="#4-2-手工查杀" class="headerlink" title="4.2-手工查杀"></a>4.2-手工查杀</h2><ol>
+<li><p>cmd命令行下taskkill杀掉进程，或者直接利用PCHunter等工具结束进程</p>
+</li>
+<li><p>在系统目录下删除病毒文件：C:\WINDOWS\system32\drivers\spo0lsv.exe</p>
+</li>
+<li><p>删除启动项：Windows+R，键入msconfig打开服务配置窗口，切换启动窗口，取消启动项，并且记录下注册表位置</p>
+<p> <img src="http://img2.21guns.top/2020-01-13-3925.jpg" alt="img"></p>
+<p> <img src="http://img2.21guns.top/2020-01-13-003925.jpg" alt="img"></p>
+</li>
+<li><p>修改注册表：Windows+R，键入regedit打开注册表窗口，找到相应位置，并删除记录</p>
+<p> <img src="http://img2.21guns.top/2020-01-13-3911.jpg" alt="image-20200113083516026"></p>
+</li>
+</ol>
+<h2 id="4-3-专杀工具"><a href="#4-3-专杀工具" class="headerlink" title="4.3-专杀工具"></a>4.3-专杀工具</h2><ul>
+<li><p>效果图</p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-3835.jpg" alt="image-20200113083529845"></p>
+<p>  <img src="http://img2.21guns.top/2020-01-13-003917.jpg" alt="image-20200113083541900"></p>
+</li>
+<li><p>GitHub地址：<a href="https://github.com/Ry1ynn/AntiPanda" target="_blank" rel="noopener">https://github.com/Ry1ynn/AntiPanda</a></p>
+</li>
+</ul>
+<h1 id="05-参考文献"><a href="#05-参考文献" class="headerlink" title="05-参考文献"></a>05-参考文献</h1><ul>
+<li><p>《C++反汇编与逆向分析技术解密》</p>
+</li>
+<li><p><a href="https://blog.csdn.net/richard1230/article/details/79505200" target="_blank" rel="noopener">https://blog.csdn.net/richard1230/article/details/79505200</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/病毒分析/" rel="tag"># 病毒分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/16/llkGame/" rel="next" title="连连看游戏破解">
+                <i class="fa fa-chevron-left"></i> 连连看游戏破解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">好好学习 天天向上</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">135</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#01-样本概况"><span class="nav-text">01-样本概况</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-样本信息"><span class="nav-text">1.1-样本信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-测试环境"><span class="nav-text">1.2-测试环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-分析目标"><span class="nav-text">1.3-分析目标</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#02-具体行为分析"><span class="nav-text">02-具体行为分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-文件操作"><span class="nav-text">2.1-文件操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-注册表操作"><span class="nav-text">2.2-注册表操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-进程操作"><span class="nav-text">2.3-进程操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-网络操作"><span class="nav-text">2.4-网络操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-行为监控"><span class="nav-text">2.5-行为监控</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-执行监控"><span class="nav-text">2.6-执行监控</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#03-恶意代码分析"><span class="nav-text">03-恶意代码分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-脱壳"><span class="nav-text">3.1-脱壳</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-整体流程"><span class="nav-text">3.2-整体流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-代码块sub-40819c"><span class="nav-text">3.3-代码块sub-40819c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-代码块sub-40d18c"><span class="nav-text">3.4-代码块sub-40d18c</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-代码块sub-40d088"><span class="nav-text">3.5-代码块sub-40d088</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-启动过程分析"><span class="nav-text">3.6-启动过程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-7-感染过程分析"><span class="nav-text">3.7-感染过程分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-8-自我保护行为"><span class="nav-text">3.8-自我保护行为</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#04-解决方案"><span class="nav-text">04-解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-病毒特征"><span class="nav-text">4.1-病毒特征</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-手工查杀"><span class="nav-text">4.2-手工查杀</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-3-专杀工具"><span class="nav-text">4.3-专杀工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#05-参考文献"><span class="nav-text">05-参考文献</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
