@@ -253,6 +253,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2020/02/19/cve-2013-2551漏洞分析（整数溢出/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="21Guns's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/02/19/cve-2013-2551漏洞分析（整数溢出/" itemprop="url">cve-2013-2551漏洞分析（整数溢出</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-19T15:46:18+08:00">
+                2020-02-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/二进制安全/" itemprop="url" rel="index">
+                    <span itemprop="name">二进制安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>[TOC]</p>
+<h1 id="01-漏洞描述"><a href="#01-漏洞描述" class="headerlink" title="01-漏洞描述"></a>01-漏洞描述</h1><ul>
+<li>漏洞战争：该漏洞出现在 IE 中负责解析 VML（向量标记语言，用 XML 语言绘制向量图形）的 vgx.dll模块，由于在处理 VML 标签时对输入参数未做有效验证导致整数溢出。</li>
+<li><a href="https://cve.mitre.org：Use-after-free" target="_blank" rel="noopener">https://cve.mitre.org：Use-after-free</a> vulnerability in Microsoft Internet Explorer 6 through 10 allows remote attackers to execute arbitrary code via a crafted web site that triggers access to a deleted object, as demonstrated by VUPEN during a Pwn2Own competition at CanSecWest 2013, aka “Internet Explorer Use After Free Vulnerability,” a different vulnerability than CVE-2013-1308 and CVE-2013-1309.</li>
+</ul>
+<h1 id="02-测试环境"><a href="#02-测试环境" class="headerlink" title="02-测试环境"></a>02-测试环境</h1><ul>
+<li>目标系统：Windows7 专业版 SP1（虚拟机</li>
+<li>WinDbg：动态调试</li>
+<li>IDA Pro：静态分析</li>
+<li>IExplore 8：漏洞软件
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/02/19/cve-2013-2551漏洞分析（整数溢出/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://21guns.top/2020/01/24/cve-2012-0003/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1011,159 +1166,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/05/26/信息安全管理-应急响应与灾难恢复/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="21Guns's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/26/信息安全管理-应急响应与灾难恢复/" itemprop="url">信息安全管理-应急响应与灾难恢复</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-26T16:26:03+08:00">
-                2019-05-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NISP二级/" itemprop="url" rel="index">
-                    <span itemprop="name">NISP二级</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="应急响应概况"><a href="#应急响应概况" class="headerlink" title="应急响应概况"></a>应急响应概况</h1><h2 id="信息安全事件分类等级"><a href="#信息安全事件分类等级" class="headerlink" title="信息安全事件分类等级"></a>信息安全事件分类等级</h2><h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
-<li><p>GB/T 24363-2009 信息安全应急响应计划规范</p>
-<ul>
-<li><p>信息安全事件</p>
-<p>由于自然或者人为以及软硬件本身缺陷或故障的原因，对信息系统造成危害，或在信息系统內发生对社会造成负面影响的事件</p>
-</li>
-<li><p>应急响应</p>
-<p>组织为了应对突发/重大信息安全事件的发生所做的准 备，以及在事件发生后所采取的措施
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2019/05/26/信息安全管理-应急响应与灾难恢复/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </p></li></ul></li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1216,7 +1218,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">135</span>
+                  <span class="site-state-item-count">136</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
