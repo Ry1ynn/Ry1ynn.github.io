@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+
+
+
+
+  <meta name="keywords" content="脱壳逆向,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="[TOC] 01-寻找OEP pushad后，esp定律失败（壳oep处有花指令，按键1添加一个nop失效，手动右键-二进制修改为90  在主模块代码起始地址，使用Ctrl+B搜索“FF 15 ?? ?? ?? ??”，找到调用IAT的地方（或者FF 25；手动找太慢，直接搜索）  调用IAT确实是FF 15，排除宝蓝的BC++、Delphi程序，是VS的  程序跑起来后，在主模块ctrl+f搜索">
+<meta name="keywords" content="脱壳逆向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="脱壳实践笔记（反硬件断点">
+<meta property="og:url" content="http://21guns.top/2019/11/24/脱壳实践笔记（反硬件断点/index.html">
+<meta property="og:site_name" content="21Guns&#39;s blogs">
+<meta property="og:description" content="[TOC] 01-寻找OEP pushad后，esp定律失败（壳oep处有花指令，按键1添加一个nop失效，手动右键-二进制修改为90  在主模块代码起始地址，使用Ctrl+B搜索“FF 15 ?? ?? ?? ??”，找到调用IAT的地方（或者FF 25；手动找太慢，直接搜索）  调用IAT确实是FF 15，排除宝蓝的BC++、Delphi程序，是VS的  程序跑起来后，在主模块ctrl+f搜索">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020753.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020754.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020759.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20750.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020802.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020757.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020823.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020824.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020828.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020825.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020827.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020800.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020744.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020756.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020803.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20826.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020826.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-21-114529.png">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020750.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020801.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020751.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020758.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20802.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020814.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020752.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20753.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20759.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20756.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020749.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020755.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-75129.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075131.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075129.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075126.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075126.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075130.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075128.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075127.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075122.jpg">
+<meta property="og:updated_time" content="2020-02-25T05:09:40.855Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="脱壳实践笔记（反硬件断点">
+<meta name="twitter:description" content="[TOC] 01-寻找OEP pushad后，esp定律失败（壳oep处有花指令，按键1添加一个nop失效，手动右键-二进制修改为90  在主模块代码起始地址，使用Ctrl+B搜索“FF 15 ?? ?? ?? ??”，找到调用IAT的地方（或者FF 25；手动找太慢，直接搜索）  调用IAT确实是FF 15，排除宝蓝的BC++、Delphi程序，是VS的  程序跑起来后，在主模块ctrl+f搜索">
+<meta name="twitter:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020753.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://21guns.top/2019/11/24/脱壳实践笔记（反硬件断点/">
+
+
+
+
+
+  <title>脱壳实践笔记（反硬件断点 | 21Guns's blogs</title>
+  
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">21Guns's blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/11/24/脱壳实践笔记（反硬件断点/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="21Guns's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">脱壳实践笔记（反硬件断点</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-24T14:26:34+08:00">
+                2019-11-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/二进制安全/" itemprop="url" rel="index">
+                    <span itemprop="name">二进制安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>[TOC]</p>
+<h3 id="01-寻找OEP"><a href="#01-寻找OEP" class="headerlink" title="01-寻找OEP"></a>01-寻找OEP</h3><ol>
+<li><p>pushad后，esp定律失败（壳oep处有花指令，按键1添加一个nop失效，手动右键-二进制修改为90</p>
+</li>
+<li><p>在主模块代码起始地址，使用Ctrl+B搜索“FF 15 ?? ?? ?? ??”，找到调用IAT的地方（或者FF 25；手动找太慢，直接搜索）</p>
+</li>
+<li><p>调用IAT确实是FF 15，排除宝蓝的BC++、Delphi程序，是VS的</p>
+</li>
+<li><p>程序跑起来后，在主模块ctrl+f搜索指令“sub esp 0x58”，果然找到，下面还有一个call，一般就是GetVersion，断定就是VC 6.0程序<a id="more"></a></p>
+</li>
+<li><p>除此之外，还可以VC 6.0 还有winMain函数的特征（winMain、sub esp 0x58、getVersion</p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020753.jpg" alt="image-20191121161139303"></p>
+</li>
+<li><p>找到真实oep</p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020754.jpg" alt="image-20191121161440388"></p>
+</li>
+</ol>
+<h3 id="02-异常回调反硬件断点"><a href="#02-异常回调反硬件断点" class="headerlink" title="02-异常回调反硬件断点"></a>02-异常回调反硬件断点</h3><ol>
+<li><p>在OEP处发现IAT加密了<br> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020759.jpg" alt="image-20191121161834601"></p>
+</li>
+<li><p>IAT处设置硬件写入断点，发现并没有断下，真实oep处设置硬件执行，也没有断下，猜测有反硬件断点的技术；</p>
+<p> 硬件断点没有触发-&gt;程序有反调试-&gt;会清除硬件断点或者让硬件断点失效</p>
+</li>
+<li><p>清除硬件断点的方法有哪些？相当于有哪些方法可以修改寄存器？</p>
+<ol>
+<li>SetThreadContext</li>
+<li>异常回调函数中可以修改寄存器</li>
+</ol>
+</li>
+<li><p>搜索SetThreadContext函数下断，发现并未断下，说明是异常回调起的作用（并未实测，win10虚拟机中的OD，ctrl+g不能搜API名）</p>
+</li>
+</ol>
+<h3 id="03-反断点异常分析"><a href="#03-反断点异常分析" class="headerlink" title="03-反断点异常分析"></a>03-反断点异常分析</h3><h4 id="配置环境"><a href="#配置环境" class="headerlink" title="配置环境"></a>配置环境</h4><ul>
+<li><p>如何分析带有异常的程序？</p>
+<ul>
+<li>修改OD菜单-选项-调试选项：将其中的选项统统取消打钩，尽可能不忽略异常</li>
+<li>修改OD菜单-插件-StrongOD-Options：将其中跳过异常的选项取消打钩</li>
+</ul>
+</li>
+<li><p>搭建异常触发环境</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20750.jpg" alt="image-20191121163511503"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020802.jpg" alt="image-20191121163541379"></p>
+</li>
+</ul>
+<h4 id="分析异常"><a href="#分析异常" class="headerlink" title="分析异常"></a>分析异常</h4><ul>
+<li><p>不忽略程序异常运行程序，一共有7处异常，依次如下：</p>
+<p>  其中3、4尽管看起来发生的位置和异常类型是一致的，但实际上触发的位置是不同的，从堆栈能看出来二者不同（就像是，同一个API，a和b两处都可以调用，尽管被调用的API相同，但是调用的位置a和b是不同的）</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020757.jpg" alt="image-20191121163818581"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020823.jpg" alt="image-20191121163942584"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020824.jpg" alt="image-20191121164040127"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020828.jpg" alt="image-20191121164127484"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020825.jpg" alt="image-20191121164149432"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020827.jpg" alt="image-20191121164206546"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020800.jpg" alt="image-20191121164226741"></p>
+</li>
+<li><p>哪一个异常对硬件断点清0？（在异常点设置硬件断点，看能不能断下，能断下说明当前异常点前面的异常处理函数中没有对硬件断点清0）</p>
+<p>  第二个异常处下硬件执行，重新执行，能够断下来，说明第一个异常无辜</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020744.jpg" alt="image-20191121191824207"></p>
+<p>  第三个异常下断，也能断下来，说明1、2无辜</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020756.jpg" alt="image-20191121192219618"></p>
+<p>  <strong>第四个异常下断，没有断下来，说明第三次异常处理中，对硬件断点清0</strong></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020803.jpg" alt="image-20191121192554307"></p>
+</li>
+<li><p>重新运行，至第三次异常，通过堆栈窗口，发现第三次的SEH处理程序是43AF42，光标移动到此，直接enter，使其反汇编窗口中跟随，发现疑似设置清零寄存器的代码（硬件断点基于寄存器，寄存器清零即消除硬件断点</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20826.jpg" alt="image-20191121193506344"></p>
+</li>
+<li><p>将此地址设置为硬件执行断点（下面才是硬件断点清零的操作，所以此处可以下断），重新运行至此时，直接dump内存保存下来（dump时不用动其他设置，直接点脱壳即可，因为仅仅是为了看代码，能不能运行无所谓；之所以在此处dump，是为了后面IDA打开时，能直接停在43AF42时</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020826.jpg" alt="image-20191121193930282"></p>
+</li>
+<li><p>IDA中打开上述dump后的文件，打开就在43AF42处（如上所言）</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-21-114529.png" alt="image-20191121194526170"></p>
+</li>
+<li><p>IDA中，structures窗口-edit-add struct type来添加新的结构体类型（mac 没有insert按键）</p>
+<p>  最终操作后如下，确实是一个断点清零0的操作（具体结构体添加的操作，见逆向实战-笔记3-IDA使用-结构体部分）</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020750.jpg" alt="image-20191121195243343"></p>
+<p>  IDA中，F5解析为C代码（进一步验证</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020801.jpg" alt="image-20191121195415253"></p>
+</li>
+<li><p>（硬件断点设置和取消，是通过设置寄存器来实现的的；是经过一个context结构体的，而非直接改dr0、Dr1这些单个的位</p>
+</li>
+</ul>
+<h4 id="突破反硬件断点"><a href="#突破反硬件断点" class="headerlink" title="突破反硬件断点"></a>突破反硬件断点</h4><ul>
+<li><p>已经找到消除硬件断点的地方了，只需要跳过即可，可以将0043AF57以下的代码到0043AF72全部nop</p>
+</li>
+<li><p>恢复之前的异常触发环境，使其能忽略异常（调试选项-异常-钩都打上、strongOD-option-skip some exception也打上）</p>
+</li>
+<li><p>找到真实oep的地方，设置硬件执行断点，在消除硬件断点的前面也设置硬件执行断点（42为消除、86为oep</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020751.jpg" alt="image-20191121201846874"></p>
+</li>
+<li><p>重新运行，首先会断在42处（因为设置了硬件断点，他要消除），在这将关键代码nop掉，这样，OEP那就能成功断下来</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020758.jpg" alt="image-20191121202059712"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20802.jpg" alt="image-20191121202157938"></p>
+</li>
+<li><p>像这样，只要每次设置硬件断点时，程序若要消除这些硬件断点，一定会跳到42处，只要跳到这，就将其nop掉，这样，后面的硬件断点就能正常断下了</p>
+</li>
+</ul>
+<h3 id="04-填充IAT的地方"><a href="#04-填充IAT的地方" class="headerlink" title="04-填充IAT的地方"></a>04-填充IAT的地方</h3><ul>
+<li><p>IAT处设置硬件写入断点，重新运行，又到了反硬件断点的地方，手动nop掉，继续，成功断在IAT写入的地方（由于是写入断点，陷阱类，eip指向下句）</p>
+<p>  先断在这，找了找，不是</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020814.jpg" alt="image-20191121202901653"></p>
+<p>  后断在这</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020752.jpg" alt="image-20191121203813185"></p>
+</li>
+<li><p>第二次断的地方，918C处，向上翻并没有发现，ctrl+up键进行微调，成功找到（ctrl+up时关掉mac的键盘映射）</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20753.jpg" alt="image-20191121204003173"></p>
+</li>
+</ul>
+<h3 id="05-获取API地址的地方"><a href="#05-获取API地址的地方" class="headerlink" title="05-获取API地址的地方"></a>05-获取API地址的地方</h3><ul>
+<li><p>写脚本的一般思路：API地址获取后，保存地址到临时变量，在填充IAT时，填充这个临时变量的值（即真正API的地址），而非经过壳代码处理后的加密值</p>
+</li>
+<li><p>从8A填充IAT的地方，F7单步向下走，时刻关注寄存器，看是否出现“xxx.yyy”的形式（尤其是eax寄存器</p>
+</li>
+<li><p>若遇到循环，想办法跳出，5个关键点：向上跳的循环、循环跳到哪、二者之间的条件跳转、条件跳转何时跳出循环何时仍在循环内、下断点在跳出循环的位置</p>
+</li>
+<li><p>第一个循环（crtl+F7自动跑，F7暂停）</p>
+<p>  1：向上跳，标示是一个循环；</p>
+<p>  2: 向上跳的循环，跳到此；</p>
+<p>  3/4: 12之间的Jxx条件跳转；</p>
+<p>  由下到上，即由1-2之间找跳转，1、3、4均是；</p>
+<p>  先测试1的，若跳出循环，则下在5，测试，发现程序跑到真实oep处，不对，舍去；</p>
+<p>  再测试3，发现正常循环内，3压根执行不到；</p>
+<p>  再测试4，若要出循环，就不跳，在6处下断，F9运行至此，再ctrl+F7，发现可以出循环，正确</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20759.jpg" alt="image-20191122084136249"></p>
+</li>
+<li><p>第二个循环</p>
+<p>  自上而下测试，先测试1处的，要跳出，需要在1下面，即4，但4也是往上跳，因此再往下，断点下载5，F9运行至此，继续F7单步；</p>
+<p>  3处，发现无论跳与不跳，都要执行到1，都会再往上跳，故舍去；</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-20756.jpg" alt="image-20191122090542037"></p>
+</li>
+<li><p>跳出第二个循环后，就要慢点F7了，时刻关注寄存器是否出现xxx.yyy的形式（重点eax）</p>
+</li>
+<li><p>跳出第二个循环后，继续F7，发现又进入了第一个循环，再次F9使其跳出循环1，然后又进入循环2，也再次F9跳出循环2，继续F7，最终终于到此</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020749.jpg" alt="image-20191122094732050"></p>
+</li>
+<li><p>99处下断，测试一下，是否每次运行完此条，eax都会出现xxx.yyy，发现确实如此</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-020755.jpg" alt="image-20191122095727759"></p>
+</li>
+<li><p>也注意到，这条指令是出现在循环1内部的，想想也对，这种操作肯定是需要循环操作的，因此，以后再遇到循环，先看其内部，有没有这种操作，先测试再说，万一就是呢</p>
+</li>
+<li><p>先不管99处是否是获取API地址的call，反正运行99后，寄存器中会出现xxx.yyy这种形式，这样就够了，这样就能够写脚本了（停在9F，反正eax有真正的函数地址，即xxx.yyy形式）</p>
+</li>
+<li><p>注意：</p>
+<ul>
+<li>不知道内部究竟是怎么循环的，跳过了循环1，还可能进入循环2，再跳出循环2后，还可能再次进入循环1……</li>
+<li>没什么规律可循，反正就是坚持这样的原则：碰到循环，就想法跳出循环</li>
+<li>玄学问题，不要深究，能找到位置就行</li>
+</ul>
+</li>
+<li><p>妈耶，我都要被自己啰嗦死了（可能这就是菜吧</p>
+</li>
+</ul>
+<h3 id="06-写OD脚本自动操作"><a href="#06-写OD脚本自动操作" class="headerlink" title="06-写OD脚本自动操作"></a>06-写OD脚本自动操作</h3><ul>
+<li>三个通用的地址<ul>
+<li>OEP</li>
+<li>填充IAT</li>
+<li>获取API地址</li>
+<li>（执行完相关指令的下一位置，而非当前位置）</li>
+</ul>
+</li>
+<li>通用思路<ul>
+<li>获取API地址处：获取寄存器的值，赋值给临时变量（xxx.yyy，即API真正地址</li>
+<li>填充IAT处：直接填充临时变量的值，即填充真实API地址，而非被壳修改过的</li>
+<li>OEP处：一直运行，直至运行到OEP，标志填充IAT结束</li>
+</ul>
+</li>
+<li>特殊地址：清除硬件断点的地方<ul>
+<li>因不同的壳而异</li>
+<li>再如，有的壳，填充IAT的代码在壳申请的内存空间中，这样，每次地址都不相同，需要先获取申请后的基地址</li>
+</ul>
+</li>
+<li>步骤<ul>
+<li>右键-脚本功能-脚本运行窗口</li>
+<li>右键-读取脚本-打开相应脚本文件</li>
+<li>先用OD运行程序到壳OEP处，再使用脚本（不可在一开始的系统断点处就使用脚本，会出错）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 找到相关地址（前三个是通用的）   </span></span><br><span class="line">MOV vOEP,<span class="number">00409486</span> <span class="comment">// OEP地址</span></span><br><span class="line">MOV vGetAPIAddr,<span class="number">438F</span>9F <span class="comment">// 获取API地址</span></span><br><span class="line">MOV vWriteIATAddr,<span class="number">43918</span>c <span class="comment">// 写入IAT地址</span></span><br><span class="line">MOV vHardwarePointAddr,<span class="number">0043</span>AF51 <span class="comment">// 清除硬件断点的地方</span></span><br><span class="line">MOV vAPIaddr,<span class="number">0</span><span class="comment">// 临时变量存储真实API地址</span></span><br><span class="line"><span class="comment">// 2. 设置断点（先清除其他，防干扰）  </span></span><br><span class="line">BPHWC<span class="comment">// 清除所有硬件断点 </span></span><br><span class="line">BC<span class="comment">// 清除所有软件断点</span></span><br><span class="line"></span><br><span class="line">BPHWS vHardwarePointAddr,<span class="string">"x"</span> <span class="comment">// 在此处下断，运行到此即停止</span></span><br><span class="line">BPHWS vOEP,<span class="string">"x"</span> <span class="comment">//</span></span><br><span class="line">BPHWS vGetAPIAddr,<span class="string">"x"</span> <span class="comment">// </span></span><br><span class="line">BPHWS vWriteIATAddr,<span class="string">"x"</span> <span class="comment">//</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//（记住大体形式，举一反三）</span></span><br><span class="line"><span class="comment">// 3.0 循环：F9运行程序</span></span><br><span class="line">LOOP_1: </span><br><span class="line">	RUN</span><br><span class="line"><span class="comment">// 3.1 清除硬件断点：若断在此，则将其NOP掉10h个字节</span></span><br><span class="line">	CMP eip,vHardwarePointAddr</span><br><span class="line">	JNZ SIGN_1</span><br><span class="line">	fill vHardwarePointAddr,<span class="number">22</span>,<span class="number">90</span><span class="comment">//NOP 10h个字节</span></span><br><span class="line"><span class="comment">// 3.2 获取API地址：若断在此，则保存API地址到临时变量</span></span><br><span class="line">SIGN_1:</span><br><span class="line">	CMP eip,vGetAPIAddr </span><br><span class="line">  JNZ SIGN_2</span><br><span class="line">	MOV vAPIaddr,eax</span><br><span class="line"><span class="comment">// 3.3 填充IAT：若断在此，则填充真实API地址（临时变量）</span></span><br><span class="line">SIGN_2:</span><br><span class="line">	CMP eip,vWriteIATAddr </span><br><span class="line">  JNZ SIGN_3</span><br><span class="line">	mov [edi], vAPIaddr<span class="comment">//依据填充IAT的指令，来决定目的是谁</span></span><br><span class="line"><span class="comment">// 3.4 OEP：若断在此，则结束，否则继续循环</span></span><br><span class="line">SIGN_3:</span><br><span class="line">	cmp eip,vOEP </span><br><span class="line">  JE EXIT_1</span><br><span class="line">	JMP LOOP_1</span><br><span class="line"><span class="comment">// 3.5 弹框，标示结束</span></span><br><span class="line">EXIT_1:</span><br><span class="line">	MSG <span class="string">"修复完毕"</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>当所有的修复完毕之后，发现IAT不是一个典型的IAT数组 ，隔4个出现一个（长型-地址）</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-75129.jpg" alt="image-20191122145503344"></p>
+</li>
+<li><p>转换hex窗口，再仔细观察，发现每一个地址后面都多了一个0，因此还需要继续修复</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075131.jpg" alt="image-20191122145717687"></p>
+</li>
+<li><p>工具：通用导入表修复工具</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075129.jpg" alt="image-20191122152618812"></p>
+</li>
+<li><p>工具使用</p>
+<ul>
+<li>PChunter查看06.exe的进程ID</li>
+<li>代码起始和结尾：程序代码段要包含在其中</li>
+<li>新的IAT VA：新建的IAT放在哪，放在壳代码所在区段中就行，因为脱壳后，壳所在区段肯定用不着了（脱壳后，仅仅是改变OEP为真实的OEP，让程序跳过壳代码，壳那块区段还是存在的</li>
+<li>修复输入表：一般就别点了，因为在这是新建一个IAT表，ImportREC是通过IAT表来修复输入表的</li>
+</ul>
+</li>
+<li><p>原理：</p>
+<ul>
+<li><p>在代码段里找调用IAT的地方，如</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075126.jpg" alt="image-20191122153036972"></p>
+</li>
+<li><p>在0x43CFCD中，一定保存的是 getVersion真实的地址，获取真实地址</p>
+</li>
+<li><p>找一个新的地方，将这些地址按照正确的格式存起来</p>
+</li>
+<li><p>OD脚本跑完后，IAT中的地址其实也是正确的，只不过格式不多（每一个后面都加了0），而ImportREC工具是依据IAT来修复输入表的，格式错误他肯定是识别不出来，所以要新建一个格式正确的IAT数组</p>
+</li>
+<li><p>（仅仅看代码段中调用了外部dll的哪些API，没调用的哪些自然不用管，因为程序运行也用不到啊</p>
+</li>
+</ul>
+</li>
+<li><p>效果</p>
+<ul>
+<li><p>修复之前，代码段调用和IAT在内存中：</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075126.jpg" alt="image-20191122153036972"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075130.jpg" alt="image-20191122153734532"></p>
+</li>
+<li><p>修复后，代码段调用时地址变了，IAT也在其他内存新建了一份</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075128.jpg" alt="image-20191122153814266"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="08-dump内存"><a href="#08-dump内存" class="headerlink" title="08-dump内存"></a>08-dump内存</h3><ul>
+<li><p>OD脚本跑完后，正好停在真实OEP处，脱壳保存为06.dump.exe</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075127.jpg" alt="image-20191122154305338"></p>
+</li>
+<li><p>利用7中，新建的IAT表来修复输入表（在这就别点重建输入表了，出错几率大，还是用专业的ImportREC，大家各司其职</p>
+</li>
+</ul>
+<h3 id="09-修复输入表（依据新建的IAT"><a href="#09-修复输入表（依据新建的IAT" class="headerlink" title="09-修复输入表（依据新建的IAT"></a>09-修复输入表（依据新建的IAT</h3><ul>
+<li><p>先IAT，再输入表，就是通过IAT重建输入表，转储至8中dump后的文件</p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-075122.jpg" alt="image-20191122154752632"></p>
+</li>
+<li><p>dump后打开失败，转储后打开成功，脱壳成功！</p>
+</li>
+</ul>
+<h3 id="10-参考"><a href="#10-参考" class="headerlink" title="10-参考"></a>10-参考</h3><ul>
+<li>15PB 脱壳课程</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/脱壳逆向/" rel="tag"># 脱壳逆向</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/22/脱壳实践笔记（动态空间填充IAT/" rel="next" title="脱壳实践笔记（动态空间填充IAT">
+                <i class="fa fa-chevron-left"></i> 脱壳实践笔记（动态空间填充IAT
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/29/pandaVirus/" rel="prev" title="熊猫烧香病毒分析">
+                熊猫烧香病毒分析 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.jpg" alt="Ry1ynn">
+            
+              <p class="site-author-name" itemprop="name">Ry1ynn</p>
+              <p class="site-description motion-element" itemprop="description">好好学习 天天向上</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">138</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">60</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Ry1ynn" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ry1ynn_pri@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>Weibo</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="/images/weixin.JPG" target="_blank" title="Wechat">
+                      
+                        <i class="fa fa-fw fa-weixin"></i>Wechat</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.t00ls.net/" title="T00ls" target="_blank">T00ls</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.freebuf.com/" title="FreeBuf" target="_blank">FreeBuf</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.sec-wiki.com/" title="SecWiki" target="_blank">SecWiki</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.seebug.org/" title="Seebug" target="_blank">Seebug</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.91ri.org/" title="91Ri" target="_blank">91Ri</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.pediy.com/" title="看雪" target="_blank">看雪</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.52pojie.cn/" title="吾爱破解" target="_blank">吾爱破解</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.anquanke.com/" title="安全客" target="_blank">安全客</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://www.ichunqiu.com/" title="i春秋" target="_blank">i春秋</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#01-寻找OEP"><span class="nav-text">01-寻找OEP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#02-异常回调反硬件断点"><span class="nav-text">02-异常回调反硬件断点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#03-反断点异常分析"><span class="nav-text">03-反断点异常分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置环境"><span class="nav-text">配置环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析异常"><span class="nav-text">分析异常</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#突破反硬件断点"><span class="nav-text">突破反硬件断点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#04-填充IAT的地方"><span class="nav-text">04-填充IAT的地方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#05-获取API地址的地方"><span class="nav-text">05-获取API地址的地方</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#06-写OD脚本自动操作"><span class="nav-text">06-写OD脚本自动操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#08-dump内存"><span class="nav-text">08-dump内存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#09-修复输入表（依据新建的IAT"><span class="nav-text">09-修复输入表（依据新建的IAT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-参考"><span class="nav-text">10-参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ry1ynn</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script id="ribbon" type="text/javascript" size="300" alpha="0.5" zindex="0" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

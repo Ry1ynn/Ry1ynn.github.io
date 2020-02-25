@@ -880,7 +880,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/11/16/llkGame/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/11/24/脱壳实践笔记（反硬件断点/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -899,7 +899,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/16/llkGame/" itemprop="url">连连看游戏破解</a></h1>
+                <a class="post-title-link" href="/2019/11/24/脱壳实践笔记（反硬件断点/" itemprop="url">脱壳实践笔记（反硬件断点</a></h1>
         
 
         <div class="post-meta">
@@ -911,8 +911,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-16T17:32:17+08:00">
-                2019-11-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-24T14:26:34+08:00">
+                2019-11-24
               </time>
             
 
@@ -973,19 +973,24 @@
       
         
           <p>[TOC]</p>
-<h1 id="01-样本概况"><a href="#01-样本概况" class="headerlink" title="01-样本概况"></a>01-样本概况</h1><h2 id="1-1-应用程序信息"><a href="#1-1-应用程序信息" class="headerlink" title="1.1-应用程序信息"></a>1.1-应用程序信息</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">文件: qqllk.exe</span><br><span class="line">大小: <span class="number">1796608</span> bytes</span><br><span class="line">修改时间: <span class="number">2011</span>年<span class="number">11</span>月<span class="number">15</span>日, <span class="number">19</span>:<span class="number">37</span>:<span class="number">34</span></span><br><span class="line">MD5: <span class="number">814</span>DE98DC72E4AB0001BA7F287239D2D</span><br><span class="line">SHA1: <span class="number">0</span>DF1596821188E2333B8F5B8AE94DB775C796B3F</span><br><span class="line">CRC32: <span class="number">8437</span>D6BE</span><br><span class="line">  </span><br><span class="line">文件: qqllk.ocx</span><br><span class="line">大小: <span class="number">903168</span> bytes</span><br><span class="line">修改时间: <span class="number">2008</span>年<span class="number">8</span>月<span class="number">8</span>日, <span class="number">0</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line">MD5: <span class="number">58293</span>D9765FD06BCDFFA638CB596E76C</span><br><span class="line">SHA1: <span class="number">64489B</span>5B2A38A64004D63064761D46350052976C</span><br><span class="line">CRC32: <span class="number">3</span>C82EFC8</span><br><span class="line">  </span><br><span class="line">文件: kyodai.exe</span><br><span class="line">大小: <span class="number">417857</span> bytes</span><br><span class="line">文件版本:<span class="number">0</span>, <span class="number">10</span>, <span class="number">4</span>, <span class="number">10</span></span><br><span class="line">修改时间: <span class="number">2008</span>年<span class="number">8</span>月<span class="number">8</span>日, <span class="number">0</span>:<span class="number">00</span>:<span class="number">00</span></span><br><span class="line">MD5: AFE5BAEB6F29A197BC935286F55D9366</span><br><span class="line">SHA1: DBB8866904F9621010B428CE12777B392C3F06CE</span><br><span class="line">CRC32: <span class="number">0</span>C1469BB</span><br></pre></td></tr></table></figure>
-<h2 id="1-2-分析环境及工具"><a href="#1-2-分析环境及工具" class="headerlink" title="1.2-分析环境及工具"></a>1.2-分析环境及工具</h2><ul>
-<li>系统环境: Windows10-64位、Windows7-32位
+<h3 id="01-寻找OEP"><a href="#01-寻找OEP" class="headerlink" title="01-寻找OEP"></a>01-寻找OEP</h3><ol>
+<li><p>pushad后，esp定律失败（壳oep处有花指令，按键1添加一个nop失效，手动右键-二进制修改为90</p>
+</li>
+<li><p>在主模块代码起始地址，使用Ctrl+B搜索“FF 15 ?? ?? ?? ??”，找到调用IAT的地方（或者FF 25；手动找太慢，直接搜索）</p>
+</li>
+<li><p>调用IAT确实是FF 15，排除宝蓝的BC++、Delphi程序，是VS的</p>
+</li>
+<li><p>程序跑起来后，在主模块ctrl+f搜索指令“sub esp 0x58”，果然找到，下面还有一个call，一般就是GetVersion，断定就是VC 6.0程序
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/16/llkGame/#more" rel="contents">
+            <a class="btn" href="/2019/11/24/脱壳实践笔记（反硬件断点/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></div>
+    </p></li></ol></div>
     
     
     
@@ -1029,7 +1034,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/11/14/010editor/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/11/22/脱壳实践笔记（动态空间填充IAT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -1048,7 +1053,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/11/14/010editor/" itemprop="url">010editor注册机</a></h1>
+                <a class="post-title-link" href="/2019/11/22/脱壳实践笔记（动态空间填充IAT/" itemprop="url">脱壳实践笔记（动态空间填充IAT</a></h1>
         
 
         <div class="post-meta">
@@ -1060,8 +1065,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-14T11:40:40+08:00">
-                2019-11-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-22T12:56:50+08:00">
+                2019-11-22
               </time>
             
 
@@ -1121,21 +1126,24 @@
 
       
         
-          <p>[toc]</p>
-<h1 id="01-样本概况"><a href="#01-样本概况" class="headerlink" title="01-样本概况"></a>01-样本概况</h1><h2 id="1-1-应用程序信息"><a href="#1-1-应用程序信息" class="headerlink" title="1.1-应用程序信息"></a>1.1-应用程序信息</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">文件: <span class="number">010</span>Editor.exe</span><br><span class="line">大小: <span class="number">46891744</span> bytes</span><br><span class="line">文件版本:<span class="number">8.0</span><span class="number">.1</span></span><br><span class="line">修改时间: <span class="number">2019</span>年<span class="number">11</span>月<span class="number">12</span>日, <span class="number">21</span>:<span class="number">05</span>:<span class="number">55</span></span><br><span class="line">MD5: <span class="number">67399</span>A3650BE615DF420393758C799CD</span><br><span class="line">SHA1: <span class="number">95</span>CC3DBFEF9781C73D147C44E179EDBAFAC37F42</span><br><span class="line">CRC32: <span class="number">8</span>A47BA40</span><br></pre></td></tr></table></figure>
-<h2 id="1-2-分析环境及工具"><a href="#1-2-分析环境及工具" class="headerlink" title="1.2-分析环境及工具"></a>1.2-分析环境及工具</h2><ul>
-<li>系统环境: Windows10-64位、Windows7-32位</li>
-<li>工具: 010Editor、OllyDebug、IDA、VS 2017
+          <p>[TOC]</p>
+<h3 id="01-找OEP：esp定律"><a href="#01-找OEP：esp定律" class="headerlink" title="01-找OEP：esp定律"></a>01-找OEP：esp定律</h3><ul>
+<li><p>F8过PUSHFD、esp右键-HW break、F9</p>
+</li>
+<li><p>单步几下到达：有个sub esp,0x58，下面还有一个call（一般就是GetVersion），故可判定VC 6.0</p>
+<p>  <img src="http://img2.21guns.top/2019-11-22-135527.jpg" alt="image-20191122185855905"></p>
+</li>
+<li><p>下面的WinMain也算是Vc6.0的特征
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2019/11/14/010editor/#more" rel="contents">
+            <a class="btn" href="/2019/11/22/脱壳实践笔记（动态空间填充IAT/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></div>
+    </p></li></ul></div>
     
     
     
@@ -1218,7 +1226,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">136</span>
+                  <span class="site-state-item-count">138</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1240,7 +1248,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-count">60</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
