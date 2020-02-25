@@ -81,34 +81,34 @@
 <meta name="description" content="[TOC] 01-找OEP：esp定律 F8过PUSHFD、esp右键-HW break、F9  单步几下到达：有个sub esp,0x58，下面还有一个call（一般就是GetVersion），故可判定VC 6.0     下面的WinMain也算是Vc6.0的特征">
 <meta name="keywords" content="脱壳逆向">
 <meta property="og:type" content="article">
-<meta property="og:title" content="脱壳实践笔记（动态空间填充IAT">
-<meta property="og:url" content="http://21guns.top/2019/11/22/脱壳实践笔记（动态空间填充IAT/index.html">
+<meta property="og:title" content="脱壳实践笔记-动态空间填充IAT">
+<meta property="og:url" content="http://21guns.top/2019/11/22/脱壳实践笔记-动态空间填充IAT/index.html">
 <meta property="og:site_name" content="21Guns&#39;s blogs">
 <meta property="og:description" content="[TOC] 01-找OEP：esp定律 F8过PUSHFD、esp右键-HW break、F9  单步几下到达：有个sub esp,0x58，下面还有一个call（一般就是GetVersion），故可判定VC 6.0     下面的WinMain也算是Vc6.0的特征">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135527.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135521.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135523.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135525.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135517.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-20-134146.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-20-134149.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-20-134143.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135518.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135522.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135526.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-20-134148.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-20-134150.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-20-134151.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135524.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135519.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135515.jpg">
-<meta property="og:image" content="http://img2.21guns.top/2019-11-22-135520.jpg">
-<meta property="og:updated_time" content="2020-02-25T05:09:59.059Z">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135527.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135521.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135523.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135525.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135517.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134146.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134149.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134143.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135518.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135522.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135526.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134148.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134150.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134151.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135524.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135519.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135515.jpg">
+<meta property="og:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135520.jpg">
+<meta property="og:updated_time" content="2020-02-25T05:24:38.249Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="脱壳实践笔记（动态空间填充IAT">
+<meta name="twitter:title" content="脱壳实践笔记-动态空间填充IAT">
 <meta name="twitter:description" content="[TOC] 01-找OEP：esp定律 F8过PUSHFD、esp右键-HW break、F9  单步几下到达：有个sub esp,0x58，下面还有一个call（一般就是GetVersion），故可判定VC 6.0     下面的WinMain也算是Vc6.0的特征">
-<meta name="twitter:image" content="http://img2.21guns.top/2019-11-22-135527.jpg">
+<meta name="twitter:image" content="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135527.jpg">
 
 
 
@@ -138,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://21guns.top/2019/11/22/脱壳实践笔记（动态空间填充IAT/">
+  <link rel="canonical" href="http://21guns.top/2019/11/22/脱壳实践笔记-动态空间填充IAT/">
 
 
 
 
 
-  <title>脱壳实践笔记（动态空间填充IAT | 21Guns's blogs</title>
+  <title>脱壳实践笔记-动态空间填充IAT | 21Guns's blogs</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/11/22/脱壳实践笔记（动态空间填充IAT/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2019/11/22/脱壳实践笔记-动态空间填充IAT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">脱壳实践笔记（动态空间填充IAT</h1>
+          <h1 class="post-title" itemprop="name headline">脱壳实践笔记-动态空间填充IAT</h1>
         
 
         <div class="post-meta">
@@ -367,10 +367,10 @@
 <li><p>F8过PUSHFD、esp右键-HW break、F9</p>
 </li>
 <li><p>单步几下到达：有个sub esp,0x58，下面还有一个call（一般就是GetVersion），故可判定VC 6.0</p>
-<p>  <img src="http://img2.21guns.top/2019-11-22-135527.jpg" alt="image-20191122185855905"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135527.jpg" alt="image-20191122185855905"></p>
 </li>
 <li><p>下面的WinMain也算是Vc6.0的特征<a id="more"></a></p>
-<p>  <img src="http://img2.21guns.top/2019-11-22-135521.jpg" alt="image-20191122185927427"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135521.jpg" alt="image-20191122185927427"></p>
 </li>
 <li><p>若pushad与pushfd连着，则fd之后再下断</p>
 </li>
@@ -387,15 +387,15 @@
 </ul>
 <h3 id="02-填充IAT的地址是动态变化的"><a href="#02-填充IAT的地址是动态变化的" class="headerlink" title="02-填充IAT的地址是动态变化的"></a>02-填充IAT的地址是动态变化的</h3><ol>
 <li><p>FF 15那个call IAT的地方，数据窗跟随，IAT处异常，IAT被壳修改了</p>
-<p> <img src="http://img2.21guns.top/2019-11-22-135523.jpg" alt="image-20191122190023454"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135523.jpg" alt="image-20191122190023454"></p>
 </li>
 <li><p>IAT处下硬件写入断点，重新运行，检查断下的地方是否正确（有时没有那么准确，一下就到断在理想位置；通过上面的地址和值判断</p>
 </li>
 <li><p>第一次断在rep movs那，硬件写入为陷阱类，指向下一条，故rep movs的上一条才是；rep movs 物理上一条为JB语句，也不可能是其他地方jmp过来的，jmp指令不可能触发硬件写入，故舍去</p>
-<p> <img src="http://img2.21guns.top/2019-11-22-135525.jpg" alt="image-20191122191018196"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135525.jpg" alt="image-20191122191018196"></p>
 </li>
 <li><p>再一次断在call处，目的地址同1中都是475080，故这就是（源地址不同，但都是xx5039，可能是一个偏移</p>
-<p> <img src="http://img2.21guns.top/2019-11-22-135517.jpg" alt="image-20191122191140575"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135517.jpg" alt="image-20191122191140575"></p>
 </li>
 <li><p>在mov 上设置硬件执行断点，去掉原来的硬件写入，重新运行，发现有时会断下，有时断不下；而硬件写入时，每次都会准确断下，推测此指令所在地址是动态变化的</p>
 </li>
@@ -412,13 +412,13 @@
 </ol>
 <h3 id="03-准确找到填充IAT的地方"><a href="#03-准确找到填充IAT的地方" class="headerlink" title="03-准确找到填充IAT的地方"></a>03-准确找到填充IAT的地方</h3><ol>
 <li><p>调用VirtualAlloc的地方<code>0047A37D CALL EAX</code> ，此处下断，运行至此时F8，得到eax即基地址 0x1F0000</p>
-<p> <img src="http://img2.21guns.top/2019-11-20-134146.jpg" alt="image-20191120191855196"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134146.jpg" alt="image-20191120191855196"></p>
 </li>
 <li><p>基地址+填充IAT指令的偏移，0x1F0000 + 0x0895 = 0x1F0895，跳到此处，下硬件执行（此时刚申请完内存，具体代码还没有拷过去，所以是一堆00，不打紧，照样下断</p>
-<p> <img src="http://img2.21guns.top/2019-11-20-134149.jpg" alt="image-20191120191920293"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134149.jpg" alt="image-20191120191920293"></p>
 </li>
 <li><p>F9运行，发现断在0x1F0895（此时就有代码了</p>
-<p> <img src="http://img2.21guns.top/2019-11-20-134143.jpg" alt="image-20191120191815132"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134143.jpg" alt="image-20191120191815132"></p>
 </li>
 <li><p>这样就可保证，每次都会断在填充IAT处（不像一开始有时候断成功，有时候失败</p>
 </li>
@@ -430,26 +430,26 @@
 </ol>
 <h3 id="05-找获取API地址的地方"><a href="#05-找获取API地址的地方" class="headerlink" title="05-找获取API地址的地方"></a>05-找获取API地址的地方</h3><ol>
 <li><p>每次运行，都要获取壳代码申请的内存空间的首地址，此时为1f0000（有随机性，每次申请的都不一样，故如此（系统有伪随机性，何况是在虚拟中，尽管如此，也要获取，确保万无一失</p>
-<p> <img src="http://img2.21guns.top/2019-11-22-135518.jpg" alt="image-20191122192636153"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135518.jpg" alt="image-20191122192636153"></p>
 </li>
 <li><p>填充IAT的位置偏移0895+基地址1f0000=1f0895，下硬件执行，运行到此</p>
-<p> <img src="http://img2.21guns.top/2019-11-22-135522.jpg" alt="image-20191122193041387"></p>
-<p> <img src="http://img2.21guns.top/2019-11-22-135526.jpg" alt="image-20191122193108680"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135522.jpg" alt="image-20191122193041387"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135526.jpg" alt="image-20191122193108680"></p>
 </li>
 <li><p>F7单步向下执行，发现进入循环，暂不看代码窗口，只关注堆栈窗口，发现是挨个字符的判断（一个函数名中全部字符的循环</p>
 </li>
 <li><p>运行到向上跳的jmp时，就是循环语句，在本jmp指令与它跳往的地方，二者之间，找JXX条件跳转语句，JXX一般就是跳出循环的</p>
-<p> <img src="http://img2.21guns.top/2019-11-20-134148.jpg" alt="image-20191120202646938"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134148.jpg" alt="image-20191120202646938"></p>
 </li>
 <li><p>在跳出的xx1ccc下断，F9测试一下，发现就不是一个函数名中各个字符的循环了，而是一个个函数名的循环，表示确实是跳出了内层的循环</p>
 </li>
 <li><p>在4的基础上继续F7单步，继续找负责本层循环的jxx条件跳转语句（这一个逻辑正好与4相反，4:跳则出循环，5:不跳才是出循环，但实质相同 </p>
-<p> <img src="http://img2.21guns.top/2019-11-20-134150.jpg" alt="image-20191120203141485"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134150.jpg" alt="image-20191120203141485"></p>
 </li>
 <li><p>4的循环时一个函数名字符串中各个字符的循环，5的循环是多个函数名的循环，猜测，接下来就是多个dll的循环了（函数名称字符串有多个字符、一个dll有多个函数、一个exe有多个dll）</p>
 </li>
 <li><p>在5的基础上，继续F7单步，此时就要慢点了，快要到关键点了，要时刻关注寄存器窗口，肯定会出现xxx.yyy此种形式；发现1911执行后，eax中出现xxx.yyy</p>
-<p> <img src="http://img2.21guns.top/2019-11-20-134151.jpg" alt="image-20191120204525809"></p>
+<p> <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-20-134151.jpg" alt="image-20191120204525809"></p>
 </li>
 <li><p>这就是所谓获取API地址的地方（不管这个值是怎么出来的，我只知道，运行到此时，eax寄存器中有我想要的东西：原始的API地址）</p>
 </li>
@@ -459,15 +459,15 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 基础模版</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 找到三个地址</span></span><br><span class="line">MOV dwGetAPIAddr,<span class="number">004385B</span>F</span><br><span class="line">MOV dwWriteIATAddr, <span class="number">004385F</span>0</span><br><span class="line">MOV dwOEP,<span class="number">00409486</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 设置断点（设置之前先清除所有</span></span><br><span class="line">BC    <span class="comment">// 清除所有软件断点</span></span><br><span class="line">BPHWC <span class="comment">// 清除所有硬件断点</span></span><br><span class="line">BPMC  <span class="comment">// 清除所有内存断点</span></span><br><span class="line"></span><br><span class="line">BPHWS dwGetAPIAddr, <span class="string">"x"</span> <span class="comment">//当执行到此地址时产生中断.</span></span><br><span class="line">BPHWS dwWriteIATAddr, <span class="string">"x"</span> <span class="comment">//当执行到此地址时产生中断.</span></span><br><span class="line">BPHWS dwOEP, <span class="string">"x"</span> <span class="comment">//当执行到此地址时产生中断.</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 循环</span></span><br><span class="line">LOOP_START:</span><br><span class="line">  RUN   <span class="comment">// 运行，即F9</span></span><br><span class="line">  CMP dwGetAPIAddr,eip</span><br><span class="line">  JNZ case1</span><br><span class="line">  MOV dwTmp,eax<span class="comment">// 将真实API地址保存至临时变量</span></span><br><span class="line">  JMP LOOP_START</span><br><span class="line">case1:</span><br><span class="line">  CMP dwWriteIATAddr,eip  </span><br><span class="line">  JNZ case2  </span><br><span class="line">  MOV [edi],dwTmp<span class="comment">// 将真实API地址填充至IAT表</span></span><br><span class="line">  JMP LOOP_START</span><br><span class="line">case2:</span><br><span class="line">  CMP dwOEP,eip  </span><br><span class="line">  JNZ LOOP_START  <span class="comment">// 继续循环</span></span><br><span class="line">  MSG <span class="string">"到达OEP!脚本结束"</span><span class="comment">// 若达到OEP则结束</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 依据不同的壳，在基础版本上加以修改</span></span><br><span class="line"><span class="comment">// 1. 找到三个地址</span></span><br><span class="line">MOV dwGetAPIAddr, <span class="number">001</span>A36		<span class="comment">// 获取真实API地址（偏移</span></span><br><span class="line">MOV dwWriteIATAddr, <span class="number">000897</span>	<span class="comment">// 填充IAT（偏移</span></span><br><span class="line">MOV dwOEP, <span class="number">0047148B</span>					<span class="comment">// OEP（真实地址</span></span><br><span class="line">MOV dwBase,<span class="number">0047</span>A37F					<span class="comment">// 壳申请的内存空间首地址（真实地址</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 设置断点</span></span><br><span class="line">BC    <span class="comment">// 清除所有软件断点</span></span><br><span class="line">BPHWC <span class="comment">// 清除所有硬件断点</span></span><br><span class="line">BPMC  <span class="comment">// 清除所有内存断点</span></span><br><span class="line"></span><br><span class="line">BPHWS dwOEP, <span class="string">"x"</span> 	<span class="comment">//OEP设置断点，此地址不会变</span></span><br><span class="line">BPHWS dwBase, <span class="string">"x"</span> <span class="comment">//申请内存空间返回基地址，是后面两个位置的基础</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 循环</span></span><br><span class="line">LOOP_START:</span><br><span class="line">  RUN   	<span class="comment">// 继续运行，直至下个断点</span></span><br><span class="line"></span><br><span class="line">  CMP dwBase,eip<span class="comment">// 内存空间申请完成，返回基地址</span></span><br><span class="line">  JNZ case0</span><br><span class="line">  ADD dwGetAPIAddr,eax  <span class="comment">// 基址+偏移 = 最终地址</span></span><br><span class="line">  ADD dwWriteIATAddr,eax    </span><br><span class="line">  BPHWS dwGetAPIAddr, <span class="string">"x"</span> <span class="comment">// 有了最终地址，再下断点</span></span><br><span class="line">  BPHWS dwWriteIATAddr, <span class="string">"x"</span> </span><br><span class="line">  JMP LOOP_START <span class="comment">// 断点都下完了，继续执行</span></span><br><span class="line">case0:</span><br><span class="line">  CMP dwGetAPIAddr,eip</span><br><span class="line">  JNZ case1</span><br><span class="line">  MOV dwTmp,eax <span class="comment">// 获取真实API地址，赋值给临时变量</span></span><br><span class="line">  JMP LOOP_START <span class="comment">// 继续执行</span></span><br><span class="line">case1:</span><br><span class="line">  CMP dwWriteIATAddr,eip  </span><br><span class="line">  JNZ case2  </span><br><span class="line">  MOV [edx],dwTmp<span class="comment">// 将临时变量中的真实API地址填充到IAT</span></span><br><span class="line">  JMP LOOP_START<span class="comment">//继续</span></span><br><span class="line">case2:</span><br><span class="line">  CMP dwOEP,eip  <span class="comment">// 若到达OEP，则前面都运行完，结束</span></span><br><span class="line">  JNZ LOOP_START  <span class="comment">// 否则继续执行</span></span><br><span class="line">  MSG <span class="string">"到达OEP!脚本结束"</span><span class="comment">// 弹窗，标示已结束</span></span><br></pre></td></tr></table></figure>
 <p>如图，修复完成（OEP是结束条件，所以正好运行至OEP</p>
-<p><img src="http://img2.21guns.top/2019-11-22-135524.jpg" alt="image-20191122213958158"></p>
+<p><img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135524.jpg" alt="image-20191122213958158"></p>
 <h3 id="07-dump内存"><a href="#07-dump内存" class="headerlink" title="07-dump内存"></a>07-dump内存</h3><ul>
 <li><p>此时IAT表是正常的，dump下来后，通过此正常的IAT来修复输入表</p>
-<p>  <img src="http://img2.21guns.top/2019-11-22-135519.jpg" alt="image-20191122214212076"></p>
+<p>  <img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135519.jpg" alt="image-20191122214212076"></p>
 </li>
 </ul>
-<h3 id="08-修复输入表"><a href="#08-修复输入表" class="headerlink" title="08-修复输入表"></a>08-修复输入表</h3><p><img src="http://img2.21guns.top/2019-11-22-135515.jpg" alt="image-20191122215400920"></p>
+<h3 id="08-修复输入表"><a href="#08-修复输入表" class="headerlink" title="08-修复输入表"></a>08-修复输入表</h3><p><img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135515.jpg" alt="image-20191122215400920"></p>
 <p>脱壳成功</p>
-<p><img src="http://img2.21guns.top/2019-11-22-135520.jpg" alt="image-20191122215429251"></p>
+<p><img src="https://note-1252764528.cos.ap-chengdu.myqcloud.com/2019-11-22-135520.jpg" alt="image-20191122215429251"></p>
 <h3 id="09-参考"><a href="#09-参考" class="headerlink" title="09-参考"></a>09-参考</h3><ul>
 <li>15PB 脱壳课程</li>
 </ul>
@@ -511,8 +511,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/24/脱壳实践笔记（反硬件断点/" rel="prev" title="脱壳实践笔记（反硬件断点">
-                脱壳实践笔记（反硬件断点 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/11/24/脱壳实践笔记-反硬件断点/" rel="prev" title="脱壳实践笔记-反硬件断点">
+                脱壳实践笔记-反硬件断点 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
