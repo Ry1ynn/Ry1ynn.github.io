@@ -253,7 +253,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/WPS攻击/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/无线渗透工具/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -272,7 +272,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/18/WPS攻击/" itemprop="url">WPS攻击</a></h1>
+                <a class="post-title-link" href="/2018/02/18/无线渗透工具/" itemprop="url">无线渗透工具</a></h1>
         
 
         <div class="post-meta">
@@ -345,19 +345,16 @@
 
       
         
-          <h2 id="01-简介"><a href="#01-简介" class="headerlink" title="01-简介"></a>01-简介</h2><ul>
-<li>WPS<ul>
-<li>WPS，wireless protected setup</li>
-<li>Wi-Fi联盟2006年开发的一项技术</li>
-<li>2011年被发现安全设计漏洞</li>
-</ul>
-</li>
-<li>使用场景<ul>
-<li>前提：终端设备（如PC、手机、USB网卡）和AP都支持WPS功能</li>
-<li>路由器和网卡各按一个按钮就能接入无线
+          <h1 id="无线渗透实操"><a href="#无线渗透实操" class="headerlink" title="无线渗透实操"></a>无线渗透实操</h1><h2 id="01-aircrack-ng简介"><a href="#01-aircrack-ng简介" class="headerlink" title="01-aircrack-ng简介"></a>01-aircrack-ng简介</h2><ul>
+<li>无线渗透和审计神器</li>
+<li>包含各种功能的工具套件（而非单个工具）<ul>
+<li>网络监测</li>
+<li>嗅探抓包</li>
+<li>包注入</li>
+<li>密码破解
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/WPS攻击/#more" rel="contents">
+            <a class="btn" href="/2018/02/18/无线渗透工具/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -365,6 +362,158 @@
         
       
     </li></ul></li></ul></div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/恶意AP相关/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Ry1ynn">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="21Guns's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/18/恶意AP相关/" itemprop="url">恶意AP相关</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
+                2018-02-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/无线安全/" itemprop="url" rel="index">
+                    <span itemprop="name">无线安全</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="EVIL-TWIN-AP-ROGUE-AP"><a href="#EVIL-TWIN-AP-ROGUE-AP" class="headerlink" title="EVIL TWIN AP / ROGUE AP"></a>EVIL TWIN AP / ROGUE AP</h1><h2 id="01-简介"><a href="#01-简介" class="headerlink" title="01-简介"></a>01-简介</h2><ul>
+<li>流氓AP、恶意AP问题</li>
+<li>蹭网（破解无线密码进入他人网络）与被蹭网（故意设置恶意AP，诱使受害者连接）</li>
+<li>北上广20%的公共场所无限网络是伪造的（客户端流量流经AP，可进行嗅探等）</li>
+<li>用于制作恶意AP的工具主要有两个：airbase-ng和hostapd</li>
+</ul>
+<h2 id="02-恶意AP攻击原理"><a href="#02-恶意AP攻击原理" class="headerlink" title="02-恶意AP攻击原理"></a>02-恶意AP攻击原理
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/18/恶意AP相关/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </h2></div>
     
     
     
@@ -509,156 +658,6 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/02/18/802-11标准/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </li></ul></div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/WPA攻击/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Ry1ynn">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="21Guns's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/18/WPA攻击/" itemprop="url">WPA攻击</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-18T19:50:51+08:00">
-                2018-02-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/无线安全/" itemprop="url" rel="index">
-                    <span itemprop="name">无线安全</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="01-姿势一：普通的WPA破解"><a href="#01-姿势一：普通的WPA破解" class="headerlink" title="01-姿势一：普通的WPA破解"></a>01-姿势一：普通的WPA破解</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1-简介"></a>1.1-简介</h2><ul>
-<li>基于字典的破解，字典越大，命中率越高，若密码异常复杂，则不会破解出来（即使字典很大，不包含也白搭）</li>
-<li>WPA2比WPA1更加安全，理论上是这样，因为其加密算法更加安全，但现实中，无论是WPA还是WPA2，如果设置高强度密码，则破解难度都很大，几乎都是难以破解（故实际中，二者破解难度可以看作是一样的）</li>
-<li>破解WPA是有一定运气成分的</li>
-<li>字典来源
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/WPA攻击/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -862,7 +861,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/无线通信过程/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/其它无线攻击-工具/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -881,7 +880,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/18/无线通信过程/" itemprop="url">无线通信过程</a></h1>
+                <a class="post-title-link" href="/2018/02/18/其它无线攻击-工具/" itemprop="url">其它无线攻击&工具</a></h1>
         
 
         <div class="post-meta">
@@ -954,24 +953,22 @@
 
       
         
-          <h1 id="无线通信过程"><a href="#无线通信过程" class="headerlink" title="无线通信过程"></a>无线通信过程</h1><h2 id="连接到无线网络（大体过程）"><a href="#连接到无线网络（大体过程）" class="headerlink" title="连接到无线网络（大体过程）"></a>连接到无线网络（大体过程）</h2><p><img src="http://img.21guns.top/18-2-2/65707860.jpg?ynotemdtimestamp=1550490771881" alt="img"></p>
-<ul>
-<li>Probe<ul>
-<li>STA向所有信道发出probe帧，发现AP（AP工作的信道不是固定不变的</li>
-<li>AP应道response</li>
-</ul>
-</li>
-<li>Authentication
+          <h1 id="01-MAC地址绑定攻击"><a href="#01-MAC地址绑定攻击" class="headerlink" title="01-MAC地址绑定攻击"></a>01-MAC地址绑定攻击</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1-简介"></a>1.1-简介</h2><ul>
+<li>管理员误以为MAC地址绑定是一种安全机制</li>
+<li>AP限制可以关联的客户端MAC地址，白名单的思想</li>
+<li>准备测试AP<ul>
+<li>完成基本的AP配置</li>
+<li>开启open认证（测试用，所以不采用WEP或WPA
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/无线通信过程/#more" rel="contents">
+            <a class="btn" href="/2018/02/18/其它无线攻击-工具/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></div>
+    </li></ul></li></ul></div>
     
     
     
@@ -1015,7 +1012,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/无线网硬件设备及基本概念/">
+    <link itemprop="mainEntityOfPage" href="http://21guns.top/2018/02/18/WPA攻击/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Ry1ynn">
@@ -1034,7 +1031,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/02/18/无线网硬件设备及基本概念/" itemprop="url">无线网硬件设备及基本概念</a></h1>
+                <a class="post-title-link" href="/2018/02/18/WPA攻击/" itemprop="url">WPA攻击</a></h1>
         
 
         <div class="post-meta">
@@ -1107,25 +1104,21 @@
 
       
         
-          <h1 id="无线网硬件设备及基本概念"><a href="#无线网硬件设备及基本概念" class="headerlink" title="无线网硬件设备及基本概念"></a>无线网硬件设备及基本概念</h1><h2 id="无线网卡准备"><a href="#无线网卡准备" class="headerlink" title="无线网卡准备"></a>无线网卡准备</h2><ul>
-<li>物理机运行kali</li>
-<li>虚拟机运行kali<ul>
-<li>外置USB无线网卡<ul>
-<li>虚拟机软件支持将物理机上的网卡映射到虚拟机</li>
-<li>桥接模式下：尽管是无线网卡，虚拟机仍将其看作是有线网卡eth0，而非wlan0等</li>
-</ul>
-</li>
-<li>TL-WN722N（建议，一般没问题
+          <h1 id="01-姿势一：普通的WPA破解"><a href="#01-姿势一：普通的WPA破解" class="headerlink" title="01-姿势一：普通的WPA破解"></a>01-姿势一：普通的WPA破解</h1><h2 id="1-1-简介"><a href="#1-1-简介" class="headerlink" title="1.1-简介"></a>1.1-简介</h2><ul>
+<li>基于字典的破解，字典越大，命中率越高，若密码异常复杂，则不会破解出来（即使字典很大，不包含也白搭）</li>
+<li>WPA2比WPA1更加安全，理论上是这样，因为其加密算法更加安全，但现实中，无论是WPA还是WPA2，如果设置高强度密码，则破解难度都很大，几乎都是难以破解（故实际中，二者破解难度可以看作是一样的）</li>
+<li>破解WPA是有一定运气成分的</li>
+<li>字典来源
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/02/18/无线网硬件设备及基本概念/#more" rel="contents">
+            <a class="btn" href="/2018/02/18/WPA攻击/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
           <!--/noindex-->
         
       
-    </li></ul></li></ul></div>
+    </li></ul></div>
     
     
     
@@ -1160,7 +1153,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1208,7 +1201,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">138</span>
+                  <span class="site-state-item-count">139</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1219,7 +1212,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
